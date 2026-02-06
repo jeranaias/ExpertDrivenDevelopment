@@ -15,7 +15,7 @@
 
 ## Overview
 
-Expert-Driven Development (EDD) is a methodology that teaches domain experts to build institutional software using AI as scaffolding, not as an end-state dependency. It is designed for military instructors, staff NCOs, officers, and DoW civilians who have real problems to solve but no coding background. This repository contains the complete training curriculum (three courses plus a supervisor orientation), the Standard Operating Procedure, an interactive toolkit, and downloadable templates. Everything here is open-source, unclassified, and ready to use.
+Expert-Driven Development (EDD) is a methodology that teaches domain experts to build institutional software using AI as scaffolding, not as an end-state dependency. It is designed for military instructors, staff NCOs, officers, and DoW civilians who have real problems to solve but no coding background. This repository contains the complete training curriculum (five courses covering every role from first-time AI users to experienced builders to supervisors), the Standard Operating Procedure, an interactive toolkit, and downloadable templates. Everything here is open-source, unclassified, and ready to use.
 
 ## The Problem
 
@@ -37,11 +37,12 @@ EDD uses AI as scaffolding to let domain experts build, document, and maintain t
 ## Training Courses
 
 | Course | Duration | Audience | Outcome |
-|:-------|:--------:|:---------|:--------|
-| **AI-Fluent Development Orientation** | 2 hours | All personnel | Write effective prompts, build a working prototype |
-| **Platform Training** | 4 hours | Builders | Build 3 complete tools on Power Platform |
-| **Advanced Workshop** | 4 hours | Experienced builders | Complex builds, debugging, teaching others |
-| **Supervisor Orientation** | 30 minutes | Leadership | Evaluate proposals, understand the process |
+|--------|----------|----------|---------|
+| **AI Fluency Fundamentals** | 2 hours | All personnel | Understand six 2011 skills, recognize the jagged frontier, map AI into workflow |
+| **Builder Orientation** | 2 hours | Aspiring builders | Build a working prototype, apply task decomposition and iterative refinement |
+| **Platform Training** | 4 hours | Builders | Build 3 complete tools on Power Platform using centaur and cyborg patterns |
+| **Advanced Workshop** | 4 hours | Experienced builders | Map the frontier, build verification protocols, teach others |
+| **Supervisor Orientation** | 30 minutes | Leadership | Create permission culture, evaluate proposals, understand apprentice problem |
 
 ## Quick Start
 

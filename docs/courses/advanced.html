@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Training 3: Advanced Workshop - A 4-hour optional course covering multi-app architecture, role-based apps, advanced automation, and debugging.">
+    <meta name="description" content="Course 4: Advanced Workshop - A 4-hour elective covering frontier mapping, multi-component builds, verification protocols, group debugging, and teaching others.">
     <title>Advanced Workshop | Expert-Driven Development</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -57,17 +57,17 @@
                     <li aria-current="page">Advanced Workshop</li>
                 </ol>
             </nav>
-            <h1 class="page-header__title">Training 3: Advanced Workshop</h1>
+            <h1 class="page-header__title">Course 4: Advanced Workshop</h1>
             <p class="page-header__desc">
-                4 hours &mdash; Optional. For experienced EDD practitioners ready to architect
-                multi-app solutions, build role-based systems, implement advanced automation,
-                debug hard problems, and teach others.
+                4 hours &mdash; Move from individual capability to organizational capability.
+                Map the frontier for your domain, build verification protocols, and learn to teach others.
             </p>
             <div class="mt-lg">
-                <span class="badge">Optional</span>
+                <span class="badge">Elective</span>
                 <span class="badge">4 Hours</span>
-                <span class="badge badge--gold">Advanced</span>
+                <span class="badge badge--gold">Experienced Builders</span>
             </div>
+            <p class="mt-lg"><strong>Prerequisite:</strong> At least one deployed tool</p>
         </div>
     </section>
 
@@ -82,11 +82,11 @@
                         <h2 class="toc__title">On This Page</h2>
                         <ul class="toc__list">
                             <li><a href="#agenda">Agenda</a></li>
-                            <li><a href="#architecting">Architecting Bigger Solutions</a></li>
-                            <li><a href="#multi-screen">Build: Multi-Screen App with Roles</a></li>
-                            <li><a href="#automation">Advanced Automation Patterns</a></li>
-                            <li><a href="#debugging">Debugging Hard Problems</a></li>
-                            <li><a href="#teaching">Teaching Others</a></li>
+                            <li><a href="#frontier-mapping">Frontier Mapping for Your Domain</a></li>
+                            <li><a href="#complex-build">Complex Build: Multi-Component System</a></li>
+                            <li><a href="#verification">Verification Protocols and QA</a></li>
+                            <li><a href="#group-debugging">Group Debugging: Real Problems</a></li>
+                            <li><a href="#teaching-others">Teaching Others: The 2011 Multiplier</a></li>
                         </ul>
                     </nav>
                 </aside>
@@ -102,416 +102,336 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Time</th>
-                                        <th scope="col">Topic</th>
-                                        <th scope="col">Duration</th>
+                                        <th scope="col">Module</th>
+                                        <th scope="col">2011 Skills Applied</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>0:00 &ndash; 0:30</td>
-                                        <td>Architecting Bigger Solutions</td>
-                                        <td>30 min</td>
+                                        <td>0:00&ndash;0:45</td>
+                                        <td>Frontier Mapping for Your Domain</td>
+                                        <td>Frontier Recognition</td>
                                     </tr>
                                     <tr>
-                                        <td>0:30 &ndash; 1:30</td>
-                                        <td>Build: Multi-Screen App with Roles</td>
-                                        <td>60 min</td>
+                                        <td>0:45&ndash;1:45</td>
+                                        <td>Complex Build: Multi-Component System</td>
+                                        <td>All six</td>
                                     </tr>
                                     <tr>
-                                        <td>1:30 &ndash; 1:45</td>
+                                        <td>1:45&ndash;2:00</td>
                                         <td>Break</td>
-                                        <td>15 min</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
-                                        <td>1:45 &ndash; 2:45</td>
-                                        <td>Advanced Automation Patterns</td>
-                                        <td>60 min</td>
+                                        <td>2:00&ndash;2:45</td>
+                                        <td>Verification Protocols and QA</td>
+                                        <td>Quality Judgment</td>
                                     </tr>
                                     <tr>
-                                        <td>2:45 &ndash; 3:00</td>
-                                        <td>Break</td>
-                                        <td>15 min</td>
+                                        <td>2:45&ndash;3:30</td>
+                                        <td>Group Debugging: Real Problems</td>
+                                        <td>Iterative Refinement, Frontier Recognition</td>
                                     </tr>
                                     <tr>
-                                        <td>3:00 &ndash; 3:45</td>
-                                        <td>Debugging Hard Problems (Group Workshop)</td>
-                                        <td>45 min</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3:45 &ndash; 4:00</td>
-                                        <td>Teaching Others &amp; Wrap-Up</td>
-                                        <td>15 min</td>
+                                        <td>3:30&ndash;4:00</td>
+                                        <td>Teaching Others: The 2011 Multiplier</td>
+                                        <td>All six</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </section>
 
-                    <!-- Architecting Bigger Solutions -->
-                    <section id="architecting">
-                        <h2>Architecting Bigger Solutions</h2>
-                        <p><strong>Duration:</strong> 30 minutes</p>
+                    <!-- Module 1: Frontier Mapping for Your Domain -->
+                    <section id="frontier-mapping">
+                        <h2>Module 1: Frontier Mapping for Your Domain</h2>
+                        <p><strong>Duration:</strong> 45 minutes</p>
 
-                        <h3>When You Need Multiple Apps</h3>
                         <p>
-                            A single Power App can handle most problems. But when your solution needs different
-                            interfaces for different users, automated workflows that run on schedules, and a
-                            dashboard that aggregates data from multiple sources, you need to think about
-                            architecture before you start building.
+                            Each participant creates a frontier map for their domain.
                         </p>
 
-                        <p>Signs you need multiple components:</p>
-                        <ul>
-                            <li>Different user groups need different screens and different permissions</li>
-                            <li>Data flows between multiple SharePoint lists or external systems</li>
-                            <li>Actions need to happen automatically on a schedule or based on triggers</li>
-                            <li>Leadership needs a high-level view while operators need a detailed view</li>
-                        </ul>
-
-                        <h3>Architecture Prompt Pattern</h3>
-                        <p>Before building anything, use this prompt to plan your architecture:</p>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Architecture Planning</span>
-                            <pre><code>I need to build a solution for [describe the overall problem].
-
-The users are:
-- [Role 1]: needs to [what they do]
-- [Role 2]: needs to [what they do]
-- [Role 3]: needs to [what they do]
-
-The data includes:
-- [Data type 1]: [describe fields and volume]
-- [Data type 2]: [describe fields and volume]
-
-Things that need to happen automatically:
-- [Trigger/schedule 1]: [what should happen]
-- [Trigger/schedule 2]: [what should happen]
-
-Using Microsoft Power Platform (SharePoint, Power Apps, Power Automate,
-Power BI), design an architecture for this solution. Tell me:
-1. What SharePoint lists I need and how they relate to each other
-2. How many Power Apps I need and what each one does
-3. What Power Automate flows I need and what triggers them
-4. What Power BI dashboards I need and who sees them
-5. A build order - what to create first, second, third</code></pre>
+                        <h3>Frontier Map Format</h3>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Inside Frontier (AI Handles)</th>
+                                        <th scope="col">Outside Frontier (AI Fails)</th>
+                                        <th scope="col">Moving Frontier (Check Periodically)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Document generation</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Data analysis</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Process automation</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Reference lookup</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Training development</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-
-                        <div class="callout callout--instructor">
-                            <h3 class="callout__title">Instructor Note</h3>
-                            <p>
-                                This is a lecture/discussion module. Walk through a real-world example: a company
-                                operations suite with separate apps for the motor pool, supply, and training sections,
-                                all feeding a single leadership dashboard. Draw the architecture on a whiteboard or
-                                shared screen. Emphasize that planning before building saves massive rework later.
-                            </p>
-                        </div>
-                    </section>
-
-                    <!-- Build: Multi-Screen App with Roles -->
-                    <section id="multi-screen">
-                        <h2>Build: Multi-Screen App with Roles</h2>
-                        <p><strong>Duration:</strong> 60 minutes &nbsp;|&nbsp; <strong>Platform:</strong> Power Apps + SharePoint</p>
-
-                        <h3>Phase 1: Role-Based Data Structure</h3>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Role-Based Data</span>
-                            <pre><code>I'm building a maintenance request system with three user roles:
-- Operators: submit maintenance requests for their equipment
-- Mechanics: view assigned requests, update status, log work performed
-- Supervisors: see all requests, assign mechanics, approve completed work
-
-Create two SharePoint lists:
-
-List 1 - "MaintenanceRequests":
-- RequestID (auto-generated number)
-- EquipmentName (text)
-- BumperNumber (text)
-- ReportedBy (person)
-- ProblemDescription (multiline text)
-- Priority (choice: Routine, Urgent, Deadline)
-- Status (choice: Submitted, Assigned, In Progress, Completed, Verified)
-- AssignedMechanic (person)
-- DateSubmitted (date, auto-set to today)
-- DateCompleted (date)
-
-List 2 - "WorkLog":
-- RelatedRequest (lookup to MaintenanceRequests)
-- Mechanic (person)
-- WorkPerformed (multiline text)
-- PartsUsed (multiline text)
-- HoursSpent (number)
-- DateLogged (date)
-
-Give me the SharePoint setup steps for both lists.</code></pre>
-                        </div>
-
-                        <h3>Phase 2: Role-Based Screens</h3>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Role Screens</span>
-                            <pre><code>Create a Power Apps canvas app for the maintenance request system with
-role-based navigation. The app should detect the current user's role
-from a SharePoint list called "UserRoles" (columns: Email, Role).
-
-Screen layout by role:
-
-OPERATOR screens:
-- Submit Request form (pre-fill ReportedBy with current user)
-- My Requests gallery (filtered to current user, sorted by date)
-
-MECHANIC screens:
-- Assigned to Me gallery (filtered to AssignedMechanic = current user)
-- Work Log form (linked to selected request)
-- Mark Complete button
-
-SUPERVISOR screens:
-- All Requests gallery with filter/sort options
-- Assign Mechanic screen (select request, pick mechanic from people picker)
-- Dashboard summary: counts by Status, average completion time
-
-Show the user only the screens for their role. Give me the Power Apps
-implementation steps including the role-detection logic.</code></pre>
-                        </div>
-
-                        <h3>Phase 3: Navigation and Polish</h3>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Navigation</span>
-                            <pre><code>Add these finishing touches to the maintenance request app:
-
-1. A home screen that greets the user by name and shows their role.
-   Display navigation buttons only for screens they have access to.
-2. A consistent header bar on every screen with the app title, current
-   user name, and a Home button.
-3. Conditional formatting: requests with Priority "Deadline" should have
-   a red border. Requests open longer than 7 days should show a warning icon.
-4. A confirmation dialog before changing request status: "Are you sure
-   you want to mark this as [new status]?"
-
-Give me the Power Apps formulas and configuration for each feature.</code></pre>
-                        </div>
-
-                        <div class="callout callout--instructor">
-                            <h3 class="callout__title">Instructor Note</h3>
-                            <p>
-                                The role-based logic is the hardest part. Common issues: (1) the UserRoles list
-                                lookup does not match the current user's email format, (2) navigation logic
-                                not correctly hiding screens, (3) lookup columns between lists not configured
-                                properly. Walk through Phase 2 step by step. Let participants tackle Phase 3
-                                independently.
-                            </p>
-                        </div>
-                    </section>
-
-                    <!-- Advanced Automation Patterns -->
-                    <section id="automation">
-                        <h2>Advanced Automation Patterns</h2>
-                        <p><strong>Duration:</strong> 60 minutes &nbsp;|&nbsp; <strong>Platform:</strong> Power Automate</p>
-
-                        <h3>Scheduled Flows</h3>
-                        <p>
-                            Not all automation is triggered by user actions. Scheduled flows run on a timer
-                            and handle recurring tasks like daily reports, weekly summaries, and overdue
-                            notifications.
-                        </p>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Scheduled Flow</span>
-                            <pre><code>Create a Power Automate scheduled flow that runs every Monday at 0700.
-The flow should:
-1. Query the "MaintenanceRequests" SharePoint list for all items where
-   Status is NOT "Completed" and NOT "Verified".
-2. Count the open requests by Priority (Routine, Urgent, Deadline).
-3. Send an email to the maintenance supervisor with subject
-   "Weekly Maintenance Summary - [date]" containing:
-   - Total open requests
-   - Breakdown by priority
-   - List of any requests open longer than 14 days (include RequestID,
-     EquipmentName, DateSubmitted, and AssignedMechanic)
-4. If there are any Deadline-priority requests open longer than 3 days,
-   send a separate urgent email to the company commander.
-
-Give me the step-by-step Power Automate configuration.</code></pre>
-                        </div>
-
-                        <h3>Approval Workflows</h3>
-                        <p>
-                            Multi-step approvals are common in military operations. The key is building
-                            clear routing logic and handling timeouts gracefully.
-                        </p>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Multi-Step Approval</span>
-                            <pre><code>Create a Power Automate approval workflow for completed maintenance requests.
-
-Trigger: When a MaintenanceRequests item's Status changes to "Completed".
-
-Approval chain:
-1. First approval: Maintenance Supervisor reviews the work log.
-   - If approved, move to step 2.
-   - If rejected, set Status back to "In Progress" and notify the mechanic.
-2. Second approval: Equipment owner (the original ReportedBy) verifies
-   the repair is satisfactory.
-   - If approved, set Status to "Verified" and update DateCompleted.
-   - If rejected, set Status back to "In Progress" and notify both the
-     mechanic and supervisor.
-
-Timeout: If either approver does not respond within 24 hours, send a
-reminder. After 48 hours total, escalate to the next level.
-
-Give me the complete flow configuration with error handling.</code></pre>
-                        </div>
-
-                        <h3>Error Handling</h3>
-                        <p>
-                            Production flows must handle failures gracefully. Always implement logging
-                            and notification for flow failures.
-                        </p>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Error Handling Pattern</span>
-                            <pre><code>Add robust error handling to my Power Automate flows using this pattern:
-
-1. Wrap the main logic in a Scope action called "Try".
-2. Add a parallel Scope called "Catch" configured to run only if "Try" fails.
-3. In the "Catch" scope:
-   a. Create an item in a "FlowErrorLog" SharePoint list with columns:
-      FlowName (text), ErrorMessage (multiline text), ErrorTimestamp (date),
-      TriggerInfo (multiline text), Status (choice: New, Investigating, Resolved)
-   b. Send an email to the flow admin with the error details.
-   c. If the flow is business-critical, also send a Teams notification.
-4. Add a "Finally" scope that always runs, logging that the flow executed
-   (for auditing regardless of success or failure).
-
-Show me how to implement this pattern and how to read error details
-from the result() function in Power Automate.</code></pre>
-                        </div>
-
-                        <div class="callout callout--instructor">
-                            <h3 class="callout__title">Instructor Note</h3>
-                            <p>
-                                The try/catch pattern in Power Automate uses "Configure run after" settings on
-                                parallel branches. This is unintuitive for most participants. Demo the pattern
-                                once on screen, then have participants implement it in their own flows. The
-                                FlowErrorLog list is extremely valuable in production &mdash; emphasize that
-                                every production flow should have error logging.
-                            </p>
-                        </div>
-                    </section>
-
-                    <!-- Debugging Hard Problems -->
-                    <section id="debugging">
-                        <h2>Debugging Hard Problems</h2>
-                        <p><strong>Duration:</strong> 45 minutes &nbsp;|&nbsp; <strong>Format:</strong> Group Workshop</p>
 
                         <p>
-                            This is a hands-on group workshop. The instructor presents broken scenarios and
-                            participants work in pairs to diagnose and fix them using AI-assisted prompting.
-                        </p>
-
-                        <h3>Debugging Prompt Pattern 1: The Isolator</h3>
-                        <p>When you do not know where the problem is, isolate it systematically.</p>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Isolate the Problem</span>
-                            <pre><code>My Power App has a form that should save data to a SharePoint list, but
-when I click Submit, nothing happens. No error message appears.
-
-Help me isolate the problem. Give me a step-by-step diagnostic checklist:
-1. How to verify the data source connection is working
-2. How to check if the form's OnSelect actually fires
-3. How to add a temporary notification to confirm the button registers clicks
-4. How to check if the SubmitForm function is referencing the correct form
-5. How to verify the SharePoint list permissions allow the current user to write</code></pre>
-                        </div>
-
-                        <h3>Debugging Prompt Pattern 2: The Translator</h3>
-                        <p>When the error message is cryptic, ask the AI to translate it.</p>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Translate the Error</span>
-                            <pre><code>I'm getting this error in Power Automate and I don't understand it:
-
-"BadRequest. The 'inputs.parameters' of workflow operation
-'Update_item' of type 'OpenApiConnection' is not valid. Error
-details: The API operation does not allow null values for property
-'Status'."
-
-Explain this error in plain language. What is happening, why is it
-happening, and what exactly do I need to change to fix it? Show me
-the corrected configuration.</code></pre>
-                        </div>
-
-                        <h3>Debugging Prompt Pattern 3: The Comparator</h3>
-                        <p>When something used to work and now does not, find what changed.</p>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Find What Changed</span>
-                            <pre><code>My Power BI dashboard was working last week but now shows "Can't
-connect to data source" errors.
-
-Nothing changed in the dashboard itself. Help me diagnose:
-1. What could have changed on the SharePoint side (permissions,
-   list structure, site URL)?
-2. What could have changed in Power BI (credentials expired,
-   gateway issues, refresh schedule)?
-3. How do I check the Power BI refresh history for error details?
-4. What is the most common cause of this error and the fastest fix?</code></pre>
-                        </div>
-
-                        <div class="callout callout--instructor">
-                            <h3 class="callout__title">Instructor Note</h3>
-                            <p>
-                                Prepare 3-4 broken scenarios before class (a broken app, a failing flow, a
-                                disconnected dashboard). Give each pair a different scenario. Allow 20 minutes
-                                for diagnosis and fix, then have each pair present their problem and solution.
-                                The goal is for participants to see that debugging is also a prompting skill &mdash;
-                                the better you describe the problem to the AI, the better the fix.
-                            </p>
-                        </div>
-                    </section>
-
-                    <!-- Teaching Others -->
-                    <section id="teaching">
-                        <h2>Teaching Others</h2>
-                        <p><strong>Duration:</strong> 15 minutes</p>
-
-                        <p>
-                            As an advanced EDD practitioner, you will be asked to help others. Here are
-                            three principles for effective knowledge transfer:
-                        </p>
-
-                        <h3>Principle 1: Guide, Don't Build</h3>
-                        <p>
-                            When someone asks for help, resist the urge to take over their keyboard. Instead,
-                            help them write a better prompt. Ask them: "What are you trying to build? Who is it
-                            for? What should it do?" Then help them structure that into the Prompt Formula.
-                        </p>
-
-                        <h3>Principle 2: Celebrate the Iteration</h3>
-                        <p>
-                            New users get discouraged when AI output is not perfect. Normalize iteration by
-                            saying things like: "Good, that is the first version. Now let's make it better."
-                            Show them that your own work also takes multiple iterations.
-                        </p>
-
-                        <h3>Principle 3: Point to the Process, Not the Answer</h3>
-                        <p>
-                            When someone is stuck, do not just give them the fix. Show them how you would
-                            diagnose it: "Here is how I would prompt the AI to figure this out." Teach the
-                            debugging prompts from this workshop. A person who can debug their own tools is
-                            ten times more valuable than someone who needs help every time.
+                            <strong>Deliverable:</strong> One-page frontier map published on the EDD site.
                         </p>
 
                         <div class="callout callout--info">
-                            <h3 class="callout__title">Remember</h3>
+                            <h3 class="callout__title">Key Teaching Point</h3>
                             <p>
-                                The goal of EDD is not to create a few experts. It is to create a culture where
-                                everyone can solve their own problems with AI assistance. Every person you teach
-                                to fish is one fewer request in your inbox.
+                                This map is the most valuable artifact. It prevents the
+                                19-percentage-point performance drop from the BCG-Harvard study.
+                                When workers apply AI beyond the frontier without knowing it,
+                                quality collapses. The frontier map makes the boundary visible.
                             </p>
                         </div>
+                    </section>
+
+                    <!-- Module 2: Complex Build — Multi-Component System -->
+                    <section id="complex-build">
+                        <h2>Module 2: Complex Build &mdash; Multi-Component System</h2>
+                        <p><strong>Duration:</strong> 60 minutes</p>
+
+                        <p>
+                            Build a system that requires switching between centaur and cyborg modes.
+                        </p>
+
+                        <h3>Example: Tutoring Management System</h3>
+                        <ul>
+                            <li>
+                                <strong>Data backend</strong> &mdash; Centaur mode (careful schema design;
+                                accuracy-critical)
+                            </li>
+                            <li>
+                                <strong>Input interface</strong> &mdash; Cyborg mode (iterative, fluid
+                                collaboration)
+                            </li>
+                            <li>
+                                <strong>Automated reporting dashboard</strong> &mdash; Centaur mode
+                                (accuracy-critical output)
+                            </li>
+                        </ul>
+
+                        <h3>Before Each Phase</h3>
+                        <p>Before beginning each phase, participants identify:</p>
+                        <ol>
+                            <li>Which mode</li>
+                            <li>Why this phase demands that mode</li>
+                            <li>What verification looks like at the phase boundary</li>
+                        </ol>
 
                         <div class="callout callout--instructor">
                             <h3 class="callout__title">Instructor Note</h3>
                             <p>
-                                Close with a round-table discussion: "What is one problem in your section that
-                                you now feel confident you could solve using what you learned today?" Have each
-                                participant share briefly. This reinforces confidence and gives you a sense of
-                                where the training landed. Distribute the SOP and resource links before dismissal.
+                                The goal is conscious, deliberate mode-switching &mdash; not a polished product.
+                                Assess on decision-making, not on output quality.
                             </p>
+                        </div>
+                    </section>
+
+                    <!-- Module 3: Verification Protocols and QA -->
+                    <section id="verification">
+                        <h2>Module 3: Verification Protocols and QA</h2>
+                        <p><strong>Duration:</strong> 45 minutes</p>
+
+                        <p>
+                            Build a QA checklist for your domain. For AI-generated output, what must be checked?
+                        </p>
+
+                        <h3>QA Checklist</h3>
+                        <ol>
+                            <li>
+                                <strong>Source verification</strong> &mdash; AI fabricates references.
+                                Every citation, regulation number, and URL must be independently verified.
+                            </li>
+                            <li>
+                                <strong>Data accuracy</strong> &mdash; Numbers, dates, names, and quantities
+                                must be checked against source data.
+                            </li>
+                            <li>
+                                <strong>Logic check</strong> &mdash; Does the reasoning hold? Are conclusions
+                                supported by the premises?
+                            </li>
+                            <li>
+                                <strong>Format compliance</strong> &mdash; Does the output match required formats,
+                                templates, and standards?
+                            </li>
+                            <li>
+                                <strong>Domain review</strong> &mdash; Does this pass the smell test for someone
+                                who knows this domain?
+                            </li>
+                        </ol>
+
+                        <h3>Exercise: Timed QA Review</h3>
+                        <p>
+                            Take an AI-generated document. Run it through your checklist. Time yourself.
+                            Compare QA time versus creation-from-scratch time. Usually 30&ndash;50% &mdash;
+                            that's the time savings.
+                        </p>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Key Teaching Point</h3>
+                            <p>
+                                The GDPval study found human experts averaged 7 hours per task. AI-assisted
+                                with review was 1.4x faster, 1.6x cheaper. The review step is where value
+                                is created.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Module 4: Group Debugging — Real Problems -->
+                    <section id="group-debugging">
+                        <h2>Module 4: Group Debugging &mdash; Real Problems</h2>
+                        <p><strong>Duration:</strong> 45 minutes</p>
+
+                        <p>
+                            Participants bring actual tools with actual problems.
+                        </p>
+
+                        <h3>Format</h3>
+                        <ul>
+                            <li>5&ndash;10 minutes per problem</li>
+                            <li>Group collaborates on diagnosis</li>
+                            <li>Document every failure case for the frontier map</li>
+                        </ul>
+
+                        <h3>Structure</h3>
+                        <ol>
+                            <li>
+                                <strong>Presenter:</strong> &ldquo;Here's what it should do.
+                                Here's what it actually does.&rdquo;
+                            </li>
+                            <li>
+                                <strong>Group:</strong> Clarifying questions
+                            </li>
+                            <li>
+                                <strong>Together:</strong> Attempt fix with AI
+                            </li>
+                            <li>
+                                <strong>Document:</strong> Root cause &mdash; frontier issue or context issue?
+                            </li>
+                        </ol>
+                    </section>
+
+                    <!-- Module 5: Teaching Others — The 2011 Multiplier -->
+                    <section id="teaching-others">
+                        <h2>Module 5: Teaching Others &mdash; The 2011 Multiplier</h2>
+                        <p><strong>Duration:</strong> 30 minutes</p>
+
+                        <h3>The Permission Gap</h3>
+                        <p>
+                            Mollick's research shows workers already using AI but hiding it.
+                            Worried about organizational reaction. This creates a shadow AI culture
+                            where best practices aren't shared.
+                        </p>
+
+                        <h3>Exercise: The 60-Second Teach</h3>
+                        <p>
+                            Each participant picks one 2011 skill, teaches it to a partner in
+                            60 seconds with their own work example. This surfaces future instructors.
+                        </p>
+
+                        <h3>Discussion: The Apprentice Problem</h3>
+                        <p>
+                            Entry-level job postings dropped 35% from 2023 to 2025. AI is automating
+                            the routine tasks that juniors traditionally learned on. If a junior never
+                            manually writes a key document because AI generates it, how do they develop
+                            the judgment to know when the AI-generated version is wrong?
+                        </p>
+
+                        <h3>Protocol for Junior Marines Using AI</h3>
+                        <ul>
+                            <li>
+                                <strong>Require review and explanation</strong> &mdash; Juniors must review AI output
+                                and explain WHY it is correct or incorrect.
+                            </li>
+                            <li>
+                                <strong>Periodically work without AI</strong> &mdash; Key tasks should periodically
+                                be done from scratch to build foundational skills.
+                            </li>
+                            <li>
+                                <strong>Use AI output as a teaching tool</strong> &mdash; Give juniors AI-generated
+                                products and have them find the problems.
+                            </li>
+                            <li>
+                                <strong>Rotate QA review</strong> &mdash; Assign juniors to the QA review step so
+                                they develop quality judgment through repeated exposure.
+                            </li>
+                        </ul>
+
+                        <h3>Deliverable: Workflow Playbook</h3>
+                        <p>
+                            Each participant produces a one-page playbook for one AI-integrated workflow
+                            from their actual job.
+                        </p>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Field</th>
+                                        <th scope="col">Content</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Task</td>
+                                        <td>A specific, recurring task from your job</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Frequency</td>
+                                        <td>How often you perform this task</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mode</td>
+                                        <td>Centaur or Cyborg</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Steps</td>
+                                        <td>Step-by-step process with Human/AI labels for each step</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Verification Checklist</td>
+                                        <td>What must be checked before output is final</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Known Frontier Issues</td>
+                                        <td>Where AI has failed on this task before</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Time Savings Estimate</td>
+                                        <td>Time without AI vs. time with AI</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Junior Development Note</td>
+                                        <td>How this workflow preserves skill-building for junior personnel</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </section>
 

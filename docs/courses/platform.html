@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Training 2: Platform Training - A 4-hour hands-on workshop building real tools on SharePoint, Power Apps, Power Automate, and Power BI.">
+    <meta name="description" content="Course 3: Platform Training - A 4-hour hands-on workshop building three complete tools on Power Platform, practicing centaur and cyborg work patterns.">
     <title>Platform Training | Expert-Driven Development</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -57,16 +57,20 @@
                     <li aria-current="page">Platform Training</li>
                 </ol>
             </nav>
-            <h1 class="page-header__title">Training 2: Platform Training</h1>
+            <h1 class="page-header__title">Course 3: Platform Training</h1>
             <p class="page-header__desc">
-                4 hours &mdash; Recommended, hands-on workshop. Build three real tools on the Power
-                Platform using AI-assisted prompting techniques from the Orientation course.
+                4 hours &mdash; Build three complete tools on Power Platform, practicing both
+                centaur and cyborg work patterns. This is where EDD students become capable
+                of producing deployable tools.
             </p>
             <div class="mt-lg">
-                <span class="badge badge--gold">Recommended</span>
+                <span class="badge badge--gold">Elective</span>
                 <span class="badge">4 Hours</span>
-                <span class="badge badge--scarlet">Hands-On</span>
+                <span class="badge badge--scarlet">Builders</span>
             </div>
+            <p class="mt-lg">
+                <strong>Prerequisite:</strong> Builder Orientation, M365 account access
+            </p>
         </div>
     </section>
 
@@ -81,11 +85,12 @@
                         <h2 class="toc__title">On This Page</h2>
                         <ul class="toc__list">
                             <li><a href="#agenda">Agenda</a></li>
-                            <li><a href="#orientation">Platform Orientation</a></li>
-                            <li><a href="#build-1">Build #1: Equipment Tracker</a></li>
-                            <li><a href="#build-2">Build #2: Request Workflow</a></li>
-                            <li><a href="#build-3">Build #3: Leadership Dashboard</a></li>
-                            <li><a href="#troubleshooting">Troubleshooting Patterns</a></li>
+                            <li><a href="#setup-review">Setup and Review</a></li>
+                            <li><a href="#build-1">Build #1: Structured Workflow (Centaur Mode)</a></li>
+                            <li><a href="#failure-sharing">Failure Sharing</a></li>
+                            <li><a href="#build-2">Build #2: Iterative Application (Cyborg Mode)</a></li>
+                            <li><a href="#build-3">Build #3: Your Problem</a></li>
+                            <li><a href="#frontier-map">Frontier Map Update</a></li>
                         </ul>
                     </nav>
                 </aside>
@@ -101,359 +106,282 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Time</th>
-                                        <th scope="col">Topic</th>
-                                        <th scope="col">Duration</th>
+                                        <th scope="col">Module</th>
+                                        <th scope="col">2011 Skills Applied</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>0:00 &ndash; 0:15</td>
-                                        <td>Platform Orientation</td>
-                                        <td>15 min</td>
+                                        <td>0:00&ndash;0:15</td>
+                                        <td>Setup and Review</td>
+                                        <td>All six (quick check)</td>
                                     </tr>
                                     <tr>
-                                        <td>0:15 &ndash; 1:15</td>
-                                        <td>Build #1: Equipment Tracker (Power Apps + SharePoint)</td>
-                                        <td>60 min</td>
+                                        <td>0:15&ndash;1:15</td>
+                                        <td>Build #1: Structured Workflow (Centaur Mode)</td>
+                                        <td>Context Assembly, Quality Judgment</td>
                                     </tr>
                                     <tr>
-                                        <td>1:15 &ndash; 1:30</td>
+                                        <td>1:15&ndash;1:30</td>
+                                        <td>Break &mdash; Failure Sharing</td>
+                                        <td>Frontier Recognition</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1:30&ndash;2:30</td>
+                                        <td>Build #2: Iterative Application (Cyborg Mode)</td>
+                                        <td>Iterative Refinement, Workflow Integration</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2:30&ndash;2:45</td>
                                         <td>Break</td>
-                                        <td>15 min</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
-                                        <td>1:30 &ndash; 2:30</td>
-                                        <td>Build #2: Request Workflow (Power Automate)</td>
-                                        <td>60 min</td>
+                                        <td>2:45&ndash;3:45</td>
+                                        <td>Build #3: Your Problem (Choose Your Mode)</td>
+                                        <td>Task Decomposition, all six</td>
                                     </tr>
                                     <tr>
-                                        <td>2:30 &ndash; 2:45</td>
-                                        <td>Break</td>
-                                        <td>15 min</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2:45 &ndash; 3:45</td>
-                                        <td>Build #3: Leadership Dashboard (Power BI)</td>
-                                        <td>60 min</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3:45 &ndash; 4:00</td>
-                                        <td>Troubleshooting Patterns &amp; Wrap-Up</td>
-                                        <td>15 min</td>
+                                        <td>3:45&ndash;4:00</td>
+                                        <td>Frontier Map Update and Wrap</td>
+                                        <td>Frontier Recognition</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </section>
 
-                    <!-- Platform Orientation -->
-                    <section id="orientation">
-                        <h2>Platform Orientation: Where Things Live</h2>
+                    <!-- Setup and Review -->
+                    <section id="setup-review">
+                        <h2>Module 1: Setup and Review</h2>
                         <p><strong>Duration:</strong> 15 minutes</p>
 
                         <p>
-                            Before building, everyone needs to know where the tools are and how they connect.
-                            Here is the platform landscape:
+                            Verify M365 access and Power Platform for all participants. Run a quick
+                            centaur vs cyborg review to ensure everyone remembers the two modes from
+                            Builder Orientation.
+                        </p>
+
+                        <p>
+                            Ask 2&ndash;3 students to share failure cases from their Builder Orientation
+                            assignment. What went wrong? What did the AI get wrong that they had to
+                            catch? These stories set the tone for the rest of the session.
+                        </p>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Instructor Note</h3>
+                            <p>
+                                Have everyone log in to each platform before proceeding. Verify access now
+                                so you do not lose time during the builds. If anyone has access issues, have
+                                IT support contact information ready. Allow 5 extra minutes if needed.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Build #1: Structured Workflow (Centaur Mode) -->
+                    <section id="build-1">
+                        <h2>Module 2: Build #1 &mdash; Structured Workflow, Centaur Mode</h2>
+                        <p><strong>Duration:</strong> 60 minutes</p>
+
+                        <p>
+                            <strong>Problem:</strong> A request routing workflow &mdash; submit request, goes to the
+                            right approver, approver acts, requester notified.
+                        </p>
+
+                        <h3>Explicit Centaur Pattern</h3>
+                        <p>
+                            This build follows the centaur pattern: distinct human phases and AI phases
+                            with clear boundaries between them.
+                        </p>
+
+                        <h4>Phase 1 &mdash; Human Designs</h4>
+                        <p>
+                            Define the approval chain, business rules, and notifications on a whiteboard.
+                            No AI. Who approves what? What are the dollar thresholds? What happens when
+                            an approver is unavailable? Map it all out by hand first.
+                        </p>
+
+                        <h4>Phase 2 &mdash; AI Builds</h4>
+                        <p>
+                            Feed the design to AI. Build the Power App form and Power Automate flow based
+                            on the whiteboard design. The AI handles the execution &mdash; translating your
+                            design into working platform components.
+                        </p>
+
+                        <h4>Phase 3 &mdash; Human Verifies</h4>
+                        <p>
+                            Test every path. Is the right person notified? What about edge cases? Submit
+                            test requests through every branch of your approval chain and verify the
+                            results against your whiteboard design.
+                        </p>
+
+                        <h4>Phase 4 &mdash; AI Refines</h4>
+                        <p>
+                            Feed test results back to the AI for fixes. Describe exactly what failed,
+                            what you expected, and what happened instead. Let the AI adjust the
+                            implementation.
+                        </p>
+
+                        <h4>Phase 5 &mdash; Human Accepts</h4>
+                        <p>
+                            Final review. Walk through the complete workflow one more time. Does it match
+                            the original design? Is it ready for users?
+                        </p>
+
+                        <div class="callout">
+                            <h3 class="callout__title">Key Teaching Point</h3>
+                            <p>
+                                At every phase boundary, there is a verification checkpoint. The human is
+                                responsible for design and verification. The AI handles execution. This
+                                separation is what makes centaur mode reliable for critical workflows.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Failure Sharing -->
+                    <section id="failure-sharing">
+                        <h2>Module 3: Failure Sharing</h2>
+                        <p><strong>Duration:</strong> 15 minutes (during break)</p>
+
+                        <p>
+                            <strong>This is NOT optional.</strong> This is one of the most important 15 minutes
+                            in the entire program.
+                        </p>
+
+                        <p>Each participant shares:</p>
+                        <ul>
+                            <li>What the AI got wrong</li>
+                            <li>How they caught it</li>
+                            <li>How they fixed it</li>
+                        </ul>
+
+                        <p>
+                            Document failures on a whiteboard or shared document. Look for patterns across
+                            the group. This becomes the beginning of the unit's frontier map &mdash; a living
+                            record of where AI works well and where it does not.
+                        </p>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Instructor Note</h3>
+                            <p>
+                                Create psychological safety. Frame failures as valuable data, not
+                                embarrassments. Lead by sharing your own failures first. The more specific
+                                and honest the sharing, the more useful the frontier map becomes.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Build #2: Iterative Application (Cyborg Mode) -->
+                    <section id="build-2">
+                        <h2>Module 4: Build #2 &mdash; Iterative Application, Cyborg Mode</h2>
+                        <p><strong>Duration:</strong> 60 minutes</p>
+
+                        <p>
+                            <strong>Problem:</strong> A training tracker that pulls from multiple sources and
+                            generates reports.
+                        </p>
+
+                        <h3>Explicit Cyborg Pattern</h3>
+                        <p>
+                            No distinct phases. Continuous back-and-forth between human and AI. The boundary
+                            between human thinking and AI execution is fluid.
+                        </p>
+
+                        <p>
+                            Start rough: <em>"I need to see which Marines have completed which training
+                            events."</em>
+                        </p>
+
+                        <p>Build incrementally:</p>
+                        <ol>
+                            <li>Data model &mdash; what tables, what columns, what relationships</li>
+                            <li>Input form &mdash; how does training data get entered</li>
+                            <li>Dashboard &mdash; what does leadership need to see at a glance</li>
+                            <li>Reports &mdash; what gets printed, emailed, or briefed</li>
+                        </ol>
+
+                        <p>
+                            Evaluate and redirect at each step. You are discovering requirements as you
+                            build, not executing a predetermined plan.
+                        </p>
+
+                        <div class="callout">
+                            <h3 class="callout__title">Key Teaching Point</h3>
+                            <p>
+                                Cyborg mode is faster but requires more constant attention. You cannot walk
+                                away and let the AI run. Best for situations where you are discovering
+                                requirements as you build &mdash; where you do not fully know what you want until
+                                you see it taking shape.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Build #3: Your Problem -->
+                    <section id="build-3">
+                        <h2>Module 5: Build #3 &mdash; Your Problem, Choose Your Mode</h2>
+                        <p><strong>Duration:</strong> 60 minutes</p>
+
+                        <p>
+                            Each participant builds the solution they identified during Builder Orientation.
+                            This is their real problem with their real requirements.
+                        </p>
+
+                        <p>Before starting, each participant states:</p>
+                        <ol>
+                            <li><strong>What they are building</strong> (one sentence)</li>
+                            <li><strong>Which mode</strong> (centaur or cyborg) and why</li>
+                            <li><strong>Where they expect frontier issues</strong> &mdash; the places where AI is likely to struggle</li>
+                        </ol>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Instructor Note</h3>
+                            <p>
+                                Resist solving every problem. When a participant gets stuck, ask:
+                                <em>"What would you tell the AI about what is going wrong?"</em> This builds
+                                the self-sufficiency they need to work independently after the course.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Frontier Map Update -->
+                    <section id="frontier-map">
+                        <h2>Module 6: Frontier Map Update and Wrap</h2>
+                        <p><strong>Duration:</strong> 15 minutes</p>
+
+                        <p>
+                            Compile all failure cases from the session into a shared frontier map.
+                            This is the collective intelligence of the group &mdash; a record of what AI can
+                            and cannot do for your specific use cases.
                         </p>
 
                         <div class="table-wrapper">
                             <table>
                                 <thead>
                                     <tr>
-                                        <th scope="col">Platform</th>
-                                        <th scope="col">Purpose</th>
-                                        <th scope="col">Access URL</th>
+                                        <th scope="col">Task Type</th>
+                                        <th scope="col">AI Handles Well</th>
+                                        <th scope="col">AI Handles Poorly</th>
+                                        <th scope="col">Verification Needed</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><strong>SharePoint Online</strong></td>
-                                        <td>Data storage &mdash; lists and document libraries</td>
-                                        <td><code>https://[tenant].sharepoint.com</code></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Power Apps</strong></td>
-                                        <td>App builder &mdash; forms, galleries, screens</td>
-                                        <td><code>https://make.powerapps.com</code></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Power Automate</strong></td>
-                                        <td>Workflow engine &mdash; triggers, approvals, emails</td>
-                                        <td><code>https://make.powerautomate.com</code></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Power BI</strong></td>
-                                        <td>Dashboards &mdash; charts, reports, data visualization</td>
-                                        <td><code>https://app.powerbi.com</code></td>
+                                        <td><em>(filled in during session)</em></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
 
-                        <div class="callout callout--instructor">
-                            <h3 class="callout__title">Instructor Note</h3>
-                            <p>
-                                Have everyone log in to each platform before proceeding. Verify access now so
-                                you do not lose time during the builds. If anyone has access issues, have IT
-                                support contact information ready. Allow 5 extra minutes if needed.
-                            </p>
-                        </div>
-                    </section>
-
-                    <!-- Build #1: Equipment Tracker -->
-                    <section id="build-1">
-                        <h2>Build #1: Equipment Tracker</h2>
-                        <p><strong>Duration:</strong> 60 minutes &nbsp;|&nbsp; <strong>Platforms:</strong> SharePoint + Power Apps</p>
-
-                        <h3>Phase 1: Data &mdash; Create the SharePoint List</h3>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Data Layer</span>
-                            <pre><code>I need a SharePoint list called "EquipmentTracker" for a company-level
-motor pool with 40 vehicles and 200 pieces of serialized gear.
-
-Columns:
-- ItemName (text) - e.g., "HMMWV" or "PVS-14"
-- SerialNumber (text) - unique
-- Category (choice: Vehicle, Optics, Communications, Weapons, Other)
-- Status (choice: FMC, PMC, NMC, In Maintenance) - default "FMC"
-- AssignedTo (person)
-- Location (choice: Motor Pool, Armory, Field, In Transit)
-- LastInventoryDate (date)
-- Notes (multiline text)
-
-Give me exact steps to create this in SharePoint Online.</code></pre>
-                        </div>
-
-                        <h3>Phase 2: App &mdash; Build the Power App</h3>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; App Build</span>
-                            <pre><code>Create a Power Apps canvas app connected to the "EquipmentTracker"
-SharePoint list. I need:
-
-Screen 1 - Gallery: Show all equipment in a scrollable list. Display
-ItemName, SerialNumber, Category, and Status. Color-code the Status
-field: FMC (green), PMC (yellow), NMC (red), In Maintenance (blue).
-Add a search bar that filters by ItemName or SerialNumber.
-
-Screen 2 - Detail/Edit: When a user taps an item in the gallery,
-navigate to a detail screen that shows all fields and allows editing.
-Only the AssignedTo person or an admin should be able to edit.
-
-Give me step-by-step instructions for Power Apps Studio.</code></pre>
-                        </div>
-
-                        <h3>Phase 3: Polish &mdash; Add Usability Features</h3>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Polish</span>
-                            <pre><code>Add these improvements to the Equipment Tracker app:
-
-1. A summary bar at the top of the gallery screen showing counts:
-   "FMC: [count] | PMC: [count] | NMC: [count] | In Maintenance: [count]"
-2. A filter dropdown for Category so users can view only Vehicles or
-   only Optics, etc. Include an "All" option.
-3. A "Last Inventory" warning: if LastInventoryDate is more than 30 days
-   ago, show a red banner on that item's card saying "INVENTORY OVERDUE".
-
-Give me the Power Apps formulas for each feature.</code></pre>
-                        </div>
-
-                        <div class="callout callout--instructor">
-                            <h3 class="callout__title">Instructor Note</h3>
-                            <p>
-                                Walk the room during this build. Most common issues: (1) SharePoint column type
-                                mismatches, (2) forgetting to connect the data source in Power Apps, (3) formula
-                                syntax errors in gallery Items property. Have participants help each other before
-                                you intervene. Peer troubleshooting builds confidence.
-                            </p>
-                        </div>
-                    </section>
-
-                    <!-- Build #2: Request Workflow -->
-                    <section id="build-2">
-                        <h2>Build #2: Request Workflow</h2>
-                        <p><strong>Duration:</strong> 60 minutes &nbsp;|&nbsp; <strong>Platform:</strong> Power Automate</p>
-
-                        <h3>Phase 1: Trigger &mdash; Set Up the Flow</h3>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Flow Trigger</span>
-                            <pre><code>Create a Power Automate flow that triggers when a new item is created
-in a SharePoint list called "SupplyRequests". The list has these columns:
-- RequestedBy (person)
-- ItemDescription (text)
-- Quantity (number)
-- Priority (choice: Routine, Urgent, Emergency)
-- Justification (multiline text)
-- Status (choice: Pending, Approved, Denied) - defaults to "Pending"
-- ApprovedBy (person)
-
-The flow should:
-1. Trigger on new item creation
-2. Send an email notification to the supply chief with request details
-3. Include the requester's name, item description, quantity, priority,
-   and justification in the email body
-
-Give me step-by-step Power Automate instructions.</code></pre>
-                        </div>
-
-                        <h3>Phase 2: Approval &mdash; Add Approval Logic</h3>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Approval Chain</span>
-                            <pre><code>Extend the SupplyRequests flow to include an approval step:
-
-1. After the notification email, add an Approval action (Approve/Reject)
-   assigned to the supply chief.
-2. If approved: update the SharePoint item Status to "Approved", set
-   ApprovedBy to the approver, and send a confirmation email to the requester.
-3. If rejected: update Status to "Denied" and send a rejection email to
-   the requester with the approver's comments.
-
-Show me how to configure the approval and the conditional branches.</code></pre>
-                        </div>
-
-                        <h3>Phase 3: Error Handling &mdash; Make It Robust</h3>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Error Handling</span>
-                            <pre><code>Add error handling to the SupplyRequests approval flow:
-
-1. Add a "Configure run after" on the approval step so that if it fails
-   or times out, the flow sends an alert email to the admin.
-2. Set a 48-hour timeout on the approval. If no response in 48 hours,
-   automatically escalate by sending the approval to the next-level
-   supervisor.
-3. Add a "Scope" action around the entire flow with a try/catch pattern:
-   if any action fails, log the error details to a SharePoint list
-   called "FlowErrorLog".
-
-Give me the Power Automate configuration steps.</code></pre>
-                        </div>
-
-                        <div class="callout callout--instructor">
-                            <h3 class="callout__title">Instructor Note</h3>
-                            <p>
-                                Power Automate is where most participants will struggle. The visual flow designer
-                                is different from Power Apps. Common issues: (1) wrong dynamic content selected,
-                                (2) approval connector not configured, (3) "Configure run after" settings missed.
-                                Demo the first phase live, then let participants try phases 2-3 with their AI tool.
-                            </p>
-                        </div>
-                    </section>
-
-                    <!-- Build #3: Leadership Dashboard -->
-                    <section id="build-3">
-                        <h2>Build #3: Leadership Dashboard</h2>
-                        <p><strong>Duration:</strong> 60 minutes &nbsp;|&nbsp; <strong>Platform:</strong> Power BI</p>
-
-                        <h3>Phase 1: Connect &mdash; Data Sources</h3>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Data Connection</span>
-                            <pre><code>I need to create a Power BI dashboard that pulls data from three
-SharePoint lists:
-- "EquipmentTracker" (ItemName, SerialNumber, Category, Status, Location)
-- "LeaveRequests" (ServiceMember, Rank, StartDate, EndDate, Status)
-- "SupplyRequests" (RequestedBy, ItemDescription, Priority, Status)
-
-Walk me through connecting Power BI Desktop to these three SharePoint
-Online lists. Show me how to set up the data connections and verify
-the data loads correctly.</code></pre>
-                        </div>
-
-                        <h3>Phase 2: Visuals &mdash; Build the Charts</h3>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Dashboard Visuals</span>
-                            <pre><code>Create a Power BI dashboard page called "Commander's Overview" with
-these visuals:
-
-1. Equipment Readiness: A donut chart showing equipment by Status
-   (FMC, PMC, NMC, In Maintenance). Use green, yellow, red, and blue.
-2. Leave Calendar: A bar chart showing the number of personnel on leave
-   per week for the next 8 weeks.
-3. Supply Pipeline: A stacked bar chart showing supply requests by
-   Priority (Routine, Urgent, Emergency) and Status (Pending, Approved,
-   Denied).
-4. Key Metrics Cards: Four card visuals showing:
-   - Total Equipment FMC Rate (percentage)
-   - Personnel Currently on Leave (count)
-   - Open Supply Requests (count)
-   - Overdue Equipment Inventories (count where LastInventoryDate > 30 days ago)
-
-Give me step-by-step Power BI instructions for each visual.</code></pre>
-                        </div>
-
-                        <h3>Phase 3: Useful &mdash; Filters and Sharing</h3>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Usability</span>
-                            <pre><code>Make the Commander's Overview dashboard more useful:
-
-1. Add a date range slicer that filters the Leave and Supply data
-   by a selectable time period.
-2. Add a Category slicer for the Equipment data so leadership can
-   view only Vehicles or only Communications gear.
-3. Set up automatic data refresh so the dashboard updates every
-   morning at 0600.
-4. Publish the dashboard to the Power BI service and share it with
-   a security group called "CompanyLeadership" as read-only viewers.
-
-Show me the steps for each improvement.</code></pre>
-                        </div>
-
-                        <div class="callout callout--instructor">
-                            <h3 class="callout__title">Instructor Note</h3>
-                            <p>
-                                Power BI is the most visual and rewarding build. Participants will see immediate
-                                results as charts populate. Common issues: (1) data type mismatches from SharePoint,
-                                (2) DAX formula errors in calculated columns, (3) publishing permissions. If time is
-                                short, focus on Phase 1 and Phase 2 &mdash; publishing can be done after class.
-                            </p>
-                        </div>
-                    </section>
-
-                    <!-- Troubleshooting Patterns -->
-                    <section id="troubleshooting">
-                        <h2>Troubleshooting Patterns</h2>
-                        <p><strong>Duration:</strong> 15 minutes</p>
-
-                        <p>
-                            When something breaks, these three prompt patterns will solve most issues. Save
-                            them as templates.
-                        </p>
-
-                        <h3>Pattern 1: The Error Reporter</h3>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Error Report</span>
-                            <pre><code>I'm working in [Power Apps / Power Automate / Power BI].
-I'm trying to [describe what you were doing].
-I got this error: "[paste exact error message]"
-Here is the formula/configuration I'm using: [paste it]
-What is wrong and how do I fix it?</code></pre>
-                        </div>
-
-                        <h3>Pattern 2: The Behavior Describer</h3>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Wrong Behavior</span>
-                            <pre><code>My [app/flow/dashboard] is doing [describe what it is doing].
-I expected it to do [describe what you wanted].
-Here is my current configuration: [paste relevant settings].
-What do I need to change?</code></pre>
-                        </div>
-
-                        <h3>Pattern 3: The Fresh Eyes Request</h3>
-                        <div class="code-block">
-                            <span class="code-block__label">Prompt &mdash; Review Request</span>
-                            <pre><code>I've been going back and forth trying to fix this and I'm stuck.
-Here is what I'm building: [brief description].
-Here is what works so far: [list working parts].
-Here is what is broken: [describe the problem].
-Can you look at this with fresh eyes and suggest a different approach?</code></pre>
-                        </div>
-
-                        <div class="callout callout--instructor">
-                            <h3 class="callout__title">Instructor Note</h3>
-                            <p>
-                                These three patterns cover 90% of troubleshooting situations. Have participants
-                                save these as notes or bookmarks. Reinforce that the key skill is <strong>describing
-                                what happened clearly</strong> &mdash; the same mindset from the Orientation course.
-                            </p>
-                        </div>
+                        <h3>Assignment Before Advanced Workshop</h3>
+                        <ol>
+                            <li>Complete Build #3 to a deployable state</li>
+                            <li>Run through the EDD SOP QA process</li>
+                            <li>Document three failure cases with specifics: what failed, how you caught it, how you fixed it</li>
+                            <li>Identify one area where AI capability surprised you &mdash; something it did better than you expected</li>
+                        </ol>
                     </section>
 
                 </div>
