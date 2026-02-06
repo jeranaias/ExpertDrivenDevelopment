@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Standard Operating Procedure for Expert-Driven AI-Assisted Development - Version 3.0. Framework, compliance, workflow, and governance for DoW AI-assisted tool development.">
+    <title>SOP: Expert-Driven AI-Assisted Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* SOP-specific styles */
+        .sop-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+            align-items: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .sop-meta__item {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+
+        .sop-meta__label {
+            font-weight: var(--font-weight-semibold);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: var(--font-size-xs);
+            color: var(--color-text-muted);
+            display: block;
+            margin-bottom: var(--space-xs);
+        }
+
+        .sop-classification {
+            display: inline-block;
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-bold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: var(--space-xs) var(--space-md);
+            border: 2px solid var(--color-success-border);
+            color: var(--color-success-text);
+            background-color: var(--color-success-bg);
+            border-radius: var(--radius-sm);
+        }
+
+        /* Mobile TOC toggle */
+        .toc-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: var(--space-md) var(--space-lg);
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-lg);
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            font-family: var(--font-family-sans);
+        }
+
+        .toc-toggle::after {
+            content: "+";
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-scarlet);
+            transition: transform var(--transition-fast);
+        }
+
+        .toc-toggle[aria-expanded="true"]::after {
+            content: "-";
+        }
+
+        .toc-collapsible {
+            display: none;
+        }
+
+        .toc-collapsible.is-open {
+            display: block;
+        }
+
+        @media (min-width: 1024px) {
+            .toc-toggle {
+                display: none;
+            }
+            .toc-collapsible {
+                display: block;
+            }
+        }
+
+        /* Section anchors - visual indicator on hover */
+        .sop-section {
+            scroll-margin-top: calc(var(--header-height) + var(--space-xl));
+        }
+
+        .sop-section h2 {
+            position: relative;
+        }
+
+        .sop-section h3 {
+            scroll-margin-top: calc(var(--header-height) + var(--space-xl));
+        }
+
+        .sop-section h4 {
+            scroll-margin-top: calc(var(--header-height) + var(--space-xl));
+        }
+
+        /* IS / ISN'T side-by-side */
+        .is-isnt-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-lg);
+        }
+
+        @media (min-width: 768px) {
+            .is-isnt-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .is-isnt-grid .is-list {
+            border-left: 4px solid var(--color-success-border);
+            padding-left: var(--space-lg);
+        }
+
+        .is-isnt-grid .isnt-list {
+            border-left: 4px solid var(--color-scarlet);
+            padding-left: var(--space-lg);
+        }
+
+        .is-isnt-grid h4 {
+            margin-top: 0;
+        }
+
+        /* Comparison table highlight */
+        .comparison-highlight-creator {
+            background-color: var(--color-success-bg);
+        }
+
+        .comparison-highlight-consumer {
+            background-color: #fce8e8;
+        }
+
+        /* Phase cards for workflow */
+        .phase-card {
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-lg);
+            border-left: 4px solid var(--color-scarlet);
+        }
+
+        .phase-card__header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: var(--space-md);
+            margin-bottom: var(--space-sm);
+        }
+
+        .phase-card__number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background-color: var(--color-scarlet);
+            color: var(--color-text-inverse);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-bold);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .phase-card__title {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            margin: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .phase-card__time {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-muted);
+            font-weight: var(--font-weight-medium);
+            margin-left: auto;
+        }
+
+        /* Back to top utility */
+        .back-to-top {
+            display: inline-block;
+            font-size: var(--font-size-xs);
+            color: var(--color-text-muted);
+            text-decoration: none;
+            margin-top: var(--space-md);
+        }
+
+        .back-to-top:hover {
+            color: var(--color-scarlet);
+        }
+
+        .back-to-top:visited {
+            color: var(--color-text-muted);
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="site-wrapper">
+
+        <!-- ============ SITE HEADER / NAV ============ -->
+        <header class="site-header">
+            <div class="container">
+                <a href="../" class="site-brand">
+                    <span class="site-brand__mark" aria-hidden="true"></span>
+                    Expert-Driven Development
+                </a>
+
+                <nav aria-label="Primary navigation">
+                    <ul class="nav-list">
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../courses/">Courses</a></li>
+                        <li><a href="./" aria-current="page">SOP</a></li>
+                        <li><a href="../toolkit/">Toolkit</a></li>
+                        <li><a href="../resources/">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </nav>
+
+                <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">
+                    <span class="nav-toggle__icon" aria-hidden="true"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Mobile navigation overlay -->
+        <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+            <ul class="nav-list">
+                <li><a href="../">Home</a></li>
+                <li><a href="../courses/">Courses</a></li>
+                <li><a href="./" aria-current="page">SOP</a></li>
+                <li><a href="../toolkit/">Toolkit</a></li>
+                <li><a href="../resources/">Resources</a></li>
+                <li><a href="../about.html">About</a></li>
+            </ul>
+        </div>
+
+        <main id="main" class="site-main">
+
+            <!-- ============ PAGE HEADER ============ -->
+            <section class="page-header">
+                <div class="container">
+                    <nav aria-label="Breadcrumb">
+                        <ol class="breadcrumb">
+                            <li><a href="../">Home</a></li>
+                            <li aria-current="page">Standard Operating Procedure</li>
+                        </ol>
+                    </nav>
+                    <h1 class="page-header__title">Standard Operating Procedure:<br>Expert-Driven AI-Assisted Development</h1>
+                    <div class="sop-meta mt-lg">
+                        <div class="sop-meta__item">
+                            <span class="sop-meta__label">Version</span>
+                            3.0
+                        </div>
+                        <div class="sop-meta__item">
+                            <span class="sop-meta__label">Date</span>
+                            26 January 2026
+                        </div>
+                        <div class="sop-meta__item">
+                            <span class="sop-meta__label">Classification</span>
+                            <span class="sop-classification">UNCLASSIFIED</span>
+                        </div>
+                        <div class="sop-meta__item">
+                            <a href="../pdf/SOP_Expert_Driven_Development_v3.pdf" class="btn btn--secondary btn--sm">Download PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ CONTENT WITH SIDEBAR ============ -->
+            <div class="container">
+                <div class="page-layout page-layout--sidebar">
+
+                    <!-- ======== SIDEBAR TOC ======== -->
+                    <aside class="sidebar sidebar--sticky" aria-label="Table of Contents">
+                        <button class="toc-toggle" aria-expanded="false" aria-controls="sop-toc" id="toc-toggle-btn">
+                            Table of Contents
+                        </button>
+                        <nav id="sop-toc" class="toc toc-collapsible" aria-label="SOP Table of Contents">
+                            <h2 class="toc__title">Contents</h2>
+                            <ol class="toc__list">
+                                <li>
+                                    <a href="#purpose-and-scope">1. Purpose and Scope</a>
+                                    <ol class="toc__list">
+                                        <li><a href="#purpose">Purpose</a></li>
+                                        <li><a href="#is-isnt">IS / ISN'T</a></li>
+                                        <li><a href="#scope">Scope</a></li>
+                                        <li><a href="#applicability">Applicability</a></li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <a href="#four-layer-framework">2. The Four-Layer Framework</a>
+                                    <ol class="toc__list">
+                                        <li><a href="#layer-1">Layer 1: Direct Tool Development</a></li>
+                                        <li><a href="#layer-2">Layer 2: Process Liberation</a></li>
+                                        <li><a href="#layer-3">Layer 3: Capability Cultivation</a></li>
+                                        <li><a href="#layer-4">Layer 4: Documentation and Replication</a></li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <a href="#creator-mindset">3. The Creator Mindset</a>
+                                    <ol class="toc__list">
+                                        <li><a href="#consumer-vs-creator">Consumer vs Creator</a></li>
+                                        <li><a href="#artifact-test">The Artifact Test</a></li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <a href="#compliance-and-security">4. Compliance and Security</a>
+                                    <ol class="toc__list">
+                                        <li><a href="#data-classification">Data Classification</a></li>
+                                        <li><a href="#privacy-requirements">Privacy Requirements</a></li>
+                                        <li><a href="#cybersecurity">Cybersecurity</a></li>
+                                        <li><a href="#opsec">OPSEC</a></li>
+                                        <li><a href="#records-management">Records Management</a></li>
+                                        <li><a href="#incident-response">Incident Response</a></li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <a href="#development-prerequisites">5. Development Prerequisites</a>
+                                    <ol class="toc__list">
+                                        <li><a href="#required">Required</a></li>
+                                        <li><a href="#not-required">Not Required</a></li>
+                                        <li><a href="#obtaining-access">Obtaining Access</a></li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <a href="#development-workflow">6. Development Workflow</a>
+                                    <ol class="toc__list">
+                                        <li><a href="#phase-1">Phase 1: Problem Definition</a></li>
+                                        <li><a href="#phase-2">Phase 2: Compliance Review</a></li>
+                                        <li><a href="#phase-3">Phase 3: Rapid Prototyping</a></li>
+                                        <li><a href="#phase-4">Phase 4: User Testing</a></li>
+                                        <li><a href="#phase-5">Phase 5: Documentation</a></li>
+                                        <li><a href="#phase-6">Phase 6: QA Review</a></li>
+                                        <li><a href="#phase-7">Phase 7: Deployment</a></li>
+                                        <li><a href="#phase-8">Phase 8: Sustainment</a></li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <a href="#roles-and-responsibilities">7. Roles and Responsibilities</a>
+                                    <ol class="toc__list">
+                                        <li><a href="#role-developer">Developer</a></li>
+                                        <li><a href="#role-qa-reviewer">QA Reviewer</a></li>
+                                        <li><a href="#role-supervisor">Supervisor</a></li>
+                                        <li><a href="#role-coordinator">Program Coordinator</a></li>
+                                        <li><a href="#role-cybersecurity">Cybersecurity Office</a></li>
+                                        <li><a href="#role-privacy">Privacy Officer</a></li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <a href="#training-requirements">8. Training Requirements</a>
+                                    <ol class="toc__list">
+                                        <li><a href="#training-required">Required</a></li>
+                                        <li><a href="#training-recommended">Recommended</a></li>
+                                        <li><a href="#training-optional">Optional</a></li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <a href="#metrics-and-assessment">9. Metrics and Assessment</a>
+                                    <ol class="toc__list">
+                                        <li><a href="#tool-level-metrics">Tool-Level Metrics</a></li>
+                                        <li><a href="#program-level-metrics">Program-Level Metrics</a></li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <a href="#scaling-and-adoption">10. Scaling and Adoption</a>
+                                    <ol class="toc__list">
+                                        <li><a href="#pilot-model">90-Day Pilot Model</a></li>
+                                        <li><a href="#success-failure-criteria">Success / Failure Criteria</a></li>
+                                        <li><a href="#tool-registry">Tool Registry</a></li>
+                                        <li><a href="#expansion-model">Expansion Model</a></li>
+                                    </ol>
+                                </li>
+                                <li><a href="#references">11. References</a></li>
+                                <li><a href="#appendices">12. Appendices</a></li>
+                            </ol>
+                        </nav>
+                    </aside>
+
+                    <!-- ======== MAIN CONTENT ======== -->
+                    <article class="page-content">
+
+                        <!-- ======================================== -->
+                        <!-- SECTION 1: PURPOSE AND SCOPE             -->
+                        <!-- ======================================== -->
+                        <section id="purpose-and-scope" class="sop-section">
+                            <h2>1. Purpose and Scope</h2>
+
+                            <h3 id="purpose">Purpose</h3>
+                            <p>
+                                This Standard Operating Procedure establishes the framework, governance, and workflow for
+                                AI-assisted tool development by subject-matter experts within Department of War organizations.
+                                Expert-Driven Development enables domain experts to build, document, and sustain institutional
+                                tools using AI as a development accelerator -- without requiring a background in software engineering,
+                                contracting, or formal IT acquisition.
+                            </p>
+
+                            <h3 id="is-isnt">EDD IS / EDD ISN'T</h3>
+                            <div class="is-isnt-grid">
+                                <div class="is-list">
+                                    <h4>EDD IS</h4>
+                                    <ul>
+                                        <li>A framework for building institutional tools using AI</li>
+                                        <li>A way to turn subject-matter expertise into working software</li>
+                                        <li>A governance model for responsible AI-assisted development</li>
+                                        <li>A training pipeline that produces AI-fluent builders</li>
+                                        <li>A documentation standard that ensures tool continuity</li>
+                                        <li>Compatible with existing DoW cybersecurity and privacy requirements</li>
+                                    </ul>
+                                </div>
+                                <div class="isnt-list">
+                                    <h4>EDD ISN'T</h4>
+                                    <ul>
+                                        <li>A replacement for professional software development or IT acquisition</li>
+                                        <li>An authorization to bypass cybersecurity or privacy controls</li>
+                                        <li>A way to build systems that handle classified data</li>
+                                        <li>A shortcut that eliminates the need for documentation</li>
+                                        <li>A single AI tool or platform</li>
+                                        <li>Limited to any specific programming language or technology stack</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3 id="scope">Scope</h3>
+                            <p>
+                                This SOP covers the complete lifecycle of AI-assisted tool development: from problem identification
+                                and compliance review through prototyping, testing, documentation, deployment, and sustainment.
+                                It applies to tools built on approved platforms using approved AI assistants that handle
+                                unclassified data only.
+                            </p>
+
+                            <h3 id="applicability">Applicability</h3>
+                            <p>
+                                This SOP applies to all personnel who develop, review, supervise, or maintain tools built
+                                using the Expert-Driven Development framework. It is designed for adoption at the unit level
+                                and can be tailored to organization-specific requirements while maintaining compliance with
+                                DoW-wide cybersecurity and privacy directives.
+                            </p>
+
+                            <a href="#purpose-and-scope" class="back-to-top">Back to top</a>
+                        </section>
+
+                        <!-- ======================================== -->
+                        <!-- SECTION 2: THE FOUR-LAYER FRAMEWORK      -->
+                        <!-- ======================================== -->
+                        <section id="four-layer-framework" class="sop-section">
+                            <h2>2. The Four-Layer Framework</h2>
+                            <p>
+                                Expert-Driven Development operates through four interdependent layers. Each layer builds
+                                on the previous one, and all four must be present for the framework to produce sustainable results.
+                            </p>
+
+                            <h3 id="layer-1">Layer 1: Direct Tool Development</h3>
+                            <p>
+                                Subject-matter experts use AI to build tools that solve real problems in their organizations.
+                                The expert provides domain knowledge -- the understanding of the problem, the workflow, the
+                                users, and the requirements. AI provides the development capability -- translating that
+                                domain knowledge into working code, interfaces, and automation.
+                            </p>
+                            <div class="callout callout--info">
+                                <p class="callout__title">Key Principle</p>
+                                <p>
+                                    The expert drives the development. AI is the accelerator, not the decision-maker.
+                                    Every design choice, workflow decision, and feature prioritization comes from the
+                                    person who understands the problem.
+                                </p>
+                            </div>
+
+                            <h3 id="layer-2">Layer 2: Process Liberation</h3>
+                            <p>
+                                By removing the dependency on contractors, acquisition timelines, and IT development queues,
+                                EDD liberates the development process. Personnel can identify a problem and begin building
+                                a solution within the same week -- not the same fiscal year. This layer addresses the
+                                structural bottleneck that prevents organizations from responding to their own needs.
+                            </p>
+
+                            <h3 id="layer-3">Layer 3: Capability Cultivation</h3>
+                            <p>
+                                Each build develops the builder. Personnel who complete EDD projects gain transferable
+                                skills in AI-assisted development, systems thinking, user-centered design, and technical
+                                documentation. These capabilities persist after the specific tool is deployed and compound
+                                across subsequent projects.
+                            </p>
+
+                            <h3 id="layer-4">Layer 4: Documentation and Replication</h3>
+                            <p>
+                                Every tool built under EDD is documented to a standard that enables another person to
+                                understand, maintain, modify, and replicate the tool without the original builder present.
+                                This layer ensures that institutional knowledge does not walk out the door when personnel
+                                transfer. Documentation is not an afterthought -- it is a core deliverable of every project.
+                            </p>
+
+                            <a href="#four-layer-framework" class="back-to-top">Back to top</a>
+                        </section>
+
+                        <!-- ======================================== -->
+                        <!-- SECTION 3: THE CREATOR MINDSET           -->
+                        <!-- ======================================== -->
+                        <section id="creator-mindset" class="sop-section">
+                            <h2>3. The Creator Mindset</h2>
+                            <p>
+                                EDD requires a fundamental shift in how personnel interact with AI tools. Most users
+                                operate as consumers -- they use AI to get answers, summarize text, or draft emails.
+                                EDD trains personnel to operate as creators -- using AI to build things that other
+                                people use.
+                            </p>
+
+                            <h3 id="consumer-vs-creator">Consumer vs Creator</h3>
+                            <div class="table-wrapper">
+                                <table>
+                                    <caption class="sr-only">Comparison of Consumer and Creator approaches to AI</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Dimension</th>
+                                            <th scope="col" class="comparison-highlight-consumer">Consumer</th>
+                                            <th scope="col" class="comparison-highlight-creator">Creator</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Output</strong></td>
+                                            <td>Answers for yourself</td>
+                                            <td>Tools for others</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Interaction</strong></td>
+                                            <td>Single prompt, single response</td>
+                                            <td>Iterative conversation toward a build</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Scope</strong></td>
+                                            <td>Personal productivity</td>
+                                            <td>Institutional capability</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Duration</strong></td>
+                                            <td>One-time use</td>
+                                            <td>Persistent, maintained artifact</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Accountability</strong></td>
+                                            <td>None -- private use</td>
+                                            <td>Documented, reviewed, and sustained</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Knowledge transfer</strong></td>
+                                            <td>None</td>
+                                            <td>Documentation package enables replication</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3 id="artifact-test">The Artifact Test</h3>
+                            <p>
+                                The simplest way to determine whether someone is operating as a consumer or a creator:
+                            </p>
+                            <blockquote>
+                                <p>
+                                    <strong>Does your AI interaction produce an artifact that someone else can use?</strong>
+                                </p>
+                                <p>
+                                    If the answer is yes -- a tool, an application, a system, a workflow -- you are creating.
+                                    If the answer is no -- a summary, an email draft, a personal answer -- you are consuming.
+                                    Both are valid. EDD focuses on creating.
+                                </p>
+                            </blockquote>
+
+                            <a href="#creator-mindset" class="back-to-top">Back to top</a>
+                        </section>
+
+                        <!-- ======================================== -->
+                        <!-- SECTION 4: COMPLIANCE AND SECURITY       -->
+                        <!-- ======================================== -->
+                        <section id="compliance-and-security" class="sop-section">
+                            <h2>4. Compliance and Security</h2>
+                            <p>
+                                All development under this SOP must comply with existing DoW cybersecurity, privacy,
+                                OPSEC, and records management requirements. AI-assisted development does not create
+                                new exceptions to these requirements -- it operates within them.
+                            </p>
+
+                            <h3 id="data-classification">Data Classification</h3>
+                            <p>
+                                EDD tools handle <strong>unclassified data only</strong>. The following data types are
+                                prohibited from use in AI-assisted development:
+                            </p>
+                            <div class="callout callout--warning">
+                                <p class="callout__title">Prohibited Data</p>
+                                <ul>
+                                    <li>Classified information (any level)</li>
+                                    <li>Controlled Unclassified Information (CUI) unless the platform is CUI-authorized</li>
+                                    <li>Personally Identifiable Information (PII) unless a Privacy Impact Assessment has been completed</li>
+                                    <li>Protected Health Information (PHI)</li>
+                                    <li>For Official Use Only (FOUO) data in non-authorized environments</li>
+                                    <li>Operational plans, force movement data, or intelligence products</li>
+                                </ul>
+                            </div>
+
+                            <h3 id="privacy-requirements">Privacy Requirements</h3>
+                            <p>
+                                Tools that collect, store, process, or display information about individuals must comply
+                                with DoW privacy directives. The following apply:
+                            </p>
+                            <h4>Privacy Impact Assessment (PIA)</h4>
+                            <p>
+                                Required for any tool that collects or maintains PII. A PIA threshold analysis must be
+                                completed during the Compliance Review phase (Phase 2) to determine whether a full PIA
+                                is required.
+                            </p>
+                            <h4>System of Records Notice (SORN)</h4>
+                            <p>
+                                If the tool creates a new system of records retrievable by a personal identifier, a SORN
+                                must be published in the Federal Register before the tool goes into production use.
+                            </p>
+                            <h4>Appeals and Redress</h4>
+                            <p>
+                                Any tool that makes decisions affecting individuals must include a mechanism for
+                                individuals to review, contest, and correct information about themselves.
+                            </p>
+
+                            <h3 id="cybersecurity">Cybersecurity</h3>
+
+                            <h4 id="approved-ai-tools">Approved AI Tools</h4>
+                            <p>
+                                The following AI tools are approved for use in EDD development. Authorization levels
+                                indicate the scope of approved use:
+                            </p>
+                            <div class="table-wrapper">
+                                <table>
+                                    <caption class="sr-only">Approved AI tools and their authorization levels</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Tool</th>
+                                            <th scope="col">Authorization Level</th>
+                                            <th scope="col">Notes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>M365 Copilot</td>
+                                            <td>Enterprise-authorized</td>
+                                            <td>Available through existing DoW M365 licensing; data stays within tenant</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Azure OpenAI</td>
+                                            <td>Enterprise-authorized</td>
+                                            <td>Requires Azure Government subscription; FedRAMP High authorized</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Copilot Studio</td>
+                                            <td>Enterprise-authorized</td>
+                                            <td>Low-code bot builder within M365 ecosystem</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gemini</td>
+                                            <td>Approved with restrictions</td>
+                                            <td>Unclassified use only; do not input PII or CUI</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Claude</td>
+                                            <td>Approved with restrictions</td>
+                                            <td>Unclassified use only; do not input PII or CUI</td>
+                                        </tr>
+                                        <tr>
+                                            <td>C3 AI</td>
+                                            <td>Enterprise-authorized</td>
+                                            <td>DoW Enterprise AI platform; available through enterprise agreement</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h4 id="approved-platforms">Approved Platforms</h4>
+                            <p>
+                                Tools built under EDD must be deployed on approved platforms:
+                            </p>
+                            <div class="table-wrapper">
+                                <table>
+                                    <caption class="sr-only">Approved deployment platforms</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Platform</th>
+                                            <th scope="col">Use Case</th>
+                                            <th scope="col">Authorization</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Microsoft Power Platform</td>
+                                            <td>Low-code applications, automation, dashboards</td>
+                                            <td>Enterprise-authorized within DoW M365</td>
+                                        </tr>
+                                        <tr>
+                                            <td>SharePoint Online</td>
+                                            <td>Web-based tools, document management, portals</td>
+                                            <td>Enterprise-authorized within DoW M365</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Azure Government</td>
+                                            <td>Cloud-hosted applications, APIs, databases</td>
+                                            <td>FedRAMP High; requires subscription</td>
+                                        </tr>
+                                        <tr>
+                                            <td>GitHub (public)</td>
+                                            <td>Open-source projects, static sites, documentation</td>
+                                            <td>Unclassified public release only</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h4 id="ato-requirements">When an ATO Is Required</h4>
+                            <p>
+                                An Authority to Operate (ATO) is required when a tool:
+                            </p>
+                            <ul>
+                                <li>Connects to or operates on the DoW Information Network (DoWIN)</li>
+                                <li>Processes, stores, or transmits CUI</li>
+                                <li>Integrates with other authorized information systems</li>
+                                <li>Operates outside the inherited authorization boundary of its host platform</li>
+                            </ul>
+                            <p>
+                                Tools built entirely within the inherited authorization boundary of an approved platform
+                                (e.g., a Power App within DoW M365) typically do not require a separate ATO but must
+                                still comply with the platform's security controls.
+                            </p>
+
+                            <h4 id="security-controls">Security Controls</h4>
+                            <p>
+                                All tools must implement security controls appropriate to their data sensitivity and
+                                deployment environment, including:
+                            </p>
+                            <ul>
+                                <li>Authentication via CAC or enterprise identity provider</li>
+                                <li>Role-based access control (RBAC) where applicable</li>
+                                <li>Audit logging of user actions and data access</li>
+                                <li>Input validation and output encoding</li>
+                                <li>Encryption of data in transit (TLS 1.2+) and at rest</li>
+                            </ul>
+
+                            <h3 id="opsec">OPSEC</h3>
+                            <p>
+                                Developers must apply OPSEC principles throughout the development lifecycle. Do not
+                                include operational details, unit-specific procedures, force structure information,
+                                or vulnerability assessments in AI prompts, tool documentation, or publicly accessible
+                                code repositories. When in doubt, consult your organization's OPSEC officer before
+                                proceeding.
+                            </p>
+
+                            <h3 id="records-management">Records Management</h3>
+                            <p>
+                                Development artifacts (documentation packages, source code, deployment records) are
+                                official records and must be managed in accordance with DoW records management directives.
+                                Retain all project documentation for the duration specified by the applicable records
+                                schedule. The documentation package produced in Phase 5 serves as the primary record
+                                of each development effort.
+                            </p>
+
+                            <h3 id="incident-response">Incident Response</h3>
+                            <p>
+                                If a security incident occurs involving an EDD tool (data breach, unauthorized access,
+                                malware, or compromise of an AI tool), personnel must:
+                            </p>
+                            <ol>
+                                <li>Immediately cease use of the affected tool</li>
+                                <li>Report the incident to the organization's Cybersecurity Office within 1 hour</li>
+                                <li>Preserve all logs, artifacts, and evidence related to the incident</li>
+                                <li>Notify the chain of command and the EDD Program Coordinator</li>
+                                <li>Cooperate with the incident response investigation</li>
+                                <li>Do not attempt to remediate the vulnerability without authorization</li>
+                            </ol>
+
+                            <a href="#compliance-and-security" class="back-to-top">Back to top</a>
+                        </section>
+
+                        <!-- ======================================== -->
+                        <!-- SECTION 5: DEVELOPMENT PREREQUISITES     -->
+                        <!-- ======================================== -->
+                        <section id="development-prerequisites" class="sop-section">
+                            <h2>5. Development Prerequisites</h2>
+
+                            <h3 id="required">Required</h3>
+                            <ul>
+                                <li>Completed EDD training (minimum: AI-Fluent Development Orientation)</li>
+                                <li>Supervisor approval for the specific development project</li>
+                                <li>Access to at least one approved AI tool</li>
+                                <li>Access to at least one approved deployment platform</li>
+                                <li>A defined problem that meets the criteria in Phase 1</li>
+                                <li>Completed Problem Definition Template</li>
+                            </ul>
+
+                            <h3 id="not-required">Not Required</h3>
+                            <ul>
+                                <li>A background in software engineering or computer science</li>
+                                <li>Prior programming experience</li>
+                                <li>A contract, funding, or acquisition document</li>
+                                <li>An IT service request or development ticket</li>
+                                <li>Permission from a centralized IT authority (unless ATO is required)</li>
+                            </ul>
+
+                            <h3 id="obtaining-access">Obtaining Access</h3>
+                            <h4>Microsoft 365</h4>
+                            <p>
+                                Most DoW personnel already have M365 accounts. Power Platform access may require
+                                a license assignment through your organization's M365 administrator. Contact your
+                                local IT support to verify your license includes Power Apps, Power Automate, and
+                                Copilot Studio.
+                            </p>
+
+                            <h4>AI Tools</h4>
+                            <p>
+                                The following table provides recommendations for obtaining access to approved AI tools:
+                            </p>
+                            <div class="table-wrapper">
+                                <table>
+                                    <caption class="sr-only">Recommendations for obtaining access to AI tools</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Tool</th>
+                                            <th scope="col">How to Obtain Access</th>
+                                            <th scope="col">Recommendation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>M365 Copilot</td>
+                                            <td>Enterprise license assignment through M365 admin</td>
+                                            <td>Start here if your organization has Copilot licenses</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Azure OpenAI</td>
+                                            <td>Azure Government subscription; request through cloud team</td>
+                                            <td>Best for custom API-driven development</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Copilot Studio</td>
+                                            <td>Included with Power Platform licensing</td>
+                                            <td>Best for building conversational AI assistants</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gemini</td>
+                                            <td>Web access at gemini.google.com (unclassified only)</td>
+                                            <td>Good general-purpose coding assistant</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Claude</td>
+                                            <td>Web access at claude.ai (unclassified only)</td>
+                                            <td>Strong for complex reasoning and documentation</td>
+                                        </tr>
+                                        <tr>
+                                            <td>C3 AI</td>
+                                            <td>Enterprise agreement; contact your AI/ML program office</td>
+                                            <td>Best for data-heavy enterprise applications</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <a href="#development-prerequisites" class="back-to-top">Back to top</a>
+                        </section>
+
+                        <!-- ======================================== -->
+                        <!-- SECTION 6: DEVELOPMENT WORKFLOW          -->
+                        <!-- ======================================== -->
+                        <section id="development-workflow" class="sop-section">
+                            <h2>6. Development Workflow</h2>
+                            <p>
+                                The EDD development workflow consists of eight phases. Each phase has defined inputs,
+                                outputs, and time estimates. Phases are sequential, but iteration between adjacent
+                                phases is expected and encouraged.
+                            </p>
+
+                            <div id="phase-1" class="phase-card sop-section">
+                                <div class="phase-card__header">
+                                    <span class="phase-card__number" aria-hidden="true">1</span>
+                                    <h3 class="phase-card__title">Problem Definition</h3>
+                                    <span class="phase-card__time">2-4 hours</span>
+                                </div>
+                                <p>
+                                    Identify and document the problem you intend to solve. Complete the Problem
+                                    Definition Template. Define the current state, desired state, affected users,
+                                    and success criteria. A well-defined problem is the single strongest predictor
+                                    of a successful build.
+                                </p>
+                                <p><strong>Output:</strong> Completed Problem Definition Template.</p>
+                            </div>
+
+                            <div id="phase-2" class="phase-card sop-section">
+                                <div class="phase-card__header">
+                                    <span class="phase-card__number" aria-hidden="true">2</span>
+                                    <h3 class="phase-card__title">Compliance Review</h3>
+                                    <span class="phase-card__time">1-4 hours</span>
+                                </div>
+                                <p>
+                                    Review the proposed tool against compliance requirements. Complete the Compliance
+                                    Checklist. Determine data classification, privacy requirements, and whether an
+                                    ATO is needed. Identify the appropriate deployment platform. Obtain supervisor
+                                    approval to proceed.
+                                </p>
+                                <p><strong>Output:</strong> Completed Compliance Checklist with supervisor signature.</p>
+                            </div>
+
+                            <div id="phase-3" class="phase-card sop-section">
+                                <div class="phase-card__header">
+                                    <span class="phase-card__number" aria-hidden="true">3</span>
+                                    <h3 class="phase-card__title">Rapid Prototyping</h3>
+                                    <span class="phase-card__time">8-20 hours</span>
+                                </div>
+                                <p>
+                                    Build the tool using AI-assisted development. Start with the minimum viable
+                                    feature set identified in Phase 1. Use iterative prompting to develop, test,
+                                    and refine functionality. Maintain a development journal documenting key
+                                    decisions, prompts that worked, and problems encountered.
+                                </p>
+                                <p><strong>Output:</strong> Working prototype with core functionality.</p>
+                            </div>
+
+                            <div id="phase-4" class="phase-card sop-section">
+                                <div class="phase-card__header">
+                                    <span class="phase-card__number" aria-hidden="true">4</span>
+                                    <h3 class="phase-card__title">User Testing</h3>
+                                    <span class="phase-card__time">4-8 hours</span>
+                                </div>
+                                <p>
+                                    Put the prototype in front of actual users. Observe how they interact with it.
+                                    Collect feedback on usability, functionality, and missing features. Iterate on
+                                    the prototype based on user feedback. A minimum of three users should test the
+                                    tool before proceeding to documentation.
+                                </p>
+                                <p><strong>Output:</strong> User-tested prototype with documented feedback and revisions.</p>
+                            </div>
+
+                            <div id="phase-5" class="phase-card sop-section">
+                                <div class="phase-card__header">
+                                    <span class="phase-card__number" aria-hidden="true">5</span>
+                                    <h3 class="phase-card__title">Documentation</h3>
+                                    <span class="phase-card__time">20-40 hrs (first) / 8-16 hrs (subsequent)</span>
+                                </div>
+                                <p>
+                                    Produce the documentation package. This is the most critical phase for institutional
+                                    value. The documentation must enable someone who has never seen the tool to understand
+                                    what it does, how it works, how to maintain it, how to modify it, and how to
+                                    replicate it. First-time builders should expect to spend significantly more time
+                                    on documentation; the investment decreases with experience.
+                                </p>
+                                <p><strong>Output:</strong> Complete documentation package.</p>
+                            </div>
+
+                            <div id="phase-6" class="phase-card sop-section">
+                                <div class="phase-card__header">
+                                    <span class="phase-card__number" aria-hidden="true">6</span>
+                                    <h3 class="phase-card__title">QA Review</h3>
+                                    <span class="phase-card__time">2-4 hours</span>
+                                </div>
+                                <p>
+                                    A designated QA Reviewer examines the tool and its documentation against the
+                                    QA Checklist. The reviewer verifies functionality, security compliance,
+                                    documentation completeness, and readiness for deployment. The reviewer must
+                                    not be the same person who built the tool.
+                                </p>
+                                <p><strong>Output:</strong> Completed QA Checklist with reviewer sign-off or remediation requirements.</p>
+                            </div>
+
+                            <div id="phase-7" class="phase-card sop-section">
+                                <div class="phase-card__header">
+                                    <span class="phase-card__number" aria-hidden="true">7</span>
+                                    <h3 class="phase-card__title">Deployment</h3>
+                                    <span class="phase-card__time">1-2 hours</span>
+                                </div>
+                                <p>
+                                    Deploy the tool to its production environment. Register the tool in the Tool
+                                    Registry. Communicate availability to intended users. Establish the sustainment
+                                    plan, including who is responsible for ongoing maintenance and how issues will
+                                    be reported and resolved.
+                                </p>
+                                <p><strong>Output:</strong> Deployed tool, completed Tool Registry entry, and sustainment plan.</p>
+                            </div>
+
+                            <div id="phase-8" class="phase-card sop-section">
+                                <div class="phase-card__header">
+                                    <span class="phase-card__number" aria-hidden="true">8</span>
+                                    <h3 class="phase-card__title">Sustainment</h3>
+                                    <span class="phase-card__time">Ongoing</span>
+                                </div>
+                                <p>
+                                    Maintain the tool in its operational environment. Monitor usage metrics, address
+                                    user-reported issues, apply updates as needed, and update documentation to reflect
+                                    changes. Plan for turnover: when the original builder departs, the documentation
+                                    package must be sufficient for a successor to assume maintenance responsibility.
+                                </p>
+                                <p><strong>Output:</strong> Operational tool with current documentation and identified maintainer.</p>
+                            </div>
+
+                            <a href="#development-workflow" class="back-to-top">Back to top</a>
+                        </section>
+
+                        <!-- ======================================== -->
+                        <!-- SECTION 7: ROLES AND RESPONSIBILITIES    -->
+                        <!-- ======================================== -->
+                        <section id="roles-and-responsibilities" class="sop-section">
+                            <h2>7. Roles and Responsibilities</h2>
+
+                            <h3 id="role-developer">Developer</h3>
+                            <p>
+                                The individual who builds the tool. Responsible for completing all eight phases of the
+                                development workflow, maintaining compliance with this SOP, producing the documentation
+                                package, and sustaining the tool through its operational lifecycle. Any personnel member
+                                who has completed the required training and received supervisor approval may serve as a
+                                developer.
+                            </p>
+
+                            <h3 id="role-qa-reviewer">QA Reviewer</h3>
+                            <p>
+                                The individual who reviews the tool and documentation in Phase 6. The QA Reviewer must
+                                be a different person from the developer. Designation criteria:
+                            </p>
+                            <ul>
+                                <li>Has completed EDD training (minimum: AI-Fluent Development Orientation)</li>
+                                <li>Has built at least one tool under EDD, or has been designated by the Program Coordinator</li>
+                                <li>Is familiar with the compliance requirements in Section 4</li>
+                                <li>Has no conflict of interest with the tool being reviewed</li>
+                            </ul>
+
+                            <h3 id="role-supervisor">Supervisor</h3>
+                            <p>
+                                The developer's direct supervisor. Responsible for approving the development project,
+                                allocating duty time for development, and ensuring the tool meets organizational needs.
+                                Supervisors are required to complete the Supervisor Orientation before approving their
+                                first EDD project. This orientation ensures supervisors understand the framework, can
+                                evaluate proposals, and know what good AI-assisted output looks like.
+                            </p>
+
+                            <h3 id="role-coordinator">Program Coordinator</h3>
+                            <p>
+                                The individual responsible for managing the EDD program at the organizational level.
+                                Maintains the Tool Registry, designates QA Reviewers, coordinates training, tracks
+                                program metrics, and reports program status to leadership. The Program Coordinator
+                                may also serve as a developer or QA Reviewer.
+                            </p>
+
+                            <h3 id="role-cybersecurity">Cybersecurity Office</h3>
+                            <p>
+                                The organization's cybersecurity team. Provides guidance on security controls, reviews
+                                ATO requirements, responds to security incidents involving EDD tools, and validates
+                                that tools comply with cybersecurity directives. Consulted during Phase 2 (Compliance
+                                Review) for any tool that connects to the network or processes sensitive data.
+                            </p>
+
+                            <h3 id="role-privacy">Privacy Officer</h3>
+                            <p>
+                                The organization's designated privacy official. Reviews PIA threshold analyses,
+                                advises on SORN requirements, and ensures tools that handle PII comply with DoW
+                                privacy directives. Consulted during Phase 2 for any tool that collects, stores,
+                                or displays information about individuals.
+                            </p>
+
+                            <a href="#roles-and-responsibilities" class="back-to-top">Back to top</a>
+                        </section>
+
+                        <!-- ======================================== -->
+                        <!-- SECTION 8: TRAINING REQUIREMENTS         -->
+                        <!-- ======================================== -->
+                        <section id="training-requirements" class="sop-section">
+                            <h2>8. Training Requirements</h2>
+
+                            <h3 id="training-required">Required</h3>
+                            <p>The following training must be completed before beginning an EDD project:</p>
+                            <div class="table-wrapper">
+                                <table>
+                                    <caption class="sr-only">Required training courses</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Course</th>
+                                            <th scope="col">Audience</th>
+                                            <th scope="col">Duration</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>AI-Fluent Development Orientation</td>
+                                            <td>All developers</td>
+                                            <td>2 hours</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Supervisor Orientation</td>
+                                            <td>Supervisors approving EDD projects</td>
+                                            <td>30 minutes</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3 id="training-recommended">Recommended</h3>
+                            <p>The following training is recommended for personnel who will build tools regularly:</p>
+                            <div class="table-wrapper">
+                                <table>
+                                    <caption class="sr-only">Recommended training courses</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Course</th>
+                                            <th scope="col">Audience</th>
+                                            <th scope="col">Duration</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Intermediate Build Workshop</td>
+                                            <td>Developers with one completed build</td>
+                                            <td>4 hours</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Documentation Standards Workshop</td>
+                                            <td>Developers preparing documentation packages</td>
+                                            <td>2 hours</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3 id="training-optional">Optional</h3>
+                            <p>The following advanced training is available for experienced builders:</p>
+                            <div class="table-wrapper">
+                                <table>
+                                    <caption class="sr-only">Optional training courses</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Course</th>
+                                            <th scope="col">Audience</th>
+                                            <th scope="col">Duration</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Advanced Development Practicum</td>
+                                            <td>Experienced builders, QA Reviewers</td>
+                                            <td>4 hours</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Program Coordinator Training</td>
+                                            <td>Personnel designated as Program Coordinators</td>
+                                            <td>2 hours</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <a href="#training-requirements" class="back-to-top">Back to top</a>
+                        </section>
+
+                        <!-- ======================================== -->
+                        <!-- SECTION 9: METRICS AND ASSESSMENT        -->
+                        <!-- ======================================== -->
+                        <section id="metrics-and-assessment" class="sop-section">
+                            <h2>9. Metrics and Assessment</h2>
+                            <p>
+                                Metrics serve two purposes: demonstrating the value of individual tools and assessing
+                                the health of the overall EDD program. All metrics should be collected consistently
+                                and reported to leadership quarterly.
+                            </p>
+
+                            <h3 id="tool-level-metrics">Tool-Level Metrics</h3>
+                            <p>Collected for each deployed tool:</p>
+                            <div class="table-wrapper">
+                                <table>
+                                    <caption class="sr-only">Tool-level metrics</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Metric</th>
+                                            <th scope="col">What It Measures</th>
+                                            <th scope="col">Collection Method</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Active users</td>
+                                            <td>Adoption and utility</td>
+                                            <td>Platform analytics or usage logs</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Time saved per use</td>
+                                            <td>Efficiency gain</td>
+                                            <td>User survey or workflow comparison</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Error rate reduction</td>
+                                            <td>Quality improvement</td>
+                                            <td>Before/after error tracking</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Build time</td>
+                                            <td>Development efficiency</td>
+                                            <td>Developer-reported hours</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Development cost</td>
+                                            <td>Cost avoidance</td>
+                                            <td>Hours multiplied by composite labor rate</td>
+                                        </tr>
+                                        <tr>
+                                            <td>User satisfaction</td>
+                                            <td>Quality of the solution</td>
+                                            <td>Post-deployment survey</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3 id="program-level-metrics">Program-Level Metrics</h3>
+                            <p>Collected across all EDD activity within the organization:</p>
+                            <div class="table-wrapper">
+                                <table>
+                                    <caption class="sr-only">Program-level metrics</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Metric</th>
+                                            <th scope="col">What It Measures</th>
+                                            <th scope="col">Target</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Number of trained personnel</td>
+                                            <td>Pipeline capacity</td>
+                                            <td>Growing quarter-over-quarter</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Number of deployed tools</td>
+                                            <td>Program output</td>
+                                            <td>Growing quarter-over-quarter</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Completion rate (started vs deployed)</td>
+                                            <td>Process effectiveness</td>
+                                            <td>>70% of started projects reach deployment</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Documentation compliance rate</td>
+                                            <td>Quality assurance</td>
+                                            <td>100% of deployed tools have complete packages</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total estimated cost avoidance</td>
+                                            <td>Return on investment</td>
+                                            <td>Reported quarterly to leadership</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Security incidents</td>
+                                            <td>Risk management</td>
+                                            <td>Zero incidents per quarter</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <a href="#metrics-and-assessment" class="back-to-top">Back to top</a>
+                        </section>
+
+                        <!-- ======================================== -->
+                        <!-- SECTION 10: SCALING AND ADOPTION         -->
+                        <!-- ======================================== -->
+                        <section id="scaling-and-adoption" class="sop-section">
+                            <h2>10. Scaling and Adoption</h2>
+
+                            <h3 id="pilot-model">90-Day Pilot Model</h3>
+                            <p>
+                                Organizations adopting EDD should begin with a 90-day pilot. The pilot provides a
+                                controlled environment to validate the framework, train initial personnel, produce
+                                the first tools, and establish organizational processes before expanding.
+                            </p>
+                            <div class="table-wrapper">
+                                <table>
+                                    <caption class="sr-only">90-day pilot timeline</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Phase</th>
+                                            <th scope="col">Timeline</th>
+                                            <th scope="col">Activities</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Setup</td>
+                                            <td>Days 1-14</td>
+                                            <td>Designate Program Coordinator, identify 2-4 pilot developers, conduct training, verify platform access</td>
+                                        </tr>
+                                        <tr>
+                                            <td>First builds</td>
+                                            <td>Days 15-60</td>
+                                            <td>Pilot developers complete Phases 1-5 on their first projects with coaching support</td>
+                                        </tr>
+                                        <tr>
+                                            <td>QA and deployment</td>
+                                            <td>Days 61-75</td>
+                                            <td>QA reviews, remediation, deployment, and Tool Registry entries</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Assessment</td>
+                                            <td>Days 76-90</td>
+                                            <td>Collect metrics, brief leadership, decide on expansion</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3 id="success-failure-criteria">Success / Failure Criteria</h3>
+                            <div class="is-isnt-grid">
+                                <div class="is-list">
+                                    <h4>Success Criteria</h4>
+                                    <ul>
+                                        <li>At least 2 tools deployed and in active use</li>
+                                        <li>All deployed tools have complete documentation packages</li>
+                                        <li>Zero security incidents during the pilot</li>
+                                        <li>Measurable time savings or error reduction demonstrated</li>
+                                        <li>Leadership endorsement for expansion</li>
+                                    </ul>
+                                </div>
+                                <div class="isnt-list">
+                                    <h4>Failure Indicators</h4>
+                                    <ul>
+                                        <li>No tools reach deployment within 90 days</li>
+                                        <li>Security or compliance violations occur</li>
+                                        <li>Developers cannot obtain platform access</li>
+                                        <li>Leadership does not allocate duty time for development</li>
+                                        <li>Documentation requirements are waived or ignored</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3 id="tool-registry">Tool Registry</h3>
+                            <p>
+                                The Tool Registry is a centralized record of all tools built under EDD within the
+                                organization. Every deployed tool must have an entry. The registry tracks:
+                            </p>
+                            <ul>
+                                <li>Tool name and description</li>
+                                <li>Developer and current maintainer</li>
+                                <li>Deployment platform and URL</li>
+                                <li>Data classification</li>
+                                <li>User count and status (active, deprecated, retired)</li>
+                                <li>Documentation package location</li>
+                                <li>Date deployed and last updated</li>
+                            </ul>
+                            <p>
+                                The Program Coordinator maintains the Tool Registry and reviews it monthly to identify
+                                tools that need updates, lack a maintainer, or should be retired.
+                            </p>
+
+                            <h3 id="expansion-model">Expansion Model</h3>
+                            <p>
+                                After a successful pilot, expansion follows a train-the-trainer model:
+                            </p>
+                            <ol>
+                                <li>Pilot developers become QA Reviewers and mentors for the next cohort</li>
+                                <li>Each cohort is 2-4 new developers with defined projects</li>
+                                <li>New cohorts begin every 60-90 days</li>
+                                <li>The Program Coordinator scales training, QA capacity, and registry management as the program grows</li>
+                                <li>Cross-organizational sharing is encouraged through the Tool Registry and documentation standards</li>
+                            </ol>
+
+                            <a href="#scaling-and-adoption" class="back-to-top">Back to top</a>
+                        </section>
+
+                        <!-- ======================================== -->
+                        <!-- SECTION 11: REFERENCES                   -->
+                        <!-- ======================================== -->
+                        <section id="references" class="sop-section">
+                            <h2>11. References</h2>
+                            <ul>
+                                <li>DoW Directive 8140.01 -- Cyberspace Workforce Management</li>
+                                <li>DoW Instruction 5000.87 -- Operation of the Software Acquisition Pathway</li>
+                                <li>DoW Instruction 5200.48 -- Controlled Unclassified Information (CUI)</li>
+                                <li>DoW Instruction 5400.11 -- DoW Privacy and Civil Liberties Programs</li>
+                                <li>DoW Instruction 8500.01 -- Cybersecurity</li>
+                                <li>DoW Instruction 8510.01 -- Risk Management Framework (RMF) for DoW Systems</li>
+                                <li>DoW Instruction 8582.01 -- Security of Non-DoW Information Systems</li>
+                                <li>DoW Directive 3020.26 -- Department of War Continuity Policy</li>
+                                <li>DoWM 5200.01 -- DoW Information Security Program</li>
+                                <li>SECNAV M-5210.1 -- Department of the Navy Records Management Program</li>
+                                <li>NIST SP 800-53 Rev. 5 -- Security and Privacy Controls for Information Systems and Organizations</li>
+                                <li>OMB Circular A-130 -- Managing Information as a Strategic Resource</li>
+                                <li>Executive Order 14110 -- Safe, Secure, and Trustworthy Development and Use of Artificial Intelligence</li>
+                            </ul>
+
+                            <a href="#references" class="back-to-top">Back to top</a>
+                        </section>
+
+                        <!-- ======================================== -->
+                        <!-- SECTION 12: APPENDICES                   -->
+                        <!-- ======================================== -->
+                        <section id="appendices" class="sop-section">
+                            <h2>12. Appendices</h2>
+                            <p>
+                                The following templates are used throughout the EDD development workflow. Download
+                                each template and complete it during the appropriate phase.
+                            </p>
+
+                            <div class="table-wrapper">
+                                <table>
+                                    <caption class="sr-only">Downloadable templates for EDD development</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Template</th>
+                                            <th scope="col">Used In</th>
+                                            <th scope="col">Download</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Problem Definition Template</td>
+                                            <td>Phase 1: Problem Definition</td>
+                                            <td><a href="../templates/problem-definition.md">problem-definition.md</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>QA Checklist</td>
+                                            <td>Phase 6: QA Review</td>
+                                            <td><a href="../templates/qa-checklist.md">qa-checklist.md</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tool Registry Entry</td>
+                                            <td>Phase 7: Deployment</td>
+                                            <td><a href="../templates/tool-registry-entry.md">tool-registry-entry.md</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>PIA Threshold Analysis</td>
+                                            <td>Phase 2: Compliance Review</td>
+                                            <td><a href="../templates/documentation-package-outline.md">documentation-package-outline.md</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Compliance Checklist</td>
+                                            <td>Phase 2: Compliance Review</td>
+                                            <td><a href="../templates/development-journal.md">development-journal.md</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <a href="#appendices" class="back-to-top">Back to top</a>
+                        </section>
+
+                    </article><!-- /.page-content -->
+
+                </div><!-- /.page-layout -->
+            </div><!-- /.container -->
+
+        </main>
+
+        <!-- ============ FOOTER ============ -->
+        <footer class="site-footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <h3 class="footer-section__title">Expert-Driven Development</h3>
+                        <p>
+                            Open-source AI-assisted development training for DoW personnel.
+                            Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                        </p>
+                    </div>
+                    <div class="footer-section">
+                        <h3 class="footer-section__title">Navigation</h3>
+                        <ul>
+                            <li><a href="../">Home</a></li>
+                            <li><a href="../courses/">Courses</a></li>
+                            <li><a href="./">SOP</a></li>
+                            <li><a href="../toolkit/">Toolkit</a></li>
+                            <li><a href="../resources/">Resources</a></li>
+                            <li><a href="../about.html">About</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3 class="footer-section__title">Project</h3>
+                        <ul>
+                            <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                            <li>MIT License</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <span>UNCLASSIFIED</span>
+                    <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+                </div>
+            </div>
+        </footer>
+
+    </div><!-- /.site-wrapper -->
+
+    <!-- Mobile navigation toggle -->
+    <script>
+    (function () {
+        var toggle = document.querySelector('.nav-toggle');
+        var mobileNav = document.getElementById('mobile-nav');
+        if (!toggle || !mobileNav) return;
+
+        toggle.addEventListener('click', function () {
+            var expanded = toggle.getAttribute('aria-expanded') === 'true';
+            toggle.setAttribute('aria-expanded', String(!expanded));
+            mobileNav.classList.toggle('is-open');
+        });
+
+        var links = mobileNav.querySelectorAll('a');
+        for (var i = 0; i < links.length; i++) {
+            links[i].addEventListener('click', function () {
+                toggle.setAttribute('aria-expanded', 'false');
+                mobileNav.classList.remove('is-open');
+            });
+        }
+    })();
+    </script>
+
+    <!-- TOC toggle for mobile -->
+    <script>
+    (function () {
+        var tocToggle = document.getElementById('toc-toggle-btn');
+        var tocContent = document.getElementById('sop-toc');
+        if (!tocToggle || !tocContent) return;
+
+        tocToggle.addEventListener('click', function () {
+            var expanded = tocToggle.getAttribute('aria-expanded') === 'true';
+            tocToggle.setAttribute('aria-expanded', String(!expanded));
+            tocContent.classList.toggle('is-open');
+        });
+    })();
+    </script>
+
+    <!-- Active TOC link highlighting -->
+    <script>
+    (function () {
+        var tocLinks = document.querySelectorAll('#sop-toc a');
+        var sections = [];
+
+        for (var i = 0; i < tocLinks.length; i++) {
+            var href = tocLinks[i].getAttribute('href');
+            if (href && href.charAt(0) === '#') {
+                var target = document.getElementById(href.substring(1));
+                if (target) {
+                    sections.push({ link: tocLinks[i], target: target });
+                }
+            }
+        }
+
+        if (sections.length === 0) return;
+
+        function updateActive() {
+            var scrollPos = window.scrollY + 120;
+            var current = sections[0];
+
+            for (var i = 0; i < sections.length; i++) {
+                if (sections[i].target.offsetTop <= scrollPos) {
+                    current = sections[i];
+                }
+            }
+
+            for (var j = 0; j < sections.length; j++) {
+                sections[j].link.classList.remove('active');
+            }
+
+            current.link.classList.add('active');
+        }
+
+        var ticking = false;
+        window.addEventListener('scroll', function () {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    updateActive();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        updateActive();
+    })();
+    </script>
+</body>
+</html>

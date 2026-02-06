@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EDD Prompt Library - Curated, copy-ready AI prompts for admin tools, training aids, data analysis, and reporting.">
+    <title>Prompt Library | Resources | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="site-wrapper">
+
+    <!-- Skip to content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="./" class="active">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation">
+                <span class="nav-toggle__icon"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile navigation -->
+    <div id="mobile-nav" class="mobile-nav">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="./" class="active">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="../">Home</a></li>
+                <li><a href="./">Resources</a></li>
+                <li>Prompt Library</li>
+            </ul>
+            <h1 class="page-header__title">Prompt Library</h1>
+            <p class="page-header__desc">Curated, copy-ready prompts organized by use case. Each prompt follows EDD principles: be specific, provide context, define the output format, and iterate.</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main id="main-content" class="site-main">
+        <div class="section">
+            <div class="container">
+
+                <div class="page-layout page-layout--sidebar">
+
+                    <!-- Sidebar / Table of Contents -->
+                    <aside class="sidebar sidebar--sticky">
+                        <nav class="toc" aria-label="On this page">
+                            <h2 class="toc__title">Categories</h2>
+                            <ul class="toc__list">
+                                <li><a href="#admin-tools">Admin Tools</a></li>
+                                <li><a href="#training-tools">Training Tools</a></li>
+                                <li><a href="#data-analysis">Data Analysis</a></li>
+                                <li><a href="#reporting">Reporting</a></li>
+                            </ul>
+                        </nav>
+                        <div class="callout callout--info mt-lg">
+                            <h3 class="callout__title">Using These Prompts</h3>
+                            <p class="text-sm">Copy any prompt below and paste it into M365 Copilot, Azure OpenAI, or your approved AI tool. Customize the bracketed placeholders with your specific details before submitting.</p>
+                        </div>
+                    </aside>
+
+                    <!-- Page Content -->
+                    <div class="page-content">
+
+                        <!-- ===== ADMIN TOOLS ===== -->
+                        <h2 id="admin-tools">Admin Tools</h2>
+                        <p>Prompts for building administrative applications that streamline unit operations: equipment tracking, leave management, and facility scheduling.</p>
+
+                        <h3>Equipment Tracker</h3>
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; Equipment Inventory App</div>
+I need a Power Apps canvas app for tracking unit equipment. The app should have:
+
+1. A SharePoint list as the data source with columns: ItemName (text), SerialNumber (text), Category (choice: Communications, Optics, IT, Vehicles, Other), AssignedTo (person), Condition (choice: Serviceable, Unserviceable, In Repair), LastInventoryDate (date), Location (text), Notes (multiline text).
+
+2. Three screens:
+   - Inventory List: gallery view with search and filter by Category and Condition
+   - Item Detail: view/edit form for a selected item
+   - Add New Item: form to create new entries with validation (SerialNumber required, no duplicates)
+
+3. A red banner at the top of every screen displaying the unit name "[YOUR UNIT]" and the current user's display name.
+
+Start with the SharePoint list schema, then build each screen one at a time.</div>
+
+                        <h3>Leave Request System</h3>
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; Leave Request Workflow</div>
+Build a Power Automate flow that manages leave requests with the following requirements:
+
+1. Trigger: When a new item is created in the SharePoint list "LeaveRequests" with columns: Requester (person), StartDate (date), EndDate (date), LeaveType (choice: Annual, Sick, Emergency, Special Liberty), Reason (text), Status (choice: Pending, Approved, Denied, default: Pending).
+
+2. Flow steps:
+   - Calculate business days between StartDate and EndDate
+   - Send an approval email to the requester's manager (use the Office 365 Users connector to get the manager)
+   - If approved: update Status to "Approved", send confirmation to requester, add event to a shared Outlook calendar
+   - If denied: update Status to "Denied", send notification with denial reason to requester
+
+3. Include error handling: if the manager lookup fails, route the approval to a fallback email address "[FALLBACK_EMAIL]".
+
+Provide the flow configuration step by step.</div>
+
+                        <h3>Room Booking System</h3>
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; Conference Room Scheduler</div>
+Create a Power Apps canvas app for booking conference rooms and shared spaces. Requirements:
+
+1. Data source: SharePoint list "RoomBookings" with columns: RoomName (choice: [LIST YOUR ROOMS]), BookedBy (person), Date (date), StartTime (text in HH:MM format), EndTime (text in HH:MM format), Purpose (text), Recurring (yes/no).
+
+2. Features:
+   - Calendar-style daily view showing all bookings per room
+   - Conflict detection: prevent double-booking the same room at overlapping times
+   - Booking form with validation (end time must be after start time, date must be today or future)
+   - "My Bookings" filtered gallery so users can see and cancel their own reservations
+
+3. Color-code rooms by availability: green = open, red = booked, yellow = partially booked for the selected day.
+
+Generate the app structure, then the conflict-detection formula first.</div>
+
+                        <h3>Check-In/Check-Out Log</h3>
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; Gear Check-In/Out Tracker</div>
+I need a Power Apps app for tracking gear check-out and check-in at the armory or supply cage. Requirements:
+
+1. SharePoint list "GearLog" columns: GearItem (lookup to master inventory list), CheckedOutBy (person), CheckOutDate (date/time, auto-filled), ExpectedReturn (date), ActualReturn (date/time), Condition_Out (choice: Serviceable, Minor Damage, Needs Repair), Condition_In (choice: same options), Notes (multiline text).
+
+2. Two main screens:
+   - Check-Out: scan or select gear item, auto-fill current user and timestamp, set expected return date, note condition
+   - Check-In: select from list of outstanding items filtered to current user, record return condition, auto-fill return timestamp
+
+3. Dashboard screen showing: total items checked out, overdue items (highlighted red), items by category.
+
+Build the Check-Out screen first with all formulas.</div>
+
+                        <!-- ===== TRAINING TOOLS ===== -->
+                        <h2 id="training-tools">Training Tools</h2>
+                        <p>Prompts for building training support applications: quiz generation, attendance tracking, and feedback collection systems.</p>
+
+                        <h3>Quiz Generator</h3>
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; Training Quiz Builder</div>
+Create a Power Apps canvas app that functions as a training quiz tool. Requirements:
+
+1. Data source: SharePoint list "QuizQuestions" with columns: QuestionText (multiline text), OptionA (text), OptionB (text), OptionC (text), OptionD (text), CorrectAnswer (choice: A, B, C, D), Category (choice: [YOUR CATEGORIES]), Difficulty (choice: Basic, Intermediate, Advanced), Explanation (multiline text).
+
+2. Quiz flow:
+   - Start screen: user selects category and number of questions (5, 10, 20)
+   - Question screen: display one question at a time with four radio-button options
+   - On answer selection: highlight correct answer green, wrong answer red, show explanation
+   - Track score as "correct / total" in a variable
+   - Results screen: show final score, percentage, list of missed questions with correct answers
+
+3. Randomize question order each time. Store results in a "QuizResults" SharePoint list with: User, Date, Category, Score, TotalQuestions.
+
+Start with the data model, then build the question display screen with scoring logic.</div>
+
+                        <h3>Attendance Tracker</h3>
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; Training Attendance System</div>
+Build a Power Apps canvas app for tracking training attendance. Requirements:
+
+1. Two SharePoint lists:
+   - "TrainingEvents": EventName (text), Date (date), Instructor (person), Location (text), MaxCapacity (number), Description (multiline text)
+   - "AttendanceRecords": Event (lookup to TrainingEvents), Attendee (person), CheckInTime (date/time), Status (choice: Present, Absent, Excused), Notes (text)
+
+2. Features:
+   - Instructor view: create events, view roster, mark attendance, generate completion certificates (simple formatted text)
+   - Student view: browse upcoming events, register (with capacity check), view personal training history
+   - Admin dashboard: attendance rates by event, no-show tracking, training completion by individual
+
+3. Attendance marking should auto-populate CheckInTime and default Status to "Present". Allow bulk marking for instructors.
+
+Build the instructor attendance-marking screen first.</div>
+
+                        <h3>Feedback Collection</h3>
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; After-Action Feedback Form</div>
+Create a Power Apps canvas app for collecting structured feedback after training events or exercises. Requirements:
+
+1. SharePoint list "Feedback" columns: EventName (text), SubmittedBy (person), Date (date/time auto-fill), OverallRating (number 1-5), ContentRating (number 1-5), InstructorRating (number 1-5), PaceRating (choice: Too Slow, Just Right, Too Fast), MostValuable (multiline text), LeastValuable (multiline text), Suggestions (multiline text), WouldRecommend (yes/no).
+
+2. Form layout:
+   - Star-rating visual for the three numeric ratings (1-5 stars using icons)
+   - Anonymous option: toggle that replaces SubmittedBy with "Anonymous"
+   - Required field validation on OverallRating and at least one text field
+   - Confirmation screen with "Thank you" message after submission
+
+3. Admin summary view: average ratings per event displayed as bar charts, word cloud or list of common themes from text responses, response count and completion rate.
+
+Start with the star-rating component, then the full form layout.</div>
+
+                        <h3>Training Schedule Board</h3>
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; Weekly Training Schedule Display</div>
+Build a Power BI report that displays the weekly training schedule from a SharePoint list. Requirements:
+
+1. Data source: SharePoint list "TrainingSchedule" with columns: EventName (text), Date (date), StartTime (text), EndTime (text), Location (text), Instructor (person), Unit (choice), TrainingType (choice: Classroom, Field, Online, PT).
+
+2. Report pages:
+   - Weekly Calendar View: matrix visual with days as columns, time blocks as rows, events as colored cells (color by TrainingType)
+   - Monthly Overview: calendar heat map showing training density by day
+   - Instructor Workload: bar chart of events per instructor for the selected time period
+
+3. Filters: date range slicer, unit filter, training type filter. Default to current week.
+
+Provide the DAX measures needed and the visual configuration for each page.</div>
+
+                        <!-- ===== DATA ANALYSIS ===== -->
+                        <h2 id="data-analysis">Data Analysis</h2>
+                        <p>Prompts for building data visualization dashboards, automated reports, and data cleanup workflows.</p>
+
+                        <h3>Dashboard Creation</h3>
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; Unit Readiness Dashboard</div>
+Create a Power BI dashboard that displays unit readiness metrics. Requirements:
+
+1. Data sources: three SharePoint lists
+   - "Personnel": Name, Rank, MOS, Section, Status (choice: Present, Leave, TAD, Medical)
+   - "Training": Person (lookup), CourseName, CompletionDate, ExpirationDate, Status (choice: Current, Expiring Soon, Expired)
+   - "Equipment": ItemName, SerialNumber, Category, Condition, AssignedTo
+
+2. Dashboard cards (top row):
+   - Personnel fill rate: present / authorized (show as percentage with color: green >90%, yellow 80-90%, red <80%)
+   - Training currency: percentage of personnel with all required training current
+   - Equipment readiness: percentage of equipment in "Serviceable" condition
+
+3. Detail visuals:
+   - Personnel by status (donut chart)
+   - Training expiring within 30/60/90 days (stacked bar)
+   - Equipment condition by category (clustered bar)
+   - Trend line: readiness over the past 12 weeks
+
+Provide the DAX measures for each card and the Power Query transformations needed.</div>
+
+                        <h3>Automated Report Generation</h3>
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; Weekly Status Report Automation</div>
+Build a Power Automate flow that generates a weekly status report from SharePoint data. Requirements:
+
+1. Trigger: Recurrence - every Monday at 0700.
+
+2. Flow steps:
+   - Query "TaskTracker" SharePoint list for items updated in the last 7 days
+   - Group tasks by Status (Completed, In Progress, Blocked, Not Started)
+   - Count items in each category
+   - Query "Milestones" list for upcoming milestones within 14 days
+   - Build an HTML email body with:
+     * Header with report date range
+     * Summary table: status category, count, percentage of total
+     * Completed items list with completion dates
+     * Blocked items with blocker descriptions (highlighted in red)
+     * Upcoming milestones section
+   - Send the email to a distribution list "[DL_EMAIL]"
+   - Save a copy to a "WeeklyReports" document library as an HTML file
+
+Provide the flow configuration and the HTML template for the email body.</div>
+
+                        <h3>Data Cleanup Workflow</h3>
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; SharePoint List Data Cleanup</div>
+Create a Power Automate flow that cleans and standardizes data in a SharePoint list on a scheduled basis. Requirements:
+
+1. Target list: "[YOUR_LIST]" with common data quality issues:
+   - Inconsistent text casing in name fields
+   - Leading/trailing whitespace
+   - Phone numbers in various formats
+   - Dates entered as text instead of date fields
+
+2. Flow logic:
+   - Trigger: daily at 0200 (off-hours)
+   - Get all items from the list
+   - For each item, apply corrections:
+     * Trim whitespace from all text fields
+     * Proper-case Name fields (first letter uppercase, rest lowercase)
+     * Standardize phone numbers to (XXX) XXX-XXXX format using regex
+     * Flag items with invalid dates in a "NeedsReview" yes/no column
+   - Update only items that changed (compare before/after to avoid unnecessary writes)
+   - Log a summary: items scanned, items corrected, items flagged
+
+Provide the flow with expression formulas for each transformation.</div>
+
+                        <!-- ===== REPORTING ===== -->
+                        <h2 id="reporting">Reporting</h2>
+                        <p>Prompts for building status reports, metrics summaries, and command-level briefing materials.</p>
+
+                        <h3>Status Report Generator</h3>
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; Daily Status Report (SITREP Format)</div>
+Build a Power Apps canvas app that generates a formatted daily status report. Requirements:
+
+1. Input form with fields matching SITREP format:
+   - DTG (date-time group, auto-generated)
+   - Unit Designation (pre-filled from settings)
+   - Personnel Status: present-for-duty count, leave count, TAD count, medical count
+   - Significant Activities (multiline text, last 24 hours)
+   - Upcoming Activities (multiline text, next 24 hours)
+   - Issues/Concerns (multiline text)
+   - Submitted By (auto-filled current user)
+
+2. On submit:
+   - Save to SharePoint list "DailyReports"
+   - Generate a formatted text output matching unit SITREP template
+   - Copy-to-clipboard button for the formatted output
+   - Send via Power Automate to the designated recipient "[RECIPIENT_EMAIL]"
+
+3. History view: browse past reports by date, search by content.
+
+Build the input form with auto-populated fields first.</div>
+
+                        <h3>Metrics Summary Dashboard</h3>
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; Monthly Metrics Summary</div>
+Create a Power BI report page that summarizes monthly command metrics for a briefing slide. Requirements:
+
+1. Data sources: SharePoint lists for Personnel, Training, Maintenance, and Tasks.
+
+2. Single-page layout designed for projection (16:9 aspect ratio):
+   - Top banner: unit logo placeholder, report title "Monthly Metrics Summary", date range
+   - Left column: Personnel strength (fill gauge), training compliance percentage (fill gauge), equipment readiness percentage (fill gauge)
+   - Center: trend chart showing all three metrics over the past 6 months as lines
+   - Right column: top 5 accomplishments (text card from a "Highlights" list), top 3 concerns (text card with red accent)
+   - Bottom: "Prepared by [NAME] | As of [DATE]" text
+
+3. All gauges should use stoplight colors: green for on-target, yellow for caution, red for below standard. Define thresholds as parameters so the user can adjust them.
+
+Provide the report layout configuration, DAX measures, and color-coding logic.</div>
+
+                        <h3>Command Brief Slides Generator</h3>
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; Automated Weekly Brief Deck</div>
+Build a Power Automate flow that generates a weekly command brief document. Requirements:
+
+1. Trigger: Recurrence - every Friday at 1400.
+
+2. Data collection:
+   - Query "WeeklyHighlights" SharePoint list for items tagged with the current week
+   - Query "Personnel" list for current strength numbers
+   - Query "UpcomingEvents" list for next week's calendar
+   - Query "ActionItems" list for open items and their status
+
+3. Document generation:
+   - Create a Word document from a template stored in a document library
+   - Populate template bookmarks/content controls with:
+     * Week ending date
+     * Personnel summary (table)
+     * Highlights (bulleted list)
+     * Upcoming events (table: date, event, location, POC)
+     * Open action items (table: item, owner, due date, status)
+   - Save the completed document to a "CommandBriefs" library
+   - Send an email to "[BRIEF_DL]" with the document attached
+
+Provide the template structure and the flow configuration.</div>
+
+                        <h3>Training Completion Report</h3>
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; Training Compliance Tracker</div>
+Create a Power BI report that tracks mandatory training completion across the unit. Requirements:
+
+1. Data sources:
+   - "Personnel" SharePoint list: Name, Rank, Section, BilletTitle
+   - "RequiredTraining" list: CourseName, Frequency (Annual, Semi-Annual, One-Time), AppliesTo (choice: All, NCO, Officer, MOS-Specific)
+   - "CompletionRecords" list: Person (lookup), Course (lookup), CompletionDate, ExpirationDate
+
+2. Report views:
+   - Compliance matrix: rows = personnel, columns = required courses, cells = status icon (green check, yellow warning for expiring within 30 days, red X for expired, gray dash for N/A)
+   - Section rollup: bar chart showing compliance percentage by section
+   - Individual detail: drill-through page showing one person's full training record
+   - Expiration forecast: line chart showing how many qualifications expire each month for the next 6 months
+
+3. Filters: section, rank, specific course. KPI card showing overall unit compliance percentage.
+
+Provide the data model relationships, DAX measures, and conditional formatting rules.</div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>An open-source training methodology for AI-assisted tool development, created at the Marine Corps Detachment, Presidio of Monterey.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../courses/">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="../toolkit/">Toolkit</a></li>
+                        <li><a href="./">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v3.pdf">SOP (PDF)</a></li>
+                        <li><a href="../pdf/TRAINING_CURRICULA_v3.pdf">Curricula (PDF)</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>MIT License</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile nav toggle script -->
+    <script>
+        (function () {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function () {
+                    var expanded = toggle.getAttribute('aria-expanded') === 'true';
+                    toggle.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>

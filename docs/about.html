@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About Expert-Driven Development - Origin, purpose, creator, proof of concept tools, and how to contribute.">
+    <title>About | Expert-Driven Development</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="site-wrapper">
+
+    <!-- Skip to content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <a href="./" class="site-brand">
+                <span class="site-brand__mark"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="./">Home</a></li>
+                    <li><a href="courses/">Courses</a></li>
+                    <li><a href="sop/">SOP</a></li>
+                    <li><a href="toolkit/">Toolkit</a></li>
+                    <li><a href="resources/">Resources</a></li>
+                    <li><a href="about.html" aria-current="page" class="active">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation">
+                <span class="nav-toggle__icon"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile navigation -->
+    <div id="mobile-nav" class="mobile-nav">
+        <ul class="nav-list">
+            <li><a href="./">Home</a></li>
+            <li><a href="courses/">Courses</a></li>
+            <li><a href="sop/">SOP</a></li>
+            <li><a href="toolkit/">Toolkit</a></li>
+            <li><a href="resources/">Resources</a></li>
+            <li><a href="about.html" aria-current="page" class="active">About</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="./">Home</a></li>
+                <li>About</li>
+            </ul>
+            <h1 class="page-header__title">About Expert-Driven Development</h1>
+            <p class="page-header__desc">An open-source training methodology that enables subject matter experts to build production tools using AI assistance, without prior coding experience.</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main id="main-content" class="site-main">
+        <div class="section">
+            <div class="container container--narrow">
+
+                <!-- Origin -->
+                <h2 id="origin">Project Origin</h2>
+                <p>Expert-Driven Development (EDD) was developed at the <strong>Marine Corps Detachment (MCD), Presidio of Monterey</strong>, at the Defense Language Institute Foreign Language Center (DLIFLC). It emerged from a practical observation: the people who best understand military workflows and operational problems are often the same people who lack access to software development resources to solve those problems.</p>
+                <p>With the arrival of capable AI coding assistants, the barrier to building functional tools shifted from "can you write code?" to "can you clearly define what you need?" EDD formalizes this shift into a repeatable, teachable methodology with governance, quality assurance, and documentation standards appropriate for military use.</p>
+
+                <!-- Purpose -->
+                <h2 id="purpose">Purpose</h2>
+                <p>EDD is an open-source training methodology for AI-assisted development. Its purpose is to:</p>
+                <ul>
+                    <li><strong>Enable subject matter experts</strong> to build the tools their workflows need, using AI to generate the technical implementation</li>
+                    <li><strong>Provide a governance framework</strong> (the SOP) that ensures tools are built responsibly, with proper approvals, documentation, and quality assurance</li>
+                    <li><strong>Create replicable, documented solutions</strong> that can survive personnel turnover and be adapted by other organizations</li>
+                    <li><strong>Reduce dependency</strong> on scarce IT development resources for unit-level operational tools</li>
+                </ul>
+                <p>All materials are released under the MIT License and are available for any organization to use, adapt, and extend.</p>
+
+                <!-- Creator -->
+                <h2 id="creator">Creator</h2>
+                <div class="card card--featured mb-xl">
+                    <h3 class="card__title mt-0">SSgt Jesse C. Morgan, USMC</h3>
+                    <p>Arabic linguist and software developer stationed at MCD-Monterey, DLIFLC. SSgt Morgan developed the EDD methodology, SOP, training curricula, and proof-of-concept tools based on direct experience building AI-assisted applications for real operational needs at the detachment level.</p>
+                    <p>The methodology was refined through multiple training cohorts and validated by the successful deployment of five production tools serving hundreds of users.</p>
+                    <div class="card__meta">
+                        <dl>
+                            <dt>Email</dt>
+                            <dd><a href="mailto:jesse.morgan@dliflc.edu">jesse.morgan@dliflc.edu</a></dd>
+                        </dl>
+                    </div>
+                </div>
+
+                <!-- Proof of Concept Tools -->
+                <h2 id="proof-of-concept">Proof of Concept Tools</h2>
+                <p>The following tools were built using the EDD methodology, demonstrating that non-traditional developers can produce production-quality applications with AI assistance:</p>
+
+                <div class="table-wrapper mb-xl">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tool</th>
+                                <th>Description</th>
+                                <th>Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>MCD Tutoring App</strong></td>
+                                <td>Scheduling and management system for academic tutoring services at the Marine Corps Detachment</td>
+                                <td>440 users</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DonDocs</strong></td>
+                                <td>Document management and routing system for detachment administrative workflows</td>
+                                <td>300 users/day</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tanaghum</strong></td>
+                                <td>Arabic language learning support tool for students at DLIFLC</td>
+                                <td>Active deployment</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Harakat</strong></td>
+                                <td>Arabic diacritization system that automatically adds tashkeel (vowel marks) to unvocalized Arabic text</td>
+                                <td>0.68% DER</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Mutawazin</strong></td>
+                                <td>Arabic typing proficiency trainer that builds speed and accuracy with Arabic keyboard layouts through structured practice sessions</td>
+                                <td>Active deployment</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>These tools collectively demonstrate that the EDD approach produces real, working software that serves real users at scale, not merely academic exercises.</p>
+
+                <!-- How to Contribute -->
+                <h2 id="contribute">How to Contribute</h2>
+                <p>EDD is an open-source project, and contributions are welcome from anyone interested in improving AI-assisted development training for military and government organizations.</p>
+
+                <div class="card-grid mb-xl">
+                    <div class="card">
+                        <h3 class="card__title mt-0">GitHub Repository</h3>
+                        <p class="card__desc">All source materials, templates, curricula, and this website are hosted on GitHub. Fork the repository, submit issues, or open pull requests.</p>
+                        <div class="card__footer">
+                            <a href="https://github.com/jeranaias/ExpertDrivenDevelopment" class="btn btn--secondary btn--sm">View on GitHub</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card__title mt-0">Contributing Guidelines</h3>
+                        <p class="card__desc">Review the CONTRIBUTING.md file for details on how to submit changes, report issues, suggest improvements, or contribute new prompts and templates.</p>
+                        <div class="card__footer">
+                            <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/CONTRIBUTING.md" class="btn btn--secondary btn--sm">Read CONTRIBUTING.md</a>
+                        </div>
+                    </div>
+                </div>
+
+                <p>Ways you can contribute:</p>
+                <ul>
+                    <li>Submit new prompts to the <a href="resources/prompt-library.html">Prompt Library</a> based on your experience</li>
+                    <li>Report issues or suggest improvements to the training materials</li>
+                    <li>Share case studies of EDD deployments at your organization</li>
+                    <li>Translate or adapt materials for different service branches or agencies</li>
+                    <li>Improve the documentation, templates, or website</li>
+                </ul>
+
+                <!-- Contact -->
+                <h2 id="contact">Contact</h2>
+                <p>For questions about the EDD methodology, training delivery, or collaboration opportunities:</p>
+                <div class="callout callout--info mb-xl">
+                    <p><strong>SSgt Jesse C. Morgan</strong><br>
+                    Marine Corps Detachment, Presidio of Monterey<br>
+                    Defense Language Institute Foreign Language Center<br>
+                    Email: <a href="mailto:jesse.morgan@dliflc.edu">jesse.morgan@dliflc.edu</a></p>
+                </div>
+
+                <!-- Acknowledgments -->
+                <h2 id="acknowledgments">Acknowledgments</h2>
+                <p>Expert-Driven Development has benefited from the support and feedback of the <strong>Marine Coders</strong> community, a grassroots organization of Marines who advocate for technology literacy, coding education, and innovation within the Marine Corps. The Marine Coders community provided early feedback, testing, and encouragement that helped shape the EDD methodology into its current form.</p>
+
+                <!-- Classification -->
+                <h2 id="classification">Classification</h2>
+                <div class="callout callout--success">
+                    <h3 class="callout__title">Distribution Statement</h3>
+                    <p><strong>UNCLASSIFIED // Distribution Unlimited</strong></p>
+                    <p>All Expert-Driven Development materials, including the SOP, training curricula, templates, toolkit, and this website, are unclassified and approved for public release. They are released under the <strong>MIT License</strong>, which permits free use, modification, and distribution with attribution.</p>
+                    <p>No classified, CUI, or restricted information is contained in any EDD material. The proof-of-concept tools referenced above are described in general terms only; no operational data, PII, or system-specific configuration details are included.</p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>An open-source training methodology for AI-assisted tool development, created at the Marine Corps Detachment, Presidio of Monterey.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="./">Home</a></li>
+                        <li><a href="courses/">Courses</a></li>
+                        <li><a href="sop/">SOP</a></li>
+                        <li><a href="toolkit/">Toolkit</a></li>
+                        <li><a href="resources/">Resources</a></li>
+                        <li><a href="about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="pdf/SOP_Expert_Driven_Development_v3.pdf">SOP (PDF)</a></li>
+                        <li><a href="pdf/TRAINING_CURRICULA_v3.pdf">Curricula (PDF)</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>MIT License</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile nav toggle script -->
+    <script>
+        (function () {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function () {
+                    var expanded = toggle.getAttribute('aria-expanded') === 'true';
+                    toggle.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>

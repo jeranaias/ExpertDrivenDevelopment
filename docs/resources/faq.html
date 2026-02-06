@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EDD FAQ - Common questions and answers from Expert-Driven Development training sessions.">
+    <title>FAQ | Resources | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="site-wrapper">
+
+    <!-- Skip to content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="./" class="active">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation">
+                <span class="nav-toggle__icon"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile navigation -->
+    <div id="mobile-nav" class="mobile-nav">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="./" class="active">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="../">Home</a></li>
+                <li><a href="./">Resources</a></li>
+                <li>FAQ</li>
+            </ul>
+            <h1 class="page-header__title">Frequently Asked Questions</h1>
+            <p class="page-header__desc">Answers to the most common questions from EDD training sessions. If your question is not listed here, check the <a href="../sop/">SOP</a> or contact the training team.</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main id="main-content" class="site-main">
+        <div class="section">
+            <div class="container container--narrow">
+
+                <!-- Q1 -->
+                <details open>
+                    <summary>"Do I need to know how to code?"</summary>
+                    <div>
+                        <p><strong>No.</strong> Expert-Driven Development is built on the premise that <em>domain expertise</em> is the prerequisite, not coding ability. You are the subject matter expert in your workflow. The AI generates the code; your job is to define the problem clearly, test the output, and iterate until the tool works correctly.</p>
+                        <p>The EDD methodology teaches you how to communicate effectively with AI tools so that your expertise drives the solution. Many successful EDD tools have been built by Marines with zero prior programming experience.</p>
+                    </div>
+                </details>
+
+                <!-- Q2 -->
+                <details>
+                    <summary>"What AI tool should I use?"</summary>
+                    <div>
+                        <p><strong>M365 Copilot is the preferred tool</strong> for DoW environments because it operates within the Microsoft security boundary and is approved for use with CUI-adjacent (but not classified) data. Azure OpenAI is also approved for organizational use.</p>
+                        <p>Other tools may be used if they are approved by your command's cybersecurity and information assurance office. The key requirement is that the tool must be authorized for use on your network and with your data classification level.</p>
+                        <div class="callout callout--warning mt-md">
+                            <h3 class="callout__title">Important</h3>
+                            <p>Regardless of which AI tool you use, <strong>never input classified, CUI, or PII data</strong> into any AI system unless that system is explicitly authorized to process that data classification.</p>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Q3 -->
+                <details>
+                    <summary>"What if the AI gives wrong answers?"</summary>
+                    <div>
+                        <p><strong>This is expected and normal.</strong> AI tools do not produce perfect output on the first attempt. The EDD methodology uses an <em>iteration loop</em> that accounts for this:</p>
+                        <ol class="steps">
+                            <li><strong>Be specific about what is wrong.</strong> Instead of saying "this doesn't work," describe exactly what happened versus what you expected. For example: "The filter on the gallery shows all items instead of only items where Status equals 'Active'."</li>
+                            <li><strong>Provide the error context.</strong> Copy and paste any error messages directly into your next prompt. Include the exact formula or code that failed.</li>
+                            <li><strong>Break the request into smaller pieces.</strong> If a complex prompt produces broken output, split it into sequential steps. Ask for one function at a time, verify it works, then move to the next.</li>
+                            <li><strong>Try a different approach.</strong> If three iterations on the same approach are not converging, describe your goal from a different angle or ask the AI to suggest alternative methods.</li>
+                        </ol>
+                        <p>The typical build involves 50-150 prompt iterations. Each wrong answer is an opportunity to refine your requirements.</p>
+                    </div>
+                </details>
+
+                <!-- Q4 -->
+                <details>
+                    <summary>"How long does it take to build a tool?"</summary>
+                    <div>
+                        <p>Based on data from EDD training cohorts:</p>
+                        <div class="table-wrapper mt-md">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Phase</th>
+                                        <th>First Tool</th>
+                                        <th>Subsequent Tools</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Planning &amp; Problem Definition</td>
+                                        <td>4-8 hours</td>
+                                        <td>2-4 hours</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Development (AI-assisted build)</td>
+                                        <td>20-40 hours</td>
+                                        <td>8-16 hours</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Testing &amp; Iteration</td>
+                                        <td>10-20 hours</td>
+                                        <td>4-8 hours</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Documentation</td>
+                                        <td>16-22 hours</td>
+                                        <td>4-8 hours</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Total</strong></td>
+                                        <td><strong>50-90 hours</strong></td>
+                                        <td><strong>18-36 hours</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="mt-md">The first tool takes longer because you are simultaneously learning the methodology, the AI interaction patterns, and the Power Platform. Subsequent tools benefit from your accumulated prompt library, template familiarity, and platform knowledge.</p>
+                    </div>
+                </details>
+
+                <!-- Q5 -->
+                <details>
+                    <summary>"What about classified data?"</summary>
+                    <div>
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Critical Security Requirement</h3>
+                            <p><strong>Never input classified information, CUI (Controlled Unclassified Information), or PII (Personally Identifiable Information) into any AI tool</strong> unless that specific tool is explicitly authorized by your security manager to process that data classification level.</p>
+                        </div>
+                        <p>EDD tools are built on unclassified platforms (Power Platform, SharePoint Online) and are designed for unclassified workflows. If your use case involves classified data:</p>
+                        <ul>
+                            <li>The tool itself must reside on an appropriately classified network</li>
+                            <li>AI-assisted development prompts must be written using only unclassified descriptions of the workflow</li>
+                            <li>No classified data, system names, or network architecture details should appear in any AI prompt</li>
+                            <li>Consult your SSO (Special Security Officer) or Information Assurance Manager before proceeding</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Q6 -->
+                <details>
+                    <summary>"Do I need my supervisor's approval?"</summary>
+                    <div>
+                        <p><strong>Yes.</strong> The EDD SOP requires supervisor approval at the planning phase. Specifically:</p>
+                        <ul>
+                            <li>The <a href="templates.html#problem-definition">Problem Definition Worksheet</a> includes a mandatory supervisor signature block</li>
+                            <li>This document must be signed <strong>before development begins</strong></li>
+                            <li>The supervisor's approval confirms that the problem is worth solving, the approach is reasonable, and the developer has authorization to spend time on the project</li>
+                        </ul>
+                        <p>This is not bureaucratic overhead; it ensures alignment between the developer's effort and the command's priorities, and it provides top-cover for the time invested in building the tool.</p>
+                    </div>
+                </details>
+
+                <!-- Q7 -->
+                <details>
+                    <summary>"What platforms can I use?"</summary>
+                    <div>
+                        <p>The EDD methodology is platform-agnostic in principle, but the training and SOP focus on the <strong>Microsoft Power Platform</strong> because it is the most widely available and approved toolset in DoW environments:</p>
+                        <ul>
+                            <li><strong>Power Apps</strong> &mdash; Build canvas apps and model-driven apps for data entry, tracking, and workflow tools</li>
+                            <li><strong>Power Automate</strong> &mdash; Create automated workflows, approval processes, and scheduled tasks</li>
+                            <li><strong>Power BI</strong> &mdash; Build dashboards, reports, and data visualizations</li>
+                            <li><strong>SharePoint</strong> &mdash; Use as a data backend (lists), document storage, and collaboration platform</li>
+                        </ul>
+                        <p>These tools are included in most DoW M365 licenses and do not require separate procurement or ATO (Authority to Operate) processes in most cases.</p>
+                    </div>
+                </details>
+
+                <!-- Q8 -->
+                <details>
+                    <summary>"What if my tool handles PII?"</summary>
+                    <div>
+                        <p>If your tool collects, stores, displays, or processes Personally Identifiable Information (PII), you must take additional steps:</p>
+                        <ol>
+                            <li><strong>Document it</strong> in the Data Considerations section of the <a href="templates.html#problem-definition">Problem Definition Worksheet</a></li>
+                            <li><strong>Complete a PIA (Privacy Impact Assessment) Threshold Analysis</strong> to determine whether a full PIA is required</li>
+                            <li><strong>Coordinate with your Privacy Officer</strong> or the installation Privacy Act coordinator</li>
+                            <li><strong>Implement required controls:</strong>
+                                <ul>
+                                    <li>Access restricted to authorized users only</li>
+                                    <li>Data encrypted at rest and in transit (SharePoint/Power Platform handles this by default)</li>
+                                    <li>Audit logging enabled</li>
+                                    <li>Data retention and disposal policy defined</li>
+                                </ul>
+                            </li>
+                            <li><strong>Document all controls</strong> in the QA Review Checklist compliance section</li>
+                        </ol>
+                        <p>Do not skip this process. PII handling violations carry serious consequences.</p>
+                    </div>
+                </details>
+
+                <!-- Q9 -->
+                <details>
+                    <summary>"How do I get Power Platform access?"</summary>
+                    <div>
+                        <p>Most DoW personnel with M365 accounts already have Power Platform access. To check:</p>
+                        <ol>
+                            <li>Navigate to <a href="https://make.powerapps.com">make.powerapps.com</a> and sign in with your DoW email</li>
+                            <li>If you can access the Power Apps maker portal, you have a license</li>
+                            <li>If access is denied, contact your <strong>S-6 / G-6 / IT support office</strong> to request a Power Apps license assignment</li>
+                        </ol>
+                        <p>Common license types that include Power Platform access:</p>
+                        <ul>
+                            <li>Microsoft 365 E3 or E5 (includes basic Power Apps and Power Automate)</li>
+                            <li>Power Apps per-user plan (for premium connectors)</li>
+                            <li>Power Automate per-user plan (for premium flow features)</li>
+                        </ul>
+                        <div class="callout callout--info mt-md">
+                            <h3 class="callout__title">Tip</h3>
+                            <p>If your S-6 is unfamiliar with Power Platform licensing, refer them to the <a href="https://learn.microsoft.com/en-us/power-platform/admin/pricing-billing-skus">Microsoft Power Platform licensing guide</a>. Many organizations already have licenses available but have not assigned them to users.</p>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Q10 -->
+                <details>
+                    <summary>"Can I share my tool with other units?"</summary>
+                    <div>
+                        <p><strong>Yes, and this is encouraged.</strong> One of the core principles of EDD is that well-documented tools can be replicated and adapted by other organizations. To share your tool effectively:</p>
+                        <ol>
+                            <li><strong>Register it</strong> in the <a href="templates.html#tool-registry">Tool Registry</a> so others can discover it</li>
+                            <li><strong>Complete the documentation package</strong>, especially the Replication Guide and Adaptation Guide, which are specifically designed to enable other units to rebuild or customize your tool</li>
+                            <li><strong>Share the documentation</strong> through your organization's knowledge management channels, or contribute it to the <a href="https://github.com/jeranaias/ExpertDrivenDevelopment">EDD GitHub repository</a></li>
+                            <li><strong>Consider presenting</strong> your tool at a Marine Coders meetup or similar community of practice forum</li>
+                        </ol>
+                        <p>The Adaptation Guide template is specifically designed to help another unit take your tool and modify it for their environment, data sources, and branding without starting from scratch.</p>
+                    </div>
+                </details>
+
+                <!-- Still have questions -->
+                <div class="callout callout--success mt-2xl">
+                    <h2 class="callout__title">Still Have Questions?</h2>
+                    <p>If your question was not answered here, check the <a href="../sop/">full SOP</a> for detailed process guidance, review the <a href="../courses/">course materials</a> for training-specific content, or contact the EDD training team at <a href="mailto:jesse.morgan@dliflc.edu">jesse.morgan@dliflc.edu</a>.</p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>An open-source training methodology for AI-assisted tool development, created at the Marine Corps Detachment, Presidio of Monterey.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../courses/">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="../toolkit/">Toolkit</a></li>
+                        <li><a href="./">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v3.pdf">SOP (PDF)</a></li>
+                        <li><a href="../pdf/TRAINING_CURRICULA_v3.pdf">Curricula (PDF)</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>MIT License</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile nav toggle script -->
+    <script>
+        (function () {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function () {
+                    var expanded = toggle.getAttribute('aria-expanded') === 'true';
+                    toggle.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>

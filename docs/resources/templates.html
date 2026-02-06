@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EDD Templates - Downloadable planning and documentation templates for Expert-Driven Development projects.">
+    <title>Templates | Resources | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="site-wrapper">
+
+    <!-- Skip to content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="./" class="active">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation">
+                <span class="nav-toggle__icon"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile navigation -->
+    <div id="mobile-nav" class="mobile-nav">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="./" class="active">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="../">Home</a></li>
+                <li><a href="./">Resources</a></li>
+                <li>Templates</li>
+            </ul>
+            <h1 class="page-header__title">Templates</h1>
+            <p class="page-header__desc">Downloadable planning and documentation templates required by the Expert-Driven Development SOP. Complete these at each phase of your project.</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main id="main-content" class="site-main">
+        <div class="section">
+            <div class="container">
+
+                <div class="callout callout--info mb-xl">
+                    <h2 class="callout__title">How to Use These Templates</h2>
+                    <p>Each template below corresponds to a specific phase or requirement in the <a href="../sop/">EDD SOP</a>. Download the Markdown files, fill them out in any text editor, and include the completed versions in your tool documentation package. Templates are listed in the order you will typically use them during a project.</p>
+                </div>
+
+                <!-- Template 1: Problem Definition -->
+                <div class="card mb-xl" id="problem-definition">
+                    <span class="card__tag">SOP Appendix A &mdash; Phase 1: Planning</span>
+                    <h2 class="card__title mt-sm">Problem Definition Worksheet</h2>
+                    <p>The starting point for every EDD project. This template captures the problem you are solving, who you are solving it for, measurable success criteria, required functions, data considerations, and required approvals. <strong>Your supervisor must sign this document before development begins.</strong></p>
+
+                    <div class="template-display mt-lg">
+                        <div class="template-display__header">
+                            <h3 class="template-display__title">Key Sections Preview</h3>
+                        </div>
+                        <div class="template-display__content">
+<strong>Tool Information</strong>
+  Tool Name | Developer | Date
+
+<strong>Problem Statement</strong>
+  Describe the problem in 2-3 sentences.
+  Focus on workflow gap, inefficiency, or unmet need.
+
+<strong>Target Users</strong>
+  Primary User Group | Secondary Users | Estimated Count
+
+<strong>Success Criteria</strong>
+  # | Metric | Current State | Target State | How Measured
+
+<strong>Required Functions</strong>
+  # | Function Description | Priority (Must / Should / Nice)
+
+<strong>Data Considerations</strong>
+  PII handling | PHI handling | Security controls checklist
+
+<strong>Approvals</strong>
+  Developer signature | Supervisor signature | Dates</div>
+                    </div>
+
+                    <div class="card__footer">
+                        <a href="../templates/problem-definition.md" class="btn btn--primary btn--sm" download>Download Template (Markdown)</a>
+                    </div>
+                </div>
+
+                <!-- Template 2: Development Journal -->
+                <div class="card mb-xl" id="development-journal">
+                    <span class="card__tag">Build Process &mdash; Phase 2: Development</span>
+                    <h2 class="card__title mt-sm">Development Journal</h2>
+                    <p>Track your build process session by session. Record what you accomplished, blockers encountered, hours spent, and the AI prompts that produced the best results. This journal feeds directly into your Replication Guide and helps future developers understand how the tool was built.</p>
+
+                    <div class="template-display mt-lg">
+                        <div class="template-display__header">
+                            <h3 class="template-display__title">Key Sections Preview</h3>
+                        </div>
+                        <div class="template-display__content">
+<strong>Project Information</strong>
+  Project Name | Developer | Start Date | Target Completion
+
+<strong>Session Log</strong> (repeat per session)
+  Date | Hours
+  What was accomplished
+  Blockers or challenges
+  Next steps
+
+<strong>Running Total Hours</strong>
+  Development | Testing | Documentation | Rework | Total
+
+<strong>Lessons Learned</strong>
+  Insights gained during the build process
+
+<strong>AI Prompts That Worked Well</strong>
+  Purpose | AI Tool Used | Prompt Text | Why it worked</div>
+                    </div>
+
+                    <div class="card__footer">
+                        <a href="../templates/development-journal.md" class="btn btn--primary btn--sm" download>Download Template (Markdown)</a>
+                    </div>
+                </div>
+
+                <!-- Template 3: QA Review Checklist -->
+                <div class="card mb-xl" id="qa-checklist">
+                    <span class="card__tag">SOP Appendix B &mdash; Phase 3: Quality Assurance</span>
+                    <h2 class="card__title mt-sm">QA Review Checklist</h2>
+                    <p>The formal quality gate before deployment. A qualified reviewer (subject matter expert, experienced developer, or supervisor) evaluates your tool across five categories: functionality, user testing, documentation completeness, compliance, and turnover readiness. All criteria must pass before deployment.</p>
+
+                    <div class="template-display mt-lg">
+                        <div class="template-display__header">
+                            <h3 class="template-display__title">Key Sections Preview</h3>
+                        </div>
+                        <div class="template-display__content">
+<strong>Review Information</strong>
+  Tool Name | Date | Developer | Reviewer
+
+<strong>1. Functionality</strong> (6 criteria)
+  Functions work as intended | Error handling | UI intuitive
+  Performance acceptable | Outputs accurate | Handles data volumes
+
+<strong>2. User Testing</strong> (4 criteria)
+  Minimum 3 users tested | Feedback collected
+  Critical items addressed | Users complete tasks independently
+
+<strong>3. Documentation</strong> (6 criteria)
+  User Guide | Replication Guide | Adaptation Guide
+  Maintenance Guide | Clear writing | Current screenshots
+
+<strong>4. Compliance</strong> (6 criteria)
+  No unauthorized PII/PHI | Approved platform
+  Security controls | PIA completed if required
+
+<strong>5. Turnover Readiness</strong> (5 criteria)
+  Tool registered | Maintainer designated
+  Documentation accessible | Backup plan exists
+
+<strong>Review Result</strong>
+  Approved | Revisions Required (with specific items)</div>
+                    </div>
+
+                    <div class="card__footer">
+                        <a href="../templates/qa-checklist.md" class="btn btn--primary btn--sm" download>Download Template (Markdown)</a>
+                    </div>
+                </div>
+
+                <!-- Template 4: Tool Registry Entry -->
+                <div class="card mb-xl" id="tool-registry">
+                    <span class="card__tag">SOP Appendix C &mdash; Phase 4: Deployment</span>
+                    <h2 class="card__title mt-sm">Tool Registry Entry</h2>
+                    <p>Register your deployed tool in the organizational Tool Registry. This entry tracks tool identification, description, user counts, documentation location, current maintainer, data sensitivity classification, and review schedule. Update this record whenever the tool's status, maintainer, or version changes.</p>
+
+                    <div class="template-display mt-lg">
+                        <div class="template-display__header">
+                            <h3 class="template-display__title">Key Sections Preview</h3>
+                        </div>
+                        <div class="template-display__content">
+<strong>Tool Identification</strong>
+  Tool Name | Version | Developer | Deployment Date
+
+<strong>Description</strong>
+  Platform | What the tool does and the problem it solves
+
+<strong>Users</strong>
+  Target User Groups | Current User Count
+
+<strong>Documentation and Support</strong>
+  Documentation Location | Current Maintainer | Contact
+
+<strong>Status</strong>
+  Active / Deprecated / Under Revision
+  Data Sensitivity: No PII / PII Controlled
+
+<strong>Change Log</strong>
+  Date | Version | Changed By | Description of Change</div>
+                    </div>
+
+                    <div class="card__footer">
+                        <a href="../templates/tool-registry-entry.md" class="btn btn--primary btn--sm" download>Download Template (Markdown)</a>
+                    </div>
+                </div>
+
+                <!-- Template 5: Documentation Package Outline -->
+                <div class="card mb-xl" id="documentation-package">
+                    <span class="card__tag">Complete Package &mdash; All Phases</span>
+                    <h2 class="card__title mt-sm">Documentation Package Outline</h2>
+                    <p>The master outline for your complete documentation package. It defines the structure and required content for all four deliverable guides: User Guide (2-5 pages), Replication Guide (10-30 pages), Adaptation Guide (5-10 pages), and Maintenance Guide (5-10 pages). All four must be completed before QA review.</p>
+
+                    <div class="template-display mt-lg">
+                        <div class="template-display__header">
+                            <h3 class="template-display__title">Key Sections Preview</h3>
+                        </div>
+                        <div class="template-display__content">
+<strong>1. User Guide</strong> (2-5 pages)
+  Audience: End users with no technical background
+  Sections: Purpose, Access/Setup, How-To with screenshots, FAQ, Getting Help
+
+<strong>2. Replication Guide</strong> (10-30 pages)
+  Audience: Developer who needs to rebuild from scratch
+  Sections: Architecture, Data Structure, Step-by-Step Rebuild,
+  Configuration, AI Prompts Used, Testing/Validation
+
+<strong>3. Adaptation Guide</strong> (5-10 pages)
+  Audience: Developer modifying for a different context
+  Sections: Adaptation targets, Configurable Parameters,
+  Data Source Mods, UI Mods, What Not to Change
+
+<strong>4. Maintenance Guide</strong> (5-10 pages)
+  Audience: Designated maintainer after developer departs
+  Sections: Troubleshooting, Update Procedures, Monitoring,
+  Dependency Management, Turnover Checklist</div>
+                    </div>
+
+                    <div class="card__footer">
+                        <a href="../templates/documentation-package-outline.md" class="btn btn--primary btn--sm" download>Download Template (Markdown)</a>
+                    </div>
+                </div>
+
+                <!-- Summary callout -->
+                <div class="callout callout--warning">
+                    <h2 class="callout__title">Reminder</h2>
+                    <p>The Problem Definition Worksheet must be completed and approved by your supervisor <strong>before</strong> any development begins. All five templates must be completed and included in your documentation package before the tool can pass QA review and be registered for deployment. See the <a href="../sop/">SOP</a> for the complete process.</p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>An open-source training methodology for AI-assisted tool development, created at the Marine Corps Detachment, Presidio of Monterey.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../courses/">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="../toolkit/">Toolkit</a></li>
+                        <li><a href="./">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v3.pdf">SOP (PDF)</a></li>
+                        <li><a href="../pdf/TRAINING_CURRICULA_v3.pdf">Curricula (PDF)</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>MIT License</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile nav toggle script -->
+    <script>
+        (function () {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function () {
+                    var expanded = toggle.getAttribute('aria-expanded') === 'true';
+                    toggle.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>
