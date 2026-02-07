@@ -382,6 +382,20 @@ CSS, and JavaScript. Start with just the data entry form.</div>
                                 at a larger scale.
                             </p>
                         </details>
+
+                        <details class="mt-lg">
+                            <summary><strong>Self-Check: Did you complete the build?</strong></summary>
+                            <div class="callout callout--warning mt-sm">
+                                <p>Before moving on, verify:</p>
+                                <ul>
+                                    <li>Do you have a working HTML file you can open in a browser?</li>
+                                    <li>Can you add a new equipment entry and see it appear?</li>
+                                    <li>Does the overdue view highlight items past due in red?</li>
+                                    <li>Does the summary show correct counts?</li>
+                                </ul>
+                                <p class="mt-sm">If not, go back to Step 3 and review the AI output. Copy the error message and paste it back to the AI with context about what you expected.</p>
+                            </div>
+                        </details>
                     </section>
 
                     <!-- Module 3: When Something Breaks -->
@@ -429,6 +443,10 @@ CSS, and JavaScript. Start with just the data entry form.</div>
                         </p>
 
                         <h4>Step 2: Send the Error to AI with Context</h4>
+                        <div class="callout callout--info mt-sm">
+                            <p><strong>What does "paste your code" mean?</strong> If you are using a browser-based AI tool, copy the entire HTML and JavaScript block the AI gave you. If you saved it to a file, open the file in a text editor and copy all the contents. The AI needs to see your code to find the bug.</p>
+                        </div>
+
                         <div class="prompt-block">
                             <div class="prompt-block__header">Prompt &mdash; Debugging</div>I'm building an equipment tracker and getting this error: "Uncaught TypeError: Cannot read properties of null (reading 'value')". This happens when I click the "Check Out" button. Here's my code: [paste your full HTML/JS code here]. The form has fields for item name, serial number, person, date out, and date due.</div>
 
@@ -610,7 +628,7 @@ Frontier Risks:
                         <details>
                             <summary>Self-Check: Review your decomposition</summary>
                             <p>
-                                Look at each subtask. Could any one of them be broken down further? If a subtask
+                                Look at each subtask. Could any one of them be broken down further? A subtask is too big if it would take more than 3 AI prompts to complete, or if you cannot describe the expected output in one sentence. If a subtask
                                 feels like it would take more than two or three prompts to complete, it is too big.
                                 Split it. Also check: did you identify at least one frontier risk? Every problem
                                 has at least one area where AI&rsquo;s training data will not perfectly match your
@@ -634,6 +652,12 @@ Frontier Risks:
                                 <li><strong>Identify at least one failure case.</strong> Something will break or produce the wrong result. When it does, document the error, your debugging prompt, and the resolution.</li>
                                 <li><strong>Bring a working (or partially working) prototype.</strong> A partial build with documented lessons is more valuable than no build at all.</li>
                             </ol>
+                            <p class="mt-sm"><strong>How to know when you are done:</strong></p>
+                            <ul>
+                                <li>You can demonstrate all user actions from your decomposition</li>
+                                <li>You have tested at least one failure case and documented it</li>
+                                <li>Someone unfamiliar with your problem could use it without your help</li>
+                            </ul>
                         </div>
 
                         <h3>Path Forward</h3>
@@ -653,12 +677,12 @@ Frontier Risks:
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><strong>Platform Training</strong></td>
+                                        <td><strong><a href="platform.html">Platform Training</a></strong></td>
                                         <td>4 hours</td>
                                         <td>Build three complete tools on Power Platform practicing centaur and cyborg work patterns.</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Advanced Workshop</strong></td>
+                                        <td><strong><a href="advanced.html">Advanced Workshop</a></strong></td>
                                         <td>4 hours</td>
                                         <td>Map the frontier for your domain, build verification protocols, and practice group debugging.</td>
                                     </tr>

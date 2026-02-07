@@ -19,7 +19,7 @@
                 <span class="site-brand__mark"></span>
                 Expert-Driven Development
             </a>
-            <nav aria-label="Main navigation">
+            <nav aria-label="Primary navigation">
                 <ul class="nav-list">
                     <li><a href="../">Home</a></li>
                     <li><a href="../courses/">Courses</a></li>
@@ -449,6 +449,14 @@ Provide the data model relationships, DAX measures, and conditional formatting r
                     toggle.setAttribute('aria-expanded', String(!expanded));
                     mobileNav.classList.toggle('is-open');
                 });
+                // Close mobile nav when clicking a link
+                var navLinks = mobileNav.querySelectorAll('a');
+                for (var i = 0; i < navLinks.length; i++) {
+                    navLinks[i].addEventListener('click', function() {
+                        toggle.setAttribute('aria-expanded', 'false');
+                        mobileNav.classList.remove('is-open');
+                    });
+                }
             }
         })();
     </script>

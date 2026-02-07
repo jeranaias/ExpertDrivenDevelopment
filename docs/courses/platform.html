@@ -85,13 +85,13 @@
                     <nav class="toc">
                         <h2 class="toc__title">On This Page</h2>
                         <ul class="toc__list">
-                            <li><a href="#agenda">Agenda</a></li>
-                            <li><a href="#setup-review">Setup and Review</a></li>
-                            <li><a href="#build-1">Build #1: Structured Workflow (Centaur Mode)</a></li>
+                            <li><a href="#agenda">Agenda &amp; Timing</a></li>
+                            <li><a href="#setup-review">Module 1: Setup and Review</a></li>
+                            <li><a href="#build-1">Module 2-3: Build #1 (Centaur Mode)</a></li>
                             <li><a href="#failure-sharing">Failure Sharing</a></li>
-                            <li><a href="#build-2">Build #2: Iterative Application (Cyborg Mode)</a></li>
-                            <li><a href="#build-3">Build #3: Your Problem</a></li>
-                            <li><a href="#frontier-map">Frontier Map Update</a></li>
+                            <li><a href="#build-2">Module 4: Build #2 (Cyborg Mode)</a></li>
+                            <li><a href="#build-3">Module 5: Build #3 &amp; Assessment</a></li>
+                            <li><a href="#frontier-map">Module 6: Frontier Map</a></li>
                         </ul>
                     </nav>
                 </aside>
@@ -149,6 +149,83 @@
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+
+                        <h3>Detailed Timing Breakdown</h3>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Module</th>
+                                        <th scope="col">Duration</th>
+                                        <th scope="col">Key Activities</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Module 1: Review &amp; Setup</td>
+                                        <td>15 min</td>
+                                        <td>M365 access verification, centaur/cyborg review, failure story sharing</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Module 2: Whiteboard Exercise</td>
+                                        <td>20 min</td>
+                                        <td>Leave router business rules, data flow, edge cases &mdash; human design phase</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Module 3: Build #1 &mdash; Leave Router</td>
+                                        <td>45 min</td>
+                                        <td>AI build, human verify, AI refine, human accept &mdash; full centaur cycle</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Break / Failure Sharing</td>
+                                        <td>10 min</td>
+                                        <td>Document what AI got wrong, how students caught it, frontier map start</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Module 4: Build #2 &mdash; Training Tracker</td>
+                                        <td>45 min</td>
+                                        <td>Cyborg mode: continuous iteration, discover requirements as you build</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Module 5: Build #3 &mdash; Help Desk</td>
+                                        <td>35 min</td>
+                                        <td>Student chooses mode, applies to real problem, independent work</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Module 6: Frontier Map &amp; Wrap-Up</td>
+                                        <td>20 min</td>
+                                        <td>Compile failures into frontier map, assignment briefing</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Buffer</strong></td>
+                                        <td><strong>10 min</strong></td>
+                                        <td><strong>Absorb overruns, handle access issues, extra questions</strong></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2"><strong>Total Course Time</strong></td>
+                                        <td><strong>4 hours (240 minutes)</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Contingency Plan: If Power Platform Is Unavailable</h3>
+                            <p>
+                                If M365 access or Power Platform is down or unavailable for any reason, pivot to the following backup plan:
+                            </p>
+                            <ol>
+                                <li><strong>Use AI chat to generate mockup screenshots:</strong> Have students describe their desired workflow to an AI tool like ChatGPT or Claude and ask it to generate mockup images of the interface. This preserves the prompt engineering practice.</li>
+                                <li><strong>Paper wireframe exercise:</strong> Complete the whiteboard planning phases for all three builds on paper or whiteboard. Focus on business logic, data flow, and edge cases. This preserves the centaur/cyborg conceptual distinction.</li>
+                                <li><strong>Use pre-built examples for demonstration:</strong> If you have screenshots or recordings of completed Power Platform builds from previous sessions, walk through them as case studies. Focus on verification checkpoints and failure recognition.</li>
+                                <li><strong>Convert to prompt engineering workshop:</strong> Have students write the complete prompt sequence they would use to build each tool, then peer review each other's prompts. This maintains the EDD skill development focus.</li>
+                            </ol>
+                            <p>
+                                The core learning outcome is not the Power Platform tool itself, but the centaur/cyborg work patterns and verification discipline. Those can be taught without live platform access if necessary.
+                            </p>
                         </div>
                     </section>
 
@@ -241,6 +318,613 @@
                             on the whiteboard design. The AI handles the execution &mdash; translating your
                             design into working platform components.
                         </p>
+
+                        <h3>Complete Build Script: Leave Request Router (Centaur Mode)</h3>
+                        <p>
+                            The following is the complete step-by-step build sequence. Each prompt block represents
+                            what the student submits to the AI. Each code block shows the expected output or result.
+                            Instructor callouts indicate teaching moments and verification checkpoints.
+                        </p>
+
+                        <details open>
+                            <summary><strong>Step 1: SharePoint List Setup</strong></summary>
+
+                            <div class="prompt-block">
+                                <strong>Student Prompt to AI:</strong>
+                                <p>
+                                    I need to create a SharePoint list called "Leave Requests" to track leave requests
+                                    for 1st Battalion, 99th Marines. The list needs the following columns:
+                                </p>
+                                <ul>
+                                    <li>Requester Name (person field)</li>
+                                    <li>Leave Type (choice: Annual, Convalescent, Emergency, Special Liberty)</li>
+                                    <li>Start Date (date)</li>
+                                    <li>End Date (date)</li>
+                                    <li>Days Requested (calculated: End Date minus Start Date)</li>
+                                    <li>Justification (multiple lines of text)</li>
+                                    <li>Status (choice: Pending, Approved, Denied, Cancelled)</li>
+                                    <li>Approver (person field)</li>
+                                    <li>Date Submitted (date and time, default to today)</li>
+                                    <li>Date Actioned (date and time)</li>
+                                </ul>
+                                <p>
+                                    Provide the step-by-step instructions to create this list in SharePoint Online.
+                                </p>
+                            </div>
+
+                            <div class="code-block">
+                                <strong>Expected AI Output:</strong>
+                                <pre>
+To create the "Leave Requests" SharePoint list:
+
+1. Navigate to your SharePoint site for 1st Bn, 99th Marines
+2. Click "New" &gt; "List"
+3. Select "Blank list"
+4. Name it "Leave Requests"
+5. Click "Create"
+
+Add the following columns (Site Contents &gt; Leave Requests &gt; Add Column):
+
+1. Requester Name
+   - Type: Person
+   - Require this column: Yes
+
+2. Leave Type
+   - Type: Choice
+   - Choices: Annual, Convalescent, Emergency, Special Liberty
+   - Default: Annual
+
+3. Start Date
+   - Type: Date and Time
+   - Format: Date Only
+   - Require this column: Yes
+
+4. End Date
+   - Type: Date and Time
+   - Format: Date Only
+   - Require this column: Yes
+
+5. Days Requested
+   - Type: Calculated
+   - Formula: =[End Date]-[Start Date]
+   - Return type: Number
+
+6. Justification
+   - Type: Multiple lines of text
+   - Require this column: Yes
+
+7. Status
+   - Type: Choice
+   - Choices: Pending, Approved, Denied, Cancelled
+   - Default: Pending
+
+8. Approver
+   - Type: Person
+   - Require this column: No
+
+9. Date Submitted
+   - Type: Date and Time
+   - Default: =TODAY()
+
+10. Date Actioned
+    - Type: Date and Time
+    - Require this column: No
+                                </pre>
+                            </div>
+
+                            <div class="callout callout--instructor">
+                                <h4 class="callout__title">Instructor Checkpoint: Verify Column Types</h4>
+                                <p>
+                                    Have students create the list now. Walk around and verify:
+                                </p>
+                                <ul>
+                                    <li>The calculated column formula is correct (common error: wrong bracket types)</li>
+                                    <li>Required fields are marked correctly</li>
+                                    <li>Default values are set (Status=Pending, Date Submitted=TODAY())</li>
+                                </ul>
+                                <p>
+                                    <strong>Common student mistake:</strong> Students often forget to set the Return Type
+                                    for calculated columns. The Days Requested formula will fail silently if this is
+                                    set to "Single line of text" instead of "Number."
+                                </p>
+                            </div>
+                        </details>
+
+                        <details open>
+                            <summary><strong>Step 2: Power Apps Form Creation</strong></summary>
+
+                            <div class="prompt-block">
+                                <strong>Student Prompt to AI:</strong>
+                                <p>
+                                    I need to create a Power Apps canvas app that connects to the "Leave Requests"
+                                    SharePoint list. The app should have:
+                                </p>
+                                <ul>
+                                    <li>A form to submit new leave requests</li>
+                                    <li>Auto-populate the Requester Name with the current user</li>
+                                    <li>Validation: End Date must be after Start Date</li>
+                                    <li>Validation: Justification must be at least 20 characters</li>
+                                    <li>A submit button that saves to the SharePoint list and shows a success message</li>
+                                </ul>
+                                <p>
+                                    Provide the Power Apps formulas I need for each control and the OnSelect action
+                                    for the submit button.
+                                </p>
+                            </div>
+
+                            <div class="code-block">
+                                <strong>Expected AI Output:</strong>
+                                <pre>
+Create a new Canvas App from the SharePoint list:
+
+1. In Power Apps (make.powerapps.com), click "Create" &gt; "Canvas app from blank"
+2. Name it "Leave Request Form"
+3. Format: Phone or Tablet (your choice)
+4. Add a data connection to your "Leave Requests" SharePoint list
+
+Add these controls to your screen:
+
+Requester Name (Label + Display):
+- Default: User().FullName
+- DisplayMode: View (read-only)
+
+Leave Type (Dropdown):
+- Items: ["Annual", "Convalescent", "Emergency", "Special Liberty"]
+
+Start Date (DatePicker):
+- Default: Today()
+
+End Date (DatePicker):
+- Default: Today() + 1
+
+Justification (TextInput, Multiline):
+- Mode: MultiLine
+- HintText: "Enter at least 20 characters explaining your leave request"
+
+Submit Button:
+- OnSelect formula:
+If(
+    DatePicker_EndDate.SelectedDate &lt;= DatePicker_StartDate.SelectedDate,
+    Notify("End Date must be after Start Date", NotificationType.Error),
+    If(
+        Len(TextInput_Justification.Text) &lt; 20,
+        Notify("Justification must be at least 20 characters", NotificationType.Error),
+        Patch(
+            'Leave Requests',
+            Defaults('Leave Requests'),
+            {
+                'Requester Name': {
+                    '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedUser",
+                    Claims: "i:0#.f|membership|" &amp; User().Email,
+                    DisplayName: User().FullName,
+                    Email: User().Email
+                },
+                'Leave Type': {Value: Dropdown_LeaveType.Selected.Value},
+                'Start Date': DatePicker_StartDate.SelectedDate,
+                'End Date': DatePicker_EndDate.SelectedDate,
+                'Justification': TextInput_Justification.Text,
+                'Status': {Value: "Pending"},
+                'Date Submitted': Now()
+            }
+        );
+        Notify("Leave request submitted successfully", NotificationType.Success);
+        Reset(TextInput_Justification);
+        Reset(DatePicker_StartDate);
+        Reset(DatePicker_EndDate)
+    )
+)
+                                </pre>
+                            </div>
+
+                            <div class="callout callout--instructor">
+                                <h4 class="callout__title">Instructor Checkpoint: Test Form Submission</h4>
+                                <p>
+                                    Have each student submit a test request. Verify:
+                                </p>
+                                <ul>
+                                    <li>The validation messages appear when End Date &lt;= Start Date</li>
+                                    <li>The validation messages appear when Justification is too short</li>
+                                    <li>A successful submission shows the success notification</li>
+                                    <li>The item appears in the SharePoint list with Status = "Pending"</li>
+                                </ul>
+                                <p>
+                                    <strong>Expected issue:</strong> The Person field syntax for Requester Name often
+                                    causes errors. If students see "Invalid data type" errors, the AI likely provided
+                                    outdated syntax. Walk through the correct @odata.type structure.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details open>
+                            <summary><strong>Step 3: Routing Logic (Power Automate Flow Setup)</strong></summary>
+
+                            <div class="prompt-block">
+                                <strong>Student Prompt to AI:</strong>
+                                <p>
+                                    I need a Power Automate flow that triggers when a new item is created in the
+                                    "Leave Requests" SharePoint list. The flow should determine the approver based on
+                                    the number of days requested:
+                                </p>
+                                <ul>
+                                    <li>1-3 days: Route to Section Leader (sectionlead@1bn99marines.mil)</li>
+                                    <li>4-10 days: Route to Company Commander (co@1bn99marines.mil)</li>
+                                    <li>More than 10 days: Route to Battalion Commander (bn-co@1bn99marines.mil)</li>
+                                </ul>
+                                <p>
+                                    The flow should update the Approver field in the SharePoint list with the
+                                    appropriate person and send them an email notification with the request details.
+                                    Provide the complete flow structure.
+                                </p>
+                            </div>
+
+                            <div class="code-block">
+                                <strong>Expected AI Output:</strong>
+                                <pre>
+Create a new Automated Cloud Flow in Power Automate:
+
+Trigger: "When an item is created" (SharePoint)
+- Site Address: [Your SharePoint site]
+- List Name: Leave Requests
+
+Action 1: Initialize variable "ApproverEmail"
+- Name: ApproverEmail
+- Type: String
+- Value: (leave blank)
+
+Action 2: Condition - Check days requested
+- If: Days Requested is less than or equal to 3
+  - Then: Set variable ApproverEmail to "sectionlead@1bn99marines.mil"
+  - Else: (add nested condition)
+
+Action 3: (Inside the Else branch) Condition - Check if 4-10 days
+- If: Days Requested is less than or equal to 10
+  - Then: Set variable ApproverEmail to "co@1bn99marines.mil"
+  - Else: Set variable ApproverEmail to "bn-co@1bn99marines.mil"
+
+Action 4: Update item (SharePoint)
+- Site Address: [Your SharePoint site]
+- List Name: Leave Requests
+- Id: [ID from trigger]
+- Approver: {ApproverEmail}
+
+Action 5: Send an email (Office 365 Outlook)
+- To: {ApproverEmail}
+- Subject: New Leave Request Pending Your Approval
+- Body:
+A new leave request requires your approval:
+
+Requester: [Requester Name Display Name]
+Leave Type: [Leave Type Value]
+Dates: [Start Date] to [End Date]
+Days: [Days Requested]
+Justification: [Justification]
+
+Please review and approve or deny this request in the Leave Requests list.
+
+[Link to item]
+                                </pre>
+                            </div>
+
+                            <div class="callout callout--instructor">
+                                <h4 class="callout__title">Instructor Checkpoint: Test Routing Logic</h4>
+                                <p>
+                                    Have students submit three test requests with different day counts (2 days, 7 days,
+                                    14 days). Check:
+                                </p>
+                                <ul>
+                                    <li>Does the Approver field in SharePoint update correctly?</li>
+                                    <li>Does the right email address receive the notification?</li>
+                                    <li>Are all the dynamic fields populated in the email body?</li>
+                                </ul>
+                                <p>
+                                    <strong>Common issue:</strong> The nested conditions often get the logic backwards.
+                                    Students should verify by checking the flow run history and tracing which branches
+                                    executed.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details open>
+                            <summary><strong>Step 4: Approval Workflow (Approver Actions)</strong></summary>
+
+                            <div class="prompt-block">
+                                <strong>Student Prompt to AI:</strong>
+                                <p>
+                                    I need to add approval functionality to the Power Automate flow. After the approver
+                                    is notified, they should receive an approval action (Approve/Reject) directly in
+                                    their email or Teams. When they take action:
+                                </p>
+                                <ul>
+                                    <li>If Approved: Update Status to "Approved", set Date Actioned to now</li>
+                                    <li>If Rejected: Update Status to "Denied", set Date Actioned to now</li>
+                                    <li>Include an optional comments field for the approver</li>
+                                </ul>
+                                <p>
+                                    Show me how to modify the flow to add this approval action.
+                                </p>
+                            </div>
+
+                            <div class="code-block">
+                                <strong>Expected AI Output:</strong>
+                                <pre>
+Modify your existing flow:
+
+After Action 4 (Update item), add:
+
+Action 5: Start and wait for an approval
+- Approval type: Approve/Reject - First to respond
+- Title: Leave Request Approval Needed
+- Assigned to: {ApproverEmail}
+- Details:
+Requester: [Requester Name Display Name]
+Leave Type: [Leave Type Value]
+Dates: [Start Date] to [End Date]
+Days: [Days Requested]
+Justification: [Justification]
+
+Please approve or reject this leave request.
+
+- Item link: [Link to item]
+- Item link description: View in SharePoint
+
+Action 6: Condition - Check approval outcome
+- If: Outcome is equal to "Approve"
+  - Then: Update item (SharePoint)
+    - Status: {Value: "Approved"}
+    - Date Actioned: utcNow()
+
+- Else: Update item (SharePoint)
+    - Status: {Value: "Denied"}
+    - Date Actioned: utcNow()
+
+Optional: Add "Approver Comments" column to SharePoint list (Multiple lines of text)
+Then add to both Update item actions:
+- Approver Comments: {Response summary from approval}
+                                </pre>
+                            </div>
+
+                            <div class="callout callout--instructor">
+                                <h4 class="callout__title">Instructor Checkpoint: Test Approval Actions</h4>
+                                <p>
+                                    Students should test both approve and reject paths:
+                                </p>
+                                <ul>
+                                    <li>Submit a new request</li>
+                                    <li>Check email/Teams for the approval action</li>
+                                    <li>Click Approve or Reject</li>
+                                    <li>Verify the SharePoint list item updates correctly</li>
+                                    <li>Verify Date Actioned is populated</li>
+                                </ul>
+                                <p>
+                                    <strong>Time check:</strong> If students are more than 40 minutes into this build,
+                                    skip the optional Approver Comments field and move to Step 5. They can add it later
+                                    if time permits.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details open>
+                            <summary><strong>Step 5: Requester Notification</strong></summary>
+
+                            <div class="prompt-block">
+                                <strong>Student Prompt to AI:</strong>
+                                <p>
+                                    After the approver takes action, I need to notify the original requester of the
+                                    decision. Send an email to the requester with:
+                                </p>
+                                <ul>
+                                    <li>Subject line indicating approval or denial</li>
+                                    <li>Summary of their original request</li>
+                                    <li>The approver's name</li>
+                                    <li>Any comments the approver provided</li>
+                                </ul>
+                                <p>
+                                    Add this to the existing flow after the approval action.
+                                </p>
+                            </div>
+
+                            <div class="code-block">
+                                <strong>Expected AI Output:</strong>
+                                <pre>
+After Action 6 (the Condition checking approval outcome), add to both branches:
+
+In the "Approve" branch, add:
+Action 7a: Send an email (Office 365 Outlook)
+- To: [Requester Name Email]
+- Subject: Your Leave Request Has Been Approved
+- Body:
+Your leave request has been APPROVED.
+
+Request Details:
+Leave Type: [Leave Type Value]
+Dates: [Start Date] to [End Date]
+Days: [Days Requested]
+Justification: [Justification]
+
+Approved by: {Approver DisplayName}
+Approver Comments: {Response summary from approval}
+
+Your leave is now authorized. Ensure you complete any required checkout procedures.
+
+In the "Reject" branch, add:
+Action 7b: Send an email (Office 365 Outlook)
+- To: [Requester Name Email]
+- Subject: Your Leave Request Has Been Denied
+- Body:
+Your leave request has been DENIED.
+
+Request Details:
+Leave Type: [Leave Type Value]
+Dates: [Start Date] to [End Date]
+Days: [Days Requested]
+Justification: [Justification]
+
+Denied by: {Approver DisplayName}
+Approver Comments: {Response summary from approval}
+
+If you have questions about this decision, contact your approving authority.
+                                </pre>
+                            </div>
+
+                            <div class="callout callout--instructor">
+                                <h4 class="callout__title">Instructor Checkpoint: Test End-to-End Flow</h4>
+                                <p>
+                                    Students should now test the complete workflow from start to finish:
+                                </p>
+                                <ul>
+                                    <li>Submit a request via the Power App</li>
+                                    <li>Verify the approver receives the approval action</li>
+                                    <li>Take action (approve or deny)</li>
+                                    <li>Verify the requester receives the outcome notification</li>
+                                    <li>Check the SharePoint list for correct Status and Date Actioned</li>
+                                </ul>
+                                <p>
+                                    <strong>Check-In Questions at this point:</strong>
+                                </p>
+                                <ol>
+                                    <li>"At what points in this build did you verify AI output instead of just trusting it?"</li>
+                                    <li>"What would break if you skipped the testing step and deployed this directly to users?"</li>
+                                    <li>"How would you explain the difference between centaur and cyborg mode to someone who missed the last class?"</li>
+                                </ol>
+                            </div>
+                        </details>
+
+                        <details open>
+                            <summary><strong>Step 6: Error Handling and Edge Cases</strong></summary>
+
+                            <div class="prompt-block">
+                                <strong>Student Prompt to AI:</strong>
+                                <p>
+                                    I need to add error handling to the Power Automate flow. Specifically:
+                                </p>
+                                <ul>
+                                    <li>If the flow fails at any step, send an error notification to an admin (admin@1bn99marines.mil)</li>
+                                    <li>If the approver field is empty or invalid, route to a default approver (co@1bn99marines.mil)</li>
+                                    <li>Add a timeout: if the approver doesn't respond within 48 hours, send a reminder email</li>
+                                </ul>
+                                <p>
+                                    Show me how to configure this in Power Automate.
+                                </p>
+                            </div>
+
+                            <div class="code-block">
+                                <strong>Expected AI Output:</strong>
+                                <pre>
+Error Handling Configuration:
+
+1. Configure Run After Settings:
+   - For Action 7a and 7b (Send email to requester), click the "..." menu
+   - Select "Configure run after"
+   - Check: "is successful", "has failed", "is skipped", "has timed out"
+
+2. Add Scope Actions (for better error tracking):
+   - Wrap Actions 1-6 in a Scope called "Main Approval Process"
+   - After the scope, add a Parallel Branch
+   - Configure this branch's "Configure run after" to run only if the scope "has failed"
+
+3. In the failure branch, add:
+   Action: Send an email (Office 365 Outlook)
+   - To: admin@1bn99marines.mil
+   - Subject: Leave Request Flow Failure
+   - Body:
+The leave request workflow failed for:
+Requester: [Requester Name Display Name]
+Item ID: [ID]
+Error: {outputs of the failed action}
+
+Please review the flow run history and the SharePoint list item.
+
+4. For the 48-hour reminder:
+   - After the "Start and wait for an approval" action, add a Delay action
+   - Delay: 2 days
+   - Then add a Condition: Check if Status is still "Pending"
+   - If Yes (still pending): Send reminder email to approver
+   - If No (already actioned): Do nothing (terminate)
+
+Note: The approval action has a built-in timeout, but the reminder ensures the approver
+is notified before the timeout expires.
+
+5. For invalid approver handling:
+   - In the initial routing logic (Action 2-3), add a final Else branch
+   - Set ApproverEmail to "co@1bn99marines.mil" (default)
+   - Add a parallel notification to admin about the routing fallback
+                                </pre>
+                            </div>
+
+                            <div class="callout callout--instructor">
+                                <h4 class="callout__title">Instructor Note: Deliberate Complexity</h4>
+                                <p>
+                                    This step introduces significant complexity. Some students will struggle with nested
+                                    scopes and run-after configuration. This is intentional. Use this moment to reinforce:
+                                </p>
+                                <ul>
+                                    <li>When complexity increases, verification becomes more critical</li>
+                                    <li>AI suggestions for error handling are often incomplete or wrong</li>
+                                    <li>The human must test failure paths, not just success paths</li>
+                                </ul>
+                                <p>
+                                    <strong>Common student struggle:</strong> The 48-hour reminder logic often conflicts
+                                    with the approval timeout. Students need to understand that the approval action itself
+                                    has a timeout setting (default 30 days). If they want a 48-hour timeout, they need to
+                                    set that in the approval action properties, not add a separate delay.
+                                </p>
+                                <p>
+                                    <strong>Time warning:</strong> If you're at 55+ minutes into this module, skip this
+                                    step entirely. Students can add error handling as homework. The core centaur pattern
+                                    is demonstrated in Steps 1-5.
+                                </p>
+                            </div>
+                        </details>
+
+                        <h3>Facilitation Protocol: Build #1</h3>
+                        <div class="callout callout--instructor">
+                            <h4 class="callout__title">Mid-Build Check-In Questions (Ask at Step 3)</h4>
+                            <ol>
+                                <li>"What parts of the AI's suggestions did you have to verify or correct so far?"</li>
+                                <li>"If you had to explain to your CO how you know this workflow is correct, what would you say?"</li>
+                                <li>"Where do you expect this build to fail when we add the approval workflow?"</li>
+                            </ol>
+                        </div>
+
+                        <div class="callout callout--warning">
+                            <h4 class="callout__title">Common Student Struggles: Build #1</h4>
+                            <ul>
+                                <li>
+                                    <strong>Person field syntax errors:</strong> The SharePoint Person field has a
+                                    complex JSON structure. AI often provides outdated syntax. If students see errors,
+                                    have them check Microsoft's current documentation for the correct @odata.type format.
+                                </li>
+                                <li>
+                                    <strong>Calculated column not updating:</strong> SharePoint calculated columns don't
+                                    recalculate in real-time. Students need to edit and re-save the item to see the
+                                    calculation. This is a SharePoint limitation, not a build error.
+                                </li>
+                                <li>
+                                    <strong>Flow not triggering:</strong> The "When an item is created" trigger sometimes
+                                    has a 5-10 minute delay in testing environments. If the flow doesn't trigger
+                                    immediately, wait a few minutes. For faster testing, use "For a selected item" trigger
+                                    and run manually.
+                                </li>
+                                <li>
+                                    <strong>Approval action not appearing in email:</strong> If the approver doesn't see
+                                    the Approve/Reject buttons in email, check their Outlook settings. Actionable messages
+                                    must be enabled. Teams approval always works as a fallback.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="callout callout--success">
+                            <h4 class="callout__title">Build #1 Success Indicators</h4>
+                            <p>Students have successfully completed Build #1 when they can demonstrate:</p>
+                            <ul>
+                                <li>A Power App that submits a leave request and validates input</li>
+                                <li>A SharePoint list that stores the request with correct data types</li>
+                                <li>A Power Automate flow that routes to the correct approver based on days requested</li>
+                                <li>An approval action that updates the SharePoint list status</li>
+                                <li>Email notifications to both approver and requester</li>
+                                <li>They can articulate at least one place where they caught an AI error and corrected it</li>
+                            </ul>
+                        </div>
 
                         <h4>Phase 3 &mdash; Human Verifies</h4>
                         <p>
@@ -433,6 +1117,462 @@
                             </p>
                         </div>
 
+                        <h3>Complete Build Script: Training Tracker Dashboard (Cyborg Mode)</h3>
+                        <p>
+                            Unlike Build #1, this build does NOT follow a predetermined plan. Students start with
+                            a rough idea and refine iteratively. The prompts are shorter, more conversational, and
+                            the human makes judgment calls at each step. This demonstrates the cyborg pattern.
+                        </p>
+
+                        <details open>
+                            <summary><strong>Iteration 1: Get Something Visible</strong></summary>
+
+                            <div class="prompt-block">
+                                <strong>Student Prompt to AI:</strong>
+                                <p>
+                                    I need a training tracker for 1st Battalion, 99th Marines. We need to track which
+                                    Marines have completed which training events. Start with a SharePoint list that can
+                                    store: Marine name, training event name, completion date, and status (Complete,
+                                    Overdue, Scheduled). Give me the SharePoint list structure.
+                                </p>
+                            </div>
+
+                            <div class="code-block">
+                                <strong>Expected AI Output:</strong>
+                                <pre>
+Create a SharePoint list called "Training Tracker":
+
+1. Marine Name (Person field, required)
+2. Training Event (Choice field: Annual Rifle Qual, CBRN Awareness, Cyber Awareness, PFT/CFT, SAPR Training)
+3. Completion Date (Date field)
+4. Status (Choice field: Complete, Overdue, Scheduled)
+5. Due Date (Date field)
+6. Days Until Due (Calculated: =[Due Date]-TODAY())
+
+This structure allows you to track individual training completions for each Marine.
+                                </pre>
+                            </div>
+
+                            <div class="callout callout--instructor">
+                                <h4 class="callout__title">Instructor Observation Point</h4>
+                                <p>
+                                    Notice that the AI provided a structure, but students haven't thought about how they'll
+                                    actually use this data yet. In cyborg mode, you build first, evaluate, then iterate.
+                                    The whiteboard planning happens incrementally, not upfront.
+                                </p>
+                                <p>
+                                    Have students create this list now. Don't let them spend more than 5 minutes on this step.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details open>
+                            <summary><strong>Iteration 2: Realize the Problem and Pivot</strong></summary>
+
+                            <div class="prompt-block">
+                                <strong>Student Prompt to AI:</strong>
+                                <p>
+                                    Wait, this structure will create a new row for every training event for every Marine.
+                                    That's going to be a very long list. I need a dashboard where I can see all five
+                                    training events for each Marine in one row. How should I restructure this?
+                                </p>
+                            </div>
+
+                            <div class="code-block">
+                                <strong>Expected AI Output:</strong>
+                                <pre>
+You're right. For a dashboard view, restructure the SharePoint list like this:
+
+"Training Status Dashboard" list:
+
+1. Marine Name (Person field, required)
+2. Rank (Choice: PFC, LCpl, Cpl, Sgt, SSgt)
+3. Annual Rifle Qual (Choice: Complete, Overdue, Scheduled, Not Started)
+4. Annual Rifle Qual Date (Date)
+5. CBRN Awareness (Choice: Complete, Overdue, Scheduled, Not Started)
+6. CBRN Awareness Date (Date)
+7. Cyber Awareness (Choice: Complete, Overdue, Scheduled, Not Started)
+8. Cyber Awareness Date (Date)
+9. PFT/CFT (Choice: Complete, Overdue, Scheduled, Not Started)
+10. PFT/CFT Date (Date)
+11. SAPR Training (Choice: Complete, Overdue, Scheduled, Not Started)
+12. SAPR Training Date (Date)
+
+This creates one row per Marine, with columns for each training event. Much better for
+dashboard visualization.
+
+However, this structure is less flexible if you need to add new training events in the
+future. Consider whether you need flexibility or dashboard clarity.
+                                </pre>
+                            </div>
+
+                            <div class="callout callout--instructor">
+                                <h4 class="callout__title">Instructor Teaching Point: This Is Cyborg Mode</h4>
+                                <p>
+                                    Point out what just happened: The student didn't plan this upfront. They built
+                                    something, evaluated it, realized it wouldn't work, and pivoted. This is cyborg mode.
+                                </p>
+                                <p>
+                                    The AI offered a tradeoff (flexibility vs. dashboard clarity). In centaur mode, this
+                                    decision would have been made in the whiteboard phase. In cyborg mode, you discover
+                                    these tradeoffs as you build.
+                                </p>
+                                <p>
+                                    Have students delete the first list and create the new structure. This is intentional
+                                    rework. It's part of the cyborg process.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details open>
+                            <summary><strong>Iteration 3: Build Power BI Dashboard (First Draft)</strong></summary>
+
+                            <div class="prompt-block">
+                                <strong>Student Prompt to AI:</strong>
+                                <p>
+                                    Now I need a Power BI dashboard that connects to this SharePoint list and shows:
+                                    A table with all Marines and their training status for each event, color-coded
+                                    (green for Complete, red for Overdue, yellow for Scheduled). Give me the steps to
+                                    create this in Power BI.
+                                </p>
+                            </div>
+
+                            <div class="code-block">
+                                <strong>Expected AI Output (with deliberate mistake):</strong>
+                                <pre>
+Create a Power BI report connected to your SharePoint list:
+
+1. Open Power BI Desktop
+2. Get Data &gt; SharePoint Online List
+3. Enter your SharePoint site URL
+4. Select "Training Status Dashboard" list
+5. Click Load
+
+Create the table visualization:
+
+1. Add a Table visual to the canvas
+2. Add these fields to the table:
+   - Marine Name
+   - Rank
+   - Annual Rifle Qual
+   - CBRN Awareness
+   - Cyber Awareness
+   - PFT/CFT
+   - SAPR Training
+
+3. Add conditional formatting:
+   - Select the "Annual Rifle Qual" column
+   - Click Format &gt; Conditional Formatting &gt; Background Color
+   - Set rules:
+     - If value = "Complete", background = Green
+     - If value = "Overdue", background = Red
+     - If value = "Scheduled", background = Yellow
+
+4. Repeat conditional formatting for all five training columns
+
+5. Add a Card visual showing total number of Marines
+
+6. Add a Pie Chart showing percentage Complete vs. Overdue vs. Scheduled across all training
+
+Your dashboard is now ready to publish to Power BI Service and share with leadership.
+                                </pre>
+                            </div>
+
+                            <div class="callout callout--warning">
+                                <h4 class="callout__title">INSTRUCTOR: DELIBERATE AI MISTAKE - DO NOT CORRECT YET</h4>
+                                <p>
+                                    The AI's conditional formatting instructions are incomplete and will fail. The
+                                    background color rules need to be set per column value, but the AI didn't specify
+                                    that you need to use "Field value" as the formatting basis, not "Rules."
+                                </p>
+                                <p>
+                                    Additionally, the Pie Chart suggestion is wrong. A pie chart showing "percentage
+                                    Complete vs. Overdue" doesn't make sense with this data structure because each
+                                    Marine has 5 different status values. The chart would be meaningless.
+                                </p>
+                                <p>
+                                    <strong>Let students attempt this and fail.</strong> Do not intervene yet. This is
+                                    a teaching moment. When students raise their hands saying "the conditional formatting
+                                    isn't working" or "the pie chart looks wrong," ask them:
+                                </p>
+                                <ul>
+                                    <li>"What did the AI tell you to do?"</li>
+                                    <li>"What result did you expect?"</li>
+                                    <li>"What result did you get?"</li>
+                                    <li>"What would you ask the AI to clarify or fix?"</li>
+                                </ul>
+                                <p>
+                                    This is frontier recognition in action. The AI gave plausible-sounding instructions
+                                    that don't actually work. The human has to catch it.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details open>
+                            <summary><strong>Iteration 4: Fix the Conditional Formatting (Student-Driven)</strong></summary>
+
+                            <div class="prompt-block">
+                                <strong>Student Prompt to AI (after discovering the error):</strong>
+                                <p>
+                                    The conditional formatting isn't working. When I select Background Color and try to
+                                    set rules, I don't see an option to set color based on the field value. I see options
+                                    for "Rules" or "Field value" but neither seems to work the way you described. Give me
+                                    the exact steps for Power BI Desktop to color-code cells based on their text value.
+                                </p>
+                            </div>
+
+                            <div class="code-block">
+                                <strong>Expected AI Output (corrected):</strong>
+                                <pre>
+You need to use "Field value" formatting, not "Rules." Here's the correct procedure:
+
+1. In your Table visual, click on the column header for "Annual Rifle Qual"
+2. In the Format pane, expand "Conditional formatting"
+3. Click "Background color"
+4. In the dialog:
+   - Format style: Field value
+   - Based on field: Annual Rifle Qual (should auto-select)
+   - Click "Advanced controls"
+   - For each value, set the color:
+     - Complete: Green (#00B050)
+     - Overdue: Red (#FF0000)
+     - Scheduled: Yellow (#FFFF00)
+     - Not Started: Gray (#D3D3D3)
+5. Click OK
+
+Repeat this process for each of the five training event columns.
+
+Note: You must do this for each column individually. There's no way to apply the same
+conditional formatting rule to multiple columns at once in Power BI Desktop.
+
+For the summary metrics, instead of a pie chart, create:
+- A Card showing "Total Complete" (count where any status = Complete)
+- A Card showing "Total Overdue" (count where any status = Overdue)
+- A Stacked Bar Chart showing count of each status across all five training events
+
+This gives leadership a clearer picture of overall training readiness.
+                                </pre>
+                            </div>
+
+                            <div class="callout callout--instructor">
+                                <h4 class="callout__title">Instructor Debrief: Failure Recognition</h4>
+                                <p>
+                                    After students successfully fix the conditional formatting, pause and debrief:
+                                </p>
+                                <ol>
+                                    <li><strong>"What was wrong with the AI's first answer?"</strong> (It gave incomplete steps)</li>
+                                    <li><strong>"How did you know it was wrong?"</strong> (They tested it and it didn't work)</li>
+                                    <li><strong>"What did you do to fix it?"</strong> (Asked the AI for clarification with specifics about what failed)</li>
+                                </ol>
+                                <p>
+                                    This is the core EDD skill: test, recognize failure, refine the prompt, iterate.
+                                    The AI is not always right on the first try. The human must verify and course-correct.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details open>
+                            <summary><strong>Iteration 5: Add Days Until Due Calculation</strong></summary>
+
+                            <div class="prompt-block">
+                                <strong>Student Prompt to AI:</strong>
+                                <p>
+                                    I need to add a column that shows how many days until each training event is due.
+                                    Each training event has an annual recurrence. For example, if a Marine completed
+                                    Annual Rifle Qual on 15 Jan 2025, it's due again on 15 Jan 2026. I want the
+                                    dashboard to show "Due in X days" or "Overdue by X days" for each event. How do I
+                                    add this to the Power BI report?
+                                </p>
+                            </div>
+
+                            <div class="code-block">
+                                <strong>Expected AI Output:</strong>
+                                <pre>
+You'll need to create calculated columns in Power BI for each training event.
+
+In Power BI Desktop, go to the Data view (left sidebar, table icon).
+
+Create a new column for "Rifle Qual Days Until Due":
+
+Rifle Qual Days Until Due =
+VAR CompletionDate = 'Training Status Dashboard'[Annual Rifle Qual Date]
+VAR DueDate = DATE(YEAR(CompletionDate) + 1, MONTH(CompletionDate), DAY(CompletionDate))
+VAR DaysUntil = DueDate - TODAY()
+RETURN
+IF(
+    ISBLANK(CompletionDate),
+    BLANK(),
+    IF(
+        DaysUntil < 0,
+        "Overdue by " & ABS(DaysUntil) & " days",
+        "Due in " & DaysUntil & " days"
+    )
+)
+
+Repeat this formula for each training event, changing the column names:
+- CBRN Awareness Days Until Due
+- Cyber Awareness Days Until Due
+- PFT/CFT Days Until Due
+- SAPR Training Days Until Due
+
+Add these new calculated columns to your Table visual to show leadership exactly how
+many days remain for each training requirement.
+                                </pre>
+                            </div>
+
+                            <div class="callout callout--instructor">
+                                <h4 class="callout__title">Instructor Checkpoint: Test the Calculation</h4>
+                                <p>
+                                    Have students add test data to the SharePoint list with dates in the past (to
+                                    generate "Overdue by X days") and verify the calculated columns work correctly.
+                                </p>
+                                <p>
+                                    Common issue: If the completion date is blank, the formula returns BLANK(). Students
+                                    need to decide what to display in that case. Do they want "Not Started" or "No data"
+                                    or leave it blank? This is a judgment call, not a technical problem.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details open>
+                            <summary><strong>Iteration 6: Generate S-3 Brief Report</strong></summary>
+
+                            <div class="prompt-block">
+                                <strong>Student Prompt to AI:</strong>
+                                <p>
+                                    I need to generate a text summary for an S-3 brief based on this data. The summary
+                                    should state the overall training readiness percentage, list any critical overdue
+                                    items (overdue by more than 7 days), and highlight upcoming scheduled training. Give
+                                    me a Power Automate flow that runs weekly and generates this summary, then emails it
+                                    to the S-3 (s3@1bn99marines.mil).
+                                </p>
+                            </div>
+
+                            <div class="code-block">
+                                <strong>Expected AI Output:</strong>
+                                <pre>
+Create a Scheduled Cloud Flow in Power Automate:
+
+Trigger: Recurrence
+- Interval: 1 week
+- Day: Monday
+- Time: 08:00
+
+Action 1: Get items (SharePoint)
+- Site: [Your site]
+- List: Training Status Dashboard
+
+Action 2: Initialize variable "TotalTrainingEvents"
+- Type: Integer
+- Value: 0
+
+Action 3: Initialize variable "CompleteEvents"
+- Type: Integer
+- Value: 0
+
+Action 4: Initialize variable "OverdueItems"
+- Type: String
+- Value: ""
+
+Action 5: Apply to each (loop through SharePoint items)
+- Input: value from Get items
+
+Inside the loop:
+- Increment TotalTrainingEvents by 5 (five training events per Marine)
+- For each training status column, add a Condition:
+  - If status = "Complete", increment CompleteEvents
+  - If status = "Overdue", append to OverdueItems string:
+    "[Marine Name] - [Training Event] (Overdue)"
+
+Action 6: Compose (calculate readiness percentage)
+- Formula: div(variables('CompleteEvents'), variables('TotalTrainingEvents'))
+- Multiply by 100
+
+Action 7: Send an email (Office 365 Outlook)
+- To: s3@1bn99marines.mil
+- Subject: Weekly Training Readiness Report - 1st Bn, 99th Marines
+- Body:
+As of [utcNow()]: Battalion maintains [percentage from Action 6]% training currency
+across five tracked events.
+
+Critical Overdue Items (>7 days):
+[OverdueItems variable]
+
+Scheduled Training (next 30 days):
+[Loop through items again and list where Status = "Scheduled"]
+
+No systemic compliance gaps identified.
+                                </pre>
+                            </div>
+
+                            <div class="callout callout--instructor">
+                                <h4 class="callout__title">Instructor Note: Time Check</h4>
+                                <p>
+                                    If you're at 40+ minutes into Build #2, skip this iteration. The core cyborg pattern
+                                    has been demonstrated in Iterations 1-5. The automated report is an enhancement, not
+                                    a core requirement.
+                                </p>
+                                <p>
+                                    If you have time, let students attempt this. The loop logic is complex and many will
+                                    struggle. Use this as another opportunity to practice iterative refinement with the AI.
+                                </p>
+                            </div>
+                        </details>
+
+                        <h3>Facilitation Protocol: Build #2</h3>
+                        <div class="callout callout--instructor">
+                            <h4 class="callout__title">Mid-Build Check-In Questions (Ask at Iteration 3)</h4>
+                            <ol>
+                                <li>"How is this build process different from Build #1? What feels different about the way you're working with the AI?"</li>
+                                <li>"At what point did you realize the first data structure wouldn't work? What made you notice that?"</li>
+                                <li>"If I asked you to add a sixth training event (Combat Lifesaver) right now, would it be easier with the first data structure or the second? Why?"</li>
+                            </ol>
+                        </div>
+
+                        <div class="callout callout--warning">
+                            <h4 class="callout__title">Common Student Struggles: Build #2</h4>
+                            <ul>
+                                <li>
+                                    <strong>Power BI conditional formatting not applying:</strong> Students often try to
+                                    select multiple columns and apply formatting at once. Power BI requires you to format
+                                    each column individually. This is tedious but necessary.
+                                </li>
+                                <li>
+                                    <strong>Calculated columns showing errors:</strong> The DAX formula syntax is
+                                    case-sensitive and picky about date functions. If students see #ERROR, have them check
+                                    the column names in the formula match exactly (including spaces).
+                                </li>
+                                <li>
+                                    <strong>SharePoint list not updating in Power BI:</strong> Power BI Desktop doesn't
+                                    auto-refresh. Students need to click "Refresh" in the Home tab to see new SharePoint
+                                    data. This is a frequent point of confusion.
+                                </li>
+                                <li>
+                                    <strong>Confusion about when to use cyborg vs centaur:</strong> Reinforce that cyborg
+                                    mode is for exploratory builds where requirements are unclear. Centaur mode is for
+                                    well-defined workflows. This build is intentionally exploratory to demonstrate the difference.
+                                </li>
+                            </ul>
+                            <p>
+                                <strong>If students are behind at Iteration 4:</strong> Skip Iteration 6 (automated
+                                report) and move directly to the debrief. The core learning objective is the cyborg
+                                pattern and failure recognition, both of which are covered in Iterations 1-5.
+                            </p>
+                        </div>
+
+                        <div class="callout callout--success">
+                            <h4 class="callout__title">Build #2 Success Indicators</h4>
+                            <p>Students have successfully completed Build #2 when they can demonstrate:</p>
+                            <ul>
+                                <li>A SharePoint list with one row per Marine and columns for each training event</li>
+                                <li>A Power BI dashboard showing training status in a table format</li>
+                                <li>Conditional formatting that color-codes status (green/red/yellow)</li>
+                                <li>They restructured their data model at least once based on evaluation of the first attempt</li>
+                                <li>They caught at least one AI error (especially the conditional formatting or pie chart issue)</li>
+                                <li>They can explain how cyborg mode differs from centaur mode using this build as an example</li>
+                            </ul>
+                        </div>
+
                         <div class="callout">
                             <h3 class="callout__title">Key Teaching Point</h3>
                             <p>
@@ -467,6 +1607,142 @@
                                 Resist solving every problem. When a participant gets stuck, ask:
                                 <em>"What would you tell the AI about what is going wrong?"</em> This builds
                                 the self-sufficiency they need to work independently after the course.
+                            </p>
+                        </div>
+
+                        <h3>Assessment Criteria for All Three Builds</h3>
+                        <p>
+                            Use this rubric to evaluate student work on Builds #1, #2, and #3. The goal is not perfection
+                            but demonstration of EDD principles: verification, frontier recognition, and appropriate use
+                            of centaur vs cyborg modes.
+                        </p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Criteria</th>
+                                        <th scope="col">Exceeds Standard</th>
+                                        <th scope="col">Meets Standard</th>
+                                        <th scope="col">Developing</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Functional Prototype</strong><br>Does the tool work end-to-end as intended?</td>
+                                        <td>
+                                            Tool works completely with no errors. All edge cases handled. Ready for user testing.
+                                        </td>
+                                        <td>
+                                            Tool works for happy path (standard use case). Some edge cases not handled, but core
+                                            functionality is solid. Would work for pilot users with caveats.
+                                        </td>
+                                        <td>
+                                            Tool has errors or fails on basic use cases. Core functionality incomplete or broken.
+                                            Not ready for any users.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Centaur Pattern Applied (Build #1)</strong><br>Did the student follow distinct human/AI phases?</td>
+                                        <td>
+                                            Clear whiteboard design phase before AI build. Verification checkpoints documented at
+                                            each phase boundary. Student can articulate what the AI was responsible for vs. what
+                                            they verified themselves.
+                                        </td>
+                                        <td>
+                                            Whiteboard design exists but may be incomplete. Some verification happened, though
+                                            not systematically. Student understands the centaur concept even if execution was imperfect.
+                                        </td>
+                                        <td>
+                                            No upfront design, or student skipped directly to AI build without planning. No clear
+                                            verification checkpoints. Doesn't understand why centaur mode matters.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Cyborg Pattern Applied (Build #2)</strong><br>Did the student iterate and refine continuously?</td>
+                                        <td>
+                                            Clear evidence of multiple iterations. Student pivoted based on evaluating AI output.
+                                            Data structure or approach changed at least once. Student can explain why they chose
+                                            cyborg mode for this build.
+                                        </td>
+                                        <td>
+                                            Some iteration occurred. Student made at least one course correction based on testing.
+                                            May have started with a plan but adapted it during build. Understands cyborg concept.
+                                        </td>
+                                        <td>
+                                            Tried to plan everything upfront (centaur approach) instead of iterating. No pivots or
+                                            course corrections. Doesn't understand when to use cyborg mode.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Independent Problem-Solving (Build #3)</strong><br>Can the student work without instructor help?</td>
+                                        <td>
+                                            Student encountered errors or issues and resolved them independently using AI iteration.
+                                            Asked instructor clarifying questions but didn't need step-by-step guidance. Demonstrated
+                                            self-sufficiency.
+                                        </td>
+                                        <td>
+                                            Student needed some instructor guidance but applied it effectively. When stuck, was able
+                                            to articulate the problem and attempt solutions. Showed progress toward independence.
+                                        </td>
+                                        <td>
+                                            Student needed constant instructor intervention. Could not diagnose issues or articulate
+                                            problems clearly. Waited for instructor to solve problems instead of attempting solutions.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Verification Steps Included</strong><br>Did the student test and verify AI output?</td>
+                                        <td>
+                                            Student tested all major paths, including error cases. Documented at least one AI mistake
+                                            they caught and corrected. Can explain their verification process clearly. Used test data
+                                            deliberately to probe edge cases.
+                                        </td>
+                                        <td>
+                                            Student tested happy path and caught at least one error. Verification was less systematic
+                                            but happened. Can identify at least one place where they had to correct AI output.
+                                        </td>
+                                        <td>
+                                            Student assumed AI output was correct without testing. No documented verification steps.
+                                            Could not identify any AI mistakes, suggesting they didn't look for them.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Frontier Recognition</strong><br>Can the student identify where AI works well vs. poorly?</td>
+                                        <td>
+                                            Student can clearly articulate at least three areas where AI struggled or required human
+                                            judgment. Contributed specific examples to the frontier map. Understands the limitations
+                                            of AI for this type of work.
+                                        </td>
+                                        <td>
+                                            Student identified at least one frontier issue (e.g., "the conditional formatting didn't
+                                            work as AI described"). Contributed to frontier map discussion. Beginning to recognize
+                                            patterns in AI limitations.
+                                        </td>
+                                        <td>
+                                            Student could not identify any specific AI failures or limitations. Either didn't
+                                            encounter issues (unlikely) or didn't recognize them. Cannot contribute meaningfully to
+                                            frontier map.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Grading Guidance</h3>
+                            <p>
+                                This is a formative assessment, not summative. The rubric is for feedback and coaching,
+                                not for pass/fail decisions. If a student is "Developing" in any category, that indicates
+                                where they need additional practice or guidance.
+                            </p>
+                            <p>
+                                <strong>Most important indicator:</strong> Verification Steps Included. If a student is
+                                not testing and verifying AI output, they are not ready for independent work. This is
+                                the core EDD discipline.
+                            </p>
+                            <p>
+                                Students should self-assess using this rubric at the end of Build #3. Ask them: "Where
+                                do you think you are on each of these criteria?" This builds self-awareness and metacognition.
                             </p>
                         </div>
                     </section>

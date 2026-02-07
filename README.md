@@ -46,14 +46,15 @@ EDD uses AI as scaffolding to let domain experts build, document, and maintain t
 
 ## Quick Start
 
-1. **Read the SOP** -- Understand the methodology, governance model, and approval process.
-   [SOP (PDF)](pdf/SOP_Expert_Driven_Development_v5.pdf)
+This is a GitHub Pages site served from the `/docs` directory. All training materials, resources, and tools are available directly through the live site.
 
-2. **Take Training 1** -- Complete the AI-Fluent Development Orientation to build your first prototype.
-   [Training Curricula (PDF)](pdf/TRAINING_CURRICULA_v5.pdf)
+1. **Visit the Training Site** -- Access all courses, resources, and tools at [jeranaias.github.io/ExpertDrivenDevelopment](https://jeranaias.github.io/ExpertDrivenDevelopment/)
 
-3. **Pick a problem and build** -- Use the templates to define your problem, plan your tool, and document the result.
-   [Templates](templates/)
+2. **Start with Course 1** -- Complete AI Fluency Fundamentals to understand the six core skills and recognize the jagged frontier.
+
+3. **Follow the Builder Pathway** -- Progress through Courses 2-4 to develop institutional tools, or direct leadership to Course 5.
+
+4. **Use the Resources** -- Access the prompt library, FAQ, templates, and interactive toolkit from the site.
 
 ## Proof of Concept
 
@@ -63,21 +64,58 @@ EDD uses AI as scaffolding to let domain experts build, document, and maintain t
 - **Harakat** -- Arabic diacritization system, 0.68% DER
 - **Mutawazin** -- Arabic typing proficiency trainer
 
+## Course Pathways
+
+**Universal Pathway** (All Personnel):
+- Course 1: AI Fluency Fundamentals → Course 5: Supervisor Orientation (leadership)
+
+**Builder Pathway**:
+- Course 1: AI Fluency Fundamentals → Course 2: Builder Orientation → Course 3: Platform Training → Course 4: Advanced Workshop
+
+## Student Course Materials
+
+The repository includes student-facing versions of Courses 1-4, designed to work as both self-paced courses and in-person companion materials. These simplified versions focus on hands-on exercises and are located at `docs/courses/student/`. There is no student version of Course 5 (Supervisor Orientation), as it is leadership-focused and delivered as a briefing.
+
 ## Repository Structure
 
 ```
-edd-training/
-├── .github/          # Issue templates, PR template, contributing guide
-├── docs/             # GitHub Pages site
-│   ├── courses/      # Training course pages
-│   ├── sop/          # SOP rendered as HTML
-│   ├── toolkit/      # Interactive EDD Toolkit
-│   └── resources/    # Prompt library, templates, FAQ
-├── pdf/              # Downloadable PDF documents
-├── templates/        # Markdown templates for download
-├── LICENSE           # MIT License
+ExpertDrivenDevelopment/
+├── .github/                    # Community files
+│   ├── ISSUE_TEMPLATE/         # Issue templates
+│   ├── CONTRIBUTING.md         # Contribution guidelines
+│   └── PULL_REQUEST_TEMPLATE.md
+├── docs/                       # GitHub Pages site (live at jeranaias.github.io/ExpertDrivenDevelopment)
+│   ├── index.html              # Site home page
+│   ├── about.html              # About EDD methodology
+│   ├── courses/                # Training course pages
+│   │   ├── index.html          # Course catalog
+│   │   ├── ai-fluency.html     # Course 1: AI Fluency Fundamentals
+│   │   ├── orientation.html    # Course 2: Builder Orientation
+│   │   ├── platform.html       # Course 3: Platform Training
+│   │   ├── advanced.html       # Course 4: Advanced Workshop
+│   │   ├── supervisor.html     # Course 5: Supervisor Orientation
+│   │   └── student/            # Student-facing course materials
+│   │       ├── index.html      # Student course catalog
+│   │       ├── ai-fluency.html # Student version of Course 1
+│   │       ├── orientation.html # Student version of Course 2
+│   │       ├── platform.html   # Student version of Course 3
+│   │       └── advanced.html   # Student version of Course 4
+│   ├── resources/              # Supporting resources
+│   │   ├── index.html          # Resources home
+│   │   ├── faq.html            # Frequently asked questions
+│   │   ├── prompt-library.html # Curated prompt templates
+│   │   └── templates.html      # Project templates
+│   ├── sop/
+│   │   └── index.html          # Standard Operating Procedure
+│   ├── toolkit/
+│   │   └── index.html          # Interactive EDD Toolkit
+│   ├── css/
+│   │   └── style.css           # Site styles
+│   ├── pdf/                    # Downloadable PDFs
+│   └── templates/              # Markdown templates
+├── LICENSE                     # MIT License
 ├── README.md
-└── SECURITY.md       # Security and classification policy
+└── SECURITY.md                 # Security and classification policy
 ```
 
 ## Contributing

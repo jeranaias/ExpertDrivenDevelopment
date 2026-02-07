@@ -19,7 +19,7 @@
                 <span class="site-brand__mark"></span>
                 Expert-Driven Development
             </a>
-            <nav aria-label="Main navigation">
+            <nav aria-label="Primary navigation">
                 <ul class="nav-list">
                     <li><a href="../">Home</a></li>
                     <li><a href="../courses/">Courses</a></li>
@@ -108,23 +108,6 @@
                         </div>
                     </div>
 
-                    <!-- PDF Downloads -->
-                    <div class="card">
-                        <span class="card__tag">Documents</span>
-                        <h2 class="card__title"><a href="../pdf/">PDF Downloads</a></h2>
-                        <p class="card__desc">Full PDF versions of the Expert-Driven Development SOP and Training Curricula for offline reference, printing, or distribution to your command.</p>
-                        <div class="card__meta">
-                            <dl>
-                                <dt>Available</dt>
-                                <dd>SOP v5, Training Curricula v5</dd>
-                            </dl>
-                        </div>
-                        <div class="card__footer">
-                            <a href="../pdf/SOP_Expert_Driven_Development_v5.pdf" class="btn btn--ghost btn--sm">SOP PDF</a>
-                            <a href="../pdf/TRAINING_CURRICULA_v5.pdf" class="btn btn--ghost btn--sm">Curricula PDF</a>
-                        </div>
-                    </div>
-
                 </div>
 
                 <!-- Quick-start callout -->
@@ -184,6 +167,14 @@
                     toggle.setAttribute('aria-expanded', String(!expanded));
                     mobileNav.classList.toggle('is-open');
                 });
+                // Close mobile nav when clicking a link
+                var navLinks = mobileNav.querySelectorAll('a');
+                for (var i = 0; i < navLinks.length; i++) {
+                    navLinks[i].addEventListener('click', function() {
+                        toggle.setAttribute('aria-expanded', 'false');
+                        mobileNav.classList.remove('is-open');
+                    });
+                }
             }
         })();
     </script>
