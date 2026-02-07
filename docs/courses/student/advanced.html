@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student version of Course 4: Advanced Workshop — frontier mapping, multi-component builds, verification protocols, debugging practice, and teaching others.">
+    <title>Advanced Workshop (Student) | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="site-wrapper">
+
+    <!-- Skip to content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Site Header -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../" class="active">Courses</a></li>
+                    <li><a href="../../sop/">SOP</a></li>
+                    <li><a href="../../toolkit/">Toolkit</a></li>
+                    <li><a href="../../resources/">Resources</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../" class="active">Courses</a></li>
+            <li><a href="../../sop/">SOP</a></li>
+            <li><a href="../../toolkit/">Toolkit</a></li>
+            <li><a href="../../resources/">Resources</a></li>
+            <li><a href="../../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../">Courses</a></li>
+                    <li><a href="./">Student Courses</a></li>
+                    <li aria-current="page">Advanced Workshop</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Advanced Workshop</h1>
+            <p class="page-header__desc">
+                Move from individual capability to organizational capability. Map the frontier
+                for your domain, build verification protocols, practice debugging, and learn to
+                teach others.
+            </p>
+            <div class="mt-lg">
+                <span class="badge">Elective</span>
+                <span class="badge">4 Hours</span>
+                <span class="badge badge--gold">Experienced Builders</span>
+            </div>
+            <p class="mt-lg"><strong>Prerequisite:</strong> At least one deployed tool</p>
+            <p class="mt-sm"><a href="../advanced.html">Instructor Guide</a></p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content" class="site-main">
+        <div class="container">
+            <div class="page-layout page-layout--sidebar">
+
+                <!-- Sidebar / Table of Contents -->
+                <aside class="sidebar sidebar--sticky" aria-label="Table of contents">
+                    <nav class="toc">
+                        <h2 class="toc__title">On This Page</h2>
+                        <ul class="toc__list">
+                            <li><a href="#overview">Overview &amp; Learning Objectives</a></li>
+                            <li><a href="#frontier-mapping">Module 1: Frontier Mapping for Your Domain</a></li>
+                            <li><a href="#complex-build">Module 2: Complex Build &mdash; Multi-Component System</a></li>
+                            <li><a href="#verification">Module 3: Verification Protocols and QA</a></li>
+                            <li><a href="#debugging">Module 4: Debugging Practice</a></li>
+                            <li><a href="#teaching-others">Module 5: Teaching Others &mdash; The 201 Multiplier</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <!-- Page Content -->
+                <div class="page-content">
+
+                    <!-- Overview & Learning Objectives -->
+                    <section id="overview">
+                        <h2>Overview &amp; Learning Objectives</h2>
+
+                        <p>
+                            This workshop takes you beyond building individual tools and into the practices
+                            that make an entire section more capable. By the end of this course, you will be
+                            able to:
+                        </p>
+
+                        <ul>
+                            <li>Map the frontier for your specific domain</li>
+                            <li>Build verification protocols for AI-generated output</li>
+                            <li>Practice debugging complex systems</li>
+                            <li>Learn to teach the 201 skills to others</li>
+                        </ul>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Before You Start</h3>
+                            <p>
+                                You should have at least one deployed tool before starting this course.
+                                The exercises assume hands-on experience building and maintaining an
+                                AI-assisted workflow or application. If you have not yet completed a build,
+                                start with <a href="orientation.html">Builder Orientation</a> and
+                                <a href="platform.html">Platform Training</a> first.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Module 1: Frontier Mapping for Your Domain -->
+                    <section id="frontier-mapping">
+                        <h2>Module 1: Frontier Mapping for Your Domain</h2>
+                        <p><strong>Duration:</strong> 45 minutes</p>
+
+                        <p>
+                            The frontier is the boundary between what AI handles well and where it fails.
+                            Your job in this module is to create a detailed map of that boundary for your
+                            specific role and domain. This is the most important artifact you will produce
+                            in this course.
+                        </p>
+
+                        <h3>Example: Filled Frontier Map (1st Bn, 99th Marines)</h3>
+                        <p>
+                            Study this completed map to understand the level of specificity expected. Each
+                            row covers a category of work, and each column captures where AI sits today
+                            relative to that category.
+                        </p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Inside Frontier (AI Handles)</th>
+                                        <th scope="col">Outside Frontier (AI Fails)</th>
+                                        <th scope="col">Moving Frontier (Check Periodically)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Document generation</td>
+                                        <td>Correspondence drafts, counseling statement templates, award write-ups, standard memo formatting</td>
+                                        <td>Documents requiring specific institutional knowledge (unit SOPs, local policy interpretation), anything needing exact regulation quotes</td>
+                                        <td>Fitness report narratives (improving rapidly), legal review summaries</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Data analysis</td>
+                                        <td>Trend identification in structured data, summarizing large datasets, creating charts/dashboards, anomaly flagging</td>
+                                        <td>Interpreting data in operational context (why readiness dropped), cross-referencing classified and unclassified sources</td>
+                                        <td>Predictive analysis (retention modeling, maintenance forecasting)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Process automation</td>
+                                        <td>Simple approval routing, email notifications, calendar scheduling, status tracking</td>
+                                        <td>Multi-system integrations with legacy databases, processes requiring human judgment calls (hardship determinations)</td>
+                                        <td>Complex conditional workflows (getting better with clear business rules)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Reference lookup</td>
+                                        <td>Finding relevant MCOs/NAVMCs, summarizing policy documents, comparing regulation versions</td>
+                                        <td>Interpreting how regulations apply to specific edge cases, resolving conflicting guidance between orders</td>
+                                        <td>Policy applicability questions (models improving but still unreliable for authoritative interpretation)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Training development</td>
+                                        <td>Lesson plan outlines, quiz/assessment generation, scenario creation, slide deck structure</td>
+                                        <td>Evaluating training effectiveness, adapting content for specific MOS requirements, determining doctrinal accuracy</td>
+                                        <td>Full lesson plan generation with appropriate examples (quality varies significantly)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Why This Map Matters</h3>
+                            <p>
+                                This map is the most valuable artifact you will create. The BCG-Harvard study
+                                found that workers who applied AI beyond the frontier without knowing it
+                                performed <strong>19 percentage points worse</strong> than those without AI.
+                                Knowing where the boundary is prevents you from trusting AI in places where it
+                                will fail silently.
+                            </p>
+                        </div>
+
+                        <h3>Blank Frontier Map Template</h3>
+                        <p>
+                            Use this template to build your own frontier map. Replace the placeholder rows
+                            with the actual categories of work in your role.
+                        </p>
+
+                        <div class="template-display">
+                            <h4>Your Frontier Map</h4>
+                            <div class="table-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Category</th>
+                                            <th scope="col">Inside Frontier</th>
+                                            <th scope="col">Outside Frontier</th>
+                                            <th scope="col">Moving Frontier</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>(your domain area 1)</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>(your domain area 2)</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>(your domain area 3)</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>(your domain area 4)</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>(your domain area 5)</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <h3>Exercise: Fill In Your Frontier Map</h3>
+                        <p>
+                            Using the blank template above, fill in your frontier map for your specific
+                            role and domain. Be as specific as possible &mdash; generic entries like
+                            &ldquo;writing&rdquo; are less useful than &ldquo;counseling statement
+                            drafts&rdquo; or &ldquo;award narratives.&rdquo;
+                        </p>
+
+                        <details>
+                            <summary><strong>Self-Check: Is Your Map Complete?</strong></summary>
+                            <p>
+                                Does every row have at least one entry in each column? If the
+                                &ldquo;Outside Frontier&rdquo; column is empty, you may be overestimating
+                                AI capabilities. Every domain has tasks where AI fails &mdash; identifying
+                                those tasks is the entire point of this exercise.
+                            </p>
+                        </details>
+                    </section>
+
+                    <!-- Module 2: Complex Build — Multi-Component System -->
+                    <section id="complex-build">
+                        <h2>Module 2: Complex Build &mdash; Multi-Component System</h2>
+                        <p><strong>Duration:</strong> 60 minutes</p>
+
+                        <p>
+                            In this module you will build a system that requires switching between centaur
+                            and cyborg modes across multiple phases. The key skill is conscious,
+                            deliberate mode-switching &mdash; choosing the right work pattern for each
+                            component based on what that component demands.
+                        </p>
+
+                        <h3>Example: Tutoring Management System (1st Bn, 99th Marines)</h3>
+                        <p>
+                            This system tracks tutoring sessions for the Language and Culture Program.
+                            It has three components, each requiring a different work mode:
+                        </p>
+
+                        <ul>
+                            <li>
+                                <strong>Data backend</strong> &mdash; Centaur mode (accuracy-critical;
+                                schema design must be correct before anything else is built)
+                            </li>
+                            <li>
+                                <strong>Input interface</strong> &mdash; Cyborg mode (iterative, fluid
+                                collaboration with rapid back-and-forth)
+                            </li>
+                            <li>
+                                <strong>Automated reporting dashboard</strong> &mdash; Centaur mode
+                                (accuracy-critical; numbers must be right)
+                            </li>
+                        </ul>
+
+                        <!-- Phase 1: Data Backend -->
+                        <h3>Phase 1: Data Backend (Centaur Mode)</h3>
+                        <p>
+                            <strong>Why centaur mode:</strong> The data model is the foundation. If the
+                            schema is wrong, every component built on top of it will inherit the error.
+                            You define the requirements precisely, AI generates the design, and you verify
+                            before moving on.
+                        </p>
+
+                        <div class="prompt-block">
+                            <p class="prompt-block__label">Prompt &mdash; Data Backend</p>
+                            <pre>Design a SharePoint data model for a tutoring management system. Tables needed:
+Students (name, rank, unit, language, proficiency level), Tutors (name, rank,
+languages, availability), Sessions (student, tutor, date, time, duration, topic,
+notes), and Reports (student, period, hours completed, progress notes).
+Define the relationships between tables and required columns.</pre>
+                        </div>
+
+                        <p><strong>Verification at the phase boundary:</strong></p>
+                        <ul>
+                            <li>Does the output match your design requirements?</li>
+                            <li>Are the data types correct for each column?</li>
+                            <li>Do the relationships between tables make sense?</li>
+                            <li>Are there any missing columns you will need later?</li>
+                        </ul>
+
+                        <details>
+                            <summary><strong>Self-Check: Phase 1</strong></summary>
+                            <p>
+                                Before moving to the next phase, verify: Does the output match your design?
+                                Are the data types correct? Do the relationships make sense? If you proceed
+                                with a flawed schema, you will have to redo the input interface and dashboard
+                                as well.
+                            </p>
+                        </details>
+
+                        <!-- Phase 2: Input Interface -->
+                        <h3>Phase 2: Input Interface (Cyborg Mode)</h3>
+                        <p>
+                            <strong>Why cyborg mode:</strong> The input form is user-facing and benefits
+                            from rapid iteration. You work alongside AI in a fluid back-and-forth,
+                            adjusting layout, field order, and validation rules as you go.
+                        </p>
+
+                        <div class="prompt-block">
+                            <p class="prompt-block__label">Prompt &mdash; Input Interface</p>
+                            <pre>Build a Power Apps form for logging tutoring sessions. It should: pull student
+and tutor names from the existing lists, auto-fill the date and time, have a
+dropdown for topic area, and a notes field. Make it mobile-friendly so tutors
+can log sessions from their phones.</pre>
+                        </div>
+
+                        <p><strong>Verification at the phase boundary:</strong></p>
+                        <ul>
+                            <li>Does the form pull from the correct data sources?</li>
+                            <li>Do the dropdowns reflect the actual lists from Phase 1?</li>
+                            <li>Does the auto-fill logic work correctly?</li>
+                            <li>Is the layout usable on a mobile device?</li>
+                        </ul>
+
+                        <details>
+                            <summary><strong>Self-Check: Phase 2</strong></summary>
+                            <p>
+                                Before moving to the next phase, verify: Does the output match your design?
+                                Are the data connections pointing to the right tables? Does the form write
+                                data in the format the reporting dashboard will need?
+                            </p>
+                        </details>
+
+                        <!-- Phase 3: Reporting Dashboard -->
+                        <h3>Phase 3: Automated Reporting Dashboard (Centaur Mode)</h3>
+                        <p>
+                            <strong>Why centaur mode:</strong> Dashboard numbers will be briefed to
+                            leadership. Incorrect metrics erode trust in the entire system. You specify
+                            exactly what metrics are needed, AI generates the dashboard, and you verify
+                            every number against source data.
+                        </p>
+
+                        <div class="prompt-block">
+                            <p class="prompt-block__label">Prompt &mdash; Dashboard</p>
+                            <pre>Create a Power BI dashboard that shows: total tutoring hours this month by
+student, tutor utilization rates, most common topic areas, and students who
+haven't attended sessions in 2+ weeks. Include a filter for date range and
+language.</pre>
+                        </div>
+
+                        <p><strong>Verification at the phase boundary:</strong></p>
+                        <ul>
+                            <li>Do the totals match a manual count of the source data?</li>
+                            <li>Are the utilization rate calculations correct?</li>
+                            <li>Does the &ldquo;2+ weeks absent&rdquo; filter use the right date logic?</li>
+                            <li>Do filters work as expected?</li>
+                        </ul>
+
+                        <details>
+                            <summary><strong>Self-Check: Phase 3</strong></summary>
+                            <p>
+                                Before calling this system complete, verify: Does the output match your
+                                design? Are the data types correct? Do the relationships make sense? Spot-check
+                                at least three data points manually against the source lists.
+                            </p>
+                        </details>
+                    </section>
+
+                    <!-- Module 3: Verification Protocols and QA -->
+                    <section id="verification">
+                        <h2>Module 3: Verification Protocols and QA</h2>
+                        <p><strong>Duration:</strong> 45 minutes</p>
+
+                        <p>
+                            Every AI-generated output needs a verification step. This module gives you a
+                            structured QA checklist and a timed exercise to practice using it.
+                        </p>
+
+                        <h3>QA Checklist</h3>
+                        <ol>
+                            <li>
+                                <strong>Source verification</strong> &mdash; AI fabricates references.
+                                Every citation, regulation number, and URL must be independently verified.
+                            </li>
+                            <li>
+                                <strong>Data accuracy</strong> &mdash; Numbers, dates, names, and quantities
+                                must be checked against source data.
+                            </li>
+                            <li>
+                                <strong>Logic check</strong> &mdash; Does the reasoning hold? Are conclusions
+                                supported by the premises?
+                            </li>
+                            <li>
+                                <strong>Format compliance</strong> &mdash; Does the output match required formats,
+                                templates, and standards?
+                            </li>
+                            <li>
+                                <strong>Domain review</strong> &mdash; Does this pass the smell test for someone
+                                who knows this domain?
+                            </li>
+                        </ol>
+
+                        <h3>Exercise: Timed QA Review</h3>
+                        <p>
+                            The following document was generated by AI. It contains <strong>five planted
+                            errors</strong>. Time yourself. Use the QA checklist above to find all five
+                            issues in this document.
+                        </p>
+
+                        <div class="template-display">
+                            <h4>AI-Generated SOP Excerpt &mdash; QA Timed Exercise</h4>
+                            <p><strong>Instructions:</strong> Time yourself. Use the QA checklist above to find all five planted issues in this document.</p>
+                            <hr>
+
+                            <p>
+                                <strong>STANDARD OPERATING PROCEDURE</strong><br>
+                                Marine Corps Detachment, 99th Training Group<br>
+                                <strong>Subject:</strong> Unit Check-In / Check-Out Procedure<br>
+                                <strong>Reference:</strong> (a) MCO 1000.6B, Individual Records Administration<br>
+                                (b) NAVMC 11800/4 (Rev 03-2025), Check-In/Check-Out Sheet
+                            </p>
+
+                            <p>
+                                <strong>1. Purpose.</strong> To establish standardized procedures for all personnel
+                                checking in to and checking out of Marine Corps Detachment, 99th Training Group.
+                                All personnel shall complete check-in within 72 hours of reporting aboard.
+                            </p>
+
+                            <p>
+                                <strong>2. Scope.</strong> This SOP applies to all Marines, Sailors, and civilian
+                                personnel assigned to or transferring from the Detachment.
+                            </p>
+
+                            <p>
+                                <strong>3. Procedure &mdash; Check-In.</strong> Personnel reporting aboard shall
+                                complete the following steps in order:
+                            </p>
+
+                            <p>
+                                Step 1: Report to the Officer of the Day (OOD) with original orders and ten
+                                copies of PCS orders.<br>
+                                Step 2: Obtain a check-in sheet per reference (b).<br>
+                                Step 3: Receive unit orientation brief from S-1 covering unit organization,
+                                key personnel, and local policies.<br>
+                                Step 4: Report to assigned section SNCOIC/OIC for introduction and initial
+                                task assignment.<br>
+                                5. Report to S-1 for initial in-processing, including service record book
+                                review and page 11 entry.<br>
+                                6. Complete remaining check-in sheet signatures (S-3, S-4, Medical, Dental,
+                                IPAC) within 48 hours of reporting.
+                            </p>
+
+                            <p>
+                                <strong>4. Procedure &mdash; Check-Out.</strong> Personnel transferring from
+                                the unit shall initiate check-out procedures no later than 10 working days
+                                prior to the date of detachment.
+                            </p>
+                        </div>
+
+                        <details>
+                            <summary><strong>Answer Key &mdash; Five Planted Errors</strong></summary>
+                            <ol>
+                                <li>
+                                    <strong>Fabricated Reference #1:</strong> &ldquo;MCO 1000.6B&rdquo; is cited as
+                                    the governing order for check-in procedures. This MCO does not exist.
+                                    AI-generated regulation numbers must always be independently verified against
+                                    the official Marine Corps Publications System.
+                                </li>
+                                <li>
+                                    <strong>Fabricated Reference #2:</strong> &ldquo;NAVMC 11800/4 (Rev 03-2025)&rdquo;
+                                    is cited as the check-in/check-out form. This form number is fabricated. AI
+                                    frequently generates plausible-sounding form numbers that do not correspond to
+                                    real NAVMC forms.
+                                </li>
+                                <li>
+                                    <strong>Data Accuracy Error &mdash; Contradictory Timelines:</strong> Paragraph 1
+                                    states check-in must be completed &ldquo;within 72 hours of reporting aboard,&rdquo;
+                                    but Step 6 states remaining signatures must be completed &ldquo;within 48 hours of
+                                    reporting.&rdquo; These timelines contradict each other. AI often introduces subtle
+                                    inconsistencies between sections of longer documents.
+                                </li>
+                                <li>
+                                    <strong>Logic Error &mdash; Steps Out of Order:</strong> Step 3 has the Marine
+                                    receiving a &ldquo;unit orientation brief from S-1,&rdquo; but Step 5 has the Marine
+                                    reporting &ldquo;to S-1 for initial in-processing.&rdquo; Logically, you would
+                                    in-process at S-1 (Step 5) before receiving the orientation brief (Step 3). The
+                                    S-1 steps are reversed.
+                                </li>
+                                <li>
+                                    <strong>Format Error &mdash; Inconsistent Numbering:</strong> Steps 1 through 4
+                                    use the &ldquo;Step 1:&rdquo; format, but the procedure then switches to a bare
+                                    &ldquo;5.&rdquo; and &ldquo;6.&rdquo; format midway through. AI frequently loses
+                                    formatting consistency in longer documents, especially when generating numbered
+                                    procedures.
+                                </li>
+                            </ol>
+                        </details>
+
+                        <details>
+                            <summary><strong>Self-Check: How Long Did It Take?</strong></summary>
+                            <p>
+                                How long did it take you to find all five errors? Now compare that to how long
+                                it would take to write this SOP from scratch. The difference is your time
+                                savings &mdash; and it demonstrates why the QA step is where value is created.
+                                AI generates the draft in seconds; your expertise catches what it gets wrong.
+                            </p>
+                        </details>
+                    </section>
+
+                    <!-- Module 4: Debugging Practice -->
+                    <section id="debugging">
+                        <h2>Module 4: Debugging Practice</h2>
+                        <p><strong>Duration:</strong> 45 minutes</p>
+
+                        <p>
+                            Debugging is a core skill for anyone building with AI. In this module you will
+                            work through three scenarios individually, diagnosing root causes and identifying
+                            fixes. Each scenario represents a common failure pattern in AI-assisted builds.
+                        </p>
+
+                        <!-- Scenario 1 -->
+                        <h3>Scenario 1: Approval Flow Sends to the Wrong Person</h3>
+                        <p>
+                            A Power Automate flow is supposed to route purchase requests based on dollar
+                            amount. Requests under $2,500 go to the Department Head for approval. Requests
+                            $2,500 and above go to the Commanding Officer.
+                        </p>
+
+                        <div class="code-block">
+                            <p class="code-block__label">Symptom</p>
+                            <pre>Request for $1,500 office supplies submitted by Cpl Torres.
+Expected: Routed to Department Head (Maj Williams).
+Actual: Routed to CO (Col Richardson).
+
+Request for $2,500 equipment purchase submitted by SSgt Park.
+Expected: Routed to CO (Col Richardson).
+Actual: Routed to CO (Col Richardson). [Correct]
+
+All requests at $2,500 exactly are handled correctly. Only requests BELOW
+$2,500 are being sent to the wrong approver.</pre>
+                        </div>
+
+                        <p><strong>Diagnosis guide:</strong></p>
+                        <ol>
+                            <li>What is the condition that controls routing?</li>
+                            <li>If requests at exactly $2,500 go to the CO correctly, but requests below $2,500 also go to the CO, what comparison operator would cause this?</li>
+                            <li>What should the condition be instead?</li>
+                        </ol>
+
+                        <details>
+                            <summary><strong>Self-Check: Root Cause and Fix</strong></summary>
+                            <p>
+                                <strong>Root cause:</strong> The condition logic uses <code>&gt;</code> (greater than)
+                                instead of <code>&gt;=</code> (greater than or equal to) for the CO threshold, or
+                                equivalently, the Department Head condition uses <code>&lt;</code> instead of
+                                <code>&lt;=</code>. Because the threshold check for &ldquo;send to Department Head&rdquo;
+                                is <code>amount &lt; 2500</code> but was written as <code>amount &gt; 2500</code> routing
+                                to CO, every amount that is not <code>&gt; 2500</code> falls through &mdash; except the
+                                logic is inverted: the condition likely reads &ldquo;if amount &gt;= 0, send to CO&rdquo;
+                                as a catch-all because the <code>&lt; 2500</code> branch was written as
+                                <code>&gt; 2500</code>.
+                            </p>
+                            <p>
+                                <strong>Fix:</strong> Change the condition to: &ldquo;If amount is greater than or equal
+                                to 2500, route to CO. Otherwise, route to Department Head.&rdquo; Verify by testing with
+                                values at $2,499, $2,500, and $2,501.
+                            </p>
+                        </details>
+
+                        <!-- Scenario 2 -->
+                        <h3>Scenario 2: Gallery View Shows All Items Instead of Filtered</h3>
+                        <p>
+                            A Power App has a gallery that should display only overdue items &mdash;
+                            items whose due date has passed and whose status is not &ldquo;Complete.&rdquo;
+                        </p>
+
+                        <div class="code-block">
+                            <p class="code-block__label">Symptom</p>
+                            <pre>The "Overdue Items" gallery shows ALL items from the task list,
+including items that are marked "Complete" and items whose due date
+is in the future.
+
+Total items in list: 47
+Items actually overdue: 12
+Items displayed in gallery: 47</pre>
+                        </div>
+
+                        <p><strong>Diagnosis guide:</strong></p>
+                        <ol>
+                            <li>What filter formula is the gallery using? Check the <code>Items</code> property of the gallery.</li>
+                            <li>Is the filter comparing dates correctly? (Common issue: comparing a date value to a text string.)</li>
+                            <li>Is the status check using the correct column name and value? (Common issue: column display name vs. internal name.)</li>
+                        </ol>
+
+                        <details>
+                            <summary><strong>Self-Check: Root Cause and Fix</strong></summary>
+                            <p>
+                                <strong>Root cause:</strong> The filter formula is likely malformed or not applied at all.
+                                Common causes include: (1) the gallery <code>Items</code> property points to the raw data
+                                source without a <code>Filter()</code> function, (2) the date comparison uses a text
+                                string like <code>"Today"</code> instead of the <code>Today()</code> function, or (3) the
+                                status column is referenced by its display name (e.g., &ldquo;Status&rdquo;) when Power
+                                Apps requires the internal name (e.g., &ldquo;OData_Status&rdquo;).
+                            </p>
+                            <p>
+                                <strong>Fix:</strong> Set the gallery Items property to:
+                                <code>Filter(TaskList, DueDate &lt; Today() &amp;&amp; Status.Value &lt;&gt; "Complete")</code>.
+                                Verify by checking the displayed count against a manual count of overdue, incomplete items.
+                            </p>
+                        </details>
+
+                        <!-- Scenario 3 -->
+                        <h3>Scenario 3: Dashboard Numbers Don&rsquo;t Match Source Data</h3>
+                        <p>
+                            A Power BI dashboard reports completion percentage for a training tracker.
+                            Leadership questions the numbers because they do not match a manual count.
+                        </p>
+
+                        <div class="code-block">
+                            <p class="code-block__label">Symptom</p>
+                            <pre>Dashboard shows: 85% training completion rate.
+Manual count shows: 67% training completion rate.
+
+Source data: 47 Marines, 12 training events each = 564 total slots.
+Dashboard appears to be counting something differently than
+"completed slots / total slots."</pre>
+                        </div>
+
+                        <p><strong>Diagnosis guide:</strong></p>
+                        <ol>
+                            <li>How is the dashboard calculating &ldquo;completion rate&rdquo;? Is it counting rows vs. distinct values?</li>
+                            <li>If a Marine completed 10 of 12 events, does the dashboard count that Marine as &ldquo;85% complete&rdquo; or as &ldquo;1 complete Marine&rdquo;?</li>
+                            <li>Are there duplicate rows in the source data inflating the count?</li>
+                        </ol>
+
+                        <details>
+                            <summary><strong>Self-Check: Root Cause and Fix</strong></summary>
+                            <p>
+                                <strong>Root cause:</strong> The counting methodology differs between the dashboard and
+                                the manual count. The most likely cause is that the dashboard is counting
+                                <strong>rows</strong> (each training completion record) rather than
+                                <strong>distinct values</strong> (unique Marine-event combinations). If some Marines have
+                                duplicate completion records (e.g., re-certifications, data entry errors), the row count
+                                is inflated. Alternatively, the dashboard may be calculating the average completion rate
+                                per Marine (averaging individual percentages) rather than the overall rate (total completed
+                                slots divided by total slots), which produces a different number.
+                            </p>
+                            <p>
+                                <strong>Fix:</strong> Align the calculation method. Use
+                                <code>DISTINCTCOUNT</code> instead of <code>COUNT</code> to avoid duplicates. Ensure the
+                                formula is: total completed distinct slots / total expected slots. Verify by manually
+                                calculating the rate for a small subset (e.g., one platoon) and comparing.
+                            </p>
+                        </details>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Key Insight</h3>
+                            <p>
+                                Every debugging session teaches you something about the frontier. When you find
+                                a bug, ask: &ldquo;Is this a frontier issue (AI cannot do this reliably) or a
+                                context issue (I did not give AI enough information)?&rdquo; Document the answer.
+                                Over time, your frontier map becomes more precise and your prompts become more
+                                effective.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Module 5: Teaching Others — The 201 Multiplier -->
+                    <section id="teaching-others">
+                        <h2>Module 5: Teaching Others &mdash; The 201 Multiplier</h2>
+                        <p><strong>Duration:</strong> 30 minutes</p>
+
+                        <p>
+                            Individual AI capability is valuable. Organizational AI capability is
+                            transformational. This module covers how to spread 201 skills across your
+                            section &mdash; and how to do it responsibly.
+                        </p>
+
+                        <h3>The Permission Gap</h3>
+                        <p>
+                            Mollick&rsquo;s research shows workers are already using AI but hiding it.
+                            They are worried about organizational reaction &mdash; will leadership see it
+                            as cheating? Will they get in trouble? This creates a shadow AI culture where
+                            best practices are not shared, mistakes are repeated, and no one benefits from
+                            anyone else&rsquo;s learning.
+                        </p>
+                        <p>
+                            The fix is explicit permission and structure. When leadership endorses AI use
+                            through a framework like EDD, people stop hiding and start sharing.
+                        </p>
+
+                        <h3>The Apprentice Problem</h3>
+                        <p>
+                            Entry-level job postings dropped <strong>35% from 2023 to 2025</strong>. AI is
+                            automating the routine tasks that juniors traditionally learned on. If a junior
+                            Marine never manually writes a counseling statement because AI generates it, how
+                            do they develop the judgment to know when the AI-generated version is wrong?
+                        </p>
+                        <p>
+                            This is not a reason to stop using AI. It is a reason to be deliberate about how
+                            juniors interact with it.
+                        </p>
+
+                        <h3>Protocol for Junior Marines Using AI</h3>
+                        <ul>
+                            <li>
+                                <strong>Require review and explanation</strong> &mdash; Juniors must review AI output
+                                and explain WHY it is correct or incorrect. The explanation builds the judgment that
+                                unreviewed use would skip.
+                            </li>
+                            <li>
+                                <strong>Periodically work without AI</strong> &mdash; Key tasks should periodically
+                                be done from scratch to build foundational skills. A Marine who has never written a
+                                memo manually cannot evaluate an AI-generated memo.
+                            </li>
+                            <li>
+                                <strong>Use AI output as a teaching tool</strong> &mdash; Give juniors AI-generated
+                                products and have them find the problems. This builds critical evaluation skills
+                                faster than starting from blank.
+                            </li>
+                            <li>
+                                <strong>Rotate QA review</strong> &mdash; Assign juniors to the QA review step so
+                                they develop quality judgment through repeated exposure to both good and flawed output.
+                            </li>
+                        </ul>
+
+                        <h3>Exercise: The 60-Second Teach</h3>
+                        <p>
+                            Pick one 201 skill you have used in your own work. Write a 60-second explanation
+                            that someone new to AI could follow. Use your own real example &mdash; not a
+                            hypothetical.
+                        </p>
+
+                        <div class="template-display">
+                            <h4>60-Second Teach Template</h4>
+                            <div class="table-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Field</th>
+                                            <th scope="col">Your Content</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Skill</strong></td>
+                                            <td>(which 201 skill are you teaching?)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Your Example</strong></td>
+                                            <td>(a real task where you used this skill)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Key Insight</strong></td>
+                                            <td>(the one thing that made the difference)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Common Mistake</strong></td>
+                                            <td>(what goes wrong when people skip this skill)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <h3>Deliverable: Workflow Playbook</h3>
+                        <p>
+                            Your final deliverable is a one-page playbook for one AI-integrated workflow
+                            from your actual job. Study the completed example below, then create your own
+                            using the blank template.
+                        </p>
+
+                        <h4>Completed Example: Weekly Training Schedule Publication</h4>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Field</th>
+                                        <th scope="col">Content</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Task</strong></td>
+                                        <td>Weekly training schedule publication for the section</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Frequency</strong></td>
+                                        <td>Weekly &mdash; every Thursday by 1600</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Mode</strong></td>
+                                        <td>Cyborg (continuous back-and-forth refinement)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Step 1</strong></td>
+                                        <td><strong>Human:</strong> Pull next week&rsquo;s events from training calendar, OPORD, and any new taskings &mdash; <em>Human Only</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Step 2</strong></td>
+                                        <td><strong>AI:</strong> Draft the schedule in standard weekly format with times, locations, and uniform requirements &mdash; <em>AI generates, Human reviews</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Step 3</strong></td>
+                                        <td><strong>Human:</strong> Cross-reference against range bookings, vehicle requests, and instructor availability &mdash; <em>Human Only</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Step 4</strong></td>
+                                        <td><strong>AI:</strong> Format conflicts as a decision matrix: &ldquo;Event A conflicts with Event B at 0900. Options: move A to 1300, move B to Tuesday, or split the section.&rdquo; &mdash; <em>AI generates options, Human decides</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Step 5</strong></td>
+                                        <td><strong>Human:</strong> Make final decisions on conflicts, add section leader notes &mdash; <em>Human Only</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Step 6</strong></td>
+                                        <td><strong>AI:</strong> Generate the final formatted schedule with all corrections applied, ready for distribution &mdash; <em>AI generates, Human approves</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Verification Checklist</strong></td>
+                                        <td>All events have confirmed locations. All times are in 24-hour format. No double-bookings remain. Uniform for each event is specified. POC listed for each event.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Known Frontier Issues</strong></td>
+                                        <td>AI sometimes invents room numbers that don&rsquo;t exist on base. AI cannot verify range availability &mdash; must be checked manually. AI occasionally uses 12-hour time format even when told to use 24-hour.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Time Savings</strong></td>
+                                        <td>Without AI: ~3 hours (gathering info, formatting, resolving conflicts manually). With AI: ~45 minutes (human gathers info, AI formats and generates options).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Junior Development Note</strong></td>
+                                        <td>Rotate schedule duty among junior Marines weekly. Require the Marine to review AI output and brief back why each event is scheduled (builds planning judgment). Monthly: have one schedule created entirely without AI assistance to maintain baseline skill.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4>Blank Workflow Playbook Template</h4>
+                        <div class="template-display">
+                            <h4>Your Workflow Playbook</h4>
+                            <div class="table-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Field</th>
+                                            <th scope="col">Content</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Task</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Frequency</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mode</td>
+                                            <td>Centaur or Cyborg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Steps</td>
+                                            <td>Step-by-step with Human/AI labels</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Verification Checklist</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Known Frontier Issues</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Time Savings</td>
+                                            <td>Without AI vs. with AI</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Junior Development Note</td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="callout callout--success">
+                            <h3 class="callout__title">Assignment</h3>
+                            <ul>
+                                <li>Complete your frontier map (Module 1) with at least five domain categories</li>
+                                <li>Create your workflow playbook for one recurring task from your actual job</li>
+                                <li>Teach one 201 skill to a colleague this week using your 60-second teach</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-bottom">
+                <span>Expert-Driven Development</span>
+                <span>UNCLASSIFIED</span>
+                <span>MIT License</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile navigation toggle
+        (function() {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function() {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>

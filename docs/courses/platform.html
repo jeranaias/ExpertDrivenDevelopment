@@ -71,6 +71,7 @@
             <p class="mt-lg">
                 <strong>Prerequisite:</strong> Builder Orientation, M365 account access
             </p>
+            <p><a href="student/platform.html">View the Student Version</a></p>
         </div>
     </section>
 
@@ -201,6 +202,39 @@
                             an approver is unavailable? Map it all out by hand first.
                         </p>
 
+                        <div class="template-display">
+                            <h4>Filled-In Whiteboard Planning Template &mdash; Request Routing Workflow</h4>
+
+                            <h5>Business Rules</h5>
+                            <ul>
+                                <li>Requests under $500: Section Leader approves</li>
+                                <li>Requests $500&ndash;$2000: Department Head approves</li>
+                                <li>Requests over $2000: CO approves</li>
+                                <li>All requests require justification memo</li>
+                                <li>Approver has 48 hours to act or request auto-escalates</li>
+                            </ul>
+
+                            <h5>Data Flow</h5>
+                            <p>
+                                Requester submits via Power App form &rarr; SharePoint list &rarr;
+                                Notification to approver &rarr; Approver acts &rarr; Requester notified of decision
+                            </p>
+
+                            <h5>Notifications</h5>
+                            <ul>
+                                <li><strong>Requester:</strong> confirmation of submission, approval/denial notification</li>
+                                <li><strong>Approver:</strong> new request alert, 24-hour reminder if not acted on</li>
+                                <li><strong>Admin:</strong> weekly summary of all requests</li>
+                            </ul>
+
+                            <h5>Edge Cases</h5>
+                            <ul>
+                                <li><strong>Approver on leave:</strong> auto-route to alternate</li>
+                                <li><strong>Request withdrawn:</strong> requester can cancel before approval</li>
+                                <li><strong>Duplicate submission:</strong> system checks for matching requests within 24 hours</li>
+                            </ul>
+                        </div>
+
                         <h4>Phase 2 &mdash; AI Builds</h4>
                         <p>
                             Feed the design to AI. Build the Power App form and Power Automate flow based
@@ -305,6 +339,100 @@
                             build, not executing a predetermined plan.
                         </p>
 
+                        <h3>Training Tracker Dashboard Mockup</h3>
+                        <p>This is what the dashboard should look like when built. Use this as the target for the cyborg build:</p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Marine</th>
+                                        <th scope="col">Rank</th>
+                                        <th scope="col">Annual Rifle Qual</th>
+                                        <th scope="col">CBRN Awareness</th>
+                                        <th scope="col">Cyber Awareness</th>
+                                        <th scope="col">PFT/CFT</th>
+                                        <th scope="col">SAPR Training</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Martinez, J.R.</td>
+                                        <td>LCpl</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                        <td>Overdue</td>
+                                        <td>Complete</td>
+                                        <td>Scheduled 15 Mar</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Thompson, A.K.</td>
+                                        <td>Cpl</td>
+                                        <td>Complete</td>
+                                        <td>Overdue</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Williams, D.M.</td>
+                                        <td>PFC</td>
+                                        <td>Scheduled 22 Mar</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                        <td>Overdue</td>
+                                        <td>Complete</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Chen, R.L.</td>
+                                        <td>LCpl</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                        <td>Overdue</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Davis, T.J.</td>
+                                        <td>Sgt</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                        <td>Overdue</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Rodriguez, M.A.</td>
+                                        <td>LCpl</td>
+                                        <td>Overdue</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                        <td>Scheduled 1 Apr</td>
+                                        <td>Complete</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2"><strong>Summary</strong></td>
+                                        <td colspan="5"><strong>67% Current | 17% Overdue | 16% Scheduled</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <div class="template-display">
+                            <h4>Report Output &mdash; S-3 Brief Format</h4>
+                            <p>
+                                As of 06 FEB 2026: Section maintains 67% training currency across five
+                                tracked events. Two critical overdue items require immediate action: LCpl
+                                Martinez Cyber Awareness (overdue 15 days) and Cpl Thompson CBRN Awareness
+                                (overdue 8 days). Section leader has been notified. Three events are scheduled
+                                within 30 days. Recommend prioritizing rifle qualification for PFC Williams
+                                (range date confirmed 22 Mar) and PFT/CFT for LCpl Rodriguez (scheduled 1 Apr).
+                                No systemic compliance gaps identified.
+                            </p>
+                        </div>
+
                         <div class="callout">
                             <h3 class="callout__title">Key Teaching Point</h3>
                             <p>
@@ -366,10 +494,40 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><em>(filled in during session)</em></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>SharePoint list schema design</td>
+                                        <td>Column types, relationships, basic validation rules</td>
+                                        <td>Complex calculated columns with nested IF logic</td>
+                                        <td>Always verify column data types match actual data</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power App form layout</td>
+                                        <td>Basic screens, navigation, standard input controls</td>
+                                        <td>Conditional visibility with 3+ dependencies</td>
+                                        <td>Test every show/hide rule with real data</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Automate flows</td>
+                                        <td>Simple approval flows, email notifications, basic conditions</td>
+                                        <td>Error handling for nested conditions, retry logic</td>
+                                        <td>Test all error paths, not just the happy path</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Data validation formulas</td>
+                                        <td>Required fields, format checks, simple lookups</td>
+                                        <td>Cross-table validation, date range conflicts</td>
+                                        <td>Check edge cases: empty fields, special characters</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dashboard/reporting</td>
+                                        <td>Basic charts, card layouts, simple filters</td>
+                                        <td>Complex DAX measures, row-level security</td>
+                                        <td>Verify numbers against source data manually</td>
+                                    </tr>
+                                    <tr>
+                                        <td>User interface text/labels</td>
+                                        <td>Button labels, headers, help text</td>
+                                        <td>Context-sensitive error messages, domain-specific jargon</td>
+                                        <td>Have an actual user read every message</td>
                                     </tr>
                                 </tbody>
                             </table>

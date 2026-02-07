@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student Course 3: Platform Training - Build three complete tools on Power Platform practicing centaur and cyborg work patterns. Self-paced and companion materials.">
+    <title>Platform Training | Student Courses | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="site-wrapper">
+
+    <!-- Skip to content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Site Header -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../" class="active">Courses</a></li>
+                    <li><a href="../../sop/">SOP</a></li>
+                    <li><a href="../../toolkit/">Toolkit</a></li>
+                    <li><a href="../../resources/">Resources</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../" class="active">Courses</a></li>
+            <li><a href="../../sop/">SOP</a></li>
+            <li><a href="../../toolkit/">Toolkit</a></li>
+            <li><a href="../../resources/">Resources</a></li>
+            <li><a href="../../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../">Courses</a></li>
+                    <li><a href="./">Student Courses</a></li>
+                    <li aria-current="page">Platform Training</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Platform Training</h1>
+            <p class="page-header__desc">
+                Build three complete tools on Power Platform, practicing both centaur and cyborg
+                work patterns. This course works as a self-paced walkthrough or as companion
+                materials during live instruction.
+            </p>
+            <div class="mt-lg">
+                <span class="badge badge--gold">Elective</span>
+                <span class="badge">4 Hours</span>
+                <span class="badge badge--scarlet">Builders</span>
+            </div>
+            <p class="mt-lg">
+                <strong>Prerequisite:</strong> Builder Orientation, M365 account access
+            </p>
+            <p class="mt-sm">
+                <a href="../platform.html">Instructor Guide</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content" class="site-main">
+        <div class="container">
+            <div class="page-layout page-layout--sidebar">
+
+                <!-- Sidebar / Table of Contents -->
+                <aside class="sidebar sidebar--sticky" aria-label="Table of contents">
+                    <nav class="toc">
+                        <h2 class="toc__title">On This Page</h2>
+                        <ul class="toc__list">
+                            <li><a href="#overview">Overview &amp; Learning Objectives</a></li>
+                            <li><a href="#setup-review">Module 1: Setup and Review</a></li>
+                            <li><a href="#build-1">Module 2: Build #1 &mdash; Structured Workflow</a></li>
+                            <li><a href="#reflection">Module 3: Reflection &mdash; What Went Wrong</a></li>
+                            <li><a href="#build-2">Module 4: Build #2 &mdash; Training Tracker</a></li>
+                            <li><a href="#build-3">Module 5: Build #3 &mdash; Your Problem</a></li>
+                            <li><a href="#frontier-map">Module 6: Frontier Map Update</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <!-- Page Content -->
+                <div class="page-content">
+
+                    <!-- Overview & Learning Objectives -->
+                    <section id="overview">
+                        <h2>Overview &amp; Learning Objectives</h2>
+
+                        <p>
+                            By the end of this course, you will be able to:
+                        </p>
+                        <ul>
+                            <li>Build 3 tools using centaur and cyborg work patterns on Power Platform</li>
+                            <li>Practice deliberate mode-switching &mdash; choosing the right pattern for the right problem</li>
+                            <li>Create your first frontier map documenting where AI works well and where it struggles</li>
+                            <li>Apply the full EDD build process from design through verification</li>
+                        </ul>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Before You Begin</h3>
+                            <p>
+                                This page assumes you completed Builder Orientation and attempted your
+                                first build. You should already be familiar with the centaur/cyborg
+                                distinction, the EDD SOP, and basic Power Platform navigation. If any
+                                of that is unfamiliar, go back and complete
+                                <a href="orientation.html">Builder Orientation</a> first.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Module 1: Setup and Review -->
+                    <section id="setup-review">
+                        <h2>Module 1: Setup and Review</h2>
+                        <p><strong>Duration:</strong> 15 minutes</p>
+
+                        <h3>Step 1: Verify Your Access</h3>
+                        <p>
+                            Before building anything, confirm you can reach all three platforms you will
+                            use today. Open each link and verify you can log in:
+                        </p>
+                        <ol>
+                            <li><strong>SharePoint:</strong> Navigate to your unit SharePoint site and confirm you can create a new list</li>
+                            <li><strong>Power Apps:</strong> Go to <code>make.powerapps.com</code> and verify you see the Home screen</li>
+                            <li><strong>Power Automate:</strong> Go to <code>make.powerautomate.com</code> and verify you can create a new flow</li>
+                        </ol>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Access Problems?</h3>
+                            <p>
+                                If you cannot log in to any of these platforms, contact your IT support
+                                before proceeding. You will need all three for every build in this course.
+                                Do not skip this step &mdash; resolving access issues during a build wastes
+                                significant time.
+                            </p>
+                        </div>
+
+                        <h3>Step 2: Centaur vs. Cyborg Review</h3>
+                        <p>
+                            You learned these two patterns in Builder Orientation. Here is a quick
+                            reference you will use throughout the session:
+                        </p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Pattern</th>
+                                        <th scope="col">How It Works</th>
+                                        <th scope="col">Best For</th>
+                                        <th scope="col">Key Risk</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Centaur</strong></td>
+                                        <td>Clear phases: human designs, AI builds, human verifies</td>
+                                        <td>High-stakes, accuracy-critical work</td>
+                                        <td>Slower but reliable</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Cyborg</strong></td>
+                                        <td>Continuous back-and-forth, fluid boundaries</td>
+                                        <td>Creative, iterative, discovery work</td>
+                                        <td>Faster but requires constant attention</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <details>
+                            <summary>Self-Check: Which mode would you use for building a leave tracking system for your section? Why?</summary>
+                            <p>
+                                <strong>Centaur mode</strong> is the better choice here. Leave tracking involves
+                                specific regulations, approval chains, and date calculations that must be
+                                accurate. You want to design all the business rules up front (who approves,
+                                what the limits are, what happens with overlapping requests), then let AI
+                                build it, then verify every rule works correctly. Getting leave calculations
+                                wrong has real consequences for Marines, so the slower-but-reliable centaur
+                                pattern is appropriate.
+                            </p>
+                            <p>
+                                Cyborg mode could work for the dashboard or reporting layer once the core
+                                logic is verified &mdash; but the foundational workflow should be centaur.
+                            </p>
+                        </details>
+                    </section>
+
+                    <!-- Module 2: Build #1 — Structured Workflow (Centaur Mode) -->
+                    <section id="build-1">
+                        <h2>Module 2: Build #1 &mdash; Structured Workflow (Centaur Mode)</h2>
+                        <p><strong>Duration:</strong> 60 minutes</p>
+
+                        <p>
+                            <strong>Problem:</strong> 1st Bn, 99th Marines needs a request routing workflow.
+                            Someone submits a request, it goes to the right approver based on the dollar
+                            amount, the approver acts on it, and the requester gets notified of the
+                            decision. You will build this on Power Platform using the centaur pattern.
+                        </p>
+
+                        <h3>Explicit Centaur Pattern</h3>
+                        <p>
+                            This build follows five distinct phases with clear boundaries between them.
+                            At each boundary, you &mdash; the human &mdash; verify before moving on.
+                        </p>
+
+                        <!-- Phase 1 -->
+                        <h4>Phase 1 &mdash; Human Designs (You Do This)</h4>
+                        <p>
+                            Before touching AI, define everything on paper or a whiteboard. Map out
+                            every business rule, every data flow, every edge case. This is the most
+                            important phase &mdash; the quality of your design determines the quality of
+                            the final product.
+                        </p>
+
+                        <div class="template-display">
+                            <h4>Whiteboard Planning Template &mdash; Request Routing Workflow</h4>
+
+                            <h5>Business Rules</h5>
+                            <ul>
+                                <li>Requests under $500: Section Leader approves</li>
+                                <li>Requests $500&ndash;$2000: Department Head approves</li>
+                                <li>Requests over $2000: CO approves</li>
+                                <li>All requests require justification memo</li>
+                                <li>Approver has 48 hours to act or request auto-escalates</li>
+                            </ul>
+
+                            <h5>Data Flow</h5>
+                            <p>
+                                Requester submits via Power App form &rarr; SharePoint list &rarr;
+                                Notification to approver &rarr; Approver acts &rarr; Requester notified of decision
+                            </p>
+
+                            <h5>Notifications</h5>
+                            <ul>
+                                <li><strong>Requester:</strong> confirmation of submission, approval/denial notification</li>
+                                <li><strong>Approver:</strong> new request alert, 24-hour reminder if not acted on</li>
+                                <li><strong>Admin:</strong> weekly summary of all requests</li>
+                            </ul>
+
+                            <h5>Edge Cases</h5>
+                            <ul>
+                                <li><strong>Approver on leave:</strong> auto-route to alternate</li>
+                                <li><strong>Request withdrawn:</strong> requester can cancel before approval</li>
+                                <li><strong>Duplicate submission:</strong> system checks for matching requests within 24 hours</li>
+                            </ul>
+                        </div>
+
+                        <p>
+                            Copy or recreate this template for your own planning. The key is that
+                            <em>you</em> made every decision here &mdash; the AI has not been involved yet.
+                        </p>
+
+                        <!-- Phase 2 -->
+                        <h4>Phase 2 &mdash; AI Builds (Prompt Sequence)</h4>
+                        <p>
+                            Now feed your design to AI, one component at a time. Use these prompts in
+                            sequence. Each one builds on the previous output.
+                        </p>
+
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt 1 &mdash; SharePoint List Design</div>
+Create a SharePoint list design for a request routing system. Columns needed:
+Request Title (single line text), Requester Name (person), Amount (currency),
+Justification (multi-line text), Status (choice: Pending/Approved/Denied/Withdrawn),
+Approver (person), Date Submitted (date), Date Resolved (date).
+Give me the column definitions I need to create in SharePoint.</div>
+
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt 2 &mdash; Power App Form</div>
+Design a Power Apps canvas app form for submitting requests to the SharePoint
+list above. The form should have: all required fields with validation (Amount
+must be > 0, Justification must be at least 20 characters), a submit button
+that writes to SharePoint, and a confirmation screen after submission.</div>
+
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt 3 &mdash; Power Automate Flow</div>
+Create a Power Automate flow that triggers when a new item is added to the
+SharePoint request list. The flow should: determine the approver based on
+amount (under $500 &rarr; Section Leader, $500-$2000 &rarr; Dept Head, over $2000 &rarr; CO),
+send an approval email to the right person, and update the SharePoint list
+with the decision.</div>
+
+                        <!-- Phase 3 -->
+                        <h4>Phase 3 &mdash; Human Verifies</h4>
+                        <p>
+                            This is the critical checkpoint. Walk through the AI output and verify it
+                            against your whiteboard design. Do not skip any item on this list.
+                        </p>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Verification Checklist</h3>
+                            <ul>
+                                <li>Does the right person get notified for each dollar amount? Test: $400, $1200, $3000.</li>
+                                <li>What happens when the approver does not respond in 48 hours? Is auto-escalation configured?</li>
+                                <li>Can the requester see their request status after submission?</li>
+                                <li>Does withdrawal work before approval? What about after?</li>
+                                <li>Are all notification messages clear and accurate?</li>
+                                <li>Does the duplicate check actually catch matching requests within 24 hours?</li>
+                            </ul>
+                        </div>
+
+                        <!-- Phase 4 -->
+                        <h4>Phase 4 &mdash; AI Refines</h4>
+                        <p>
+                            Feed your verification findings back to AI. Be specific about what
+                            failed, what you expected, and what happened instead.
+                        </p>
+
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt 4 &mdash; Refinement</div>
+I tested the request routing workflow and found these issues:
+
+1. [Describe specific issue — e.g., "When I submit a $1500 request, it routes
+   to the Section Leader instead of the Department Head"]
+2. [Describe specific issue — e.g., "There is no auto-escalation after 48 hours.
+   The flow ends after sending the initial approval email"]
+3. [Describe specific issue — e.g., "The requester never receives a confirmation
+   email after submitting"]
+
+For each issue: here is what I expected, here is what happened instead.
+Fix each one and explain what you changed.</div>
+
+                        <!-- Phase 5 -->
+                        <h4>Phase 5 &mdash; Human Accepts</h4>
+                        <p>
+                            Final walkthrough. Run through the entire workflow one more time from
+                            start to finish:
+                        </p>
+                        <ol>
+                            <li>Submit a test request at each dollar threshold ($400, $1200, $3000)</li>
+                            <li>Verify each routes to the correct approver</li>
+                            <li>Approve one, deny one, let one time out</li>
+                            <li>Confirm all notifications fire correctly</li>
+                            <li>Test the withdrawal path</li>
+                            <li>Verify the admin weekly summary includes all test requests</li>
+                        </ol>
+
+                        <p>
+                            If everything passes, your Build #1 is complete. If not, return to Phase 4
+                            and iterate.
+                        </p>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Key Teaching Point</h3>
+                            <p>
+                                At every phase boundary, there is a verification checkpoint. The human is
+                                responsible for design and verification. The AI handles execution. This
+                                separation is what makes centaur mode reliable for critical workflows.
+                                Notice that you never let the AI decide <em>what</em> to build &mdash; only
+                                <em>how</em> to build what you already designed.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Module 3: Reflection — What Went Wrong -->
+                    <section id="reflection">
+                        <h2>Module 3: Reflection &mdash; What Went Wrong</h2>
+                        <p><strong>Duration:</strong> 15 minutes</p>
+
+                        <p>
+                            Before moving on to your next build, take 15 minutes to reflect on what
+                            happened during Build #1. Every builder encounters AI failures &mdash; the
+                            skill is in recognizing them quickly and knowing how to recover. This
+                            structured reflection replaces what would be a group failure-sharing session
+                            during live instruction.
+                        </p>
+
+                        <div class="template-display">
+                            <h4>Build #1 Reflection Template</h4>
+
+                            <h5>What did the AI get wrong during Build #1?</h5>
+                            <p><em>(Be specific. Which component? What was the exact error?)</em></p>
+                            <p>_______________________________________________________________</p>
+                            <p>_______________________________________________________________</p>
+
+                            <h5>How did you catch it?</h5>
+                            <p><em>(During which phase? What test or review revealed the problem?)</em></p>
+                            <p>_______________________________________________________________</p>
+                            <p>_______________________________________________________________</p>
+
+                            <h5>How did you fix it?</h5>
+                            <p><em>(What did you tell the AI? Did it fix the issue on the first try?)</em></p>
+                            <p>_______________________________________________________________</p>
+                            <p>_______________________________________________________________</p>
+
+                            <h5>What would you check for next time?</h5>
+                            <p><em>(What will you add to your personal verification checklist?)</em></p>
+                            <p>_______________________________________________________________</p>
+                            <p>_______________________________________________________________</p>
+                        </div>
+
+                        <p>
+                            Save this reflection. You will use it when you build your frontier map in
+                            Module 6.
+                        </p>
+
+                        <details>
+                            <summary>Self-Check: What is the most common type of error AI makes in Power Automate flows?</summary>
+                            <p>
+                                <strong>Error handling for nested conditions and missing edge case paths.</strong>
+                                AI is good at building the "happy path" &mdash; the flow that works when
+                                everything goes as expected. But it frequently misses error handling for
+                                nested conditions (what happens when a condition inside another condition
+                                fails?) and omits edge case paths entirely (what if the approver field is
+                                empty? what if the amount is exactly $500?).
+                            </p>
+                            <p>
+                                This is why Phase 3 verification is non-negotiable. You must test the
+                                paths the AI is most likely to forget.
+                            </p>
+                        </details>
+                    </section>
+
+                    <!-- Module 4: Build #2 — Training Tracker (Cyborg Mode) -->
+                    <section id="build-2">
+                        <h2>Module 4: Build #2 &mdash; Training Tracker (Cyborg Mode)</h2>
+                        <p><strong>Duration:</strong> 60 minutes</p>
+
+                        <p>
+                            <strong>Problem:</strong> 1st Bn, 99th Marines needs a training tracker that shows
+                            completion status across the section and generates reports for leadership.
+                            You will build this using the cyborg pattern &mdash; continuous back-and-forth
+                            with AI, discovering requirements as you go.
+                        </p>
+
+                        <h3>Target Dashboard</h3>
+                        <p>
+                            This is what your dashboard should look like when complete. Use this as your
+                            target while building:
+                        </p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Marine</th>
+                                        <th scope="col">Rank</th>
+                                        <th scope="col">Annual Rifle Qual</th>
+                                        <th scope="col">CBRN Awareness</th>
+                                        <th scope="col">Cyber Awareness</th>
+                                        <th scope="col">PFT/CFT</th>
+                                        <th scope="col">SAPR Training</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Martinez, J.R.</td>
+                                        <td>LCpl</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                        <td>Overdue</td>
+                                        <td>Complete</td>
+                                        <td>Scheduled 15 Mar</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Thompson, A.K.</td>
+                                        <td>Cpl</td>
+                                        <td>Complete</td>
+                                        <td>Overdue</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Williams, D.M.</td>
+                                        <td>PFC</td>
+                                        <td>Scheduled 22 Mar</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                        <td>Overdue</td>
+                                        <td>Complete</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Chen, R.L.</td>
+                                        <td>LCpl</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                        <td>Overdue</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Davis, T.J.</td>
+                                        <td>Sgt</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                        <td>Overdue</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Rodriguez, M.A.</td>
+                                        <td>LCpl</td>
+                                        <td>Overdue</td>
+                                        <td>Complete</td>
+                                        <td>Complete</td>
+                                        <td>Scheduled 1 Apr</td>
+                                        <td>Complete</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2"><strong>Summary</strong></td>
+                                        <td colspan="5"><strong>67% Current | 17% Overdue | 16% Scheduled</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <h3>Report Output</h3>
+                        <p>Your tracker should also generate this kind of summary for leadership briefs:</p>
+
+                        <div class="template-display">
+                            <h4>Report Output &mdash; S-3 Brief Format</h4>
+                            <p>
+                                As of 06 FEB 2026: Section maintains 67% training currency across five
+                                tracked events. Two critical overdue items require immediate action: LCpl
+                                Martinez Cyber Awareness (overdue 15 days) and Cpl Thompson CBRN Awareness
+                                (overdue 8 days). Section leader has been notified. Three events are scheduled
+                                within 30 days. Recommend prioritizing rifle qualification for PFC Williams
+                                (range date confirmed 22 Mar) and PFT/CFT for LCpl Rodriguez (scheduled 1 Apr).
+                                No systemic compliance gaps identified.
+                            </p>
+                        </div>
+
+                        <h3>Guided Cyborg Build</h3>
+                        <p>
+                            Unlike the centaur build, you will not plan everything up front. Start with
+                            a rough idea and iterate. Use these prompts as your starting sequence, then
+                            continue the conversation based on what the AI produces.
+                        </p>
+
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt 1 &mdash; Initial Structure</div>
+I need a training tracker for my Marine Corps section in 1st Bn, 99th Marines.
+It should track 6 Marines across 5 required training events. I need to see at
+a glance who is current, who is overdue, and who has events scheduled. Build
+this as a SharePoint list with a Power App gallery view.</div>
+
+                        <p>
+                            Review the output. Does the data model make sense? Are the right columns
+                            included? Adjust and continue:
+                        </p>
+
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt 2 &mdash; Visual Formatting</div>
+Add conditional formatting: green for Complete, red for Overdue, yellow for
+Scheduled. Add a summary bar at the top showing percentages for each status
+across all Marines and all events.</div>
+
+                        <p>
+                            Check the formatting. Does it match the target dashboard above? Now add
+                            the reporting layer:
+                        </p>
+
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt 3 &mdash; Report Generation</div>
+Generate a report view that summarizes the data in paragraph form suitable for
+an S-3 brief. Include: overall percentage current, critical overdue items with
+names and how many days overdue, and upcoming scheduled events in the next 30
+days. Format it as a professional military brief.</div>
+
+                        <p>
+                            From here, continue iterating based on what you see. You might need to
+                            adjust column types, fix formatting, add filters, or refine the report
+                            language. That is the cyborg pattern &mdash; you are discovering what works
+                            through rapid iteration.
+                        </p>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Key Teaching Point</h3>
+                            <p>
+                                Cyborg mode is faster but requires constant attention. You cannot walk
+                                away and let the AI run. You are evaluating and redirecting at each step,
+                                discovering requirements as you build rather than executing a predetermined
+                                plan. Notice how different this feels from the centaur build &mdash; that
+                                difference is deliberate, and knowing when to use which pattern is one of
+                                the core skills this course develops.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Module 5: Build #3 — Your Problem -->
+                    <section id="build-3">
+                        <h2>Module 5: Build #3 &mdash; Your Problem</h2>
+                        <p><strong>Duration:</strong> 60 minutes</p>
+
+                        <p>
+                            Now build a solution to a real problem you face in your unit. This is the
+                            tool you identified during Builder Orientation &mdash; your actual requirement,
+                            your actual data, your actual users.
+                        </p>
+
+                        <h3>Before You Start</h3>
+                        <p>Answer these three questions before writing a single prompt:</p>
+                        <ol>
+                            <li><strong>What are you building?</strong> (Describe it in one sentence.)</li>
+                            <li><strong>Which mode will you use &mdash; centaur or cyborg &mdash; and why?</strong></li>
+                            <li><strong>Where do you expect frontier issues?</strong> (Where is AI likely to struggle with your specific problem?)</li>
+                        </ol>
+
+                        <div class="template-display">
+                            <h4>Build #3 Decomposition Template</h4>
+
+                            <h5>Problem Statement</h5>
+                            <p><em>(One sentence: who has the problem, what is the problem, what does a solution look like?)</em></p>
+                            <p>_______________________________________________________________</p>
+
+                            <h5>Mode Selection</h5>
+                            <p><em>(Centaur or Cyborg? Why?)</em></p>
+                            <p>_______________________________________________________________</p>
+
+                            <h5>Components to Build</h5>
+                            <p><em>(Break your solution into 3-5 pieces. What platform tools will you use for each?)</em></p>
+                            <ol>
+                                <li>_______________________________________________________________</li>
+                                <li>_______________________________________________________________</li>
+                                <li>_______________________________________________________________</li>
+                                <li>_______________________________________________________________</li>
+                                <li>_______________________________________________________________</li>
+                            </ol>
+
+                            <h5>Expected Frontier Issues</h5>
+                            <p><em>(Where will AI likely struggle? What will you need to verify most carefully?)</em></p>
+                            <ul>
+                                <li>_______________________________________________________________</li>
+                                <li>_______________________________________________________________</li>
+                                <li>_______________________________________________________________</li>
+                            </ul>
+
+                            <h5>Verification Plan</h5>
+                            <p><em>(How will you know it works? What tests will you run?)</em></p>
+                            <ul>
+                                <li>_______________________________________________________________</li>
+                                <li>_______________________________________________________________</li>
+                                <li>_______________________________________________________________</li>
+                            </ul>
+                        </div>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Getting Stuck?</h3>
+                            <p>
+                                When you hit a wall, ask yourself: <em>"What would I tell the AI about
+                                what is going wrong?"</em> If you can describe the problem clearly, you
+                                can prompt the AI to fix it. If you cannot describe it, that is a sign
+                                you need to step back and think through the design before asking AI
+                                for more code.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Module 6: Frontier Map Update -->
+                    <section id="frontier-map">
+                        <h2>Module 6: Frontier Map Update</h2>
+                        <p><strong>Duration:</strong> 15 minutes</p>
+
+                        <p>
+                            A frontier map records what AI can and cannot do for your specific use cases.
+                            Based on everything you experienced in Builds #1 through #3, fill in or update
+                            the map below. This becomes a living reference you will use on every future
+                            build.
+                        </p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Task Type</th>
+                                        <th scope="col">AI Handles Well</th>
+                                        <th scope="col">AI Handles Poorly</th>
+                                        <th scope="col">Verification Needed</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>SharePoint list schema design</td>
+                                        <td>Column types, relationships, basic validation rules</td>
+                                        <td>Complex calculated columns with nested IF logic</td>
+                                        <td>Always verify column data types match actual data</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power App form layout</td>
+                                        <td>Basic screens, navigation, standard input controls</td>
+                                        <td>Conditional visibility with 3+ dependencies</td>
+                                        <td>Test every show/hide rule with real data</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Automate flows</td>
+                                        <td>Simple approval flows, email notifications, basic conditions</td>
+                                        <td>Error handling for nested conditions, retry logic</td>
+                                        <td>Test all error paths, not just the happy path</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Data validation formulas</td>
+                                        <td>Required fields, format checks, simple lookups</td>
+                                        <td>Cross-table validation, date range conflicts</td>
+                                        <td>Check edge cases: empty fields, special characters</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dashboard/reporting</td>
+                                        <td>Basic charts, card layouts, simple filters</td>
+                                        <td>Complex DAX measures, row-level security</td>
+                                        <td>Verify numbers against source data manually</td>
+                                    </tr>
+                                    <tr>
+                                        <td>User interface text/labels</td>
+                                        <td>Button labels, headers, help text</td>
+                                        <td>Context-sensitive error messages, domain-specific jargon</td>
+                                        <td>Have an actual user read every message</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p>
+                            Update this map with your own observations. Where did your experience
+                            differ from the table above? Add rows for task types specific to your
+                            Build #3 problem.
+                        </p>
+
+                        <h3>Assignment</h3>
+                        <div class="callout callout--success">
+                            <h3 class="callout__title">Before Advanced Workshop</h3>
+                            <ol>
+                                <li>Complete Build #3 to a deployable state</li>
+                                <li>Run through the <a href="../../sop/">EDD SOP</a> QA process</li>
+                                <li>Document 3 failure cases with specifics: what failed, how you caught it, how you fixed it</li>
+                                <li>Identify one area where AI surprised you &mdash; something it did better than you expected</li>
+                            </ol>
+                            <p class="mt-sm">
+                                Bring all of this to the <a href="advanced.html">Advanced Workshop</a>.
+                                Your failure cases and frontier map will be the foundation for that session.
+                            </p>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-bottom">
+                <span>Expert-Driven Development</span>
+                <span>UNCLASSIFIED</span>
+                <span>MIT License</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile navigation toggle
+        (function() {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function() {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>

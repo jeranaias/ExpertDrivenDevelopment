@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student Course 2: Builder Orientation - A self-paced 2-hour elective for aspiring builders. Guided walkthroughs, debugging exercises, and decomposition practice.">
+    <title>Builder Orientation (Student) | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="site-wrapper">
+
+    <!-- Skip to content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Site Header -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../" class="active">Courses</a></li>
+                    <li><a href="../../sop/">SOP</a></li>
+                    <li><a href="../../toolkit/">Toolkit</a></li>
+                    <li><a href="../../resources/">Resources</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../" class="active">Courses</a></li>
+            <li><a href="../../sop/">SOP</a></li>
+            <li><a href="../../toolkit/">Toolkit</a></li>
+            <li><a href="../../resources/">Resources</a></li>
+            <li><a href="../../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../">Courses</a></li>
+                    <li><a href="./">Student Courses</a></li>
+                    <li aria-current="page">Builder Orientation</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Builder Orientation</h1>
+            <p class="page-header__desc">
+                Go beyond daily AI use and build your first tool. This course walks you through
+                a complete build process, debugging exercises, and a decomposition framework
+                you will use on every project.
+            </p>
+            <div class="mt-lg">
+                <span class="badge">Elective</span>
+                <span class="badge">2 Hours</span>
+                <span class="badge badge--gold">Aspiring Builders</span>
+            </div>
+            <p class="mt-lg"><strong>Prerequisite:</strong> AI Fluency Fundamentals</p>
+            <p class="mt-sm text-sm text-muted">
+                <a href="../orientation.html">Instructor Guide</a> &mdash; the live-instruction version of this course.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content" class="site-main">
+        <div class="container">
+            <div class="page-layout page-layout--sidebar">
+
+                <!-- Sidebar / Table of Contents -->
+                <aside class="sidebar sidebar--sticky" aria-label="Table of contents">
+                    <nav class="toc">
+                        <h2 class="toc__title">On This Page</h2>
+                        <ul class="toc__list">
+                            <li><a href="#overview">Overview &amp; Learning Objectives</a></li>
+                            <li><a href="#module-1">Module 1: From User to Builder</a></li>
+                            <li><a href="#module-2">Module 2: Guided Build &mdash; Equipment Tracker</a></li>
+                            <li><a href="#module-3">Module 3: When Something Breaks</a></li>
+                            <li><a href="#module-4">Module 4: Your Problem &mdash; Decomposition Exercise</a></li>
+                            <li><a href="#module-5">Module 5: Assignment &amp; Path Forward</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <!-- Page Content -->
+                <div class="page-content">
+
+                    <!-- Overview & Learning Objectives -->
+                    <section id="overview">
+                        <h2>Overview &amp; Learning Objectives</h2>
+
+                        <p>
+                            By the end of this course you will be able to:
+                        </p>
+                        <ul>
+                            <li><strong>Build a working prototype</strong> of a simple tool using AI, starting from a blank screen.</li>
+                            <li><strong>Apply task decomposition</strong> to break a real problem into buildable subtasks before touching any tool.</li>
+                            <li><strong>Debug with AI</strong> &mdash; read an error message, provide context, and iterate until the problem is resolved.</li>
+                        </ul>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Before You Begin</h3>
+                            <p>
+                                This page assumes you have completed <strong>AI Fluency Fundamentals</strong> and can
+                                apply all six 201 skills: Task Decomposition, Context Assembly, Iterative Refinement,
+                                Quality Judgment, Frontier Recognition, and Failure Recovery. If you cannot recall
+                                at least four of these from memory, go back and review before continuing.
+                            </p>
+                        </div>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Module</th>
+                                        <th scope="col">Est. Time</th>
+                                        <th scope="col">201 Skills Applied</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>From User to Builder</td>
+                                        <td>10 min read</td>
+                                        <td>Task Decomposition</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Guided Build &mdash; Equipment Tracker</td>
+                                        <td>45 min hands-on</td>
+                                        <td>Task Decomposition, Context Assembly, Iterative Refinement</td>
+                                    </tr>
+                                    <tr>
+                                        <td>When Something Breaks</td>
+                                        <td>25 min hands-on</td>
+                                        <td>Iterative Refinement, Quality Judgment, Failure Recovery</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Your Problem &mdash; Decomposition Exercise</td>
+                                        <td>25 min exercise</td>
+                                        <td>Task Decomposition, Frontier Recognition</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Assignment &amp; Path Forward</td>
+                                        <td>10 min read</td>
+                                        <td>All six</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- Module 1: From User to Builder -->
+                    <section id="module-1">
+                        <h2>Module 1: From User to Builder</h2>
+                        <p><strong>Estimated time:</strong> 10 min read</p>
+
+                        <h3>Bridge from User to Builder</h3>
+                        <p>
+                            In AI Fluency Fundamentals you learned to manage AI as a user &mdash; writing prompts,
+                            refining outputs, and judging quality inside a single conversation. Building tools is the
+                            same set of skills applied at higher complexity. Instead of managing one conversation, you
+                            are managing an entire project through AI. The 201 skills do not change; the scope does.
+                        </p>
+                        <p>
+                            Think of it this way: a user asks AI to draft an email. A builder asks AI to create the
+                            system that drafts, tracks, and sends emails. The difference is not talent &mdash; it is
+                            <strong>decomposition</strong>. You learn to see the system as parts, then build each part
+                            with the same prompting skills you already have.
+                        </p>
+
+                        <h3>The Builder Mindset: Decompose Before Building</h3>
+                        <p>
+                            Before you open any tool &mdash; before you type a single prompt &mdash; decompose on paper
+                            or a whiteboard. What are the components? What does the data look like? What does the user
+                            need to see? What actions do they need to take?
+                        </p>
+                        <p>
+                            This is <strong>Task Decomposition</strong> applied to system design. The quality of your
+                            decomposition predicts the quality of your build. A vague plan produces a vague tool. A
+                            specific plan produces a specific tool.
+                        </p>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Common Mistake</h3>
+                            <p>
+                                The number-one mistake new builders make is opening the tool first and
+                                &ldquo;figuring it out as they go.&rdquo; This works for simple tasks. It fails
+                                completely for anything with more than two or three moving parts. Decompose first.
+                                Always.
+                            </p>
+                        </div>
+
+                        <details>
+                            <summary>Self-Check: What is the first thing you should do before opening any tool?</summary>
+                            <p>
+                                <strong>Decompose the problem on paper.</strong> Identify the data, the user actions,
+                                and the components before writing a single prompt. If you skipped straight to
+                                &ldquo;open the AI tool and start prompting,&rdquo; revisit the builder mindset
+                                section above.
+                            </p>
+                        </details>
+                    </section>
+
+                    <!-- Module 2: Guided Build — Equipment Tracker -->
+                    <section id="module-2">
+                        <h2>Module 2: Guided Build &mdash; Equipment Tracker</h2>
+                        <p><strong>Estimated time:</strong> 45 min hands-on</p>
+
+                        <p>
+                            In this module you will build a working equipment checkout tracker for 1st Bn, 99th Marines
+                            from scratch, using AI. Follow each step in order. By the end you will have a functional
+                            web application and a repeatable process you can apply to any problem.
+                        </p>
+
+                        <!-- Step 1 -->
+                        <h3>Step 1: Decompose the Problem</h3>
+                        <p>
+                            The problem: <em>&ldquo;I need a way to track equipment checkout for my section.&rdquo;</em>
+                        </p>
+                        <p>
+                            Before touching any tool, answer three questions on paper:
+                        </p>
+                        <ul>
+                            <li><strong>What data fields do I need?</strong></li>
+                            <li><strong>What does the user need to do?</strong></li>
+                            <li><strong>What is the simplest useful version?</strong></li>
+                        </ul>
+                        <p>
+                            Here is what that looks like filled out:
+                        </p>
+
+                        <div class="template-display">
+                            <div class="template-display__header">
+                                <h4 class="template-display__title">Planning Template &mdash; Equipment Tracker</h4>
+                            </div>
+                            <div class="template-display__content">Problem Statement:
+  "I need a way to track equipment checkout for my section at 1st Bn, 99th Marines."
+
+Data Fields Needed:
+  - Item name (e.g., "PVS-14 Night Vision")
+  - Serial number (alphanumeric, 6-12 characters)
+  - Person checking out (name and rank)
+  - Date checked out
+  - Date due back
+  - Status (Available, Checked Out, Overdue)
+
+User Actions:
+  1. Check out a piece of equipment
+  2. Check equipment back in
+  3. View a list of all overdue items
+
+Simplest Useful Version:
+  A single-page web app with a form, a table of all items,
+  and an overdue-items view. No login, no database &mdash;
+  browser storage is fine for a prototype.</div>
+                        </div>
+
+                        <p>
+                            Notice how specific this is. You have not opened a tool yet, but you already know exactly
+                            what you are asking AI to build. This is decomposition in action.
+                        </p>
+
+                        <!-- Step 2 -->
+                        <h3>Step 2: Write Your First Prompt</h3>
+                        <p>
+                            Now translate your planning template into a prompt. Be specific about every field, every
+                            action, and the technology. Here is the prompt to use:
+                        </p>
+
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; Initial Build</div>I need to build an equipment checkout tracker for a Marine Corps section.
+Data fields: Item name, Serial number, Person checking out (name and rank),
+Date checked out, Date due back, Status (Available, Checked Out, Overdue).
+Users need to: check out equipment, check it back in, and see a list of
+all overdue items. Build this as a simple web application using HTML,
+CSS, and JavaScript. Start with just the data entry form.</div>
+
+                        <p>
+                            Copy this prompt into your AI tool and run it. You should receive HTML, CSS, and JavaScript
+                            for a basic data entry form.
+                        </p>
+
+                        <!-- Step 3 -->
+                        <h3>Step 3: Review the Output</h3>
+                        <p>
+                            Before you do anything else, review what you got. Open the HTML file in a browser and check:
+                        </p>
+                        <ul>
+                            <li><strong>Does it have all six data fields?</strong> Item name, serial number, person (name and rank), date out, date due, status.</li>
+                            <li><strong>Does the form actually work?</strong> Can you type in each field and submit?</li>
+                            <li><strong>Does it display submitted entries?</strong> You should see a table or list of items.</li>
+                        </ul>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Common Issues at This Stage</h3>
+                            <ul>
+                                <li>AI might omit the status field or default everything to one status.</li>
+                                <li>The &ldquo;overdue&rdquo; calculation might be missing entirely &mdash; AI often handles the form but skips the business logic.</li>
+                                <li>Date fields might not use a date picker.</li>
+                                <li>The form might not clear after submission.</li>
+                            </ul>
+                            <p class="mb-0">
+                                These are all normal. This is why we iterate. Note what is missing and move to Step 4.
+                            </p>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <h3>Step 4: Iterate</h3>
+                        <p>
+                            Now refine. You will make two passes, each adding specific functionality. After each prompt,
+                            review the output in your browser before moving to the next one.
+                        </p>
+
+                        <h4>Refinement Pass 1: Overdue View and Check-In</h4>
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; Refinement Pass 1</div>Add an overdue items view that highlights anything past the due date in red. Add a check-in button next to each checked-out item. When the user clicks check-in, the status should change to "Available" and the item should disappear from the overdue list if it was there.</div>
+
+                        <p>
+                            After running this prompt, check:
+                        </p>
+                        <ul>
+                            <li>Do overdue items actually appear in red?</li>
+                            <li>Does the check-in button work?</li>
+                            <li>Does checking in an item update its status immediately?</li>
+                        </ul>
+
+                        <h4>Refinement Pass 2: Validation and Summary</h4>
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; Refinement Pass 2</div>The serial number field should validate format (alphanumeric, 6-12 characters). Show a validation error if the format is wrong. Add a summary at the top showing total items, checked out, and overdue counts. Update the counts automatically when items are checked out or returned.</div>
+
+                        <p>
+                            After running this prompt, test the validation:
+                        </p>
+                        <ul>
+                            <li>Try entering a serial number that is too short (e.g., &ldquo;AB1&rdquo;). Does it reject it?</li>
+                            <li>Try a valid serial number (e.g., &ldquo;SN12345A&rdquo;). Does it accept it?</li>
+                            <li>Do the summary counts update when you add or check in items?</li>
+                        </ul>
+
+                        <!-- Step 5 -->
+                        <h3>Step 5: Review Your Final Product</h3>
+
+                        <div class="callout callout--success">
+                            <h3 class="callout__title">Your Finished Tracker Should Include</h3>
+                            <ul>
+                                <li>A data entry form with all six fields (item, serial, person, date out, date due, status)</li>
+                                <li>Serial number validation (alphanumeric, 6&ndash;12 characters)</li>
+                                <li>A table showing all equipment with current status</li>
+                                <li>A check-in button next to each checked-out item</li>
+                                <li>An overdue items view with red highlighting</li>
+                                <li>A summary dashboard: total items, checked out, overdue</li>
+                                <li>Automatic status updates when items are checked in or become overdue</li>
+                            </ul>
+                        </div>
+
+                        <p>
+                            Take a moment to compare your result against the original planning template from Step 1.
+                            Every requirement you wrote down before opening any tool should now exist in the finished
+                            product. If anything is missing, write one more targeted prompt to add it.
+                        </p>
+
+                        <details>
+                            <summary>Self-Check: Does your tracker have all original requirements?</summary>
+                            <p>
+                                Go back to the planning template in Step 1. Check each data field, each user action,
+                                and the simplest-useful-version description against what you built. If something is
+                                missing, write a specific prompt requesting just that feature. This is iterative
+                                refinement &mdash; the same skill you practiced in AI Fluency Fundamentals, applied
+                                at a larger scale.
+                            </p>
+                        </details>
+                    </section>
+
+                    <!-- Module 3: When Something Breaks -->
+                    <section id="module-3">
+                        <h2>Module 3: When Something Breaks</h2>
+                        <p><strong>Estimated time:</strong> 25 min hands-on</p>
+
+                        <p>
+                            Things will break. That is not a sign that you did something wrong &mdash; it is a normal
+                            part of building. This module teaches you how to debug with AI so you can recover from
+                            failures instead of quitting.
+                        </p>
+
+                        <!-- Failure Case 1 -->
+                        <h3>Failure Case 1: The Crash</h3>
+                        <p>
+                            Imagine you click the &ldquo;Check Out&rdquo; button on your equipment tracker and nothing
+                            happens. You open your browser&rsquo;s developer console (<kbd>F12</kbd> &rarr; Console tab)
+                            and see this error:
+                        </p>
+
+                        <div class="code-block">
+                            <span class="code-block__label">Browser Console Error</span>
+                            <pre><code>Uncaught TypeError: Cannot read properties of null (reading 'value')
+    at checkOutItem (tracker.js:42)
+    at HTMLButtonElement.onclick (index.html:28)</code></pre>
+                        </div>
+
+                        <p>
+                            This looks intimidating, but you can read it. Walk through the debugging process:
+                        </p>
+
+                        <h4>Step 1: Read the Error Message</h4>
+                        <p>
+                            Break it down in plain language:
+                        </p>
+                        <ul>
+                            <li><strong>&ldquo;Cannot read properties of null&rdquo;</strong> &mdash; JavaScript tried to access something that does not exist.</li>
+                            <li><strong>&ldquo;reading &lsquo;value&rsquo;&rdquo;</strong> &mdash; Specifically, it tried to read the <code>.value</code> of a form field.</li>
+                            <li><strong>&ldquo;at checkOutItem (tracker.js:42)&rdquo;</strong> &mdash; The crash happened on line 42 of tracker.js, inside a function called <code>checkOutItem</code>.</li>
+                        </ul>
+                        <p>
+                            Translation: the code is trying to get the value of a form field, but it cannot find that
+                            field on the page.
+                        </p>
+
+                        <h4>Step 2: Send the Error to AI with Context</h4>
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; Debugging</div>I'm building an equipment tracker and getting this error: "Uncaught TypeError: Cannot read properties of null (reading 'value')". This happens when I click the "Check Out" button. Here's my code: [paste your full HTML/JS code here]. The form has fields for item name, serial number, person, date out, and date due.</div>
+
+                        <p>
+                            Notice the structure of this debugging prompt:
+                        </p>
+                        <ol>
+                            <li><strong>The exact error message</strong> (copied, not paraphrased)</li>
+                            <li><strong>When it happens</strong> (clicking the Check Out button)</li>
+                            <li><strong>The full code</strong> (AI needs to see it to find the mismatch)</li>
+                            <li><strong>What the code should do</strong> (context about your form fields)</li>
+                        </ol>
+
+                        <h4>Step 3: Understand the Fix</h4>
+                        <p>
+                            The most common cause of this error: an <strong>ID mismatch</strong> between your HTML and
+                            JavaScript. For example, the HTML might use <code>id="serialNumber"</code> but the JavaScript
+                            looks for <code>document.getElementById("serial-number")</code>. AI will identify the exact
+                            mismatch and provide corrected code.
+                        </p>
+                        <p>
+                            Apply the fix, save, and reload your browser. Verify that the Check Out button now works.
+                        </p>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Key Lesson</h3>
+                            <p>
+                                The first time something breaks, most people quit. That is the 80%.
+                                Debugging with AI is a skill. Copy the error, provide context, and iterate.
+                                You do not need to understand every line of code &mdash; you need to understand the
+                                process: <strong>read the error, give AI context, apply the fix, verify.</strong>
+                            </p>
+                        </div>
+
+                        <!-- Failure Case 2 -->
+                        <h3>Failure Case 2: The Logic Error</h3>
+                        <p>
+                            Not all failures produce error messages. Sometimes the code runs fine but produces the
+                            wrong result. This is harder to catch and more important to practice.
+                        </p>
+                        <p>
+                            Scenario: Your overdue calculation shows items as overdue <em>even after they were returned</em>.
+                            An item with status &ldquo;Available&rdquo; still shows up highlighted in red in the overdue
+                            view. The console has no errors.
+                        </p>
+
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt &mdash; Logic Error Debugging</div>My equipment tracker's overdue calculation is wrong. Items that have been returned (status is "Available") still show up in the overdue items list highlighted in red. The overdue check should only apply to items with status "Checked Out" whose due date is in the past. Here's my code: [paste code]. Can you find the logic error?</div>
+
+                        <p>
+                            The likely cause: the overdue check compares the due date to today but does <em>not</em>
+                            check the status first. It flags every item whose due date has passed, regardless of
+                            whether it has been returned. The fix is a simple conditional: only flag items where
+                            <code>status === "Checked Out"</code> <em>and</em> the due date is past.
+                        </p>
+
+                        <p>
+                            Apply the fix. Return an item and verify it disappears from the overdue list.
+                        </p>
+
+                        <details>
+                            <summary>Self-Check: What are the three steps to debug with AI?</summary>
+                            <div>
+                                <ol>
+                                    <li><strong>Read the error</strong> &mdash; understand what it is telling you in plain language (or, for logic errors, describe the wrong behavior precisely).</li>
+                                    <li><strong>Provide context</strong> &mdash; give AI the exact error message, when it happens, your code, and what the code should do.</li>
+                                    <li><strong>Iterate</strong> &mdash; apply the fix, verify, and if the problem persists, send the updated code and new error back to AI.</li>
+                                </ol>
+                            </div>
+                        </details>
+                    </section>
+
+                    <!-- Module 4: Your Problem — Decomposition Exercise -->
+                    <section id="module-4">
+                        <h2>Module 4: Your Problem &mdash; Decomposition Exercise</h2>
+                        <p><strong>Estimated time:</strong> 25 min exercise</p>
+
+                        <p>
+                            Now it is your turn. Pick a real problem from your work &mdash; something you or your
+                            section actually deals with &mdash; and decompose it using the same framework from
+                            Module 2. Before you fill in the blank template, study the completed example below.
+                        </p>
+
+                        <!-- Filled Example -->
+                        <h3>Completed Example</h3>
+
+                        <div class="template-display">
+                            <div class="template-display__header">
+                                <h4 class="template-display__title">Decomposition Template &mdash; Armory Sign-Out Log</h4>
+                            </div>
+                            <div class="template-display__content">Problem Statement:
+  "I need a sign-out log for the armory that tracks who has what weapon
+   at 1st Bn, 99th Marines."
+
+Subtask 1: Design the data model (weapon type, serial, assigned Marine, date/time out, date/time in)
+  [Human designs]
+
+Subtask 2: Build the sign-out form with weapon selection and Marine lookup
+  [AI builds]
+
+Subtask 3: Build the sign-in process with timestamp and condition notes
+  [AI builds]
+
+Subtask 4: Create a real-time dashboard showing all weapons currently signed out
+  [AI builds]
+
+Subtask 5: Verify serial number formats match actual USMC weapon serial conventions
+  [Human verifies]
+
+Pattern: Centaur
+  Reason: Weapons tracking is high-stakes. Human makes all design decisions
+  and verifies all outputs. AI handles implementation but human validates
+  every record format and business rule.
+
+Frontier Risks:
+  - AI may not know USMC serial number formats for specific weapon systems
+  - AI may not understand armory accountability regulations
+  - Condition reporting categories may need SME input</div>
+                        </div>
+
+                        <p>
+                            Notice a few things about this example:
+                        </p>
+                        <ul>
+                            <li>The problem statement is one sentence.</li>
+                            <li>Each subtask is small enough to accomplish in one or two prompts.</li>
+                            <li>Every subtask has a clear label: Human designs, AI builds, or Human verifies.</li>
+                            <li>The centaur pattern was chosen because weapons tracking has no room for error.</li>
+                            <li>Frontier risks identify where AI&rsquo;s knowledge runs out.</li>
+                        </ul>
+
+                        <!-- Blank Template -->
+                        <h3>Your Decomposition</h3>
+                        <p>
+                            Fill this out on paper, in a notes app, or in a document. Do not skip any field.
+                        </p>
+
+                        <div class="template-display">
+                            <div class="template-display__header">
+                                <h4 class="template-display__title">Decomposition Template &mdash; Your Problem</h4>
+                            </div>
+                            <div class="template-display__content">Problem Statement:
+  "_______________________________________________________________"
+
+Subtask 1: _______________________________________________
+  [Human designs / AI builds / Human verifies]
+
+Subtask 2: _______________________________________________
+  [Human designs / AI builds / Human verifies]
+
+Subtask 3: _______________________________________________
+  [Human designs / AI builds / Human verifies]
+
+Subtask 4: _______________________________________________
+  [Human designs / AI builds / Human verifies]
+
+(Add more subtasks if needed. If any subtask would take more
+than 2-3 prompts to complete, break it down further.)
+
+Pattern:  [ ] Centaur    [ ] Cyborg
+  Reason: ________________________________________________
+
+Frontier Risks:
+  - ________________________________________________________
+  - ________________________________________________________
+  - ________________________________________________________</div>
+                        </div>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Peer Review (if in a live session)</h3>
+                            <p>
+                                If you are working through this in a group, pair up and review each other&rsquo;s
+                                decompositions. Ask: &ldquo;Is any subtask too big? Is there a frontier risk you
+                                missed?&rdquo; If you are working alone, review your own decomposition against these
+                                two questions before moving on.
+                            </p>
+                        </div>
+
+                        <details>
+                            <summary>Self-Check: Review your decomposition</summary>
+                            <p>
+                                Look at each subtask. Could any one of them be broken down further? If a subtask
+                                feels like it would take more than two or three prompts to complete, it is too big.
+                                Split it. Also check: did you identify at least one frontier risk? Every problem
+                                has at least one area where AI&rsquo;s training data will not perfectly match your
+                                real-world context.
+                            </p>
+                        </details>
+                    </section>
+
+                    <!-- Module 5: Assignment & Path Forward -->
+                    <section id="module-5">
+                        <h2>Module 5: Assignment &amp; Path Forward</h2>
+                        <p><strong>Estimated time:</strong> 10 min read</p>
+
+                        <h3>Your Assignment</h3>
+
+                        <div class="callout callout--success">
+                            <h3 class="callout__title">Build Your Decomposed Solution</h3>
+                            <ol>
+                                <li><strong>Build it.</strong> Take the decomposition you created in Module 4 and build your solution using AI, following the same process from Module 2: prompt, review, iterate.</li>
+                                <li><strong>Document what worked and what did not.</strong> Keep brief notes as you go. Which prompts produced good output on the first try? Which required multiple iterations?</li>
+                                <li><strong>Identify at least one failure case.</strong> Something will break or produce the wrong result. When it does, document the error, your debugging prompt, and the resolution.</li>
+                                <li><strong>Bring a working (or partially working) prototype.</strong> A partial build with documented lessons is more valuable than no build at all.</li>
+                            </ol>
+                        </div>
+
+                        <h3>Path Forward</h3>
+                        <p>
+                            This course introduced the builder workflow: decompose, build, debug, iterate. The courses
+                            ahead go deeper:
+                        </p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Next Step</th>
+                                        <th scope="col">Duration</th>
+                                        <th scope="col">What You Will Learn</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Platform Training</strong></td>
+                                        <td>4 hours</td>
+                                        <td>Build three complete tools on Power Platform practicing centaur and cyborg work patterns.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Advanced Workshop</strong></td>
+                                        <td>4 hours</td>
+                                        <td>Map the frontier for your domain, build verification protocols, and practice group debugging.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Ongoing Contribution</strong></td>
+                                        <td>Continuous</td>
+                                        <td>Build tools that serve your section, contribute to the shared toolkit, and teach others.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p>
+                            You have completed Builder Orientation. You know how to decompose a problem, build with AI,
+                            and debug when things break. The rest is practice.
+                        </p>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-bottom">
+                <span>Expert-Driven Development</span>
+                <span>UNCLASSIFIED</span>
+                <span>MIT License</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile navigation toggle
+        (function() {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function() {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>
