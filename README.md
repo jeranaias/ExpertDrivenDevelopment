@@ -38,7 +38,7 @@ EDD uses AI as scaffolding to let domain experts build, document, and maintain t
 
 | Course | Duration | Audience | Outcome |
 |--------|----------|----------|---------|
-| **AI Fluency Fundamentals** | 2 hours | All personnel | Understand six 2011 skills, recognize the jagged frontier, map AI into workflow |
+| **AI Fluency Fundamentals** | 2 hours | All personnel | Understand six 201 skills, recognize the jagged frontier, map AI into workflow |
 | **Builder Orientation** | 2 hours | Aspiring builders | Build a working prototype, apply task decomposition and iterative refinement |
 | **Platform Training** | 4 hours | Builders | Build 3 complete tools on Power Platform using centaur and cyborg patterns |
 | **Advanced Workshop** | 4 hours | Experienced builders | Map the frontier, build verification protocols, teach others |

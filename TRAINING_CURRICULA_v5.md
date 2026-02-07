@@ -3,11 +3,11 @@
 
 ### What Changed From v4.0
 
-The v4.0 curriculum restructured training around six 2011-level skills. That was the right move. But it crammed two different audiences into the same opening course: people who need to *use* AI effectively and people who want to *build* tools with AI. Those are different training objectives for different populations.
+The v4.0 curriculum restructured training around six 201-level skills. That was the right move. But it crammed two different audiences into the same opening course: people who need to *use* AI effectively and people who want to *build* tools with AI. Those are different training objectives for different populations.
 
-This revision adds a fifth course — AI Fluency Fundamentals — as a standalone 2-hour universal requirement. Every Marine, sailor, and civilian at MCCES takes this course. It teaches the six 2011-level skills, the jagged frontier, centaur/cyborg work patterns, and quality judgment. No tool-building required. No Power Platform. Just the applied judgment skills that research shows actually predict sustained AI adoption.
+This revision adds a fifth course — AI Fluency Fundamentals — as a standalone 2-hour universal requirement. Every Marine, sailor, and civilian at MCCES takes this course. It teaches the six 201-level skills, the jagged frontier, centaur/cyborg work patterns, and quality judgment. No tool-building required. No Power Platform. Just the applied judgment skills that research shows actually predict sustained AI adoption.
 
-The builder courses (Trainings 1–3) now assume students arrive with the 2011 framework already internalized. They spend zero time on theory and 100% of time building.
+The builder courses (Trainings 1–3) now assume students arrive with the 201 framework already internalized. They spend zero time on theory and 100% of time building.
 
 ### Why This Matters Now
 
@@ -35,14 +35,14 @@ When consultants used AI on tasks inside its capability boundary, they completed
 
 The study also identified two productive work patterns: **Centaurs** (clear human/AI division of labor) and **Cyborgs** (fluid, continuous human/AI integration). Both patterns outperformed unstructured AI use.
 
-**Design implication:** Frontier Recognition is a core 2011 skill, not a footnote. We teach students to identify the boundary and share failure cases. The centaur/cyborg framework gives students a vocabulary for choosing how to work with AI on different task types.
+**Design implication:** Frontier Recognition is a core 201 skill, not a footnote. We teach students to identify the boundary and share failure cases. The centaur/cyborg framework gives students a vocabulary for choosing how to work with AI on different task types.
 
 ### Study 3: The Skill-Leveling Effect
 **Source:** Brynjolfsson, Li, & Raymond (2025). "Generative AI at Work." *Quarterly Journal of Economics*, 140(2), 889–942. 5,172 customer support agents.
 
 AI assistance increased productivity by 15% on average, but the gains were dramatically uneven. Novice and low-skilled workers improved by 34%. The most experienced workers saw minimal gains and slight quality decreases. AI effectively disseminated the tacit knowledge of top performers to everyone else. Workers with two months of AI-assisted experience performed as well as workers with six months of unassisted experience.
 
-**Design implication:** AI doesn't replace expertise — it amplifies it. But it amplifies judgment *and* errors equally. This is why Quality Judgment is the most important 2011 skill: the same tool that makes a junior Marine more productive also makes an overconfident one more dangerous.
+**Design implication:** AI doesn't replace expertise — it amplifies it. But it amplifies judgment *and* errors equally. This is why Quality Judgment is the most important 201 skill: the same tool that makes a junior Marine more productive also makes an overconfident one more dangerous.
 
 ### Study 4: Management as the Core AI Skill
 **Source:** Mollick (2026). "Management as AI Superpower." *One Useful Thing.* Wharton executive MBA field experiment.
@@ -78,11 +78,11 @@ Mollick's direct warning: "That training pipeline that was always implicit has b
 
 ---
 
-## The Six 2011-Level Skills
+## The Six 201-Level Skills
 
 These six skills are the backbone of the entire curriculum. Every module in every course maps back to at least one of them. None of them are prompting techniques.
 
-| # | Skill | What It Means | 101 Behavior | 2011 Behavior |
+| # | Skill | What It Means | 101 Behavior | 201 Behavior |
 |---|-------|---------------|--------------|--------------| 
 | 1 | Context Assembly | Knowing what information to provide, from which sources, and why | Dumps entire documents or provides almost no context | Curates background, constraints, and examples to improve output quality |
 | 2 | Quality Judgment | Knowing when to trust AI output and when to verify | Accepts first output as-is or abandons entirely | Knows which task types need verification, spots reliable vs. unreliable content within the same output |
@@ -93,7 +93,7 @@ These six skills are the backbone of the entire curriculum. Every module in ever
 
 ### Two Work Patterns: Centaur and Cyborg
 
-The BCG-Harvard study identified two productive patterns for working with AI. Both work. The 2011 skill is knowing which pattern fits which task.
+The BCG-Harvard study identified two productive patterns for working with AI. Both work. The 201 skill is knowing which pattern fits which task.
 
 **Centaur Mode:** Clearly divide work between human and AI. The human does strategy and framing, AI generates options and drafts. Distinct responsibilities with clear handoff points.
 - Best for: High-stakes work requiring clear accountability and verification checkpoints
@@ -119,7 +119,7 @@ This means Frontier Recognition can't be learned once and memorized. It has to b
 
 | Course | Duration | Audience | Prerequisite | Outcome |
 |--------|----------|----------|--------------|---------|
-| **AI Fluency Fundamentals** | 2 hours | All personnel | None | Understand the six 2011 skills, recognize the jagged frontier, know when to trust AI output, map AI into your workflow |
+| **AI Fluency Fundamentals** | 2 hours | All personnel | None | Understand the six 201 skills, recognize the jagged frontier, know when to trust AI output, map AI into your workflow |
 | **Builder Orientation** | 2 hours | Aspiring builders | AI Fluency Fundamentals | Build a working prototype, apply task decomposition and iterative refinement in practice |
 | **Platform Training** | 4 hours | Builders | Builder Orientation | Build 3 complete tools on Power Platform using centaur and cyborg work patterns |
 | **Advanced Workshop** | 4 hours | Experienced builders | At least one deployed tool | Map the frontier for your domain, build verification protocols, teach others |
@@ -187,7 +187,7 @@ Instructors remain certified as long as they:
 
 ### Agenda
 
-| Time | Module | 2011 Skills Targeted |
+| Time | Module | 201 Skills Targeted |
 |------|--------|---------------------|
 | 0:00–0:15 | Why 80% Quit (and How You Won't) | Frontier Recognition |
 | 0:15–0:40 | The Six Skills That Actually Matter | All six — overview |
@@ -217,11 +217,11 @@ Instructors remain certified as long as they:
 
 ### Module 2: The Six Skills That Actually Matter (25 min)
 
-Walk through all six 2011 skills with military-relevant examples. For each skill, show the 101 behavior and the 2011 behavior side by side.
+Walk through all six 201 skills with military-relevant examples. For each skill, show the 101 behavior and the 201 behavior side by side.
 
 **Skill 1 — Context Assembly:**
 - 101: "Write me a counseling statement."
-- 2011: "Write a counseling statement for a Lance Corporal who was late to formation twice this month. The tone should be corrective but not adversarial. The Marine has otherwise been a solid performer. Use the format from NAVMC 10274. This is a page 11 entry, not an adverse 6105."
+- 201: "Write a counseling statement for a Lance Corporal who was late to formation twice this month. The tone should be corrective but not adversarial. The Marine has otherwise been a solid performer. Use the format from NAVMC 10274. This is a page 11 entry, not an adverse 6105."
 
 **Key teaching point:** AI is extremely sensitive to context quality. The difference between mediocre output and useful output is usually not the prompt structure — it's the information you provide. This is exactly like giving a task to a new join: the more specific your guidance, the better the result.
 
@@ -229,11 +229,11 @@ Walk through all six 2011 skills with military-relevant examples. For each skill
 - Show an AI-generated naval message with three correct elements and two subtle errors (wrong DTG format, incorrect reference number)
 - Ask: "Would you sign this?" Then reveal the errors.
 
-**Key teaching point:** AI can be confidently correct and confidently wrong in the same paragraph. The 2011 skill is spotting which is which. The Brynjolfsson study found that AI helped novice workers improve by 34% — but only because the AI was disseminating expert-level patterns. If you can't judge quality, you're amplifying errors, not expertise.
+**Key teaching point:** AI can be confidently correct and confidently wrong in the same paragraph. The 201 skill is spotting which is which. The Brynjolfsson study found that AI helped novice workers improve by 34% — but only because the AI was disseminating expert-level patterns. If you can't judge quality, you're amplifying errors, not expertise.
 
 **Skill 3 — Task Decomposition:**
 - 101: "Write me a training plan for the platoon."
-- 2011: Break it into subtasks. "First, list the required annual training events for FY26. Then map them against the calendar, avoiding known conflicts. Then identify which events need range time and put those first."
+- 201: Break it into subtasks. "First, list the required annual training events for FY26. Then map them against the calendar, avoiding known conflicts. Then identify which events need range time and put those first."
 
 **Key teaching point:** Mollick calls this the Equation of Agentic Work. You're deciding whether to delegate based on three things: how long it would take you, how likely AI is to get it right, and how long it takes you to check. Breaking tasks into smaller pieces improves the AI's success probability on each piece.
 
@@ -341,13 +341,13 @@ Start a shared document (can be as simple as a whiteboard or a shared spreadshee
 
 **Elective | 2 Hours | Aspiring Builders**
 
-**Purpose:** For people who want to go beyond daily AI use and actually build tools. Focuses entirely on hands-on building. The 2011 framework was covered in AI Fluency Fundamentals — here we apply it.
+**Purpose:** For people who want to go beyond daily AI use and actually build tools. Focuses entirely on hands-on building. The 201 framework was covered in AI Fluency Fundamentals — here we apply it.
 
 **Prerequisite:** AI Fluency Fundamentals (in-person or online completion)
 
 ### Agenda
 
-| Time | Module | 2011 Skills Applied |
+| Time | Module | 201 Skills Applied |
 |------|--------|---------------------|
 | 0:00–0:10 | From User to Builder (bridge from Course 1) | Task Decomposition |
 | 0:10–0:40 | Live Build #1: Equipment Tracker | Task Decomposition, Context Assembly, Iterative Refinement |
@@ -362,7 +362,7 @@ Start a shared document (can be as simple as a whiteboard or a shared spreadshee
 
 **The builder mindset:** Before you open any tool, you decompose on the whiteboard. What are the components? What does the data look like? What does the user need to see? This is Task Decomposition applied to system design.
 
-**Instructor note:** Quickly verify that all students completed AI Fluency Fundamentals. Ask: "What are the six 2011 skills?" If students can't recall at least four, do a 2-minute refresher. Then move on.
+**Instructor note:** Quickly verify that all students completed AI Fluency Fundamentals. Ask: "What are the six 201 skills?" If students can't recall at least four, do a 2-minute refresher. Then move on.
 
 ### Module 2: Live Build #1 — Equipment Tracker (30 min)
 
@@ -438,7 +438,7 @@ Start a shared document (can be as simple as a whiteboard or a shared spreadshee
 
 ### Agenda
 
-| Time | Module | 2011 Skills Applied |
+| Time | Module | 201 Skills Applied |
 |------|--------|---------------------|
 | 0:00–0:15 | Setup and Review | All six (quick check) |
 | 0:15–1:15 | Build #1: Structured Workflow (Centaur Mode) | Context Assembly, Quality Judgment |
@@ -530,14 +530,14 @@ This map lives on the EDD site. It grows with every training delivery and every 
 
 ### Agenda
 
-| Time | Module | 2011 Skills Applied |
+| Time | Module | 201 Skills Applied |
 |------|--------|---------------------|
 | 0:00–0:45 | Frontier Mapping for Your Domain | Frontier Recognition |
 | 0:45–1:45 | Complex Build: Multi-Component System | All six |
 | 1:45–2:00 | Break | |
 | 2:00–2:45 | Verification Protocols and QA | Quality Judgment |
 | 2:45–3:30 | Group Debugging: Real Problems | Iterative Refinement, Frontier Recognition |
-| 3:30–4:00 | Teaching Others: The 2011 Multiplier | All six |
+| 3:30–4:00 | Teaching Others: The 201 Multiplier | All six |
 
 ### Module 1: Frontier Mapping for Your Domain (45 min)
 
@@ -598,7 +598,7 @@ Participants bring actual tools with actual problems.
 3. Together: Attempt the fix using AI assistance
 4. Document: What was the root cause? Was this a frontier issue or a context issue?
 
-### Module 5: Teaching Others — The 2011 Multiplier (30 min)
+### Module 5: Teaching Others — The 201 Multiplier (30 min)
 
 **The problem:** Individual AI capability doesn't scale. Organizational AI capability does. How do you turn what you know into what your section knows?
 
@@ -606,7 +606,7 @@ Participants bring actual tools with actual problems.
 
 **Exercise: The 60-Second Teach**
 
-Each participant picks one of the six 2011 skills and teaches it to a partner in 60 seconds, using an example from their own work. Then switch.
+Each participant picks one of the six 201 skills and teaches it to a partner in 60 seconds, using an example from their own work. Then switch.
 
 This exercise surfaces who can explain the framework clearly — those people are your future instructors.
 
@@ -658,7 +658,7 @@ Mollick's research is explicit: workers are already using AI and hiding it. They
 | Time | Module | Focus |
 |------|--------|-------|
 | 0:00–0:05 | Why This Matters Now | The 80% problem, DoW AI Strategy, rapid adoption mandate |
-| 0:05–0:12 | What EDD Is | Five courses, six 2011 skills, research foundation (headline level) |
+| 0:05–0:12 | What EDD Is | Five courses, six 201 skills, research foundation (headline level) |
 | 0:12–0:20 | Your Role: Creating Permission | What "yes" looks like, what kills adoption, guard rails |
 | 0:20–0:27 | Evaluating Proposals and Output | Four questions to ask, what quality looks like |
 | 0:27–0:30 | The Apprentice Problem | Preserving junior development while gaining efficiency |
@@ -680,7 +680,7 @@ Mollick's research is explicit: workers are already using AI and hiding it. They
 3. QA — Quality: Peer review, security assessment, and user verification
 4. Community — Sustainability: Shared frontier maps, workflow playbooks, cross-unit mentoring
 
-**The six 2011 skills** (headline level only): Context Assembly, Quality Judgment, Task Decomposition, Iterative Refinement, Workflow Integration, Frontier Recognition. These are management skills, not technical skills. Your Marines already have the foundation.
+**The six 201 skills** (headline level only): Context Assembly, Quality Judgment, Task Decomposition, Iterative Refinement, Workflow Integration, Frontier Recognition. These are management skills, not technical skills. Your Marines already have the foundation.
 
 ### Module 3: Your Role — Creating Permission (8 min)
 
@@ -765,7 +765,7 @@ Mollick's research is explicit: workers are already using AI and hiding it. They
 - Lead with operational relevance: SITREP requirement, DoW AI Strategy, what other units are doing.
 - End with a specific ask: "Within the next week, ask one person in your section what they'd build if they had permission."
 
-### Appendix B: Quick Reference — The Six 2011 Skills
+### Appendix B: Quick Reference — The Six 201 Skills
 
 | Skill | One-Sentence Definition | Key Question |
 |-------|------------------------|--------------|
@@ -826,7 +826,7 @@ Mollick's research is explicit: workers are already using AI and hiding it. They
 | v1.0 | 2024 | Initial training outlines |
 | v2.0 | 2024 | Added Power Platform focus |
 | v3.0 | Jan 2026 | Restructured around EDD SOP, added QA framework |
-| v4.0 | Feb 2026 | Restructured around 2011-level skills, jagged frontier, centaur/cyborg patterns, quality judgment exercises, frontier mapping |
+| v4.0 | Feb 2026 | Restructured around 201-level skills, jagged frontier, centaur/cyborg patterns, quality judgment exercises, frontier mapping |
 | v5.0 | Feb 2026 | Added AI Fluency Fundamentals as universal 5th course; expanded research foundation with GDPval, Mollick delegation equation, Brynjolfsson skill-leveling, UK Government study; added delegation equation module; strengthened apprentice problem protocols; added junior development field to workflow playbooks; full research source appendix |
 
 ---
