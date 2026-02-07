@@ -1,0 +1,1342 @@
+% =============================================================================
+% SOP: Expert-Driven AI-Assisted Development -- Version 5.0
+% Compiled with pdflatex
+% =============================================================================
+\documentclass[11pt,letterpaper]{article}
+
+% ---------------------------------------------------------------------------
+% Packages
+% ---------------------------------------------------------------------------
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=blue,bookmarks=true]{hyperref}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{tocloft}
+\usepackage{lastpage}
+\usepackage{parskip}
+
+% ---------------------------------------------------------------------------
+% Color definitions
+% ---------------------------------------------------------------------------
+\definecolor{scarlet}{RGB}{180,30,30}
+\definecolor{darkgray}{RGB}{60,60,60}
+
+% ---------------------------------------------------------------------------
+% Header / Footer
+% ---------------------------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textsc{SOP: Expert-Driven AI-Assisted Development}}
+\fancyhead[R]{\small\textbf{UNCLASSIFIED}}
+\fancyfoot[L]{\small Version 5.0}
+\fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ---------------------------------------------------------------------------
+% Section formatting
+% ---------------------------------------------------------------------------
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{scarlet}}
+  {\thesection.}{0.5em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{darkgray}}
+  {\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries}
+  {\thesubsubsection}{0.5em}{}
+
+% ---------------------------------------------------------------------------
+% Table of contents formatting
+% ---------------------------------------------------------------------------
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setcounter{tocdepth}{2}
+
+% ---------------------------------------------------------------------------
+% List formatting
+% ---------------------------------------------------------------------------
+\setlist[itemize]{nosep,left=0pt .. 1.5em}
+\setlist[enumerate]{nosep,left=0pt .. 1.5em}
+
+% ---------------------------------------------------------------------------
+% Callout box command
+% ---------------------------------------------------------------------------
+\newcommand{\calloutbox}[2]{%
+  \medskip
+  \noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{%
+    \textbf{#1}\par\smallskip #2}}%
+  \medskip
+}
+
+% ---------------------------------------------------------------------------
+% Blockquote environment
+% ---------------------------------------------------------------------------
+\newenvironment{sopblockquote}{%
+  \begin{quote}\itshape
+}{%
+  \end{quote}
+}
+
+% =============================================================================
+\begin{document}
+
+% =============================================================================
+% TITLE PAGE
+% =============================================================================
+\thispagestyle{empty}
+
+\begin{center}
+
+\vspace*{1.5in}
+
+{\Large\textbf{UNCLASSIFIED // Distribution Unlimited}}
+
+\vspace{0.75in}
+
+{\LARGE\textbf{Standard Operating Procedure}}
+
+\vspace{0.3in}
+
+{\Huge\bfseries\color{scarlet} Expert-Driven AI-Assisted Development}
+
+\vspace{0.3in}
+
+{\Large A Methodology for Building Institutional Capability}
+
+\vspace{1in}
+
+\begin{tabular}{rl}
+\textbf{Document Version:} & 5.0 \\[4pt]
+\textbf{Effective Date:}    & February 2026 \\[4pt]
+\textbf{Classification:}    & UNCLASSIFIED // Distribution Unlimited \\[4pt]
+\textbf{Prepared by:}       & SSgt Jesse C. Morgan \\
+                             & Marine Corps Detachment Presidio of Monterey \\
+                             & Defense Language Institute Foreign Language Center \\
+\end{tabular}
+
+\vfill
+
+\rule{0.8\textwidth}{0.4pt}
+
+\medskip
+
+{\small\itshape Core Principle: Use AI to build things that don't need AI.\\
+The tools last. The AI was just how we built them.}
+
+\medskip
+
+\rule{0.8\textwidth}{0.4pt}
+
+\vspace{0.5in}
+
+{\small\textbf{UNCLASSIFIED}}
+
+\end{center}
+
+\newpage
+
+% =============================================================================
+% TABLE OF CONTENTS
+% =============================================================================
+\tableofcontents
+\newpage
+
+% =============================================================================
+% SECTION 1: PURPOSE AND SCOPE
+% =============================================================================
+\section{Purpose and Scope}
+\label{sec:purpose-and-scope}
+
+\subsection{Purpose}
+\label{sec:purpose}
+
+This Standard Operating Procedure establishes the framework, governance, and workflow for
+AI-assisted tool development by subject-matter experts within Department of War (DoW) organizations.
+Expert-Driven Development enables domain experts to build, document, and sustain institutional
+tools using AI as a development accelerator---without requiring a background in software engineering,
+contracting, or formal IT acquisition.
+
+\subsection{EDD IS / EDD ISN'T}
+\label{sec:is-isnt}
+
+\begin{minipage}[t]{0.47\textwidth}
+\subsubsection*{EDD IS}
+\begin{itemize}
+  \item A framework for building institutional tools using AI
+  \item A way to turn subject-matter expertise into working software
+  \item A governance model for responsible AI-assisted development
+  \item A training pipeline that produces AI-fluent builders
+  \item A documentation standard that ensures tool continuity
+  \item Compatible with existing DoW cybersecurity and privacy requirements
+\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.47\textwidth}
+\subsubsection*{EDD ISN'T}
+\begin{itemize}
+  \item A replacement for professional software development or IT acquisition
+  \item An authorization to bypass cybersecurity or privacy controls
+  \item A way to build systems that handle classified data
+  \item A shortcut that eliminates the need for documentation
+  \item A single AI tool or platform
+  \item Limited to any specific programming language or technology stack
+\end{itemize}
+\end{minipage}
+
+\subsection{Scope}
+\label{sec:scope}
+
+This SOP covers the complete lifecycle of AI-assisted tool development: from problem identification
+and compliance review through prototyping, testing, documentation, deployment, and sustainment.
+It applies to tools built on approved platforms using approved AI assistants that handle
+unclassified data only.
+
+\subsection{Applicability}
+\label{sec:applicability}
+
+This SOP applies to all personnel who develop, review, supervise, or maintain tools built
+using the Expert-Driven Development framework. It is designed for adoption at the unit level
+and can be tailored to organization-specific requirements while maintaining compliance with
+DoW-wide cybersecurity and privacy directives.
+
+% =============================================================================
+% SECTION 2: THE FOUR-LAYER FRAMEWORK
+% =============================================================================
+\section{The Four-Layer Framework}
+\label{sec:four-layer-framework}
+
+Expert-Driven Development operates through four interdependent layers. Each layer builds
+on the previous one, and all four must be present for the framework to produce sustainable results.
+
+\subsection{Layer 1: Direct Tool Development}
+\label{sec:layer-1}
+
+Subject-matter experts use AI to build tools that solve real problems in their organizations.
+The expert provides domain knowledge---the understanding of the problem, the workflow, the
+users, and the requirements. AI provides the development capability---translating that
+domain knowledge into working code, interfaces, and automation.
+
+\calloutbox{Key Principle}{%
+The expert drives the development. AI is the accelerator, not the decision-maker.
+Every design choice, workflow decision, and feature prioritization comes from the
+person who understands the problem.}
+
+\subsection{Layer 2: Process Liberation}
+\label{sec:layer-2}
+
+By removing the dependency on contractors, acquisition timelines, and IT development queues,
+EDD liberates the development process. Personnel can identify a problem and begin building
+a solution within the same week---not the same fiscal year. This layer addresses the
+structural bottleneck that prevents organizations from responding to their own needs.
+
+\subsection{Layer 3: Capability Cultivation}
+\label{sec:layer-3}
+
+Each build develops the builder. The five-course training curriculum and the 2011-level
+skills framework cultivate six core competencies: Context Assembly, Quality Judgment,
+Task Decomposition, Iterative Refinement, Workflow Integration, and Frontier Recognition.
+Personnel who complete EDD projects gain transferable skills in AI-assisted development,
+systems thinking, user-centered design, and technical documentation. These capabilities
+persist after the specific tool is deployed and compound across subsequent projects.
+
+\subsection{Layer 4: Documentation and Replication}
+\label{sec:layer-4}
+
+Every tool built under EDD is documented to a standard that enables another person to
+understand, maintain, modify, and replicate the tool without the original builder present.
+This layer ensures that institutional knowledge does not walk out the door when personnel
+transfer. Documentation is not an afterthought---it is a core deliverable of every project.
+
+% =============================================================================
+% SECTION 3: THE CREATOR MINDSET
+% =============================================================================
+\section{The Creator Mindset}
+\label{sec:creator-mindset}
+
+EDD requires a fundamental shift in how personnel interact with AI tools. Most users
+operate as consumers---they use AI to get answers, summarize text, or draft emails.
+EDD trains personnel to operate as creators---using AI to build things that other
+people use.
+
+\subsection{Consumer vs Creator}
+\label{sec:consumer-vs-creator}
+
+\begin{longtable}{@{}p{3cm}p{5cm}p{5.5cm}@{}}
+\toprule
+\textbf{Dimension} & \textbf{Consumer} & \textbf{Creator} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Dimension} & \textbf{Consumer} & \textbf{Creator} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+\textbf{Output} & Answers for yourself & Tools for others \\
+\midrule
+\textbf{Interaction} & Single prompt, single response & Iterative conversation toward a build \\
+\midrule
+\textbf{Scope} & Personal productivity & Institutional capability \\
+\midrule
+\textbf{Duration} & One-time use & Persistent, maintained artifact \\
+\midrule
+\textbf{Accountability} & None---private use & Documented, reviewed, and sustained \\
+\midrule
+\textbf{Knowledge transfer} & None & Documentation package enables replication \\
+\end{longtable}
+
+\subsection{The Artifact Test}
+\label{sec:artifact-test}
+
+The simplest way to determine whether someone is operating as a consumer or a creator:
+
+\begin{sopblockquote}
+\textbf{Does your AI interaction produce an artifact that someone else can use?}
+
+If the answer is yes---a tool, an application, a system, a workflow---you are creating.
+If the answer is no---a summary, an email draft, a personal answer---you are consuming.
+Both are valid. EDD focuses on creating.
+\end{sopblockquote}
+
+% =============================================================================
+% SECTION 4: COMPLIANCE AND SECURITY
+% =============================================================================
+\section{Compliance and Security}
+\label{sec:compliance-and-security}
+
+All development under this SOP must comply with existing DoW cybersecurity, privacy,
+OPSEC, and records management requirements. AI-assisted development does not create
+new exceptions to these requirements---it operates within them.
+
+\subsection{Data Classification}
+\label{sec:data-classification}
+
+EDD tools handle \textbf{unclassified data only}. The following data types are
+prohibited from use in AI-assisted development:
+
+\calloutbox{Prohibited Data}{%
+\begin{itemize}
+  \item Classified information (any level)
+  \item Controlled Unclassified Information (CUI) unless the platform is CUI-authorized
+  \item Personally Identifiable Information (PII) unless a Privacy Impact Assessment has been completed
+  \item Protected Health Information (PHI)
+  \item For Official Use Only (FOUO) data in non-authorized environments
+  \item Operational plans, force movement data, or intelligence products
+\end{itemize}}
+
+\subsection{Privacy Requirements}
+\label{sec:privacy-requirements}
+
+Tools that collect, store, process, or display information about individuals must comply
+with DoW privacy directives. The following apply:
+
+\subsubsection{Privacy Impact Assessment (PIA)}
+
+Required for any tool that collects or maintains PII. A PIA threshold analysis must be
+completed during the Compliance Review phase (Phase 2) to determine whether a full PIA
+is required.
+
+\subsubsection{System of Records Notice (SORN)}
+
+If the tool creates a new system of records retrievable by a personal identifier, a SORN
+must be published in the Federal Register before the tool goes into production use.
+
+\subsubsection{Appeals and Redress}
+
+Any tool that makes decisions affecting individuals must include a mechanism for
+individuals to review, contest, and correct information about themselves.
+
+\subsection{Cybersecurity}
+\label{sec:cybersecurity}
+
+\subsubsection{Approved AI Tools}
+\label{sec:approved-ai-tools}
+
+The following AI tools are approved for use in EDD development. Authorization levels
+indicate the scope of approved use:
+
+\begin{longtable}{@{}p{3cm}p{4cm}p{6.5cm}@{}}
+\toprule
+\textbf{Tool} & \textbf{Authorization Level} & \textbf{Notes} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Tool} & \textbf{Authorization Level} & \textbf{Notes} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+M365 Copilot & Enterprise-authorized & Available through existing DoW M365 licensing; data stays within tenant \\
+\midrule
+Azure OpenAI & Enterprise-authorized & Requires Azure Government subscription; FedRAMP High authorized \\
+\midrule
+Copilot Studio & Enterprise-authorized & Low-code bot builder within M365 ecosystem \\
+\midrule
+Gemini & Approved with restrictions & Unclassified use only; do not input PII or CUI \\
+\midrule
+Claude & Approved with restrictions & Unclassified use only; do not input PII or CUI \\
+\midrule
+C3 AI & Enterprise-authorized & DoW Enterprise AI platform; available through enterprise agreement \\
+\end{longtable}
+
+\subsubsection{Approved Platforms}
+\label{sec:approved-platforms}
+
+Tools built under EDD must be deployed on approved platforms:
+
+\begin{longtable}{@{}p{3.5cm}p{5cm}p{5cm}@{}}
+\toprule
+\textbf{Platform} & \textbf{Use Case} & \textbf{Authorization} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Platform} & \textbf{Use Case} & \textbf{Authorization} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Microsoft Power Platform & Low-code applications, automation, dashboards & Enterprise-authorized within DoW M365 \\
+\midrule
+SharePoint Online & Web-based tools, document management, portals & Enterprise-authorized within DoW M365 \\
+\midrule
+Azure Government & Cloud-hosted applications, APIs, databases & FedRAMP High; requires subscription \\
+\midrule
+GitHub (public) & Open-source projects, static sites, documentation & Unclassified public release only \\
+\end{longtable}
+
+\subsubsection{When an ATO Is Required}
+\label{sec:ato-requirements}
+
+An Authority to Operate (ATO) is required when a tool:
+
+\begin{itemize}
+  \item Connects to or operates on the DoW Information Network (DoWIN)
+  \item Processes, stores, or transmits CUI
+  \item Integrates with other authorized information systems
+  \item Operates outside the inherited authorization boundary of its host platform
+\end{itemize}
+
+Tools built entirely within the inherited authorization boundary of an approved platform
+(e.g., a Power App within DoW M365) typically do not require a separate ATO but must
+still comply with the platform's security controls.
+
+\subsubsection{Security Controls}
+\label{sec:security-controls}
+
+All tools must implement security controls appropriate to their data sensitivity and
+deployment environment, including:
+
+\begin{itemize}
+  \item Authentication via CAC or enterprise identity provider
+  \item Role-based access control (RBAC) where applicable
+  \item Audit logging of user actions and data access
+  \item Input validation and output encoding
+  \item Encryption of data in transit (TLS 1.2+) and at rest
+\end{itemize}
+
+\subsection{OPSEC}
+\label{sec:opsec}
+
+Developers must apply OPSEC principles throughout the development lifecycle. Do not
+include operational details, unit-specific procedures, force structure information,
+or vulnerability assessments in AI prompts, tool documentation, or publicly accessible
+code repositories. When in doubt, consult your organization's OPSEC officer before
+proceeding.
+
+\subsection{Records Management}
+\label{sec:records-management}
+
+Development artifacts (documentation packages, source code, deployment records) are
+official records and must be managed in accordance with DoW records management directives.
+Retain all project documentation for the duration specified by the applicable records
+schedule. The documentation package produced in Phase 5 serves as the primary record
+of each development effort.
+
+\subsection{Incident Response}
+\label{sec:incident-response}
+
+If a security incident occurs involving an EDD tool (data breach, unauthorized access,
+malware, or compromise of an AI tool), personnel must:
+
+\begin{enumerate}
+  \item Immediately cease use of the affected tool
+  \item Report the incident to the organization's Cybersecurity Office within 1 hour
+  \item Preserve all logs, artifacts, and evidence related to the incident
+  \item Notify the chain of command and the EDD Program Coordinator
+  \item Cooperate with the incident response investigation
+  \item Do not attempt to remediate the vulnerability without authorization
+\end{enumerate}
+
+% =============================================================================
+% SECTION 5: DEVELOPMENT PREREQUISITES
+% =============================================================================
+\section{Development Prerequisites}
+\label{sec:development-prerequisites}
+
+\subsection{Required}
+\label{sec:required}
+
+\begin{itemize}
+  \item Completed EDD training (minimum: AI Fluency Fundamentals)
+  \item Supervisor approval for the specific development project
+  \item Access to at least one approved AI tool
+  \item Access to at least one approved deployment platform
+  \item A defined problem that meets the criteria in Phase 1
+  \item Completed Problem Definition Template
+\end{itemize}
+
+\subsection{Not Required}
+\label{sec:not-required}
+
+\begin{itemize}
+  \item A background in software engineering or computer science
+  \item Prior programming experience
+  \item A contract, funding, or acquisition document
+  \item An IT service request or development ticket
+  \item Permission from a centralized IT authority (unless ATO is required)
+\end{itemize}
+
+\subsection{Obtaining Access}
+\label{sec:obtaining-access}
+
+\subsubsection{Microsoft 365}
+
+Most DoW personnel already have M365 accounts. Power Platform access may require
+a license assignment through your organization's M365 administrator. Contact your
+local IT support to verify your license includes Power Apps, Power Automate, and
+Copilot Studio.
+
+\subsubsection{AI Tools}
+
+The following table provides recommendations for obtaining access to approved AI tools:
+
+\begin{longtable}{@{}p{2.5cm}p{5.5cm}p{5.5cm}@{}}
+\toprule
+\textbf{Tool} & \textbf{How to Obtain Access} & \textbf{Recommendation} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Tool} & \textbf{How to Obtain Access} & \textbf{Recommendation} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+M365 Copilot & Enterprise license assignment through M365 admin & Start here if your organization has Copilot licenses \\
+\midrule
+Azure OpenAI & Azure Government subscription; request through cloud team & Best for custom API-driven development \\
+\midrule
+Copilot Studio & Included with Power Platform licensing & Best for building conversational AI assistants \\
+\midrule
+Gemini & Web access at gemini.google.com (unclassified only) & Good general-purpose coding assistant \\
+\midrule
+Claude & Web access at claude.ai (unclassified only) & Strong for complex reasoning and documentation \\
+\midrule
+C3 AI & Enterprise agreement; contact your AI/ML program office & Best for data-heavy enterprise applications \\
+\end{longtable}
+
+% =============================================================================
+% SECTION 6: DEVELOPMENT WORKFLOW
+% =============================================================================
+\section{Development Workflow}
+\label{sec:development-workflow}
+
+The EDD development workflow consists of eight phases. Each phase has defined inputs,
+outputs, and time estimates. Phases are sequential, but iteration between adjacent
+phases is expected and encouraged.
+
+% --- Phase 1 ---
+\subsection{Phase 1: Problem Definition}
+\label{sec:phase-1}
+
+\noindent\textit{Estimated time: 2--4 hours}
+
+Identify and document the problem you intend to solve. Complete the Problem
+Definition Template. Define the current state, desired state, affected users,
+and success criteria. A well-defined problem is the single strongest predictor
+of a successful build.
+
+\textbf{Output:} Completed Problem Definition Template.
+
+% --- Phase 2 ---
+\subsection{Phase 2: Compliance Review}
+\label{sec:phase-2}
+
+\noindent\textit{Estimated time: 1--4 hours}
+
+Review the proposed tool against compliance requirements. Complete the Compliance
+Checklist. Determine data classification, privacy requirements, and whether an
+ATO is needed. Identify the appropriate deployment platform. Obtain supervisor
+approval to proceed.
+
+\textbf{Output:} Completed Compliance Checklist with supervisor signature.
+
+% --- Phase 3 ---
+\subsection{Phase 3: Rapid Prototyping}
+\label{sec:phase-3}
+
+\noindent\textit{Estimated time: 8--20 hours}
+
+Build the tool using AI-assisted development. Start with the minimum viable
+feature set identified in Phase 1. Use iterative prompting to develop, test,
+and refine functionality. Maintain a development journal documenting key
+decisions, prompts that worked, and problems encountered.
+
+\textbf{Output:} Working prototype with core functionality.
+
+% --- Phase 4 ---
+\subsection{Phase 4: User Testing}
+\label{sec:phase-4}
+
+\noindent\textit{Estimated time: 4--8 hours}
+
+Put the prototype in front of actual users. Observe how they interact with it.
+Collect feedback on usability, functionality, and missing features. Iterate on
+the prototype based on user feedback. A minimum of three users should test the
+tool before proceeding to documentation.
+
+\textbf{Output:} User-tested prototype with documented feedback and revisions.
+
+% --- Phase 5 ---
+\subsection{Phase 5: Documentation}
+\label{sec:phase-5}
+
+\noindent\textit{Estimated time: 20--40 hours (first project) / 8--16 hours (subsequent)}
+
+Produce the documentation package. This is the most critical phase for institutional
+value. The documentation must enable someone who has never seen the tool to understand
+what it does, how it works, how to maintain it, how to modify it, and how to
+replicate it. First-time builders should expect to spend significantly more time
+on documentation; the investment decreases with experience.
+
+\textbf{Output:} Complete documentation package.
+
+% --- Phase 6 ---
+\subsection{Phase 6: QA Review}
+\label{sec:phase-6}
+
+\noindent\textit{Estimated time: 2--4 hours}
+
+A designated QA Reviewer examines the tool and its documentation against the
+QA Checklist. The reviewer verifies functionality, security compliance,
+documentation completeness, and readiness for deployment. The reviewer must
+not be the same person who built the tool.
+
+\textbf{Output:} Completed QA Checklist with reviewer sign-off or remediation requirements.
+
+% --- Phase 7 ---
+\subsection{Phase 7: Deployment}
+\label{sec:phase-7}
+
+\noindent\textit{Estimated time: 1--2 hours}
+
+Deploy the tool to its production environment. Register the tool in the Tool
+Registry. Communicate availability to intended users. Establish the sustainment
+plan, including who is responsible for ongoing maintenance and how issues will
+be reported and resolved.
+
+\textbf{Output:} Deployed tool, completed Tool Registry entry, and sustainment plan.
+
+% --- Phase 8 ---
+\subsection{Phase 8: Sustainment}
+\label{sec:phase-8}
+
+\noindent\textit{Estimated time: Ongoing}
+
+Maintain the tool in its operational environment. Monitor usage metrics, address
+user-reported issues, apply updates as needed, and update documentation to reflect
+changes. Plan for turnover: when the original builder departs, the documentation
+package must be sufficient for a successor to assume maintenance responsibility.
+
+\textbf{Output:} Operational tool with current documentation and identified maintainer.
+
+% =============================================================================
+% SECTION 7: ROLES AND RESPONSIBILITIES
+% =============================================================================
+\section{Roles and Responsibilities}
+\label{sec:roles-and-responsibilities}
+
+\subsection{Developer}
+\label{sec:role-developer}
+
+The individual who builds the tool. Responsible for completing all eight phases of the
+development workflow, maintaining compliance with this SOP, producing the documentation
+package, and sustaining the tool through its operational lifecycle. Any personnel member
+who has completed the required training and received supervisor approval may serve as a
+developer.
+
+\subsection{QA Reviewer}
+\label{sec:role-qa-reviewer}
+
+The individual who reviews the tool and documentation in Phase 6. The QA Reviewer must
+be a different person from the developer. Designation criteria:
+
+\begin{itemize}
+  \item Has completed EDD training (minimum: AI Fluency Fundamentals)
+  \item Has built at least one tool under EDD, or has been designated by the Program Coordinator
+  \item Is familiar with the compliance requirements in Section~\ref{sec:compliance-and-security}
+  \item Has no conflict of interest with the tool being reviewed
+\end{itemize}
+
+\subsection{Supervisor}
+\label{sec:role-supervisor}
+
+The developer's direct supervisor. Responsible for approving the development project,
+allocating duty time for development, and ensuring the tool meets organizational needs.
+Supervisors are required to complete the Supervisor Orientation before approving their
+first EDD project. This orientation ensures supervisors understand the framework, can
+evaluate proposals, and know what good AI-assisted output looks like.
+
+\subsection{Program Coordinator}
+\label{sec:role-coordinator}
+
+The individual responsible for managing the EDD program at the organizational level.
+Maintains the Tool Registry, designates QA Reviewers, coordinates training, tracks
+program metrics, and reports program status to leadership. The Program Coordinator
+may also serve as a developer or QA Reviewer.
+
+\subsection{Cybersecurity Office}
+\label{sec:role-cybersecurity}
+
+The organization's cybersecurity team. Provides guidance on security controls, reviews
+ATO requirements, responds to security incidents involving EDD tools, and validates
+that tools comply with cybersecurity directives. Consulted during Phase 2 (Compliance
+Review) for any tool that connects to the network or processes sensitive data.
+
+\subsection{Privacy Officer}
+\label{sec:role-privacy}
+
+The organization's designated privacy official. Reviews PIA threshold analyses,
+advises on SORN requirements, and ensures tools that handle PII comply with DoW
+privacy directives. Consulted during Phase 2 for any tool that collects, stores,
+or displays information about individuals.
+
+% =============================================================================
+% SECTION 8: TRAINING REQUIREMENTS
+% =============================================================================
+\section{Training Requirements}
+\label{sec:training-requirements}
+
+The v5 curriculum comprises five courses organized by audience and prerequisite chain.
+
+\subsection{Required}
+\label{sec:training-required}
+
+The following course is the universal prerequisite and must be completed before beginning any EDD activity:
+
+\begin{longtable}{@{}p{4cm}p{3cm}p{2cm}p{4.5cm}@{}}
+\toprule
+\textbf{Course} & \textbf{Audience} & \textbf{Duration} & \textbf{Prerequisite} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Course} & \textbf{Audience} & \textbf{Duration} & \textbf{Prerequisite} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+AI Fluency Fundamentals & All personnel & 2 hours & None (universal prerequisite) \\
+\end{longtable}
+
+\subsection{Recommended for Builders}
+\label{sec:training-recommended}
+
+The following courses are recommended/elective for personnel who will build tools:
+
+\begin{longtable}{@{}p{3.5cm}p{3.5cm}p{2cm}p{4.5cm}@{}}
+\toprule
+\textbf{Course} & \textbf{Audience} & \textbf{Duration} & \textbf{Prerequisite} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Course} & \textbf{Audience} & \textbf{Duration} & \textbf{Prerequisite} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Builder Orientation & Aspiring builders & 2 hours & AI Fluency Fundamentals \\
+\midrule
+Platform Training & Builders & 4 hours & Builder Orientation \\
+\midrule
+Advanced Workshop & Experienced builders & 4 hours & At least one deployed tool \\
+\end{longtable}
+
+\subsection{Recommended for Leadership}
+\label{sec:training-leadership}
+
+The following course is recommended for supervisors and leadership personnel:
+
+\begin{longtable}{@{}p{3.5cm}p{4.5cm}p{2cm}p{3.5cm}@{}}
+\toprule
+\textbf{Course} & \textbf{Audience} & \textbf{Duration} & \textbf{Prerequisite} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Course} & \textbf{Audience} & \textbf{Duration} & \textbf{Prerequisite} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Supervisor Orientation & Supervisors approving EDD projects & 30 minutes & None \\
+\end{longtable}
+
+\subsection{Six 2011-Level Skills}
+\label{sec:six-skills}
+
+The training curriculum develops six core competencies defined in the 2011-level skills framework.
+These skills represent the capabilities that separate effective AI-assisted builders from casual AI users:
+
+\begin{enumerate}
+  \item \textbf{Context Assembly}---The ability to gather and structure the right information so AI can produce useful output.
+  \item \textbf{Quality Judgment}---The ability to evaluate AI-generated output for correctness, completeness, and fitness for purpose.
+  \item \textbf{Task Decomposition}---The ability to break complex problems into discrete, AI-addressable tasks.
+  \item \textbf{Iterative Refinement}---The ability to systematically improve AI output through structured feedback cycles.
+  \item \textbf{Workflow Integration}---The ability to embed AI-assisted processes into existing organizational workflows.
+  \item \textbf{Frontier Recognition}---The ability to identify where AI capability boundaries lie and adjust approach accordingly.
+\end{enumerate}
+
+\subsection{Instructor Certification}
+\label{sec:instructor-certification}
+
+Instructors for each course must meet the following certification requirements:
+
+\begin{longtable}{@{}p{3.5cm}p{10cm}@{}}
+\toprule
+\textbf{Course} & \textbf{Requirements} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Course} & \textbf{Requirements} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+AI Fluency Fundamentals & Completed course AND at least one builder course \\
+\midrule
+Builder Orientation & Completed all builder courses AND deployed at least one tool \\
+\midrule
+Platform Training & Completed all builder courses, deployed at least one tool, plus Power Platform proficiency \\
+\midrule
+Advanced Workshop & Completed all builder courses, deployed at least one tool, plus served as QA reviewer for 2+ tools \\
+\midrule
+Supervisor Orientation & Any qualified AI Fluency Fundamentals instructor \\
+\end{longtable}
+
+\textbf{Certification process:} Complete course as student $\rightarrow$ Build/deploy tool $\rightarrow$
+Shadow instructor $\rightarrow$ Co-teach $\rightarrow$ Certification from Program Coordinator.
+
+% =============================================================================
+% SECTION 9: METRICS AND ASSESSMENT
+% =============================================================================
+\section{Metrics and Assessment}
+\label{sec:metrics-and-assessment}
+
+Metrics serve two purposes: demonstrating the value of individual tools and assessing
+the health of the overall EDD program. All metrics should be collected consistently
+and reported to leadership quarterly.
+
+\subsection{Tool-Level Metrics}
+\label{sec:tool-level-metrics}
+
+Collected for each deployed tool:
+
+\begin{longtable}{@{}p{3.5cm}p{4cm}p{6cm}@{}}
+\toprule
+\textbf{Metric} & \textbf{What It Measures} & \textbf{Collection Method} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Metric} & \textbf{What It Measures} & \textbf{Collection Method} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Active users & Adoption and utility & Platform analytics or usage logs \\
+\midrule
+Time saved per use & Efficiency gain & User survey or workflow comparison \\
+\midrule
+Error rate reduction & Quality improvement & Before/after error tracking \\
+\midrule
+Build time & Development efficiency & Developer-reported hours \\
+\midrule
+Development cost & Cost avoidance & Hours multiplied by composite labor rate \\
+\midrule
+User satisfaction & Quality of the solution & Post-deployment survey \\
+\end{longtable}
+
+\subsection{Program-Level Metrics}
+\label{sec:program-level-metrics}
+
+Collected across all EDD activity within the organization:
+
+\begin{longtable}{@{}p{3.5cm}p{3.5cm}p{6.5cm}@{}}
+\toprule
+\textbf{Metric} & \textbf{What It Measures} & \textbf{Target} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Metric} & \textbf{What It Measures} & \textbf{Target} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Number of trained personnel & Pipeline capacity & Growing quarter-over-quarter \\
+\midrule
+Number of deployed tools & Program output & Growing quarter-over-quarter \\
+\midrule
+Completion rate (started vs deployed) & Process effectiveness & $>$70\% of started projects reach deployment \\
+\midrule
+Documentation compliance rate & Quality assurance & 100\% of deployed tools have complete packages \\
+\midrule
+Total estimated cost avoidance & Return on investment & Reported quarterly to leadership \\
+\midrule
+Security incidents & Risk management & Zero incidents per quarter \\
+\end{longtable}
+
+% =============================================================================
+% SECTION 10: SCALING AND ADOPTION
+% =============================================================================
+\section{Scaling and Adoption}
+\label{sec:scaling-and-adoption}
+
+\subsection{90-Day Pilot Model}
+\label{sec:pilot-model}
+
+Organizations adopting EDD should begin with a 90-day pilot. The pilot provides a
+controlled environment to validate the framework, train initial personnel, produce
+the first tools, and establish organizational processes before expanding.
+
+\begin{longtable}{@{}p{3cm}p{2.5cm}p{8cm}@{}}
+\toprule
+\textbf{Phase} & \textbf{Timeline} & \textbf{Activities} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Phase} & \textbf{Timeline} & \textbf{Activities} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Setup & Days 1--14 & Designate Program Coordinator, identify 2--4 pilot developers, conduct training, verify platform access \\
+\midrule
+First builds & Days 15--60 & Pilot developers complete Phases 1--5 on their first projects with coaching support \\
+\midrule
+QA and deployment & Days 61--75 & QA reviews, remediation, deployment, and Tool Registry entries \\
+\midrule
+Assessment & Days 76--90 & Collect metrics, brief leadership, decide on expansion \\
+\end{longtable}
+
+\subsection{Success / Failure Criteria}
+\label{sec:success-failure-criteria}
+
+\begin{minipage}[t]{0.47\textwidth}
+\subsubsection*{Success Criteria}
+\begin{itemize}
+  \item At least 2 tools deployed and in active use
+  \item All deployed tools have complete documentation packages
+  \item Zero security incidents during the pilot
+  \item Measurable time savings or error reduction demonstrated
+  \item Leadership endorsement for expansion
+\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.47\textwidth}
+\subsubsection*{Failure Indicators}
+\begin{itemize}
+  \item No tools reach deployment within 90 days
+  \item Security or compliance violations occur
+  \item Developers cannot obtain platform access
+  \item Leadership does not allocate duty time for development
+  \item Documentation requirements are waived or ignored
+\end{itemize}
+\end{minipage}
+
+\bigskip
+
+\subsection{Tool Registry}
+\label{sec:tool-registry}
+
+The Tool Registry is a centralized record of all tools built under EDD within the
+organization. Every deployed tool must have an entry. The registry tracks:
+
+\begin{itemize}
+  \item Tool name and description
+  \item Developer and current maintainer
+  \item Deployment platform and URL
+  \item Data classification
+  \item User count and status (active, deprecated, retired)
+  \item Documentation package location
+  \item Date deployed and last updated
+\end{itemize}
+
+The Program Coordinator maintains the Tool Registry and reviews it monthly to identify
+tools that need updates, lack a maintainer, or should be retired.
+
+\subsection{Expansion Model}
+\label{sec:expansion-model}
+
+After a successful pilot, expansion follows a train-the-trainer model:
+
+\begin{enumerate}
+  \item Pilot developers become QA Reviewers and mentors for the next cohort
+  \item Each cohort is 2--4 new developers with defined projects
+  \item New cohorts begin every 60--90 days
+  \item The Program Coordinator scales training, QA capacity, and registry management as the program grows
+  \item Cross-organizational sharing is encouraged through the Tool Registry and documentation standards
+\end{enumerate}
+
+% =============================================================================
+% SECTION 11: REFERENCES
+% =============================================================================
+\section{References}
+\label{sec:references}
+
+\subsection{Policy and Regulatory References}
+
+\begin{itemize}
+  \item DoW Directive 8140.01---Cyberspace Workforce Management
+  \item DoW Instruction 5000.87---Operation of the Software Acquisition Pathway
+  \item DoW Instruction 5200.48---Controlled Unclassified Information (CUI)
+  \item DoW Instruction 5400.11---DoW Privacy and Civil Liberties Programs
+  \item DoW Instruction 8500.01---Cybersecurity
+  \item DoW Instruction 8510.01---Risk Management Framework (RMF) for DoW Systems
+  \item DoW Instruction 8582.01---Security of Non-DoW Information Systems
+  \item DoW Directive 3020.26---Department of War Continuity Policy
+  \item DoWM 5200.01---DoW Information Security Program
+  \item SECNAV M-5210.1---Department of the Navy Records Management Program
+  \item NIST SP 800-53 Rev.\ 5---Security and Privacy Controls for Information Systems and Organizations
+  \item OMB Circular A-130---Managing Information as a Strategic Resource
+  \item Executive Order 14110---Safe, Secure, and Trustworthy Development and Use of Artificial Intelligence
+  \item DoW AI Strategy, January 2026
+\end{itemize}
+
+\subsection{Research Foundation}
+
+\begin{itemize}
+  \item Dell'Acqua, F., et al.\ (2023). ``Navigating the Jagged Technological Frontier.'' Harvard Business School / BCG. Study of 758 consultants demonstrating the jagged frontier of AI capability.
+  \item Brynjolfsson, E., Li, D., \& Raymond, L.\ (2025). ``Generative AI at Work.'' Stanford / MIT. Study of 5,172 customer-support agents demonstrating skill-leveling effects of AI assistance.
+  \item Mollick, E.\ (2026). ``Management as AI Superpower.'' Wharton School. Research on the delegation equation and management capabilities in AI-assisted work.
+  \item OpenAI (2025). ``GDPval: Measuring Economic Value of AI.'' Study of 1,320 tasks establishing expert parity benchmarks.
+  \item UK Government Digital Services (2025). AI-assisted development deployment across 20,000 employees, demonstrating government-scale deployment patterns.
+  \item Microsoft Work Trend Index. Study of 300,000+ employees identifying 80\% tool abandonment rate without structured training.
+  \item Stanford Digital Economy Lab. Research on the apprenticeship crisis and implications for AI-assisted skill development.
+\end{itemize}
+
+% =============================================================================
+% SECTION 12: APPENDICES
+% =============================================================================
+\section{Appendices}
+\label{sec:appendices}
+
+The following templates are used throughout the EDD development workflow. Download
+each template and complete it during the appropriate phase.
+
+\begin{longtable}{@{}p{4cm}p{4.5cm}p{5cm}@{}}
+\toprule
+\textbf{Template} & \textbf{Used In} & \textbf{Filename} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Template} & \textbf{Used In} & \textbf{Filename} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Problem Definition Template & Phase 1: Problem Definition & problem-definition.md \\
+\midrule
+QA Checklist & Phase 6: QA Review & qa-checklist.md \\
+\midrule
+Tool Registry Entry & Phase 7: Deployment & tool-registry-entry.md \\
+\midrule
+PIA Threshold Analysis & Phase 2: Compliance Review & documentation-package-outline.md \\
+\midrule
+Compliance Checklist & Phase 2: Compliance Review & development-journal.md \\
+\end{longtable}
+
+% ---------------------------------------------------------------------------
+% APPENDIX A: Problem Definition Template
+% ---------------------------------------------------------------------------
+\newpage
+\appendix
+\section{Problem Definition Template}
+\label{app:problem-definition}
+
+\begin{longtable}{@{}p{4cm}p{9.5cm}@{}}
+\toprule
+\textbf{Field} & \textbf{Entry} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Field} & \textbf{Entry} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Tool Name          & \rule{9cm}{0.4pt} \\
+\midrule
+Developer Name     & \rule{9cm}{0.4pt} \\
+\midrule
+Date               & \rule{9cm}{0.4pt} \\
+\midrule
+Organization       & \rule{9cm}{0.4pt} \\
+\midrule
+Problem Statement  & Describe the problem in 2--3 sentences. What is happening now that is inefficient, error-prone, or unsustainable? \\
+\midrule
+Current State      & How is this task currently performed? What tools are used? How long does it take? \\
+\midrule
+Desired State      & What does the ideal workflow look like after the tool is deployed? \\
+\midrule
+Affected Users     & Who will use this tool? How many users? What are their roles? \\
+\midrule
+Success Criteria   & How will you know the tool works? Define 2--3 measurable outcomes. \\
+\midrule
+Data Requirements  & What data will the tool process? What is the classification level? Does it include PII? \\
+\midrule
+Deployment Platform & Where will the tool be hosted? (e.g., SharePoint, Power Platform, Azure) \\
+\midrule
+Estimated Timeline & How many hours/days do you expect to invest in Phases 1--7? \\
+\midrule
+Supervisor Approval & Name, rank, signature, date \\
+\end{longtable}
+
+% ---------------------------------------------------------------------------
+% APPENDIX B: QA Review Checklist
+% ---------------------------------------------------------------------------
+\newpage
+\section{QA Review Checklist}
+\label{app:qa-checklist}
+
+\begin{longtable}{@{}p{0.6cm}p{8cm}p{1.5cm}p{3cm}@{}}
+\toprule
+\textbf{\#} & \textbf{Item} & \textbf{Pass/Fail} & \textbf{Notes} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{\#} & \textbf{Item} & \textbf{Pass/Fail} & \textbf{Notes} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+\multicolumn{4}{l}{\textbf{Functionality}} \\
+\midrule
+1 & Tool performs all functions described in the Problem Definition Template & & \\
+\midrule
+2 & All user-facing features work without errors & & \\
+\midrule
+3 & Edge cases and error conditions are handled gracefully & & \\
+\midrule
+\multicolumn{4}{l}{\textbf{Security \& Compliance}} \\
+\midrule
+4 & Tool handles only unclassified data & & \\
+\midrule
+5 & No PII is processed without a completed PIA & & \\
+\midrule
+6 & Authentication and access controls are implemented & & \\
+\midrule
+7 & Compliance Checklist is complete and signed & & \\
+\midrule
+\multicolumn{4}{l}{\textbf{Documentation}} \\
+\midrule
+8 & Documentation package is complete & & \\
+\midrule
+9 & A new person could maintain the tool using only the documentation & & \\
+\midrule
+10 & User guide is clear and accurate & & \\
+\midrule
+11 & Technical documentation describes architecture and dependencies & & \\
+\midrule
+\multicolumn{4}{l}{\textbf{Deployment Readiness}} \\
+\midrule
+12 & Tool is deployed on an approved platform & & \\
+\midrule
+13 & Sustainment plan identifies a maintainer & & \\
+\midrule
+14 & Tool Registry entry is complete & & \\
+\midrule
+\multicolumn{4}{l}{} \\
+\midrule
+\multicolumn{2}{l}{\textbf{Reviewer Name / Signature:}} & \multicolumn{2}{l}{\rule{5cm}{0.4pt}} \\
+\midrule
+\multicolumn{2}{l}{\textbf{Date:}} & \multicolumn{2}{l}{\rule{5cm}{0.4pt}} \\
+\midrule
+\multicolumn{2}{l}{\textbf{Recommendation:}} & \multicolumn{2}{l}{$\square$ Approve \quad $\square$ Remediate} \\
+\end{longtable}
+
+% ---------------------------------------------------------------------------
+% APPENDIX C: Tool Registry Entry
+% ---------------------------------------------------------------------------
+\newpage
+\section{Tool Registry Entry}
+\label{app:tool-registry-entry}
+
+\begin{longtable}{@{}p{4.5cm}p{9cm}@{}}
+\toprule
+\textbf{Field} & \textbf{Entry} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Field} & \textbf{Entry} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Tool Name                & \rule{8.5cm}{0.4pt} \\
+\midrule
+Description              & Brief description of what the tool does (1--2 sentences) \\
+\midrule
+Developer                & Name, rank, organization \\
+\midrule
+Current Maintainer       & Name, rank, organization \\
+\midrule
+Deployment Platform      & (e.g., SharePoint, Power Platform, Azure, GitHub) \\
+\midrule
+URL / Location           & \rule{8.5cm}{0.4pt} \\
+\midrule
+Data Classification      & (e.g., Unclassified, CUI) \\
+\midrule
+PII Handled              & Yes / No \\
+\midrule
+ATO Required             & Yes / No \\
+\midrule
+User Count               & \rule{8.5cm}{0.4pt} \\
+\midrule
+Status                   & Active / Deprecated / Retired \\
+\midrule
+Date Deployed            & \rule{8.5cm}{0.4pt} \\
+\midrule
+Last Updated             & \rule{8.5cm}{0.4pt} \\
+\midrule
+Documentation Location   & Path or URL to the documentation package \\
+\midrule
+Sustainment Plan         & Who maintains it and how issues are reported \\
+\end{longtable}
+
+% ---------------------------------------------------------------------------
+% APPENDIX D: PIA Threshold Analysis
+% ---------------------------------------------------------------------------
+\newpage
+\section{PIA Threshold Analysis}
+\label{app:pia-threshold}
+
+Complete this analysis during Phase 2 (Compliance Review) for every tool. If any answer in Section~2 is ``Yes,'' consult the Privacy Officer to determine whether a full PIA is required.
+
+\begin{longtable}{@{}p{0.6cm}p{10cm}p{2.5cm}@{}}
+\toprule
+\textbf{\#} & \textbf{Question} & \textbf{Yes / No} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{\#} & \textbf{Question} & \textbf{Yes / No} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+\multicolumn{3}{l}{\textbf{Section 1: System Description}} \\
+\midrule
+1 & What is the name of the tool? & \rule{2cm}{0.4pt} \\
+\midrule
+2 & What is the purpose of the tool? & \rule{2cm}{0.4pt} \\
+\midrule
+3 & Who are the intended users? & \rule{2cm}{0.4pt} \\
+\midrule
+\multicolumn{3}{l}{\textbf{Section 2: PII Determination}} \\
+\midrule
+4 & Does the tool collect, store, or display names of individuals? & \\
+\midrule
+5 & Does the tool collect, store, or display Social Security Numbers or DoD ID Numbers? & \\
+\midrule
+6 & Does the tool collect, store, or display contact information (email, phone, address)? & \\
+\midrule
+7 & Does the tool collect, store, or display personnel records or performance data? & \\
+\midrule
+8 & Does the tool collect, store, or display medical or health information? & \\
+\midrule
+9 & Does the tool collect, store, or display financial information? & \\
+\midrule
+10 & Does the tool make decisions that affect individuals (assignments, evaluations, access)? & \\
+\midrule
+\multicolumn{3}{l}{\textbf{Section 3: Determination}} \\
+\midrule
+\multicolumn{2}{l}{If all answers in Section 2 are ``No'':} & Full PIA not required \\
+\midrule
+\multicolumn{2}{l}{If any answer in Section 2 is ``Yes'':} & Consult Privacy Officer \\
+\midrule
+\multicolumn{3}{l}{} \\
+\midrule
+\multicolumn{2}{l}{\textbf{Analyst Name / Signature:}} & \rule{2cm}{0.4pt} \\
+\midrule
+\multicolumn{2}{l}{\textbf{Date:}} & \rule{2cm}{0.4pt} \\
+\end{longtable}
+
+% ---------------------------------------------------------------------------
+% APPENDIX E: Compliance Checklist
+% ---------------------------------------------------------------------------
+\newpage
+\section{Compliance Checklist}
+\label{app:compliance-checklist}
+
+Complete this checklist during Phase 2 (Compliance Review) before beginning development.
+
+\begin{longtable}{@{}p{0.6cm}p{9cm}p{1.2cm}p{2.5cm}@{}}
+\toprule
+\textbf{\#} & \textbf{Item} & \textbf{Status} & \textbf{Notes} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{\#} & \textbf{Item} & \textbf{Status} & \textbf{Notes} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+\multicolumn{4}{l}{\textbf{Data Classification}} \\
+\midrule
+1 & Tool processes only unclassified data & & \\
+\midrule
+2 & No CUI will be processed (or platform is CUI-authorized) & & \\
+\midrule
+3 & No classified data will be processed at any level & & \\
+\midrule
+\multicolumn{4}{l}{\textbf{Privacy}} \\
+\midrule
+4 & PIA Threshold Analysis completed (Appendix~\ref{app:pia-threshold}) & & \\
+\midrule
+5 & Privacy Officer consulted (if PII is involved) & & \\
+\midrule
+6 & SORN requirements reviewed (if applicable) & & \\
+\midrule
+\multicolumn{4}{l}{\textbf{Cybersecurity}} \\
+\midrule
+7 & Tool will be deployed on an approved platform & & \\
+\midrule
+8 & AI tools used are on the approved list & & \\
+\midrule
+9 & ATO requirement determined (required / not required) & & \\
+\midrule
+10 & Cybersecurity Office consulted (if connecting to DoWIN) & & \\
+\midrule
+\multicolumn{4}{l}{\textbf{OPSEC}} \\
+\midrule
+11 & No operational details in AI prompts or code & & \\
+\midrule
+12 & No force structure or vulnerability data exposed & & \\
+\midrule
+\multicolumn{4}{l}{\textbf{Records Management}} \\
+\midrule
+13 & Records retention schedule identified & & \\
+\midrule
+14 & Documentation will be stored in an approved location & & \\
+\midrule
+\multicolumn{4}{l}{\textbf{Approval}} \\
+\midrule
+\multicolumn{2}{l}{\textbf{Developer Name / Signature:}} & \multicolumn{2}{l}{\rule{4cm}{0.4pt}} \\
+\midrule
+\multicolumn{2}{l}{\textbf{Supervisor Name / Signature:}} & \multicolumn{2}{l}{\rule{4cm}{0.4pt}} \\
+\midrule
+\multicolumn{2}{l}{\textbf{Date:}} & \multicolumn{2}{l}{\rule{4cm}{0.4pt}} \\
+\end{longtable}
+
+% =============================================================================
+\end{document}

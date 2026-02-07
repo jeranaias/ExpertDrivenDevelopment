@@ -7,7 +7,7 @@
 [![Classification](https://img.shields.io/badge/Classification-UNCLASSIFIED-green.svg)](#classification)
 [![Docs](https://img.shields.io/badge/docs-live-blue.svg)](https://jeranaias.github.io/ExpertDrivenDevelopment/)
 
-[**View Training Site**](https://jeranaias.github.io/ExpertDrivenDevelopment/) | [**Read the SOP**](pdf/SOP_Expert_Driven_Development_v3.pdf) | [**Download PDFs**](pdf/)
+[**View Training Site**](https://jeranaias.github.io/ExpertDrivenDevelopment/) | [**Read the SOP**](pdf/SOP_Expert_Driven_Development_v5.pdf) | [**Download PDFs**](pdf/)
 
 </div>
 
@@ -47,10 +47,10 @@ EDD uses AI as scaffolding to let domain experts build, document, and maintain t
 ## Quick Start
 
 1. **Read the SOP** -- Understand the methodology, governance model, and approval process.
-   [SOP (PDF)](pdf/SOP_Expert_Driven_Development_v3.pdf)
+   [SOP (PDF)](pdf/SOP_Expert_Driven_Development_v5.pdf)
 
 2. **Take Training 1** -- Complete the AI-Fluent Development Orientation to build your first prototype.
-   [Training Curricula (PDF)](pdf/TRAINING_CURRICULA_v3.pdf)
+   [Training Curricula (PDF)](pdf/TRAINING_CURRICULA_v5.pdf)
 
 3. **Pick a problem and build** -- Use the templates to define your problem, plan your tool, and document the result.
    [Templates](templates/)

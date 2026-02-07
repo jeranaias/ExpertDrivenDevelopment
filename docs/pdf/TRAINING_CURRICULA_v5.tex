@@ -1,0 +1,1310 @@
+\documentclass[11pt,letterpaper]{article}
+
+% =============================================================================
+% Packages
+% =============================================================================
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage[colorlinks=true,linkcolor=blue!70!black,urlcolor=blue!70!black]{hyperref}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{tocloft}
+\usepackage{lastpage}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
+
+% =============================================================================
+% Page Layout and Headers/Footers
+% =============================================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Training Curricula: Expert-Driven AI-Assisted Development}
+\fancyhead[R]{\small UNCLASSIFIED}
+\fancyfoot[L]{\small Version 5.0}
+\fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% =============================================================================
+% Section Formatting
+% =============================================================================
+\titleformat{\section}
+  {\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5ex plus 0.5ex minus 0.2ex}{1ex plus 0.2ex}
+\titlespacing*{\subsection}{0pt}{1.2ex plus 0.4ex minus 0.2ex}{0.8ex plus 0.2ex}
+\titlespacing*{\subsubsection}{0pt}{1ex plus 0.3ex minus 0.2ex}{0.6ex plus 0.2ex}
+
+% =============================================================================
+% Table of Contents Formatting
+% =============================================================================
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftbeforesecskip}{4pt}
+\setlength{\cftbeforesubsecskip}{2pt}
+
+% =============================================================================
+% Custom Column Types
+% =============================================================================
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% =============================================================================
+% Document
+% =============================================================================
+\begin{document}
+
+% =============================================================================
+% TITLE PAGE
+% =============================================================================
+\thispagestyle{empty}
+\begin{center}
+
+\vspace*{1.5in}
+
+{\LARGE\bfseries Training Curricula}
+
+\vspace{0.3in}
+
+{\Large Expert-Driven AI-Assisted Development}
+
+\vspace{0.3in}
+
+{\large Teaching Marines to Build Software with AI}
+
+\vspace{1in}
+
+\begin{tabular}{@{}l l@{}}
+\textbf{Document Version:} & 5.0 \\
+\textbf{Effective Date:} & February 2026 \\
+\textbf{Classification:} & UNCLASSIFIED // Distribution Unlimited \\
+\end{tabular}
+
+\vspace{0.6in}
+
+Prepared by: SSgt Jesse C. Morgan \\
+Marine Corps Detachment Presidio of Monterey \\
+Defense Language Institute Foreign Language Center
+
+\vfill
+
+\rule{0.8\textwidth}{0.4pt}
+
+\vspace{0.3in}
+
+\textit{``The only skill that matters: Can you explain what you want to a very smart, very literal assistant?''}
+
+\vspace{0.5in}
+
+\end{center}
+
+\newpage
+
+% =============================================================================
+% TABLE OF CONTENTS
+% =============================================================================
+\tableofcontents
+\newpage
+
+% =============================================================================
+% WHAT CHANGED FROM v4.0
+% =============================================================================
+\section{What Changed From v4.0}
+
+The v4.0 curriculum restructured training around six 2011-level skills. That was the right move. But it crammed two different audiences into the same opening course: people who need to \textit{use} AI effectively and people who want to \textit{build} tools with AI. Those are different training objectives for different populations.
+
+This revision adds a fifth course --- AI Fluency Fundamentals --- as a standalone 2-hour universal requirement. Every Marine, sailor, and civilian at MCCES takes this course. It teaches the six 2011-level skills, the jagged frontier, centaur/cyborg work patterns, and quality judgment. No tool-building required. No Power Platform. Just the applied judgment skills that research shows actually predict sustained AI adoption.
+
+The builder courses (Trainings 1--3) now assume students arrive with the 2011 framework already internalized. They spend zero time on theory and 100\% of time building.
+
+% =============================================================================
+% WHY THIS MATTERS NOW
+% =============================================================================
+\section{Why This Matters Now}
+
+The DoW's January 2026 AI Strategy declares that ``2026 will be the year we emphatically raise the bar for Military AI Dominance.'' The Army stood up a dedicated AI/ML officer career field (49B) in October 2025. The Pentagon launched GenAI.mil in December 2025. The Marine Corps is hosting generative AI workshops at Quantico. Every service is scrambling to build AI fluency across the force.
+
+But fluency is not the same as access. Giving people AI tools without teaching them judgment is worse than giving them nothing --- it's the jagged frontier problem at institutional scale. This curriculum fills the gap between ``here's a tool'' and ``here's how to think.''
+
+% =============================================================================
+% THE RESEARCH FOUNDATION
+% =============================================================================
+\section{The Research Foundation}
+
+This curriculum is not built on intuition. It's built on the largest studies of AI and work ever conducted. Every design decision traces back to empirical findings.
+
+% ---------------------------------------------------------------------------
+\subsection{Study 1: The 80\% Abandonment Problem}
+
+\textbf{Source:} Microsoft Work Trend Index, enterprise deployment data across 300,000+ employees
+
+Microsoft tracked AI tool adoption at enterprise scale. Excitement peaked for approximately three weeks after deployment. Then came what researchers called a ``crater of disappointment.'' The vast majority of workers quietly stopped using AI tools. The survivors didn't write better prompts --- they learned to manage AI like a capable but inexperienced team member.
+
+\textbf{Design implication:} Our curriculum opens with this finding. The first thing every student hears is that most people fail, and the reason is not the technology --- it's the approach. Training must teach management skills, not tool skills.
+
+% ---------------------------------------------------------------------------
+\subsection{Study 2: The Jagged Frontier}
+
+\textbf{Source:} Dell'Acqua et al. (2023). ``Navigating the Jagged Technological Frontier.'' Harvard Business School Working Paper. 758 BCG consultants.
+
+When consultants used AI on tasks inside its capability boundary, they completed 12.2\% more tasks, 25.1\% faster, with 40\% higher quality. But on tasks outside that boundary --- tasks that \textit{looked} like AI should handle them --- consultants were 19 percentage points less likely to produce correct solutions than those working without AI at all.
+
+The study also identified two productive work patterns: \textbf{Centaurs} (clear human/AI division of labor) and \textbf{Cyborgs} (fluid, continuous human/AI integration). Both patterns outperformed unstructured AI use.
+
+\textbf{Design implication:} Frontier Recognition is a core 2011 skill, not a footnote. We teach students to identify the boundary and share failure cases. The centaur/cyborg framework gives students a vocabulary for choosing how to work with AI on different task types.
+
+% ---------------------------------------------------------------------------
+\subsection{Study 3: The Skill-Leveling Effect}
+
+\textbf{Source:} Brynjolfsson, Li, \& Raymond (2025). ``Generative AI at Work.'' \textit{Quarterly Journal of Economics}, 140(2), 889--942. 5,172 customer support agents.
+
+AI assistance increased productivity by 15\% on average, but the gains were dramatically uneven. Novice and low-skilled workers improved by 34\%. The most experienced workers saw minimal gains and slight quality decreases. AI effectively disseminated the tacit knowledge of top performers to everyone else. Workers with two months of AI-assisted experience performed as well as workers with six months of unassisted experience.
+
+\textbf{Design implication:} AI doesn't replace expertise --- it amplifies it. But it amplifies judgment \textit{and} errors equally. This is why Quality Judgment is the most important 2011 skill: the same tool that makes a junior Marine more productive also makes an overconfident one more dangerous.
+
+% ---------------------------------------------------------------------------
+\subsection{Study 4: Management as the Core AI Skill}
+
+\textbf{Source:} Mollick (2026). ``Management as AI Superpower.'' \textit{One Useful Thing.} Wharton executive MBA field experiment.
+
+Mollick's January 2026 experiment put non-technical executive MBA students through a four-day AI-intensive startup exercise. Students with management experience --- the ability to scope problems, define deliverables, give feedback, and recognize when output is wrong --- dramatically outperformed those without, regardless of technical ability. The key insight: AI work is delegation work. The skills are the same: clear instructions, quality evaluation, iterative feedback, and knowing what ``done'' looks like.
+
+Mollick also formalized the \textbf{Equation of Agentic Work}: the decision to delegate to AI depends on (1) how long the task takes you to do, (2) how likely the AI is to succeed, and (3) how long it takes to evaluate the AI's output. Subject matter expertise improves all three variables.
+
+\textbf{Design implication:} Our entire curriculum is built on the management framing. ``You're not learning to use a tool. You're learning to manage one.'' This framing also validates the military audience: Marines already know how to manage. They just need to apply those skills to AI.
+
+% ---------------------------------------------------------------------------
+\subsection{Study 5: The GDPval Expert Parity Benchmark}
+
+\textbf{Source:} OpenAI (2025). ``GDPval: Evaluating AI Model Performance on Real-World Economically Valuable Tasks.'' 1,320 tasks across 44 occupations.
+
+For the first time, frontier AI models were tested head-to-head against human experts across real-world professional tasks spanning nine GDP-driving industries. Expert graders conducted blind evaluations. The best models produced work rated as good as or better than human experts on nearly half of all tasks. Human experts averaged 7 hours per task; AI completed them in minutes but required approximately one hour of human review. When paired with human oversight, AI-assisted workflows were 1.4x faster and 1.6x cheaper than unassisted experts.
+
+\textbf{Design implication:} AI is already at or near expert-level on many knowledge work tasks. The bottleneck is not AI capability --- it's human ability to evaluate, direct, and integrate AI output. This validates our entire focus on judgment over prompting.
+
+% ---------------------------------------------------------------------------
+\subsection{Study 6: The UK Government Scale Deployment}
+
+\textbf{Source:} UK Government Digital Services (2025). Microsoft 365 Copilot deployment across 20,000 government employees in 12 departments.
+
+Government workers reported saving more than 25 minutes per day --- nearly two weeks per year. Over 70\% said AI helped them spend less time on routine tasks and more time on strategic work. Over 80\% said they wouldn't want to give up AI access. Nine of twelve departments continued their licenses after the trial. Results were realized in just three months, consistent with Microsoft's finding that it takes up to 11 weeks to build the AI habit.
+
+\textbf{Design implication:} Government bureaucracies --- the closest analog to military organizations --- see measurable gains when AI is deployed with proper onboarding support. But ``support'' means training, community sessions, and workshops, not just a login and a tip sheet.
+
+% ---------------------------------------------------------------------------
+\subsection{Study 7: The Apprenticeship Crisis}
+
+\textbf{Source:} Multiple studies including Brynjolfsson et al. (2025), Stanford Digital Economy Lab analysis, CNBC/Mollick/Kinder reporting (2025).
+
+Entry-level job postings dropped 35\% from January 2023 to June 2025 in AI-exposed occupations. Employment among workers aged 22--25 in these fields declined 13\%. When AI handles the routine tasks that junior workers traditionally learned on, the apprenticeship pipeline breaks. Organizations that cut junior roles today face a catastrophic expertise shortage in five to ten years --- ``architects who have never laid a brick.''
+
+Mollick's direct warning: ``That training pipeline that was always implicit has broken, and it has to be reconstructed.''
+
+\textbf{Design implication:} Our Supervisor Orientation course explicitly addresses the apprentice problem. Leaders must ensure junior Marines still develop judgment through reviewing AI output, not just accepting it. The curriculum includes specific protocols for preserving developmental opportunities alongside AI efficiency gains.
+
+% =============================================================================
+% THE SIX 2011-LEVEL SKILLS
+% =============================================================================
+\section{The Six 2011-Level Skills}
+
+These six skills are the backbone of the entire curriculum. Every module in every course maps back to at least one of them. None of them are prompting techniques.
+
+\begin{longtable}{c L{1.1in} L{1.4in} L{1.3in} L{1.3in}}
+\toprule
+\textbf{\#} & \textbf{Skill} & \textbf{What It Means} & \textbf{101 Behavior} & \textbf{2011 Behavior} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+1 & Context Assembly & Knowing what information to provide, from which sources, and why & Dumps entire documents or provides almost no context & Curates background, constraints, and examples to improve output quality \\
+\midrule
+2 & Quality Judgment & Knowing when to trust AI output and when to verify & Accepts first output as-is or abandons entirely & Knows which task types need verification, spots reliable vs.\ unreliable content within the same output \\
+\midrule
+3 & Task Decomposition & Breaking work into AI-appropriate chunks & Throws entire task at AI or avoids it & Identifies which subtasks to delegate vs.\ retain, like managing a team member \\
+\midrule
+4 & Iterative Refinement & Moving from 70\% to 95\% through structured passes & Accepts first draft or gives up & Treats first output as starting point, knows how to direct revision \\
+\midrule
+5 & Workflow Integration & Embedding AI into how work actually gets done & AI is a side activity (``I'll try the AI thing later'') & AI is an integrated capability (``This is just how we do correspondence now'') \\
+\midrule
+6 & Frontier Recognition & Knowing when you're outside AI's capability boundary & Assumes AI is uniformly good or uniformly bad & Knows where AI excels vs.\ fails for their specific work, shares failure cases \\
+\end{longtable}
+
+% ---------------------------------------------------------------------------
+\subsection{Two Work Patterns: Centaur and Cyborg}
+
+The BCG-Harvard study identified two productive patterns for working with AI. Both work. The 2011 skill is knowing which pattern fits which task.
+
+\textbf{Centaur Mode:} Clearly divide work between human and AI. The human does strategy and framing, AI generates options and drafts. Distinct responsibilities with clear handoff points.
+\begin{itemize}[nosep]
+  \item Best for: High-stakes work requiring clear accountability and verification checkpoints
+  \item DoW examples: Legal reviews, admin separations, security clearance processing, fitrep drafting
+\end{itemize}
+
+\textbf{Cyborg Mode:} Completely integrate AI into the workflow. Continuous back-and-forth. The boundary between human and AI work becomes fluid.
+\begin{itemize}[nosep]
+  \item Best for: Creative and iterative work where continuous refinement improves output
+  \item DoW examples: Building PowerApps, developing training materials, writing SOPs, data analysis
+\end{itemize}
+
+The mistake is picking one pattern and applying it to everything. Teach both. Let people match the pattern to the task.
+
+% ---------------------------------------------------------------------------
+\subsection{The Jagged Frontier}
+
+AI capabilities are uneven across tasks, and the boundary is not intuitive. The BCG-Harvard study found that untrained AI users don't just miss gains --- they actively degrade their own work quality on certain tasks. The frontier is also constantly shifting as models improve.
+
+This means Frontier Recognition can't be learned once and memorized. It has to be practiced continuously, and failure cases must be shared. When someone discovers a task AI handles poorly, that knowledge is as valuable as discovering what AI handles well.
+
+% =============================================================================
+% TRAINING OVERVIEW
+% =============================================================================
+\section{Training Overview}
+
+\subsection{Five Courses, One Goal}
+
+\begin{longtable}{L{1.2in} L{0.6in} L{1in} L{1.2in} L{1.8in}}
+\toprule
+\textbf{Course} & \textbf{Duration} & \textbf{Audience} & \textbf{Prerequisite} & \textbf{Outcome} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\textbf{AI Fluency Fundamentals} & 2 hours & All personnel & None & Understand the six 2011 skills, recognize the jagged frontier, know when to trust AI output, map AI into your workflow \\
+\midrule
+\textbf{Builder Orientation} & 2 hours & Aspiring builders & AI Fluency Fundamentals & Build a working prototype, apply task decomposition and iterative refinement in practice \\
+\midrule
+\textbf{Platform Training} & 4 hours & Builders & Builder Orientation & Build 3 complete tools on Power Platform using centaur and cyborg work patterns \\
+\midrule
+\textbf{Advanced Workshop} & 4 hours & Experienced builders & At least one deployed tool & Map the frontier for your domain, build verification protocols, teach others \\
+\midrule
+\textbf{Supervisor Orientation} & 30 minutes & Leadership & None & Evaluate proposals, create permission culture, understand the apprentice problem \\
+\end{longtable}
+
+% ---------------------------------------------------------------------------
+\subsection{Prerequisites}
+
+\textbf{AI Fluency Fundamentals:} None. Come as you are.
+
+\textbf{Builder Orientation:} Must have completed AI Fluency Fundamentals (in-person or online). Come with a problem you want to solve.
+
+\textbf{Platform Training:} Must have completed Builder Orientation. Have M365 account access.
+
+\textbf{Advanced Workshop:} Must have built at least one working tool.
+
+\textbf{Supervisor Orientation:} None. Can be taken independently. Recommended before or alongside AI Fluency Fundamentals.
+
+% =============================================================================
+% INSTRUCTOR CERTIFICATION
+% =============================================================================
+\section{Instructor Certification}
+
+\subsection{Who Can Teach}
+
+\begin{longtable}{L{1.8in} L{4.2in}}
+\toprule
+\textbf{Course} & \textbf{Instructor Requirements} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+AI Fluency Fundamentals & Completed AI Fluency Fundamentals AND at least one builder course, OR demonstrated equivalent expertise \\
+\midrule
+Builder Orientation & Completed all builder courses AND deployed at least one tool \\
+\midrule
+Platform Training & Same as Builder Orientation, plus demonstrated proficiency with Power Platform \\
+\midrule
+Advanced Workshop & Same as Platform Training, plus served as QA reviewer for at least 2 tools \\
+\midrule
+Supervisor Orientation & Any qualified AI Fluency Fundamentals instructor \\
+\end{longtable}
+
+% ---------------------------------------------------------------------------
+\subsection{Certification Process}
+
+\begin{enumerate}[nosep]
+  \item Complete the relevant course(s) as a student
+  \item Build and deploy at least one tool under the EDD SOP (for builder courses)
+  \item Shadow an existing instructor for one delivery of the course
+  \item Deliver the course with an existing instructor present (co-teach)
+  \item Receive certification from Program Coordinator
+\end{enumerate}
+
+% ---------------------------------------------------------------------------
+\subsection{Train-the-Trainer Guidance}
+
+For new units without certified instructors:
+\begin{itemize}[nosep]
+  \item Request support from an established unit's instructor
+  \item Use video recordings of course delivery (if available)
+  \item Program Coordinator may certify based on equivalent experience
+\end{itemize}
+
+\textbf{Succession planning:} Each unit should maintain at least 2 certified instructors. When an instructor PCSs, ensure replacement is certified before departure.
+
+% ---------------------------------------------------------------------------
+\subsection{Maintaining Certification}
+
+Instructors remain certified as long as they:
+\begin{itemize}[nosep]
+  \item Deliver at least one course per year
+  \item Stay current with platform and AI tool changes
+  \item Maintain active involvement in the developer community
+\end{itemize}
+
+% =============================================================================
+% COURSE 1: AI FLUENCY FUNDAMENTALS
+% =============================================================================
+\section{Course 1: AI Fluency Fundamentals}
+
+\textbf{Required \textbar\ 2 Hours \textbar\ All Personnel}
+
+\textbf{Purpose:} Give every Marine, sailor, and civilian the applied judgment skills to use AI effectively in their daily work --- regardless of whether they ever build a tool. This is the universal prerequisite. Everyone takes it.
+
+\textbf{This is not a tool tour.} There are no prompting formulas. No ``top 10 things ChatGPT can do.'' This course teaches the management skills that separate the 20\% who sustain AI adoption from the 80\% who quit.
+
+% ---------------------------------------------------------------------------
+\subsection{Agenda}
+
+\begin{longtable}{L{0.8in} L{2.8in} L{2in}}
+\toprule
+\textbf{Time} & \textbf{Module} & \textbf{2011 Skills Targeted} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+0:00--0:15 & Why 80\% Quit (and How You Won't) & Frontier Recognition \\
+\midrule
+0:15--0:40 & The Six Skills That Actually Matter & All six --- overview \\
+\midrule
+0:40--0:55 & The Delegation Equation & Task Decomposition, Context Assembly \\
+\midrule
+0:55--1:05 & Break & \\
+\midrule
+1:05--1:30 & The Trust Problem: Quality Judgment & Quality Judgment, Frontier Recognition \\
+\midrule
+1:30--1:45 & Your Workflow: Centaur, Cyborg, or Neither & Workflow Integration \\
+\midrule
+1:45--2:00 & Frontier Mapping and Your Assignment & Frontier Recognition, all six \\
+\end{longtable}
+
+% ---------------------------------------------------------------------------
+\subsection{Module 1: Why 80\% Quit (15 min)}
+
+\textbf{Opening hook:} Microsoft tracked hundreds of thousands of employees using AI tools. Excitement peaked for about three weeks. Then came a crater of disappointment. The vast majority quietly stopped. The 20\% who survived didn't write better prompts --- they learned to manage AI like a capable but inexperienced team member.
+
+\textbf{Why people fail:}
+\begin{itemize}[nosep]
+  \item They type ``help me with this report'' and get something generic
+  \item They try again and get something confident and wrong
+  \item They try a third time and decide it's faster to do it themselves
+  \item They never come back
+\end{itemize}
+
+\textbf{The punchline:} The UK government gave AI tools to 20,000 workers across 12 departments with proper training and support. After three months, over 80\% didn't want to give them up. Workers reported saving 25 minutes a day --- nearly two weeks a year. Nine of twelve departments kept their licenses. The difference wasn't the tool. It was the training.
+
+\textbf{Why this training is different:} We're not teaching you how to use a tool. We're teaching you how to manage one. The same skills that make you a good leader --- breaking work into pieces, knowing what good looks like, giving constructive feedback, verifying quality --- are the skills that make you effective with AI.
+
+\textbf{The management framing:} Would you hand a 100-page RFP to a brand new Marine and say ``handle this''? No. You'd break it into pieces. You'd tell them which parts to tackle first. You'd explain what good looks like. You'd review their work and give feedback. That's how you should work with AI.
+
+\textbf{Instructor note:} Cite the exact numbers but keep the energy conversational. This is not a PowerPoint lecture. It's a wake-up call. The point is: most people fail at AI not because they're dumb, but because nobody taught them the right skills. You're about to learn the right skills.
+
+% ---------------------------------------------------------------------------
+\subsection{Module 2: The Six Skills That Actually Matter (25 min)}
+
+Walk through all six 2011 skills with military-relevant examples. For each skill, show the 101 behavior and the 2011 behavior side by side.
+
+\textbf{Skill 1 --- Context Assembly:}
+\begin{itemize}[nosep]
+  \item 101: ``Write me a counseling statement.''
+  \item 2011: ``Write a counseling statement for a Lance Corporal who was late to formation twice this month. The tone should be corrective but not adversarial. The Marine has otherwise been a solid performer. Use the format from NAVMC 10274. This is a page 11 entry, not an adverse 6105.''
+\end{itemize}
+
+\textbf{Key teaching point:} AI is extremely sensitive to context quality. The difference between mediocre output and useful output is usually not the prompt structure --- it's the information you provide. This is exactly like giving a task to a new join: the more specific your guidance, the better the result.
+
+\textbf{Skill 2 --- Quality Judgment:}
+\begin{itemize}[nosep]
+  \item Show an AI-generated naval message with three correct elements and two subtle errors (wrong DTG format, incorrect reference number)
+  \item Ask: ``Would you sign this?'' Then reveal the errors.
+\end{itemize}
+
+\textbf{Key teaching point:} AI can be confidently correct and confidently wrong in the same paragraph. The 2011 skill is spotting which is which. The Brynjolfsson study found that AI helped novice workers improve by 34\% --- but only because the AI was disseminating expert-level patterns. If you can't judge quality, you're amplifying errors, not expertise.
+
+\textbf{Skill 3 --- Task Decomposition:}
+\begin{itemize}[nosep]
+  \item 101: ``Write me a training plan for the platoon.''
+  \item 2011: Break it into subtasks. ``First, list the required annual training events for FY26. Then map them against the calendar, avoiding known conflicts. Then identify which events need range time and put those first.''
+\end{itemize}
+
+\textbf{Key teaching point:} Mollick calls this the Equation of Agentic Work. You're deciding whether to delegate based on three things: how long it would take you, how likely AI is to get it right, and how long it takes you to check. Breaking tasks into smaller pieces improves the AI's success probability on each piece.
+
+\textbf{Skill 4 --- Iterative Refinement:}
+\begin{itemize}[nosep]
+  \item Show a real first draft from AI. It's 70\% there. Then demonstrate the iteration:
+  \begin{itemize}[nosep]
+    \item ``The tone is too formal. Make it sound like a Gunny talking to his Marines.''
+    \item ``The third paragraph repeats the first. Consolidate.''
+    \item ``Add specific dates from this schedule: [paste schedule].''
+  \end{itemize}
+  \item Three passes. Now it's 95\%.
+\end{itemize}
+
+\textbf{Key teaching point:} The first output is never the final product. It's a starting point you manage toward completion. You wouldn't accept an intern's first draft --- don't accept AI's. The GDPval study found that simple improvements to prompts could boost AI win rates by another five percentage points. Iteration isn't a workaround --- it's the skill.
+
+\textbf{Skill 5 --- Workflow Integration:}
+\begin{itemize}[nosep]
+  \item Side activity: ``I'll try using AI for this one thing later.''
+  \item Integrated: ``Every Friday, the duty NCO uses AI to draft the weekend safety brief from the current weather, liberty boundaries, and recent incidents. That's just how we do it now.''
+\end{itemize}
+
+\textbf{Key teaching point:} AI becomes valuable when it's embedded in a recurring workflow, not used as an occasional experiment. The goal is a playbook that anyone in the section can follow. Microsoft's research shows it takes up to 11 weeks to build the AI habit. If you only use it once, you'll never get past the crater of disappointment.
+
+\textbf{Skill 6 --- Frontier Recognition:}
+\begin{itemize}[nosep]
+  \item Show examples of tasks AI handles well in your domain (formatting, drafting, summarizing, data organization)
+  \item Show examples of tasks AI handles poorly (interpreting specific MCOs, calculating TIS/TIG accurately, anything requiring institutional knowledge not in training data)
+  \item Introduce the jagged frontier: the capability boundary is not intuitive, and it changes as models improve
+\end{itemize}
+
+\textbf{Key teaching point:} The BCG-Harvard study found that untrained users working outside the frontier didn't just fail to benefit --- they performed 19 percentage points \textit{worse} than those without AI. When you discover a task AI handles poorly, share it. That knowledge is as valuable as discovering what AI handles well.
+
+% ---------------------------------------------------------------------------
+\subsection{Module 3: The Delegation Equation (15 min)}
+
+\textbf{Mollick's framework:} For any task, ask three questions:
+\begin{enumerate}[nosep]
+  \item \textbf{Human Baseline Time} --- How long would this take me to do myself?
+  \item \textbf{Probability of Success} --- How likely is AI to produce acceptable output?
+  \item \textbf{AI Process Time} --- How long does it take me to request, wait, and evaluate?
+\end{enumerate}
+
+\textbf{Walk through examples:}
+\begin{itemize}[nosep]
+  \item Writing a 5-paragraph order from scratch: 4 hours human time. AI can draft in minutes. But reviewing for accuracy in a 5-paragraph format with specific unit details takes 45 minutes. If AI gets it 70\% right, that's still a significant time save --- delegate.
+  \item Calculating a Marine's TIS/TIG for promotion: 5 minutes human time with the right references. AI might get it right, might not. Checking takes as long as doing it. Don't delegate.
+  \item Drafting a quarterly training schedule: 6 hours human time. AI can produce a solid first draft in minutes if given the right constraints. 30 minutes to review and adjust. High probability of acceptable output on the structure, lower on specific details. Delegate the structure, fill in the specifics yourself.
+\end{itemize}
+
+\textbf{Key teaching point:} The more expertise you have, the better you are at all three variables. Experts give better instructions (higher probability of success), spot errors faster (lower AI process time), and know which tasks are worth delegating (better human baseline estimates). AI doesn't replace expertise. It rewards it.
+
+% ---------------------------------------------------------------------------
+\subsection{Module 4: The Trust Problem --- Quality Judgment (25 min)}
+
+\textbf{THE RED PEN REVIEW EXERCISE}
+
+This is the highest-value activity in the entire AI Fluency Fundamentals course.
+
+\textbf{Setup:} Distribute three AI-generated documents relevant to your unit's work:
+\begin{enumerate}[nosep]
+  \item A leave request endorsement (mostly correct, one procedural error)
+  \item A situation report summary (accurate data, wrong attribution in one place)
+  \item A training evaluation write-up (good structure, fabricated reference number)
+\end{enumerate}
+
+\textbf{Exercise:} Participants have 10 minutes. Red pen each document. Mark anything you wouldn't sign.
+
+\textbf{Debrief (15 min):}
+\begin{itemize}[nosep]
+  \item Reveal what was correct and what was wrong
+  \item Key question: ``Did you catch the fabricated reference number?'' Most people don't. AI doesn't flag uncertainty --- it presents everything with equal confidence.
+  \item Introduce the verification hierarchy:
+  \begin{itemize}[nosep]
+    \item \textbf{High-stakes documents} (legal, personnel, financial): Line-by-line verification of every fact, reference, and number. Centaur mode --- human verifies everything.
+    \item \textbf{Medium-stakes documents} (correspondence, reports, briefings): Spot-check key claims, verify references, check tone. Mixed mode.
+    \item \textbf{Low-stakes documents} (first drafts, brainstorming, formatting): Quick review for obvious errors. Cyborg mode.
+  \end{itemize}
+  \item Connect to the Brynjolfsson finding: AI improved novice workers by 34\% because it disseminated expert patterns. But when experienced workers followed AI suggestions uncritically, quality declined slightly. \textit{You} are the quality control.
+\end{itemize}
+
+\textbf{Instructor note:} This exercise is not optional. This is where the training pays for itself. Every participant should leave this module viscerally understanding that AI output requires judgment, not just acceptance. Make it sting a little --- use documents from their actual domain where the errors would matter.
+
+% ---------------------------------------------------------------------------
+\subsection{Module 5: Your Workflow --- Centaur, Cyborg, or Neither (15 min)}
+
+\textbf{Introduce the two patterns:}
+\begin{itemize}[nosep]
+  \item \textbf{Centaur:} Clear division. Human does Phase 1, hands off to AI for Phase 2, human reviews in Phase 3. Best for high-stakes work. Think: legal review, admin separation packages, fitness report drafts.
+  \item \textbf{Cyborg:} Continuous integration. Human and AI work in constant back-and-forth. The boundary is fluid. Best for creative and iterative work. Think: drafting SOPs, building training materials, analyzing data.
+\end{itemize}
+
+\textbf{Exercise: Workflow Mapping (10 min)}
+
+Each participant picks one recurring task from their actual job. On the provided worksheet, they:
+\begin{enumerate}[nosep]
+  \item Break it into 3--5 subtasks
+  \item Mark each subtask: \textbf{Human Only} / \textbf{AI Could Help} / \textbf{AI Should Do This}
+  \item Identify which pattern fits: Centaur or Cyborg
+  \item Estimate time savings if AI handled the appropriate subtasks
+\end{enumerate}
+
+\textbf{Debrief:} Ask 2--3 volunteers to share their maps. Point out patterns. Many people will find that 30--50\% of their recurring work has AI-appropriate subtasks they've never tried delegating.
+
+\textbf{Key teaching point:} The UK government study found that trained workers saved 25 minutes a day. That's not from one big win --- it's from dozens of small workflow integrations. The compounding effect of AI fluency is more powerful than any single use case.
+
+% ---------------------------------------------------------------------------
+\subsection{Module 6: Frontier Mapping and Your Assignment (15 min)}
+
+\textbf{Introduce frontier mapping:}
+Start a shared document (can be as simple as a whiteboard or a shared spreadsheet) with three columns:
+\begin{itemize}[nosep]
+  \item \textbf{AI Handles Well:} Tasks where AI consistently produces good output in your domain
+  \item \textbf{AI Handles Poorly:} Tasks where AI fails or produces unreliable output
+  \item \textbf{Moving Frontier:} Tasks where AI capability is improving --- check periodically
+\end{itemize}
+
+\textbf{Seed the map} with 3--5 examples from the instructor's own experience. Then ask: based on what you've seen today, what would you add?
+
+\textbf{Assignment:}
+\begin{enumerate}[nosep]
+  \item Pick one recurring task from your workflow map (Module 5)
+  \item Try using AI on it this week
+  \item Note what worked and what didn't
+  \item Bring your results --- especially your failure cases --- to share with your section
+\end{enumerate}
+
+\textbf{For those continuing to Builder Orientation:} Bring a specific problem you want to build a tool to solve. Be ready to decompose it into subtasks before you open any software.
+
+\textbf{Closing:} You are now equipped with the same judgment framework that separates sustained AI adopters from the 80\% who quit. The tools will change. The models will improve. These six skills will still be the difference between productive AI use and wasted time.
+
+% =============================================================================
+% COURSE 2: BUILDER ORIENTATION
+% =============================================================================
+\section{Course 2: Builder Orientation}
+
+\textbf{Elective \textbar\ 2 Hours \textbar\ Aspiring Builders}
+
+\textbf{Purpose:} For people who want to go beyond daily AI use and actually build tools. Focuses entirely on hands-on building. The 2011 framework was covered in AI Fluency Fundamentals --- here we apply it.
+
+\textbf{Prerequisite:} AI Fluency Fundamentals (in-person or online completion)
+
+% ---------------------------------------------------------------------------
+\subsection{Agenda}
+
+\begin{longtable}{L{0.8in} L{2.8in} L{2in}}
+\toprule
+\textbf{Time} & \textbf{Module} & \textbf{2011 Skills Applied} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+0:00--0:10 & From User to Builder (bridge from Course 1) & Task Decomposition \\
+\midrule
+0:10--0:40 & Live Build \#1: Equipment Tracker & Task Decomposition, Context Assembly, Iterative Refinement \\
+\midrule
+0:40--0:50 & Break & \\
+\midrule
+0:50--1:25 & Live Build \#2: When Something Breaks & Iterative Refinement, Quality Judgment \\
+\midrule
+1:25--1:50 & Your Problem: Decomposition Exercise & Task Decomposition, Frontier Recognition \\
+\midrule
+1:50--2:00 & Assignment and Path Forward & All six \\
+\end{longtable}
+
+% ---------------------------------------------------------------------------
+\subsection{Module 1: From User to Builder (10 min)}
+
+\textbf{Bridge from AI Fluency Fundamentals:} You've learned to manage AI as a user --- giving it tasks, evaluating output, integrating it into workflows. Building tools is the same skills at higher complexity. Instead of managing one conversation, you're managing an entire project through AI.
+
+\textbf{The builder mindset:} Before you open any tool, you decompose on the whiteboard. What are the components? What does the data look like? What does the user need to see? This is Task Decomposition applied to system design.
+
+\textbf{Instructor note:} Quickly verify that all students completed AI Fluency Fundamentals. Ask: ``What are the six 2011 skills?'' If students can't recall at least four, do a 2-minute refresher. Then move on.
+
+% ---------------------------------------------------------------------------
+\subsection{Module 2: Live Build \#1 --- Equipment Tracker (30 min)}
+
+\textbf{The problem:} ``I need a way to track equipment checkout for my section.''
+
+\textbf{Step 1: Decompose BEFORE touching AI (5 min, whiteboard)}
+\begin{itemize}[nosep]
+  \item What data fields do we need? (item, serial number, person, date out, date due, status)
+  \item What does the user need to do? (check out, check in, see what's overdue)
+  \item What's the simplest version that's useful?
+\end{itemize}
+
+\textbf{Step 2: Build with AI (20 min)}
+\begin{itemize}[nosep]
+  \item Instructor narrates every decision: ``I'm giving the AI context about our data structure first. Watch how I break this into specific requests rather than one giant ask.''
+  \item Build a working equipment tracker in Power Apps
+  \item Demonstrate Context Assembly in real time: ``Notice I'm telling it \textit{why} we need the due date field --- so it knows to build an overdue alert.''
+  \item Demonstrate Iterative Refinement: The first version will be functional but ugly. Run two revision passes.
+\end{itemize}
+
+\textbf{Step 3: Review (5 min)}
+\begin{itemize}[nosep]
+  \item Show the finished product
+  \item Ask: ``What would you change for your section?''
+  \item Emphasize: This took 30 minutes. Before AI, this would have been a week-long project requiring a developer.
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+\subsection{Module 3: When Something Breaks (35 min)}
+
+\textbf{Purpose:} Intentionally create a failure and demonstrate debugging with AI.
+
+\textbf{Setup:} Continue building on the equipment tracker. Add a feature that's slightly outside AI's comfort zone --- perhaps a conditional formatting rule that requires specific business logic.
+
+\textbf{Let it break.} When it does:
+\begin{enumerate}[nosep]
+  \item Read the error message out loud
+  \item Show the debugging process: ``I'm going to paste this error back to AI with context about what I was trying to do.''
+  \item Demonstrate that debugging IS the work. This is normal.
+  \item Show recovery: how the fix often teaches you something about the tool
+\end{enumerate}
+
+\textbf{Key teaching point:} The first time something breaks, most people quit. That's why they're in the 80\%. Debugging with AI is a skill. The AI is better at diagnosing its own errors than you are, but only if you give it context about what went wrong.
+
+\textbf{Extended build:} Add 1--2 more features to the tracker. By the end, students see a full cycle: decompose $\rightarrow$ build $\rightarrow$ break $\rightarrow$ debug $\rightarrow$ improve.
+
+% ---------------------------------------------------------------------------
+\subsection{Module 4: Your Problem --- Decomposition Exercise (25 min)}
+
+\textbf{Exercise:} Each participant takes the problem they brought to class and:
+\begin{enumerate}[nosep]
+  \item Writes it as a one-sentence problem statement
+  \item Decomposes it into 4--6 subtasks on paper
+  \item Marks each subtask: \textbf{Human designs} / \textbf{AI builds} / \textbf{Human verifies}
+  \item Identifies which pattern (centaur or cyborg) fits each phase
+  \item Identifies potential frontier issues --- where might AI struggle with this specific problem?
+\end{enumerate}
+
+\textbf{Peer review (10 min):} Pair up. Review each other's decomposition. Ask: ``Is any subtask too big? Is there a frontier risk you missed?''
+
+\textbf{Instructor note:} Walk the room during this exercise. The quality of decomposition predicts the quality of the eventual build. Catch ``dump the whole thing on AI'' plans early and redirect.
+
+% ---------------------------------------------------------------------------
+\subsection{Module 5: Assignment and Path Forward (10 min)}
+
+\textbf{Assignment before Platform Training:}
+\begin{enumerate}[nosep]
+  \item Attempt to build your decomposed solution using AI
+  \item Document what worked and what didn't
+  \item Identify at least one failure case to share at the next session
+  \item Bring your working (or partially working) prototype to Platform Training
+\end{enumerate}
+
+\textbf{Path forward:}
+\begin{itemize}[nosep]
+  \item Platform Training (4 hours): Build three complete tools
+  \item Advanced Workshop (4 hours): Frontier mapping, verification protocols, teaching others
+  \item Ongoing: Contribute to the shared frontier map, submit tools for QA review, mentor others
+\end{itemize}
+
+% =============================================================================
+% COURSE 3: PLATFORM TRAINING
+% =============================================================================
+\section{Course 3: Platform Training}
+
+\textbf{Elective \textbar\ 4 Hours \textbar\ Builders}
+
+\textbf{Purpose:} Build three complete tools on Power Platform, practicing both centaur and cyborg work patterns. This is where EDD students become capable of producing deployable tools under the EDD SOP.
+
+\textbf{Prerequisite:} Builder Orientation. M365 account access.
+
+% ---------------------------------------------------------------------------
+\subsection{Agenda}
+
+\begin{longtable}{L{0.8in} L{2.8in} L{2in}}
+\toprule
+\textbf{Time} & \textbf{Module} & \textbf{2011 Skills Applied} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+0:00--0:15 & Setup and Review & All six (quick check) \\
+\midrule
+0:15--1:15 & Build \#1: Structured Workflow (Centaur Mode) & Context Assembly, Quality Judgment \\
+\midrule
+1:15--1:30 & Break --- Failure Sharing & Frontier Recognition \\
+\midrule
+1:30--2:30 & Build \#2: Iterative Application (Cyborg Mode) & Iterative Refinement, Workflow Integration \\
+\midrule
+2:30--2:45 & Break & \\
+\midrule
+2:45--3:45 & Build \#3: Your Problem (Choose Your Mode) & Task Decomposition, all six \\
+\midrule
+3:45--4:00 & Frontier Map Update and Wrap & Frontier Recognition \\
+\end{longtable}
+
+% ---------------------------------------------------------------------------
+\subsection{Module 1: Setup and Review (15 min)}
+
+Verify all participants have M365 access and can reach Power Platform. Quick review of centaur vs.\ cyborg patterns. Ask 2--3 students to share a failure case from their Builder Orientation assignment.
+
+% ---------------------------------------------------------------------------
+\subsection{Module 2: Build \#1 --- Structured Workflow, Centaur Mode (60 min)}
+
+\textbf{The problem:} A request routing workflow --- someone submits a request, it goes to the right approver, the approver acts on it, the requester gets notified.
+
+\textbf{Explicit centaur pattern:}
+\begin{itemize}[nosep]
+  \item \textbf{Phase 1 --- Human designs:} Define the approval chain, business rules, and notification requirements on the whiteboard. No AI yet.
+  \item \textbf{Phase 2 --- AI builds:} Feed the design to AI. Build the Power App form and the Power Automate flow.
+  \item \textbf{Phase 3 --- Human verifies:} Test every path. Does the right person get notified? What happens with edge cases?
+  \item \textbf{Phase 4 --- AI refines:} Feed test results back to AI for fixes.
+  \item \textbf{Phase 5 --- Human accepts:} Final review before deployment.
+\end{itemize}
+
+\textbf{Key teaching point:} At every phase boundary, there's a verification checkpoint. The human is responsible for \textit{design} and \textit{verification}. AI handles \textit{execution}. This is the pattern for any high-stakes tool.
+
+% ---------------------------------------------------------------------------
+\subsection{Module 3: Failure Sharing (15 min, during break)}
+
+\textbf{This is not optional. This is one of the most important 15 minutes in the entire program.}
+
+Structure:
+\begin{itemize}[nosep]
+  \item Each participant shares: what AI got wrong, how they caught it, how they fixed it
+  \item Document on a whiteboard or shared doc
+  \item Look for patterns: Are certain types of tasks consistently problematic?
+  \item This becomes the beginning of the unit's frontier map
+\end{itemize}
+
+\textbf{Instructor note:} Create psychological safety. Frame failures as valuable data, not embarrassments. ``Every failure case you share saves someone else an hour of confusion.'' Lead by sharing your own failure cases first.
+
+% ---------------------------------------------------------------------------
+\subsection{Module 4: Build \#2 --- Iterative Application, Cyborg Mode (60 min)}
+
+\textbf{The problem:} A training tracker that pulls data from multiple sources and generates reports.
+
+\textbf{Explicit cyborg pattern:}
+\begin{itemize}[nosep]
+  \item No distinct phases. Continuous back-and-forth with AI.
+  \item Start with a rough idea: ``I need to see which Marines have completed which training events.''
+  \item Build incrementally: data model $\rightarrow$ input form $\rightarrow$ dashboard $\rightarrow$ reports
+  \item At each step, evaluate and redirect: ``That chart doesn't show what I need. Change the X axis to show completion by date, not by person.''
+  \item The boundary between human and AI contribution is fluid. Sometimes you type code directly. Sometimes AI generates entire components.
+\end{itemize}
+
+\textbf{Key teaching point:} Cyborg mode is faster but requires more constant attention. It's not ``set and forget.'' It's a continuous conversation. Best for work where you're discovering requirements as you build.
+
+% ---------------------------------------------------------------------------
+\subsection{Module 5: Build \#3 --- Your Problem, Choose Your Mode (60 min)}
+
+Each participant builds the solution they decomposed in Builder Orientation.
+
+\textbf{Before starting, each participant states:}
+\begin{enumerate}[nosep]
+  \item What they're building (one sentence)
+  \item Which mode they're using (centaur or cyborg) and why
+  \item Where they expect frontier issues (what might AI struggle with)
+\end{enumerate}
+
+\textbf{During the build:} Instructor circulates, helping with blocks and noting common patterns.
+
+\textbf{Instructor note:} Resist the urge to solve every problem. When a student hits a block, ask: ``What would you tell the AI about what's going wrong?'' Teaching them to debug with AI is more valuable than fixing it yourself.
+
+% ---------------------------------------------------------------------------
+\subsection{Module 6: Frontier Map Update and Wrap (15 min)}
+
+Compile all failure cases from today into the shared frontier map:
+
+\begin{longtable}{L{1.3in} L{1.5in} L{1.5in} L{1.5in}}
+\toprule
+\textbf{Task Type} & \textbf{AI Handles Well} & \textbf{AI Handles Poorly} & \textbf{Verification Needed} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+& & & \\
+\end{longtable}
+
+This map lives on the EDD site. It grows with every training delivery and every new tool built. Share it with GySgt Swickard for MCCES-wide distribution.
+
+\textbf{Assignment before Advanced Workshop:}
+\begin{itemize}[nosep]
+  \item Complete your Build \#3 tool to deployable state
+  \item Run it through the EDD SOP QA process
+  \item Document three specific failure cases you encountered
+  \item Identify one area where AI capability surprised you (better or worse than expected)
+\end{itemize}
+
+% =============================================================================
+% COURSE 4: ADVANCED WORKSHOP
+% =============================================================================
+\section{Course 4: Advanced Workshop}
+
+\textbf{Elective \textbar\ 4 Hours \textbar\ Experienced Builders}
+
+\textbf{Purpose:} Move from individual capability to organizational capability. Map the frontier for your functional area, build verification protocols, and learn to teach others.
+
+\textbf{Prerequisite:} At least one deployed tool.
+
+% ---------------------------------------------------------------------------
+\subsection{Agenda}
+
+\begin{longtable}{L{0.8in} L{2.8in} L{2in}}
+\toprule
+\textbf{Time} & \textbf{Module} & \textbf{2011 Skills Applied} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+0:00--0:45 & Frontier Mapping for Your Domain & Frontier Recognition \\
+\midrule
+0:45--1:45 & Complex Build: Multi-Component System & All six \\
+\midrule
+1:45--2:00 & Break & \\
+\midrule
+2:00--2:45 & Verification Protocols and QA & Quality Judgment \\
+\midrule
+2:45--3:30 & Group Debugging: Real Problems & Iterative Refinement, Frontier Recognition \\
+\midrule
+3:30--4:00 & Teaching Others: The 2011 Multiplier & All six \\
+\end{longtable}
+
+% ---------------------------------------------------------------------------
+\subsection{Module 1: Frontier Mapping for Your Domain (45 min)}
+
+Each participant (or working group from the same functional area) creates a frontier map specific to their domain.
+
+\textbf{Format:}
+
+\begin{longtable}{L{1.2in} L{1.5in} L{1.5in} L{1.5in}}
+\toprule
+\textbf{Category} & \textbf{Inside Frontier (AI Handles)} & \textbf{Outside Frontier (AI Fails)} & \textbf{Moving Frontier (Check Periodically)} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+& & & \\
+\end{longtable}
+
+\textbf{Categories to map:}
+\begin{itemize}[nosep]
+  \item Document generation (correspondence, reports, evaluations)
+  \item Data analysis (trend identification, anomaly detection, summarization)
+  \item Process automation (workflows, notifications, routing)
+  \item Reference lookup (MCOs, regulations, policy interpretation)
+  \item Training development (lesson plans, scenarios, assessments)
+\end{itemize}
+
+\textbf{Deliverable:} Each participant produces a one-page frontier map for their functional area. These maps are published on the EDD site and shared with GySgt Swickard. Assign an owner responsible for updating as capabilities change.
+
+\textbf{Key teaching point:} This map is the most valuable artifact any of your students will produce. A good frontier map prevents the 19-percentage-point performance drop that the BCG-Harvard study documented for untrained users working outside the frontier.
+
+% ---------------------------------------------------------------------------
+\subsection{Module 2: Complex Build --- Multi-Component System (60 min)}
+
+Build a system that requires switching between centaur and cyborg modes. Example: a tutoring management system with a data backend (centaur --- careful schema design, human-verified), an input interface (cyborg --- iterative), and an automated reporting dashboard (centaur --- accuracy-critical).
+
+\textbf{Before each phase, participants must explicitly identify:}
+\begin{enumerate}[nosep]
+  \item Which mode they're using
+  \item Why this phase demands that mode
+  \item What verification looks like at the phase boundary
+\end{enumerate}
+
+\textbf{Instructor note:} The goal is not a polished product. The goal is conscious, deliberate mode-switching. If a student builds the whole thing in one mode, they haven't learned the skill.
+
+% ---------------------------------------------------------------------------
+\subsection{Module 3: Verification Protocols and QA (45 min)}
+
+\textbf{Build a QA checklist for your domain.}
+
+For any AI-generated output in your functional area, what must be checked?
+\begin{enumerate}[nosep]
+  \item \textbf{Source verification:} Are cited references real? (AI fabricates references.)
+  \item \textbf{Data accuracy:} Do numbers, dates, and identifiers match source material?
+  \item \textbf{Logic check:} Does the reasoning hold? Are conclusions supported by the evidence?
+  \item \textbf{Format compliance:} Does it match required templates, styles, and standards?
+  \item \textbf{Domain review:} Does it reflect how your organization actually operates?
+\end{enumerate}
+
+\textbf{Exercise:} Take an AI-generated document from your domain. Run it through the checklist. Time yourself. Compare QA time vs.\ creation-from-scratch time. In most cases, QA of AI output is 30--50\% of creation time --- that's your time savings.
+
+\textbf{Key teaching point:} The GDPval study found that human experts averaged 7 hours per task. AI-assisted workflows with human review were 1.4x faster and 1.6x cheaper. The review step is not overhead --- it's where the value is created. An unchecked AI output is a liability, not an asset.
+
+% ---------------------------------------------------------------------------
+\subsection{Module 4: Group Debugging --- Real Problems (45 min)}
+
+Participants bring actual tools with actual problems.
+\begin{itemize}[nosep]
+  \item 5--10 minutes per problem
+  \item Group collaborates on diagnosis and fix
+  \item Document every failure case --- these feed the frontier map
+\end{itemize}
+
+\textbf{Structure:}
+\begin{enumerate}[nosep]
+  \item Presenter: ``Here's what it should do. Here's what it actually does.''
+  \item Group: Ask clarifying questions
+  \item Together: Attempt the fix using AI assistance
+  \item Document: What was the root cause? Was this a frontier issue or a context issue?
+\end{enumerate}
+
+% ---------------------------------------------------------------------------
+\subsection{Module 5: Teaching Others --- The 2011 Multiplier (30 min)}
+
+\textbf{The problem:} Individual AI capability doesn't scale. Organizational AI capability does. How do you turn what you know into what your section knows?
+
+\textbf{The permission gap:} Mollick's research shows that many workers are already using AI but hiding it because they're worried about organizational reaction. Workers are ``just not telling management about it.'' They're worried about job outcomes and don't want to give saved time back. This creates a shadow AI culture where best practices aren't shared and mistakes aren't caught.
+
+\textbf{Exercise: The 60-Second Teach}
+
+Each participant picks one of the six 2011 skills and teaches it to a partner in 60 seconds, using an example from their own work. Then switch.
+
+This exercise surfaces who can explain the framework clearly --- those people are your future instructors.
+
+\textbf{Discussion: The Apprentice Problem}
+
+Cite the research: entry-level job postings dropped 35\% from 2023--2025. AI is automating the routine tasks that junior workers traditionally learned on. If we're not careful, we'll produce Marines who can operate AI-assisted workflows but can't function when the AI is unavailable.
+
+\textbf{The protocol:} When junior Marines use AI in your section:
+\begin{itemize}[nosep]
+  \item Require them to review AI output and explain \textit{why} it's correct or incorrect --- not just accept it
+  \item Periodically have them do key tasks without AI to build baseline competency
+  \item Use AI output as a teaching tool: ``Here's what AI generated. What would you change and why?''
+  \item Rotate who does QA review --- this is where judgment develops
+\end{itemize}
+
+\textbf{Deliverable: Workflow Playbook}
+
+Each participant writes a one-page playbook for one AI-integrated workflow in their section:
+
+\begin{longtable}{L{1.8in} L{4.2in}}
+\toprule
+\textbf{Field} & \textbf{Content} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Task & What recurring task does this playbook cover? \\
+\midrule
+Frequency & How often is this task performed? \\
+\midrule
+Mode & Centaur or Cyborg? \\
+\midrule
+Steps & Step-by-step with Human/AI labels for each step \\
+\midrule
+Verification Checklist & What must be checked before the output is used? \\
+\midrule
+Known Frontier Issues & Where has AI failed on this task? What to watch for? \\
+\midrule
+Time Savings Estimate & How long without AI vs.\ with AI? \\
+\midrule
+Junior Development Note & How does this workflow preserve skill-building opportunities? \\
+\end{longtable}
+
+These playbooks are published on the EDD site. They become the institutional knowledge base for AI-integrated workflows.
+
+% =============================================================================
+% COURSE 5: SUPERVISOR ORIENTATION
+% =============================================================================
+\section{Course 5: Supervisor Orientation}
+
+\textbf{Recommended \textbar\ 30 Minutes \textbar\ Leadership}
+
+\textbf{Purpose:} The highest-leverage 30 minutes in the entire program. One supervisor creating a permission culture enables an entire section. One supervisor creating a fear culture kills adoption across their command.
+
+\textbf{Prerequisite:} None. Can be taken independently. Recommended before or alongside any other course.
+
+% ---------------------------------------------------------------------------
+\subsection{Core Message}
+
+\textbf{``Your people are waiting for you to say yes.''}
+
+Mollick's research is explicit: workers are already using AI and hiding it. They're worried about organizational reaction. The permission gap --- not the technology --- is the largest barrier to AI adoption. The DoW's January 2026 AI Strategy pushes ``rapid adoption,'' but rapid adoption requires supervisor support at the lowest levels.
+
+% ---------------------------------------------------------------------------
+\subsection{Agenda}
+
+\begin{longtable}{L{0.8in} L{2.8in} L{2in}}
+\toprule
+\textbf{Time} & \textbf{Module} & \textbf{Focus} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+0:00--0:05 & Why This Matters Now & The 80\% problem, DoW AI Strategy, rapid adoption mandate \\
+\midrule
+0:05--0:12 & What EDD Is & Five courses, six 2011 skills, research foundation (headline level) \\
+\midrule
+0:12--0:20 & Your Role: Creating Permission & What ``yes'' looks like, what kills adoption, guard rails \\
+\midrule
+0:20--0:27 & Evaluating Proposals and Output & Four questions to ask, what quality looks like \\
+\midrule
+0:27--0:30 & The Apprentice Problem & Preserving junior development while gaining efficiency \\
+\end{longtable}
+
+% ---------------------------------------------------------------------------
+\subsection{Module 1: Why This Matters Now (5 min)}
+
+\begin{itemize}[nosep]
+  \item Microsoft found that most workers abandon AI tools within weeks without organizational support
+  \item The UK government study showed 25 minutes/day savings with proper support
+  \item The DoW's January 2026 AI Strategy declares this the year of Military AI Dominance
+  \item The Army created a dedicated AI/ML officer career field (49B)
+  \item The Marine Corps is running generative AI workshops at Quantico
+  \item Your command directed AI as a SITREP item. This isn't optional anymore.
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+\subsection{Module 2: What EDD Is (7 min)}
+
+\textbf{The four-layer framework:}
+\begin{enumerate}[nosep]
+  \item SOP --- Governance: How tools are proposed, reviewed, approved, and maintained
+  \item Training --- Education: Five courses from universal fluency to advanced building
+  \item QA --- Quality: Peer review, security assessment, and user verification
+  \item Community --- Sustainability: Shared frontier maps, workflow playbooks, cross-unit mentoring
+\end{enumerate}
+
+\textbf{The six 2011 skills} (headline level only): Context Assembly, Quality Judgment, Task Decomposition, Iterative Refinement, Workflow Integration, Frontier Recognition. These are management skills, not technical skills. Your Marines already have the foundation.
+
+% ---------------------------------------------------------------------------
+\subsection{Module 3: Your Role --- Creating Permission (8 min)}
+
+\textbf{What ``yes'' looks like:}
+\begin{itemize}[nosep]
+  \item ``Try it. Show me what you build.''
+  \item ``I don't need to understand how it works. I need to understand what it does.''
+  \item ``If it saves time and meets quality standards, we should do it.''
+  \item Protected time for learning (even 30 minutes per week)
+  \item Public recognition when someone builds something useful
+\end{itemize}
+
+\textbf{What kills adoption:}
+\begin{itemize}[nosep]
+  \item ``I need to approve every AI interaction.''
+  \item ``Don't use AI for anything official.''
+  \item ``We'll wait until there's a formal policy.''
+  \item Punishing experimentation failures
+  \item Treating AI use as suspicious or lazy
+\end{itemize}
+
+\textbf{Guard rails (not roadblocks):}
+\begin{itemize}[nosep]
+  \item All tools go through the EDD SOP process before deployment
+  \item All AI-generated content for official use must be reviewed by a qualified human
+  \item Sensitive/classified information is never entered into unauthorized AI systems
+  \item Failed experiments are shared as learning, not punished as waste
+\end{itemize}
+
+\textbf{The default answer should be ``yes, with appropriate review.''}
+
+% ---------------------------------------------------------------------------
+\subsection{Module 4: Evaluating Proposals and Output (7 min)}
+
+\textbf{When a Marine comes to you with an AI-built tool or AI-assisted output, ask four questions:}
+\begin{enumerate}[nosep]
+  \item \textbf{Does it work?} Can you demonstrate it doing what it claims to do?
+  \item \textbf{Is the output accurate?} Are facts, references, and numbers verifiable?
+  \item \textbf{Does it follow the SOP?} Has it gone through the proper review process?
+  \item \textbf{Does it save time?} What's the before/after comparison?
+\end{enumerate}
+
+\textbf{You don't need to evaluate \textit{how} the AI produced it.} That's like asking how the engine works before you'll drive the car. Focus on the output, not the mechanism.
+
+\textbf{What quality looks like:} The same standards you'd apply to any work product. If a Marine handed you this document without mentioning AI, would you sign it? That's the standard.
+
+% ---------------------------------------------------------------------------
+\subsection{Module 5: The Apprentice Problem (3 min)}
+
+\textbf{The long-term risk:} If AI handles all the routine tasks that junior Marines used to learn on, those Marines never develop the judgment to operate without AI. Research shows entry-level employment in AI-exposed fields dropped 13\% since 2022. We cannot let this happen in our formations.
+
+\textbf{Your role:}
+\begin{itemize}[nosep]
+  \item Require juniors to \textit{review} AI output, not just accept it
+  \item Periodically require key tasks to be done without AI assistance
+  \item Use AI output as a teaching tool: ``The AI generated this. What would you change?''
+  \item Ensure developmental assignments aren't all delegated to AI
+  \item Remember: the goal is AI-augmented Marines, not AI-dependent ones
+\end{itemize}
+
+\textbf{Closing:} The EDD program provides the structure. Your people have the motivation. The DoW has directed the priority. The only thing standing between your section and measurable productivity gains is your permission. Give it.
+
+% =============================================================================
+% APPENDICES
+% =============================================================================
+\appendix
+\section{Appendix A: Instructor Notes}
+
+\textbf{AI Fluency Fundamentals:}
+\begin{itemize}[nosep]
+  \item This is the most important course in the program. It determines whether people become sustained AI users or part of the 80\% who quit.
+  \item The Red Pen Review exercise is non-negotiable. Skip nothing else, but do not skip this.
+  \item Keep the energy conversational. This is not a PowerPoint death march. Use real examples from your own experience.
+  \item When students say ``I don't have time for this,'' respond with the UK government data: 25 minutes saved per day. The training pays for itself in the first week.
+  \item If teaching online: the Red Pen Review exercise can be done with distributed documents and a timed review period. The debrief must be synchronous.
+\end{itemize}
+
+\textbf{Builder Orientation:}
+\begin{itemize}[nosep]
+  \item Verify AI Fluency Fundamentals completion before proceeding.
+  \item The live build should be messy. When something breaks, celebrate it. ``This is what debugging looks like. This is normal.''
+  \item The decomposition exercise in Module 4 is the make-or-break moment. Students who decompose well build well. Spend the time.
+\end{itemize}
+
+\textbf{Platform Training:}
+\begin{itemize}[nosep]
+  \item Failure sharing during break is not optional. It's one of the most valuable 15 minutes in the whole program.
+  \item Build \#3 (their own problem) is where students transition from following along to independent capability. Give them space.
+  \item The frontier map produced in the final module is a real deliverable. It should be published on the EDD site.
+\end{itemize}
+
+\textbf{Advanced Workshop:}
+\begin{itemize}[nosep]
+  \item The frontier maps and workflow playbooks are deliverables, not exercises. They should be published on the EDD site and shared with GySgt Swickard for MCCES-wide distribution.
+  \item The apprentice problem discussion is particularly important for senior NCOs and staff NCOs attending. They set the tone for their sections.
+  \item The 60-Second Teach exercise identifies future instructors. Note who does it well.
+\end{itemize}
+
+\textbf{Supervisor Orientation:}
+\begin{itemize}[nosep]
+  \item This is the highest-leverage 30 minutes in the program. One supervisor creating permission culture enables an entire section.
+  \item Respect the time constraint. Supervisors are busy. Don't run over 30 minutes.
+  \item Lead with operational relevance: SITREP requirement, DoW AI Strategy, what other units are doing.
+  \item End with a specific ask: ``Within the next week, ask one person in your section what they'd build if they had permission.''
+\end{itemize}
+
+% =============================================================================
+\section{Appendix B: Quick Reference --- The Six 2011 Skills}
+
+\begin{longtable}{L{1.2in} L{2.2in} L{2.4in}}
+\toprule
+\textbf{Skill} & \textbf{One-Sentence Definition} & \textbf{Key Question} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Context Assembly & Curate the right background, constraints, and examples before asking AI to work & ``What does AI need to know to do this well?'' \\
+\midrule
+Quality Judgment & Spot reliable vs.\ unreliable content in the same output & ``Would I sign this?'' \\
+\midrule
+Task Decomposition & Break work into subtasks and decide which to delegate & ``If this were a new Marine, how would I assign it?'' \\
+\midrule
+Iterative Refinement & Treat AI output as a starting point and direct structured revision & ``What's wrong with this draft, specifically?'' \\
+\midrule
+Workflow Integration & Embed AI into recurring processes so it becomes standard operating procedure & ``Can anyone in my section follow this playbook?'' \\
+\midrule
+Frontier Recognition & Know where AI excels and where it fails for your specific work & ``Has anyone tried this task with AI? What happened?'' \\
+\end{longtable}
+
+% =============================================================================
+\section{Appendix C: Centaur vs. Cyborg Quick Reference}
+
+\begin{longtable}{L{1.2in} L{2.4in} L{2.4in}}
+\toprule
+\textbf{Dimension} & \textbf{Centaur} & \textbf{Cyborg} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Pattern & Clear division between human and AI work & Fluid, continuous integration \\
+\midrule
+Best For & High-stakes, accountability-critical work & Creative, iterative, exploratory work \\
+\midrule
+Verification & At defined phase boundaries & Continuous throughout \\
+\midrule
+DoW Examples & Legal reviews, fitreps, admin separations, personnel actions & SOPs, training materials, PowerApps, data analysis \\
+\midrule
+Risk If Misapplied & Too slow for iterative work; AI phases are under-utilized & Insufficient verification for high-stakes work; errors slip through \\
+\end{longtable}
+
+% =============================================================================
+\section{Appendix D: Workflow Playbook Template}
+
+\begin{longtable}{L{1.8in} L{4.2in}}
+\toprule
+\textbf{Field} & \textbf{Content} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\textbf{Task} & {[What recurring task does this playbook cover?]} \\
+\midrule
+\textbf{Frequency} & {[How often? Daily / Weekly / Monthly / As needed]} \\
+\midrule
+\textbf{Mode} & {[Centaur / Cyborg]} \\
+\midrule
+\textbf{Step 1} & {[Description]} --- \textbf{Human / AI} \\
+\midrule
+\textbf{Step 2} & {[Description]} --- \textbf{Human / AI} \\
+\midrule
+\textbf{Step 3} & {[Description]} --- \textbf{Human / AI} \\
+\midrule
+\textbf{Step 4} & {[Description]} --- \textbf{Human / AI} \\
+\midrule
+\textbf{Step 5} & {[Description]} --- \textbf{Human / AI} \\
+\midrule
+\textbf{Verification Checklist} & {[What must be checked?]} \\
+\midrule
+\textbf{Known Frontier Issues} & {[Where has AI failed? What to watch for?]} \\
+\midrule
+\textbf{Time Savings} & {[Without AI: \_\_\_ min/hrs. With AI: \_\_\_ min/hrs.]} \\
+\midrule
+\textbf{Junior Development} & {[How does this workflow preserve skill-building?]} \\
+\end{longtable}
+
+% =============================================================================
+\section{Appendix E: Research Sources}
+
+\begin{longtable}{L{1.6in} L{2in} L{2.2in}}
+\toprule
+\textbf{Study} & \textbf{Key Finding} & \textbf{How We Use It} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Microsoft enterprise deployment data (300K+ employees) & 80\% of workers abandon AI tools within \textasciitilde 3 weeks; survivors learn management skills, not prompting skills & Opens every course; frames AI as management skill \\
+\midrule
+Dell'Acqua et al.\ (2023), Harvard/BCG, 758 consultants & Inside frontier: +12\% tasks, +25\% speed, +40\% quality. Outside frontier: $-$19 pp correctness. Two patterns: centaur and cyborg & Core framework: jagged frontier, centaur/cyborg, frontier mapping \\
+\midrule
+Brynjolfsson, Li, \& Raymond (2025), Stanford/MIT, 5,172 agents & AI boosts productivity 15\% avg; novices gain 34\%; top performers gain little; AI disseminates tacit expert knowledge & Explains why quality judgment matters more than prompting; supports skill-leveling argument \\
+\midrule
+Mollick (2026), Wharton executive MBA experiment & Management skills predict AI effectiveness; delegation equation; ``AI work is delegation work'' & Management framing throughout; delegation equation in Course 1 Module 3 \\
+\midrule
+OpenAI GDPval (2025), 1,320 tasks across 44 occupations & Frontier models approach expert parity on \textasciitilde 48\% of tasks; 100x faster/cheaper on inference; 1.4x faster with human review; human oversight remains essential & Validates focus on judgment over prompting; used in Modules on Quality Judgment \\
+\midrule
+UK Government Digital Services (2025), 20,000 employees & 25 min/day savings; 80\%+ wouldn't give up AI; 9/12 departments continued licenses & Evidence for Supervisor Orientation; proves government bureaucracies benefit from AI with proper training \\
+\midrule
+Stanford Digital Economy Lab / multiple (2023--2025) & Entry-level postings down 35\%; employment ages 22--25 down 13\% in AI-exposed fields; apprenticeship pipeline at risk & Apprentice problem discussion in Advanced Workshop and Supervisor Orientation \\
+\midrule
+DoW AI Strategy (January 2026) & ``2026 will be the year we raise the bar for Military AI Dominance''; directs rapid adoption across all services & Operational relevance throughout; cited in Supervisor Orientation \\
+\midrule
+Army 49B AI/ML Officer career field (October 2025) & Dedicated uniformed AI expertise pathway & Context for why military is investing in AI human capital \\
+\end{longtable}
+
+% =============================================================================
+% DOCUMENT HISTORY
+% =============================================================================
+\section*{Document History}
+\addcontentsline{toc}{section}{Document History}
+
+\begin{longtable}{L{0.8in} L{0.8in} L{4.2in}}
+\toprule
+\textbf{Version} & \textbf{Date} & \textbf{Changes} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+v1.0 & 2024 & Initial training outlines \\
+\midrule
+v2.0 & 2024 & Added Power Platform focus \\
+\midrule
+v3.0 & Jan 2026 & Restructured around EDD SOP, added QA framework \\
+\midrule
+v4.0 & Feb 2026 & Restructured around 2011-level skills, jagged frontier, centaur/cyborg patterns, quality judgment exercises, frontier mapping \\
+\midrule
+v5.0 & Feb 2026 & Added AI Fluency Fundamentals as universal 5th course; expanded research foundation with GDPval, Mollick delegation equation, Brynjolfsson skill-leveling, UK Government study; added delegation equation module; strengthened apprentice problem protocols; added junior development field to workflow playbooks; full research source appendix \\
+\end{longtable}
+
+\vspace{0.5in}
+
+\noindent\rule{\textwidth}{0.4pt}
+
+\vspace{0.2in}
+
+\noindent\textbf{Classification:} UNCLASSIFIED // Distribution Unlimited
+
+\noindent\textbf{Proponent:} MCCES AI Working Group / Expert-Driven Development Program
+
+\noindent\textbf{Published:} \url{https://jeranaias.github.io/ExpertDrivenDevelopment/}
+
+\end{document}
