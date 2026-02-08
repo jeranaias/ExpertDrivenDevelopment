@@ -14,7 +14,7 @@
   var btn = document.createElement('button');
   btn.className = 'back-to-top';
   btn.setAttribute('aria-label', 'Back to top');
-  btn.textContent = '\u2191';
+  btn.textContent = '';
   document.body.appendChild(btn);
 
   var ticking = false;
