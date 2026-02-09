@@ -604,6 +604,31 @@
     <script src="../js/enhancements.js"></script>
     <script src="../js/knowledge-check.js"></script>
     <script src="../js/course-progress.js"></script>
+    <script src="../js/user-identity.js"></script>
+
+    <script>
+    // Pre-fill certificate form from user identity
+    (function () {
+        document.addEventListener('edd-user-ready', function (e) {
+            var user = e.detail;
+            if (!user) return;
+
+            var nameField = document.getElementById('cert-name');
+            var rankField = document.getElementById('cert-rank');
+            var unitField = document.getElementById('cert-unit');
+
+            if (nameField && !nameField.value && user.name) {
+                nameField.value = user.name;
+            }
+            if (rankField && !rankField.value && user.rank) {
+                rankField.value = user.rank;
+            }
+            if (unitField && !unitField.value && user.unit) {
+                unitField.value = user.unit;
+            }
+        });
+    })();
+    </script>
 
 </body>
 </html>

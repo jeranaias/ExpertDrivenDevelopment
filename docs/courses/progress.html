@@ -267,6 +267,11 @@
         <section class="section">
             <div class="container">
 
+                <!-- User identity greeting (populated by JS) -->
+                <div id="edd-user-greeting" style="display:none;" class="mb-lg">
+                    <h2 id="edd-user-greeting-text" style="margin-top:0;border-bottom:none;padding-bottom:0;"></h2>
+                </div>
+
                 <div class="callout callout--info mb-xl">
                     <h2 class="callout__title">Browser-Based Progress</h2>
                     <p>Your progress is saved in this browser. To track progress across devices, use the Export feature below.</p>
@@ -536,6 +541,22 @@
                 var lines = [];
                 lines.push('TRAINING RECORD — EXPERT-DRIVEN DEVELOPMENT');
                 lines.push('Date Generated: ' + dateStr);
+
+                // Include user identity if available
+                try {
+                    var userRaw = localStorage.getItem('edd_user');
+                    if (userRaw) {
+                        var userData = JSON.parse(userRaw);
+                        var userLine = '';
+                        if (userData.rank) { userLine += userData.rank + ' '; }
+                        if (userData.name) { userLine += userData.name; }
+                        if (userData.unit) { userLine += ', ' + userData.unit; }
+                        if (userLine) {
+                            lines.push('Student: ' + userLine);
+                        }
+                    }
+                } catch (ex) { /* ignore */ }
+
                 lines.push('');
 
                 for (var i = 0; i < COURSES.length; i++) {
@@ -601,6 +622,29 @@
     <script src="../js/enhancements.js"></script>
     <script src="../js/knowledge-check.js"></script>
     <script src="../js/course-progress.js"></script>
+    <script src="../js/user-identity.js"></script>
+
+    <script>
+    // Show user greeting on progress page
+    (function () {
+        document.addEventListener('edd-user-ready', function (e) {
+            var user = e.detail;
+            if (!user || !user.name) return;
+
+            var parts = [];
+            if (user.rank) { parts.push(user.rank); }
+            parts.push(user.name);
+            var label = parts.join(' ');
+
+            var greeting = document.getElementById('edd-user-greeting');
+            var greetingText = document.getElementById('edd-user-greeting-text');
+            if (greeting && greetingText) {
+                greetingText.textContent = 'Progress for ' + label;
+                greeting.style.display = 'block';
+            }
+        });
+    })();
+    </script>
 
 </body>
 </html>
