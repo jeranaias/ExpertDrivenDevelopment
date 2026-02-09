@@ -2545,6 +2545,20 @@ figcaption {
   margin-left: var(--space-sm);
 }
 
+.knowledge-check__question.is-unanswered {
+  border-left: 3px solid var(--color-scarlet);
+  padding-left: var(--space-md);
+  background-color: var(--color-warning-bg, #fff8e6);
+}
+
+.knowledge-check__status-msg {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-scarlet);
+  padding: var(--space-sm) 0;
+  margin-top: var(--space-sm);
+}
+
 
 /* ==========================================================
    COURSE PROGRESS / CHECKLIST COMPONENT
