@@ -2785,3 +2785,26 @@ figcaption {
 .course-checklist__item.is-auto-checked.fade-out {
     background: transparent;
 }
+
+/* Locked checklist items (require verification to unlock) */
+.course-checklist__item.is-locked label {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+.course-checklist__item.is-locked input[type="checkbox"] {
+    cursor: not-allowed;
+}
+.course-checklist__item.is-locked.is-verified label {
+    cursor: default;
+    opacity: 1;
+}
+.course-checklist__item.is-locked.is-verified input[type="checkbox"] {
+    cursor: default;
+}
+.course-checklist__lock-msg {
+    display: none;
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--color-scarlet, #CC0000);
+    font-weight: 600;
+}

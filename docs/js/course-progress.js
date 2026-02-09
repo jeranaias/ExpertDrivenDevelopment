@@ -127,16 +127,86 @@
       updateProgress();
     }
 
-    // Bind change listeners to all checkboxes
+    /**
+     * Check if the knowledge check has been passed by looking at localStorage.
+     * knowledge-check.js stores results as edd_kc_{courseId}_{moduleId}.
+     */
+    function hasPassedKnowledgeCheck() {
+      var prefix = 'edd_kc_' + courseId;
+      try {
+        for (var k = 0; k < localStorage.length; k++) {
+          var key = localStorage.key(k);
+          if (key && key.indexOf(prefix) === 0) {
+            var data = JSON.parse(localStorage.getItem(key));
+            if (data && data.passed === true) {
+              return true;
+            }
+          }
+        }
+      } catch (e) {
+        // fail silently
+      }
+      return false;
+    }
+
+    // Bind change listeners to all checkboxes and lock restricted items
+    var kcPassed = hasPassedKnowledgeCheck();
+
     for (var i = 0; i < items.length; i++) {
       var checkbox = items[i].querySelector('input[type="checkbox"]');
       if (checkbox) {
+        var itemKey = checkbox.getAttribute('data-item') || '';
+
+        // Lock the knowledge-check checkbox — can only be checked by passing the quiz
+        if (itemKey === 'knowledge-check') {
+          if (kcPassed) {
+            checkbox.checked = true;
+            items[i].classList.add('is-locked', 'is-verified');
+          } else {
+            checkbox.disabled = true;
+            checkbox.checked = false;
+            items[i].classList.add('is-locked');
+          }
+          // Prevent manual toggle even if not disabled (belt and suspenders)
+          (function(cb, item) {
+            cb.addEventListener('click', function(e) {
+              if (!item.classList.contains('is-verified')) {
+                e.preventDefault();
+                cb.checked = false;
+                // Show tooltip message
+                var msg = item.querySelector('.course-checklist__lock-msg');
+                if (!msg) {
+                  msg = document.createElement('span');
+                  msg.className = 'course-checklist__lock-msg';
+                  msg.textContent = 'Pass the Knowledge Check above to unlock';
+                  item.querySelector('label').appendChild(msg);
+                }
+                msg.style.display = 'inline';
+                setTimeout(function() { msg.style.display = 'none'; }, 3000);
+              }
+            });
+          })(checkbox, items[i]);
+        }
+
         checkbox.addEventListener('change', onCheckboxChange);
       }
     }
 
     // Restore saved state and update progress on load
     restoreState();
+
+    // After restore, enforce KC lock (don't let saved state override the lock)
+    for (var r = 0; r < items.length; r++) {
+      var rcb = items[r].querySelector('input[type="checkbox"]');
+      if (rcb) {
+        var rKey = rcb.getAttribute('data-item') || '';
+        if (rKey === 'knowledge-check' && !kcPassed) {
+          rcb.checked = false;
+          rcb.disabled = true;
+        }
+      }
+    }
+
     updateProgress();
 
     /**
@@ -152,17 +222,18 @@
         return;
       }
 
-      // Find and check the knowledge-check item in this checklist
+      // Find, unlock, and check the knowledge-check item in this checklist
       for (var j = 0; j < items.length; j++) {
         var cb = items[j].querySelector('input[type="checkbox"]');
         if (cb) {
           var itemKey = cb.getAttribute('data-item') || '';
           if (itemKey === 'knowledge-check') {
-            if (!cb.checked) {
-              cb.checked = true;
-              saveState();
-              updateProgress();
-            }
+            cb.disabled = false;
+            cb.checked = true;
+            items[j].classList.add('is-verified');
+            items[j].classList.remove('is-locked');
+            saveState();
+            updateProgress();
             break;
           }
         }
