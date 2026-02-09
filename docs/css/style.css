@@ -2772,3 +2772,16 @@ figcaption {
     display: none !important;
   }
 }
+
+
+/* ==========================================================
+   SCROLL-BASED AUTO-CHECK HIGHLIGHT
+   ========================================================== */
+
+.course-checklist__item.is-auto-checked {
+    background: rgba(245, 209, 48, 0.2);  /* gold flash */
+    transition: background 1.5s ease;
+}
+.course-checklist__item.is-auto-checked.fade-out {
+    background: transparent;
+}

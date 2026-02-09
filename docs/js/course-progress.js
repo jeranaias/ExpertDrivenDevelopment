@@ -174,4 +174,207 @@
   for (var i = 0; i < checklists.length; i++) {
     initChecklist(checklists[i]);
   }
+
+  /**
+   * Scroll-based automatic progress tracking.
+   * Uses IntersectionObserver to detect when a student scrolls past
+   * a module section, then auto-checks the corresponding checklist item.
+   */
+  function initScrollTracker() {
+    // Graceful degradation: bail if IntersectionObserver is not supported
+    if (typeof IntersectionObserver === 'undefined') {
+      return;
+    }
+
+    // Collect all sections whose id could map to a module checklist item.
+    // Pattern 1: id="module-1", id="module-2", etc.
+    // Pattern 2: id="setup-review", id="build-1", etc. (platform.html style)
+    var allSections = document.querySelectorAll('section[id]');
+    if (!allSections.length) {
+      return;
+    }
+
+    // Build a mapping from section id to the matching checkbox element(s).
+    // We only map sections that have a corresponding module-prefixed data-item
+    // in a .course-checklist on this page.
+    var sectionMap = []; // array of { section: element, checkbox: element, itemEl: element }
+
+    for (var s = 0; s < allSections.length; s++) {
+      var section = allSections[s];
+      var sectionId = section.getAttribute('id');
+
+      // Skip non-module sections: overview, knowledge-check, capstone,
+      // completion-checklist, and any exercises
+      if (sectionId === 'overview' ||
+          sectionId === 'knowledge-check' ||
+          sectionId === 'capstone' ||
+          sectionId === 'completion-checklist' ||
+          sectionId === 'main-content') {
+        continue;
+      }
+
+      // Try to find a matching checkbox in any course-checklist on the page.
+      // Strategy 1: Direct match — data-item equals the section id (e.g., "module-1")
+      var checkbox = null;
+      var itemEl = null;
+      var directMatch = document.querySelector(
+        '.course-checklist input[data-item="' + sectionId + '"]'
+      );
+      if (directMatch) {
+        checkbox = directMatch;
+      } else {
+        // Strategy 2: Suffix match — data-item ends with the section id
+        // e.g., section id="setup-review" matches data-item="module-1-setup-review"
+        var allCheckboxes = document.querySelectorAll('.course-checklist input[data-item]');
+        for (var c = 0; c < allCheckboxes.length; c++) {
+          var dataItem = allCheckboxes[c].getAttribute('data-item') || '';
+          // Only match module items (data-item starts with "module-")
+          if (dataItem.indexOf('module-') === 0 &&
+              dataItem.length > sectionId.length &&
+              dataItem.indexOf(sectionId, dataItem.length - sectionId.length) !== -1) {
+            checkbox = allCheckboxes[c];
+            break;
+          }
+        }
+      }
+
+      if (!checkbox) {
+        continue;
+      }
+
+      // Only auto-check module items (data-item starting with "module-")
+      var checkboxDataItem = checkbox.getAttribute('data-item') || '';
+      if (checkboxDataItem.indexOf('module-') !== 0) {
+        continue;
+      }
+
+      // Find the parent .course-checklist__item for the highlight animation
+      itemEl = checkbox.closest
+        ? checkbox.closest('.course-checklist__item')
+        : (function(el) {
+            while (el && el.parentNode) {
+              el = el.parentNode;
+              if (el.classList && el.classList.contains('course-checklist__item')) {
+                return el;
+              }
+            }
+            return null;
+          })(checkbox);
+
+      sectionMap.push({
+        section: section,
+        checkbox: checkbox,
+        itemEl: itemEl
+      });
+    }
+
+    // Nothing to observe if no mappings found
+    if (!sectionMap.length) {
+      return;
+    }
+
+    // Track which sections have already been auto-checked this session
+    // to avoid re-triggering after manual uncheck
+    var autoChecked = {};
+
+    /**
+     * Flash a highlight on the checklist row when auto-checked.
+     */
+    function flashHighlight(el) {
+      if (!el) return;
+      el.classList.add('is-auto-checked');
+      // Force reflow so the transition starts from the gold background
+      void el.offsetWidth;
+      // After a brief moment, trigger the fade-out transition
+      setTimeout(function() {
+        el.classList.add('fade-out');
+      }, 50);
+      // Clean up classes after animation completes
+      setTimeout(function() {
+        el.classList.remove('is-auto-checked');
+        el.classList.remove('fade-out');
+      }, 1600);
+    }
+
+    /**
+     * Auto-check a checkbox and trigger the save/update flow.
+     */
+    function autoCheck(entry) {
+      var cb = entry.checkbox;
+      var dataItem = cb.getAttribute('data-item') || '';
+
+      // Already checked (manually or previously auto-checked) — do nothing
+      if (cb.checked) {
+        return;
+      }
+
+      // If the user manually unchecked this item, respect that —
+      // only auto-check once per page load session
+      if (autoChecked[dataItem]) {
+        return;
+      }
+
+      // Mark as auto-checked
+      autoChecked[dataItem] = true;
+      cb.checked = true;
+
+      // Trigger the same save/update flow as a manual checkbox change.
+      // Dispatch a 'change' event so the existing listener picks it up.
+      var evt;
+      if (typeof Event === 'function') {
+        evt = new Event('change', { bubbles: true });
+      } else {
+        // IE11 fallback
+        evt = document.createEvent('Event');
+        evt.initEvent('change', true, true);
+      }
+      cb.dispatchEvent(evt);
+
+      // Flash the highlight animation
+      flashHighlight(entry.itemEl);
+    }
+
+    // Create the IntersectionObserver.
+    // rootMargin '0px 0px -20% 0px' means the bottom 20% of the viewport
+    // is excluded, so the section bottom must scroll past that 20% zone.
+    var observer = new IntersectionObserver(function(entries) {
+      for (var i = 0; i < entries.length; i++) {
+        var ioEntry = entries[i];
+        // We observe sentinel elements placed at the bottom of sections.
+        // When they become visible (intersecting), the user has scrolled past.
+        if (ioEntry.isIntersecting) {
+          // Find the corresponding mapping entry
+          var sentinel = ioEntry.target;
+          var mapEntry = sentinel._eddMapEntry;
+          if (mapEntry) {
+            autoCheck(mapEntry);
+            // Stop observing this sentinel — it's done
+            observer.unobserve(sentinel);
+          }
+        }
+      }
+    }, {
+      rootMargin: '0px 0px -20% 0px',
+      threshold: 0
+    });
+
+    // For each mapped section, create a sentinel element at the bottom
+    // and observe it. This ensures the observer fires when the bottom
+    // of the section scrolls into the observation zone.
+    for (var m = 0; m < sectionMap.length; m++) {
+      var sentinel = document.createElement('div');
+      sentinel.setAttribute('aria-hidden', 'true');
+      sentinel.style.height = '1px';
+      sentinel.style.width = '1px';
+      sentinel.style.overflow = 'hidden';
+      sentinel.style.opacity = '0';
+      sentinel.style.pointerEvents = 'none';
+      sentinel._eddMapEntry = sectionMap[m];
+      sectionMap[m].section.appendChild(sentinel);
+      observer.observe(sentinel);
+    }
+  }
+
+  // Initialize the scroll tracker
+  initScrollTracker();
 })();
