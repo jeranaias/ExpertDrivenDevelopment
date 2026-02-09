@@ -87,8 +87,8 @@
                             <li><a href="#agenda">Agenda</a></li>
                             <li><a href="#frontier-mapping">Frontier Mapping for Your Domain</a></li>
                             <li><a href="#complex-build">Complex Build: Multi-Component System</a></li>
-                            <li><a href="#verification">Verification Protocols and QA</a></li>
                             <li><a href="#group-debugging">Group Debugging: Real Problems</a></li>
+                            <li><a href="#verification">Verification Protocols and QA</a></li>
                             <li><a href="#teaching-others">Teaching Others: The 201 Multiplier</a></li>
                             <li><a href="#assessment">Assessment Rubric</a></li>
                         </ul>
@@ -471,114 +471,6 @@
                         </div>
                     </section>
 
-                    <!-- Module 3: Verification Protocols and QA -->
-                    <section id="verification">
-                        <h2>Module 4: Verification Protocols and QA</h2>
-                        <p><strong>Duration:</strong> 30 minutes</p>
-
-                        <p>
-                            Build a QA checklist for your domain. For AI-generated output, what must be checked?
-                        </p>
-
-                        <h3>QA Checklist</h3>
-                        <ol>
-                            <li>
-                                <strong>Source verification</strong> &mdash; AI fabricates references.
-                                Every citation, regulation number, and URL must be independently verified.
-                            </li>
-                            <li>
-                                <strong>Data accuracy</strong> &mdash; Numbers, dates, names, and quantities
-                                must be checked against source data.
-                            </li>
-                            <li>
-                                <strong>Logic check</strong> &mdash; Does the reasoning hold? Are conclusions
-                                supported by the premises?
-                            </li>
-                            <li>
-                                <strong>Format compliance</strong> &mdash; Does the output match required formats,
-                                templates, and standards?
-                            </li>
-                            <li>
-                                <strong>Domain review</strong> &mdash; Does this pass the smell test for someone
-                                who knows this domain?
-                            </li>
-                        </ol>
-
-                        <h3>Exercise: Timed QA Review</h3>
-                        <p>
-                            Take an AI-generated document. Run it through your checklist. Time yourself.
-                            Compare QA time versus creation-from-scratch time. Usually 30&ndash;50% &mdash;
-                            that's the time savings.
-                        </p>
-
-                        <div class="template-display">
-                            <h4>AI-Generated SOP Excerpt &mdash; QA Timed Exercise</h4>
-                            <p><strong>Instructions:</strong> Time yourself. How long does it take you to find all five issues? Typical completion time: 5&ndash;10 minutes.</p>
-                            <hr>
-                            <p><strong>STANDARD OPERATING PROCEDURE</strong><br>
-                            Marine Corps Detachment, 99th Training Group<br>
-                            <strong>Subject:</strong> Unit Check-In / Check-Out Procedure<br>
-                            <strong>Reference:</strong> (a) MCO 1000.6B, Individual Records Administration<br>
-                            (b) NAVMC 11800/4 (Rev 03-2025), Check-In/Check-Out Sheet</p>
-
-                            <p><strong>1. Purpose.</strong> To establish standardized procedures for all personnel
-                            checking in to and checking out of Marine Corps Detachment, 99th Training Group.
-                            All personnel shall complete check-in within 72 hours of reporting aboard.</p>
-
-                            <p><strong>2. Scope.</strong> This SOP applies to all Marines, Sailors, and civilian
-                            personnel assigned to or transferring from the Detachment.</p>
-
-                            <p><strong>3. Procedure &mdash; Check-In.</strong> Personnel reporting aboard shall
-                            complete the following steps in order:</p>
-
-                            <p>Step 1: Report to the Officer of the Day (OOD) with original orders and ten
-                            copies of PCS orders.<br>
-                            Step 2: Obtain a check-in sheet per reference (b).<br>
-                            Step 3: Receive unit orientation brief from S-1 covering unit organization,
-                            key personnel, and local policies.<br>
-                            Step 4: Report to assigned section SNCOIC/OIC for introduction and initial
-                            task assignment.<br>
-                            5. Report to S-1 for initial in-processing, including service record book
-                            review and page 11 entry.<br>
-                            6. Complete remaining check-in sheet signatures (S-3, S-4, Medical, Dental,
-                            IPAC) within 48 hours of reporting.</p>
-
-                            <p><strong>4. Procedure &mdash; Check-Out.</strong> Personnel transferring from
-                            the unit shall initiate check-out procedures no later than 10 working days
-                            prior to the date of detachment.</p>
-                        </div>
-
-                        <details>
-                            <summary><strong>Answer Key &mdash; Five Planted Errors</strong></summary>
-                            <ol>
-                                <li>
-                                    <strong>Fabricated Reference #1:</strong> &ldquo;MCO 1000.6B&rdquo; is cited as the governing order for check-in procedures. This MCO does not exist. AI-generated regulation numbers must always be independently verified against the official Marine Corps Publications System.
-                                </li>
-                                <li>
-                                    <strong>Fabricated Reference #2:</strong> &ldquo;NAVMC 11800/4 (Rev 03-2025)&rdquo; is cited as the check-in/check-out form. This form number is fabricated. AI frequently generates plausible-sounding form numbers that do not correspond to real NAVMC forms.
-                                </li>
-                                <li>
-                                    <strong>Data Accuracy Error &mdash; Contradictory Timelines:</strong> Paragraph 1 states check-in must be completed &ldquo;within 72 hours of reporting aboard,&rdquo; but Step 6 states remaining signatures must be completed &ldquo;within 48 hours of reporting.&rdquo; These timelines contradict each other. AI often introduces subtle inconsistencies between sections of longer documents.
-                                </li>
-                                <li>
-                                    <strong>Logic Error &mdash; Steps Out of Order:</strong> Step 3 has the Marine receiving a &ldquo;unit orientation brief from S-1,&rdquo; but Step 5 has the Marine reporting &ldquo;to S-1 for initial in-processing.&rdquo; Logically, you would in-process at S-1 (Step 5) before receiving the orientation brief (Step 3). The S-1 steps are reversed.
-                                </li>
-                                <li>
-                                    <strong>Format Error &mdash; Inconsistent Numbering:</strong> Steps 1 through 4 use the &ldquo;Step 1:&rdquo; format, but the procedure then switches to a bare &ldquo;5.&rdquo; and &ldquo;6.&rdquo; format midway through. AI frequently loses formatting consistency in longer documents, especially when generating numbered procedures.
-                                </li>
-                            </ol>
-                        </details>
-
-                        <div class="callout callout--info">
-                            <h3 class="callout__title">Key Teaching Point</h3>
-                            <p>
-                                The GDPval study found human experts averaged 7 hours per task. AI-assisted
-                                with review was 1.4x faster, 1.6x cheaper. The review step is where value
-                                is created.
-                            </p>
-                        </div>
-                    </section>
-
                     <!-- Module 3: Group Debugging — Real Problems -->
                     <section id="group-debugging">
                         <h2>Module 3: Group Debugging &mdash; Real Problems</h2>
@@ -692,6 +584,114 @@
                             <h3 class="callout__title">Key Takeaway</h3>
                             <p>
                                 Most debugging comes down to three categories: (1) the AI didn't have enough context, (2) the platform has a quirk the AI doesn't know about, or (3) we hit an actual frontier limitation. Categories 1 and 2 can be solved with better prompting and domain knowledge. Category 3 goes on the frontier map.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Module 4: Verification Protocols and QA -->
+                    <section id="verification">
+                        <h2>Module 4: Verification Protocols and QA</h2>
+                        <p><strong>Duration:</strong> 30 minutes</p>
+
+                        <p>
+                            Build a QA checklist for your domain. For AI-generated output, what must be checked?
+                        </p>
+
+                        <h3>QA Checklist</h3>
+                        <ol>
+                            <li>
+                                <strong>Source verification</strong> &mdash; AI fabricates references.
+                                Every citation, regulation number, and URL must be independently verified.
+                            </li>
+                            <li>
+                                <strong>Data accuracy</strong> &mdash; Numbers, dates, names, and quantities
+                                must be checked against source data.
+                            </li>
+                            <li>
+                                <strong>Logic check</strong> &mdash; Does the reasoning hold? Are conclusions
+                                supported by the premises?
+                            </li>
+                            <li>
+                                <strong>Format compliance</strong> &mdash; Does the output match required formats,
+                                templates, and standards?
+                            </li>
+                            <li>
+                                <strong>Domain review</strong> &mdash; Does this pass the smell test for someone
+                                who knows this domain?
+                            </li>
+                        </ol>
+
+                        <h3>Exercise: Timed QA Review</h3>
+                        <p>
+                            Take an AI-generated document. Run it through your checklist. Time yourself.
+                            Compare QA time versus creation-from-scratch time. Usually 30&ndash;50% &mdash;
+                            that's the time savings.
+                        </p>
+
+                        <div class="template-display">
+                            <h4>AI-Generated SOP Excerpt &mdash; QA Timed Exercise</h4>
+                            <p><strong>Instructions:</strong> Time yourself. How long does it take you to find all five issues? Typical completion time: 5&ndash;10 minutes.</p>
+                            <hr>
+                            <p><strong>STANDARD OPERATING PROCEDURE</strong><br>
+                            Marine Corps Detachment, 99th Training Group<br>
+                            <strong>Subject:</strong> Unit Check-In / Check-Out Procedure<br>
+                            <strong>Reference:</strong> (a) MCO 1000.6B, Individual Records Administration<br>
+                            (b) NAVMC 11800/4 (Rev 03-2025), Check-In/Check-Out Sheet</p>
+
+                            <p><strong>1. Purpose.</strong> To establish standardized procedures for all personnel
+                            checking in to and checking out of Marine Corps Detachment, 99th Training Group.
+                            All personnel shall complete check-in within 72 hours of reporting aboard.</p>
+
+                            <p><strong>2. Scope.</strong> This SOP applies to all Marines, Sailors, and civilian
+                            personnel assigned to or transferring from the Detachment.</p>
+
+                            <p><strong>3. Procedure &mdash; Check-In.</strong> Personnel reporting aboard shall
+                            complete the following steps in order:</p>
+
+                            <p>Step 1: Report to the Officer of the Day (OOD) with original orders and ten
+                            copies of PCS orders.<br>
+                            Step 2: Obtain a check-in sheet per reference (b).<br>
+                            Step 3: Receive unit orientation brief from S-1 covering unit organization,
+                            key personnel, and local policies.<br>
+                            Step 4: Report to assigned section SNCOIC/OIC for introduction and initial
+                            task assignment.<br>
+                            5. Report to S-1 for initial in-processing, including service record book
+                            review and page 11 entry.<br>
+                            6. Complete remaining check-in sheet signatures (S-3, S-4, Medical, Dental,
+                            IPAC) within 48 hours of reporting.</p>
+
+                            <p><strong>4. Procedure &mdash; Check-Out.</strong> Personnel transferring from
+                            the unit shall initiate check-out procedures no later than 10 working days
+                            prior to the date of detachment.</p>
+                        </div>
+
+                        <details>
+                            <summary><strong>Answer Key &mdash; Five Planted Errors</strong></summary>
+                            <ol>
+                                <li>
+                                    <strong>Fabricated Reference #1:</strong> &ldquo;MCO 1000.6B&rdquo; is cited as the governing order for check-in procedures. This MCO does not exist. AI-generated regulation numbers must always be independently verified against the official Marine Corps Publications System.
+                                </li>
+                                <li>
+                                    <strong>Fabricated Reference #2:</strong> &ldquo;NAVMC 11800/4 (Rev 03-2025)&rdquo; is cited as the check-in/check-out form. This form number is fabricated. AI frequently generates plausible-sounding form numbers that do not correspond to real NAVMC forms.
+                                </li>
+                                <li>
+                                    <strong>Data Accuracy Error &mdash; Contradictory Timelines:</strong> Paragraph 1 states check-in must be completed &ldquo;within 72 hours of reporting aboard,&rdquo; but Step 6 states remaining signatures must be completed &ldquo;within 48 hours of reporting.&rdquo; These timelines contradict each other. AI often introduces subtle inconsistencies between sections of longer documents.
+                                </li>
+                                <li>
+                                    <strong>Logic Error &mdash; Steps Out of Order:</strong> Step 3 has the Marine receiving a &ldquo;unit orientation brief from S-1,&rdquo; but Step 5 has the Marine reporting &ldquo;to S-1 for initial in-processing.&rdquo; Logically, you would in-process at S-1 (Step 5) before receiving the orientation brief (Step 3). The S-1 steps are reversed.
+                                </li>
+                                <li>
+                                    <strong>Format Error &mdash; Inconsistent Numbering:</strong> Steps 1 through 4 use the &ldquo;Step 1:&rdquo; format, but the procedure then switches to a bare &ldquo;5.&rdquo; and &ldquo;6.&rdquo; format midway through. AI frequently loses formatting consistency in longer documents, especially when generating numbered procedures.
+                                </li>
+                            </ol>
+                        </details>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Key Teaching Point</h3>
+                            <p>
+                                The GDPval study found human experts averaged 7 hours per task. AI-assisted
+                                with review was 1.4x faster, 1.6x cheaper. The review step is where value
+                                is created.
                             </p>
                         </div>
                     </section>
@@ -943,6 +943,13 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Completion Criteria: What a Finished Playbook Looks Like</h3>
+                            <p>
+                                A completed playbook entry should have: a clear task name, realistic frequency, the correct mode (Centaur or Cyborg), 4-8 concrete steps with Human/AI labels, a verification checklist with 3-5 items, at least one known frontier issue, and a specific time savings estimate. If your playbook has fewer than 4 steps or no verification checklist, it is not detailed enough.
+                            </p>
+                        </div>
                     </section>
 
                     <!-- Assessment Rubric -->
@@ -1059,6 +1066,8 @@
     </script>
 
     <script src="../js/enhancements.js"></script>
+    <script src="../js/knowledge-check.js"></script>
+    <script src="../js/course-progress.js"></script>
 
 </body>
 </html>

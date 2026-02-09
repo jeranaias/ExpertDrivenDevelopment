@@ -268,6 +268,16 @@
                             </div>
                         </div>
 
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Completion Criteria</h3>
+                            <p>
+                                Complete all 5 category rows. Each cell should contain a specific, concrete
+                                example from your domain &mdash; not generic descriptions. The &ldquo;Moving
+                                Frontier&rdquo; column should include tasks where AI capability is improving
+                                and you should re-evaluate quarterly.
+                            </p>
+                        </div>
+
                         <h3>Exercise: Fill In Your Frontier Map</h3>
                         <p>
                             Using the blank template above, fill in your frontier map for your specific
@@ -830,6 +840,15 @@ Dashboard appears to be counting something differently than
                             <p><strong>Working alone?</strong> Record your 60-second teach as a voice memo or short video. Teaching to a camera forces you to clarify your thinking the same way teaching a person does. If you can explain a 201 skill clearly in 60 seconds using your own example, you understand it.</p>
                         </div>
 
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">60-Second Teach Completion Criteria</h3>
+                            <p>
+                                Each field should be 1&ndash;3 sentences. The &ldquo;Common Mistake&rdquo; field
+                                is the most valuable &mdash; think about what you got wrong when you first learned
+                                this skill, or what you have seen others get wrong.
+                            </p>
+                        </div>
+
                         <div class="template-display">
                             <h4>60-Second Teach Template</h4>
                             <div class="table-wrapper">
@@ -939,6 +958,16 @@ Dashboard appears to be counting something differently than
                             </table>
                         </div>
 
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Workflow Playbook Completion Criteria</h3>
+                            <p>
+                                A complete playbook entry includes: 4&ndash;8 concrete steps with Human/AI
+                                labels, a verification checklist with 3&ndash;5 specific items to check, at
+                                least one known frontier issue, and a realistic time savings estimate. Compare
+                                your entry against the filled example above.
+                            </p>
+                        </div>
+
                         <h4>Blank Workflow Playbook Template</h4>
                         <div class="template-display">
                             <h4>Your Workflow Playbook</h4>
@@ -999,6 +1028,483 @@ Dashboard appears to be counting something differently than
                         </div>
                     </section>
 
+                    <!-- Capstone Deliverable -->
+                    <section id="capstone">
+                        <h2>Capstone Deliverable</h2>
+                        <div class="callout callout--success">
+                            <h3 class="callout__title">Documentation Package</h3>
+                            <p>
+                                Complete the full documentation package (User Guide, Replication Guide,
+                                Adaptation Guide, Maintenance Guide) for your tool. The package must be
+                                thorough enough that another developer could rebuild your tool from the
+                                Replication Guide alone.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Knowledge Check -->
+                    <section id="knowledge-check">
+                        <h2>Knowledge Check</h2>
+                        <div class="knowledge-check" data-course="advanced-student" data-module="1">
+                            <h3 class="knowledge-check__title">Knowledge Check</h3>
+
+                            <!-- Module 1, Question 1 -->
+                            <div class="knowledge-check__question" data-correct="2">
+                                <p class="knowledge-check__prompt">The BCG-Harvard study found that workers who applied AI beyond the frontier without knowing it performed how much worse than those without AI?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_1_q1" value="0">
+                                        <span>5 percentage points worse</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_1_q1" value="1">
+                                        <span>10 percentage points worse</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_1_q1" value="2">
+                                        <span>19 percentage points worse</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_1_q1" value="3">
+                                        <span>35 percentage points worse</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The BCG-Harvard study found a 19 percentage point performance drop when workers applied AI beyond the frontier unknowingly. This is why frontier mapping is the most important artifact in this course -- knowing where the boundary is prevents you from trusting AI in places where it will fail silently.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 1, Question 2 -->
+                            <div class="knowledge-check__question" data-correct="3">
+                                <p class="knowledge-check__prompt">Your frontier map has an "Outside Frontier" column that is completely empty for every category. What does this indicate?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_1_q2" value="0">
+                                        <span>You have found an AI tool that handles everything in your domain perfectly</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_1_q2" value="1">
+                                        <span>Your domain is particularly well-suited to AI automation</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_1_q2" value="2">
+                                        <span>You need more build experience before completing the map</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_1_q2" value="3">
+                                        <span>You are likely overestimating AI capabilities, since every domain has tasks where AI fails</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>Every domain has tasks where AI fails. An empty "Outside Frontier" column indicates overestimation of AI capabilities rather than a domain that AI handles perfectly. Identifying those failure points is the entire purpose of the frontier mapping exercise. If you cannot find failures, you may not have tested AI on enough tasks in your domain.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 1, Question 3 -->
+                            <div class="knowledge-check__question" data-correct="0">
+                                <p class="knowledge-check__prompt">What is the purpose of the "Moving Frontier" column in a frontier map?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_1_q3" value="0">
+                                        <span>To capture tasks where AI capability is improving and should be re-evaluated periodically to see if they have moved inside the frontier</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_1_q3" value="1">
+                                        <span>To list tasks that are being moved from one team to another</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_1_q3" value="2">
+                                        <span>To document tasks that require physical movement between workstations</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_1_q3" value="3">
+                                        <span>To track tasks that shift between centaur and cyborg mode</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The "Moving Frontier" column captures tasks where AI capability is actively improving. For example, fitness report narratives or predictive analysis might be unreliable today but improving rapidly. These items should be re-evaluated quarterly so you can take advantage of new capabilities as they become reliable enough for production use.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 2, Question 1 -->
+                            <div class="knowledge-check__question" data-correct="1">
+                                <p class="knowledge-check__prompt">In the Tutoring Management System example, the data backend uses centaur mode while the input interface uses cyborg mode. What principle drives this mode selection?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_2_q1" value="0">
+                                        <span>Backend components always use centaur mode and frontend components always use cyborg mode</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_2_q1" value="1">
+                                        <span>The mode is chosen based on what each component demands: accuracy-critical foundations use centaur, while user-facing iterative work uses cyborg</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_2_q1" value="2">
+                                        <span>You should alternate modes between phases to practice both equally</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_2_q1" value="3">
+                                        <span>The first component always uses centaur mode regardless of what it is</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>Mode selection is driven by what each component demands, not by a fixed rule about component type. The data backend uses centaur mode because the schema is a foundation -- errors cascade to everything built on top. The input interface uses cyborg mode because it is user-facing and benefits from rapid iteration. The reporting dashboard returns to centaur mode because the numbers must be accurate for leadership briefs.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 2, Question 2 -->
+                            <div class="knowledge-check__question" data-correct="0">
+                                <p class="knowledge-check__prompt">You completed Phase 1 (data backend) and Phase 2 (input interface) of a multi-component system. In Phase 3 (reporting dashboard), you discover the dashboard totals do not match the input data. What should you do first?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_2_q2" value="0">
+                                        <span>Trace the data from input to dashboard to identify where the discrepancy originates -- it could be in the data backend, the input form, or the dashboard calculation</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_2_q2" value="1">
+                                        <span>Rebuild the dashboard from scratch using a different AI prompt</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_2_q2" value="2">
+                                        <span>Accept the dashboard numbers since the AI likely has a valid reason for the difference</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_2_q2" value="3">
+                                        <span>Add a manual override field to the dashboard so you can correct the numbers</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>In a multi-component system, discrepancies can originate at any layer. The correct approach is to trace the data flow from input through storage to display to find exactly where the numbers diverge. The error might be in the dashboard calculation, but it could also be in how the input form writes data or how the data backend stores it. Systematic diagnosis prevents you from fixing the wrong component.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 2, Question 3 -->
+                            <div class="knowledge-check__question" data-correct="3">
+                                <p class="knowledge-check__prompt">Why does the course recommend verifying the data backend schema before building the input interface or dashboard?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_2_q3" value="0">
+                                        <span>Power Platform requires the data source to exist before creating apps that connect to it</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_2_q3" value="1">
+                                        <span>The data backend is the easiest component to build, so it should be done first</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_2_q3" value="2">
+                                        <span>The instructor guide specifies this order and it cannot be changed</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_2_q3" value="3">
+                                        <span>If the schema is wrong, every component built on top of it inherits the error, requiring you to redo the interface and dashboard as well</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The data model is the foundation. If the schema has incorrect column types, missing relationships, or wrong data types, every component built on top of it will inherit those errors. Fixing a schema after building the input form and dashboard means rebuilding those components too. Verifying the foundation before building upward prevents cascading rework.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 3, Question 1 -->
+                            <div class="knowledge-check__question" data-correct="2">
+                                <p class="knowledge-check__prompt">The QA checklist lists "Source verification" as item #1. According to the timed QA exercise, why is this the most important step?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_3_q1" value="0">
+                                        <span>Because source verification is the fastest step and should be completed first</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_3_q1" value="1">
+                                        <span>Because AI never fabricates references when given the correct source material</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_3_q1" value="2">
+                                        <span>Because it is the easiest step to skip and the most dangerous when you do, since AI fabricates plausible-sounding citations that look legitimate</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_3_q1" value="3">
+                                        <span>Because regulations change frequently and must be checked regardless of whether AI was used</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>Source verification is item #1 because it is the easiest step to skip and the most dangerous when you do. AI generates plausible-sounding regulation numbers, form numbers, and citations that do not correspond to real documents. Most people catch formatting errors quickly but miss fabricated references unless they explicitly verify every citation against authoritative sources.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 3, Question 2 -->
+                            <div class="knowledge-check__question" data-correct="1">
+                                <p class="knowledge-check__prompt">In the timed QA exercise, the AI-generated SOP contains steps that are out of logical order (receiving an S-1 orientation brief before in-processing at S-1). What type of QA check catches this error?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_3_q2" value="0">
+                                        <span>Source verification -- checking the regulation that defines the correct step order</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_3_q2" value="1">
+                                        <span>Logic check -- verifying that the reasoning holds and steps follow a sensible sequence</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_3_q2" value="2">
+                                        <span>Format compliance -- ensuring the steps are numbered correctly</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_3_q2" value="3">
+                                        <span>Data accuracy -- comparing the step count against the template</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>This is a logic check error. The question is whether the reasoning and sequence make sense: logically, you would in-process at S-1 before receiving an orientation brief from S-1. Domain knowledge tells you the steps are reversed. Format compliance would catch the inconsistent numbering (a separate error in the same document), but the logical ordering issue requires understanding the actual workflow.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 3, Question 3 -->
+                            <div class="knowledge-check__question" data-correct="0">
+                                <p class="knowledge-check__prompt">The timed QA exercise demonstrates that AI can generate a draft SOP in seconds, but finding the five errors takes several minutes of careful review. What does this teach about the value proposition of AI-assisted work?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_3_q3" value="0">
+                                        <span>The time savings come from AI generating the draft, but the value is created during the QA step where your expertise catches what AI gets wrong</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_3_q3" value="1">
+                                        <span>AI-assisted work is not actually faster when you account for QA time</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_3_q3" value="2">
+                                        <span>The QA step should be skipped for low-stakes documents to maximize time savings</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_3_q3" value="3">
+                                        <span>AI should not be used for SOPs since the error rate is too high</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The exercise demonstrates the core value proposition: AI handles the generation (fast, repetitive work) while humans handle the verification (expert judgment). Even with QA time included, the total time is less than writing from scratch. But the QA step is where the actual value is created -- it is what separates a useful draft from a document with fabricated references and logical errors.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 4, Question 1 -->
+                            <div class="knowledge-check__question" data-correct="3">
+                                <p class="knowledge-check__prompt">In Debugging Scenario 1, a $1,500 request routes to the CO instead of the Department Head. The key diagnostic question is: "If requests at exactly $2,500 go to the CO correctly, but requests below $2,500 also go to the CO, what comparison operator would cause this?" What is the root cause?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q1" value="0">
+                                        <span>The flow has a typo in the dollar amount threshold</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q1" value="1">
+                                        <span>The approver lookup table has the wrong person assigned to the Department Head role</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q1" value="2">
+                                        <span>The amount field is stored as text instead of a number, causing string comparison instead of numeric comparison</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q1" value="3">
+                                        <span>The condition logic uses the wrong comparison operator, so the "route to Department Head" branch never evaluates to true for values below the threshold</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The root cause is inverted or incorrect comparison operators in the condition logic. For example, if the condition reads "if amount >= 0, send to CO" as a catch-all because the Department Head branch was incorrectly written, every request falls through to the CO. The fix is to ensure the condition properly routes amounts below $2,500 to the Department Head and amounts at or above $2,500 to the CO, then verify with test values at $2,499, $2,500, and $2,501.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 4, Question 2 -->
+                            <div class="knowledge-check__question" data-correct="2">
+                                <p class="knowledge-check__prompt">In Debugging Scenario 2, a gallery view that should show only overdue items displays all 47 items instead of the expected 12. Which of the following is the most systematic first step in diagnosing this issue?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q2" value="0">
+                                        <span>Delete the gallery and recreate it from scratch with a new AI prompt</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q2" value="1">
+                                        <span>Check whether the SharePoint list has the correct number of items</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q2" value="2">
+                                        <span>Inspect the gallery's Items property to see whether a Filter() function is applied and whether it references the correct column names and data types</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q2" value="3">
+                                        <span>Refresh the browser and check if the gallery updates</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The systematic first step is to inspect the gallery's Items property. If the gallery shows all items, the most likely cause is that the filter is missing, malformed, or referencing incorrect column names. Common AI errors include: pointing to the raw data source without a Filter() function, using a text string "Today" instead of the Today() function, or using a column's display name when Power Apps requires the internal name.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 4, Question 3 -->
+                            <div class="knowledge-check__question" data-correct="1">
+                                <p class="knowledge-check__prompt">After resolving a debugging scenario, the course suggests asking: "Is this a frontier issue or a context issue?" What is the practical difference between the two?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q3" value="0">
+                                        <span>Frontier issues are bugs in the AI model itself, while context issues are bugs in the platform</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q3" value="1">
+                                        <span>A frontier issue means AI cannot do this reliably regardless of your prompt, while a context issue means you did not give AI enough information to do it correctly</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q3" value="2">
+                                        <span>Frontier issues require switching to a different AI tool, while context issues require switching to a different work mode</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q3" value="3">
+                                        <span>There is no practical difference; both terms describe the same type of error</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The distinction is critical for how you respond. A context issue means you can fix the problem by providing better information in your prompt -- the AI is capable, it just lacked the right input. A frontier issue means AI cannot reliably handle this task regardless of how you prompt it, so you need to plan for manual work or extra verification. Documenting which category each bug falls into makes your frontier map more precise and your future prompts more effective.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 5, Question 1 -->
+                            <div class="knowledge-check__question" data-correct="2">
+                                <p class="knowledge-check__prompt">Mollick's research shows workers are already using AI but hiding it. According to the course, what is the organizational fix for this "shadow AI culture"?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_5_q1" value="0">
+                                        <span>Monitor employee AI usage through software tracking tools</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_5_q1" value="1">
+                                        <span>Ban AI usage until formal training is complete for all personnel</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_5_q1" value="2">
+                                        <span>Explicit permission and structure through a framework like EDD, so people stop hiding AI use and start sharing best practices</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_5_q1" value="3">
+                                        <span>Require all AI-generated work to be labeled as such in all communications</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The fix is explicit permission and structure. When leadership endorses AI use through a framework like EDD, people stop hiding and start sharing. This eliminates shadow AI culture where best practices are not shared, mistakes are repeated, and no one benefits from anyone else's learning. Structure transforms individual capability into organizational capability.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 5, Question 2 -->
+                            <div class="knowledge-check__question" data-correct="3">
+                                <p class="knowledge-check__prompt">The course describes the "apprentice problem": entry-level job postings dropped 35% from 2023 to 2025 as AI automates routine tasks juniors traditionally learned on. Which protocol addresses this?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_5_q2" value="0">
+                                        <span>Prevent juniors from using AI until they have at least two years of experience</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_5_q2" value="1">
+                                        <span>Assign juniors only to tasks that AI cannot perform</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_5_q2" value="2">
+                                        <span>Give juniors access to more advanced AI tools to compensate for reduced learning opportunities</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_5_q2" value="3">
+                                        <span>Require juniors to review and explain AI output, periodically work without AI, and rotate through QA review duties to build foundational judgment</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The protocol is deliberate about how juniors interact with AI: require them to review and explain why AI output is correct or incorrect (builds judgment), periodically complete key tasks without AI (builds foundational skills), use AI output as a teaching tool for finding problems (builds critical evaluation), and rotate QA review duty (builds quality judgment through repeated exposure). The goal is not to restrict AI use but to ensure juniors develop the expertise needed to evaluate AI output.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 5, Question 3 -->
+                            <div class="knowledge-check__question" data-correct="0">
+                                <p class="knowledge-check__prompt">A complete workflow playbook entry requires several components. Which of the following is the most critical for ensuring the playbook remains useful over time?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_5_q3" value="0">
+                                        <span>Known frontier issues, because they tell future users exactly where to apply extra scrutiny and what AI failures to watch for</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_5_q3" value="1">
+                                        <span>Time savings estimates, because they justify continued AI usage to leadership</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_5_q3" value="2">
+                                        <span>The task frequency, because it determines how often the playbook is used</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_5_q3" value="3">
+                                        <span>The Human/AI labels on each step, because they clarify who does what</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>While all components matter, known frontier issues are the most critical for long-term usefulness. They encode hard-won experience about where AI fails for this specific workflow, such as "AI sometimes invents room numbers that don't exist on base" or "AI cannot verify range availability." Without this information, future users will repeat the same mistakes. The frontier issues turn individual debugging experience into organizational knowledge.</p>
+                                </div>
+                            </div>
+
+                            <button class="knowledge-check__submit btn btn--primary">Check Answers</button>
+                            <div class="knowledge-check__result" hidden></div>
+                        </div>
+                    </section>
+
+                    <!-- Course Completion Checklist -->
+                    <section id="completion-checklist">
+                        <h2>Course Completion Checklist</h2>
+                        <div class="course-checklist" data-course="advanced-student">
+                            <h3 class="course-checklist__title">Course Completion Checklist</h3>
+                            <div class="course-progress-bar">
+                                <div class="course-progress-bar__fill"></div>
+                            </div>
+                            <span class="course-progress-bar__text">0% Complete</span>
+                            <ul class="course-checklist__list">
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="module-1-frontier-map">
+                                        <span>Module 1: Frontier Map completed</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="module-2-complex-build">
+                                        <span>Module 2: Complex Build completed</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="module-3-qa-exercise">
+                                        <span>Module 3: QA Exercise completed</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="module-4-debugging">
+                                        <span>Module 4: Debugging Practice completed</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="module-5-playbook">
+                                        <span>Module 5: Workflow Playbook completed</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="knowledge-check-passed">
+                                        <span>Knowledge Check: Scored 80% or higher</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="capstone-documentation">
+                                        <span>Capstone: Documentation Package completed</span>
+                                    </label>
+                                </li>
+                            </ul>
+                            <div class="course-checklist__complete" hidden>
+                                <div class="callout callout--success">
+                                    <h3 class="callout__title">Course Complete!</h3>
+                                    <p>You have completed Advanced Workshop. <a href="../progress.html">View your progress dashboard</a> or <a href="../certificate.html">generate your certificate</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                 </div>
             </div>
         </div>
@@ -1032,6 +1538,8 @@ Dashboard appears to be counting something differently than
     </script>
 
     <script src="../../js/enhancements.js"></script>
+    <script src="../../js/knowledge-check.js"></script>
+    <script src="../../js/course-progress.js"></script>
 
 </body>
 </html>

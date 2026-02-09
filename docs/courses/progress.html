@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Track your completion progress across all Expert-Driven Development courses. View checklist status, knowledge check scores, and generate a training record.">
+    <title>Your Progress | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Progress Dashboard Styles */
+        .progress-card {
+            background-color: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--color-border-light);
+            transition: background var(--transition-base);
+        }
+
+        .progress-card--complete::before {
+            background: linear-gradient(90deg, var(--color-scarlet) 0%, var(--color-gold) 100%);
+        }
+
+        .progress-card__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .progress-card__title {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            margin: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .progress-card__status {
+            display: inline-block;
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            padding: 0.15em 0.6em;
+            border-radius: 999px;
+            border: 1px solid var(--color-border-light);
+            background-color: var(--color-bg-secondary);
+            color: var(--color-text-secondary);
+        }
+
+        .progress-card__status--in-progress {
+            background-color: var(--color-info-bg);
+            color: var(--color-info-text);
+            border-color: var(--color-info-border);
+        }
+
+        .progress-card__status--complete {
+            background-color: var(--color-success-bg);
+            color: var(--color-success-text);
+            border-color: #a8dab5;
+        }
+
+        .progress-bar-track {
+            width: 100%;
+            height: 8px;
+            background-color: var(--color-bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: var(--space-sm);
+            border: 1px solid var(--color-border-light);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-scarlet) 0%, var(--color-gold) 100%);
+            border-radius: 4px;
+            transition: width 0.4s ease;
+            min-width: 0;
+        }
+
+        .progress-card__detail {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-muted);
+        }
+
+        .progress-card__detail a {
+            margin-left: var(--space-md);
+        }
+
+        .progress-card__kc {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-muted);
+            margin-top: var(--space-xs);
+        }
+
+        /* Credential Pathway Diagram */
+        .pathway {
+            margin-top: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .pathway__diagram {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: var(--space-md);
+            padding: var(--space-xl);
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+        }
+
+        .pathway__row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            width: 100%;
+        }
+
+        .pathway__node {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-md);
+            background-color: var(--color-bg-primary);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-secondary);
+            white-space: nowrap;
+        }
+
+        .pathway__node--required {
+            border-color: var(--color-scarlet);
+        }
+
+        .pathway__node--complete {
+            border-color: var(--color-success-border);
+            background-color: var(--color-success-bg);
+            color: var(--color-success-text);
+        }
+
+        .pathway__node-check {
+            display: none;
+        }
+
+        .pathway__node--complete .pathway__node-check {
+            display: inline;
+        }
+
+        .pathway__arrow {
+            font-size: var(--font-size-lg);
+            color: var(--color-text-muted);
+            flex-shrink: 0;
+        }
+
+        .pathway__branch {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: var(--space-sm);
+            margin-left: var(--space-2xl);
+        }
+
+        .pathway__branch-arrow {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-muted);
+            margin-left: var(--space-md);
+        }
+
+        @media (max-width: 768px) {
+            .pathway__diagram {
+                padding: var(--space-md);
+            }
+
+            .pathway__row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .pathway__arrow {
+                transform: rotate(90deg);
+                align-self: center;
+            }
+
+            .pathway__branch {
+                margin-left: var(--space-lg);
+            }
+        }
+    </style>
+</head>
+<body class="site-wrapper">
+
+    <!-- Skip to content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Site Header -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./" class="active">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="./" class="active">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../resources/">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Courses</a></li>
+                    <li aria-current="page">Your Progress</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Your Progress</h1>
+            <p class="page-header__desc">
+                Track your completion across all Expert-Driven Development courses.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content" class="site-main">
+        <section class="section">
+            <div class="container">
+
+                <div class="callout callout--info mb-xl">
+                    <h2 class="callout__title">Browser-Based Progress</h2>
+                    <p>Your progress is saved in this browser. To track progress across devices, use the Export feature below.</p>
+                </div>
+
+                <!-- Course Progress Cards -->
+                <div id="progress-cards">
+                    <!-- Cards are rendered by JavaScript below -->
+                </div>
+
+                <!-- Credential Pathway -->
+                <div class="pathway">
+                    <h2>Credential Pathway</h2>
+                    <p class="mb-lg">Complete courses in sequence to build your Expert-Driven Development credential. AI Fluency Fundamentals is the required starting point for all personnel.</p>
+
+                    <div class="pathway__diagram" id="pathway-diagram">
+                        <div class="pathway__row">
+                            <div class="pathway__node pathway__node--required" id="pathway-ai-fluency-student">
+                                <span class="pathway__node-check" aria-hidden="true">&#10003;</span>
+                                AI Fluency (Required)
+                            </div>
+                            <span class="pathway__arrow" aria-hidden="true">&#8594;</span>
+                            <div class="pathway__node" id="pathway-orientation-student">
+                                <span class="pathway__node-check" aria-hidden="true">&#10003;</span>
+                                Builder Orientation
+                            </div>
+                            <span class="pathway__arrow" aria-hidden="true">&#8594;</span>
+                            <div class="pathway__node" id="pathway-platform-student">
+                                <span class="pathway__node-check" aria-hidden="true">&#10003;</span>
+                                Platform Training
+                            </div>
+                            <span class="pathway__arrow" aria-hidden="true">&#8594;</span>
+                            <div class="pathway__node" id="pathway-advanced-student">
+                                <span class="pathway__node-check" aria-hidden="true">&#10003;</span>
+                                Advanced Workshop
+                            </div>
+                        </div>
+                        <div class="pathway__branch">
+                            <span class="pathway__branch-arrow" aria-hidden="true">&#8600; from AI Fluency</span>
+                            <div class="pathway__node" id="pathway-supervisor">
+                                <span class="pathway__node-check" aria-hidden="true">&#10003;</span>
+                                Supervisor Orientation
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export Progress -->
+                <div class="mt-2xl">
+                    <h2>Export Training Record</h2>
+                    <p class="mb-lg">Generate a text summary of your training progress for record-keeping or to share with your chain of command.</p>
+                    <button type="button" class="btn btn--primary" id="export-btn">Export Progress</button>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-bottom">
+                <span>Expert-Driven Development</span>
+                <span>UNCLASSIFIED</span>
+                <span>MIT License</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile navigation toggle
+        (function() {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function() {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+
+    <script>
+        // Progress Dashboard
+        (function() {
+            'use strict';
+
+            var CHECKLIST_PREFIX = 'edd_checklist_';
+            var KC_PREFIX = 'edd_kc_';
+
+            var COURSES = [
+                { id: 'ai-fluency-student', name: 'AI Fluency Fundamentals', number: 1 },
+                { id: 'orientation-student', name: 'Builder Orientation', number: 2 },
+                { id: 'platform-student', name: 'Platform Training', number: 3 },
+                { id: 'advanced-student', name: 'Advanced Workshop', number: 4 },
+                { id: 'supervisor', name: 'Supervisor Orientation', number: 5 }
+            ];
+
+            /**
+             * Read checklist data from localStorage for a given course ID.
+             * Returns { checked: N, total: N }.
+             */
+            function getChecklistProgress(courseId) {
+                var result = { checked: 0, total: 0 };
+                try {
+                    var raw = localStorage.getItem(CHECKLIST_PREFIX + courseId);
+                    if (raw) {
+                        var state = JSON.parse(raw);
+                        var keys = [];
+                        for (var k in state) {
+                            if (state.hasOwnProperty(k)) {
+                                keys.push(k);
+                            }
+                        }
+                        result.total = keys.length;
+                        for (var i = 0; i < keys.length; i++) {
+                            if (state[keys[i]] === true) {
+                                result.checked++;
+                            }
+                        }
+                    }
+                } catch (e) {
+                    // fail silently
+                }
+                return result;
+            }
+
+            /**
+             * Read the best knowledge check score from localStorage for a course.
+             * Looks for any key matching edd_kc_{courseId}_*.
+             * Returns { score: N, total: N, passed: bool } or null.
+             */
+            function getKnowledgeCheckScore(courseId) {
+                var best = null;
+                try {
+                    for (var i = 0; i < localStorage.length; i++) {
+                        var key = localStorage.key(i);
+                        if (key && key.indexOf(KC_PREFIX + courseId + '_') === 0) {
+                            var data = JSON.parse(localStorage.getItem(key));
+                            if (data && typeof data.score === 'number') {
+                                if (!best || data.score > best.score) {
+                                    best = {
+                                        score: data.score,
+                                        total: data.total,
+                                        passed: data.passed === true
+                                    };
+                                }
+                            }
+                        }
+                    }
+                } catch (e) {
+                    // fail silently
+                }
+                return best;
+            }
+
+            /**
+             * Determine the status of a course.
+             * Returns 'complete', 'in-progress', or 'not-started'.
+             */
+            function getCourseStatus(progress) {
+                if (progress.total === 0) {
+                    return 'not-started';
+                }
+                if (progress.checked >= progress.total) {
+                    return 'complete';
+                }
+                if (progress.checked > 0) {
+                    return 'in-progress';
+                }
+                return 'not-started';
+            }
+
+            /**
+             * Get human-readable status label.
+             */
+            function getStatusLabel(status) {
+                if (status === 'complete') return 'Complete';
+                if (status === 'in-progress') return 'In Progress';
+                return 'Not Started';
+            }
+
+            /**
+             * Build and render progress cards.
+             */
+            function renderCards() {
+                var container = document.getElementById('progress-cards');
+                if (!container) return;
+
+                var html = '';
+
+                for (var i = 0; i < COURSES.length; i++) {
+                    var course = COURSES[i];
+                    var progress = getChecklistProgress(course.id);
+                    var status = getCourseStatus(progress);
+                    var statusLabel = getStatusLabel(status);
+                    var percentage = progress.total > 0 ? Math.round((progress.checked / progress.total) * 100) : 0;
+                    var kc = getKnowledgeCheckScore(course.id);
+
+                    var statusClass = 'progress-card__status';
+                    if (status === 'complete') statusClass += ' progress-card__status--complete';
+                    if (status === 'in-progress') statusClass += ' progress-card__status--in-progress';
+
+                    var cardClass = 'progress-card';
+                    if (status === 'complete') cardClass += ' progress-card--complete';
+
+                    html += '<div class="' + cardClass + '">';
+                    html += '  <div class="progress-card__header">';
+                    html += '    <h3 class="progress-card__title">Course ' + course.number + ': ' + course.name + '</h3>';
+                    html += '    <span class="' + statusClass + '">' + statusLabel + '</span>';
+                    html += '  </div>';
+                    html += '  <div class="progress-bar-track">';
+                    html += '    <div class="progress-bar-fill" style="width: ' + percentage + '%"></div>';
+                    html += '  </div>';
+                    html += '  <div class="progress-card__detail">';
+                    html += '    <span>' + progress.checked + ' of ' + progress.total + ' items complete</span>';
+
+                    if (status === 'complete') {
+                        html += '    <a href="certificate.html?course=' + encodeURIComponent(course.id) + '">Generate Certificate</a>';
+                    }
+
+                    html += '  </div>';
+
+                    // Knowledge check score
+                    if (kc) {
+                        var kcStatus = kc.passed ? 'PASS' : 'FAIL';
+                        html += '  <div class="progress-card__kc">';
+                        html += '    Knowledge Check: ' + kc.score + '/' + kc.total + ' (' + kcStatus + ')';
+                        html += '  </div>';
+                    }
+
+                    html += '</div>';
+                }
+
+                container.innerHTML = html;
+            }
+
+            /**
+             * Update the credential pathway diagram based on completion.
+             */
+            function updatePathway() {
+                for (var i = 0; i < COURSES.length; i++) {
+                    var course = COURSES[i];
+                    var progress = getChecklistProgress(course.id);
+                    var status = getCourseStatus(progress);
+                    var node = document.getElementById('pathway-' + course.id);
+                    if (node && status === 'complete') {
+                        node.classList.add('pathway__node--complete');
+                    }
+                }
+            }
+
+            /**
+             * Export progress as a text file.
+             */
+            function exportProgress() {
+                var now = new Date();
+                var dateStr = now.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+
+                var lines = [];
+                lines.push('TRAINING RECORD — EXPERT-DRIVEN DEVELOPMENT');
+                lines.push('Date Generated: ' + dateStr);
+                lines.push('');
+
+                for (var i = 0; i < COURSES.length; i++) {
+                    var course = COURSES[i];
+                    var progress = getChecklistProgress(course.id);
+                    var status = getCourseStatus(progress);
+                    var statusLabel = getStatusLabel(status).toUpperCase();
+                    var kc = getKnowledgeCheckScore(course.id);
+
+                    lines.push('Course ' + course.number + ': ' + course.name + ' — ' + statusLabel);
+                    lines.push('  Checklist: ' + progress.checked + '/' + progress.total + ' items');
+
+                    if (kc) {
+                        var kcStatus = kc.passed ? 'PASS' : 'FAIL';
+                        lines.push('  Knowledge Check: ' + kc.score + '/' + kc.total + ' (' + kcStatus + ')');
+                    } else {
+                        lines.push('  Knowledge Check: NOT ATTEMPTED');
+                    }
+
+                    lines.push('');
+                }
+
+                lines.push('---');
+                lines.push('Generated from: Expert-Driven Development Training Site');
+                lines.push('https://jeranaias.github.io/ExpertDrivenDevelopment/');
+
+                var text = lines.join('\n');
+
+                // Try to trigger a download
+                try {
+                    var blob = new Blob([text], { type: 'text/plain' });
+                    var url = URL.createObjectURL(blob);
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'edd-training-record-' + now.toISOString().slice(0, 10) + '.txt';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                } catch (e) {
+                    // Fallback: open in new window
+                    var win = window.open('', '_blank');
+                    if (win) {
+                        win.document.write('<pre>' + text.replace(/</g, '&lt;') + '</pre>');
+                        win.document.title = 'EDD Training Record';
+                        win.document.close();
+                    }
+                }
+            }
+
+            // Initialize
+            renderCards();
+            updatePathway();
+
+            // Bind export button
+            var exportBtn = document.getElementById('export-btn');
+            if (exportBtn) {
+                exportBtn.addEventListener('click', exportProgress);
+            }
+        })();
+    </script>
+
+    <script src="../js/enhancements.js"></script>
+    <script src="../js/knowledge-check.js"></script>
+    <script src="../js/course-progress.js"></script>
+
+</body>
+</html>

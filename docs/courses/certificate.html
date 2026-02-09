@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate a completion certificate for any Expert-Driven Development course you have finished.">
+    <title>Generate Certificate | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Certificate Form Styles */
+        .cert-form {
+            max-width: 600px;
+        }
+
+        .cert-form .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        /* Certificate Preview Area */
+        .cert-preview-wrapper {
+            margin-top: var(--space-2xl);
+        }
+
+        .cert-preview {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: var(--space-3xl) var(--space-2xl);
+            border: 3px solid var(--color-text-primary);
+            background-color: var(--color-bg-primary);
+            text-align: center;
+            position: relative;
+        }
+
+        .cert-preview::before,
+        .cert-preview::after {
+            content: "";
+            position: absolute;
+            border: 1px solid var(--color-border);
+        }
+
+        .cert-preview::before {
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+        }
+
+        .cert-preview::after {
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            border-color: var(--color-scarlet);
+        }
+
+        .cert-header {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-sm);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cert-subtitle {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-scarlet);
+            margin-bottom: var(--space-2xl);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cert-divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-scarlet) 0%, var(--color-gold) 100%);
+            margin: var(--space-lg) auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cert-course-name {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-lg);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cert-body {
+            font-size: var(--font-size-md);
+            line-height: var(--line-height-relaxed);
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            margin-bottom: var(--space-2xl);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cert-date {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-sm);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cert-org {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-lg);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cert-number {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-muted);
+            font-family: var(--font-family-mono);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cert-actions {
+            text-align: center;
+            margin-top: var(--space-xl);
+        }
+
+        /* Print Styles */
+        @media print {
+            /* Hide everything except the certificate */
+            body * {
+                visibility: hidden;
+            }
+
+            .cert-preview-wrapper,
+            .cert-preview-wrapper * {
+                visibility: visible;
+            }
+
+            .cert-actions {
+                display: none !important;
+            }
+
+            .cert-preview-wrapper {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .cert-preview {
+                max-width: none;
+                width: 7.5in;
+                margin: 0.5in auto;
+                padding: 0.75in 0.5in;
+                border: 3px solid #000;
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+
+            .cert-preview::before {
+                top: 6px;
+                left: 6px;
+                right: 6px;
+                bottom: 6px;
+                border: 1px solid #999;
+            }
+
+            .cert-preview::after {
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                border: 1px solid #CC0000;
+            }
+
+            .cert-header {
+                font-size: 24pt;
+            }
+
+            .cert-subtitle {
+                font-size: 14pt;
+                color: #CC0000;
+            }
+
+            .cert-course-name {
+                font-size: 18pt;
+            }
+
+            .cert-body {
+                font-size: 12pt;
+            }
+
+            .cert-date,
+            .cert-org {
+                font-size: 10pt;
+            }
+
+            .cert-number {
+                font-size: 8pt;
+            }
+
+            .cert-divider {
+                background: #CC0000;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            /* Hide site header, footer, nav, breadcrumb, form */
+            .site-header,
+            .site-footer,
+            .mobile-nav,
+            .page-header,
+            .skip-link,
+            .back-to-top,
+            .progress-reading,
+            #cert-form-section {
+                display: none !important;
+            }
+
+            @page {
+                size: letter landscape;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body class="site-wrapper">
+
+    <!-- Skip to content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Site Header -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./" class="active">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="./" class="active">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../resources/">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Courses</a></li>
+                    <li aria-current="page">Certificate</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Generate Certificate</h1>
+            <p class="page-header__desc">
+                Generate a completion certificate for any course you have finished.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content" class="site-main">
+        <section class="section" id="cert-form-section">
+            <div class="container">
+
+                <!-- No completed courses callout (hidden by default) -->
+                <div class="callout callout--warning mb-xl" id="no-courses-callout" hidden>
+                    <h2 class="callout__title">No Completed Courses</h2>
+                    <p>Complete a course first to generate your certificate. <a href="progress.html">View your progress</a> to see where you stand.</p>
+                </div>
+
+                <!-- Certificate Form -->
+                <div class="cert-form" id="cert-form-wrapper">
+                    <h2>Certificate Details</h2>
+                    <p class="mb-lg">Fill in your information and select a completed course to generate your certificate.</p>
+
+                    <form id="cert-form" novalidate>
+                        <div class="form-group">
+                            <label for="cert-name" class="form-label">Your Full Name <span aria-hidden="true">*</span></label>
+                            <input type="text" id="cert-name" class="form-input" required placeholder="e.g., John A. Smith" autocomplete="name">
+                            <span class="form-hint">Required. This name will appear on your certificate.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cert-rank" class="form-label">Rank</label>
+                            <input type="text" id="cert-rank" class="form-input" placeholder="e.g., SSgt">
+                            <span class="form-hint">Optional.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cert-unit" class="form-label">Unit</label>
+                            <input type="text" id="cert-unit" class="form-input" placeholder="e.g., Marine Corps Detachment">
+                            <span class="form-hint">Optional.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cert-course" class="form-label">Select Course <span aria-hidden="true">*</span></label>
+                            <select id="cert-course" class="form-select" required>
+                                <option value="">-- Select a completed course --</option>
+                            </select>
+                            <span class="form-hint">Only courses you have completed are shown.</span>
+                        </div>
+
+                        <button type="submit" class="btn btn--primary btn--lg" id="generate-btn">Generate Certificate</button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Certificate Preview (hidden until generated) -->
+        <div class="cert-preview-wrapper" id="cert-preview-wrapper" hidden>
+            <div class="container">
+                <div class="cert-preview" id="cert-preview">
+                    <div class="cert-header">Certificate of Completion</div>
+                    <div class="cert-subtitle">Expert-Driven Development</div>
+                    <div class="cert-divider"></div>
+                    <div class="cert-course-name" id="cert-display-course"></div>
+                    <div class="cert-divider"></div>
+                    <div class="cert-body" id="cert-display-body"></div>
+                    <div class="cert-date" id="cert-display-date"></div>
+                    <div class="cert-org">Marine Corps Detachment, Presidio of Monterey</div>
+                    <div class="cert-divider"></div>
+                    <div class="cert-number" id="cert-display-number"></div>
+                </div>
+
+                <div class="cert-actions">
+                    <button type="button" class="btn btn--primary btn--lg" id="print-btn">Print / Save as PDF</button>
+                    <button type="button" class="btn btn--secondary btn--lg" id="edit-btn" style="margin-left: var(--space-md);">Edit Details</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-bottom">
+                <span>Expert-Driven Development</span>
+                <span>UNCLASSIFIED</span>
+                <span>MIT License</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile navigation toggle
+        (function() {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function() {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+
+    <script>
+        // Certificate Generator
+        (function() {
+            'use strict';
+
+            var CHECKLIST_PREFIX = 'edd_checklist_';
+
+            var COURSES = [
+                { id: 'ai-fluency-student', name: 'AI Fluency Fundamentals' },
+                { id: 'orientation-student', name: 'Builder Orientation' },
+                { id: 'platform-student', name: 'Platform Training' },
+                { id: 'advanced-student', name: 'Advanced Workshop' },
+                { id: 'supervisor', name: 'Supervisor Orientation' }
+            ];
+
+            var formSection = document.getElementById('cert-form-section');
+            var formWrapper = document.getElementById('cert-form-wrapper');
+            var noCoursesCallout = document.getElementById('no-courses-callout');
+            var certForm = document.getElementById('cert-form');
+            var courseSelect = document.getElementById('cert-course');
+            var previewWrapper = document.getElementById('cert-preview-wrapper');
+            var printBtn = document.getElementById('print-btn');
+            var editBtn = document.getElementById('edit-btn');
+
+            /**
+             * Check if a course is complete in localStorage.
+             */
+            function isCourseComplete(courseId) {
+                try {
+                    var raw = localStorage.getItem(CHECKLIST_PREFIX + courseId);
+                    if (!raw) return false;
+
+                    var state = JSON.parse(raw);
+                    var keys = [];
+                    for (var k in state) {
+                        if (state.hasOwnProperty(k)) {
+                            keys.push(k);
+                        }
+                    }
+
+                    if (keys.length === 0) return false;
+
+                    for (var i = 0; i < keys.length; i++) {
+                        if (state[keys[i]] !== true) {
+                            return false;
+                        }
+                    }
+                    return true;
+                } catch (e) {
+                    return false;
+                }
+            }
+
+            /**
+             * Populate the course dropdown with only completed courses.
+             */
+            function populateCourseDropdown() {
+                var completedCount = 0;
+
+                for (var i = 0; i < COURSES.length; i++) {
+                    var course = COURSES[i];
+                    if (isCourseComplete(course.id)) {
+                        var option = document.createElement('option');
+                        option.value = course.id;
+                        option.textContent = course.name;
+                        courseSelect.appendChild(option);
+                        completedCount++;
+                    }
+                }
+
+                if (completedCount === 0) {
+                    noCoursesCallout.removeAttribute('hidden');
+                    formWrapper.setAttribute('hidden', '');
+                }
+
+                // Pre-select course from URL parameter
+                var params = {};
+                var search = window.location.search.substring(1);
+                if (search) {
+                    var pairs = search.split('&');
+                    for (var j = 0; j < pairs.length; j++) {
+                        var parts = pairs[j].split('=');
+                        if (parts.length === 2) {
+                            params[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1]);
+                        }
+                    }
+                }
+
+                if (params.course) {
+                    courseSelect.value = params.course;
+                }
+            }
+
+            /**
+             * Generate a simple hash-based certificate number.
+             * Uses a basic string hash (DJB2 variant) to create a deterministic ID.
+             */
+            function generateCertNumber(name, courseId, dateStr) {
+                var input = name + '|' + courseId + '|' + dateStr;
+                var hash = 5381;
+                for (var i = 0; i < input.length; i++) {
+                    hash = ((hash * 33) ^ input.charCodeAt(i)) >>> 0;
+                }
+                var hex = hash.toString(16).toUpperCase();
+                while (hex.length < 8) {
+                    hex = '0' + hex;
+                }
+                return 'EDD-' + hex;
+            }
+
+            /**
+             * Get course name from ID.
+             */
+            function getCourseName(courseId) {
+                for (var i = 0; i < COURSES.length; i++) {
+                    if (COURSES[i].id === courseId) {
+                        return COURSES[i].name;
+                    }
+                }
+                return courseId;
+            }
+
+            /**
+             * Generate and display the certificate.
+             */
+            function generateCertificate() {
+                var nameInput = document.getElementById('cert-name');
+                var rankInput = document.getElementById('cert-rank');
+                var unitInput = document.getElementById('cert-unit');
+
+                var name = nameInput.value.trim();
+                var rank = rankInput.value.trim();
+                var unit = unitInput.value.trim();
+                var courseId = courseSelect.value;
+
+                // Validation
+                if (!name) {
+                    nameInput.focus();
+                    return;
+                }
+                if (!courseId) {
+                    courseSelect.focus();
+                    return;
+                }
+
+                var courseName = getCourseName(courseId);
+                var now = new Date();
+                var dateStr = now.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+
+                // Build the recipient line
+                var recipientParts = [];
+                if (rank) {
+                    recipientParts.push(rank);
+                }
+                recipientParts.push(name);
+                var recipientLine = recipientParts.join(' ');
+                if (unit) {
+                    recipientLine += ', ' + unit;
+                }
+
+                // Build the certification text
+                var bodyText = 'This certifies that ' + recipientLine +
+                    ' has successfully completed ' + courseName +
+                    ' as part of the Expert-Driven Development training program.';
+
+                // Generate certificate number
+                var certNumber = generateCertNumber(name, courseId, dateStr);
+
+                // Populate the certificate
+                document.getElementById('cert-display-course').textContent = courseName;
+                document.getElementById('cert-display-body').textContent = bodyText;
+                document.getElementById('cert-display-date').textContent = dateStr;
+                document.getElementById('cert-display-number').textContent = 'Certificate No. ' + certNumber;
+
+                // Show the preview, hide the form section
+                previewWrapper.removeAttribute('hidden');
+                formSection.setAttribute('hidden', '');
+
+                // Scroll to the certificate
+                previewWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            // Form submission
+            certForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                generateCertificate();
+            });
+
+            // Print button
+            printBtn.addEventListener('click', function() {
+                window.print();
+            });
+
+            // Edit button - go back to form
+            editBtn.addEventListener('click', function() {
+                previewWrapper.setAttribute('hidden', '');
+                formSection.removeAttribute('hidden');
+                formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+
+            // Initialize
+            populateCourseDropdown();
+        })();
+    </script>
+
+    <script src="../js/enhancements.js"></script>
+    <script src="../js/knowledge-check.js"></script>
+    <script src="../js/course-progress.js"></script>
+
+</body>
+</html>

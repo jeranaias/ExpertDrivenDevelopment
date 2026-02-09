@@ -293,6 +293,17 @@ CSS, and JavaScript. Start with just the data entry form.</div>
                             for a basic data entry form.
                         </p>
 
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">What to Expect</h3>
+                            <p>
+                                Your output should include a SharePoint list structure with columns for:
+                                Equipment Name (text), Serial Number (text), Status (choice: Available/Checked
+                                Out/Maintenance), Assigned To (text), Date Checked Out (date), and Expected
+                                Return (date). If your output is missing columns or has different data types,
+                                that is normal &mdash; use the refinement prompts in the next step to fix it.
+                            </p>
+                        </div>
+
                         <!-- Step 3 -->
                         <h3>Step 3: Review the Output</h3>
                         <p>
@@ -328,6 +339,17 @@ CSS, and JavaScript. Start with just the data entry form.</div>
                         <div class="prompt-block">
                             <div class="prompt-block__header">Prompt &mdash; Refinement Pass 1</div>Add an overdue items view that highlights anything past the due date in red. Add a check-in button next to each checked-out item. When the user clicks check-in, the status should change to "Available" and the item should disappear from the overdue list if it was there.</div>
 
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">What to Expect</h3>
+                            <p>
+                                After this pass, your tracker should show a separate overdue items section
+                                or visual indicator (typically red text or red background) for any item whose
+                                due date is in the past. Each checked-out item should have a button or link
+                                labeled &ldquo;Check In&rdquo; or similar. Clicking it should change the status
+                                back to &ldquo;Available&rdquo; and remove the item from the overdue view.
+                            </p>
+                        </div>
+
                         <p>
                             After running this prompt, check:
                         </p>
@@ -340,6 +362,19 @@ CSS, and JavaScript. Start with just the data entry form.</div>
                         <h4>Refinement Pass 2: Validation and Summary</h4>
                         <div class="prompt-block">
                             <div class="prompt-block__header">Prompt &mdash; Refinement Pass 2</div>The serial number field should validate format (alphanumeric, 6-12 characters). Show a validation error if the format is wrong. Add a summary at the top showing total items, checked out, and overdue counts. Update the counts automatically when items are checked out or returned.</div>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">What to Expect</h3>
+                            <p>
+                                Your form should now show a validation error message when the serial number
+                                is outside the 6&ndash;12 alphanumeric character range. At the top of the page,
+                                you should see a summary area displaying three counts: total items, currently
+                                checked out, and overdue. These counts should update automatically when you add
+                                a new entry or check an item back in. If the counts do not update, the AI likely
+                                generated static text instead of dynamic counters &mdash; mention this in your
+                                next refinement prompt.
+                            </p>
+                        </div>
 
                         <p>
                             After running this prompt, test the validation:
@@ -701,6 +736,483 @@ Frontier Risks:
                         </p>
                     </section>
 
+                    <!-- Capstone Deliverable -->
+                    <section id="capstone">
+                        <h2>Capstone Deliverable</h2>
+                        <div class="callout callout--success">
+                            <h3 class="callout__title">Problem Definition Document</h3>
+                            <p>
+                                Using the Problem Definition Worksheet template, write a complete problem
+                                definition for a real workflow problem in your unit. Include: problem statement,
+                                target users, at least 3 success criteria, required functions with priorities,
+                                and data considerations.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Knowledge Check -->
+                    <section id="knowledge-check">
+                        <h2>Knowledge Check</h2>
+                        <div class="knowledge-check" data-course="orientation-student" data-module="1">
+                            <h3 class="knowledge-check__title">Module 1: From User to Builder</h3>
+
+                            <div class="knowledge-check__question" data-correct="3">
+                                <p class="knowledge-check__prompt">What is the primary difference between using AI as a "user" and using AI as a "builder"?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_1_q1" value="0">
+                                        <span>Builders use more advanced AI models than users</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_1_q1" value="1">
+                                        <span>Builders write longer prompts with more technical language</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_1_q1" value="2">
+                                        <span>Builders need coding experience that users do not</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_1_q1" value="3">
+                                        <span>Builders manage an entire project through AI using decomposition, while users manage single conversations</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The difference is scope, not talent. A user asks AI to draft an email; a builder asks AI to create the system that drafts, tracks, and sends emails. Building applies the same 201 skills (context assembly, iterative refinement, etc.) at a higher level of complexity through decomposition.</p>
+                                </div>
+                            </div>
+
+                            <div class="knowledge-check__question" data-correct="0">
+                                <p class="knowledge-check__prompt">According to Module 1, what is the number-one mistake new builders make?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_1_q2" value="0">
+                                        <span>Opening the tool first and trying to figure it out as they go, instead of decomposing on paper</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_1_q2" value="1">
+                                        <span>Choosing the wrong AI tool for their project</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_1_q2" value="2">
+                                        <span>Spending too much time planning and not enough time building</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_1_q2" value="3">
+                                        <span>Trying to build something too simple that does not need AI</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The most common mistake is jumping straight into the tool without decomposing first. This approach works for simple tasks but fails completely for anything with more than two or three moving parts. The builder mindset requires you to identify data, user actions, and components on paper before writing a single prompt.</p>
+                                </div>
+                            </div>
+
+                            <div class="knowledge-check__question" data-correct="2">
+                                <p class="knowledge-check__prompt">The course states: "The quality of your decomposition predicts the quality of your build." What does this mean in practice?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_1_q3" value="0">
+                                        <span>Decomposition eliminates the need for iterative refinement during the build</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_1_q3" value="1">
+                                        <span>More subtasks always produce a better final product</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_1_q3" value="2">
+                                        <span>A specific, detailed plan with clear components produces a specific, functional tool; a vague plan produces a vague tool</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_1_q3" value="3">
+                                        <span>AI performs better when it can see the full decomposition in a single prompt</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>Decomposition is Task Decomposition applied to system design. When you clearly identify data fields, user actions, and the simplest useful version before building, each prompt to AI is specific and targeted. Vague plans lead to vague prompts, which lead to generic output that does not solve your actual problem.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="knowledge-check" data-course="orientation-student" data-module="2">
+                            <h3 class="knowledge-check__title">Module 2: Equipment Tracker Guided Build</h3>
+
+                            <div class="knowledge-check__question" data-correct="1">
+                                <p class="knowledge-check__prompt">In the Equipment Tracker build, Step 1 asks you to answer three questions on paper before opening any tool. Why is this sequence important?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_2_q1" value="0">
+                                        <span>Writing on paper helps you memorize the requirements better</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_2_q1" value="1">
+                                        <span>Identifying data fields, user actions, and the simplest useful version gives you a precise prompt that produces targeted output</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_2_q1" value="2">
+                                        <span>AI tools require you to input a planning document before they generate code</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_2_q1" value="3">
+                                        <span>It ensures you do not exceed the AI's context window limit</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The three planning questions (what data fields, what user actions, what is the simplest useful version) translate directly into a specific prompt. The Equipment Tracker prompt included every data field, every user action, and the technology choice because the planning template identified them first. Without this planning, you would write a vague prompt like "build me a tracker" and get generic output.</p>
+                                </div>
+                            </div>
+
+                            <div class="knowledge-check__question" data-correct="3">
+                                <p class="knowledge-check__prompt">After running the initial build prompt, Step 3 asks you to review the output before iterating. What is the most common category of issue you should expect at this stage?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_2_q2" value="0">
+                                        <span>The code will have syntax errors that prevent it from loading</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_2_q2" value="1">
+                                        <span>The visual design will be too ugly to use</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_2_q2" value="2">
+                                        <span>The AI will refuse to generate the code because the prompt is too specific</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_2_q2" value="3">
+                                        <span>Missing business logic like the overdue calculation, or incomplete features like no date picker or status field</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>AI commonly handles the form structure but skips business logic. The module specifically warns that the overdue calculation may be missing entirely, the status field might default to a single value, date fields might not use pickers, and the form might not clear after submission. These are normal first-draft gaps that iterative refinement addresses.</p>
+                                </div>
+                            </div>
+
+                            <div class="knowledge-check__question" data-correct="0">
+                                <p class="knowledge-check__prompt">The guided build uses two refinement passes after the initial prompt. What principle from AI Fluency Fundamentals does this directly apply?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_2_q3" value="0">
+                                        <span>Iterative Refinement: the first output is never the final product, and each pass addresses specific gaps with targeted instructions</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_2_q3" value="1">
+                                        <span>Context Assembly: each refinement pass adds more background information</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_2_q3" value="2">
+                                        <span>Frontier Recognition: each pass tests whether AI can handle increasingly complex features</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_2_q3" value="3">
+                                        <span>Workflow Integration: the two-pass approach becomes a repeatable process</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The two refinement passes are Iterative Refinement in action. Pass 1 adds the overdue view and check-in functionality. Pass 2 adds validation and a summary dashboard. Each pass targets specific missing functionality with precise instructions, just like the weekend safety brief exercise in AI Fluency where three passes took a 70% draft to 95%.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="knowledge-check" data-course="orientation-student" data-module="3">
+                            <h3 class="knowledge-check__title">Module 3: When Something Breaks</h3>
+
+                            <div class="knowledge-check__question" data-correct="2">
+                                <p class="knowledge-check__prompt">You see this error in the browser console: "Uncaught TypeError: Cannot read properties of null (reading 'value')." In plain language, what is happening?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_3_q1" value="0">
+                                        <span>The browser does not support the JavaScript feature being used</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_3_q1" value="1">
+                                        <span>The form field contains an invalid value that JavaScript cannot process</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_3_q1" value="2">
+                                        <span>The code is trying to read the value of a form field that does not exist on the page, usually due to an ID mismatch</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_3_q1" value="3">
+                                        <span>The server rejected the form submission because a required field was empty</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>"Cannot read properties of null" means JavaScript tried to access something that does not exist. "Reading 'value'" means it specifically tried to read a form field's value. The most common cause is an ID mismatch: the HTML uses one name (like "serialNumber") but the JavaScript looks for a different one (like "serial-number"). You do not need to be a programmer to read this; you need to break it into parts.</p>
+                                </div>
+                            </div>
+
+                            <div class="knowledge-check__question" data-correct="1">
+                                <p class="knowledge-check__prompt">What are the four essential pieces of information to include in a debugging prompt to AI?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_3_q2" value="0">
+                                        <span>The AI model used, your operating system, your browser version, and a screenshot</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_3_q2" value="1">
+                                        <span>The exact error message, when it happens, the full code, and what the code should do</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_3_q2" value="2">
+                                        <span>The programming language, the framework, the line number, and your best guess at the fix</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_3_q2" value="3">
+                                        <span>A summary of the error, similar errors you have seen before, and the project requirements</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>An effective debugging prompt includes: (1) the exact error message, copied verbatim rather than paraphrased; (2) when it happens, such as "when I click the Check Out button"; (3) the full code so AI can find the mismatch; and (4) what the code should do, providing context about your intended behavior. This structure gives AI everything it needs to locate and fix the problem.</p>
+                                </div>
+                            </div>
+
+                            <div class="knowledge-check__question" data-correct="3">
+                                <p class="knowledge-check__prompt">Failure Case 2 describes a "logic error" where returned items still appear in the overdue list. Why is this type of error harder to catch than a crash?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_3_q3" value="0">
+                                        <span>Logic errors only appear in certain browsers</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_3_q3" value="1">
+                                        <span>Logic errors require knowledge of advanced programming concepts to diagnose</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_3_q3" value="2">
+                                        <span>Logic errors corrupt the data and require a complete rebuild</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_3_q3" value="3">
+                                        <span>The code runs without error messages, so you only catch it by testing behavior and noticing wrong results</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>Logic errors produce no console errors. The code runs fine but produces the wrong result. In this case, the overdue check compared the due date to today but did not also check whether the item had been returned. The only way to catch this is to test the actual behavior: return an item and verify it disappears from the overdue list. This is why Quality Judgment matters during building, not just during document review.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="knowledge-check" data-course="orientation-student" data-module="4">
+                            <h3 class="knowledge-check__title">Module 4: Decomposition Framework</h3>
+
+                            <div class="knowledge-check__question" data-correct="0">
+                                <p class="knowledge-check__prompt">The decomposition template labels each subtask as "Human designs," "AI builds," or "Human verifies." In the armory sign-out log example, why was "Verify serial number formats" labeled "Human verifies" rather than "AI builds"?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_4_q1" value="0">
+                                        <span>AI may not know actual USMC weapon serial number conventions, so a human with domain expertise must validate the formats</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_4_q1" value="1">
+                                        <span>Serial number verification is too simple for AI and would waste its capabilities</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_4_q1" value="2">
+                                        <span>Regulations prohibit AI from accessing serial number databases</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_4_q1" value="3">
+                                        <span>Human verification is always required for any data field in a military application</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>This is a frontier risk in action. AI may not know the actual serial number formats for specific USMC weapon systems. The frontier risks section explicitly flags this: "AI may not know USMC serial number formats for specific weapon systems." A human with domain knowledge must verify that the format rules match reality, because AI will generate plausible-looking but potentially wrong validation rules.</p>
+                                </div>
+                            </div>
+
+                            <div class="knowledge-check__question" data-correct="2">
+                                <p class="knowledge-check__prompt">The module states that a subtask is "too big" if it would take more than 2-3 prompts to complete. Why is this the threshold?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_4_q2" value="0">
+                                        <span>AI tools have a maximum of 3 prompts per conversation before quality degrades</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_4_q2" value="1">
+                                        <span>It matches the standard project management rule of keeping tasks under 4 hours</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_4_q2" value="2">
+                                        <span>Smaller subtasks have clearer expected outputs, making it easier to verify success and catch errors at each step</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_4_q2" value="3">
+                                        <span>AI generates better code when prompts are shorter</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>Small subtasks have clear expected outputs that you can describe in one sentence and verify immediately. If a subtask requires many prompts, it means the scope is too broad for you to judge whether AI succeeded. Breaking it smaller lets you apply Quality Judgment at each step, catching errors early instead of discovering them in a tangled final product.</p>
+                                </div>
+                            </div>
+
+                            <div class="knowledge-check__question" data-correct="1">
+                                <p class="knowledge-check__prompt">The armory sign-out log example chose the Centaur pattern. What characteristic of the problem made Centaur the right choice over Cyborg?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_4_q3" value="0">
+                                        <span>The problem involves multiple data fields, which Centaur handles better</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_4_q3" value="1">
+                                        <span>Weapons tracking is high-stakes with no room for error, requiring clear handoffs and human validation at every stage</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_4_q3" value="2">
+                                        <span>The project has five subtasks, which is too many for Cyborg mode</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_4_q3" value="3">
+                                        <span>Cyborg mode requires two people working simultaneously, which was not available</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The example explicitly states: "Weapons tracking is high-stakes. Human makes all design decisions and verifies all outputs." Centaur mode provides clear division of labor with sequential handoffs, which is essential when accuracy is non-negotiable. Cyborg mode blurs the boundary between human and AI contributions, which is appropriate for lower-stakes iterative work but not for accountability-sensitive systems.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="knowledge-check" data-course="orientation-student" data-module="5">
+                            <h3 class="knowledge-check__title">Module 5: Assignment and Path Forward</h3>
+
+                            <div class="knowledge-check__question" data-correct="2">
+                                <p class="knowledge-check__prompt">The assignment asks you to "identify at least one failure case" during your build. Why is documenting a failure required, not optional?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_5_q1" value="0">
+                                        <span>Failure documentation is needed for grading purposes</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_5_q1" value="1">
+                                        <span>Failures indicate that the problem was too complex for AI</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_5_q1" value="2">
+                                        <span>Encountering and resolving failures is a normal, expected part of building; documenting the process builds the debugging skill</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_5_q1" value="3">
+                                        <span>It helps AI developers improve their models by collecting failure data</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>Module 3 established that things will break and that is normal. The assignment requires documenting a failure because debugging with AI is a core builder skill. Recording the error, your debugging prompt, and the resolution reinforces the process (read the error, provide context, iterate) and proves you can recover from failures instead of quitting.</p>
+                                </div>
+                            </div>
+
+                            <div class="knowledge-check__question" data-correct="0">
+                                <p class="knowledge-check__prompt">The "how to know when you are done" criteria include: "Someone unfamiliar with your problem could use it without your help." What builder skill does this criterion test?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_5_q2" value="0">
+                                        <span>Quality Judgment: knowing whether the output is complete, correct, and usable, not just functional</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_5_q2" value="1">
+                                        <span>Context Assembly: providing enough background for any user</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_5_q2" value="2">
+                                        <span>Workflow Integration: embedding the tool into a team process</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_5_q2" value="3">
+                                        <span>Frontier Recognition: identifying what AI can handle independently</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>Quality Judgment at the builder level means evaluating not just whether the code runs, but whether the tool is usable, complete, and appropriate for its intended audience. If an unfamiliar user cannot figure out how to use the tool without your help, it is not done yet regardless of whether the code works. This is the same skill from AI Fluency applied at a system level.</p>
+                                </div>
+                            </div>
+
+                            <div class="knowledge-check__question" data-correct="3">
+                                <p class="knowledge-check__prompt">The course describes the builder workflow as "decompose, build, debug, iterate." How does this compare to the skills learned in AI Fluency Fundamentals?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_5_q3" value="0">
+                                        <span>It replaces the six 201 skills with a new set of builder-specific skills</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_5_q3" value="1">
+                                        <span>It only uses Task Decomposition; the other five skills are not relevant to building</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_5_q3" value="2">
+                                        <span>It is a completely different discipline that requires programming knowledge</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_orientation-student_5_q3" value="3">
+                                        <span>It is the same six 201 skills applied at greater scope: decomposition drives the plan, context assembly drives the prompts, and quality judgment drives the review</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>Building is not a new discipline; it is the same 201 skills at higher complexity. Task Decomposition breaks the project into buildable pieces. Context Assembly produces specific prompts. Iterative Refinement improves each piece. Quality Judgment evaluates the output. Frontier Recognition identifies where AI will need human help. The module overview table maps each module to the specific 201 skills it applies.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="knowledge-check__submit btn btn--primary">Check Answers</button>
+                        <div class="knowledge-check__result" hidden></div>
+                    </section>
+
+                    <!-- Completion Checklist -->
+                    <section id="completion-checklist">
+                        <div class="course-checklist" data-course="orientation-student">
+                            <h3 class="course-checklist__title">Course Completion Checklist</h3>
+                            <div class="course-progress-bar">
+                                <div class="course-progress-bar__fill"></div>
+                            </div>
+                            <span class="course-progress-bar__text">0% Complete</span>
+                            <ul class="course-checklist__list">
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="module-1">
+                                        <span>Module 1: From User to Builder &mdash; Read and understood</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="module-2">
+                                        <span>Module 2: Equipment Tracker Build completed</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="module-3">
+                                        <span>Module 3: Debugging Exercise completed</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="module-4">
+                                        <span>Module 4: Decomposition Exercise completed</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="module-5">
+                                        <span>Module 5: Assignment reviewed</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="knowledge-check">
+                                        <span>Knowledge Check &mdash; Scored 80% or higher</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="capstone">
+                                        <span>Capstone: Problem Definition Document completed</span>
+                                    </label>
+                                </li>
+                            </ul>
+                            <div class="course-checklist__complete" hidden>
+                                <div class="callout callout--success">
+                                    <h3 class="callout__title">Course Complete!</h3>
+                                    <p>You have completed Builder Orientation. <a href="../progress.html">View your progress dashboard</a> or <a href="../certificate.html">generate your certificate</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                 </div>
             </div>
         </div>
@@ -734,6 +1246,8 @@ Frontier Risks:
     </script>
 
     <script src="../../js/enhancements.js"></script>
+    <script src="../../js/knowledge-check.js"></script>
+    <script src="../../js/course-progress.js"></script>
 
 </body>
 </html>

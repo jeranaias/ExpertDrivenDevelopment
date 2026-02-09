@@ -683,6 +683,16 @@ days. Format it as a professional military brief.</div>
                             <p>Need a reference for what a good decomposition looks like? See the <a href="orientation.html#module-4">completed example in Builder Orientation Module 4</a>.</p>
                         </div>
 
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Completion Criteria</h3>
+                            <p>
+                                A complete decomposition should include: a clear tool name and purpose, the
+                                selected mode (Centaur or Cyborg) with a reason, 3&ndash;6 components to build,
+                                at least 2 specific data sources, and 3+ verification criteria. If you cannot
+                                fill all fields, revisit your problem definition.
+                            </p>
+                        </div>
+
                         <div class="callout callout--info">
                             <h3 class="callout__title">Getting Stuck?</h3>
                             <p>
@@ -762,6 +772,17 @@ days. Format it as a professional military brief.</div>
                             <p><strong>How to use your frontier map:</strong> Update it monthly as you gain experience. Before starting any new build, consult your map to identify frontier risks early. Share it with your section so everyone benefits from your lessons learned.</p>
                         </div>
 
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Frontier Map Completion Criteria</h3>
+                            <p>
+                                Your frontier map should have at least 5 task types relevant to your role.
+                                Each cell should contain a specific example, not just &ldquo;yes&rdquo; or
+                                &ldquo;no.&rdquo; For example, instead of writing &ldquo;handles well&rdquo;
+                                under AI Handles Well, write &ldquo;Generates draft SOPs from bullet points
+                                with correct formatting.&rdquo;
+                            </p>
+                        </div>
+
                         <p>
                             Update this map with your own observations. Where did your experience
                             differ from the table above? Add rows for task types specific to your
@@ -781,6 +802,566 @@ days. Format it as a professional military brief.</div>
                                 Bring all of this to the <a href="advanced.html">Advanced Workshop</a>.
                                 Your failure cases and frontier map will be the foundation for that session.
                             </p>
+                        </div>
+                    </section>
+
+                    <!-- Capstone Deliverable -->
+                    <section id="capstone">
+                        <h2>Capstone Deliverable</h2>
+                        <div class="callout callout--success">
+                            <h3 class="callout__title">Working Tool Prototype</h3>
+                            <p>
+                                Build one functional Power Platform tool that solves a real problem identified
+                                in your Problem Definition. Document the build process in your Development
+                                Journal with at least 3 session entries.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Knowledge Check -->
+                    <section id="knowledge-check">
+                        <h2>Knowledge Check</h2>
+                        <div class="knowledge-check" data-course="platform-student" data-module="1">
+                            <h3 class="knowledge-check__title">Knowledge Check</h3>
+
+                            <!-- Module 1, Question 1 -->
+                            <div class="knowledge-check__question" data-correct="2">
+                                <p class="knowledge-check__prompt">You need to build a leave tracking system that involves specific regulations, approval chains, and date calculations. Which work pattern is most appropriate and why?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_1_q1" value="0">
+                                        <span>Cyborg mode, because continuous iteration will help discover the right business rules faster</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_1_q1" value="1">
+                                        <span>Cyborg mode, because leave tracking is a creative task that benefits from fluid boundaries</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_1_q1" value="2">
+                                        <span>Centaur mode, because accuracy-critical work with specific regulations requires human design and verification with clear phase boundaries</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_1_q1" value="3">
+                                        <span>Either mode works equally well for this type of task</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>Centaur mode is correct. Leave tracking involves regulations, approval chains, and date calculations that must be accurate. You design all the business rules up front, let AI build, then verify every rule works. The slower-but-reliable centaur pattern is appropriate when getting calculations wrong has real consequences.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 1, Question 2 -->
+                            <div class="knowledge-check__question" data-correct="1">
+                                <p class="knowledge-check__prompt">Why does the course require you to verify access to SharePoint, Power Apps, and Power Automate before starting any build?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_1_q2" value="0">
+                                        <span>It is a formality to confirm your M365 license is active</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_1_q2" value="1">
+                                        <span>Resolving access issues during a build wastes significant time, and all three platforms are needed for every build</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_1_q2" value="2">
+                                        <span>To give IT support time to provision additional storage for your projects</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_1_q2" value="3">
+                                        <span>To ensure your browser is compatible with Power Platform</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>Discovering access issues mid-build is one of the biggest time wasters. Since every build in this course requires all three platforms, verifying access up front prevents costly interruptions and ensures you can focus on learning the build patterns rather than troubleshooting login problems.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 1, Question 3 -->
+                            <div class="knowledge-check__question" data-correct="0">
+                                <p class="knowledge-check__prompt">What is the key risk associated with cyborg mode compared to centaur mode?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_1_q3" value="0">
+                                        <span>Cyborg mode is faster but requires constant attention to catch errors during the fluid back-and-forth</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_1_q3" value="1">
+                                        <span>Cyborg mode produces lower-quality output than centaur mode in all cases</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_1_q3" value="2">
+                                        <span>Cyborg mode does not allow any human input during the build process</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_1_q3" value="3">
+                                        <span>Cyborg mode can only be used for creative tasks, never for data-driven ones</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>Cyborg mode trades planning time for iteration speed. The fluid, continuous back-and-forth is faster, but you must stay engaged and evaluate every output. Without constant attention, errors can compound quickly because there are no formal verification checkpoints between phases.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 2, Question 1 -->
+                            <div class="knowledge-check__question" data-correct="3">
+                                <p class="knowledge-check__prompt">In the centaur pattern for Build #1, why is it critical that the human completes the whiteboard planning phase before involving AI?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_2_q1" value="0">
+                                        <span>AI cannot understand business requirements unless they are drawn on a whiteboard</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_2_q1" value="1">
+                                        <span>The whiteboard template is a required deliverable that must be submitted for grading</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_2_q1" value="2">
+                                        <span>AI works faster when given a physical photograph of a whiteboard</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_2_q1" value="3">
+                                        <span>The quality of the design determines the quality of the final product, and the human must own every business rule decision before the AI executes</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>In centaur mode, the human is responsible for all design decisions. By mapping out every business rule, data flow, and edge case before AI is involved, you ensure the AI builds what you designed rather than making its own design decisions. The AI should decide how to build, never what to build.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 2, Question 2 -->
+                            <div class="knowledge-check__question" data-correct="1">
+                                <p class="knowledge-check__prompt">During Phase 3 (Human Verifies) of the centaur build, you discover that a $400 request routes to the Department Head instead of the Section Leader. What is the correct next step?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_2_q2" value="0">
+                                        <span>Skip the error and move to Phase 5 since the overall workflow is mostly working</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_2_q2" value="1">
+                                        <span>Document the specific issue, return to Phase 4 (AI Refines), and describe what you expected versus what happened</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_2_q2" value="2">
+                                        <span>Start over from Phase 1 and redesign the entire workflow from scratch</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_2_q2" value="3">
+                                        <span>Manually edit the flow to fix the routing without involving AI</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The centaur pattern includes a refinement phase (Phase 4) specifically for this situation. You feed your verification findings back to AI with specific details: what you expected, what happened instead. Being specific about failures helps the AI produce accurate fixes. Skipping errors or restarting entirely both waste the work already done.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 2, Question 3 -->
+                            <div class="knowledge-check__question" data-correct="2">
+                                <p class="knowledge-check__prompt">Why does the centaur build use a sequence of separate prompts (one for SharePoint, one for Power Apps, one for Power Automate) rather than a single prompt for the entire system?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_2_q3" value="0">
+                                        <span>AI can only process one platform at a time due to technical limitations</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_2_q3" value="1">
+                                        <span>It is faster to write three short prompts than one long prompt</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_2_q3" value="2">
+                                        <span>Each prompt builds on the previous output, allowing verification at each component boundary before moving to the next</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_2_q3" value="3">
+                                        <span>The course structure requires three separate prompts for assessment purposes</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>Breaking the build into sequential prompts maintains the centaur principle of verification at each boundary. Each component (data layer, input form, automation flow) can be verified against the design before the next component is built on top of it. This prevents errors from cascading through the entire system.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 3, Question 1 -->
+                            <div class="knowledge-check__question" data-correct="0">
+                                <p class="knowledge-check__prompt">What is the most common type of error AI makes when building Power Automate flows?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_3_q1" value="0">
+                                        <span>Missing error handling for nested conditions and omitting edge case paths entirely</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_3_q1" value="1">
+                                        <span>Using the wrong connector type for SharePoint integration</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_3_q1" value="2">
+                                        <span>Creating flows that exceed the Power Automate execution time limit</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_3_q1" value="3">
+                                        <span>Selecting the wrong trigger type for the flow</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>AI excels at building the "happy path" but frequently misses error handling for nested conditions and omits edge case paths entirely. For example, it might not account for what happens when the approver field is empty or when the amount is exactly at the threshold. This is why Phase 3 verification must focus on testing the paths AI is most likely to forget.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 3, Question 2 -->
+                            <div class="knowledge-check__question" data-correct="3">
+                                <p class="knowledge-check__prompt">Why does the course require a structured reflection after Build #1 instead of immediately starting Build #2?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_3_q2" value="0">
+                                        <span>To give you a break between intensive build sessions</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_3_q2" value="1">
+                                        <span>To document errors for the instructor to review later</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_3_q2" value="2">
+                                        <span>To practice writing after a technical exercise</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_3_q2" value="3">
+                                        <span>The failure patterns you identify will save you hours on Build #3, and feed directly into your frontier map in Module 6</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The reflection is not a break or a formality. The patterns you identify from Build #1 failures directly inform how you approach Build #3 and become source material for your frontier map in Module 6. Recognizing AI failure patterns quickly and knowing how to recover is a core skill that develops through deliberate reflection.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 3, Question 3 -->
+                            <div class="knowledge-check__question" data-correct="2">
+                                <p class="knowledge-check__prompt">Your Build #1 reflection reveals that the AI-generated flow handled the standard approval path correctly but failed when a request was submitted with an amount of exactly $500. What does this failure tell you about AI-generated workflows?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_3_q3" value="0">
+                                        <span>The AI used the wrong currency format for the amount field</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_3_q3" value="1">
+                                        <span>Power Automate cannot process exact threshold values</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_3_q3" value="2">
+                                        <span>AI frequently mishandles boundary conditions where values fall exactly on threshold limits, which is why testing edge cases is essential</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_3_q3" value="3">
+                                        <span>The AI does not understand dollar amounts and should be given amounts in cents instead</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>Boundary conditions (values that fall exactly on threshold limits) are a classic edge case that AI often mishandles. The AI might use "less than" when it should use "less than or equal to," causing requests at exactly $500 to route incorrectly. This is why your verification checklist should always include tests at exact threshold values, not just values clearly above or below them.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 4, Question 1 -->
+                            <div class="knowledge-check__question" data-correct="1">
+                                <p class="knowledge-check__prompt">Build #2 (Training Tracker) uses cyborg mode instead of centaur mode. What is the fundamental difference in how you discover requirements?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_4_q1" value="0">
+                                        <span>In cyborg mode, the AI discovers requirements for you by analyzing existing data</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_4_q1" value="1">
+                                        <span>In cyborg mode, you discover requirements through rapid iteration and back-and-forth, rather than defining everything up front</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_4_q1" value="2">
+                                        <span>In cyborg mode, requirements are not needed because the AI builds the right thing automatically</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_4_q1" value="3">
+                                        <span>In cyborg mode, you use the same whiteboard template but skip the verification phase</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>Cyborg mode trades planning time for iteration speed. Instead of defining every business rule on a whiteboard before involving AI, you start with a rough idea and discover requirements as you iterate. You are constantly evaluating and redirecting the AI, adjusting layout, field order, and validation rules based on what each iteration produces.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 4, Question 2 -->
+                            <div class="knowledge-check__question" data-correct="0">
+                                <p class="knowledge-check__prompt">While building the training tracker dashboard in cyborg mode, the AI generates a summary showing "67% Current" but your manual count shows 70%. What should you do?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_4_q2" value="0">
+                                        <span>Investigate the calculation method, prompt the AI to explain how it computed the percentage, and adjust the formula to match your expected methodology</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_4_q2" value="1">
+                                        <span>Accept the AI number since it likely used a more sophisticated calculation method</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_4_q2" value="2">
+                                        <span>Manually override the number to 70% and move on to the next feature</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_4_q2" value="3">
+                                        <span>Ignore the discrepancy since a 3% difference is within acceptable tolerance</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>Even in cyborg mode, data accuracy requires verification. The discrepancy likely stems from a difference in calculation methodology (e.g., counting rows vs. distinct values, or averaging individual percentages vs. computing an overall rate). The correct approach is to investigate how the AI computed the number, align the formula with your intended methodology, and verify the corrected output against your manual count.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 4, Question 3 -->
+                            <div class="knowledge-check__question" data-correct="3">
+                                <p class="knowledge-check__prompt">The training tracker needs conditional formatting: green for Complete, red for Overdue, yellow for Scheduled. After the AI applies formatting, you notice "Scheduled 15 Mar" items appear in green instead of yellow. What is the most likely cause?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_4_q3" value="0">
+                                        <span>Power Apps does not support yellow as a conditional formatting color</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_4_q3" value="1">
+                                        <span>The AI applied the formatting to the wrong column in the data source</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_4_q3" value="2">
+                                        <span>The AI used RGB values instead of named colors in the formula</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_4_q3" value="3">
+                                        <span>The conditional logic is checking for an exact match on "Scheduled" but the actual data contains "Scheduled 15 Mar," so the condition does not match and falls through to the default</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>AI frequently writes conditional formatting that checks for exact string matches (e.g., Status = "Scheduled") when the actual data contains additional text (e.g., "Scheduled 15 Mar"). The condition fails to match, so the item falls through to the default color. The fix is to use a "starts with" or "contains" check instead of an exact match. This is a common pattern where AI handles the happy path but misses real-world data variations.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 5, Question 1 -->
+                            <div class="knowledge-check__question" data-correct="2">
+                                <p class="knowledge-check__prompt">Before starting Build #3, the course requires you to answer three specific questions. What is the purpose of answering "Where do you expect frontier issues?" before writing any prompts?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_5_q1" value="0">
+                                        <span>To determine which AI model to use for the build</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_5_q1" value="1">
+                                        <span>To decide whether the problem is worth solving with AI</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_5_q1" value="2">
+                                        <span>To identify where AI is likely to struggle with your specific problem so you can plan more careful verification for those areas</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_5_q1" value="3">
+                                        <span>To create a list of tasks that should be done entirely without AI</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>Anticipating frontier issues before building allows you to plan your verification strategy. If you know AI typically struggles with a particular aspect of your problem (e.g., complex date logic, domain-specific validation), you can allocate more time and attention to verifying those components. This proactive approach prevents the costly cycle of building, discovering failures late, and rebuilding.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 5, Question 2 -->
+                            <div class="knowledge-check__question" data-correct="1">
+                                <p class="knowledge-check__prompt">The Build #3 Decomposition Template asks you to break your solution into 3-5 components. Why is decomposition important for an AI-assisted build?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_5_q2" value="0">
+                                        <span>AI can only generate code for one component at a time due to token limits</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_5_q2" value="1">
+                                        <span>Smaller components are easier to verify individually, and errors in one component can be fixed without rebuilding the entire system</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_5_q2" value="2">
+                                        <span>It allows you to assign different components to different AI tools</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_5_q2" value="3">
+                                        <span>Decomposition is only necessary for centaur mode, not cyborg mode</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>Decomposition enables targeted verification. When you break a solution into discrete components, you can verify each one independently against your design. If a single component fails, you can fix it without rebuilding the entire system. This applies regardless of whether you use centaur or cyborg mode for the build.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 5, Question 3 -->
+                            <div class="knowledge-check__question" data-correct="0">
+                                <p class="knowledge-check__prompt">You are stuck on Build #3 and cannot figure out what is wrong with the AI output. According to the course guidance, what should you do?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_5_q3" value="0">
+                                        <span>If you cannot clearly describe the problem to the AI, step back and think through the design before asking for more code</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_5_q3" value="1">
+                                        <span>Ask the AI to diagnose its own error and suggest the fix</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_5_q3" value="2">
+                                        <span>Delete everything and start the build from scratch with a different approach</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_5_q3" value="3">
+                                        <span>Switch to the opposite work mode (centaur to cyborg or vice versa)</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The key insight is: if you can describe the problem clearly, you can prompt the AI to fix it. If you cannot describe it, that signals a design problem, not an AI problem. Stepping back to clarify your own understanding of what should happen is more productive than generating more code against a poorly understood requirement.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 6, Question 1 -->
+                            <div class="knowledge-check__question" data-correct="3">
+                                <p class="knowledge-check__prompt">A frontier map documents what AI can and cannot do for your use cases. Why is specificity important when filling in the "AI Handles Poorly" column?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_6_q1" value="0">
+                                        <span>To help AI vendors improve their products based on user feedback</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_6_q1" value="1">
+                                        <span>To justify why your builds took longer than expected</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_6_q1" value="2">
+                                        <span>To create a list of tasks that should never use AI under any circumstances</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_6_q1" value="3">
+                                        <span>Specific examples help you identify frontier risks early on future builds, so you know exactly what to verify most carefully</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>Generic entries like "handles poorly" provide no actionable guidance. Specific entries like "error handling for nested conditions" or "complex calculated columns with nested IF logic" tell you exactly what to watch for on your next build. The more specific your frontier map, the faster you can identify risk areas and plan verification accordingly.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 6, Question 2 -->
+                            <div class="knowledge-check__question" data-correct="2">
+                                <p class="knowledge-check__prompt">The example frontier map shows that AI handles "basic charts, card layouts, simple filters" well for dashboards, but handles "complex DAX measures, row-level security" poorly. How should this information change your approach when building a dashboard?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_6_q2" value="0">
+                                        <span>Avoid using AI for any dashboard work since some parts are outside the frontier</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_6_q2" value="1">
+                                        <span>Use AI for the entire dashboard but have someone else review it</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_6_q2" value="2">
+                                        <span>Use AI for the layout and simple components, but manually verify or build the complex DAX measures and security rules yourself</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_6_q2" value="3">
+                                        <span>Wait until AI improves enough to handle complex DAX measures before building the dashboard</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The frontier map enables targeted use of AI. You can confidently use AI for components inside the frontier (layout, basic charts) while applying extra scrutiny or manual effort to components outside the frontier (DAX measures, row-level security). This selective approach captures AI's speed benefits while protecting against its known weaknesses.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 6, Question 3 -->
+                            <div class="knowledge-check__question" data-correct="1">
+                                <p class="knowledge-check__prompt">The course says to update your frontier map monthly. Why is periodic updating necessary?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_6_q3" value="0">
+                                        <span>Your supervisor requires monthly documentation of AI usage</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_6_q3" value="1">
+                                        <span>AI capabilities change over time, so tasks that were outside the frontier may move inside as models improve, and your own experience reveals new patterns</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_6_q3" value="2">
+                                        <span>The map format changes with each software update and must be reformatted</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_platform-student_6_q3" value="3">
+                                        <span>To track how many builds you have completed each month</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The frontier is not static. AI capabilities improve over time, so tasks that were outside the frontier (like complex conditional workflows) may move inside as models get better. Your own experience also deepens, revealing new patterns about what AI handles well or poorly. The "Moving Frontier" column exists specifically to capture tasks that should be re-evaluated periodically.</p>
+                                </div>
+                            </div>
+
+                            <button class="knowledge-check__submit btn btn--primary">Check Answers</button>
+                            <div class="knowledge-check__result" hidden></div>
+                        </div>
+                    </section>
+
+                    <!-- Course Completion Checklist -->
+                    <section id="completion-checklist">
+                        <h2>Course Completion Checklist</h2>
+                        <div class="course-checklist" data-course="platform-student">
+                            <h3 class="course-checklist__title">Course Completion Checklist</h3>
+                            <div class="course-progress-bar">
+                                <div class="course-progress-bar__fill"></div>
+                            </div>
+                            <span class="course-progress-bar__text">0% Complete</span>
+                            <ul class="course-checklist__list">
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="module-1-setup-review">
+                                        <span>Module 1: Setup and Review completed</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="module-2-build-1">
+                                        <span>Module 2: Build #1 (Structured Workflow) completed</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="module-3-reflection">
+                                        <span>Module 3: Reflection Exercise completed</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="module-4-build-2">
+                                        <span>Module 4: Build #2 (Training Tracker) completed</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="module-5-build-3">
+                                        <span>Module 5: Build #3 (Your Problem) completed</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="module-6-frontier-map">
+                                        <span>Module 6: Frontier Map updated</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="knowledge-check-passed">
+                                        <span>Knowledge Check: Scored 80% or higher</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="capstone-prototype">
+                                        <span>Capstone: Working Tool Prototype completed</span>
+                                    </label>
+                                </li>
+                            </ul>
+                            <div class="course-checklist__complete" hidden>
+                                <div class="callout callout--success">
+                                    <h3 class="callout__title">Course Complete!</h3>
+                                    <p>You have completed Platform Training. <a href="../progress.html">View your progress dashboard</a> or <a href="../certificate.html">generate your certificate</a>.</p>
+                                </div>
+                            </div>
                         </div>
                     </section>
 
@@ -817,6 +1398,8 @@ days. Format it as a professional military brief.</div>
     </script>
 
     <script src="../../js/enhancements.js"></script>
+    <script src="../../js/knowledge-check.js"></script>
+    <script src="../../js/course-progress.js"></script>
 
 </body>
 </html>
