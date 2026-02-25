@@ -241,85 +241,81 @@ adverse 6105.</code></pre>
                         <!-- Skill 2 -->
                         <h3>Skill 2 &mdash; Quality Judgment</h3>
                         <p>
-                            AI can be confidently correct and confidently wrong in the same paragraph. Your job is
-                            to know the difference. Review the following AI-generated naval message and ask yourself:
-                            <strong>Would you sign this?</strong>
+                            AI can produce two completely different outputs from the same prompt. Your job is
+                            knowing which one is actually ready to submit. Read both outputs below &mdash; they
+                            came from the <strong>exact same prompt</strong>. Which one gets approved by the
+                            awards board?
                         </p>
 
-                        <div class="template-display mt-lg">
-                            <div class="template-display__header">
-                                <h4 class="template-display__title">AI-Generated Naval Message &mdash; Review Exercise</h4>
+                        <div class="code-block mt-lg">
+                            <span class="code-block__label">Prompt &mdash; Same for Both Outputs</span>
+                            <pre><code>Write a summary action paragraph for an end-of-tour Navy and
+Marine Corps Achievement Medal for a Staff Sergeant who led a
+maintenance team of 4, managed a $2.1M equipment account with
+zero discrepancies, and trained 12 new Marines over 18 months.</code></pre>
+                        </div>
+
+                        <div class="d-flex gap-lg mt-lg" style="flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 280px;">
+                                <div class="template-display">
+                                    <div class="template-display__header">
+                                        <h4 class="template-display__title">Output A</h4>
+                                    </div>
+                                    <div class="template-display__content">Staff Sergeant Smith demonstrated exceptional leadership and unparalleled dedication to duty while serving as Maintenance Team Leader. His outstanding performance and tireless work ethic resulted in tremendous success across all areas of responsibility. He expertly managed a multi-million dollar equipment account with remarkable efficiency and trained numerous Marines to the highest standards of proficiency. His selfless devotion to the mission and his Marines significantly contributed to the unit&rsquo;s overall readiness and operational capability. Staff Sergeant Smith&rsquo;s performance clearly exceeded expectations and reflected great credit upon himself and the Marine Corps.</div>
+                                </div>
                             </div>
-                            <div class="template-display__content">
-UNCLAS<br>
-ROUTINE<br>
-<br>
-R 06 FEB 2026 1430Z<br>
-FM 1ST BN 99TH MAR<br>
-TO CMC WASHINGTON DC<br>
-INFO COMMARCORBASECOM QUANTICO VA<br>
-BT<br>
-UNCLAS<br>
-<br>
-SUBJ/UPDATED TRAINING READINESS REPORT FOR 1ST BN, 99TH MARINES//<br>
-<br>
-REF/A/MARADMIN 447/25//<br>
-REF/B/MCO 1553.3B//<br>
-NARR/REF A IS THE ANNUAL TRAINING GUIDANCE FOR FY26. REF B IS THE TRAINING AND EDUCATION MANAGEMENT ORDER.//<br>
-<br>
-1. PER REF A, 1ST BN 99TH MARINES HAS COMPLETED 87 PERCENT OF REQUIRED ANNUAL TRAINING EVENTS FOR FY26 Q1.<br>
-<br>
-2. THE FOLLOWING EVENTS REMAIN OUTSTANDING:<br>
-&nbsp;&nbsp;A. MCMAP SUSTAINMENT (23 PERSONNEL)<br>
-&nbsp;&nbsp;B. ANNUAL SWIM QUALIFICATION (14 PERSONNEL)<br>
-&nbsp;&nbsp;C. PME COMPLETION FOR SERGEANTS (4 PERSONNEL)<br>
-<br>
-3. REQUEST EXTENSION OF TRAINING DEADLINE FROM 28 FEB 2026 TO 31 MAR 2026 DUE TO PERSONNEL TURNOVER DURING PCS CYCLE.<br>
-<br>
-4. POC FOR THIS MATTER IS CAPT J. R. VANCE, S-3, DSN 555-0192.<br>
-<br>
-BT
+                            <div style="flex: 1; min-width: 280px;">
+                                <div class="template-display">
+                                    <div class="template-display__header">
+                                        <h4 class="template-display__title">Output B</h4>
+                                    </div>
+                                    <div class="template-display__content">Staff Sergeant Smith led a four-Marine maintenance team responsible for 87 principal end items valued at $2.1 million, maintaining 98 percent operational readiness over 18 months with zero accountability discrepancies across three command inspections. He developed a 40-hour training syllabus for incoming technicians and personally qualified 12 Marines on corrective maintenance procedures, reducing work order completion time by 22 percent. His inventory management procedures were adopted as the battalion standard after his section achieved the only perfect score during the FY25 Supply Management Inspection.</div>
+                                </div>
                             </div>
                         </div>
 
                         <p class="mt-md">
-                            Take a minute. Read it carefully. What would you change before this message goes out?
+                            Take a minute. Read both carefully. Which paragraph would survive an awards board review?
+                            What specifically makes one better than the other?
                         </p>
 
                         <details class="mt-md">
-                            <summary><strong>Reveal Errors</strong></summary>
+                            <summary><strong>Reveal Analysis</strong></summary>
                             <div class="callout callout--warning mt-sm">
-                                <p><strong>Error 1 &mdash; Wrong DTG Format (Line 4)</strong></p>
+                                <p><strong>Output A &mdash; Returned by Awards Board</strong></p>
                                 <p>
-                                    The message reads <code>R 06 FEB 2026 1430Z</code>. The correct Date-Time Group
-                                    format is <code>R 061430Z FEB 2026</code> &mdash; day and time run together,
-                                    followed by the Zulu designator, then the month and year. This is a formatting
-                                    error that AI frequently produces because it defaults to civilian date conventions.
-                                    Any communications clerk would catch this immediately.
+                                    Zero verifiable facts. &ldquo;Exceptional,&rdquo; &ldquo;unparalleled,&rdquo;
+                                    &ldquo;tremendous&rdquo; are filler words that say nothing specific. &ldquo;Multi-million
+                                    dollar&rdquo; instead of the actual figure. &ldquo;Numerous Marines&rdquo; instead of 12.
+                                    This paragraph describes every Staff Sergeant who ever lived &mdash; it distinguishes
+                                    no one. Any awards board would return it for rewrite.
                                 </p>
-                                <p class="mt-sm"><strong>Error 2 &mdash; Fabricated Reference (Line 13)</strong></p>
+                                <p class="mt-sm"><strong>Output B &mdash; Gets Approved</strong></p>
                                 <p>
-                                    <code>REF/A/MARADMIN 447/25</code> does not exist. AI commonly fabricates
-                                    reference numbers with high confidence. This is the single most dangerous
-                                    category of AI error in military correspondence: a fake reference that looks
-                                    completely plausible. The only way to catch it is to verify every reference
-                                    against the actual source.
+                                    Every claim is specific and verifiable: 87 end items, $2.1M, 98% readiness,
+                                    zero discrepancies across three inspections, 40-hour syllabus, 12 Marines qualified,
+                                    22% reduction in completion time, perfect SMI score. Actions are tied directly to
+                                    measurable outcomes. Written in proper award narrative style.
                                 </p>
-                                <p class="mt-sm"><strong>Three Correct Elements</strong></p>
-                                <ul>
-                                    <li><strong>Paragraph numbering:</strong> Paragraphs 1&ndash;4 are properly numbered with correct sub-paragraph formatting (2.A, 2.B, 2.C).</li>
-                                    <li><strong>Subject line:</strong> Reasonable and properly formatted with the double-slash terminator.</li>
-                                    <li><strong>UNCLAS header:</strong> Correct use of the UNCLAS classification marking at the top of the message.</li>
-                                </ul>
+                                <p class="mt-sm"><strong>Why This Matters</strong></p>
+                                <p>
+                                    Both outputs came from the same AI with the same prompt. Output A is what AI
+                                    produces when no one pushes back. Output B is what you get when an expert reviews
+                                    the draft and demands specifics. The AI had the information &mdash; the prompt
+                                    included the numbers &mdash; but it defaulted to generic praise language because
+                                    that pattern dominates its training data. The expert&rsquo;s job is to reject
+                                    &ldquo;sounds good&rdquo; and demand &ldquo;is accurate.&rdquo;
+                                </p>
                             </div>
                         </details>
 
                         <div class="callout callout--info mt-lg">
                             <h3 class="callout__title">Key Insight</h3>
                             <p>
-                                The Brynjolfsson study found AI helped novice workers improve by 34% &mdash; but only
-                                because the AI was disseminating expert-level patterns. The experts still catch what
-                                the novices miss. Your domain knowledge is the filter that makes AI output safe to use.
+                                AI defaults to language that <em>sounds</em> impressive over language that <em>is</em>
+                                accurate. The Brynjolfsson study found AI helped novice workers improve by 34% &mdash;
+                                but only because experts caught what the novices missed. Your domain knowledge is
+                                the filter. &ldquo;Would this survive review?&rdquo; is the only question that matters.
                             </p>
                         </div>
 
