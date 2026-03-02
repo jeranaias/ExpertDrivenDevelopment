@@ -158,6 +158,20 @@
             padding: 0;
         }
 
+        /* Ensure site-header sits above toolkit content */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 200;
+        }
+
+        /* Prevent toolkit body styles from affecting site nav */
+        .site-footer {
+            margin-left: 0 !important;
+            position: relative;
+            z-index: 2;
+        }
+
         html {
             scroll-behavior: smooth;
         }
@@ -251,7 +265,7 @@
             position: relative;
             z-index: 1;
             display: flex;
-            min-height: 100vh;
+            min-height: calc(100vh - var(--header-height, 64px));
         }
 
         /* Sidebar - Glass morphism */
@@ -262,9 +276,9 @@
             -webkit-backdrop-filter: blur(32px) saturate(180%);
             border-right: 1.5px solid rgba(0, 0, 0, 0.08);
             position: fixed;
-            top: 0;
+            top: var(--header-height, 64px);
             left: 0;
-            height: 100vh;
+            height: calc(100vh - var(--header-height, 64px));
             display: flex;
             flex-direction: column;
             z-index: var(--z-dropdown);
@@ -783,13 +797,13 @@
         .main {
             flex: 1;
             margin-left: 280px;
-            min-height: 100vh;
+            min-height: calc(100vh - var(--header-height, 64px));
         }
 
         /* Header - Premium glass effect with gradient */
         .header {
             position: sticky;
-            top: 0;
+            top: var(--header-height, 64px);
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.92) 100%);
             backdrop-filter: blur(40px) saturate(200%);
             -webkit-backdrop-filter: blur(40px) saturate(200%);
@@ -2402,6 +2416,43 @@
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- ============ SITE HEADER / NAV ============ -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="./" aria-current="page">Toolkit</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Site mobile navigation overlay -->
+    <div id="site-mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="./" aria-current="page">Toolkit</a></li>
+            <li><a href="../resources/">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
 
     <div class="ambient" aria-hidden="true"></div>
     <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
@@ -5590,6 +5641,44 @@ If you have the capability to generate a PDF directly, please do so. Otherwise, 
         <span>Prompt copied to clipboard</span>
     </div>
 
+    <!-- ============ SITE FOOTER ============ -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>
+                        Open-source AI-assisted development training for DoW personnel.
+                        Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../courses/">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="../tools/">Tools</a></li>
+                        <li><a href="./">Toolkit</a></li>
+                        <li><a href="../resources/">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Project</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
     <!-- Mobile menu button -->
     <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open navigation menu" aria-expanded="false">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
@@ -6187,6 +6276,29 @@ button[disabled] {
     }
 }
 </style>
+
+    <!-- Site mobile navigation toggle -->
+    <script>
+    (function () {
+        var toggle = document.querySelector('.nav-toggle');
+        var mobileNav = document.getElementById('site-mobile-nav');
+        if (!toggle || !mobileNav) return;
+
+        toggle.addEventListener('click', function () {
+            var expanded = toggle.getAttribute('aria-expanded') === 'true';
+            toggle.setAttribute('aria-expanded', String(!expanded));
+            mobileNav.classList.toggle('is-open');
+        });
+
+        var links = mobileNav.querySelectorAll('a');
+        for (var i = 0; i < links.length; i++) {
+            links[i].addEventListener('click', function () {
+                toggle.setAttribute('aria-expanded', 'false');
+                mobileNav.classList.remove('is-open');
+            });
+        }
+    })();
+    </script>
 
     <script src="../js/enhancements.js"></script>
     <script src="../js/knowledge-check.js"></script>
