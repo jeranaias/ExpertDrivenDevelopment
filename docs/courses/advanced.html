@@ -244,44 +244,51 @@
                         <h3>Frontier Map Format</h3>
                         <div class="table-wrapper">
                             <table>
+                                <caption class="sr-only">Frontier map showing AI capabilities by category with recommended tools</caption>
                                 <thead>
                                     <tr>
                                         <th scope="col">Category</th>
                                         <th scope="col">Inside Frontier (AI Handles)</th>
                                         <th scope="col">Outside Frontier (AI Fails)</th>
                                         <th scope="col">Moving Frontier (Check Periodically)</th>
+                                        <th scope="col">Recommended Tool</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Document generation</td>
-                                        <td>Correspondence drafts, counseling statement templates, award write-ups, standard memo formatting</td>
-                                        <td>Documents requiring specific institutional knowledge (unit SOPs, local policy interpretation), anything needing exact regulation quotes</td>
-                                        <td>Fitness report narratives (improving rapidly), legal review summaries</td>
+                                        <td data-label="Category">Document generation</td>
+                                        <td data-label="Inside Frontier">Correspondence drafts, counseling statement templates, award write-ups, standard memo formatting</td>
+                                        <td data-label="Outside Frontier">Documents requiring specific institutional knowledge (unit SOPs, local policy interpretation), anything needing exact regulation quotes</td>
+                                        <td data-label="Moving Frontier">Fitness report narratives (improving rapidly), legal review summaries</td>
+                                        <td data-label="Recommended Tool"><strong>GenAI.mil</strong> for documents referencing real personnel; commercial tools for fictional examples</td>
                                     </tr>
                                     <tr>
-                                        <td>Data analysis</td>
-                                        <td>Trend identification in structured data, summarizing large datasets, creating charts/dashboards, anomaly flagging</td>
-                                        <td>Interpreting data in operational context (why readiness dropped), cross-referencing classified and unclassified sources</td>
-                                        <td>Predictive analysis (retention modeling, maintenance forecasting)</td>
+                                        <td data-label="Category">Data analysis</td>
+                                        <td data-label="Inside Frontier">Trend identification in structured data, summarizing large datasets, creating charts/dashboards, anomaly flagging</td>
+                                        <td data-label="Outside Frontier">Interpreting data in operational context (why readiness dropped), cross-referencing classified and unclassified sources</td>
+                                        <td data-label="Moving Frontier">Predictive analysis (retention modeling, maintenance forecasting)</td>
+                                        <td data-label="Recommended Tool"><strong>CamoGPT</strong> for data with sensitive details; M365 Copilot for Excel-based analysis</td>
                                     </tr>
                                     <tr>
-                                        <td>Process automation</td>
-                                        <td>Simple approval routing, email notifications, calendar scheduling, status tracking</td>
-                                        <td>Multi-system integrations with legacy databases, processes requiring human judgment calls (hardship determinations)</td>
-                                        <td>Complex conditional workflows (getting better with clear business rules)</td>
+                                        <td data-label="Category">Process automation</td>
+                                        <td data-label="Inside Frontier">Simple approval routing, email notifications, calendar scheduling, status tracking</td>
+                                        <td data-label="Outside Frontier">Multi-system integrations with legacy databases, processes requiring human judgment calls (hardship determinations)</td>
+                                        <td data-label="Moving Frontier">Complex conditional workflows (getting better with clear business rules)</td>
+                                        <td data-label="Recommended Tool"><strong>CamoGPT</strong> for Power Platform code generation; Copilot Studio for bot flows</td>
                                     </tr>
                                     <tr>
-                                        <td>Reference lookup</td>
-                                        <td>Finding relevant MCOs/NAVMCs, summarizing policy documents, comparing regulation versions</td>
-                                        <td>Interpreting how regulations apply to specific edge cases, resolving conflicting guidance between orders</td>
-                                        <td>Policy applicability questions (models improving but still unreliable for authoritative interpretation)</td>
+                                        <td data-label="Category">Reference lookup</td>
+                                        <td data-label="Inside Frontier">Finding relevant MCOs/NAVMCs, summarizing policy documents, comparing regulation versions</td>
+                                        <td data-label="Outside Frontier">Interpreting how regulations apply to specific edge cases, resolving conflicting guidance between orders</td>
+                                        <td data-label="Moving Frontier">Policy applicability questions (models improving but still unreliable for authoritative interpretation)</td>
+                                        <td data-label="Recommended Tool"><strong>GenAI.mil</strong> when referencing real directives; Claude for unclassified policy analysis</td>
                                     </tr>
                                     <tr>
-                                        <td>Training development</td>
-                                        <td>Lesson plan outlines, quiz/assessment generation, scenario creation, slide deck structure</td>
-                                        <td>Evaluating training effectiveness, adapting content for specific MOS requirements, determining doctrinal accuracy</td>
-                                        <td>Full lesson plan generation with appropriate examples (quality varies significantly)</td>
+                                        <td data-label="Category">Training development</td>
+                                        <td data-label="Inside Frontier">Lesson plan outlines, quiz/assessment generation, scenario creation, slide deck structure</td>
+                                        <td data-label="Outside Frontier">Evaluating training effectiveness, adapting content for specific MOS requirements, determining doctrinal accuracy</td>
+                                        <td data-label="Moving Frontier">Full lesson plan generation with appropriate examples (quality varies significantly)</td>
+                                        <td data-label="Recommended Tool">Claude or Gemini for unclassified content; <strong>GenAI.mil</strong> for MOS-specific material</td>
                                     </tr>
                                 </tbody>
                             </table>
