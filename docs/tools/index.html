@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your AI Development Toolkit - The tools available on MCEN for Expert-Driven Development. GenAI.mil, CamoGPT, Power Platform, and GitHub Pages.">
+    <title>Tools | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="site-wrapper">
+
+    <!-- Skip to content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Site Header -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="./" class="active" aria-current="page">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="./" class="active" aria-current="page">Tools</a></li>
+            <li><a href="../resources/">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li aria-current="page">Tools</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Your AI Development Toolkit</h1>
+            <p class="page-header__desc">
+                These are the tools available to you on MCEN right now. Every exercise in the EDD curriculum uses one or more of these platforms.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content" class="site-main">
+        <div class="container">
+            <div class="page-layout page-layout--sidebar">
+
+                <!-- Sidebar / Table of Contents -->
+                <aside class="sidebar sidebar--sticky" aria-label="Table of contents">
+                    <nav class="toc">
+                        <h2 class="toc__title">On This Page</h2>
+                        <ul class="toc__list">
+                            <li><a href="#ai-platforms">AI Platforms</a></li>
+                            <li><a href="#genai-mil">GenAI.mil</a></li>
+                            <li><a href="#camogpt">CamoGPT</a></li>
+                            <li><a href="#building-platforms">Building Platforms</a></li>
+                            <li><a href="#power-platform">Power Platform</a></li>
+                            <li><a href="#github-pages">GitHub Pages</a></li>
+                            <li><a href="#quick-reference">Quick Reference</a></li>
+                            <li><a href="#security">Security Reminders</a></li>
+                            <li><a href="#whats-next">Preparing for What&rsquo;s Next</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <!-- Page Content -->
+                <div class="page-content">
+
+                    <!-- AI Platforms -->
+                    <section id="ai-platforms">
+                        <h2>AI Platforms</h2>
+                    </section>
+
+                    <section id="genai-mil">
+                        <h3>GenAI.mil &mdash; Your Primary AI Assistant</h3>
+                        <p><strong>URL:</strong> genai.mil</p>
+                        <p><strong>Access:</strong> CAC login on MCEN</p>
+                        <p><strong>Authorization:</strong> MARADMIN 018/26 designates GenAI.mil as the USMC enterprise generative AI platform</p>
+
+                        <p>GenAI.mil is the DoD enterprise generative AI platform, IL5-authorized for CUI, with over 1.1 million users across all services as of February 2026. Use it for:</p>
+                        <ul>
+                            <li>All Course 1 exercises (Red Pen Review, Workflow Mapping, Frontier Mapping)</li>
+                            <li>Code generation during builder courses (Courses 2&ndash;4)</li>
+                            <li>Document drafting, analysis, and summarization</li>
+                            <li>Brainstorming and task decomposition</li>
+                            <li>Debugging &mdash; paste error messages and context for diagnosis</li>
+                        </ul>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Important</h3>
+                            <p>
+                                GenAI.mil generates code as text output. You cannot run code inside GenAI.mil. Copy the generated code into your target platform (Power Platform, a text editor, or a development environment) to execute it.
+                            </p>
+                        </div>
+
+                        <h4>Tips for Effective Use</h4>
+                        <ul>
+                            <li>Use the file upload feature to provide context documents (SOPs, regulations, templates)</li>
+                            <li>When generating code for Power Platform, specify &ldquo;Power Apps formula language&rdquo; or &ldquo;Power Automate flow&rdquo; in your prompt</li>
+                            <li>For iterative refinement, keep the conversation going in the same thread &mdash; GenAI.mil maintains context within a session</li>
+                            <li>When debugging, paste the exact error message along with what you were trying to accomplish</li>
+                        </ul>
+                    </section>
+
+                    <section id="camogpt">
+                        <h3>CamoGPT &mdash; Advanced Capabilities</h3>
+                        <p><strong>URL:</strong> camogpt.ai.army.mil</p>
+                        <p><strong>Access:</strong> CAC login on MCEN</p>
+                        <p><strong>Authorization:</strong> Available to Marines per MARADMIN 018/26</p>
+
+                        <p>CamoGPT is an Army-managed platform with approximately 75,000 users. Use it when you need:</p>
+                        <ul>
+                            <li>API access (for building tools that call AI programmatically)</li>
+                            <li>Tool calling capabilities</li>
+                            <li>Shared workspaces for team collaboration</li>
+                            <li>Dataset conversation (upload a CSV and ask questions about it)</li>
+                            <li>SIPR/IL6 access capability</li>
+                            <li>Capabilities not yet available on GenAI.mil</li>
+                        </ul>
+
+                        <p>
+                            CamoGPT and GenAI.mil are complementary. Start with GenAI.mil for most tasks. Move to CamoGPT when you need advanced features like API access, tool calling, or shared workspaces.
+                        </p>
+                    </section>
+
+                    <!-- Building Platforms -->
+                    <section id="building-platforms">
+                        <h2>Building Platforms</h2>
+                        <p>The AI platforms above help you <em>build</em>. The platforms below are where your tools <em>live</em>.</p>
+                    </section>
+
+                    <section id="power-platform">
+                        <h3>Microsoft 365 Power Platform</h3>
+                        <p><strong>Access:</strong> M365 account on MCEN</p>
+                        <p><strong>Components:</strong> PowerApps (build apps), Power Automate (automate workflows), Power BI (dashboards and reports)</p>
+
+                        <p>
+                            This is where you BUILD tools. The AI platforms above help you build &mdash; Power Platform is where the tools live.
+                        </p>
+                        <p>
+                            <strong>M365 Copilot</strong> is also available in Word, Excel, and PowerPoint on MCEN for AI-assisted document creation within Office apps.
+                        </p>
+                    </section>
+
+                    <section id="github-pages">
+                        <h3>GitHub Pages</h3>
+                        <p><strong>URL:</strong> github.com</p>
+                        <p><strong>Use:</strong> Host browser-based tools accessible on MCEN (like DonDocs and this site)</p>
+
+                        <p>
+                            For tools that need to be accessible across the enterprise without ATO concerns, browser-based applications hosted on GitHub Pages run entirely client-side with zero data transmission &mdash; no server, no database, no security footprint.
+                        </p>
+                    </section>
+
+                    <!-- Quick Reference -->
+                    <section id="quick-reference">
+                        <h2>Tool Selection Quick Reference</h2>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">What You&rsquo;re Doing</th>
+                                        <th scope="col">Primary Tool</th>
+                                        <th scope="col">Why</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Course 1 exercises</td>
+                                        <td>GenAI.mil</td>
+                                        <td>Enterprise platform, all Marines have access</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Code generation for Power Platform</td>
+                                        <td>GenAI.mil</td>
+                                        <td>Specify target platform in your prompt</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Debugging errors</td>
+                                        <td>GenAI.mil or CamoGPT</td>
+                                        <td>Paste error + context, ask for diagnosis</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Building Power Apps / Automations</td>
+                                        <td>Power Platform + GenAI.mil</td>
+                                        <td>Build in Power Platform, use AI for code/logic</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Analyzing data from spreadsheets</td>
+                                        <td>CamoGPT</td>
+                                        <td>Dataset conversation feature handles CSV queries</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Team collaboration on AI projects</td>
+                                        <td>CamoGPT</td>
+                                        <td>Shared workspace feature</td>
+                                    </tr>
+                                    <tr>
+                                        <td>API integration into tools</td>
+                                        <td>CamoGPT</td>
+                                        <td>Only platform with API access currently</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hosting browser-based tools</td>
+                                        <td>GitHub Pages</td>
+                                        <td>Zero server, zero ATO footprint</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Document drafting in Word/Excel</td>
+                                        <td>M365 Copilot</td>
+                                        <td>Built into Office apps on MCEN</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- Security Reminders -->
+                    <section id="security">
+                        <h2>Security Reminders</h2>
+                        <ul>
+                            <li>Never enter classified information into GenAI.mil or CamoGPT (both are IL5/CUI-authorized, not classified)</li>
+                            <li>GenAI.mil and CamoGPT are authorized for CUI &mdash; but verify your specific data handling requirements with your security manager</li>
+                            <li>Browser-based tools hosted on GitHub Pages process data locally &mdash; no information leaves the machine</li>
+                            <li>AI-generated content for official use must always be reviewed by a qualified human per EDD SOP</li>
+                            <li>You are responsible for the accuracy of any AI-assisted output you submit &mdash; the AI is a tool, not an authority</li>
+                        </ul>
+                    </section>
+
+                    <!-- Preparing for What's Next -->
+                    <section id="whats-next">
+                        <h2>Preparing for What&rsquo;s Next</h2>
+
+                        <p>
+                            The current MCEN AI toolkit &mdash; GenAI.mil, CamoGPT, M365 Copilot, and Power Platform &mdash; is the starting point, not the ceiling. The DoD AI landscape is expanding rapidly:
+                        </p>
+                        <ul>
+                            <li>GenAI.mil has announced plans for API access, agentic AI development solutions, and classified network expansion</li>
+                            <li>AI-assisted IDEs (like GitHub Copilot, Cursor, and Claude Code) are standard in commercial development but not yet available on MCEN</li>
+                            <li>Code execution sandboxes would allow Marines to run AI-generated code directly instead of copy-pasting between platforms</li>
+                            <li>These tools would multiply the output of EDD-trained Marines significantly</li>
+                        </ul>
+
+                        <p>
+                            The EDD methodology is designed to be platform-resilient. The six 201 skills &mdash; Context Assembly, Quality Judgment, Task Decomposition, Iterative Refinement, Workflow Integration, and Frontier Recognition &mdash; transfer across any AI platform. As new tools come online, Marines trained in EDD will adopt them faster because they already have the judgment framework. The tools will change. The skills won&rsquo;t.
+                        </p>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">When Better Tools Arrive</h3>
+                            <p>
+                                When better tools arrive on MCEN, update the tool references in this curriculum. The methodology doesn&rsquo;t change &mdash; only the specific platform instructions in each exercise.
+                            </p>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>
+                        Open-source AI-assisted development training for DoW personnel.
+                        Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../courses/">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="../toolkit/">Toolkit</a></li>
+                        <li><a href="./">Tools</a></li>
+                        <li><a href="../resources/">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Project</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile navigation toggle -->
+    <script>
+    (function () {
+        var toggle = document.querySelector('.nav-toggle');
+        var mobileNav = document.getElementById('mobile-nav');
+        if (!toggle || !mobileNav) return;
+
+        toggle.addEventListener('click', function () {
+            var expanded = toggle.getAttribute('aria-expanded') === 'true';
+            toggle.setAttribute('aria-expanded', String(!expanded));
+            mobileNav.classList.toggle('is-open');
+        });
+
+        var links = mobileNav.querySelectorAll('a');
+        for (var i = 0; i < links.length; i++) {
+            links[i].addEventListener('click', function () {
+                toggle.setAttribute('aria-expanded', 'false');
+                mobileNav.classList.remove('is-open');
+            });
+        }
+    })();
+    </script>
+
+    <script src="../js/enhancements.js"></script>
+
+</body>
+</html>

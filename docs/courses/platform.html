@@ -25,6 +25,7 @@
                     <li><a href="./" class="active">Courses</a></li>
                     <li><a href="../sop/">SOP</a></li>
                     <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
                     <li><a href="../resources/">Resources</a></li>
                     <li><a href="../about.html">About</a></li>
                 </ul>
@@ -42,6 +43,7 @@
             <li><a href="./" class="active">Courses</a></li>
             <li><a href="../sop/">SOP</a></li>
             <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
             <li><a href="../resources/">Resources</a></li>
             <li><a href="../about.html">About</a></li>
         </ul>
@@ -314,9 +316,11 @@
 
                         <h4>Phase 2 &mdash; AI Builds</h4>
                         <p>
-                            Feed the design to AI. Build the Power App form and Power Automate flow based
-                            on the whiteboard design. The AI handles the execution &mdash; translating your
-                            design into working platform components.
+                            Open GenAI.mil. Feed it your whiteboard design: &ldquo;I need a Power App with
+                            a request submission form that routes to approvers based on [your business rules].
+                            Here&rsquo;s the approval chain: [paste from whiteboard]. Build the Power Apps
+                            screen layout and the Power Automate flow logic.&rdquo; Copy generated code/logic
+                            into Power Platform.
                         </p>
 
                         <h3>Complete Build Script: Leave Request Router (Centaur Mode)</h3>
@@ -935,9 +939,11 @@ is notified before the timeout expires.
 
                         <h4>Phase 4 &mdash; AI Refines</h4>
                         <p>
-                            Feed test results back to the AI for fixes. Describe exactly what failed,
-                            what you expected, and what happened instead. Let the AI adjust the
-                            implementation.
+                            Back in GenAI.mil, paste your test results: &ldquo;The flow works for the first
+                            approver but skips the second. Here&rsquo;s the flow logic: [paste]. The business
+                            rule is [explain]. Fix the routing logic.&rdquo; Describe exactly what failed,
+                            what you expected, and what happened instead. Copy the corrected code back into
+                            Power Platform.
                         </p>
 
                         <h4>Phase 5 &mdash; Human Accepts</h4>
@@ -1002,12 +1008,18 @@ is notified before the timeout expires.
                         <h3>Explicit Cyborg Pattern</h3>
                         <p>
                             No distinct phases. Continuous back-and-forth between human and AI. The boundary
-                            between human thinking and AI execution is fluid.
+                            between human thinking and AI execution is fluid. In cyborg mode, keep GenAI.mil
+                            open alongside Power Platform at all times. The conversation is continuous and
+                            the context accumulates in a single GenAI.mil thread.
                         </p>
 
                         <p>
-                            Start rough: <em>"I need to see which Marines have completed which training
-                            events."</em>
+                            Start rough in GenAI.mil: <em>&ldquo;Build me a data model for tracking training
+                            completion&rdquo;</em> &rarr; copy to Power Apps &rarr; <em>&ldquo;Now I need an
+                            input form for this data model&rdquo;</em> &rarr; copy to Power Apps &rarr;
+                            <em>&ldquo;That chart doesn&rsquo;t show what I need. Here&rsquo;s what I see:
+                            [describe or paste current formula]. Change the X axis to show completion by
+                            date.&rdquo;</em>
                         </p>
 
                         <p>Build incrementally:</p>

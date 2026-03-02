@@ -25,6 +25,7 @@
                     <li><a href="./" class="active">Courses</a></li>
                     <li><a href="../sop/">SOP</a></li>
                     <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
                     <li><a href="../resources/">Resources</a></li>
                     <li><a href="../about.html">About</a></li>
                 </ul>
@@ -42,6 +43,7 @@
             <li><a href="./" class="active">Courses</a></li>
             <li><a href="../sop/">SOP</a></li>
             <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
             <li><a href="../resources/">Resources</a></li>
             <li><a href="../about.html">About</a></li>
         </ul>
@@ -236,7 +238,11 @@
                         <p><strong>Duration:</strong> 30 minutes</p>
 
                         <p>
-                            Each participant creates a frontier map for their domain.
+                            Each participant creates a frontier map for their domain. Map the frontier for
+                            each tool separately. What GenAI.mil handles well in your domain may differ from
+                            what CamoGPT handles well. For example, GenAI.mil may excel at generating Power Apps
+                            formulas but struggle with complex data transformations that CamoGPT&rsquo;s dataset
+                            conversation feature handles natively.
                         </p>
 
                         <h3>Frontier Map Format</h3>
@@ -245,40 +251,46 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Category</th>
-                                        <th scope="col">Inside Frontier (AI Handles)</th>
-                                        <th scope="col">Outside Frontier (AI Fails)</th>
-                                        <th scope="col">Moving Frontier (Check Periodically)</th>
+                                        <th scope="col">GenAI.mil Handles</th>
+                                        <th scope="col">CamoGPT Handles</th>
+                                        <th scope="col">Neither Handles (Human Only)</th>
+                                        <th scope="col">Moving Frontier</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>Document generation</td>
-                                        <td>Correspondence drafts, counseling statement templates, award write-ups, standard memo formatting</td>
-                                        <td>Documents requiring specific institutional knowledge (unit SOPs, local policy interpretation), anything needing exact regulation quotes</td>
+                                        <td>Correspondence drafts, counseling statements, award write-ups, memo formatting, code generation for Power Platform</td>
+                                        <td>Same drafting capabilities, plus shared workspace for collaborative editing</td>
+                                        <td>Documents requiring institutional knowledge (unit SOPs, local policy interpretation), exact regulation quotes</td>
                                         <td>Fitness report narratives (improving rapidly), legal review summaries</td>
                                     </tr>
                                     <tr>
                                         <td>Data analysis</td>
-                                        <td>Trend identification in structured data, summarizing large datasets, creating charts/dashboards, anomaly flagging</td>
-                                        <td>Interpreting data in operational context (why readiness dropped), cross-referencing classified and unclassified sources</td>
+                                        <td>Trend identification, summarizing datasets, creating chart descriptions, anomaly flagging</td>
+                                        <td>Dataset conversation (CSV upload and query), structured data analysis, API-driven data pipelines</td>
+                                        <td>Interpreting data in operational context, cross-referencing classified and unclassified sources</td>
                                         <td>Predictive analysis (retention modeling, maintenance forecasting)</td>
                                     </tr>
                                     <tr>
                                         <td>Process automation</td>
-                                        <td>Simple approval routing, email notifications, calendar scheduling, status tracking</td>
-                                        <td>Multi-system integrations with legacy databases, processes requiring human judgment calls (hardship determinations)</td>
+                                        <td>Generating Power Automate flow logic, approval routing code, notification templates</td>
+                                        <td>API integrations, tool calling for automated workflows, programmatic AI access</td>
+                                        <td>Multi-system integrations with legacy databases, human judgment calls (hardship determinations)</td>
                                         <td>Complex conditional workflows (getting better with clear business rules)</td>
                                     </tr>
                                     <tr>
                                         <td>Reference lookup</td>
                                         <td>Finding relevant MCOs/NAVMCs, summarizing policy documents, comparing regulation versions</td>
-                                        <td>Interpreting how regulations apply to specific edge cases, resolving conflicting guidance between orders</td>
+                                        <td>Same capabilities, with file upload for larger document sets</td>
+                                        <td>Interpreting how regulations apply to edge cases, resolving conflicting guidance between orders</td>
                                         <td>Policy applicability questions (models improving but still unreliable for authoritative interpretation)</td>
                                     </tr>
                                     <tr>
                                         <td>Training development</td>
-                                        <td>Lesson plan outlines, quiz/assessment generation, scenario creation, slide deck structure</td>
-                                        <td>Evaluating training effectiveness, adapting content for specific MOS requirements, determining doctrinal accuracy</td>
+                                        <td>Lesson plan outlines, quiz generation, scenario creation, slide deck structure</td>
+                                        <td>Collaborative lesson plan development in shared workspaces, data-driven training analysis</td>
+                                        <td>Evaluating training effectiveness, adapting content for specific MOS requirements, doctrinal accuracy</td>
                                         <td>Full lesson plan generation with appropriate examples (quality varies significantly)</td>
                                     </tr>
                                 </tbody>

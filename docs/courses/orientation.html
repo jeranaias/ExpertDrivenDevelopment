@@ -25,6 +25,7 @@
                     <li><a href="./" class="active">Courses</a></li>
                     <li><a href="../sop/">SOP</a></li>
                     <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
                     <li><a href="../resources/">Resources</a></li>
                     <li><a href="../about.html">About</a></li>
                 </ul>
@@ -42,6 +43,7 @@
             <li><a href="./" class="active">Courses</a></li>
             <li><a href="../sop/">SOP</a></li>
             <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
             <li><a href="../resources/">Resources</a></li>
             <li><a href="../about.html">About</a></li>
         </ul>
@@ -279,7 +281,13 @@
                         </div>
 
                         <h3>Step 2: Build with AI (20 min)</h3>
-                        <p>Open your AI chat interface. Narrate each prompt before typing it. Follow this sequence:</p>
+                        <p>
+                            Open GenAI.mil in one browser tab and Power Apps in another. In GenAI.mil,
+                            describe your data structure and ask it to generate the Power Apps formula code.
+                            Copy the generated code into Power Apps. GenAI.mil generates the code as text &mdash;
+                            you copy it into Power Apps to run it.
+                        </p>
+                        <p>Narrate each prompt before typing it. Follow this sequence:</p>
 
                         <details open>
                             <summary><strong>Prompt 1: Initial Request (2 min)</strong></summary>
@@ -568,15 +576,25 @@ If(DateDue < Today(), Red, Black)</pre>
                         <p>Expect every student to hit at least one error. When they do:</p>
                         <ol>
                             <li><strong>Read the error message out loud.</strong> Do not guess. Read exactly what the system says.</li>
-                            <li><strong>Copy the exact error message.</strong> Include any error codes or line numbers.</li>
-                            <li><strong>Show the debugging process:</strong> Go back to AI and paste the error with context. Example prompt:</li>
+                            <li><strong>Copy the exact error message</strong> from Power Apps. Include any error codes or line numbers.</li>
+                            <li><strong>Switch to your GenAI.mil conversation.</strong> Paste the error along with what you were trying to do. Example prompt:</li>
                         </ol>
 
                         <div class="prompt-block">
                             <p>I am building a leave request tracker in Power Apps. I added this formula to my gallery:</p>
                             <pre>Filter(LeaveRequests, Status = "Pending" && RequestDate > Today())</pre>
                             <p>But I am getting this error: "The function 'Filter' has some invalid arguments."</p>
-                            <p>The RequestDate column is a Date field in my SharePoint list. What is wrong?</p>
+                            <p>The RequestDate column is a Date field in my SharePoint list. What is wrong and how do I fix it?</p>
+                        </div>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Instructor Narration</h3>
+                            <p>
+                                &ldquo;I copied the error message from Power Apps. I switched to my GenAI.mil conversation.
+                                I pasted the error along with what I was trying to do. GenAI.mil diagnosed it and suggested
+                                a fix. I copy the corrected code back into Power Apps. This is the debugging loop: Power Apps
+                                shows the error, GenAI.mil diagnoses it, you apply the fix.&rdquo;
+                            </p>
                         </div>
 
                         <div class="callout callout--info">
