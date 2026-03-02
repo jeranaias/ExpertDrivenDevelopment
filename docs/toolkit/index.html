@@ -2145,6 +2145,53 @@
             }
         }
 
+        /* Complexity badge */
+        .complexity-badge {
+            display: inline-block;
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+            padding: 2px 8px;
+            border-radius: var(--radius-sm);
+            margin-left: 8px;
+            vertical-align: middle;
+            letter-spacing: 0.02em;
+        }
+        .complexity-badge--beginner {
+            background: var(--success-light);
+            color: #fff;
+        }
+        .complexity-badge--intermediate {
+            background: var(--warning);
+            color: #fff;
+        }
+        .complexity-badge--advanced {
+            background: var(--error);
+            color: #fff;
+        }
+
+        /* Category meta info */
+        .category-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+        .category-meta__item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .category-meta__label {
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+        }
+
         /* LaTeX output format badge */
         .latex-badge {
             display: inline-flex;
@@ -2249,7 +2296,7 @@
                     <button class="nav-item active" data-category="problem" aria-describedby="workflow-section">
                         <span class="nav-icon" aria-hidden="true">&#128203;</span>
                         <span class="nav-label">Problem Definition</span>
-                        <span class="nav-count">4</span>
+                        <span class="nav-count">5</span>
                     </button>
                     <button class="nav-item" data-category="compliance" aria-describedby="workflow-section">
                         <span class="nav-icon" aria-hidden="true">&#128274;</span>
@@ -2259,7 +2306,7 @@
                     <button class="nav-item" data-category="data" aria-describedby="workflow-section">
                         <span class="nav-icon" aria-hidden="true">&#128451;</span>
                         <span class="nav-label">Data Design</span>
-                        <span class="nav-count">5</span>
+                        <span class="nav-count">4</span>
                     </button>
                 </div>
 
@@ -2287,7 +2334,7 @@
                     <button class="nav-item" data-category="debug" aria-describedby="quality-section">
                         <span class="nav-icon" aria-hidden="true">&#128295;</span>
                         <span class="nav-label">Debugging</span>
-                        <span class="nav-count">5</span>
+                        <span class="nav-count">6</span>
                     </button>
                     <button class="nav-item" data-category="docs" aria-describedby="quality-section">
                         <span class="nav-icon" aria-hidden="true">&#128221;</span>
@@ -2315,7 +2362,7 @@
                     <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
                     <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
                 </svg>
-                <span class="disclaimer-text">Use only with your unit's approved AI tools. Never input classified, PII, or sensitive information.</span>
+                <span class="disclaimer-text">Use these prompts with GenAI.mil or CamoGPT on MCEN. Never input classified information. See the Tools page for data handling guidance.</span>
                 <button class="disclaimer-close" aria-label="Dismiss disclaimer">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                         <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
@@ -2352,6 +2399,11 @@
                     <div class="category-intro">
                         <h2>Getting Started</h2>
                         <p>These prompts help you clearly define what you're building before you build it. <strong>This is the most important phase.</strong> A well-defined problem is half-solved. Spend time here to save significant rework later.</p>
+                        <div class="category-meta">
+                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 1 — Problem Definition</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 2 Module 4, Course 3 Module 5</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil for all exercises</div>
+                        </div>
                     </div>
 
                     <div class="prompt-grid">
@@ -2360,7 +2412,7 @@
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">1</div>
                                     <div>
-                                        <div class="prompt-title">Problem Discovery</div>
+                                        <div class="prompt-title">Problem Discovery <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Analyzes pain points to understand root causes</div>
                                     </div>
                                 </div>
@@ -2415,9 +2467,9 @@ Don't suggest a solution yet—just help me understand the problem better.</div>
                         <article class="prompt-card" data-search="pdd document requirements specification">
                             <button class="prompt-header" aria-expanded="false" aria-controls="prompt-problem-2">
                                 <div class="prompt-header-left">
-                                    <div class="prompt-number">1</div>
+                                    <div class="prompt-number">2</div>
                                     <div>
-                                        <div class="prompt-title">Problem Definition Document</div>
+                                        <div class="prompt-title">Problem Definition Document <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Generates a draft PDD per the SOP</div>
                                     </div>
                                 </div>
@@ -2481,9 +2533,9 @@ If you have the capability to generate a PDF directly, please do so. Otherwise, 
                         <article class="prompt-card" data-search="user story stories persona requirements">
                             <button class="prompt-header" aria-expanded="false" aria-controls="prompt-problem-3">
                                 <div class="prompt-header-left">
-                                    <div class="prompt-number">2</div>
+                                    <div class="prompt-number">3</div>
                                     <div>
-                                        <div class="prompt-title">User Story Generator</div>
+                                        <div class="prompt-title">User Story Generator <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Creates user stories from each user's perspective</div>
                                     </div>
                                 </div>
@@ -2529,9 +2581,9 @@ Focus on the most common tasks, not edge cases. Prioritize each story as Must Ha
                         <article class="prompt-card" data-search="minimum viable product mvp cut ruthless simple scope check creep">
                             <button class="prompt-header" aria-expanded="false" aria-controls="prompt-problem-4">
                                 <div class="prompt-header-left">
-                                    <div class="prompt-number">3</div>
+                                    <div class="prompt-number">4</div>
                                     <div>
-                                        <div class="prompt-title">MVP Definition</div>
+                                        <div class="prompt-title">MVP Definition <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Defines MVP and prevents scope creep before you start building</div>
                                     </div>
                                 </div>
@@ -2587,7 +2639,57 @@ Be ruthless. A working simple tool beats a broken complex one.</div>
                             </div>
                         </article>
 
-                        
+                        <article class="prompt-card" data-search="frontier check boundary capability limitation ai inside outside task evaluation">
+                            <button class="prompt-header" aria-expanded="false" aria-controls="prompt-problem-5">
+                                <div class="prompt-header-left">
+                                    <div class="prompt-number">5</div>
+                                    <div>
+                                        <div class="prompt-title">Frontier Check <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
+                                        <div class="prompt-subtitle">Evaluates whether a task is inside or outside the AI frontier</div>
+                                    </div>
+                                </div>
+                                <div class="prompt-toggle" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </div>
+                            </button>
+                            <div class="prompt-body" id="prompt-problem-5">
+                                <p class="prompt-description">Before delegating a task to AI, use this prompt to evaluate whether it falls inside or outside the AI frontier for your domain. This directly applies the Frontier Recognition skill from Course 1.</p>
+                                <div class="prompt-box">
+                                    <div class="prompt-box-header">
+                                        <span class="prompt-box-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg> Prompt Template</span>
+                                        <button class="copy-btn" aria-label="Copy prompt to clipboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy</button>
+                                    </div>
+                                    <div class="prompt-content">I need to evaluate whether a task is suitable for AI assistance.
+
+## TASK DESCRIPTION
+<span class="placeholder">[Describe the specific task you want AI to help with]</span>
+
+## DOMAIN CONTEXT
+<span class="placeholder">[What field/specialty does this task belong to? What expertise is needed to verify the output?]</span>
+
+## EVALUATION CRITERIA
+For this task, help me assess:
+
+1. **Inside the frontier?** Can AI reliably produce a correct or useful output for this type of task? What evidence supports this?
+2. **Outside the frontier?** What aspects of this task require human judgment, institutional knowledge, or real-world verification that AI cannot provide?
+3. **Verification difficulty:** How hard is it to check if the AI output is correct? Can someone without deep expertise verify it, or does it require a subject matter expert?
+4. **Risk of undetected errors:** If the AI gets something wrong, how likely is it that the error would go unnoticed? What would the consequences be?
+5. **Recommended approach:** Based on the above, should I:
+   - Delegate fully to AI (inside frontier, easy to verify)
+   - Use centaur mode (human designs, AI executes, human verifies)
+   - Use cyborg mode (continuous human-AI collaboration)
+   - Keep this task fully human (outside frontier or high-risk errors)
+
+## OUTPUT FORMAT
+Provide a clear recommendation with reasoning for each criterion.</div>
+                                </div>
+                                <div class="tip-box">
+                                    <strong>When to use this:</strong> Before starting any new AI-assisted task, especially in domains where you are unsure of AI capabilities. This prompt operationalizes the Frontier Recognition skill — the most important skill for avoiding the 19-percentage-point performance drop identified in the BCG-Harvard study.
+                                </div>
+                            </div>
+                        </article>
+
+
                     </div>
                 </div>
 
@@ -2596,6 +2698,11 @@ Be ruthless. A working simple tool beats a broken complex one.</div>
                     <div class="category-intro">
                         <h2>Before You Build</h2>
                         <p>These prompts help you identify compliance requirements <strong>before</strong> you build. They help you think through compliance—they don't replace consultation with your Privacy Officer, Cybersecurity Office, or Legal. When in doubt, ask the professionals.</p>
+                        <div class="category-meta">
+                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 2 — Compliance Review</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 3 Module 1, Course 4 Module 4</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil (safe for CUI references); consult your Privacy Officer and Cybersecurity Office</div>
+                        </div>
                     </div>
 
                     <div class="prompt-grid">
@@ -2604,7 +2711,7 @@ Be ruthless. A working simple tool beats a broken complex one.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">2</div>
                                     <div>
-                                        <div class="prompt-title">PII Identification</div>
+                                        <div class="prompt-title">PII Identification <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Determines if your tool handles Personally Identifiable Information</div>
                                     </div>
                                 </div>
@@ -2615,7 +2722,7 @@ Be ruthless. A working simple tool beats a broken complex one.</div>
                                 </div>
                             </button>
                             <div class="prompt-body" id="prompt-compliance-1">
-                                <p class="prompt-description">Before building, understand if your data fields constitute PII and what that means for your project. References NIST 800-53 privacy controls. References NIST 800-53 privacy controls.</p>
+                                <p class="prompt-description">Before building, understand if your data fields constitute PII and what that means for your project. References NIST 800-53 privacy controls.</p>
                                 <div class="prompt-box">
                                     <div class="prompt-box-header">
                                         <span class="prompt-box-label">
@@ -2646,7 +2753,7 @@ Then summarize:
 - Whether a Privacy Impact Assessment is likely required
 - Recommended data minimization (fields I could remove or anonymize)
 
-Reference current DoW privacy directives (DoWI 5400.11) and NIST 800-53 privacy controls for PII definitions.</div>
+Reference current DoW privacy directives (DoWI 5400.11) and NIST 800-53 privacy controls for PII definitions. (Search for these directives on GenAI.mil if you need clarification on specific requirements.)</div>
                                 </div>
                             </div>
                         </article>
@@ -2656,7 +2763,7 @@ Reference current DoW privacy directives (DoWI 5400.11) and NIST 800-53 privacy 
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">1</div>
                                     <div>
-                                        <div class="prompt-title">PIA Threshold Analysis</div>
+                                        <div class="prompt-title">PIA Threshold Analysis <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Determines if you need a full Privacy Impact Assessment</div>
                                     </div>
                                 </div>
@@ -2710,7 +2817,7 @@ Based on the answers, tell me:
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">2</div>
                                     <div>
-                                        <div class="prompt-title">Security Controls Checklist</div>
+                                        <div class="prompt-title">Security Controls Checklist <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Ensures your tool implements required security controls</div>
                                     </div>
                                 </div>
@@ -2721,7 +2828,7 @@ Based on the answers, tell me:
                                 </div>
                             </button>
                             <div class="prompt-body" id="prompt-compliance-3">
-                                <p class="prompt-description">Generate a security controls checklist specific to your tool's sensitivity and user base. Considers NIST 800-53 controls and FedRAMP requirements for cloud components. Considers NIST 800-53 controls and FedRAMP requirements for cloud components.</p>
+                                <p class="prompt-description">Generate a security controls checklist specific to your tool's sensitivity and user base. Considers NIST 800-53 controls and FedRAMP requirements for cloud components.</p>
                                 <div class="prompt-box">
                                     <div class="prompt-box-header">
                                         <span class="prompt-box-label">
@@ -2781,6 +2888,11 @@ Consider:
                     <div class="category-intro">
                         <h2>Foundation Layer</h2>
                         <p>These prompts help you design SharePoint lists and Dataverse tables. <strong>Get this right and everything else is easier.</strong> Get it wrong and you'll be rebuilding. Start minimal—you can add columns, but removing them after data exists is painful.</p>
+                        <div class="category-meta">
+                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 3 — Design &amp; Build</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 2 Module 2, Course 3 Modules 2–4</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil for data modeling; build in Power Platform</div>
+                        </div>
                     </div>
 
                     <div class="prompt-grid">
@@ -2789,7 +2901,7 @@ Consider:
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">1</div>
                                     <div>
-                                        <div class="prompt-title">Requirements to Data Structure</div>
+                                        <div class="prompt-title">Requirements to Data Structure <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Translates your requirements into a data design</div>
                                     </div>
                                 </div>
@@ -2845,7 +2957,7 @@ Show me the list/table structure in a table format.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">2</div>
                                     <div>
-                                        <div class="prompt-title">Single List Design</div>
+                                        <div class="prompt-title">Single List Design <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Designs simple tools that need one list or table</div>
                                     </div>
                                 </div>
@@ -2901,7 +3013,7 @@ Keep it simple—I can add columns later, but removing them is harder.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">3</div>
                                     <div>
-                                        <div class="prompt-title">Multi-List with Relationships</div>
+                                        <div class="prompt-title">Multi-List with Relationships <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Creates multiple related lists/tables with proper structure</div>
                                     </div>
                                 </div>
@@ -2958,7 +3070,7 @@ Show me an entity relationship diagram in text format, then the detailed list/ta
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">4</div>
                                     <div>
-                                        <div class="prompt-title">View Design</div>
+                                        <div class="prompt-title">View Design <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Plans useful views for your list or table</div>
                                     </div>
                                 </div>
@@ -3016,6 +3128,11 @@ For each view specify:
                     <div class="category-intro">
                         <h2>User Interface</h2>
                         <p>These prompts help you build canvas apps in Power Apps. Focus on <strong>working software</strong>, not perfect software. Build ugly first, get it working, then make it pretty. Test with real data early.</p>
+                        <div class="category-meta">
+                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 3 — Design &amp; Build</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 2 Module 2, Course 3 Modules 2–5</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil for code generation; copy output into Power Apps</div>
+                        </div>
                     </div>
 
                     <div class="prompt-grid">
@@ -3024,7 +3141,7 @@ For each view specify:
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">1</div>
                                     <div>
-                                        <div class="prompt-title">App Architecture</div>
+                                        <div class="prompt-title">App Architecture <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Plans screens and navigation before building</div>
                                     </div>
                                 </div>
@@ -3078,7 +3195,7 @@ Keep it minimal—I can add screens later.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">2</div>
                                     <div>
-                                        <div class="prompt-title">Gallery Implementation</div>
+                                        <div class="prompt-title">Gallery Implementation <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Builds list views that display data from SharePoint or Dataverse</div>
                                     </div>
                                 </div>
@@ -3132,7 +3249,7 @@ Account for the delegation warning if the list might exceed 2000 items.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">3</div>
                                     <div>
-                                        <div class="prompt-title">Form Implementation</div>
+                                        <div class="prompt-title">Form Implementation <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Builds forms for creating and editing records</div>
                                     </div>
                                 </div>
@@ -3187,7 +3304,7 @@ Generate:
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">4</div>
                                     <div>
-                                        <div class="prompt-title">Patch and Submit</div>
+                                        <div class="prompt-title">Patch and Submit <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Saves data to SharePoint with error handling</div>
                                     </div>
                                 </div>
@@ -3240,7 +3357,7 @@ Show me the complete OnSelect formula for the submit button.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">5</div>
                                     <div>
-                                        <div class="prompt-title">Role-Based Access</div>
+                                        <div class="prompt-title">Role-Based Access <span class="complexity-badge complexity-badge--advanced">Advanced</span></div>
                                         <div class="prompt-subtitle">Shows different content based on user role</div>
                                     </div>
                                 </div>
@@ -3293,6 +3410,11 @@ Implement role-based access:
                     <div class="category-intro">
                         <h2>Automation Layer</h2>
                         <p>These prompts help you build automated workflows. <strong>Automation is just "when X happens, do Y."</strong> If you can describe the business rule, AI can help you build the flow. Check run history when things don't work.</p>
+                        <div class="category-meta">
+                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 3 — Design &amp; Build</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 3 Module 2 (Centaur), Course 3 Module 4 (Cyborg)</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil for flow logic; CamoGPT for API integrations</div>
+                        </div>
                     </div>
 
                     <div class="prompt-grid">
@@ -3301,7 +3423,7 @@ Implement role-based access:
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">1</div>
                                     <div>
-                                        <div class="prompt-title">Flow from Business Rule</div>
+                                        <div class="prompt-title">Flow from Business Rule <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Translates a business process into a flow design</div>
                                     </div>
                                 </div>
@@ -3356,7 +3478,7 @@ Draw the flow in text format, then explain each step.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">2</div>
                                     <div>
-                                        <div class="prompt-title">Email Notification</div>
+                                        <div class="prompt-title">Email Notification <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Builds flows that send notification emails</div>
                                     </div>
                                 </div>
@@ -3412,7 +3534,7 @@ Show me exactly what to put in each field.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">3</div>
                                     <div>
-                                        <div class="prompt-title">Approval Workflow</div>
+                                        <div class="prompt-title">Approval Workflow <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Builds approval processes with routing</div>
                                     </div>
                                 </div>
@@ -3471,7 +3593,7 @@ Design the approval flow:
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">4</div>
                                     <div>
-                                        <div class="prompt-title">Scheduled Cloud Flow</div>
+                                        <div class="prompt-title">Scheduled Cloud Flow <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Creates scheduled cloud flows that run on a timer</div>
                                     </div>
                                 </div>
@@ -3527,7 +3649,7 @@ Include consideration for flow run time limits.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">5</div>
                                     <div>
-                                        <div class="prompt-title">Error Handling</div>
+                                        <div class="prompt-title">Error Handling <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Makes flows more robust with try-catch patterns</div>
                                     </div>
                                 </div>
@@ -3581,7 +3703,7 @@ Show me the parallel branch structure for error handling.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">6</div>
                                     <div>
-                                        <div class="prompt-title">API Integration Flow</div>
+                                        <div class="prompt-title">API Integration Flow <span class="complexity-badge complexity-badge--advanced">Advanced</span></div>
                                         <div class="prompt-subtitle">Builds robust HTTP/API integration flows with proper error handling</div>
                                     </div>
                                 </div>
@@ -3650,6 +3772,11 @@ Note if this requires a premium license.</div>
                     <div class="category-intro">
                         <h2>Reporting Layer</h2>
                         <p>These prompts help you build dashboards and reports. <strong>A good dashboard answers questions before they're asked.</strong> Focus on what leadership actually needs to know. Less is more—5 clear visuals beats 20 confusing ones.</p>
+                        <div class="category-meta">
+                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 3 — Design &amp; Build</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 3 Module 4 (Training Tracker)</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil for DAX and M code generation</div>
+                        </div>
                     </div>
 
                     <div class="prompt-grid">
@@ -3658,7 +3785,7 @@ Note if this requires a premium license.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">1</div>
                                     <div>
-                                        <div class="prompt-title">Dashboard Requirements</div>
+                                        <div class="prompt-title">Dashboard Requirements <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Understands what stakeholders actually need</div>
                                     </div>
                                 </div>
@@ -3711,7 +3838,7 @@ Prioritize: What are the 3-5 MUST-HAVE visuals vs. nice-to-haves?</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">2</div>
                                     <div>
-                                        <div class="prompt-title">Visual Selection</div>
+                                        <div class="prompt-title">Visual Selection <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Chooses the right chart type for your data</div>
                                     </div>
                                 </div>
@@ -3764,7 +3891,7 @@ Show me the field mappings (what goes where in the visual).</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">3</div>
                                     <div>
-                                        <div class="prompt-title">DAX Measure Creation</div>
+                                        <div class="prompt-title">DAX Measure Creation <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Creates calculated measures from plain English</div>
                                     </div>
                                 </div>
@@ -3819,7 +3946,7 @@ Test the logic with an example calculation.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">4</div>
                                     <div>
-                                        <div class="prompt-title">KPI Card Design</div>
+                                        <div class="prompt-title">KPI Card Design <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Creates impactful single-number displays</div>
                                     </div>
                                 </div>
@@ -3872,7 +3999,7 @@ Give me the exact DAX formulas.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">5</div>
                                     <div>
-                                        <div class="prompt-title">Power Query Transformation</div>
+                                        <div class="prompt-title">Power Query Transformation <span class="complexity-badge complexity-badge--advanced">Advanced</span></div>
                                         <div class="prompt-subtitle">Creates Power Query M transformations for complex data shaping</div>
                                     </div>
                                 </div>
@@ -3933,6 +4060,11 @@ If the transformation is complex, break it into a reusable function I can apply 
                     <div class="category-intro">
                         <h2>Fixing Things</h2>
                         <p>These prompts help you fix things that aren't working. <strong>Debugging is a skill.</strong> The better you describe the problem, the faster you'll solve it. Don't panic—everything is fixable. Change one thing at a time.</p>
+                        <div class="category-meta">
+                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 4 — Testing</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 2 Module 3, Course 4 Module 3</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil or CamoGPT — paste error messages with context</div>
+                        </div>
                     </div>
 
                     <div class="prompt-grid">
@@ -3941,7 +4073,7 @@ If the transformation is complex, break it into a reusable function I can apply 
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">1</div>
                                     <div>
-                                        <div class="prompt-title">Universal Debugging Prompt</div>
+                                        <div class="prompt-title">Universal Debugging Prompt <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Diagnoses and fixes almost any problem</div>
                                     </div>
                                 </div>
@@ -3997,7 +4129,7 @@ Fix it.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">2</div>
                                     <div>
-                                        <div class="prompt-title">Power Apps Formula Error</div>
+                                        <div class="prompt-title">Power Apps Formula Error <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Fixes formula errors with red underlines and error messages</div>
                                     </div>
                                 </div>
@@ -4048,7 +4180,7 @@ Fix this formula. Explain what was wrong and why the fix works.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">3</div>
                                     <div>
-                                        <div class="prompt-title">Delegation Warning</div>
+                                        <div class="prompt-title">Delegation Warning <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Fixes the yellow warning triangle</div>
                                     </div>
                                 </div>
@@ -4100,9 +4232,9 @@ Give me a specific rewritten formula if possible.</div>
                         <article class="prompt-card" data-search="power automate flow failed failure run history error">
                             <button class="prompt-header" aria-expanded="false" aria-controls="prompt-debug-4">
                                 <div class="prompt-header-left">
-                                    <div class="prompt-number">5</div>
+                                    <div class="prompt-number">4</div>
                                     <div>
-                                        <div class="prompt-title">Power Automate Failure</div>
+                                        <div class="prompt-title">Power Automate Failure <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Diagnoses and fixes flow failures</div>
                                     </div>
                                 </div>
@@ -4159,7 +4291,7 @@ Diagnose and fix this flow.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">5</div>
                                     <div>
-                                        <div class="prompt-title">Error Message Decoder</div>
+                                        <div class="prompt-title">Error Message Decoder <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Understands cryptic error messages</div>
                                     </div>
                                 </div>
@@ -4212,7 +4344,7 @@ Be specific to my context.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">6</div>
                                     <div>
-                                        <div class="prompt-title">Performance Troubleshooting</div>
+                                        <div class="prompt-title">Performance Troubleshooting <span class="complexity-badge complexity-badge--advanced">Advanced</span></div>
                                         <div class="prompt-subtitle">Diagnoses and resolves performance bottlenecks</div>
                                     </div>
                                 </div>
@@ -4276,6 +4408,11 @@ Prioritize recommendations by impact and effort required.</div>
                     <div class="category-intro">
                         <h2>Making It Last</h2>
                         <p>These prompts help you create documentation that allows others to <strong>use, maintain, replicate, and adapt</strong> your tools. Good documentation is what makes your tool institutional capability instead of a burden you leave behind.</p>
+                        <div class="category-meta">
+                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 5 — Documentation</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 4 Module 4</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil for drafting; upload existing docs for context</div>
+                        </div>
                     </div>
 
                     <div class="prompt-grid">
@@ -4284,7 +4421,7 @@ Prioritize recommendations by impact and effort required.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">1</div>
                                     <div>
-                                        <div class="prompt-title">User Guide</div>
+                                        <div class="prompt-title">User Guide <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Creates end-user documentation (2-5 pages)</div>
                                     </div>
                                 </div>
@@ -4355,7 +4492,7 @@ If you have the capability to generate a PDF directly, please do so. Otherwise, 
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">2</div>
                                     <div>
-                                        <div class="prompt-title">Replication Guide</div>
+                                        <div class="prompt-title">Replication Guide <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Creates instructions to rebuild from scratch (10-30 pages)</div>
                                     </div>
                                 </div>
@@ -4426,7 +4563,7 @@ If you have the capability to generate a PDF directly, please do so. Otherwise, 
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">3</div>
                                     <div>
-                                        <div class="prompt-title">Maintenance Guide</div>
+                                        <div class="prompt-title">Maintenance Guide <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Creates instructions for ongoing upkeep (5-10 pages)</div>
                                     </div>
                                 </div>
@@ -4489,7 +4626,7 @@ If you have the capability to generate a PDF directly, please do so. Otherwise, 
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">4</div>
                                     <div>
-                                        <div class="prompt-title">Handover Document</div>
+                                        <div class="prompt-title">Handover Document <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Transfers tool ownership (PCS, PCA)</div>
                                     </div>
                                 </div>
@@ -4557,8 +4694,8 @@ If you have the capability to generate a PDF directly, please do so. Otherwise, 
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">5</div>
                                     <div>
-                                        <div class="prompt-title">Document Formatting & Enhancement</div>
-                                        <div class="prompt-subtitle">Creates or enhances documents with professional formatting and branding</div>
+                                        <div class="prompt-title">Document Formatting & Enhancement <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
+                                        <div class="prompt-subtitle">Formats documentation deliverables for SOP Phase 5 compliance</div>
                                     </div>
                                 </div>
                                 <div class="prompt-toggle" aria-hidden="true">
@@ -4645,6 +4782,11 @@ If you have the capability to generate a PDF directly, please do so. Otherwise, 
                     <div class="category-intro">
                         <h2>Quality Check</h2>
                         <p>These prompts help with quality assurance review before deployment. QA review is required per the SOP—<strong>you cannot review your own work.</strong> Your job is to verify it works, check documentation, confirm compliance, and approve or return with feedback.</p>
+                        <div class="category-meta">
+                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 6 — QA Review</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 4 Module 4</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil for generating review checklists; human reviewer makes final call</div>
+                        </div>
                     </div>
 
                     <div class="prompt-grid">
@@ -4653,7 +4795,7 @@ If you have the capability to generate a PDF directly, please do so. Otherwise, 
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">1</div>
                                     <div>
-                                        <div class="prompt-title">Testing Checklist</div>
+                                        <div class="prompt-title">Testing Checklist <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Systematically tests tool functionality</div>
                                     </div>
                                 </div>
@@ -4731,7 +4873,7 @@ If you have the capability to generate a PDF directly, please do so. Otherwise, 
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">2</div>
                                     <div>
-                                        <div class="prompt-title">QA Review Summary</div>
+                                        <div class="prompt-title">QA Review Summary <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Writes the final review and recommendation</div>
                                     </div>
                                 </div>
@@ -4808,7 +4950,7 @@ If you have the capability to generate a PDF directly, please do so. Otherwise, 
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">3</div>
                                     <div>
-                                        <div class="prompt-title">Accessibility Compliance Check</div>
+                                        <div class="prompt-title">Accessibility Compliance Check <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Audits Section 508 and WCAG 2.1 AA accessibility compliance</div>
                                     </div>
                                 </div>
@@ -4868,7 +5010,7 @@ Include a checklist I can use for testing with actual assistive technology.</div
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">4</div>
                                     <div>
-                                        <div class="prompt-title">User Acceptance Testing (UAT) Plan</div>
+                                        <div class="prompt-title">User Acceptance Testing (UAT) Plan <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Creates comprehensive user acceptance testing plan and materials</div>
                                     </div>
                                 </div>
@@ -4928,7 +5070,7 @@ Format as a document I can share with stakeholders.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">5</div>
                                     <div>
-                                        <div class="prompt-title">Regression Testing Checklist</div>
+                                        <div class="prompt-title">Regression Testing Checklist <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Generates regression test suite for change deployments</div>
                                     </div>
                                 </div>
@@ -4993,7 +5135,7 @@ Include a rollback decision matrix: what severity of failure triggers rollback?<
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">6</div>
                                     <div>
-                                        <div class="prompt-title">Test Data Generation</div>
+                                        <div class="prompt-title">Test Data Generation <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Creates realistic test data sets for comprehensive testing</div>
                                     </div>
                                 </div>
@@ -5054,7 +5196,7 @@ If PII is not allowed, use obviously fake but realistic-format data (e.g., "Test
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">7</div>
                                     <div>
-                                        <div class="prompt-title">Security Review</div>
+                                        <div class="prompt-title">Security Review <span class="complexity-badge complexity-badge--advanced">Advanced</span></div>
                                         <div class="prompt-subtitle">Identifies security vulnerabilities and provides remediation guidance</div>
                                     </div>
                                 </div>
@@ -5131,6 +5273,11 @@ Provide findings as: CRITICAL / HIGH / MEDIUM / LOW with specific remediation st
                     <div class="category-intro">
                         <h2>Sharing Knowledge</h2>
                         <p>These prompts help you teach others how to build. <strong>Your job isn't to build everyone's tools—it's to help them build their own.</strong> The goal is to create more builders, not more dependencies on you.</p>
+                        <div class="category-meta">
+                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Post-deployment — Scale Layer</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 4 Module 5</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil for lesson planning; CamoGPT shared workspaces for team exercises</div>
+                        </div>
                     </div>
 
                     <div class="prompt-grid">
@@ -5139,7 +5286,7 @@ Provide findings as: CRITICAL / HIGH / MEDIUM / LOW with specific remediation st
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">1</div>
                                     <div>
-                                        <div class="prompt-title">Guiding Without Taking Over</div>
+                                        <div class="prompt-title">Guiding Without Taking Over <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Helps someone learn without doing it for them</div>
                                     </div>
                                 </div>
@@ -5199,7 +5346,7 @@ Give me 3-5 questions that will help them solve this themselves.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">2</div>
                                     <div>
-                                        <div class="prompt-title">Explaining a Concept</div>
+                                        <div class="prompt-title">Explaining a Concept <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Teaches something clearly to a beginner</div>
                                     </div>
                                 </div>
@@ -5252,7 +5399,7 @@ Keep it under 2 minutes of reading time.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">3</div>
                                     <div>
-                                        <div class="prompt-title">Handling Frustration</div>
+                                        <div class="prompt-title">Handling Frustration <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Helps someone who's frustrated or wants to give up</div>
                                     </div>
                                 </div>
@@ -5313,7 +5460,7 @@ The goal is to get them from "I can't do this" to "I haven't figured this out ye
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">4</div>
                                     <div>
-                                        <div class="prompt-title">Running a Training Session</div>
+                                        <div class="prompt-title">Running a Training Session <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Plans and structures a group training</div>
                                     </div>
                                 </div>
@@ -5455,13 +5602,13 @@ If you have the capability to generate a PDF directly, please do so. Otherwise, 
 
             // Category titles and counts for header updates
             const categoryInfo = {
-                problem: { title: 'Problem Definition', count: 4 },
+                problem: { title: 'Problem Definition', count: 5 },
                 compliance: { title: 'Compliance', count: 3 },
-                data: { title: 'Data Design', count: 5 },
+                data: { title: 'Data Design', count: 4 },
                 apps: { title: 'Power Apps', count: 5 },
                 automate: { title: 'Power Automate', count: 6 },
                 bi: { title: 'Power BI', count: 5 },
-                debug: { title: 'Debugging', count: 5 },
+                debug: { title: 'Debugging', count: 6 },
                 docs: { title: 'Documentation', count: 5 },
                 qa: { title: 'QA Review', count: 7 },
                 teach: { title: 'Teaching', count: 4 }
