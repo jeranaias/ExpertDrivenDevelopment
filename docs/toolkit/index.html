@@ -157,14 +157,76 @@
             padding: 0;
         }
 
-        /* Ensure site-header sits above toolkit content */
+        /* ---- Site chrome overrides ----
+           Force site-header, page-header, and footer to render
+           exactly as they do on every other page, despite toolkit
+           `:root` and `*` resets above. */
+
         .site-header {
             position: sticky;
             top: 0;
             z-index: 200;
         }
 
-        /* Prevent toolkit body styles from affecting site nav */
+        .page-header {
+            background-color: #f8f7f5 !important;
+            padding: 3rem 0 !important;
+            border-bottom: 2px solid #e8e7e3 !important;
+        }
+
+        .page-header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .page-header__title {
+            font-size: 2rem !important;
+            font-weight: 700 !important;
+            color: #1a1a1a !important;
+            margin-bottom: 0.25rem !important;
+            margin-top: 0 !important;
+            border-bottom: none !important;
+            padding-bottom: 0 !important;
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+        }
+
+        .page-header__desc {
+            color: #4a4a4a !important;
+            font-size: 1.125rem !important;
+            margin-bottom: 0 !important;
+            max-width: 65ch;
+        }
+
+        .page-header .breadcrumb {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            list-style: none;
+            padding: 1rem 0;
+            margin: 0;
+            font-size: 0.875rem;
+            color: #6e6e6e;
+        }
+
+        .page-header .breadcrumb li + li::before {
+            content: "\203A";
+            margin: 0 0.5rem;
+            color: #d9d8d4;
+            font-size: 1.25rem;
+            line-height: 1;
+        }
+
+        .page-header .breadcrumb a {
+            color: #4a4a4a;
+            text-decoration: none;
+        }
+
+        .page-header .breadcrumb a:hover {
+            color: #CC0000;
+        }
+
         .site-footer {
             margin-left: 0 !important;
             position: relative;
@@ -657,32 +719,24 @@
         }
 
         .header-btn {
-            padding: 8px 16px;
-            background: rgba(240, 240, 235, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            color: var(--text-secondary);
-            font-size: var(--font-size-sm);
-            font-weight: var(--font-weight-semibold);
-            letter-spacing: 0.02em;
+            padding: 0.5rem 1.5rem;
+            background-color: transparent;
+            border: 2px solid #d9d8d4;
+            border-radius: 6px;
+            color: #4a4a4a;
+            font-size: 0.875rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+            transition: border-color 150ms ease, color 150ms ease;
             display: flex;
             align-items: center;
-            gap: var(--space-sm);
+            gap: 0.5rem;
             font-family: inherit;
-            min-height: 44px;
-            box-shadow: var(--shadow-xs);
         }
 
         .header-btn:hover {
-            background: rgba(232, 232, 227, 0.9);
-            border-color: var(--border-hover);
-            color: var(--text-primary);
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
+            border-color: #4a4a4a;
+            color: #1a1a1a;
         }
 
         .header-btn:focus {
@@ -705,60 +759,43 @@
 
         /* Content */
         .content {
-            padding: var(--space-10) 48px var(--space-12);
+            padding: 3rem 3rem 4rem;
             max-width: 920px;
         }
 
-        /* Category intro - Enhanced gradient card */
+        /* Category intro */
         .category-intro {
-            margin-bottom: var(--space-10);
-            padding: var(--space-8);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(245, 245, 240, 0.6) 100%);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--border-hover);
-            border-radius: var(--radius-lg);
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: #f8f7f5;
+            border: 1px solid #e8e7e3;
+            border-left: 4px solid #CC0000;
+            border-radius: 0 6px 6px 0;
             position: relative;
             overflow: hidden;
-            box-shadow: var(--shadow-md);
         }
 
         .category-intro::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-primary) 0%, var(--purple-primary) 50%, transparent 100%);
-            box-shadow: none;
+            display: none;
         }
 
         .category-intro::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-            pointer-events: none;
+            display: none;
         }
 
         .category-intro h2 {
-            font-size: var(--font-size-base);
+            font-size: var(--font-size-sm);
             font-weight: var(--font-weight-bold);
             text-transform: uppercase;
-            letter-spacing: var(--tracking-widest);
-            line-height: var(--leading-snug);
-            color: var(--accent-secondary);
-            margin-bottom: var(--space-3);
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            letter-spacing: 0.05em;
+            line-height: 1.25;
+            color: #CC0000;
+            margin-bottom: 0.5rem;
         }
 
         .category-intro p {
-            font-size: var(--font-size-base);
-            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+            color: #4a4a4a;
             line-height: var(--leading-relaxed);
         }
 
@@ -824,19 +861,18 @@
         }
 
         .prompt-header {
-            padding: var(--space-6) var(--space-8);
+            padding: 1rem 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             cursor: pointer;
-            transition: background-color 300ms ease;
+            transition: background-color 200ms ease;
             border: none;
             background: none;
             width: 100%;
             text-align: left;
             font-family: inherit;
             color: inherit;
-            min-height: 56px;
             position: relative;
             z-index: 3;
         }
