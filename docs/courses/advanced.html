@@ -248,6 +248,7 @@
                         <h3>Frontier Map Format</h3>
                         <div class="table-wrapper">
                             <table>
+                                <caption class="sr-only">Frontier map showing AI capabilities by category with recommended tools</caption>
                                 <thead>
                                     <tr>
                                         <th scope="col">Category</th>
@@ -259,39 +260,39 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Document generation</td>
-                                        <td>Correspondence drafts, counseling statements, award write-ups, memo formatting, code generation for Power Platform</td>
-                                        <td>Same drafting capabilities, plus shared workspace for collaborative editing</td>
-                                        <td>Documents requiring institutional knowledge (unit SOPs, local policy interpretation), exact regulation quotes</td>
-                                        <td>Fitness report narratives (improving rapidly), legal review summaries</td>
+                                        <td data-label="Category">Document generation</td>
+                                        <td data-label="GenAI.mil Handles">Correspondence drafts, counseling statements, award write-ups, memo formatting, code generation for Power Platform</td>
+                                        <td data-label="CamoGPT Handles">Same drafting capabilities, plus shared workspace for collaborative editing</td>
+                                        <td data-label="Neither Handles (Human Only)">Documents requiring institutional knowledge (unit SOPs, local policy interpretation), exact regulation quotes</td>
+                                        <td data-label="Moving Frontier">Fitness report narratives (improving rapidly), legal review summaries</td>
                                     </tr>
                                     <tr>
-                                        <td>Data analysis</td>
-                                        <td>Trend identification, summarizing datasets, creating chart descriptions, anomaly flagging</td>
-                                        <td>Dataset conversation (CSV upload and query), structured data analysis, API-driven data pipelines</td>
-                                        <td>Interpreting data in operational context, cross-referencing classified and unclassified sources</td>
-                                        <td>Predictive analysis (retention modeling, maintenance forecasting)</td>
+                                        <td data-label="Category">Data analysis</td>
+                                        <td data-label="GenAI.mil Handles">Trend identification, summarizing datasets, creating chart descriptions, anomaly flagging</td>
+                                        <td data-label="CamoGPT Handles">Dataset conversation (CSV upload and query), structured data analysis, API-driven data pipelines</td>
+                                        <td data-label="Neither Handles (Human Only)">Interpreting data in operational context, cross-referencing classified and unclassified sources</td>
+                                        <td data-label="Moving Frontier">Predictive analysis (retention modeling, maintenance forecasting)</td>
                                     </tr>
                                     <tr>
-                                        <td>Process automation</td>
-                                        <td>Generating Power Automate flow logic, approval routing code, notification templates</td>
-                                        <td>API integrations, tool calling for automated workflows, programmatic AI access</td>
-                                        <td>Multi-system integrations with legacy databases, human judgment calls (hardship determinations)</td>
-                                        <td>Complex conditional workflows (getting better with clear business rules)</td>
+                                        <td data-label="Category">Process automation</td>
+                                        <td data-label="GenAI.mil Handles">Generating Power Automate flow logic, approval routing code, notification templates</td>
+                                        <td data-label="CamoGPT Handles">API integrations, tool calling for automated workflows, programmatic AI access</td>
+                                        <td data-label="Neither Handles (Human Only)">Multi-system integrations with legacy databases, human judgment calls (hardship determinations)</td>
+                                        <td data-label="Moving Frontier">Complex conditional workflows (getting better with clear business rules)</td>
                                     </tr>
                                     <tr>
-                                        <td>Reference lookup</td>
-                                        <td>Finding relevant MCOs/NAVMCs, summarizing policy documents, comparing regulation versions</td>
-                                        <td>Same capabilities, with file upload for larger document sets</td>
-                                        <td>Interpreting how regulations apply to edge cases, resolving conflicting guidance between orders</td>
-                                        <td>Policy applicability questions (models improving but still unreliable for authoritative interpretation)</td>
+                                        <td data-label="Category">Reference lookup</td>
+                                        <td data-label="GenAI.mil Handles">Finding relevant MCOs/NAVMCs, summarizing policy documents, comparing regulation versions</td>
+                                        <td data-label="CamoGPT Handles">Same capabilities, with file upload for larger document sets</td>
+                                        <td data-label="Neither Handles (Human Only)">Interpreting how regulations apply to edge cases, resolving conflicting guidance between orders</td>
+                                        <td data-label="Moving Frontier">Policy applicability questions (models improving but still unreliable for authoritative interpretation)</td>
                                     </tr>
                                     <tr>
-                                        <td>Training development</td>
-                                        <td>Lesson plan outlines, quiz generation, scenario creation, slide deck structure</td>
-                                        <td>Collaborative lesson plan development in shared workspaces, data-driven training analysis</td>
-                                        <td>Evaluating training effectiveness, adapting content for specific MOS requirements, doctrinal accuracy</td>
-                                        <td>Full lesson plan generation with appropriate examples (quality varies significantly)</td>
+                                        <td data-label="Category">Training development</td>
+                                        <td data-label="GenAI.mil Handles">Lesson plan outlines, quiz generation, scenario creation, slide deck structure</td>
+                                        <td data-label="CamoGPT Handles">Collaborative lesson plan development in shared workspaces, data-driven training analysis</td>
+                                        <td data-label="Neither Handles (Human Only)">Evaluating training effectiveness, adapting content for specific MOS requirements, doctrinal accuracy</td>
+                                        <td data-label="Moving Frontier">Full lesson plan generation with appropriate examples (quality varies significantly)</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1053,10 +1054,36 @@
     <!-- Site Footer -->
     <footer class="site-footer" role="contentinfo">
         <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>
+                        Open-source AI-assisted development training for DoW personnel.
+                        Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="./">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="../toolkit/">Toolkit</a></li>
+${indent}<li><a href="../tools/">Tools</a></li>
+                        <li><a href="../resources/">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Project</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
             <div class="footer-bottom">
-                <span>Expert-Driven Development</span>
                 <span>UNCLASSIFIED</span>
-                <span>MIT License</span>
                 <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
             </div>
         </div>

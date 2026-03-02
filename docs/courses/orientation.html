@@ -264,6 +264,17 @@
                             </p>
                         </div>
 
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Preferred Tool Order</h3>
+                            <p>
+                                For live builds, prefer <strong>CamoGPT</strong> or <strong>GenAI.mil</strong>
+                                if the classroom has CAC-enabled workstations on a DoD network. These tools
+                                allow you to use realistic unit data in prompts without OPSEC concerns.
+                                Fall back to commercial tools (Claude, Gemini) for unclassified-only exercises.
+                                See the <a href="../tools/">Approved Tools</a> page.
+                            </p>
+                        </div>
+
                         <h3>Step 1: Decompose BEFORE Touching AI (5 min, whiteboard)</h3>
                         <p>Write on whiteboard or share screen with notepad. Ask students to call out answers:</p>
                         <ul>
@@ -606,6 +617,16 @@ If(DateDue < Today(), Red, Black)</pre>
                             </p>
                         </div>
 
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Debugging Across Tools</h3>
+                            <p>
+                                Debugging techniques work the same regardless of which AI tool you use.
+                                If a student gets stuck on <strong>CamoGPT</strong>, they can paste the
+                                same error message into Claude or Gemini for a second opinion. Using
+                                multiple tools is a valid strategy.
+                            </p>
+                        </div>
+
                         <h3>Peer Review Protocol (15 min)</h3>
                         <p>Pair students up. Each student demonstrates their prototype (even if incomplete) to their partner.</p>
 
@@ -921,10 +942,36 @@ If(DateDue < Today(), Red, Black)</pre>
     <!-- Site Footer -->
     <footer class="site-footer" role="contentinfo">
         <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>
+                        Open-source AI-assisted development training for DoW personnel.
+                        Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="./">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="../toolkit/">Toolkit</a></li>
+${indent}<li><a href="../tools/">Tools</a></li>
+                        <li><a href="../resources/">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Project</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
             <div class="footer-bottom">
-                <span>Expert-Driven Development</span>
                 <span>UNCLASSIFIED</span>
-                <span>MIT License</span>
                 <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
             </div>
         </div>
