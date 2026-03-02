@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Approved AI tools and platforms for Expert-Driven Development. Access guidance for GenAI.mil, CamoGPT, M365 Copilot, and other DoW-authorized AI assistants.">
+    <title>Approved Tools | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="site-wrapper">
+
+    <!-- Skip to content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Site Header -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="./" aria-current="page">Tools</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="./" aria-current="page">Tools</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../resources/">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li aria-current="page">Approved Tools</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Approved Tools &amp; Platforms</h1>
+            <p class="page-header__desc">
+                AI assistants and deployment platforms authorized for Expert-Driven Development.
+                Use only approved tools. Never input classified, CUI, or PII into unauthorized systems.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content" class="site-main">
+        <div class="container">
+            <div class="page-layout page-layout--sidebar">
+
+                <!-- Sidebar / Table of Contents -->
+                <aside class="sidebar sidebar--sticky" aria-label="Table of contents">
+                    <nav class="toc">
+                        <h2 class="toc__title">On This Page</h2>
+                        <ul class="toc__list">
+                            <li><a href="#ai-assistants">AI Assistants</a></li>
+                            <li><a href="#genai-mil">GenAI.mil</a></li>
+                            <li><a href="#camogpt">CamoGPT</a></li>
+                            <li><a href="#commercial-tools">Commercial AI Tools</a></li>
+                            <li><a href="#platforms">Deployment Platforms</a></li>
+                            <li><a href="#comparison">Tool Comparison</a></li>
+                            <li><a href="#access">Getting Access</a></li>
+                            <li><a href="#security">Security Reminders</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <!-- Page Content -->
+                <div class="page-content">
+
+                    <div class="callout callout--warning">
+                        <h3 class="callout__title">Classification Reminder</h3>
+                        <p>
+                            All AI tools process <strong>unclassified data only</strong>. Do not input classified
+                            information, CUI, PII, PHI, or FOUO data into any AI system unless the platform is
+                            explicitly authorized for that data type. When in doubt, consult your Cybersecurity Office.
+                        </p>
+                    </div>
+
+                    <!-- AI Assistants -->
+                    <section id="ai-assistants">
+                        <h2>AI Assistants</h2>
+                        <p>
+                            The following AI assistants are approved for use in EDD development. Authorization
+                            levels indicate the scope of approved use and data handling permissions.
+                        </p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <caption class="sr-only">Approved AI assistants for EDD development</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Tool</th>
+                                        <th scope="col">Authorization</th>
+                                        <th scope="col">Data Boundary</th>
+                                        <th scope="col">Best For</th>
+                                        <th scope="col">Access</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td data-label="Tool"><strong>GenAI.mil</strong></td>
+                                        <td data-label="Authorization">DoD-authorized</td>
+                                        <td data-label="Data Boundary">IL5 (CUI-capable)</td>
+                                        <td data-label="Best For">CUI-safe prompting, sensitive administrative tasks</td>
+                                        <td data-label="Access">CAC-authenticated at genai.mil</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Tool"><strong>CamoGPT</strong></td>
+                                        <td data-label="Authorization">DoD-authorized</td>
+                                        <td data-label="Data Boundary">IL5 (CUI-capable)</td>
+                                        <td data-label="Best For">Code generation, technical writing, data analysis</td>
+                                        <td data-label="Access">CAC-authenticated at camogpt.mil</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Tool"><strong>M365 Copilot</strong></td>
+                                        <td data-label="Authorization">Enterprise-authorized</td>
+                                        <td data-label="Data Boundary">DoW M365 tenant</td>
+                                        <td data-label="Best For">Document drafting, email, Excel, Teams integration</td>
+                                        <td data-label="Access">M365 Copilot license via admin</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Tool"><strong>Copilot Studio</strong></td>
+                                        <td data-label="Authorization">Enterprise-authorized</td>
+                                        <td data-label="Data Boundary">DoW M365 tenant</td>
+                                        <td data-label="Best For">Building conversational AI assistants and bots</td>
+                                        <td data-label="Access">Power Platform license</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Tool"><strong>Azure OpenAI</strong></td>
+                                        <td data-label="Authorization">Enterprise-authorized</td>
+                                        <td data-label="Data Boundary">Azure Government (FedRAMP High)</td>
+                                        <td data-label="Best For">Custom API-driven development, embeddings</td>
+                                        <td data-label="Access">Azure Gov subscription</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Tool"><strong>Claude</strong></td>
+                                        <td data-label="Authorization">Approved with restrictions</td>
+                                        <td data-label="Data Boundary">Unclassified only</td>
+                                        <td data-label="Best For">Complex reasoning, documentation, code review</td>
+                                        <td data-label="Access">claude.ai (web)</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Tool"><strong>Gemini</strong></td>
+                                        <td data-label="Authorization">Approved with restrictions</td>
+                                        <td data-label="Data Boundary">Unclassified only</td>
+                                        <td data-label="Best For">General-purpose coding, multimodal tasks</td>
+                                        <td data-label="Access">gemini.google.com (web)</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Tool"><strong>C3 AI</strong></td>
+                                        <td data-label="Authorization">Enterprise-authorized</td>
+                                        <td data-label="Data Boundary">DoW enterprise boundary</td>
+                                        <td data-label="Best For">Data-heavy enterprise applications</td>
+                                        <td data-label="Access">Enterprise agreement via AI/ML office</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- GenAI.mil -->
+                    <section id="genai-mil">
+                        <h2>GenAI.mil</h2>
+                        <p>
+                            GenAI.mil is the Department of Defense&rsquo;s official generative AI portal. It provides
+                            CAC-authenticated access to large language models within the DoD security boundary at
+                            Impact Level 5 (IL5), making it the <strong>only approved option for prompts involving
+                            CUI or sensitive unclassified data</strong>.
+                        </p>
+
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li>CAC authentication &mdash; no separate account required</li>
+                            <li>IL5 data boundary &mdash; safe for CUI when used per policy</li>
+                            <li>Multiple model options (GPT-4, Claude, Llama) under one portal</li>
+                            <li>Conversation history saved per user</li>
+                            <li>No data used for model training</li>
+                        </ul>
+
+                        <h3>When to Use GenAI.mil</h3>
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Use GenAI.mil When</h3>
+                            <ul>
+                                <li>Your prompt includes CUI or sensitive unclassified information</li>
+                                <li>You are drafting documents that reference real personnel, units, or operational details</li>
+                                <li>Your organization requires all AI interactions to remain within the DoD boundary</li>
+                                <li>You need an auditable record of AI-assisted work</li>
+                            </ul>
+                        </div>
+
+                        <h3>Access</h3>
+                        <p>
+                            Navigate to <strong>genai.mil</strong> using a CAC-enabled browser on a DoD network
+                            or approved VPN. No additional account creation is required.
+                        </p>
+                    </section>
+
+                    <!-- CamoGPT -->
+                    <section id="camogpt">
+                        <h2>CamoGPT</h2>
+                        <p>
+                            CamoGPT is a DoD-hosted AI assistant purpose-built for military personnel. It operates
+                            within the DoD security boundary at IL5 and is optimized for code generation, technical
+                            writing, and structured data analysis.
+                        </p>
+
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li>CAC authentication with DoD network access</li>
+                            <li>IL5 data boundary &mdash; CUI-capable</li>
+                            <li>Optimized for code generation and technical tasks</li>
+                            <li>Supports file uploads for document analysis</li>
+                            <li>No data retention for model training</li>
+                        </ul>
+
+                        <h3>When to Use CamoGPT</h3>
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Use CamoGPT When</h3>
+                            <ul>
+                                <li>You need AI-assisted code generation for Power Platform or web development</li>
+                                <li>You are analyzing structured data that may contain sensitive details</li>
+                                <li>You need to upload documents for AI-assisted review within the DoD boundary</li>
+                                <li>You want an alternative to commercial tools for technical tasks</li>
+                            </ul>
+                        </div>
+
+                        <h3>Access</h3>
+                        <p>
+                            Navigate to <strong>camogpt.mil</strong> using a CAC-enabled browser. Available on
+                            DoD networks. Check with your local IT support for network access.
+                        </p>
+                    </section>
+
+                    <!-- Commercial Tools -->
+                    <section id="commercial-tools">
+                        <h2>Commercial AI Tools</h2>
+                        <p>
+                            The following commercial tools are approved for <strong>unclassified use only</strong>.
+                            Do not input CUI, PII, or sensitive data into these platforms.
+                        </p>
+
+                        <h3>M365 Copilot</h3>
+                        <p>
+                            Integrated directly into Word, Excel, PowerPoint, Outlook, and Teams. Data stays
+                            within your DoW M365 tenant. Best for personnel who already work primarily in
+                            Microsoft applications.
+                        </p>
+
+                        <h3>Claude &amp; Gemini</h3>
+                        <p>
+                            Web-based AI assistants approved for unclassified work. Strong for complex reasoning
+                            (Claude) and multimodal tasks (Gemini). Use these when you need a general-purpose
+                            AI assistant and your data is fully unclassified.
+                        </p>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Commercial Tool Restrictions</h3>
+                            <p>
+                                Commercial AI tools (Claude, Gemini, ChatGPT) operate outside the DoD security
+                                boundary. Treat every prompt as a public disclosure. Do not include real names,
+                                unit designations, operational details, or any data you would not post on a
+                                public bulletin board.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Deployment Platforms -->
+                    <section id="platforms">
+                        <h2>Deployment Platforms</h2>
+                        <p>
+                            Tools built under EDD must be deployed on approved platforms. The platform determines
+                            the security boundary and available features.
+                        </p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <caption class="sr-only">Approved deployment platforms for EDD tools</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Platform</th>
+                                        <th scope="col">Use Case</th>
+                                        <th scope="col">Authorization</th>
+                                        <th scope="col">Cost</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td data-label="Platform"><strong>Microsoft Power Platform</strong></td>
+                                        <td data-label="Use Case">Low-code apps, automation, dashboards</td>
+                                        <td data-label="Authorization">Enterprise-authorized (DoW M365)</td>
+                                        <td data-label="Cost">Included in M365 licensing</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Platform"><strong>SharePoint Online</strong></td>
+                                        <td data-label="Use Case">Web-based tools, portals, document management</td>
+                                        <td data-label="Authorization">Enterprise-authorized (DoW M365)</td>
+                                        <td data-label="Cost">Included in M365 licensing</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Platform"><strong>Azure Government</strong></td>
+                                        <td data-label="Use Case">Cloud-hosted applications, APIs, databases</td>
+                                        <td data-label="Authorization">FedRAMP High</td>
+                                        <td data-label="Cost">Requires Azure Gov subscription</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Platform"><strong>GitHub (public)</strong></td>
+                                        <td data-label="Use Case">Open-source projects, static sites, documentation</td>
+                                        <td data-label="Authorization">Unclassified public release only</td>
+                                        <td data-label="Cost">Free</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- Tool Comparison -->
+                    <section id="comparison">
+                        <h2>Tool Comparison</h2>
+                        <p>
+                            Use this decision matrix to select the right AI assistant for your task.
+                        </p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <caption class="sr-only">Decision matrix for selecting the right AI tool</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Scenario</th>
+                                        <th scope="col">Recommended Tool</th>
+                                        <th scope="col">Why</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td data-label="Scenario">Prompt contains CUI or real PII</td>
+                                        <td data-label="Recommended Tool">GenAI.mil or CamoGPT</td>
+                                        <td data-label="Why">Only IL5-authorized tools may process CUI</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Scenario">Building a Power App with AI assistance</td>
+                                        <td data-label="Recommended Tool">CamoGPT or M365 Copilot</td>
+                                        <td data-label="Why">Code generation within DoD boundary; Copilot integrates with Power Platform</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Scenario">Drafting unclassified correspondence</td>
+                                        <td data-label="Recommended Tool">M365 Copilot</td>
+                                        <td data-label="Why">Integrates directly with Word and Outlook</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Scenario">Complex reasoning or long-form analysis</td>
+                                        <td data-label="Recommended Tool">Claude (unclassified only)</td>
+                                        <td data-label="Why">Strong for multi-step reasoning and documentation</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Scenario">General coding assistance (unclassified)</td>
+                                        <td data-label="Recommended Tool">Claude or Gemini</td>
+                                        <td data-label="Why">Strong code generation; free web access</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Scenario">Building a conversational bot</td>
+                                        <td data-label="Recommended Tool">Copilot Studio</td>
+                                        <td data-label="Why">Purpose-built for M365 bot creation</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- Getting Access -->
+                    <section id="access">
+                        <h2>Getting Access</h2>
+
+                        <h3>DoD Tools (GenAI.mil, CamoGPT)</h3>
+                        <ol class="steps">
+                            <li>Ensure you have a valid CAC and a CAC-enabled browser</li>
+                            <li>Connect to a DoD network or approved VPN</li>
+                            <li>Navigate to the tool URL (genai.mil or camogpt.mil)</li>
+                            <li>Authenticate with your CAC &mdash; no separate registration required</li>
+                        </ol>
+
+                        <h3>M365 Copilot</h3>
+                        <ol class="steps">
+                            <li>Check with your M365 administrator whether Copilot licenses are available</li>
+                            <li>Request license assignment through your organization&rsquo;s IT support</li>
+                            <li>Once assigned, Copilot appears in Word, Excel, Outlook, and Teams</li>
+                        </ol>
+
+                        <h3>Commercial Tools (Claude, Gemini)</h3>
+                        <ol class="steps">
+                            <li>Navigate to claude.ai or gemini.google.com from any browser</li>
+                            <li>Create a personal account (do not use your .mil email)</li>
+                            <li>Use for unclassified work only &mdash; treat every prompt as public disclosure</li>
+                        </ol>
+                    </section>
+
+                    <!-- Security Reminders -->
+                    <section id="security">
+                        <h2>Security Reminders</h2>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Before Every AI Interaction</h3>
+                            <ol>
+                                <li><strong>Classify your data.</strong> Is any part of your prompt CUI, PII, or sensitive? If yes, use GenAI.mil or CamoGPT only.</li>
+                                <li><strong>Check your tool.</strong> Is the tool authorized for the data type you are processing?</li>
+                                <li><strong>Sanitize if needed.</strong> Replace real names, units, and locations with fictional equivalents before using commercial tools.</li>
+                                <li><strong>Verify output.</strong> AI-generated content may contain fabricated references, statistics, or regulation numbers. Verify everything before use.</li>
+                            </ol>
+                        </div>
+
+                        <p>
+                            For complete compliance requirements, see the
+                            <a href="../sop/#compliance-and-security">Compliance and Security section</a> of the SOP.
+                        </p>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>
+                        Open-source AI-assisted development training for DoW personnel.
+                        Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../courses/">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="./">Tools</a></li>
+                        <li><a href="../toolkit/">Toolkit</a></li>
+                        <li><a href="../resources/">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Project</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function() {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+
+    <script src="../js/enhancements.js"></script>
+    <script src="../js/knowledge-check.js"></script>
+    <script src="../js/course-progress.js"></script>
+    <script src="../js/user-identity.js"></script>
+
+</body>
+</html>
