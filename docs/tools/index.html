@@ -101,7 +101,6 @@
                             CUI may only be processed on IL5-authorized platforms (GenAI.mil, CamoGPT).
                             ChatGPT and Gemini are IL5-authorized when accessed via GenAI.mil; when accessed
                             through their commercial websites, they are restricted to unclassified data only.
-                            Claude (claude.ai) is commercial-only and restricted to unclassified data.
                             PII and PHI require anonymization before use on any AI platform, including IL5
                             tools, unless a Privacy Impact Assessment (PIA) has been completed and approved.
                             When in doubt, consult your Cybersecurity Office or Privacy Officer.
@@ -177,13 +176,6 @@
                                         <td data-label="Data Boundary">Azure Government (FedRAMP High)</td>
                                         <td data-label="Best For">Custom API-driven development, embeddings</td>
                                         <td data-label="Access">Azure Gov subscription</td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Tool"><strong>Claude</strong></td>
-                                        <td data-label="Authorization">Approved with restrictions</td>
-                                        <td data-label="Data Boundary">Unclassified only</td>
-                                        <td data-label="Best For">Complex reasoning, documentation, code review</td>
-                                        <td data-label="Access">claude.ai (web); not available on GenAI.mil</td>
                                     </tr>
                                     <tr>
                                         <td data-label="Tool"><strong>Gemini</strong></td>
@@ -321,19 +313,18 @@
                             section covers only their commercial web versions.
                         </p>
 
-                        <h3>Claude, ChatGPT &amp; Gemini (Commercial Web)</h3>
+                        <h3>ChatGPT &amp; Gemini (Commercial Web)</h3>
                         <p>
-                            Web-based AI assistants approved for unclassified work. Claude (claude.ai) is strong
-                            for complex reasoning and documentation &mdash; it is not on GenAI.mil. ChatGPT
+                            Web-based AI assistants approved for unclassified work. ChatGPT
                             (chatgpt.com) and Gemini (gemini.google.com) are also available within the DoD
                             boundary via GenAI.mil, where they are IL5-authorized for CUI. When accessed through
-                            their commercial websites, use all three only with fully unclassified data.
+                            their commercial websites, use both only with fully unclassified data.
                         </p>
 
                         <div class="callout callout--warning">
                             <h3 class="callout__title">Commercial Tool Restrictions</h3>
                             <p>
-                                When using commercial AI websites (claude.ai, gemini.google.com, chatgpt.com),
+                                When using commercial AI websites (chatgpt.com, gemini.google.com),
                                 you are outside the DoD security boundary. Treat every prompt as a public
                                 disclosure. Do not include real names, unit designations, operational details,
                                 or any data you would not post on a public bulletin board. Note: Gemini and
@@ -426,13 +417,13 @@
                                     </tr>
                                     <tr>
                                         <td data-label="Scenario">Complex reasoning or long-form analysis</td>
-                                        <td data-label="Recommended Tool">Claude (unclassified only)</td>
-                                        <td data-label="Why">Strong for multi-step reasoning and documentation</td>
+                                        <td data-label="Recommended Tool">GenAI.mil (ChatGPT)</td>
+                                        <td data-label="Why">Strong for multi-step reasoning and documentation; IL5/CUI-authorized</td>
                                     </tr>
                                     <tr>
-                                        <td data-label="Scenario">General coding assistance (unclassified)</td>
-                                        <td data-label="Recommended Tool">Claude or Gemini (unclassified only when used commercially)</td>
-                                        <td data-label="Why">Strong code generation; Gemini also available on GenAI.mil</td>
+                                        <td data-label="Scenario">General coding assistance</td>
+                                        <td data-label="Recommended Tool">GenAI.mil (ChatGPT or Gemini)</td>
+                                        <td data-label="Why">Strong code generation; both IL5/CUI-authorized on GenAI.mil</td>
                                     </tr>
                                     <tr>
                                         <td data-label="Scenario">Building a conversational bot</td>
@@ -463,9 +454,9 @@
                             <li>Once assigned, Copilot appears in Word, Excel, Outlook, and Teams</li>
                         </ol>
 
-                        <h3>Commercial Tools (Claude, ChatGPT, Gemini)</h3>
+                        <h3>Commercial Tools (ChatGPT, Gemini)</h3>
                         <ol class="steps">
-                            <li>Navigate to claude.ai, chatgpt.com, or gemini.google.com from any browser</li>
+                            <li>Navigate to chatgpt.com or gemini.google.com from any browser</li>
                             <li>Create a personal account (do not use your .mil email)</li>
                             <li>Use for unclassified work only &mdash; treat every prompt as public disclosure</li>
                             <li>Note: ChatGPT and Gemini are also available on GenAI.mil (IL5, CUI-authorized) via CAC</li>
@@ -502,7 +493,7 @@
                         <ul>
                             <li>The DoD AI roadmap includes expanding GenAI.mil capabilities; CamoGPT already provides API access, tool calling, and IL6/SIPR capabilities</li>
                             <li>GenAI.mil replaces the Air Force&rsquo;s NIPRGPT, which has been sunsetted; five of six military branches have adopted GenAI.mil as their enterprise AI platform</li>
-                            <li>AI-assisted IDEs (like GitHub Copilot, Cursor, and Claude Code) are standard in commercial development but not available on MCEN</li>
+                            <li>AI-assisted IDEs (like GitHub Copilot and Cursor) are standard in commercial development but not available on MCEN</li>
                             <li>Code execution sandboxes would allow Marines to run AI-generated code directly instead of copy-pasting between platforms</li>
                             <li>These tools would multiply the output of EDD-trained Marines significantly</li>
                         </ul>
