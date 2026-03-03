@@ -22,6 +22,19 @@ desktop.ini
 node_modules/
 npm-debug.log
 
+# Serena (MCP tool config)
+.serena/
+
+# Planning/internal templates (not user-facing)
+templates/
+docs/templates/
+
+# Screenshots (local testing)
+*.png
+*.jpg
+!docs/**/*.png
+!docs/**/*.jpg
+
 # LaTeX build artifacts
 *.aux
 *.log
