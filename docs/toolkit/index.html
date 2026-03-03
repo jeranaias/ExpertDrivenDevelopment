@@ -297,6 +297,7 @@
             z-index: 1;
             display: flex;
             min-height: calc(100vh - var(--header-height, 64px));
+            overflow-x: hidden;
         }
 
         /* Sidebar - matches site TOC pattern */
@@ -1591,9 +1592,31 @@
         }
 
         /* Mobile Small: 375px - 413px */
-        @media (min-width: 375px) {
+        @media (min-width: 375px) and (max-width: 413px) {
+            .header {
+                padding: 12px 16px;
+            }
+
+            .header.scrolled {
+                padding: 10px 16px;
+            }
+
             .header-title h2 {
                 font-size: clamp(20px, 5vw, 22px);
+            }
+
+            .header-actions .header-btn {
+                width: 44px;
+                padding: 6px;
+                justify-content: center;
+                font-size: 0;
+                min-height: 44px;
+            }
+
+            .header-actions .header-btn svg {
+                width: 16px;
+                height: 16px;
+                margin: 0;
             }
 
             .content {
