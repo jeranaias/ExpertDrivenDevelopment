@@ -663,7 +663,7 @@
             gap: var(--space-md);
         }
 
-        .header-title h1 {
+        .header-title h2 {
             font-size: var(--font-size-xl);
             font-weight: var(--font-weight-bold);
             letter-spacing: -0.01em;
@@ -671,7 +671,7 @@
             transition: font-size var(--transition-normal);
         }
 
-        .header.scrolled .header-title h1 {
+        .header.scrolled .header-title h2 {
             font-size: var(--font-size-lg);
         }
 
@@ -1419,7 +1419,7 @@
                 padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 20px);
             }
 
-            .header-title h1 {
+            .header-title h2 {
                 font-size: clamp(18px, 5vw, 20px);
             }
 
@@ -1592,7 +1592,7 @@
 
         /* Mobile Small: 375px - 413px */
         @media (min-width: 375px) {
-            .header-title h1 {
+            .header-title h2 {
                 font-size: clamp(20px, 5vw, 22px);
             }
 
@@ -1623,7 +1623,7 @@
                 padding: 16px clamp(20px, 5vw, 24px);
             }
 
-            .header-title h1 {
+            .header-title h2 {
                 font-size: clamp(22px, 5vw, 24px);
             }
 
@@ -1716,7 +1716,7 @@
                 padding: 20px clamp(28px, 5vw, 36px);
             }
 
-            .header-title h1 {
+            .header-title h2 {
                 font-size: 24px;
             }
 
@@ -1798,7 +1798,7 @@
                 padding: 20px clamp(32px, 4vw, 40px);
             }
 
-            .header-title h1 {
+            .header-title h2 {
                 font-size: 24px;
             }
 
@@ -1850,7 +1850,7 @@
                 padding: 24px 40px;
             }
 
-            .header-title h1 {
+            .header-title h2 {
                 font-size: 26px;
             }
 
@@ -1899,7 +1899,7 @@
                 padding: 24px clamp(40px, 4vw, 60px);
             }
 
-            .header-title h1 {
+            .header-title h2 {
                 font-size: 28px;
             }
 
@@ -1931,7 +1931,7 @@
                 padding: 28px 80px;
             }
 
-            .header-title h1 {
+            .header-title h2 {
                 font-size: 30px;
             }
 
@@ -2274,7 +2274,7 @@
 
     <div class="app">
         <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar" role="navigation" aria-label="Category navigation">
+        <aside class="sidebar" id="sidebar" aria-label="Category navigation">
             <div class="sidebar-header">
                 <h2 class="toc__title">Prompt Categories</h2>
             </div>
@@ -2356,13 +2356,13 @@
         </aside>
 
         <!-- Main -->
-        <main class="main" id="main-content" role="main">
-            <div class="disclaimer" id="disclaimer" role="alert">
+        <main class="main" id="main-content">
+            <div class="disclaimer" id="disclaimer">
                 <svg class="disclaimer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                     <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
                     <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
                 </svg>
-                <span class="disclaimer-text">Use these prompts with GenAI.mil or CamoGPT on MCEN. Never input classified information. See the Tools page for data handling guidance.</span>
+                <span class="disclaimer-text">Use these prompts with GenAI.mil or CamoGPT on MCEN. Do not input data beyond what the platform is authorized to handle &mdash; CUI on IL5 only, PII requires a PIA, classified only on CamoGPT (SIPR/IL6). See the <a href="../tools/">Tools page</a> for platform authorization levels and data handling guidance.</span>
                 <button class="disclaimer-close" aria-label="Dismiss disclaimer">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                         <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
@@ -2370,9 +2370,9 @@
                 </button>
             </div>
 
-            <header class="header" role="banner">
+            <header class="header">
                 <div class="header-title">
-                    <h1 id="header-text">Problem Definition</h1>
+                    <h2 id="header-text">Problem Definition</h2>
                     <span class="badge" id="header-badge">5 prompts</span>
                 </div>
                 <div class="header-actions">
@@ -2394,6 +2394,14 @@
             </header>
 
             <div class="content">
+                <div class="no-results" id="noResults" style="display: none;">
+                    <svg class="no-results-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                    <h3>No prompts match your search</h3>
+                    <p>Try different keywords or clear the search to browse all prompts.</p>
+                </div>
                 <!-- Problem Definition -->
                 <div class="category active" id="problem" role="region" aria-label="Problem Definition prompts">
                     <div class="category-intro">
@@ -2403,6 +2411,7 @@
                             <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 1 — Problem Definition</div>
                             <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 2 Module 4, Course 3 Module 5</div>
                             <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil for all exercises</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Skills:</span> Context Assembly, Task Decomposition</div>
                         </div>
                     </div>
 
@@ -2644,7 +2653,7 @@ Be ruthless. A working simple tool beats a broken complex one.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">5</div>
                                     <div>
-                                        <div class="prompt-title">Frontier Check <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
+                                        <div class="prompt-title">Frontier Check <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Evaluates whether a task is inside or outside the AI frontier</div>
                                     </div>
                                 </div>
@@ -2684,7 +2693,7 @@ For this task, help me assess:
 Provide a clear recommendation with reasoning for each criterion.</div>
                                 </div>
                                 <div class="tip-box">
-                                    <strong>When to use this:</strong> Before starting any new AI-assisted task, especially in domains where you are unsure of AI capabilities. This prompt operationalizes the Frontier Recognition skill — the most important skill for avoiding the 19-percentage-point performance drop identified in the BCG-Harvard study.
+                                    <strong>When to use this:</strong> Run this before starting any new AI-assisted task, especially in unfamiliar territory. The biggest risk with AI isn't getting a wrong answer — it's not knowing you got a wrong answer. This check helps you spot tasks where AI errors would be hard to catch.
                                 </div>
                             </div>
                         </article>
@@ -2700,8 +2709,9 @@ Provide a clear recommendation with reasoning for each criterion.</div>
                         <p>These prompts help you identify compliance requirements <strong>before</strong> you build. They help you think through compliance—they don't replace consultation with your Privacy Officer, Cybersecurity Office, or Legal. When in doubt, ask the professionals.</p>
                         <div class="category-meta">
                             <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 2 — Compliance Review</div>
-                            <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 3 Module 1, Course 4 Module 4</div>
-                            <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil (safe for CUI references); consult your Privacy Officer and Cybersecurity Office</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 1 Module 4, Course 4 Module 4</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil (CUI-authorized; describe data types and field names, not actual CUI values); consult your Privacy Officer and Cybersecurity Office</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Skills:</span> Quality Judgment</div>
                         </div>
                     </div>
 
@@ -2709,7 +2719,7 @@ Provide a clear recommendation with reasoning for each criterion.</div>
                         <article class="prompt-card" data-search="pii personally identifiable information privacy data">
                             <button class="prompt-header" aria-expanded="false" aria-controls="prompt-compliance-1">
                                 <div class="prompt-header-left">
-                                    <div class="prompt-number">2</div>
+                                    <div class="prompt-number">1</div>
                                     <div>
                                         <div class="prompt-title">PII Identification <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Determines if your tool handles Personally Identifiable Information</div>
@@ -2743,6 +2753,8 @@ Provide a clear recommendation with reasoning for each criterion.</div>
 
 <span class="placeholder">[LIST_ALL_DATA_FIELDS_YOUR_TOOL_WILL_HANDLE]</span>
 
+(List field names and data types only — do not paste actual data values or records into this prompt.)
+
 For each field, tell me:
 1. Is this PII (Personally Identifiable Information)?
 2. If yes, what category (direct identifier, quasi-identifier, sensitive)?
@@ -2753,7 +2765,7 @@ Then summarize:
 - Whether a Privacy Impact Assessment is likely required
 - Recommended data minimization (fields I could remove or anonymize)
 
-Reference current DoW privacy directives (DoWI 5400.11) and NIST 800-53 privacy controls for PII definitions. (Search for these directives on GenAI.mil if you need clarification on specific requirements.)</div>
+Reference current DoW privacy directives (DoWI 5400.11) and NIST 800-53 privacy controls for PII definitions. (Consult your unit Privacy Officer or Cybersecurity Office for guidance on specific requirements.)</div>
                                 </div>
                             </div>
                         </article>
@@ -2761,7 +2773,7 @@ Reference current DoW privacy directives (DoWI 5400.11) and NIST 800-53 privacy 
                         <article class="prompt-card" data-search="pia privacy impact assessment threshold">
                             <button class="prompt-header" aria-expanded="false" aria-controls="prompt-compliance-2">
                                 <div class="prompt-header-left">
-                                    <div class="prompt-number">1</div>
+                                    <div class="prompt-number">2</div>
                                     <div>
                                         <div class="prompt-title">PIA Threshold Analysis <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Determines if you need a full Privacy Impact Assessment</div>
@@ -2815,7 +2827,7 @@ Based on the answers, tell me:
                         <article class="prompt-card" data-search="security controls authentication authorization audit cac">
                             <button class="prompt-header" aria-expanded="false" aria-controls="prompt-compliance-3">
                                 <div class="prompt-header-left">
-                                    <div class="prompt-number">2</div>
+                                    <div class="prompt-number">3</div>
                                     <div>
                                         <div class="prompt-title">Security Controls Checklist <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
                                         <div class="prompt-subtitle">Ensures your tool implements required security controls</div>
@@ -2889,9 +2901,10 @@ Consider:
                         <h2>Foundation Layer</h2>
                         <p>These prompts help you design SharePoint lists and Dataverse tables. <strong>Get this right and everything else is easier.</strong> Get it wrong and you'll be rebuilding. Start minimal—you can add columns, but removing them after data exists is painful.</p>
                         <div class="category-meta">
-                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 3 — Design &amp; Build</div>
-                            <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 2 Module 2, Course 3 Modules 2–4</div>
+                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 3 — Rapid Prototyping</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 2 Module 2, Course 3 Modules 2, 4</div>
                             <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil for data modeling; build in Power Platform</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Skills:</span> Context Assembly, Task Decomposition</div>
                         </div>
                     </div>
 
@@ -3129,9 +3142,10 @@ For each view specify:
                         <h2>User Interface</h2>
                         <p>These prompts help you build canvas apps in Power Apps. Focus on <strong>working software</strong>, not perfect software. Build ugly first, get it working, then make it pretty. Test with real data early.</p>
                         <div class="category-meta">
-                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 3 — Design &amp; Build</div>
-                            <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 2 Module 2, Course 3 Modules 2–5</div>
+                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 3 — Rapid Prototyping</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 2 Module 2, Course 3 Modules 2, 4–5</div>
                             <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil for code generation; copy output into Power Apps</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Skills:</span> Task Decomposition, Iterative Refinement</div>
                         </div>
                     </div>
 
@@ -3141,7 +3155,7 @@ For each view specify:
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">1</div>
                                     <div>
-                                        <div class="prompt-title">App Architecture <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
+                                        <div class="prompt-title">App Architecture <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
                                         <div class="prompt-subtitle">Plans screens and navigation before building</div>
                                     </div>
                                 </div>
@@ -3411,9 +3425,10 @@ Implement role-based access:
                         <h2>Automation Layer</h2>
                         <p>These prompts help you build automated workflows. <strong>Automation is just "when X happens, do Y."</strong> If you can describe the business rule, AI can help you build the flow. Check run history when things don't work.</p>
                         <div class="category-meta">
-                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 3 — Design &amp; Build</div>
+                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 3 — Rapid Prototyping</div>
                             <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 3 Module 2 (Centaur), Course 3 Module 4 (Cyborg)</div>
                             <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil for flow logic; CamoGPT for API integrations</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Skills:</span> Workflow Integration, Task Decomposition</div>
                         </div>
                     </div>
 
@@ -3649,7 +3664,7 @@ Include consideration for flow run time limits.</div>
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">5</div>
                                     <div>
-                                        <div class="prompt-title">Error Handling <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
+                                        <div class="prompt-title">Error Handling <span class="complexity-badge complexity-badge--advanced">Advanced</span></div>
                                         <div class="prompt-subtitle">Makes flows more robust with try-catch patterns</div>
                                     </div>
                                 </div>
@@ -3773,9 +3788,10 @@ Note if this requires a premium license.</div>
                         <h2>Reporting Layer</h2>
                         <p>These prompts help you build dashboards and reports. <strong>A good dashboard answers questions before they're asked.</strong> Focus on what leadership actually needs to know. Less is more—5 clear visuals beats 20 confusing ones.</p>
                         <div class="category-meta">
-                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 3 — Design &amp; Build</div>
+                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 3 — Rapid Prototyping</div>
                             <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 3 Module 4 (Training Tracker)</div>
                             <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil for DAX and M code generation</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Skills:</span> Context Assembly, Quality Judgment</div>
                         </div>
                     </div>
 
@@ -4061,9 +4077,10 @@ If the transformation is complex, break it into a reusable function I can apply 
                         <h2>Fixing Things</h2>
                         <p>These prompts help you fix things that aren't working. <strong>Debugging is a skill.</strong> The better you describe the problem, the faster you'll solve it. Don't panic—everything is fixable. Change one thing at a time.</p>
                         <div class="category-meta">
-                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 4 — Testing</div>
+                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 4 — User Testing</div>
                             <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 2 Module 3, Course 4 Module 3</div>
-                            <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil or CamoGPT — paste error messages with context</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil or CamoGPT — paste error messages with context (remove any PII, CUI, or sensitive data from error output before pasting)</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Skills:</span> Iterative Refinement, Quality Judgment</div>
                         </div>
                     </div>
 
@@ -4410,8 +4427,9 @@ Prioritize recommendations by impact and effort required.</div>
                         <p>These prompts help you create documentation that allows others to <strong>use, maintain, replicate, and adapt</strong> your tools. Good documentation is what makes your tool institutional capability instead of a burden you leave behind.</p>
                         <div class="category-meta">
                             <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 5 — Documentation</div>
-                            <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 4 Module 4</div>
-                            <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil for drafting; upload existing docs for context</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 4 Module 5</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil for drafting; upload existing docs for context (ensure documents are appropriate for the platform's authorization level)</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Skills:</span> Context Assembly, Workflow Integration</div>
                         </div>
                     </div>
 
@@ -4694,8 +4712,8 @@ If you have the capability to generate a PDF directly, please do so. Otherwise, 
                                 <div class="prompt-header-left">
                                     <div class="prompt-number">5</div>
                                     <div>
-                                        <div class="prompt-title">Document Formatting & Enhancement <span class="complexity-badge complexity-badge--beginner">Beginner</span></div>
-                                        <div class="prompt-subtitle">Formats documentation deliverables for SOP Phase 5 compliance</div>
+                                        <div class="prompt-title">Document Formatting & Enhancement <span class="complexity-badge complexity-badge--intermediate">Intermediate</span></div>
+                                        <div class="prompt-subtitle">Formats content into publication-ready documents with professional typography and branding</div>
                                     </div>
                                 </div>
                                 <div class="prompt-toggle" aria-hidden="true">
@@ -4726,7 +4744,7 @@ If you have the capability to generate a PDF directly, please do so. Otherwise, 
 
 CONTENT SOURCE (choose one approach):
 Option A - NEW CONTENT: <span class="placeholder">[DESCRIBE_WHAT_THE_DOCUMENT_SHOULD_CONTAIN]</span>
-Option B - EXISTING CONTENT: <span class="placeholder">[PASTE_YOUR_EXISTING_CONTENT_ROUGH_NOTES_OR_DRAFT]</span>
+Option B - EXISTING CONTENT: <span class="placeholder">[PASTE_YOUR_EXISTING_CONTENT_ROUGH_NOTES_OR_DRAFT — ensure content is appropriate for the platform's data authorization level; do not paste CUI into commercial tools]</span>
 
 DOCUMENT TYPE: <span class="placeholder">[USER_GUIDE_TECHNICAL_MANUAL_REPORT_MEMO_POLICY_DOCUMENT_OR_OTHER]</span>
 
@@ -4786,6 +4804,7 @@ If you have the capability to generate a PDF directly, please do so. Otherwise, 
                             <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phase 6 — QA Review</div>
                             <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 4 Module 4</div>
                             <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil for generating review checklists; human reviewer makes final call</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Skills:</span> Quality Judgment, Frontier Recognition</div>
                         </div>
                     </div>
 
@@ -5186,7 +5205,7 @@ Generate:
 4. **Data Generation Script**: Power Automate flow or script to generate this data
 5. **Reset Procedure**: How to clear and regenerate test data
 
-If PII is not allowed, use obviously fake but realistic-format data (e.g., "Test User 001" not "John Smith").</div>
+Whether PII is allowed or not, never paste real PII records into this prompt as examples. If PII is not allowed in the test data, use obviously fake but realistic-format data (e.g., "Test User 001" not "John Smith").</div>
                                 </div>
                             </div>
                         </article>
@@ -5274,9 +5293,10 @@ Provide findings as: CRITICAL / HIGH / MEDIUM / LOW with specific remediation st
                         <h2>Sharing Knowledge</h2>
                         <p>These prompts help you teach others how to build. <strong>Your job isn't to build everyone's tools—it's to help them build their own.</strong> The goal is to create more builders, not more dependencies on you.</p>
                         <div class="category-meta">
-                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Post-deployment — Scale Layer</div>
+                            <div class="category-meta__item"><span class="category-meta__label">SOP Phase:</span> Phases 7–8 — Deployment &amp; Sustainment</div>
                             <div class="category-meta__item"><span class="category-meta__label">Used in:</span> Course 4 Module 5</div>
-                            <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil for lesson planning; CamoGPT shared workspaces for team exercises</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Tool:</span> GenAI.mil for lesson planning; CamoGPT shared workspaces for team exercises (verify current availability)</div>
+                            <div class="category-meta__item"><span class="category-meta__label">Skills:</span> Context Assembly, Workflow Integration</div>
                         </div>
                     </div>
 
@@ -5622,6 +5642,7 @@ If you have the capability to generate a PDF directly, please do so. Otherwise, 
             const headerText = document.getElementById('header-text');
             const headerBadge = document.getElementById('header-badge');
             const toast = document.getElementById('toast');
+            const noResults = document.getElementById('noResults');
             const liveRegion = document.getElementById('liveRegion');
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const disclaimerClose = document.querySelector('.disclaimer-close');
@@ -5829,6 +5850,7 @@ If you have the capability to generate a PDF directly, please do so. Otherwise, 
                     document.querySelector('[data-category="problem"]').classList.add('active');
                     headerText.textContent = 'Problem Definition';
                     headerBadge.textContent = '5 prompts';
+                    noResults.style.display = 'none';
                     return;
                 }
 
@@ -5856,6 +5878,7 @@ If you have the capability to generate a PDF directly, please do so. Otherwise, 
                 });
 
                 headerBadge.textContent = matchCount + ' matches';
+                noResults.style.display = matchCount === 0 ? '' : 'none';
                 announce(`${matchCount} search results found`);
             }, 300);
 

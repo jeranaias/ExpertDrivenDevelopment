@@ -257,7 +257,7 @@
                         <div class="callout callout--instructor">
                             <h3 class="callout__title">Instructor Setup</h3>
                             <p>
-                                <strong>Before class:</strong> Ensure you have access to ChatGPT, Claude, or similar AI chat interface projected on screen. Have Power Apps portal open in another tab. Do NOT pre-build anything. The value is in the live narration of decisions.
+                                <strong>Before class:</strong> Ensure you have access to <strong>GenAI.mil</strong> (preferred), or a commercial AI tool (ChatGPT, Gemini, or Claude &mdash; note Claude is not on GenAI.mil) for unclassified exercises, projected on screen. Have Power Apps portal open in another tab. Do NOT pre-build anything. The value is in the live narration of decisions.
                             </p>
                             <p>
                                 <strong>Teaching approach:</strong> Think out loud constantly. Verbalize every decision: "I'm choosing to start simple because..." "I'm adding this detail to the prompt because..." "I'm ignoring this AI suggestion because..."
@@ -267,11 +267,22 @@
                         <div class="callout callout--info">
                             <h3 class="callout__title">Preferred Tool Order</h3>
                             <p>
-                                For live builds, prefer <strong>CamoGPT</strong> or <strong>GenAI.mil</strong>
+                                For live builds, prefer <strong>GenAI.mil</strong> or <strong>CamoGPT</strong> (Army-managed)
                                 if the classroom has CAC-enabled workstations on a DoD network. These tools
-                                allow you to use realistic unit data in prompts without OPSEC concerns.
-                                Fall back to commercial tools (Claude, Gemini) for unclassified-only exercises.
+                                allow you to use CUI-level unit data in prompts. Anonymize PII (real names, SSNs) unless a PIA authorizes it.
+                                Fall back to commercial tools (ChatGPT, Gemini, Claude) for unclassified-only exercises. Note: ChatGPT, Gemini, and Grok are available on GenAI.mil; Claude is not.
                                 See the <a href="../tools/">Approved Tools</a> page.
+                            </p>
+                        </div>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Data Handling Boundaries</h3>
+                            <p>
+                                <strong>GenAI.mil / CamoGPT (Army-managed, IL5):</strong> Authorized for CUI.
+                                PII and PHI must be anonymized unless a PIA authorizes it.
+                                Classified data is never authorized (except CamoGPT on SIPR/IL6).<br>
+                                <strong>Commercial tools (Claude, ChatGPT, Gemini via web):</strong>
+                                Unclassified, non-sensitive data only. Treat every prompt as public disclosure.
                             </p>
                         </div>
 
@@ -621,9 +632,10 @@ If(DateDue < Today(), Red, Black)</pre>
                             <h3 class="callout__title">Debugging Across Tools</h3>
                             <p>
                                 Debugging techniques work the same regardless of which AI tool you use.
-                                If a student gets stuck on <strong>CamoGPT</strong>, they can paste the
-                                same error message into Claude or Gemini for a second opinion. Using
-                                multiple tools is a valid strategy.
+                                If a student gets stuck on <strong>CamoGPT</strong> (Army-managed), they can paste the
+                                same error message into Gemini or Claude (commercial, unclassified only) for a second opinion
+                                (unclassified prompts only &mdash; do not paste CUI into commercial tools).
+                                Using multiple tools is a valid strategy.
                             </p>
                         </div>
 
@@ -957,7 +969,7 @@ If(DateDue < Today(), Red, Black)</pre>
                         <li><a href="./">Courses</a></li>
                         <li><a href="../sop/">SOP</a></li>
                         <li><a href="../toolkit/">Toolkit</a></li>
-${indent}<li><a href="../tools/">Tools</a></li>
+                        <li><a href="../tools/">Tools</a></li>
                         <li><a href="../resources/">Resources</a></li>
                         <li><a href="../about.html">About</a></li>
                     </ul>

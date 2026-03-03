@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Approved AI tools and platforms for Expert-Driven Development. Access guidance for GenAI.mil, CamoGPT, M365 Copilot, and other DoW-authorized AI assistants.">
+    <meta name="description" content="Approved AI tools and platforms for Expert-Driven Development. Access guidance for GenAI.mil, CamoGPT, M365 Copilot, and other DoD-authorized AI assistants.">
     <title>Approved Tools | Expert-Driven Development</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -61,7 +61,7 @@
             <h1 class="page-header__title">Approved Tools &amp; Platforms</h1>
             <p class="page-header__desc">
                 AI assistants and deployment platforms authorized for Expert-Driven Development.
-                Use only approved tools. Never input classified, CUI, or PII into unauthorized systems.
+                Use only approved tools. CUI is authorized only on IL5 platforms. PII requires a PIA. Classified data is authorized only on CamoGPT (SIPR/IL6).
             </p>
         </div>
     </section>
@@ -79,7 +79,8 @@
                             <li><a href="#ai-assistants">AI Assistants</a></li>
                             <li><a href="#genai-mil">GenAI.mil</a></li>
                             <li><a href="#camogpt">CamoGPT</a></li>
-                            <li><a href="#commercial-tools">Commercial AI Tools</a></li>
+                            <li><a href="#enterprise-tools">Enterprise Tools</a></li>
+                            <li><a href="#commercial-tools">Commercial Web Access</a></li>
                             <li><a href="#platforms">Deployment Platforms</a></li>
                             <li><a href="#comparison">Tool Comparison</a></li>
                             <li><a href="#access">Getting Access</a></li>
@@ -95,9 +96,15 @@
                     <div class="callout callout--warning">
                         <h3 class="callout__title">Classification Reminder</h3>
                         <p>
-                            All AI tools process <strong>unclassified data only</strong>. Do not input classified
-                            information, CUI, PII, PHI, or FOUO data into any AI system unless the platform is
-                            explicitly authorized for that data type. When in doubt, consult your Cybersecurity Office.
+                            <strong>Never input classified information into any AI tool unless it operates on a classified network.</strong>
+                            CamoGPT on SIPR/IL6 is the only listed tool authorized for classified data.
+                            CUI may only be processed on IL5-authorized platforms (GenAI.mil, CamoGPT).
+                            ChatGPT and Gemini are IL5-authorized when accessed via GenAI.mil; when accessed
+                            through their commercial websites, they are restricted to unclassified data only.
+                            Claude (claude.ai) is commercial-only and restricted to unclassified data.
+                            PII and PHI require anonymization before use on any AI platform, including IL5
+                            tools, unless a Privacy Impact Assessment (PIA) has been completed and approved.
+                            When in doubt, consult your Cybersecurity Office or Privacy Officer.
                         </p>
                     </div>
 
@@ -125,16 +132,30 @@
                                     <tr>
                                         <td data-label="Tool"><strong>GenAI.mil</strong></td>
                                         <td data-label="Authorization">DoD-authorized</td>
-                                        <td data-label="Data Boundary">IL5 (CUI-capable)</td>
+                                        <td data-label="Data Boundary">IL5 (CUI-capable; PII requires PIA)</td>
                                         <td data-label="Best For">CUI-safe prompting, sensitive administrative tasks</td>
                                         <td data-label="Access">CAC-authenticated at genai.mil</td>
                                     </tr>
                                     <tr>
                                         <td data-label="Tool"><strong>CamoGPT</strong></td>
-                                        <td data-label="Authorization">DoD-authorized</td>
-                                        <td data-label="Data Boundary">IL5 (CUI-capable)</td>
+                                        <td data-label="Authorization">Army-managed, DoD-authorized</td>
+                                        <td data-label="Data Boundary">IL5 (NIPR, CUI-capable) &amp; IL6 (SIPR)</td>
                                         <td data-label="Best For">Code generation, technical writing, data analysis</td>
                                         <td data-label="Access">CAC-authenticated at camogpt.mil</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Tool"><strong>ChatGPT</strong></td>
+                                        <td data-label="Authorization">Available via GenAI.mil; also commercial</td>
+                                        <td data-label="Data Boundary">IL5 via GenAI.mil; unclassified via chatgpt.com</td>
+                                        <td data-label="Best For">General-purpose drafting, brainstorming, code generation</td>
+                                        <td data-label="Access">Available on GenAI.mil (CAC) or chatgpt.com (commercial, unclassified only)</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="Tool"><strong>Grok</strong></td>
+                                        <td data-label="Authorization">Available via GenAI.mil</td>
+                                        <td data-label="Data Boundary">IL5 via GenAI.mil</td>
+                                        <td data-label="Best For">General-purpose reasoning, summarization</td>
+                                        <td data-label="Access">Available on GenAI.mil (CAC)</td>
                                     </tr>
                                     <tr>
                                         <td data-label="Tool"><strong>M365 Copilot</strong></td>
@@ -162,14 +183,14 @@
                                         <td data-label="Authorization">Approved with restrictions</td>
                                         <td data-label="Data Boundary">Unclassified only</td>
                                         <td data-label="Best For">Complex reasoning, documentation, code review</td>
-                                        <td data-label="Access">claude.ai (web)</td>
+                                        <td data-label="Access">claude.ai (web); not available on GenAI.mil</td>
                                     </tr>
                                     <tr>
                                         <td data-label="Tool"><strong>Gemini</strong></td>
-                                        <td data-label="Authorization">Approved with restrictions</td>
-                                        <td data-label="Data Boundary">Unclassified only</td>
+                                        <td data-label="Authorization">Available via GenAI.mil; also commercial</td>
+                                        <td data-label="Data Boundary">IL5 via GenAI.mil; unclassified via gemini.google.com</td>
                                         <td data-label="Best For">General-purpose coding, multimodal tasks</td>
-                                        <td data-label="Access">gemini.google.com (web)</td>
+                                        <td data-label="Access">gemini.google.com (web); also available via GenAI.mil</td>
                                     </tr>
                                     <tr>
                                         <td data-label="Tool"><strong>C3 AI</strong></td>
@@ -189,16 +210,19 @@
                         <p>
                             GenAI.mil is the Department of Defense&rsquo;s official generative AI portal. It provides
                             CAC-authenticated access to large language models within the DoD security boundary at
-                            Impact Level 5 (IL5), making it the <strong>only approved option for prompts involving
-                            CUI or sensitive unclassified data</strong>.
+                            Impact Level 5 (IL5), making it the <strong>primary approved option for prompts involving
+                            CUI or sensitive unclassified data</strong> (CamoGPT is also IL5-authorized for CUI).
                         </p>
 
                         <h3>Key Features</h3>
                         <ul>
                             <li>CAC authentication &mdash; no separate account required</li>
                             <li>IL5 data boundary &mdash; safe for CUI when used per policy</li>
-                            <li>Multiple model options (GPT-4, Claude, Llama) under one portal</li>
-                            <li>Conversation history saved per user</li>
+                            <li>Multiple model options (Gemini, Grok, ChatGPT) under one portal</li>
+                            <li>File upload for document analysis and retrieval-augmented generation (RAG)</li>
+                            <li>Deep research, document formatting, and web grounding</li>
+                            <li>Video and imagery analysis</li>
+                            <li>Persistent chat histories saved per user</li>
                             <li>No data used for model training</li>
                         </ul>
 
@@ -218,23 +242,35 @@
                             Navigate to <strong>genai.mil</strong> using a CAC-enabled browser on a DoD network
                             or approved VPN. No additional account creation is required.
                         </p>
+
+                        <div class="callout callout--success">
+                            <h3 class="callout__title">Marine Corps Enterprise Primary</h3>
+                            <p>
+                                Per MARADMIN 018/26 (January 2026), GenAI.mil is the designated enterprise
+                                generative AI platform for the Marine Corps. It launched in December 2025,
+                                replaces the sunsetted NIPRGPT (Air Force), and serves over 1.1 million
+                                unique users across five of six military branches.
+                            </p>
+                        </div>
                     </section>
 
                     <!-- CamoGPT -->
                     <section id="camogpt">
                         <h2>CamoGPT</h2>
                         <p>
-                            CamoGPT is a DoD-hosted AI assistant purpose-built for military personnel. It operates
-                            within the DoD security boundary at IL5 and is optimized for code generation, technical
+                            CamoGPT is an Army-managed AI assistant available to military personnel. It operates
+                            within the DoD security boundary at IL5 (NIPR) and IL6 (SIPR) and is optimized for code generation, technical
                             writing, and structured data analysis.
                         </p>
 
                         <h3>Key Features</h3>
                         <ul>
                             <li>CAC authentication with DoD network access</li>
-                            <li>IL5 data boundary &mdash; CUI-capable</li>
+                            <li>IL5 (NIPR) and IL6 (SIPR) data boundaries &mdash; the only listed AI tool with classified network access</li>
+                            <li>API access and tool calling for automated workflows</li>
+                            <li>File upload and RAG for document analysis</li>
+                            <li>Shared workspaces for collaborative editing</li>
                             <li>Optimized for code generation and technical tasks</li>
-                            <li>Supports file uploads for document analysis</li>
                             <li>No data retention for model training</li>
                         </ul>
 
@@ -249,6 +285,12 @@
                             </ul>
                         </div>
 
+                        <p>
+                            CamoGPT is transitioning toward expanded R&amp;D and agentic AI testing
+                            capabilities. Its use is &ldquo;not limited&rdquo; per MARADMIN 018/26,
+                            but GenAI.mil is the designated enterprise primary for Marines.
+                        </p>
+
                         <h3>Access</h3>
                         <p>
                             Navigate to <strong>camogpt.mil</strong> using a CAC-enabled browser. Available on
@@ -256,35 +298,46 @@
                         </p>
                     </section>
 
-                    <!-- Commercial Tools -->
-                    <section id="commercial-tools">
-                        <h2>Commercial AI Tools</h2>
-                        <p>
-                            The following commercial tools are approved for <strong>unclassified use only</strong>.
-                            Do not input CUI, PII, or sensitive data into these platforms.
-                        </p>
+                    <!-- Enterprise Microsoft Tools -->
+                    <section id="enterprise-tools">
+                        <h2>Enterprise Microsoft Tools</h2>
 
                         <h3>M365 Copilot</h3>
                         <p>
                             Integrated directly into Word, Excel, PowerPoint, Outlook, and Teams. Data stays
-                            within your DoW M365 tenant. Best for personnel who already work primarily in
-                            Microsoft applications.
+                            within your DoW M365 tenant. M365 Copilot is enterprise-authorized &mdash; it is
+                            not subject to the commercial tool restrictions below.
+                        </p>
+                    </section>
+
+                    <!-- Commercial Tools -->
+                    <section id="commercial-tools">
+                        <h2>Commercial Web Access (Unclassified Only)</h2>
+                        <p>
+                            The following AI tools can be accessed through their commercial websites for
+                            <strong>unclassified use only</strong>. Do not input CUI, PII, or
+                            sensitive data when using commercial web access. Note: ChatGPT and Gemini are
+                            also available on GenAI.mil where they are IL5-authorized for CUI &mdash; this
+                            section covers only their commercial web versions.
                         </p>
 
-                        <h3>Claude &amp; Gemini</h3>
+                        <h3>Claude, ChatGPT &amp; Gemini (Commercial Web)</h3>
                         <p>
-                            Web-based AI assistants approved for unclassified work. Strong for complex reasoning
-                            (Claude) and multimodal tasks (Gemini). Use these when you need a general-purpose
-                            AI assistant and your data is fully unclassified.
+                            Web-based AI assistants approved for unclassified work. Claude (claude.ai) is strong
+                            for complex reasoning and documentation &mdash; it is not on GenAI.mil. ChatGPT
+                            (chatgpt.com) and Gemini (gemini.google.com) are also available within the DoD
+                            boundary via GenAI.mil, where they are IL5-authorized for CUI. When accessed through
+                            their commercial websites, use all three only with fully unclassified data.
                         </p>
 
                         <div class="callout callout--warning">
                             <h3 class="callout__title">Commercial Tool Restrictions</h3>
                             <p>
-                                Commercial AI tools (Claude, Gemini, ChatGPT) operate outside the DoD security
-                                boundary. Treat every prompt as a public disclosure. Do not include real names,
-                                unit designations, operational details, or any data you would not post on a
-                                public bulletin board.
+                                When using commercial AI websites (claude.ai, gemini.google.com, chatgpt.com),
+                                you are outside the DoD security boundary. Treat every prompt as a public
+                                disclosure. Do not include real names, unit designations, operational details,
+                                or any data you would not post on a public bulletin board. Note: Gemini and
+                                ChatGPT are also available inside the DoD boundary via GenAI.mil.
                             </p>
                         </div>
                     </section>
@@ -357,9 +410,9 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td data-label="Scenario">Prompt contains CUI or real PII</td>
-                                        <td data-label="Recommended Tool">GenAI.mil or CamoGPT</td>
-                                        <td data-label="Why">Only IL5-authorized tools may process CUI</td>
+                                        <td data-label="Scenario">Prompt contains CUI</td>
+                                        <td data-label="Recommended Tool">GenAI.mil (includes ChatGPT, Gemini, Grok) or CamoGPT</td>
+                                        <td data-label="Why">Only IL5-authorized tools may process CUI. PII must be anonymized even on IL5 tools unless a completed PIA authorizes it.</td>
                                     </tr>
                                     <tr>
                                         <td data-label="Scenario">Building a Power App with AI assistance</td>
@@ -378,8 +431,8 @@
                                     </tr>
                                     <tr>
                                         <td data-label="Scenario">General coding assistance (unclassified)</td>
-                                        <td data-label="Recommended Tool">Claude or Gemini</td>
-                                        <td data-label="Why">Strong code generation; free web access</td>
+                                        <td data-label="Recommended Tool">Claude or Gemini (unclassified only when used commercially)</td>
+                                        <td data-label="Why">Strong code generation; Gemini also available on GenAI.mil</td>
                                     </tr>
                                     <tr>
                                         <td data-label="Scenario">Building a conversational bot</td>
@@ -410,11 +463,12 @@
                             <li>Once assigned, Copilot appears in Word, Excel, Outlook, and Teams</li>
                         </ol>
 
-                        <h3>Commercial Tools (Claude, Gemini)</h3>
+                        <h3>Commercial Tools (Claude, ChatGPT, Gemini)</h3>
                         <ol class="steps">
-                            <li>Navigate to claude.ai or gemini.google.com from any browser</li>
+                            <li>Navigate to claude.ai, chatgpt.com, or gemini.google.com from any browser</li>
                             <li>Create a personal account (do not use your .mil email)</li>
                             <li>Use for unclassified work only &mdash; treat every prompt as public disclosure</li>
+                            <li>Note: ChatGPT and Gemini are also available on GenAI.mil (IL5, CUI-authorized) via CAC</li>
                         </ol>
                     </section>
 
@@ -425,7 +479,7 @@
                         <div class="callout callout--warning">
                             <h3 class="callout__title">Before Every AI Interaction</h3>
                             <ol>
-                                <li><strong>Classify your data.</strong> Is any part of your prompt CUI, PII, or sensitive? If yes, use GenAI.mil or CamoGPT only.</li>
+                                <li><strong>Classify your data.</strong> Does your prompt contain CUI? Use GenAI.mil or CamoGPT. Does it contain PII or PHI? Anonymize it first &mdash; PII and PHI require a completed PIA before use on any AI tool; without one, anonymize first.</li>
                                 <li><strong>Check your tool.</strong> Is the tool authorized for the data type you are processing?</li>
                                 <li><strong>Sanitize if needed.</strong> Replace real names, units, and locations with fictional equivalents before using commercial tools.</li>
                                 <li><strong>Verify output.</strong> AI-generated content may contain fabricated references, statistics, or regulation numbers. Verify everything before use.</li>
@@ -446,8 +500,9 @@
                             The current MCEN AI toolkit &mdash; GenAI.mil, CamoGPT, M365 Copilot, and Power Platform &mdash; is the starting point, not the ceiling. The DoD AI landscape is expanding rapidly:
                         </p>
                         <ul>
-                            <li>GenAI.mil has announced plans for API access, agentic AI development solutions, and classified network expansion</li>
-                            <li>AI-assisted IDEs (like GitHub Copilot, Cursor, and Claude Code) are standard in commercial development but not yet available on MCEN</li>
+                            <li>The DoD AI roadmap includes expanding GenAI.mil capabilities; CamoGPT already provides API access, tool calling, and IL6/SIPR capabilities</li>
+                            <li>GenAI.mil replaces the Air Force&rsquo;s NIPRGPT, which has been sunsetted; five of six military branches have adopted GenAI.mil as their enterprise AI platform</li>
+                            <li>AI-assisted IDEs (like GitHub Copilot, Cursor, and Claude Code) are standard in commercial development but not available on MCEN</li>
                             <li>Code execution sandboxes would allow Marines to run AI-generated code directly instead of copy-pasting between platforms</li>
                             <li>These tools would multiply the output of EDD-trained Marines significantly</li>
                         </ul>

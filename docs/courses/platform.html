@@ -220,7 +220,7 @@
                                 If M365 access or Power Platform is down or unavailable for any reason, pivot to the following backup plan:
                             </p>
                             <ol>
-                                <li><strong>Use AI chat to generate mockup screenshots:</strong> Have students describe their desired workflow to an AI tool like ChatGPT or Claude and ask it to generate mockup images of the interface. This preserves the prompt engineering practice.</li>
+                                <li><strong>Use AI chat to generate mockup screenshots:</strong> Have students describe their desired workflow to an AI tool like ChatGPT or Gemini (both also on GenAI.mil) or Claude (commercial, unclassified only) and ask it to generate mockup images of the interface. This preserves the prompt engineering practice.</li>
                                 <li><strong>Paper wireframe exercise:</strong> Complete the whiteboard planning phases for all three builds on paper or whiteboard. Focus on business logic, data flow, and edge cases. This preserves the centaur/cyborg conceptual distinction.</li>
                                 <li><strong>Use pre-built examples for demonstration:</strong> If you have screenshots or recordings of completed Power Platform builds from previous sessions, walk through them as case studies. Focus on verification checkpoints and failure recognition.</li>
                                 <li><strong>Convert to prompt engineering workshop:</strong> Have students write the complete prompt sequence they would use to build each tool, then peer review each other's prompts. This maintains the EDD skill development focus.</li>
@@ -262,9 +262,8 @@
                             <p>
                                 During hands-on builds, students will use an AI chat tool to generate
                                 Power Apps formulas and Power Automate flow definitions. If the classroom
-                                has CAC-enabled workstations, use <strong>CamoGPT</strong> or
-                                <strong>GenAI.mil</strong> so students can reference real unit data in
-                                their prompts. Fall back to commercial tools for unclassified exercises.
+                                has CAC-enabled workstations, use <strong>GenAI.mil</strong> or
+                                <strong>CamoGPT</strong> (Army-managed) so students can reference CUI-level unit data in their prompts (anonymize PII unless a PIA authorizes it). Fall back to commercial tools for unclassified exercises.
                                 See the <a href="../tools/">Approved Tools</a> page for the full list.
                             </p>
                         </div>
@@ -336,13 +335,12 @@
                         </p>
 
                         <div class="callout callout--info">
-                            <h3 class="callout__title">CamoGPT for Code Generation</h3>
+                            <h3 class="callout__title">GenAI.mil and CamoGPT for Code Generation</h3>
                             <p>
                                 When generating Power Apps formulas and Power Automate expressions,
-                                <strong>CamoGPT</strong> and <strong>GenAI.mil</strong> produce the same
+                                <strong>GenAI.mil</strong> and <strong>CamoGPT</strong> (Army-managed) produce the same
                                 quality of code output as commercial tools. Use them when your prompts
-                                include real unit names, approval chains, or other operationally relevant
-                                details. See the <a href="../tools/">Approved Tools</a> page.
+                                include CUI-level unit data such as unit names and approval chains. Anonymize PII (real Marine names, SSNs) unless a PIA authorizes it. See the <a href="../tools/">Approved Tools</a> page.
                             </p>
                         </div>
 
@@ -1061,10 +1059,12 @@ is notified before the timeout expires.
                         <div class="callout callout--info">
                             <h3 class="callout__title">GenAI.mil for CUI-Safe Prompting</h3>
                             <p>
-                                Training tracker prompts often reference real Marine names, PII, and
-                                readiness data that may qualify as CUI. Use <strong>GenAI.mil</strong>
-                                or <strong>CamoGPT</strong> when prompts include real personnel data.
-                                If using commercial tools, substitute fictional names and dates.
+                                Training tracker prompts often reference readiness data that may qualify as CUI.
+                                Use <strong>GenAI.mil</strong> or <strong>CamoGPT</strong> (Army-managed) for CUI-containing
+                                prompts. However, PII (real Marine names, SSNs, contact information) must be
+                                anonymized even on IL5 tools unless a Privacy Impact Assessment authorizes its
+                                use. Substitute fictional names and dates when possible. If using commercial
+                                tools, all data must be unclassified and non-sensitive.
                                 See the <a href="../tools/">Approved Tools</a> page for guidance.
                             </p>
                         </div>
@@ -1647,6 +1647,17 @@ No systemic compliance gaps identified.
                             <li><strong>Where they expect frontier issues</strong> &mdash; the places where AI is likely to struggle</li>
                         </ol>
 
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Data Handling Reminder</h3>
+                            <p>
+                                Build #3 uses real unit problems. CUI is authorized on
+                                <strong>GenAI.mil</strong> and <strong>CamoGPT</strong> (Army-managed). PII (names,
+                                SSNs, contact info) must be anonymized even on IL5 tools unless a PIA
+                                authorizes it. Commercial tools (Claude, ChatGPT, Gemini via web) are for
+                                unclassified data only.
+                            </p>
+                        </div>
+
                         <div class="callout callout--info">
                             <h3 class="callout__title">Expected Detail Level for Build Declarations</h3>
                             <p>
@@ -1901,7 +1912,7 @@ No systemic compliance gaps identified.
                         <li><a href="./">Courses</a></li>
                         <li><a href="../sop/">SOP</a></li>
                         <li><a href="../toolkit/">Toolkit</a></li>
-${indent}<li><a href="../tools/">Tools</a></li>
+                        <li><a href="../tools/">Tools</a></li>
                         <li><a href="../resources/">Resources</a></li>
                         <li><a href="../about.html">About</a></li>
                     </ul>

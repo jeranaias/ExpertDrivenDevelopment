@@ -315,15 +315,15 @@ new exceptions to these requirements---it operates within them.
 \subsection{Data Classification}
 \label{sec:data-classification}
 
-EDD tools handle \textbf{unclassified data only}. The following data types are
-prohibited from use in AI-assisted development:
+EDD tools handle data at varying classification levels depending on the platform.
+The following data handling restrictions apply:
 
 \calloutbox{Prohibited Data}{%
 \begin{itemize}
-  \item Classified information (any level)
-  \item Controlled Unclassified Information (CUI) unless the platform is CUI-authorized
+  \item Classified information (any level) except on IL6/SIPR-authorized tools (currently CamoGPT only)
+  \item Controlled Unclassified Information (CUI) on platforms not authorized for CUI (use GenAI.mil or CamoGPT for CUI)
   \item Personally Identifiable Information (PII) unless a Privacy Impact Assessment has been completed
-  \item Protected Health Information (PHI)
+  \item Protected Health Information (PHI) unless a completed PIA authorizes it
   \item For Official Use Only (FOUO) data in non-authorized environments
   \item Operational plans, force movement data, or intelligence products
 \end{itemize}}
@@ -370,18 +370,30 @@ indicate the scope of approved use:
 \endhead
 \bottomrule
 \endlastfoot
+GenAI.mil & DoD-authorized (IL5) & Marine Corps enterprise primary per MARADMIN 018/26; models include Gemini, Grok, ChatGPT; CUI-authorized (PII requires PIA); supports file upload, RAG, deep research, web grounding \\
+\midrule
+CamoGPT & DoD-authorized (IL5/IL6) & Army-managed; available on NIPR (IL5) and SIPR (IL6); API access, tool calling, shared workspaces, file upload; CUI-authorized \\
+\midrule
 M365 Copilot & Enterprise-authorized & Available through existing DoW M365 licensing; data stays within tenant \\
 \midrule
 Azure OpenAI & Enterprise-authorized & Requires Azure Government subscription; FedRAMP High authorized \\
 \midrule
 Copilot Studio & Enterprise-authorized & Low-code bot builder within M365 ecosystem \\
 \midrule
-Gemini & Approved with restrictions & Unclassified use only; do not input PII or CUI \\
+Gemini & Available via GenAI.mil; also commercial & IL5 via GenAI.mil (CUI-authorized); commercial instance (gemini.google.com) is unclassified only \\
 \midrule
-Claude & Approved with restrictions & Unclassified use only; do not input PII or CUI \\
+ChatGPT & Available via GenAI.mil; also commercial & IL5 via GenAI.mil (CUI-authorized); commercial instance (chatgpt.com) is unclassified only \\
+\midrule
+Claude & Commercial only & Unclassified use only; do not input PII or CUI \\
 \midrule
 C3 AI & Enterprise-authorized & DoW Enterprise AI platform; available through enterprise agreement \\
 \end{longtable}
+
+\textbf{Note:} Per MARADMIN 018/26 (January 2026), GenAI.mil is designated as the Marine Corps enterprise generative AI platform. It launched in December 2025, replaces the Air Force's NIPRGPT (sunsetted), and serves over 1.1 million unique users across five military branches.
+
+GenAI.mil provides file upload, retrieval-augmented generation (RAG), deep research, document formatting, video and imagery analysis, web grounding, and persistent chat histories. CamoGPT provides API access, tool calling, shared workspaces, file upload, and is the only listed tool with classified network (IL6/SIPR) access.
+
+\textbf{Data Handling Boundaries:} CUI may be processed on IL5-authorized platforms (GenAI.mil, CamoGPT). PII and PHI must be anonymized before use on any AI platform unless a completed Privacy Impact Assessment (PIA) authorizes it. Classified information must never be input to any AI tool except those operating on IL6/SIPR (currently CamoGPT only). When accessed outside GenAI.mil, commercial AI tools (claude.ai, gemini.google.com, chatgpt.com) are authorized for unclassified, non-sensitive data only.
 
 \subsubsection{Approved Platforms}
 \label{sec:approved-platforms}
@@ -399,6 +411,10 @@ Tools built under EDD must be deployed on approved platforms:
 \endhead
 \bottomrule
 \endlastfoot
+GenAI.mil & Enterprise AI chat, file analysis, deep research, code generation & DoD-authorized IL5; CAC authentication; enterprise primary per MARADMIN 018/26 \\
+\midrule
+CamoGPT & AI chat, API access, tool calling, SIPR AI access & Army-managed; IL5 (NIPR) and IL6 (SIPR); CAC authentication \\
+\midrule
 Microsoft Power Platform & Low-code applications, automation, dashboards & Enterprise-authorized within DoW M365 \\
 \midrule
 SharePoint Online & Web-based tools, document management, portals & Enterprise-authorized within DoW M365 \\
@@ -525,15 +541,21 @@ The following table provides recommendations for obtaining access to approved AI
 \endhead
 \bottomrule
 \endlastfoot
+GenAI.mil & CAC-authenticated at genai.mil; no separate account required; requires DoD network & Start here --- this is the Marine Corps enterprise primary per MARADMIN 018/26 \\
+\midrule
+CamoGPT & CAC-authenticated at camogpt.mil; requires DoD network & Use for API access, tool calling, or SIPR tasks; supplementary to GenAI.mil \\
+\midrule
 M365 Copilot & Enterprise license assignment through M365 admin & Start here if your organization has Copilot licenses \\
 \midrule
 Azure OpenAI & Azure Government subscription; request through cloud team & Best for custom API-driven development \\
 \midrule
 Copilot Studio & Included with Power Platform licensing & Best for building conversational AI assistants \\
 \midrule
-Gemini & Web access at gemini.google.com (unclassified only) & Good general-purpose coding assistant \\
+Gemini & CAC-authenticated via GenAI.mil (CUI-authorized); also at gemini.google.com (unclassified only) & Available on GenAI.mil and commercially \\
 \midrule
-Claude & Web access at claude.ai (unclassified only) & Strong for complex reasoning and documentation \\
+ChatGPT & CAC-authenticated via GenAI.mil (CUI-authorized); also at chatgpt.com (unclassified only) & Available on GenAI.mil and commercially \\
+\midrule
+Claude & Web access at claude.ai (commercial only, unclassified) & Not on GenAI.mil; strong for complex reasoning and documentation \\
 \midrule
 C3 AI & Enterprise agreement; contact your AI/ML program office & Best for data-heavy enterprise applications \\
 \end{longtable}
@@ -1051,9 +1073,9 @@ QA Checklist & Phase 6: QA Review & qa-checklist.md \\
 \midrule
 Tool Registry Entry & Phase 7: Deployment & tool-registry-entry.md \\
 \midrule
-PIA Threshold Analysis & Phase 2: Compliance Review & documentation-package-outline.md \\
+PIA Threshold Analysis & Phase 2: Compliance Review & pia-threshold-analysis.md \\
 \midrule
-Compliance Checklist & Phase 2: Compliance Review & development-journal.md \\
+Compliance Checklist & Phase 2: Compliance Review & compliance-checklist.md \\
 \end{longtable}
 
 % ---------------------------------------------------------------------------

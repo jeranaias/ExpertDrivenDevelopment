@@ -154,7 +154,7 @@
                         <div class="callout callout--info">
                             <h3 class="callout__title">Before Starting</h3>
                             <p>
-                                Verify all students have access to an AI chat tool (ChatGPT, Copilot, or Claude).
+                                Verify all students have access to an AI chat tool. Use <strong>GenAI.mil</strong> (preferred) if CAC-enabled workstations are available. Commercial tools (ChatGPT, Gemini, Claude) are approved for unclassified exercises. Note: ChatGPT, Gemini, and Grok are available on GenAI.mil; Claude is not.
                                 If using a classroom computer lab, test the AI tool on 2-3 machines before students
                                 arrive.
                             </p>
@@ -164,10 +164,11 @@
                             <h3 class="callout__title">Tool Selection Note</h3>
                             <p>
                                 If the classroom has CAC-enabled workstations on a DoD network, use
-                                <strong>GenAI.mil</strong> or <strong>CamoGPT</strong> for all exercises.
-                                These tools operate within the DoD security boundary and are safe for prompts
-                                that reference real unit information. If using commercial tools, remind students
-                                to use fictional names and units in all prompts.
+                                <strong>GenAI.mil</strong> or <strong>CamoGPT</strong> (Army-managed) for all exercises.
+                                These tools operate within the DoD security boundary and are authorized for
+                                prompts containing CUI. PII (real names, SSNs, contact information) must still
+                                be anonymized unless a Privacy Impact Assessment authorizes its use. If using
+                                commercial tools, remind students to use fictional names and units in all prompts.
                             </p>
                         </div>
 
@@ -264,7 +265,7 @@
                         <p>
                             The primary AI tool you&rsquo;ll use throughout this course is <strong>GenAI.mil</strong>
                             (genai.mil), the DoD&rsquo;s enterprise AI platform authorized for all Marines per
-                            MARADMIN 018/26. Over 1.1 million service members are already using it. If you
+                            MARADMIN 018/26. Over 1.1 million unique users (service members, civilians, and contractors) are already using it. If you
                             haven&rsquo;t logged in yet, you will today.
                         </p>
 
@@ -272,9 +273,20 @@
                             <h3 class="callout__title">Approved Tools for This Course</h3>
                             <p>
                                 Exercises in this course work with any approved AI assistant. If you have CAC access,
-                                use <strong>GenAI.mil</strong> or <strong>CamoGPT</strong> for the safest option.
-                                Commercial tools (Claude, Gemini) are approved for unclassified prompts only.
+                                use <strong>GenAI.mil</strong> or <strong>CamoGPT</strong> (Army-managed) for the safest option.
+                                Commercial tools are approved for unclassified prompts only. Note: Gemini, Grok, and ChatGPT are available on GenAI.mil; Claude is not.
                                 See the <a href="../tools/">Approved Tools</a> page for full details.
+                            </p>
+                        </div>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Data Handling Boundaries</h3>
+                            <p>
+                                <strong>GenAI.mil / CamoGPT (Army-managed, IL5):</strong> Authorized for CUI.
+                                PII and PHI must be anonymized unless a PIA authorizes it.
+                                Classified data is never authorized (except CamoGPT on SIPR/IL6).<br>
+                                <strong>Commercial tools (Claude, ChatGPT, Gemini via web):</strong>
+                                Unclassified, non-sensitive data only. Treat every prompt as public disclosure.
                             </p>
                         </div>
 
@@ -1065,8 +1077,8 @@ Date: 03 February 2026
                             <li>Estimate time savings per iteration</li>
                             <li>For each subtask you marked &ldquo;AI Could Help&rdquo; or &ldquo;AI Should Do This,&rdquo; identify which tool you&rsquo;d use:
                                 <ul>
-                                    <li><strong>GenAI.mil</strong> for drafting, analysis, and code generation</li>
-                                    <li><strong>CamoGPT</strong> for data analysis on spreadsheets or tasks requiring API access</li>
+                                    <li><strong>GenAI.mil</strong> (primary) for drafting, analysis, code generation, file upload, and deep research</li>
+                                    <li><strong>CamoGPT</strong> (Army-managed) for API-driven workflows, SIPR tasks, or collaborative workspaces</li>
                                     <li><strong>M365 Copilot</strong> for document editing within Office apps</li>
                                     <li><strong>Power Platform</strong> for building applications</li>
                                 </ul>
@@ -1078,7 +1090,7 @@ Date: 03 February 2026
                             <p>
                                 When labeling subtasks, consider which <a href="../tools/">approved tool</a>
                                 is best suited for each. Use <strong>GenAI.mil</strong> or
-                                <strong>CamoGPT</strong> for tasks involving sensitive data.
+                                <strong>CamoGPT</strong> (Army-managed) for tasks involving sensitive data.
                                 Use commercial tools for unclassified brainstorming and drafting.
                             </p>
                         </div>
@@ -1232,7 +1244,7 @@ Date: 03 February 2026
                         <li><a href="./">Courses</a></li>
                         <li><a href="../sop/">SOP</a></li>
                         <li><a href="../toolkit/">Toolkit</a></li>
-${indent}<li><a href="../tools/">Tools</a></li>
+                        <li><a href="../tools/">Tools</a></li>
                         <li><a href="../resources/">Resources</a></li>
                         <li><a href="../about.html">About</a></li>
                     </ul>
