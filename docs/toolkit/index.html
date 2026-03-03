@@ -1676,6 +1676,10 @@
                 box-shadow: var(--shadow-lg);
             }
 
+            .sidebar.open ~ .main .header {
+                z-index: calc(var(--z-dropdown) - 2);
+            }
+
             .main {
                 margin-left: 0;
                 width: 100%;
@@ -2250,8 +2254,6 @@
         </ul>
     </div>
 
-    <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
-
     <!-- Live region for announcements -->
     <div id="liveRegion" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
@@ -2273,6 +2275,7 @@
     </section>
 
     <div class="app">
+        <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar" aria-label="Category navigation">
             <div class="sidebar-header">
