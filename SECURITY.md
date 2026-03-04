@@ -12,10 +12,9 @@ The following categories of information are **strictly prohibited** from being c
 
 - **Classified Information** of any level (CONFIDENTIAL, SECRET, TOP SECRET, or any compartmented programs)
 - **Controlled Unclassified Information (CUI)**
-- **For Official Use Only (FOUO)** materials
 - **Personally Identifiable Information (PII)**, including but not limited to real names of students or trainees, Social Security Numbers, DoW ID numbers, EDIPI numbers, phone numbers, home addresses, or personal email addresses
 - **Protected Health Information (PHI)**
-- **Real operational data**, including operational plans, schedules, intelligence products, unit-specific procedures, deployment information, or operationally sensitive material
+- **Real operational data**, including operational plans, schedules, operational intelligence products, unit-specific procedures, deployment information, or operationally sensitive material
 - **Real student data or real personnel data**
 - **Real .mil email addresses** (other than the project POC)
 - **Export-controlled technical data** under ITAR or EAR
@@ -33,7 +32,7 @@ All examples, sample data, scenarios, and demonstrations in this repository **mu
 All contributors are personally responsible for verifying that their submissions contain only UNCLASSIFIED information before committing to this repository. By submitting a pull request or committing content, you affirm that:
 
 1. The content is UNCLASSIFIED and approved for public release.
-2. The content contains no CUI, FOUO, PII, PHI, or classified information.
+2. The content contains no CUI, PII, PHI, or classified information.
 3. All names, data, and scenarios are fictional.
 4. The content does not violate any DoW information security policies.
 

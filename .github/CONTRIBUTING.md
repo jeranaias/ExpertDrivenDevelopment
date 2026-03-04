@@ -43,7 +43,7 @@ Issue templates are available when you create a new issue. Please fill out all r
 
 All content in this repository must comply with the following requirements:
 
-- **UNCLASSIFIED only.** All materials must be UNCLASSIFIED and suitable for public release. Do not commit any classified, CUI, FOUO, or export-controlled information.
+- **UNCLASSIFIED only.** All materials must be UNCLASSIFIED and suitable for public release. Do not commit any classified, CUI, or export-controlled information.
 - **No PII.** Do not include real names, DoW ID numbers, Social Security Numbers, personal email addresses, phone numbers, or any other personally identifiable information.
 - **No real operational data.** Do not reference real operations, unit-specific procedures, or operationally sensitive material.
 - **Fictional names and data only.** All examples, scenarios, and sample data must use fictional names, units, and information.

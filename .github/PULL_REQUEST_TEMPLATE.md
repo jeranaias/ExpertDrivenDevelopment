@@ -30,7 +30,7 @@ List the key changes included in this pull request:
 - [ ] This pull request contains **no PII** (no real names, DoW IDs, SSNs, personal contact information, etc.).
 - [ ] This pull request contains **no real personnel or student data**.
 - [ ] All examples, scenarios, and sample data use **fictional names and information only**.
-- [ ] This pull request contains **no CUI, FOUO, or classified information**.
+- [ ] This pull request contains **no CUI or classified information**.
 - [ ] I have personally reviewed all submitted content to verify compliance with the above.
 
 ## Testing

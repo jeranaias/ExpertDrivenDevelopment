@@ -37,4 +37,4 @@ Add any other information, screenshots, or references that support your feedback
 
 ---
 
-**Reminder:** Do not include any classified, CUI, FOUO, PII, or operationally sensitive information in this submission. All content must be UNCLASSIFIED.
+**Reminder:** Do not include any classified, CUI, PII, or operationally sensitive information in this submission. All content must be UNCLASSIFIED.

@@ -122,11 +122,11 @@ ExpertDrivenDevelopment/
 
 Contributions are welcome from all DoW personnel. Please read the [Contributing Guide](.github/CONTRIBUTING.md) before submitting issues or pull requests.
 
-> **All contributions must be UNCLASSIFIED.** Do not submit CUI, PII, FOUO, or classified material under any circumstances.
+> **All contributions must be UNCLASSIFIED.** Do not submit CUI, PII, or classified material under any circumstances.
 
 ## Classification
 
-All materials in this repository are **UNCLASSIFIED // Distribution Unlimited**. No CUI, PII, FOUO, or classified information is permitted in any file, issue, pull request, or discussion. See [SECURITY.md](SECURITY.md) for details.
+All materials in this repository are **UNCLASSIFIED // Distribution Unlimited**. No CUI, PII, or classified information is permitted in any file, issue, pull request, or discussion. See [SECURITY.md](SECURITY.md) for details.
 
 ## License
 

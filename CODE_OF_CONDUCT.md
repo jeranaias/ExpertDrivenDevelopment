@@ -35,7 +35,7 @@ Examples of unacceptable behavior include:
 * Public or private harassment
 * Publishing others' private information, such as a physical or email address,
   without their explicit permission
-* Sharing or committing classified, CUI, FOUO, or PII content to this
+* Sharing or committing classified, CUI, or PII content to this
   repository
 * Other conduct which could reasonably be considered inappropriate in a
   professional military or government setting

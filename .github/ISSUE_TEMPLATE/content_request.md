@@ -46,4 +46,4 @@ Add any other details or context that may be helpful.
 
 ---
 
-**Reminder:** Do not include any classified, CUI, FOUO, PII, or operationally sensitive information in this request. All content must be UNCLASSIFIED.
+**Reminder:** Do not include any classified, CUI, PII, or operationally sensitive information in this request. All content must be UNCLASSIFIED.

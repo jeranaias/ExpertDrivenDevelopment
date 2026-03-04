@@ -41,4 +41,4 @@ Add any other relevant details or context about this issue.
 
 ---
 
-**Reminder:** Do not include any classified, CUI, FOUO, PII, or operationally sensitive information in this issue. All content must be UNCLASSIFIED.
+**Reminder:** Do not include any classified, CUI, PII, or operationally sensitive information in this issue. All content must be UNCLASSIFIED.
