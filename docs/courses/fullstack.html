@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Course 6: Full-Stack AI-Assisted Development - An 8-hour intensive workshop where students build and deploy a complete web application using AI as their development partner.">
+    <title>Full-Stack AI-Assisted Development | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="site-wrapper">
+
+    <!-- Skip to content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Site Header -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./" class="active">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="./" class="active">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="../resources/">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Courses</a></li>
+                    <li aria-current="page">Full-Stack AI-Assisted Development</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Course 6: Full-Stack AI-Assisted Development</h1>
+            <p class="page-header__desc">
+                8 hours &mdash; Build and deploy a complete web application from zero using AI as your
+                development partner. Go backend, React frontend, database, authentication, Docker,
+                and cloud deployment. The capstone of the EDD Builder path.
+            </p>
+            <div class="mt-lg">
+                <span class="badge badge--gold">Bonus &mdash; Elective</span>
+                <span class="badge">8 Hours</span>
+                <span class="badge badge--scarlet">Advanced Builders</span>
+            </div>
+            <p class="mt-lg">
+                <strong>Prerequisite:</strong> Advanced Workshop (Course 4), at least 1 deployed tool, computer with admin rights
+            </p>
+            <p><a href="student/fullstack.html">View the Student Version</a></p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content" class="site-main">
+        <div class="container">
+            <div class="page-layout page-layout--sidebar">
+
+                <!-- Sidebar / Table of Contents -->
+                <aside class="sidebar sidebar--sticky" aria-label="Table of contents">
+                    <nav class="toc">
+                        <h2 class="toc__title">On This Page</h2>
+                        <ul class="toc__list">
+                            <li><a href="#overview">Course Overview</a></li>
+                            <li><a href="#agenda">Agenda &amp; Timing</a></li>
+                            <li><a href="#module-1">Module 1: The Full-Stack Frontier</a></li>
+                            <li><a href="#module-2">Module 2: Environment Setup</a></li>
+                            <li><a href="#module-3">Module 3: Backend from Scratch</a></li>
+                            <li><a href="#module-4">Module 4: Data Layer</a></li>
+                            <li><a href="#module-5">Module 5: Frontend from Scratch</a></li>
+                            <li><a href="#module-6">Module 6: Pages &amp; Navigation</a></li>
+                            <li><a href="#module-7">Module 7: AI Chat Integration</a></li>
+                            <li><a href="#module-8">Module 8: Auth &amp; Middleware</a></li>
+                            <li><a href="#module-9">Module 9: External Integrations</a></li>
+                            <li><a href="#module-10">Module 10: Docker &amp; Deployment</a></li>
+                            <li><a href="#assessment">Assessment &amp; Wrap-Up</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <!-- Page Content -->
+                <div class="page-content">
+
+<!-- ============================================================ -->
+<!-- COURSE OVERVIEW                                               -->
+<!-- ============================================================ -->
+
+<section id="overview">
+    <h2>Course Overview</h2>
+
+    <p>
+        Courses 1&ndash;5 taught you to build tools on Power Platform &mdash; low-code applications
+        within the Microsoft ecosystem. That&rsquo;s powerful, and most Marines will never need more.
+    </p>
+    <p>
+        But some problems don&rsquo;t fit inside Power Apps. When you need a custom AI chat interface,
+        role-based dashboards with real-time data, or an application that deploys anywhere from a
+        laptop to Azure Government &mdash; you need full-stack development.
+    </p>
+    <p>
+        This course teaches you to build that. Not by learning to code from scratch, but by learning
+        to <strong>direct AI to write code for you</strong>, verify it works, and iterate when it doesn&rsquo;t.
+        The same Cyborg pattern from Course 3, applied at a fundamentally higher level.
+    </p>
+
+    <div class="callout callout--info">
+        <h3 class="callout__title">What You&rsquo;ll Build</h3>
+        <p>
+            By the end of this course, you will have built and deployed a working web application with:
+        </p>
+        <ul>
+            <li>A <strong>Go backend</strong> serving a REST API with multiple endpoints</li>
+            <li>A <strong>React frontend</strong> with multiple pages, navigation, and interactive features</li>
+            <li>A <strong>data layer</strong> that reads from JSON files (upgradeable to SQLite or PostgreSQL)</li>
+            <li>An <strong>AI chat interface</strong> that queries your application&rsquo;s data through tool use</li>
+            <li><strong>Role-based authentication</strong> so different users see different data</li>
+            <li>A <strong>Docker container</strong> deployed to Azure Container Apps (or running locally)</li>
+        </ul>
+        <p>
+            This is exactly how <a href="https://github.com/jeranaias/heywood-tbs">Heywood TBS</a> was built.
+        </p>
+    </div>
+
+    <h3>Six Principles of AI-Assisted Full-Stack Development</h3>
+
+    <ol>
+        <li>
+            <strong>The Conversation is the IDE.</strong>
+            Your AI chat window is your primary development tool. Code editors are for verification,
+            not authoring. You tell the AI what you need; it writes the code.
+        </li>
+        <li>
+            <strong>Scaffold &rarr; Flesh Out &rarr; Integrate.</strong>
+            Always start with the skeleton. Get a blank page loading before adding features.
+            Get one API endpoint working before building ten. Never try to build everything at once.
+        </li>
+        <li>
+            <strong>The 3-Minute Rule.</strong>
+            If the AI&rsquo;s output doesn&rsquo;t work after 3 minutes of debugging, paste the exact error
+            message back to the AI. Don&rsquo;t manually debug AI-generated code &mdash; let the AI fix its own work.
+        </li>
+        <li>
+            <strong>Incremental Deployment.</strong>
+            Deploy after every major feature, not at the end. If you wait until the end to deploy,
+            you&rsquo;ll spend hours debugging environment issues instead of building features.
+        </li>
+        <li>
+            <strong>Interface-First Design.</strong>
+            Define <em>what</em> your system needs to do before <em>how</em> it does it. Tell the AI
+            &ldquo;I need a function that takes a student ID and returns their record&rdquo; &mdash; not
+            &ldquo;write me a SQL query.&rdquo; AI excels at implementing well-defined interfaces.
+        </li>
+        <li>
+            <strong>Copy the Error, Not Your Frustration.</strong>
+            When something breaks, give the AI the exact error message and the file that caused it.
+            Don&rsquo;t say &ldquo;it doesn&rsquo;t work&rdquo; &mdash; say &ldquo;I get this error when I run go build.&rdquo;
+        </li>
+    </ol>
+
+    <div class="callout callout--instructor">
+        <h3 class="callout__title">Instructor Requirements</h3>
+        <p>
+            This course requires an instructor who has:
+        </p>
+        <ul>
+            <li>Built and deployed at least one full-stack web application using AI assistance</li>
+            <li>Experience with Go or another backend language (Python, Node.js can substitute)</li>
+            <li>A working Docker installation on the instructor machine</li>
+            <li>An Azure subscription (or ability to demo deployment)</li>
+            <li>An OpenAI API key or Azure OpenAI access</li>
+        </ul>
+        <p>
+            <strong>Critical:</strong> The instructor should build the entire application themselves before
+            teaching this course, following the student prompts. You need to know where students will get
+            stuck, because they will.
+        </p>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- AGENDA & TIMING                                               -->
+<!-- ============================================================ -->
+
+<section id="agenda">
+    <h2>Agenda &amp; Timing</h2>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Time</th>
+                    <th scope="col">Module</th>
+                    <th scope="col">What Students Build</th>
+                    <th scope="col">Key Skill</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0:00&ndash;0:30</td>
+                    <td>1. The Full-Stack Frontier</td>
+                    <td>Mental model shift</td>
+                    <td>Understanding scope</td>
+                </tr>
+                <tr>
+                    <td>0:30&ndash;1:15</td>
+                    <td>2. Environment Setup</td>
+                    <td>Go, Node, Git, VS Code, Docker installed</td>
+                    <td>AI-guided installation</td>
+                </tr>
+                <tr>
+                    <td>1:15&ndash;2:00</td>
+                    <td>3. Backend from Scratch</td>
+                    <td>Go HTTP server, router, first endpoint</td>
+                    <td>AI-generated server code</td>
+                </tr>
+                <tr>
+                    <td>2:00&ndash;2:45</td>
+                    <td>4. Data Layer</td>
+                    <td>DataStore interface, JSON store, seed data</td>
+                    <td>Interface-first design</td>
+                </tr>
+                <tr>
+                    <td>2:45&ndash;3:00</td>
+                    <td colspan="3"><em>Break (15 minutes)</em></td>
+                </tr>
+                <tr>
+                    <td>3:00&ndash;3:45</td>
+                    <td>5. Frontend from Scratch</td>
+                    <td>React + Vite + TypeScript, first page</td>
+                    <td>AI-assisted frontend</td>
+                </tr>
+                <tr>
+                    <td>3:45&ndash;4:30</td>
+                    <td>6. Pages &amp; Navigation</td>
+                    <td>Dashboard, detail page, sidebar, routing</td>
+                    <td>Iterative UI building</td>
+                </tr>
+                <tr>
+                    <td>4:30&ndash;5:15</td>
+                    <td>7. AI Chat Integration</td>
+                    <td>Chat page, OpenAI API, tool use</td>
+                    <td>Building AI into your app</td>
+                </tr>
+                <tr>
+                    <td>5:15&ndash;5:30</td>
+                    <td colspan="3"><em>Break (15 minutes)</em></td>
+                </tr>
+                <tr>
+                    <td>5:30&ndash;6:15</td>
+                    <td>8. Auth &amp; Middleware</td>
+                    <td>Role-based auth, protected routes</td>
+                    <td>Security patterns</td>
+                </tr>
+                <tr>
+                    <td>6:15&ndash;7:00</td>
+                    <td>9. External Integrations</td>
+                    <td>Database or Microsoft Graph API</td>
+                    <td>Connecting real services</td>
+                </tr>
+                <tr>
+                    <td>7:00&ndash;7:45</td>
+                    <td>10. Docker &amp; Deployment</td>
+                    <td>Containerized app on Azure</td>
+                    <td>Local to production</td>
+                </tr>
+                <tr>
+                    <td>7:45&ndash;8:00</td>
+                    <td>Wrap-Up &amp; Assessment</td>
+                    <td>Deployed app + frontier map</td>
+                    <td>Self-assessment</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3"><strong>Total Course Time</strong></td>
+                    <td><strong>8 hours (480 minutes)</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="callout callout--warning">
+        <h3 class="callout__title">Pacing Note</h3>
+        <p>
+            This is an aggressive pace. Some students will fall behind, especially in Modules 3&ndash;4 (backend)
+            and Module 7 (AI chat). That&rsquo;s expected. The instructor should:
+        </p>
+        <ul>
+            <li>Have a pre-built &ldquo;checkpoint&rdquo; version of the app at each module boundary</li>
+            <li>Students who fall behind can clone the checkpoint and continue from there</li>
+            <li>Prioritize: if time is short, skip Module 9 (External Integrations) &mdash; it&rsquo;s the most independent module</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MODULE 1: THE FULL-STACK FRONTIER                             -->
+<!-- ============================================================ -->
+
+<section id="module-1">
+    <h2>Module 1: The Full-Stack Frontier</h2>
+    <p><strong>Duration:</strong> 30 minutes</p>
+
+    <p>
+        This module shifts students&rsquo; mental model from &ldquo;I build Power Apps&rdquo; to
+        &ldquo;I can build anything.&rdquo; The goal isn&rsquo;t to make them software engineers &mdash;
+        it&rsquo;s to make them realize that AI has moved the frontier so far that the distinction
+        between &ldquo;coder&rdquo; and &ldquo;non-coder&rdquo; is dissolving.
+    </p>
+
+    <h3>1.1 The Before and After</h3>
+
+    <p>Start with a live demo. Open the Heywood TBS application and show:</p>
+    <ul>
+        <li>The Dashboard &mdash; 200 students, real-time analytics, at-risk identification</li>
+        <li>The Chat &mdash; ask &ldquo;Morning brief&rdquo; and watch it pull live data</li>
+        <li>The Settings page &mdash; database connections, Outlook integration, admin config</li>
+        <li>The role picker &mdash; switch from XO to Student, watch the entire UI adapt</li>
+    </ul>
+
+    <p>Then reveal:</p>
+
+    <div class="callout callout--info">
+        <h3 class="callout__title">Key Reveal</h3>
+        <p>
+            &ldquo;This application has 8,400 lines of Go backend code, 4,400 lines of React frontend code,
+            35 API endpoints, 5 database backends, Microsoft Graph integration, CAC authentication,
+            and FIPS 140-3 compliance. It was built in <strong>days, not months</strong>, by one person
+            working with AI. No team of contractors. No six-month timeline. No $2M budget.&rdquo;
+        </p>
+    </div>
+
+    <h3>1.2 Why Full-Stack?</h3>
+
+    <p>Walk through the limitations students have hit with Power Platform:</p>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Limitation</th>
+                    <th scope="col">Power Platform</th>
+                    <th scope="col">Full-Stack</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Custom AI chat interface</td>
+                    <td>Not possible (Copilot Studio is limited)</td>
+                    <td>Build exactly what you need</td>
+                </tr>
+                <tr>
+                    <td>Role-based dashboards</td>
+                    <td>Power BI RLS (complex setup)</td>
+                    <td>Code it directly &mdash; one app, four views</td>
+                </tr>
+                <tr>
+                    <td>Offline / disconnected ops</td>
+                    <td>Requires internet + M365 license</td>
+                    <td>Docker container runs anywhere</td>
+                </tr>
+                <tr>
+                    <td>Data sovereignty</td>
+                    <td>Data lives in Microsoft cloud</td>
+                    <td>Data stays where you put it</td>
+                </tr>
+                <tr>
+                    <td>Cost per user</td>
+                    <td>$20+/user/month (Power Apps license)</td>
+                    <td>$0 &mdash; open source, self-hosted</td>
+                </tr>
+                <tr>
+                    <td>Deployment flexibility</td>
+                    <td>Microsoft cloud only</td>
+                    <td>Azure, AWS, on-prem, laptop, ship, field</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>1.3 The Stack We&rsquo;re Building</h3>
+
+    <p>Draw this on the whiteboard (or show the slide):</p>
+
+    <div class="code-block">
+        <div class="code-block__label">Application Architecture</div>
+        <pre>
+┌─────────────────────────────────────┐
+│          React Frontend              │
+│   (What the user sees and clicks)    │
+├─────────────────────────────────────┤
+│          Go HTTP Server              │
+│   (Handles requests, returns data)   │
+├─────────────────────────────────────┤
+│          Data Layer                  │
+│   (Stores and retrieves data)        │
+├─────────────────────────────────────┤
+│          External Services           │
+│   (AI APIs, Outlook, databases)      │
+└─────────────────────────────────────┘</pre>
+    </div>
+
+    <p>
+        Explain each layer in one sentence:
+    </p>
+    <ul>
+        <li><strong>Frontend</strong> &mdash; React code that runs in the user&rsquo;s browser. It draws the screens and sends requests to the backend.</li>
+        <li><strong>Backend</strong> &mdash; Go code that runs on the server. It receives requests, processes data, and sends back JSON.</li>
+        <li><strong>Data Layer</strong> &mdash; Where the data lives. Starts as JSON files, can upgrade to SQLite or PostgreSQL.</li>
+        <li><strong>External Services</strong> &mdash; Other systems your app talks to: OpenAI for chat, Microsoft Graph for Outlook, etc.</li>
+    </ul>
+
+    <h3>1.4 How AI Changes Everything</h3>
+
+    <p>
+        In traditional development, a junior developer spends <strong>years</strong> learning a programming
+        language before building anything useful. With AI-assisted development:
+    </p>
+
+    <ul>
+        <li>You describe what you want in plain English</li>
+        <li>The AI writes the code</li>
+        <li>You verify it works (run it, check the output)</li>
+        <li>If it doesn&rsquo;t work, you paste the error back and the AI fixes it</li>
+        <li>Repeat until done</li>
+    </ul>
+
+    <p>
+        You don&rsquo;t need to understand every line of code. You need to understand:
+    </p>
+    <ol>
+        <li><strong>What to ask for</strong> (requirements &mdash; you learned this in Courses 1&ndash;4)</li>
+        <li><strong>How to verify it works</strong> (run the code, check the browser)</li>
+        <li><strong>How to debug failures</strong> (paste errors back to the AI)</li>
+        <li><strong>When to move on</strong> (the 3-Minute Rule)</li>
+    </ol>
+
+    <div class="callout callout--instructor">
+        <h3 class="callout__title">Instructor Note</h3>
+        <p>
+            Students will be intimidated. That&rsquo;s normal. Remind them: &ldquo;You felt the same way
+            before Course 2 when you built your first Power App. By the end of today, you&rsquo;ll have
+            a deployed web application. Same process, higher ceiling.&rdquo;
+        </p>
+    </div>
+
+    <div class="callout callout--success">
+        <h3 class="callout__title">Module 1 Complete When</h3>
+        <ul>
+            <li>Students can articulate the four layers of a web application</li>
+            <li>Students understand they won&rsquo;t &ldquo;learn to code&rdquo; &mdash; they&rsquo;ll learn to direct AI to code for them</li>
+            <li>Students have seen the live Heywood demo and understand the target</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MODULE 2: ENVIRONMENT SETUP                                   -->
+<!-- ============================================================ -->
+
+<section id="module-2">
+    <h2>Module 2: Environment Setup</h2>
+    <p><strong>Duration:</strong> 45 minutes</p>
+
+    <p>
+        Before we build anything, students need the right tools installed. This is the most
+        boring module and the most critical. If the environment isn&rsquo;t right, nothing else works.
+    </p>
+
+    <div class="callout callout--warning">
+        <h3 class="callout__title">Pre-Class Preparation</h3>
+        <p>
+            Ideally, send setup instructions to students <strong>before class</strong> so they arrive
+            with tools installed. In practice, expect 30&ndash;50% to need help during this module.
+            Have the instructor and any TAs circulate during this time.
+        </p>
+    </div>
+
+    <h3>2.1 Required Tools</h3>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Tool</th>
+                    <th scope="col">What It Does</th>
+                    <th scope="col">How to Install</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Go 1.22+</strong></td>
+                    <td>Backend programming language</td>
+                    <td><code>go.dev/dl</code> &mdash; download installer</td>
+                </tr>
+                <tr>
+                    <td><strong>Node.js 20+</strong></td>
+                    <td>Frontend build tools</td>
+                    <td><code>nodejs.org</code> &mdash; LTS version</td>
+                </tr>
+                <tr>
+                    <td><strong>Git</strong></td>
+                    <td>Version control</td>
+                    <td><code>git-scm.com</code> &mdash; download installer</td>
+                </tr>
+                <tr>
+                    <td><strong>VS Code</strong></td>
+                    <td>Code editor</td>
+                    <td><code>code.visualstudio.com</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Docker Desktop</strong></td>
+                    <td>Container runtime (Module 10)</td>
+                    <td><code>docker.com/products/docker-desktop</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>2.2 AI-Guided Installation</h3>
+
+    <p>
+        Here&rsquo;s your first lesson in AI-assisted development: <strong>let the AI help you install things.</strong>
+        Students should open their AI tool (ChatGPT, Claude, Copilot) and use this prompt:
+    </p>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            I need to set up a development environment on [Windows/Mac]. I need to install:
+            Go 1.22 or later, Node.js 20 LTS, Git, and VS Code. Give me step-by-step
+            instructions for my operating system, including how to verify each installation
+            works. After installation, I should be able to run: go version, node --version,
+            npm --version, git --version &mdash; and see version numbers for all four.
+        </p>
+    </div>
+
+    <h3>2.3 Verify the Environment</h3>
+
+    <p>Every student should open a terminal (Command Prompt, PowerShell, or Terminal) and run:</p>
+
+    <div class="code-block">
+        <div class="code-block__label">Verification Commands</div>
+        <pre>
+go version        # Should show: go version go1.22.x or higher
+node --version    # Should show: v20.x.x or higher
+npm --version     # Should show: 10.x.x or higher
+git --version     # Should show: git version 2.x.x</pre>
+    </div>
+
+    <h3>2.4 Create the Project</h3>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            I&rsquo;m starting a new full-stack web application. Create the initial project
+            structure with a Go backend and React frontend. The project should be called
+            &ldquo;my-staff-app&rdquo; with this structure:
+        </p>
+        <ul>
+            <li>Root directory: my-staff-app/</li>
+            <li>Go module initialized as &ldquo;my-staff-app&rdquo; in the root</li>
+            <li>Backend entry point at cmd/server/main.go</li>
+            <li>Internal packages directory at internal/</li>
+            <li>React app (Vite + TypeScript) in web/ subdirectory</li>
+            <li>Data directory at data/ for JSON seed files</li>
+        </ul>
+        <p>
+            Give me the exact terminal commands to create this structure and initialize
+            both the Go module and the React app. Use Vite with the React-TypeScript template.
+        </p>
+    </div>
+
+    <div class="code-block">
+        <div class="code-block__label">Expected Terminal Commands</div>
+        <pre>
+mkdir my-staff-app
+cd my-staff-app
+go mod init my-staff-app
+mkdir -p cmd/server internal data
+npm create vite@latest web -- --template react-ts
+cd web && npm install && cd ..</pre>
+    </div>
+
+    <div class="callout callout--instructor">
+        <h3 class="callout__title">Instructor Checkpoint: Environment Ready</h3>
+        <p>Before moving on, verify every student has:</p>
+        <ul>
+            <li>All four tools installed and verified</li>
+            <li>The project directory created with both Go and React initialized</li>
+            <li><code>go mod init</code> completed (go.mod file exists)</li>
+            <li><code>npm install</code> completed in web/ (node_modules exists)</li>
+        </ul>
+        <p>
+            <strong>Common issues:</strong> Go not in PATH (need to restart terminal), npm create
+            vite fails (need to update npm: <code>npm install -g npm@latest</code>), Docker requires
+            admin rights (defer to Module 10).
+        </p>
+    </div>
+
+    <div class="callout callout--success">
+        <h3 class="callout__title">Module 2 Complete When</h3>
+        <ul>
+            <li>Every student has Go, Node, Git, and VS Code installed</li>
+            <li>Project directory exists with go.mod and web/package.json</li>
+            <li>Students have used AI to guide their own installation</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MODULE 3: BACKEND FROM SCRATCH                                -->
+<!-- ============================================================ -->
+
+<section id="module-3">
+    <h2>Module 3: Backend from Scratch</h2>
+    <p><strong>Duration:</strong> 45 minutes</p>
+
+    <p>
+        This is where students write their first real server-side code &mdash; or rather, where they
+        <strong>direct the AI</strong> to write it. By the end of this module, students will have a
+        running HTTP server that responds to API requests with JSON.
+    </p>
+
+    <h3>3.1 The First Server</h3>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            Create a Go HTTP server in cmd/server/main.go that:
+        </p>
+        <ul>
+            <li>Starts on port 8080</li>
+            <li>Uses only the Go standard library (net/http), no frameworks</li>
+            <li>Has a health check endpoint at GET /api/v1/health that returns {"status": "ok"}</li>
+            <li>Uses Go 1.22 ServeMux pattern matching (method + path)</li>
+            <li>Logs the server start address to stdout</li>
+            <li>Accepts a -port flag to change the port</li>
+            <li>Accepts a -dev flag for development mode</li>
+        </ul>
+    </div>
+
+    <div class="code-block">
+        <div class="code-block__label">Expected: cmd/server/main.go</div>
+        <pre>
+package main
+
+import (
+    "encoding/json"
+    "flag"
+    "fmt"
+    "log"
+    "net/http"
+)
+
+func main() {
+    port := flag.String("port", "8080", "server port")
+    dev := flag.Bool("dev", false, "development mode")
+    flag.Parse()
+
+    mux := http.NewServeMux()
+
+    mux.HandleFunc("GET /api/v1/health", func(w http.ResponseWriter, r *http.Request) {
+        w.Header().Set("Content-Type", "application/json")
+        json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
+    })
+
+    addr := ":" + *port
+    log.Printf("Server starting on %s (dev=%v)", addr, *dev)
+    if err := http.ListenAndServe(addr, mux); err != nil {
+        log.Fatal(err)
+    }
+}</pre>
+    </div>
+
+    <p>Students run it:</p>
+
+    <div class="code-block">
+        <div class="code-block__label">Run and Test</div>
+        <pre>
+go run ./cmd/server -dev
+
+# In another terminal (or browser):
+curl http://localhost:8080/api/v1/health
+# Returns: {"status":"ok"}</pre>
+    </div>
+
+    <div class="callout callout--info">
+        <h3 class="callout__title">First Victory</h3>
+        <p>
+            This is a critical moment. When students see <code>{"status":"ok"}</code> in their browser,
+            they&rsquo;ve just built their first web server. Celebrate it. They wrote zero lines of code
+            themselves, but they directed the AI to build something real. That&rsquo;s the skill.
+        </p>
+    </div>
+
+    <h3>3.2 Adding a Router</h3>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            Now create a separate router file at internal/api/router.go. Move the route
+            registration into a SetupRouter function that returns an *http.ServeMux.
+            Also create helper functions writeJSON(w, status, data) and writeError(w, status, message)
+            in the same package. Keep the health endpoint. The main.go should call
+            api.SetupRouter() instead of defining routes directly.
+        </p>
+    </div>
+
+    <p>
+        This teaches <strong>Scaffold &rarr; Flesh Out</strong>: we started with everything in main.go,
+        now we&rsquo;re separating concerns. The AI handles the refactoring.
+    </p>
+
+    <h3>3.3 First Data Endpoint</h3>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            Add a new endpoint GET /api/v1/items that returns a hardcoded JSON array of 5 items.
+            Each item should have: id (string), title (string), status (string: &ldquo;active&rdquo; or
+            &ldquo;pending&rdquo;), and priority (string: &ldquo;high&rdquo;, &ldquo;medium&rdquo;, &ldquo;low&rdquo;).
+            Make the items relevant to a military unit &mdash; things like &ldquo;Complete range safety brief&rdquo;
+            or &ldquo;Submit PFT scores.&rdquo;
+        </p>
+    </div>
+
+    <div class="callout callout--instructor">
+        <h3 class="callout__title">Instructor Checkpoint: Server Running</h3>
+        <p>Every student should be able to:</p>
+        <ul>
+            <li>Run <code>go run ./cmd/server -dev</code> without errors</li>
+            <li>Open <code>http://localhost:8080/api/v1/health</code> in a browser and see JSON</li>
+            <li>Open <code>http://localhost:8080/api/v1/items</code> and see the 5-item array</li>
+        </ul>
+        <p>
+            <strong>Common issues:</strong> Port already in use (change to 8081), import path mismatches
+            (go.mod module name must match import paths), missing go.sum (run <code>go mod tidy</code>).
+        </p>
+    </div>
+
+    <div class="callout callout--success">
+        <h3 class="callout__title">Module 3 Complete When</h3>
+        <ul>
+            <li>Go server runs and serves JSON on two endpoints</li>
+            <li>Code is organized with a separate router file</li>
+            <li>Students have practiced the prompt &rarr; verify &rarr; iterate cycle at least twice</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MODULE 4: DATA LAYER                                          -->
+<!-- ============================================================ -->
+
+<section id="module-4">
+    <h2>Module 4: Data Layer</h2>
+    <p><strong>Duration:</strong> 45 minutes</p>
+
+    <p>
+        Hardcoded data is fine for testing, but real applications read from data stores.
+        This module teaches <strong>Interface-First Design</strong> &mdash; one of the most powerful
+        patterns in AI-assisted development.
+    </p>
+
+    <h3>4.1 Define the Interface</h3>
+
+    <p>
+        Before writing any data storage code, we define what our data layer needs to <em>do</em>.
+        This is the interface &mdash; a contract that says &ldquo;any data store must support these operations.&rdquo;
+    </p>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            Create a Go interface in internal/data/store.go for a DataStore that manages
+            items for a military unit application. The interface should have these methods:
+        </p>
+        <ul>
+            <li>ListItems() &mdash; returns all items</li>
+            <li>GetItem(id string) &mdash; returns one item by ID</li>
+            <li>CreateItem(item) &mdash; adds a new item</li>
+            <li>UpdateItem(id string, updates) &mdash; modifies an existing item</li>
+        </ul>
+        <p>
+            Also define the Item struct with fields: ID, Title, Description, Status, Priority,
+            AssignedTo, CreatedAt. Use proper JSON tags. Then implement a JSONStore that reads
+            from and writes to a JSON file in the data/ directory.
+        </p>
+    </div>
+
+    <div class="callout callout--info">
+        <h3 class="callout__title">Why Interfaces Matter</h3>
+        <p>
+            This is the same pattern used in Heywood. Its DataStore interface has 27 methods and
+            5 different backends (JSON, SQLite, PostgreSQL, Excel, Hybrid). But the rest of the
+            application doesn&rsquo;t care which backend is active &mdash; it only talks to the interface.
+        </p>
+        <p>
+            When you define interfaces first, you can:
+        </p>
+        <ul>
+            <li>Start with JSON files (easy, no setup)</li>
+            <li>Upgrade to SQLite later (without changing any other code)</li>
+            <li>Switch to PostgreSQL for production (just a config change)</li>
+        </ul>
+    </div>
+
+    <h3>4.2 Create Seed Data</h3>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            Create a JSON seed file at data/items.json with 20 realistic items for a
+            military training unit. Include a mix of statuses (active, pending, completed)
+            and priorities (high, medium, low). Items should be things like equipment checks,
+            training events, qualification deadlines, and admin tasks. Use military formatting
+            for dates and descriptions.
+        </p>
+    </div>
+
+    <h3>4.3 Wire It Up</h3>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            Update cmd/server/main.go to:
+        </p>
+        <ul>
+            <li>Load the JSONStore from the data/ directory on startup</li>
+            <li>Pass the store to the router/handlers</li>
+            <li>Replace the hardcoded items endpoint with one that reads from the store</li>
+            <li>Add a GET /api/v1/items/{id} endpoint that returns a single item</li>
+        </ul>
+    </div>
+
+    <div class="callout callout--instructor">
+        <h3 class="callout__title">Instructor Checkpoint: Data Layer Working</h3>
+        <ul>
+            <li>GET /api/v1/items returns 20 items from the JSON file</li>
+            <li>GET /api/v1/items/1 returns a single item</li>
+            <li>Students can explain what an interface is in one sentence: &ldquo;A contract that defines what operations a data store must support&rdquo;</li>
+        </ul>
+    </div>
+
+    <div class="callout callout--success">
+        <h3 class="callout__title">Module 4 Complete When</h3>
+        <ul>
+            <li>DataStore interface defined with 4+ methods</li>
+            <li>JSONStore implementation reads from data/items.json</li>
+            <li>API endpoints return data from the store</li>
+            <li>Students understand interface-first design</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MODULE 5: FRONTEND FROM SCRATCH                               -->
+<!-- ============================================================ -->
+
+<section id="module-5">
+    <h2>Module 5: Frontend from Scratch</h2>
+    <p><strong>Duration:</strong> 45 minutes</p>
+
+    <p>
+        The backend is serving data. Now we build the frontend to display it. Students will create
+        a React application that fetches data from their Go API and renders it in the browser.
+    </p>
+
+    <h3>5.1 Configure the Frontend</h3>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            I have a React app created with Vite in my web/ directory. I need to:
+        </p>
+        <ul>
+            <li>Install and configure Tailwind CSS for styling</li>
+            <li>Set up a Vite proxy so /api requests forward to my Go server on port 8080</li>
+            <li>Create a simple API client at web/src/lib/api.ts that has a function to fetch items from /api/v1/items</li>
+            <li>Replace the default App.tsx with a clean starting point that shows &ldquo;My Staff App&rdquo; as the heading</li>
+        </ul>
+        <p>
+            Give me the exact commands and file contents. Use Tailwind CSS v3 with the default config.
+        </p>
+    </div>
+
+    <h3>5.2 First Component &mdash; The Items List</h3>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            Create a React component at web/src/pages/ItemsPage.tsx that:
+        </p>
+        <ul>
+            <li>Fetches items from the API on mount using useEffect</li>
+            <li>Displays them in a table with columns: Title, Status, Priority, Assigned To</li>
+            <li>Color-codes the Status column (green for active, yellow for pending, gray for completed)</li>
+            <li>Color-codes the Priority column (red for high, yellow for medium, green for low)</li>
+            <li>Uses Tailwind CSS classes for styling</li>
+            <li>Shows a loading state while fetching</li>
+            <li>Shows an error message if the fetch fails</li>
+        </ul>
+    </div>
+
+    <h3>5.3 Run Both Together</h3>
+
+    <p>Students now need two terminals:</p>
+
+    <div class="code-block">
+        <div class="code-block__label">Terminal 1: Backend</div>
+        <pre>go run ./cmd/server -dev</pre>
+    </div>
+
+    <div class="code-block">
+        <div class="code-block__label">Terminal 2: Frontend</div>
+        <pre>cd web && npm run dev</pre>
+    </div>
+
+    <p>
+        Open <code>http://localhost:5173</code> (Vite&rsquo;s dev server). The React app loads and
+        fetches data from the Go backend via the Vite proxy. Students see their items rendered
+        in a styled table.
+    </p>
+
+    <div class="callout callout--info">
+        <h3 class="callout__title">Second Victory</h3>
+        <p>
+            This is another key moment. Students are now seeing data flow from a JSON file,
+            through a Go server, into a React frontend, rendered in the browser. They built
+            a full-stack application. Everything from here is adding features.
+        </p>
+    </div>
+
+    <div class="callout callout--instructor">
+        <h3 class="callout__title">Instructor Checkpoint: Frontend Rendering</h3>
+        <ul>
+            <li>React app loads at localhost:5173</li>
+            <li>Items table displays data from the Go API</li>
+            <li>Status and priority columns are color-coded</li>
+            <li>No console errors in browser dev tools</li>
+        </ul>
+        <p>
+            <strong>Common issues:</strong> CORS errors (need the Vite proxy configured), fetch returns HTML
+            instead of JSON (API path wrong), Tailwind not loading (PostCSS config missing).
+            For each: paste the error into AI and let it fix it.
+        </p>
+    </div>
+
+    <div class="callout callout--success">
+        <h3 class="callout__title">Module 5 Complete When</h3>
+        <ul>
+            <li>React app fetches and displays data from the Go API</li>
+            <li>Table is styled with Tailwind CSS</li>
+            <li>Students understand the frontend-backend relationship</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MODULE 6: PAGES & NAVIGATION                                  -->
+<!-- ============================================================ -->
+
+<section id="module-6">
+    <h2>Module 6: Pages &amp; Navigation</h2>
+    <p><strong>Duration:</strong> 45 minutes</p>
+
+    <p>
+        One page isn&rsquo;t an application. This module adds multiple pages, client-side routing,
+        and a navigation sidebar &mdash; turning the prototype into something that looks and feels
+        like a real application.
+    </p>
+
+    <h3>6.1 Add React Router</h3>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            Add client-side routing to my React app using react-router-dom. Create:
+        </p>
+        <ul>
+            <li>A layout component with a dark sidebar on the left (like a military application)</li>
+            <li>Navigation links in the sidebar: Dashboard, Items, Settings</li>
+            <li>A Dashboard page that shows summary stats (total items, items by status, items by priority)</li>
+            <li>The existing Items page at /items</li>
+            <li>A placeholder Settings page</li>
+            <li>A header bar at the top with the app name and a user role indicator</li>
+        </ul>
+        <p>
+            Use Tailwind CSS. The sidebar should be dark navy (#1a1f36), links should highlight
+            when active, and the main content area should have a light background.
+        </p>
+    </div>
+
+    <h3>6.2 Item Detail Page</h3>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            Add an item detail page at /items/:id that:
+        </p>
+        <ul>
+            <li>Fetches a single item from GET /api/v1/items/{id}</li>
+            <li>Shows all fields in a clean card layout</li>
+            <li>Has a back button that returns to the items list</li>
+            <li>Shows a 404 message if the item doesn&rsquo;t exist</li>
+        </ul>
+        <p>
+            Also make the item titles in the table on the Items page clickable links
+            that navigate to the detail page.
+        </p>
+    </div>
+
+    <h3>6.3 Dashboard with Stats</h3>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            Create a Dashboard page that fetches all items and shows:
+        </p>
+        <ul>
+            <li>Four stat cards at the top: Total Items, Active, Pending, Completed (with counts)</li>
+            <li>Each card should have a colored indicator (green, yellow, blue, gray)</li>
+            <li>Below the cards, show a &ldquo;Recent Items&rdquo; section with the 5 most recent items</li>
+            <li>Add a &ldquo;Quick Actions&rdquo; panel on the right with links to the Items page and Settings</li>
+        </ul>
+    </div>
+
+    <div class="callout callout--instructor">
+        <h3 class="callout__title">Instructor Checkpoint: Multi-Page App</h3>
+        <ul>
+            <li>Sidebar navigation works (clicking links changes the page without full reload)</li>
+            <li>Dashboard shows stats calculated from the API data</li>
+            <li>Item detail page loads correctly from the items list</li>
+            <li>Active page is highlighted in the sidebar</li>
+        </ul>
+    </div>
+
+    <div class="callout callout--success">
+        <h3 class="callout__title">Module 6 Complete When</h3>
+        <ul>
+            <li>Application has 3+ pages with sidebar navigation</li>
+            <li>Dashboard shows aggregated stats from API data</li>
+            <li>Item detail page works with dynamic routing</li>
+            <li>Application looks and feels like a real tool, not a prototype</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MODULE 7: AI CHAT INTEGRATION                                 -->
+<!-- ============================================================ -->
+
+<section id="module-7">
+    <h2>Module 7: AI Chat Integration</h2>
+    <p><strong>Duration:</strong> 45 minutes</p>
+
+    <p>
+        This is the inception module &mdash; <strong>using AI to build AI features</strong>.
+        Students will add a chat interface to their application that connects to OpenAI
+        and can query the application&rsquo;s own data through tool use.
+    </p>
+
+    <div class="callout callout--warning">
+        <h3 class="callout__title">API Key Required</h3>
+        <p>
+            Students need an OpenAI API key (<code>OPENAI_API_KEY</code>) or Azure OpenAI credentials
+            for this module. If keys aren&rsquo;t available, the instructor should demo this module live
+            and students can add it later. Alternatively, have one shared API key for the class.
+        </p>
+    </div>
+
+    <h3>7.1 Chat Backend</h3>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            Create a chat service in internal/ai/chat.go that:
+        </p>
+        <ul>
+            <li>Connects to the OpenAI API using net/http (no SDK, just raw HTTP)</li>
+            <li>Reads the API key from the OPENAI_API_KEY environment variable</li>
+            <li>Sends messages to gpt-4o with a system prompt that says: &ldquo;You are a staff officer assistant for a military unit. You help manage tasks, track items, and answer questions about unit operations.&rdquo;</li>
+            <li>Supports tool use &mdash; define a &ldquo;lookup_items&rdquo; tool that searches the DataStore</li>
+            <li>Returns the AI&rsquo;s response as a string</li>
+        </ul>
+        <p>
+            Also create a POST /api/v1/chat endpoint that accepts {"message": "..."} and returns
+            {"response": "..."}.
+        </p>
+    </div>
+
+    <h3>7.2 Tool Use &mdash; The AI Queries Your Data</h3>
+
+    <div class="callout callout--info">
+        <h3 class="callout__title">What is Tool Use?</h3>
+        <p>
+            Tool use (also called function calling) lets the AI call functions in your application.
+            When a user asks &ldquo;How many high-priority items do I have?&rdquo;, the AI doesn&rsquo;t guess &mdash;
+            it calls your <code>lookup_items</code> function, gets the real data, and responds with
+            the actual count.
+        </p>
+        <p>
+            This is what makes Heywood powerful. It doesn&rsquo;t hallucinate about student data &mdash;
+            it queries the real database and reports facts.
+        </p>
+    </div>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            Define an OpenAI tool for the chat service called &ldquo;lookup_items&rdquo; with these parameters:
+        </p>
+        <ul>
+            <li>status (optional string) &mdash; filter by status: &ldquo;active&rdquo;, &ldquo;pending&rdquo;, &ldquo;completed&rdquo;</li>
+            <li>priority (optional string) &mdash; filter by priority: &ldquo;high&rdquo;, &ldquo;medium&rdquo;, &ldquo;low&rdquo;</li>
+            <li>query (optional string) &mdash; search term to match against title or description</li>
+        </ul>
+        <p>
+            When the AI calls this tool, execute the search against the DataStore and return the
+            matching items as JSON. The AI will then use this data in its response to the user.
+        </p>
+    </div>
+
+    <h3>7.3 Chat Frontend</h3>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            Create a Chat page at web/src/pages/ChatPage.tsx that:
+        </p>
+        <ul>
+            <li>Has a message input at the bottom with a send button</li>
+            <li>Displays conversation history with user messages on the right (blue) and AI responses on the left (gray)</li>
+            <li>Shows a loading indicator while waiting for the AI response</li>
+            <li>Auto-scrolls to the latest message</li>
+            <li>Renders markdown in the AI&rsquo;s response (bold, lists, headers)</li>
+            <li>Disables the input while a request is in flight</li>
+        </ul>
+    </div>
+
+    <p>Add &ldquo;Chat&rdquo; to the sidebar navigation. Students can now:</p>
+    <ol>
+        <li>Open the Chat page</li>
+        <li>Type &ldquo;What are my high-priority items?&rdquo;</li>
+        <li>Watch the AI query the DataStore through tool use</li>
+        <li>See the response with actual data from their application</li>
+    </ol>
+
+    <div class="callout callout--instructor">
+        <h3 class="callout__title">Instructor Checkpoint: Chat Working</h3>
+        <ul>
+            <li>Chat page sends messages and displays responses</li>
+            <li>AI uses tool calling to query the DataStore (visible in server logs)</li>
+            <li>Response contains actual data, not hallucinated items</li>
+        </ul>
+        <p>
+            <strong>Common issues:</strong> API key not set (export OPENAI_API_KEY=...), CORS blocking
+            the chat request (add CORS middleware), tool call response format wrong (the AI will
+            help debug its own tool definitions).
+        </p>
+    </div>
+
+    <div class="callout callout--success">
+        <h3 class="callout__title">Module 7 Complete When</h3>
+        <ul>
+            <li>Chat interface sends and receives messages</li>
+            <li>AI uses tool calling to query application data</li>
+            <li>Responses are rendered with markdown formatting</li>
+            <li>Students understand the concept of tool use (AI calling your code)</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MODULE 8: AUTH & MIDDLEWARE                                    -->
+<!-- ============================================================ -->
+
+<section id="module-8">
+    <h2>Module 8: Authentication &amp; Middleware</h2>
+    <p><strong>Duration:</strong> 45 minutes</p>
+
+    <p>
+        Different users should see different things. A commanding officer sees everything.
+        A junior Marine sees only their own data. This module adds role-based authentication
+        and middleware &mdash; the security layer that makes this possible.
+    </p>
+
+    <h3>8.1 Middleware Concept</h3>
+
+    <p>
+        Middleware is code that runs <strong>before</strong> every request reaches your handler.
+        It&rsquo;s like a gate guard &mdash; checking credentials before letting anyone into the building.
+    </p>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            Create a middleware package at internal/middleware/ with:
+        </p>
+        <ul>
+            <li>A CORS middleware that allows requests from localhost:5173 in dev mode</li>
+            <li>A SecurityHeaders middleware that sets standard security headers (X-Content-Type-Options, X-Frame-Options, etc.)</li>
+            <li>An Auth middleware that reads a &ldquo;role&rdquo; cookie and sets the role in the request context</li>
+            <li>A Chain function that composes multiple middleware together</li>
+            <li>Helper functions: GetRole(ctx) returns the role string from context</li>
+        </ul>
+        <p>
+            Valid roles are: &ldquo;admin&rdquo;, &ldquo;staff&rdquo;, &ldquo;user&rdquo;. If no cookie is set, default to &ldquo;user&rdquo;.
+        </p>
+    </div>
+
+    <h3>8.2 Role Switching (Demo Mode)</h3>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            Add two auth endpoints:
+        </p>
+        <ul>
+            <li>GET /api/v1/auth/me &mdash; returns the current user&rsquo;s role from the cookie</li>
+            <li>POST /api/v1/auth/switch &mdash; accepts {"role": "admin"} and sets the role cookie</li>
+        </ul>
+        <p>
+            On the frontend, add a role picker dropdown in the header that lets users switch
+            between Admin, Staff, and User roles. When switched, the page should reload to
+            reflect the new role.
+        </p>
+    </div>
+
+    <h3>8.3 Role-Based Filtering</h3>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            Update the API handlers to filter data based on role:
+        </p>
+        <ul>
+            <li>Admin sees all items and all endpoints</li>
+            <li>Staff sees all items but cannot access Settings endpoints</li>
+            <li>User sees only items assigned to them (filter by AssignedTo field)</li>
+        </ul>
+        <p>
+            Also conditionally show/hide the Settings link in the sidebar based on role.
+        </p>
+    </div>
+
+    <div class="callout callout--instructor">
+        <h3 class="callout__title">Instructor Checkpoint: Auth Working</h3>
+        <ul>
+            <li>Role picker changes the active role</li>
+            <li>Switching to &ldquo;User&rdquo; shows fewer items (only their assigned ones)</li>
+            <li>Settings link disappears for non-admin roles</li>
+            <li>Auth endpoints return correct role from cookie</li>
+        </ul>
+    </div>
+
+    <div class="callout callout--success">
+        <h3 class="callout__title">Module 8 Complete When</h3>
+        <ul>
+            <li>Middleware chain applies CORS, security headers, and auth</li>
+            <li>Role picker works and persists across page loads</li>
+            <li>Data is filtered based on user role</li>
+            <li>Students understand middleware as &ldquo;code that runs before every request&rdquo;</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MODULE 9: EXTERNAL INTEGRATIONS                               -->
+<!-- ============================================================ -->
+
+<section id="module-9">
+    <h2>Module 9: External Integrations</h2>
+    <p><strong>Duration:</strong> 45 minutes</p>
+
+    <p>
+        Real applications connect to external services. This module offers two paths &mdash;
+        students choose one based on what&rsquo;s available to them:
+    </p>
+
+    <ul>
+        <li><strong>Path A: Database Backend</strong> &mdash; add SQLite to replace JSON files (no external service needed)</li>
+        <li><strong>Path B: Microsoft Graph</strong> &mdash; connect to Outlook calendar and mail (requires Azure AD credentials)</li>
+    </ul>
+
+    <div class="callout callout--info">
+        <h3 class="callout__title">Choose Your Path</h3>
+        <p>
+            Path A (SQLite) is recommended for most students &mdash; it requires no external accounts and
+            teaches a broadly useful skill. Path B (Microsoft Graph) is for students with Azure AD
+            access who want to integrate with Outlook.
+        </p>
+    </div>
+
+    <h3>Path A: SQLite Database</h3>
+
+    <details>
+        <summary><strong>Path A: Add SQLite Backend</strong></summary>
+
+        <div class="prompt-block">
+            <strong>Student Prompt to AI:</strong>
+            <p>
+                Add a SQLite database backend to my application. Create a new implementation of my
+                DataStore interface that:
+            </p>
+            <ul>
+                <li>Uses the modernc.org/sqlite driver (pure Go, no CGO required)</li>
+                <li>Auto-creates the items table on startup if it doesn&rsquo;t exist</li>
+                <li>Implements all DataStore methods using SQL queries</li>
+                <li>Uses parameterized queries to prevent SQL injection</li>
+                <li>Falls back to the JSON store if the database connection fails</li>
+            </ul>
+            <p>
+                Update main.go to accept a -db flag: &ldquo;json&rdquo; (default) or &ldquo;sqlite&rdquo;.
+            </p>
+        </div>
+
+        <p>
+            After implementation, students can run with <code>-db sqlite</code> and their data
+            persists in a local database file instead of JSON. This is the exact pattern
+            Heywood uses &mdash; same interface, different backend.
+        </p>
+    </details>
+
+    <h3>Path B: Microsoft Graph</h3>
+
+    <details>
+        <summary><strong>Path B: Connect to Outlook via Microsoft Graph</strong></summary>
+
+        <div class="prompt-block">
+            <strong>Student Prompt to AI:</strong>
+            <p>
+                Create a Microsoft Graph API client in internal/msgraph/client.go that:
+            </p>
+            <ul>
+                <li>Uses OAuth2 client credentials flow (app-only, no user login)</li>
+                <li>Reads GRAPH_TENANT_ID, GRAPH_CLIENT_ID, GRAPH_CLIENT_SECRET from environment</li>
+                <li>Gets an access token and caches it until near-expiry</li>
+                <li>Has a Get(path, params) method for authenticated Graph API calls</li>
+                <li>Supports both commercial (graph.microsoft.com) and GCC High (graph.microsoft.us) endpoints</li>
+            </ul>
+            <p>
+                Then add endpoints:
+            </p>
+            <ul>
+                <li>GET /api/v1/calendar/today &mdash; returns today&rsquo;s calendar events</li>
+                <li>GET /api/v1/mail/summary &mdash; returns recent email subjects and senders</li>
+            </ul>
+        </div>
+    </details>
+
+    <div class="callout callout--instructor">
+        <h3 class="callout__title">Instructor Checkpoint: Integration Working</h3>
+        <p><strong>Path A:</strong> App starts with <code>-db sqlite</code>, data persists after restart.</p>
+        <p><strong>Path B:</strong> Calendar and mail endpoints return real data from Outlook.</p>
+    </div>
+
+    <div class="callout callout--success">
+        <h3 class="callout__title">Module 9 Complete When</h3>
+        <ul>
+            <li>Students have connected their app to at least one external service</li>
+            <li>The integration works end-to-end (data flows from external source to browser)</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MODULE 10: DOCKER & DEPLOYMENT                                -->
+<!-- ============================================================ -->
+
+<section id="module-10">
+    <h2>Module 10: Docker &amp; Deployment</h2>
+    <p><strong>Duration:</strong> 45 minutes</p>
+
+    <p>
+        The application works on your laptop. Now it needs to work everywhere.
+        Docker packages your entire application &mdash; backend, frontend, data &mdash; into a
+        single container that runs identically on any machine.
+    </p>
+
+    <h3>10.1 The Dockerfile</h3>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            Create a multi-stage Dockerfile for my application:
+        </p>
+        <ul>
+            <li>Stage 1 (web-builder): Use node:22-alpine. Copy web/ directory, run npm ci and npm run build. Output goes to web/dist/.</li>
+            <li>Stage 2 (go-builder): Use golang:1.24-alpine. Copy Go source, run go build with CGO_ENABLED=0 and -trimpath -ldflags=&rdquo;-s -w&rdquo;. Output is a single binary.</li>
+            <li>Stage 3 (runtime): Use alpine:3.21. Copy the binary, the web/dist directory, and the data/ directory. Run as non-root user. Expose port 8080. Add a health check.</li>
+        </ul>
+        <p>
+            The Go server should serve the React build from web/dist/ in production mode (when -dev is not set).
+            Add a SPA fallback that serves index.html for any non-API, non-asset route.
+        </p>
+    </div>
+
+    <h3>10.2 Build and Run Locally</h3>
+
+    <div class="code-block">
+        <div class="code-block__label">Build and Run with Docker</div>
+        <pre>
+docker build -t my-staff-app .
+docker run -p 8080:8080 -e OPENAI_API_KEY=sk-... my-staff-app
+
+# Open http://localhost:8080 — the full application runs from the container</pre>
+    </div>
+
+    <div class="callout callout--info">
+        <h3 class="callout__title">Third Victory &mdash; The Big One</h3>
+        <p>
+            When students see their application running from a Docker container &mdash; with the
+            React frontend, Go backend, and data all packaged together &mdash; they&rsquo;ve crossed a
+            fundamental threshold. This container can run on any machine in the world.
+            A laptop, a server, Azure, a ship, a field TOC.
+        </p>
+    </div>
+
+    <h3>10.3 Deploy to Azure (Optional)</h3>
+
+    <p>
+        If students have Azure access, deploy the container to Azure Container Apps:
+    </p>
+
+    <div class="prompt-block">
+        <strong>Student Prompt to AI:</strong>
+        <p>
+            Give me the Azure CLI commands to deploy my Docker container to Azure Container Apps.
+            I need to:
+        </p>
+        <ul>
+            <li>Create a resource group</li>
+            <li>Create an Azure Container Registry (ACR)</li>
+            <li>Push my Docker image to ACR</li>
+            <li>Create a Container App that runs the image</li>
+            <li>Set environment variables for OPENAI_API_KEY</li>
+            <li>Get the public URL of the deployed app</li>
+        </ul>
+        <p>
+            Use the Azure CLI (az command). My app name is &ldquo;my-staff-app&rdquo;.
+        </p>
+    </div>
+
+    <div class="callout callout--instructor">
+        <h3 class="callout__title">Instructor Checkpoint: Deployed</h3>
+        <p><strong>Minimum:</strong> Docker container runs locally on port 8080, serves the full application.</p>
+        <p><strong>Ideal:</strong> Container deployed to Azure with a public URL that works.</p>
+        <p>
+            <strong>Common issues:</strong> Docker not installed (they need Docker Desktop), build fails on
+            node_modules (need .dockerignore), image too large (make sure multi-stage build is correct),
+            Azure login issues (az login first).
+        </p>
+    </div>
+
+    <div class="callout callout--success">
+        <h3 class="callout__title">Module 10 Complete When</h3>
+        <ul>
+            <li>Docker image builds successfully</li>
+            <li>Container runs locally and serves the full application</li>
+            <li>Students understand that one container = entire application</li>
+            <li>(Bonus) Application deployed to Azure with a public URL</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- ASSESSMENT & WRAP-UP                                          -->
+<!-- ============================================================ -->
+
+<section id="assessment">
+    <h2>Assessment &amp; Wrap-Up</h2>
+    <p><strong>Duration:</strong> 15 minutes</p>
+
+    <h3>Assessment Criteria</h3>
+
+    <p>Students have successfully completed Course 6 when they have a deployed application that meets:</p>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Criterion</th>
+                    <th scope="col">Minimum</th>
+                    <th scope="col">Target</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>API Endpoints</td>
+                    <td>3 endpoints returning JSON</td>
+                    <td>5+ endpoints with CRUD operations</td>
+                </tr>
+                <tr>
+                    <td>Frontend Pages</td>
+                    <td>2 pages with navigation</td>
+                    <td>4+ pages with sidebar, routing, and detail views</td>
+                </tr>
+                <tr>
+                    <td>Data Layer</td>
+                    <td>Reads from JSON files</td>
+                    <td>Interface-based with upgradeable backend</td>
+                </tr>
+                <tr>
+                    <td>AI Integration</td>
+                    <td>Chat sends/receives messages</td>
+                    <td>Tool use queries live data</td>
+                </tr>
+                <tr>
+                    <td>Authentication</td>
+                    <td>Role picker in UI</td>
+                    <td>Role-based data filtering</td>
+                </tr>
+                <tr>
+                    <td>Deployment</td>
+                    <td>Docker container runs locally</td>
+                    <td>Deployed to Azure with public URL</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Frontier Map Update</h3>
+
+    <p>
+        Have each student update their personal frontier map from Course 1. New capabilities to add:
+    </p>
+
+    <ul>
+        <li><strong>Can now do:</strong> Build and deploy a full-stack web application using AI assistance</li>
+        <li><strong>Still learning:</strong> Complex database design, production security hardening, CI/CD pipelines</li>
+        <li><strong>Next frontier:</strong> What problem at your unit needs a custom application that Power Platform can&rsquo;t solve?</li>
+    </ul>
+
+    <h3>What Comes Next</h3>
+
+    <p>
+        This course gave you the foundation. The real learning happens when you build something
+        for your own unit. Here&rsquo;s the recommended progression:
+    </p>
+
+    <ol>
+        <li><strong>Week 1&ndash;2:</strong> Rebuild today&rsquo;s application from scratch without looking at the prompts. This builds muscle memory.</li>
+        <li><strong>Week 3&ndash;4:</strong> Identify a real problem at your unit. Define requirements using the Problem Definition Worksheet from Course 3.</li>
+        <li><strong>Week 5&ndash;8:</strong> Build it. Use the same prompt &rarr; verify &rarr; iterate cycle. Expect 80&ndash;120 hours for your first real full-stack tool.</li>
+        <li><strong>Week 9+:</strong> Deploy, get feedback, iterate. Document everything using the Documentation Package template.</li>
+    </ol>
+
+    <div class="callout callout--info">
+        <h3 class="callout__title">Time Expectations</h3>
+        <p>
+            Your first real full-stack application will take <strong>80&ndash;120 hours</strong>. That&rsquo;s
+            2&ndash;3 weeks of focused work. Your second will take 40&ndash;60 hours. Your third, 20&ndash;30.
+            The skill compounds &mdash; you get faster because you learn what to ask for and how to
+            structure your conversations with AI.
+        </p>
+        <p>
+            For comparison: a contractor would quote 6&ndash;12 months and $500K+ for the same application.
+        </p>
+    </div>
+
+    <div class="callout callout--success">
+        <h3 class="callout__title">Course 6 Complete</h3>
+        <p>
+            You just built and deployed a full-stack web application. You wrote the requirements.
+            AI wrote the code. You verified it worked. You deployed it to the cloud.
+        </p>
+        <p>
+            That&rsquo;s not &ldquo;learning to code.&rdquo; That&rsquo;s <strong>Expert-Driven Development</strong>
+            at the highest level &mdash; domain experts building exactly what they need, at the speed
+            of conversation.
+        </p>
+    </div>
+</section>
+
+                </div> <!-- /page-content -->
+            </div> <!-- /page-layout -->
+        </div> <!-- /container -->
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>
+                        Open-source AI-assisted development training for DoW personnel.
+                        Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="./">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="../toolkit/">Toolkit</a></li>
+                        <li><a href="../tools/">Tools</a></li>
+                        <li><a href="../resources/">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Project</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function() {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+    <script src="../js/enhancements.js"></script>
+    <script src="../js/knowledge-check.js"></script>
+    <script src="../js/course-progress.js"></script>
+    <script src="../js/user-identity.js"></script>
+
+</body>
+</html>
