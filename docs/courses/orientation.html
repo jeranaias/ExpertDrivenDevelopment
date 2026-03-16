@@ -312,46 +312,33 @@
                         <p>Narrate each prompt before typing it. Follow this sequence:</p>
 
                         <details open>
-                            <summary><strong>Prompt 1: Initial Request (2 min)</strong></summary>
+                            <summary><strong>Prompt 1: Define the Problem (2 min)</strong></summary>
 
                             <div class="callout callout--instructor">
-                                <p><strong>Say before typing:</strong> "I am starting with the context of WHO will use this and WHAT platform I am constrained to. Notice I am not asking for a full solution yet, I am asking for a plan."</p>
+                                <p><strong>Say:</strong> "I start with WHO uses this and WHAT platform we have. I ask for a plan, not code."</p>
                             </div>
 
                             <div class="prompt-block">
                                 <p><strong>Prompt to AI:</strong></p>
-                                <p>I need to build a simple equipment checkout tracker for a Marine Corps rifle section (about 30 people, 50 pieces of equipment). I want to use Microsoft Power Apps because that is what our battalion has access to.</p>
-                                <p>The tracker needs to:</p>
-                                <ul>
-                                    <li>Let users check out an item (record: item name, serial number, person's name, date out, date due)</li>
-                                    <li>Let users check in an item (update status)</li>
-                                    <li>Show a list of all currently checked out items</li>
-                                    <li>Highlight overdue items</li>
-                                </ul>
-                                <p>What is the simplest way to build this in Power Apps? Give me a step-by-step plan before we start building.</p>
+                                <p>I need an equipment checkout tracker for a Marine Corps rifle section (~30 people, ~50 items) in Microsoft Power Apps. It needs to: check out items (item name, serial, person, date out, date due), check in items, show all checked-out items, and highlight overdue ones. Give me a step-by-step plan before we build.</p>
                             </div>
 
                             <div class="callout callout--instructor">
-                                <p><strong>Expected AI Response:</strong> AI will likely suggest using a SharePoint list as the data source, creating a Canvas app with a form and a gallery. It will outline 4-6 steps.</p>
-                                <p><strong>What to say:</strong> "Good. Notice it gave us a plan, not code. We verify the plan makes sense before we start building. Does this approach make sense to you all?" (Pause for questions.)</p>
+                                <p><strong>Expected:</strong> AI suggests a SharePoint list as data source + Canvas app with form and gallery.</p>
+                                <p><strong>Say:</strong> "It gave us a plan, not code. We verify the plan makes sense before building."</p>
                             </div>
                         </details>
 
                         <details open>
-                            <summary><strong>Prompt 2: Create Data Structure (3 min)</strong></summary>
+                            <summary><strong>Prompt 2: Create the Data Structure (3 min)</strong></summary>
 
                             <div class="callout callout--instructor">
-                                <p><strong>Say before typing:</strong> "Now I will ask it to create the data structure. I am being specific about field names and types because I know my domain."</p>
+                                <p><strong>Say:</strong> "Now I get the exact data structure. I specify field names and types because I know my domain."</p>
                             </div>
 
                             <div class="prompt-block">
                                 <p><strong>Prompt to AI:</strong></p>
-                                <p>Good plan. Let's start with the data structure. Give me the exact SharePoint list configuration I need:</p>
-                                <ul>
-                                    <li>List name</li>
-                                    <li>All columns with their data types</li>
-                                    <li>Any calculated columns for status (like flagging overdue items)</li>
-                                </ul>
+                                <p>Give me the exact SharePoint list configuration: list name, all columns with data types, and any calculated columns for overdue status.</p>
                             </div>
 
                             <div class="code-block">
@@ -361,39 +348,37 @@
 Columns:
 1. Title (Single line of text) - Item Name
 2. SerialNumber (Single line of text)
-3. AssignedTo (Single line of text) - Person's Name
+3. AssignedTo (Single line of text)
 4. DateOut (Date and Time)
 5. DateDue (Date and Time)
 6. Status (Choice: Checked Out, Checked In, Overdue)
 7. CheckedInDate (Date and Time) - nullable
 
 Calculated Column:
-- IsOverdue (Yes/No): =IF(AND(Status="Checked Out",DateDue<TODAY()),TRUE,FALSE)</pre>
+- IsOverdue (Yes/No): =IF(AND(Status="Checked Out",DateDue&lt;TODAY()),TRUE,FALSE)</pre>
                             </div>
 
                             <div class="callout callout--instructor">
-                                <p><strong>What to do:</strong> Open SharePoint (or show where you would). Say: "In a real build, I would now create this list in SharePoint. For time, I am going to assume it exists. Key point: AI gave us the exact configuration. We do not need to guess."</p>
+                                <p><strong>Action:</strong> Create this list in SharePoint now (or describe where you would). AI gave us the exact configuration &mdash; no guessing.</p>
                             </div>
                         </details>
 
+                        <div class="callout callout--tip" style="border-left: 4px solid #228B22; background: #f0fff0; padding: 1rem; margin: 1rem 0;">
+                            <p><strong>Shortcut: Instant App from SharePoint</strong></p>
+                            <p>Once the SharePoint list exists, you do not need to build the app from scratch. Go to the list, click <strong>Integrate</strong> &rarr; <strong>Power Apps</strong> &rarr; <strong>Create an app</strong>. Power Apps generates a fully functional app connected to your list in seconds &mdash; forms, gallery, navigation, all wired up.</p>
+                            <p>This is your starting point. From here, use AI to <em>refine</em> the auto-generated app to match your needs. The remaining prompts show how.</p>
+                        </div>
+
                         <details open>
-                            <summary><strong>Prompt 3: Build the Interface (5 min)</strong></summary>
+                            <summary><strong>Prompt 3: Refine the Interface (5 min)</strong></summary>
 
                             <div class="callout callout--instructor">
-                                <p><strong>Say before typing:</strong> "Now I ask for the app interface. I will be specific about what I want users to see first."</p>
+                                <p><strong>Say:</strong> "Power Apps gave us a working app. Now I use AI to customize it. I describe what I want changed in plain English."</p>
                             </div>
 
                             <div class="prompt-block">
                                 <p><strong>Prompt to AI:</strong></p>
-                                <p>Now give me the Power Apps formula code for the main screen. I want:</p>
-                                <ul>
-                                    <li>A gallery showing all currently checked-out items (filter Status = "Checked Out")</li>
-                                    <li>Display: Item name, assigned to, date due</li>
-                                    <li>Overdue items should show in red text</li>
-                                    <li>A button to open a form for checking out new items</li>
-                                    <li>A button next to each item in the gallery to check it back in</li>
-                                </ul>
-                                <p>Give me the Power Apps formula code for the gallery's Items property and the color formatting.</p>
+                                <p>I have a Power Apps Canvas app connected to my EquipmentCheckout SharePoint list. The auto-generated gallery shows all items. I want to: filter the gallery to only show checked-out items, color overdue items in red, and add a check-in button next to each item. Give me the formulas.</p>
                             </div>
 
                             <div class="code-block">
@@ -401,88 +386,74 @@ Calculated Column:
                                 <pre>Gallery Items Property:
 Filter(EquipmentCheckout, Status = "Checked Out")
 
-Gallery Item Text Color (for DateDue label):
+DateDue Label Color:
 If(ThisItem.IsOverdue, Red, Black)
 
 Check In Button OnSelect:
-Patch(EquipmentCheckout, ThisItem, {Status: "Checked In", CheckedInDate: Now()})
-
-New Checkout Button OnSelect:
-Navigate(CheckoutFormScreen, ScreenTransition.None)</pre>
+Patch(EquipmentCheckout, ThisItem, {Status: "Checked In", CheckedInDate: Now()})</pre>
                             </div>
 
                             <div class="callout callout--instructor">
-                                <p><strong>What to say:</strong> "See how specific the formulas are? I did not need to know Power Apps syntax. I described what I wanted in plain English. The AI translated it to code. This is Context Assembly: I provided domain knowledge (what users need to see), AI provided technical knowledge (how to code it)."</p>
+                                <p><strong>Say:</strong> "I described what I wanted in plain English. AI translated it to Power Apps formulas. This is Context Assembly: I provided domain knowledge, AI provided technical knowledge."</p>
                             </div>
                         </details>
 
                         <details open>
-                            <summary><strong>Prompt 4: Add Refinement (3 min)</strong></summary>
+                            <summary><strong>Prompt 4: Iterate (3 min)</strong></summary>
 
                             <div class="callout callout--instructor">
-                                <p><strong>Say before typing:</strong> "First version works, but it is ugly and hard to use. Now I iterate. This is Iterative Refinement."</p>
+                                <p><strong>Say:</strong> "It works but needs polish. I iterate &mdash; I do not rebuild. This is Iterative Refinement."</p>
                             </div>
 
                             <div class="prompt-block">
                                 <p><strong>Prompt to AI:</strong></p>
-                                <p>This works, but I want to improve the user experience:</p>
-                                <ul>
-                                    <li>Add a search bar at the top to filter by item name or person</li>
-                                    <li>Sort the gallery so overdue items appear first</li>
-                                    <li>Add an icon next to overdue items (red warning triangle)</li>
-                                </ul>
-                                <p>Update the gallery Items property and add the search functionality.</p>
+                                <p>Add a search bar to filter by item name or person, sort overdue items to the top, and add a red warning icon next to overdue items.</p>
                             </div>
 
                             <div class="code-block">
                                 <p><strong>Expected AI Output:</strong></p>
-                                <pre>Add a Text Input control (name it: SearchBox)
+                                <pre>Add a Text Input control (name: SearchBox)
 
-Updated Gallery Items Property:
+Updated Gallery Items:
 SortByColumns(
-    Filter(
-        EquipmentCheckout,
+    Filter(EquipmentCheckout,
         Status = "Checked Out" &&
-        (SearchBox.Text in Title || SearchBox.Text in AssignedTo)
-    ),
-    "IsOverdue", Descending
-)
+        (SearchBox.Text in Title || SearchBox.Text in AssignedTo)),
+    "IsOverdue", Descending)
 
-Add Icon control in gallery template:
-Icon: Icon.Warning
+Add Icon in gallery: Icon.Warning
 Visible: ThisItem.IsOverdue
 Color: Red</pre>
                             </div>
 
                             <div class="callout callout--instructor">
-                                <p><strong>What to say:</strong> "Notice I did not rebuild from scratch. I asked for incremental improvements. This is how real building works: functional first, then refine."</p>
+                                <p><strong>Say:</strong> "I did not rebuild from scratch. Incremental improvements. Functional first, then refine."</p>
                             </div>
                         </details>
 
                         <details open>
-                            <summary><strong>Prompt 5: Handle an Error (4 min)</strong></summary>
+                            <summary><strong>Prompt 5: Debug an Error (4 min)</strong></summary>
 
                             <div class="callout callout--instructor">
-                                <p><strong>Say before typing:</strong> "Now I am going to intentionally create an error to show you debugging. Let's say I try to add a feature and it breaks."</p>
-                                <p><strong>Action:</strong> Manually introduce a small error in the formula (like wrong column name) or ask for a feature that will cause a conflict.</p>
+                                <p><strong>Say:</strong> "Now I intentionally break something to show you debugging with AI."</p>
+                                <p><strong>Action:</strong> Introduce a small error (wrong column name or type mismatch).</p>
                             </div>
 
                             <div class="prompt-block">
                                 <p><strong>Prompt to AI:</strong></p>
-                                <p>I tried to add your search formula but I am getting an error: "Invalid argument type. Expecting a Text value instead."</p>
-                                <p>Here is the exact formula I used:</p>
+                                <p>I am getting this error: "Invalid argument type. Expecting a Text value instead." Here is my formula:</p>
                                 <pre>Filter(EquipmentCheckout, Status = "Checked Out" && SearchBox.Text in SerialNumber)</pre>
                                 <p>What is wrong?</p>
                             </div>
 
                             <div class="code-block">
-                                <p><strong>Expected AI Response:</strong></p>
-                                <p>The issue is that the "in" operator expects text fields. SerialNumber might be formatted as a number. Try this instead:</p>
-                                <pre>Filter(EquipmentCheckout, Status = "Checked Out" && SearchBox.Text in Text(SerialNumber))</pre>
+                                <p><strong>Expected:</strong></p>
+                                <p>The "in" operator expects text. SerialNumber may be a number. Fix:</p>
+                                <pre>SearchBox.Text in Text(SerialNumber)</pre>
                             </div>
 
                             <div class="callout callout--instructor">
-                                <p><strong>What to say:</strong> "This is the most important skill: debugging with AI. I copied the exact error message, showed the exact code, and asked what was wrong. AI diagnosed it immediately. Most people quit the first time they see an error. Builders treat errors as normal and fixable."</p>
+                                <p><strong>Say:</strong> "Exact error message + exact code + what you were trying to do. AI diagnoses it immediately. Most people quit at the first error. Builders treat errors as normal."</p>
                             </div>
                         </details>
 
@@ -490,32 +461,25 @@ Color: Red</pre>
                             <summary><strong>Prompt 6: Final Polish (3 min)</strong></summary>
 
                             <div class="callout callout--instructor">
-                                <p><strong>Say before typing:</strong> "Last step: make it look professional. This is optional but improves adoption."</p>
+                                <p><strong>Say:</strong> "Last step: make it look professional. Optional but improves adoption."</p>
                             </div>
 
                             <div class="prompt-block">
                                 <p><strong>Prompt to AI:</strong></p>
-                                <p>Final request: give me a color scheme and layout that looks professional for a Marine Corps app. Suggest:</p>
-                                <ul>
-                                    <li>Background colors</li>
-                                    <li>Button colors</li>
-                                    <li>Header design</li>
-                                </ul>
-                                <p>Use Marine Corps colors (red and gold accents on dark background) if possible.</p>
+                                <p>Give me a professional color scheme for a Marine Corps app: background, buttons, header. Use red and gold accents on dark background.</p>
                             </div>
 
                             <div class="code-block">
                                 <p><strong>Expected AI Output:</strong></p>
-                                <pre>Color Scheme:
-- App Background: RGBA(20, 20, 20, 1) - Dark gray
-- Header: RGBA(140, 0, 0, 1) - Marine red
-- Buttons: RGBA(200, 160, 0, 1) - Gold
-- Text on dark: White
-- Gallery alternating rows: RGBA(40, 40, 40, 1) and RGBA(30, 30, 30, 1)</pre>
+                                <pre>Background: RGBA(20, 20, 20, 1) - Dark gray
+Header:     RGBA(140, 0, 0, 1) - Marine red
+Buttons:    RGBA(200, 160, 0, 1) - Gold
+Text:       White
+Alt rows:   RGBA(40, 40, 40, 1) / RGBA(30, 30, 30, 1)</pre>
                             </div>
 
                             <div class="callout callout--instructor">
-                                <p><strong>What to say:</strong> "Even aesthetic choices can be guided by AI. I provided the constraint (Marine Corps colors), it provided options."</p>
+                                <p><strong>Say:</strong> "Even aesthetic choices can be AI-guided. I provided the constraint, it provided options."</p>
                             </div>
                         </details>
 
