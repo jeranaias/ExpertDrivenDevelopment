@@ -1,0 +1,795 @@
+% =============================================================================
+% EDD Executive Brief — 15-Slide Teams Presentation
+% Compiled with tectonic
+% =============================================================================
+\documentclass[aspectratio=169,11pt]{beamer}
+
+% ---------------------------------------------------------------------------
+% Theme and colors
+% ---------------------------------------------------------------------------
+\usetheme{default}
+\usecolortheme{default}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+\usepackage{fontawesome5}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% EDD brand colors
+\definecolor{scarlet}{RGB}{180,30,30}
+\definecolor{navyblue}{RGB}{0,40,85}
+\definecolor{dodgreen}{RGB}{34,120,60}
+\definecolor{lightgray}{RGB}{240,240,240}
+\definecolor{medgray}{RGB}{180,180,180}
+\definecolor{darktext}{RGB}{50,50,50}
+\definecolor{amber}{RGB}{200,140,20}
+
+% Beamer color overrides
+\setbeamercolor{frametitle}{fg=white,bg=navyblue}
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{subtitle}{fg=white!80}
+\setbeamercolor{author}{fg=white!90}
+\setbeamercolor{date}{fg=white!70}
+\setbeamercolor{structure}{fg=scarlet}
+\setbeamercolor{itemize item}{fg=scarlet}
+\setbeamercolor{itemize subitem}{fg=navyblue}
+\setbeamercolor{block title}{fg=white,bg=scarlet}
+\setbeamercolor{block body}{bg=lightgray}
+\setbeamercolor{footline}{fg=medgray}
+\setbeamercolor{normal text}{fg=darktext}
+
+\setbeamerfont{frametitle}{size=\Large,series=\bfseries}
+\setbeamerfont{title}{size=\huge,series=\bfseries}
+\setbeamerfont{subtitle}{size=\large}
+
+% Frame title formatting
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1.1cm,dp=0.3cm,leftskip=0.5cm]{frametitle}%
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}%
+}
+
+% Footer with UNCLASSIFIED and slide number
+\setbeamertemplate{footline}{%
+  \hbox to \paperwidth{%
+    \hspace{0.5cm}%
+    {\color{medgray}\scriptsize UNCLASSIFIED}%
+    \hfill
+    {\color{medgray}\scriptsize EDD Executive Brief \quad|\quad \insertframenumber/\inserttotalframenumber}%
+    \hspace{0.5cm}%
+  }%
+  \vspace{2pt}%
+}
+
+% Compact lists
+\setlength{\leftmargini}{1.2em}
+\setlength{\leftmarginii}{1.0em}
+\emergencystretch=3em
+
+% Highlight command
+\newcommand{\hl}[1]{\textbf{\color{scarlet}#1}}
+\newcommand{\navy}[1]{\textbf{\color{navyblue}#1}}
+\newcommand{\grn}[1]{\textbf{\color{dodgreen}#1}}
+
+% Stat box (no tikz to avoid beamer scope issues)
+\newcommand{\statbox}[2]{%
+  \fcolorbox{medgray}{lightgray}{\parbox{2.8cm}{\centering
+    {\Large\bfseries\color{scarlet}#1}\\[2pt]
+    {\footnotesize\color{darktext}#2}}}%
+}
+
+% =============================================================================
+\begin{document}
+
+% ---------------------------------------------------------------------------
+% Slide 1: Title
+% ---------------------------------------------------------------------------
+{
+\setbeamertemplate{footline}{}
+\begin{frame}[plain]
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[navyblue] (current page.north west) rectangle (current page.south east);
+  \fill[scarlet] ([yshift=-4.2cm]current page.north west) rectangle ([yshift=-4.4cm]current page.north east);
+  \node[anchor=north,white,font=\scriptsize\bfseries,yshift=-0.3cm] at (current page.north) {UNCLASSIFIED};
+  \node[anchor=south,white,font=\scriptsize,yshift=0.3cm] at (current page.south) {UNCLASSIFIED // Distribution Unlimited};
+\end{tikzpicture}
+
+\vspace{1.5cm}
+\begin{center}
+  {\Huge\bfseries\color{white} Expert-Driven Development}\\[0.5cm]
+  {\Large\color{white!80} Open-Source AI-Assisted Development Training}\\[0.15cm]
+  {\Large\color{white!80} for Department of War Personnel}\\[1.5cm]
+  {\normalsize\color{white!70} SSgt Jesse C.\ Morgan, USMC}\\[0.1cm]
+  {\small\color{white!60} Marine Corps Detachment, Presidio of Monterey}\\
+  {\small\color{white!60} Defense Language Institute Foreign Language Center}\\[0.4cm]
+  {\small\color{white!50} January 2026}
+\end{center}
+\end{frame}
+}
+
+% ---------------------------------------------------------------------------
+% Slide 2: The Problem
+% ---------------------------------------------------------------------------
+\begin{frame}[shrink=5]{The Problem: Expertise Without Tools}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+
+\navy{Domain experts understand their problems better than anyone.}\\[6pt]
+But they can't build the solutions themselves.
+
+\bigskip
+
+\begin{itemize}
+  \item Traditional development: contractors, months of lead time, six-figure budgets
+  \item IT backlogs: requests sit for months or years
+  \item By the time a tool ships, the problem has changed
+  \item The people closest to the problem remain disconnected from the solution
+\end{itemize}
+
+\bigskip
+
+{\small\hl{Meanwhile:} 80\% of workers given AI tools quit within weeks (Microsoft). Access without training is worse than no access.}
+
+\column{0.4\textwidth}
+\begin{center}
+\statbox{80\%}{abandon AI tools\\within weeks}
+
+\vspace{12pt}
+
+\statbox{-19 pp}{accuracy when\\untrained users hit\\the jagged frontier}
+
+\vspace{12pt}
+
+\statbox{\$0}{EDD tool\\development cost}
+\end{center}
+\end{columns}
+
+\end{frame}
+
+% ---------------------------------------------------------------------------
+% Slide 3: The Solution
+% ---------------------------------------------------------------------------
+\begin{frame}[shrink=5]{The Solution: EDD in 60 Seconds}
+
+\begin{center}
+{\normalsize
+\fcolorbox{navyblue}{navyblue!8}{\parbox{2.5cm}{\centering\faGraduationCap\\[2pt]\textbf{Train}\\[-1pt]{\scriptsize 5 courses, 12.5 hrs}}}%
+\;{\color{navyblue}$\rightarrow$}\;%
+\fcolorbox{navyblue}{navyblue!8}{\parbox{2.5cm}{\centering\faTools\\[2pt]\textbf{Build}\\[-1pt]{\scriptsize AI as scaffolding}}}%
+\;{\color{navyblue}$\rightarrow$}\;%
+\fcolorbox{navyblue}{navyblue!8}{\parbox{2.5cm}{\centering\faFile*\\[2pt]\textbf{Document}\\[-1pt]{\scriptsize SOP + 4 guides}}}%
+\;{\color{navyblue}$\rightarrow$}\;%
+\fcolorbox{navyblue}{navyblue!8}{\parbox{2.5cm}{\centering\faUsers\\[2pt]\textbf{Scale}\\[-1pt]{\scriptsize Train-the-trainer}}}%
+}
+\end{center}
+
+\vspace{6pt}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\navy{What EDD is:}
+\begin{itemize}
+  \item Training methodology for domain experts
+  \item Governance framework (SOP) for responsible building
+  \item AI is scaffolding --- removed after construction
+  \item Tools are standard apps on standard infrastructure
+  \item Open-source, MIT-licensed, UNCLASSIFIED
+\end{itemize}
+
+\column{0.48\textwidth}
+\navy{What EDD is not:}
+\begin{itemize}
+  \item Not a coding bootcamp
+  \item Not an AI product or platform
+  \item Not dependent on any single AI tool
+  \item Not a replacement for IT professionals
+  \item Not a shortcut around governance
+\end{itemize}
+\end{columns}
+
+\end{frame}
+
+% ---------------------------------------------------------------------------
+% Slide 4: Research Foundation
+% ---------------------------------------------------------------------------
+\begin{frame}[shrink=10]{Built on Research, Not Intuition}
+
+{\small Every design decision traces to peer-reviewed empirical findings --- 7 studies, 300K+ subjects.}
+
+\vspace{2pt}
+
+\renewcommand{\arraystretch}{1.05}
+{\footnotesize
+\begin{tabular}{@{}p{3.8cm}p{5.2cm}p{4.8cm}@{}}
+\toprule
+\textbf{Study} & \textbf{Finding} & \textbf{EDD Design Impact} \\
+\midrule
+Microsoft Work Trend Index (300K+) &
+  80\% abandon AI within weeks &
+  Management framing, not tool training \\
+BCG-Harvard 2023 (758 consultants) &
+  +40\% quality inside frontier; -19pp outside &
+  Frontier Recognition; Centaur/Cyborg modes \\
+Stanford/MIT 2025 (5,172 agents) &
+  Novices +34\%; experts flat &
+  Quality Judgment as core skill \\
+Mollick 2026 (Wharton MBA) &
+  Management skills predict AI effectiveness &
+  ``Learning to manage, not use'' \\
+UK Gov 2025 (20K employees) &
+  25 min/day saved; 80\%+ retained &
+  Gov orgs benefit with proper training \\
+Stanford DEL 2025 &
+  Entry-level postings down 35\% &
+  Apprentice Problem protocol \\
+OpenAI GDPval (1,320 tasks) &
+  AI at expert parity on 48\% of tasks &
+  Focus on judgment over prompting \\
+\bottomrule
+\end{tabular}
+}
+
+\end{frame}
+
+% ---------------------------------------------------------------------------
+% Slide 5: The Six Skills
+% ---------------------------------------------------------------------------
+\begin{frame}[shrink=5]{The Six 201-Level Skills}
+
+{\small These are \hl{management skills}, not prompting techniques. Every module maps to at least one.}
+
+\vspace{3pt}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+
+\begin{block}{\faSearch\quad 1. Context Assembly}
+{\scriptsize Curate background, constraints, and examples \emph{before} tasking AI. Prevents over-sharing sensitive data.}
+\end{block}
+
+\begin{block}{\faCheckCircle\quad 2. Quality Judgment}
+{\scriptsize Spot reliable vs.\ unreliable content within the \emph{same} output. The Red Pen Review exercise.}
+\end{block}
+
+\begin{block}{\faProjectDiagram\quad 3. Task Decomposition}
+{\scriptsize Break work into AI-appropriate chunks. Decide what to delegate vs.\ retain.}
+\end{block}
+
+\column{0.48\textwidth}
+
+\begin{block}{\faSync*\quad 4. Iterative Refinement}
+{\scriptsize First output is a starting point, not a deliverable. Structured revision passes.}
+\end{block}
+
+\begin{block}{\faCogs\quad 5. Workflow Integration}
+{\scriptsize Embed AI into recurring processes with documented playbooks. Human/AI labels.}
+\end{block}
+
+\begin{block}{\faGlobe\quad 6. Frontier Recognition}
+{\scriptsize Know where AI excels and fails for \emph{your} work. Share failure cases across the org.}
+\end{block}
+
+\end{columns}
+
+\end{frame}
+
+% ---------------------------------------------------------------------------
+% Slide 6: Course Overview
+% ---------------------------------------------------------------------------
+\begin{frame}[shrink=5]{Training Curriculum: 6 Courses, Every Role}
+
+\renewcommand{\arraystretch}{1.15}
+{\small
+\begin{tabular}{@{}p{0.3cm}>{\raggedright\arraybackslash}p{3.8cm}p{1cm}p{2cm}p{5.5cm}@{}}
+\toprule
+& \textbf{Course} & \textbf{Hrs} & \textbf{Audience} & \textbf{Outcome} \\
+\midrule
+\hl{1} & AI Fluency Fundamentals & 2 & All personnel & Six 201 skills, jagged frontier, when to trust AI \\
+\hl{2} & Builder Orientation & 2 & Aspiring builders & Build a working prototype from a real problem \\
+\hl{3} & Platform Training & 4 & Builders & Build 3 tools on Power Platform; centaur/cyborg \\
+\hl{4} & Advanced Workshop & 4 & Experienced & Frontier mapping, verification, teach others \\
+\hl{5} & Supervisor Orientation & 0.5 & Leadership & Permission culture, evaluate proposals \\
+\hl{6} & Full-Stack Capstone & 8 & Advanced & Go + React + AI chat; personal time \\
+\bottomrule
+\end{tabular}
+}
+
+\vspace{8pt}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\navy{Universal Pathway:} Course 1 $\to$ Course 5 (leadership)
+
+\navy{Builder Pathway:} Course 1 $\to$ 2 $\to$ 3 $\to$ 4 $\to$ 6
+
+\column{0.48\textwidth}
+\navy{Instructor Certification:} Complete as student $\to$ shadow $\to$ co-teach $\to$ certified. Each unit maintains 2+ instructors. PCS-resilient.
+\end{columns}
+
+\end{frame}
+
+% ---------------------------------------------------------------------------
+% Slide 7: Courses 1-2 Deep Dive
+% ---------------------------------------------------------------------------
+\begin{frame}[shrink=5]{Course 1--2: From Zero to Prototype}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+
+\navy{\faGraduationCap\quad Course 1: AI Fluency Fundamentals}\\
+{\small 2 hours | Required for all personnel}
+
+\vspace{4pt}
+
+\begin{itemize}\small
+  \item Opens with the 80\% abandonment problem
+  \item Introduces all six 201-level skills
+  \item \hl{Red Pen Review}: verify AI output before signing
+  \item Centaur vs.\ Cyborg work patterns
+  \item Delegation Equation (Mollick)
+  \item Verification hierarchy: high/medium/low stakes
+  \item Closes with personal AI action plan
+\end{itemize}
+
+\vspace{4pt}
+{\footnotesize\color{dodgreen}\faCheckCircle\quad No tools required. No Power Platform. Pure judgment skills.}
+
+\column{0.48\textwidth}
+
+\navy{\faTools\quad Course 2: Builder Orientation}\\
+{\small 2 hours | Prerequisite: Course 1}
+
+\vspace{4pt}
+
+\begin{itemize}\small
+  \item ``Come with a problem you want to solve''
+  \item Live instructor demo: real tool in 30 min
+  \item Students build their first prototype
+  \item Task Decomposition in practice
+  \item Iterative Refinement: 70\% $\to$ 95\%
+  \item Debugging with AI assistance
+  \item Failure sharing: what went wrong?
+\end{itemize}
+
+\vspace{4pt}
+{\footnotesize\color{dodgreen}\faCheckCircle\quad Students leave with a working prototype of their own idea.}
+\end{columns}
+
+\end{frame}
+
+% ---------------------------------------------------------------------------
+% Slide 8: Courses 3-6
+% ---------------------------------------------------------------------------
+\begin{frame}[shrink=5]{Courses 3--6: Building to Mastery}
+
+\begin{columns}[T]
+\column{0.32\textwidth}
+
+\navy{Course 3: Platform Training}\\
+{\scriptsize 4 hours | Build 3 tools}
+
+\begin{itemize}\scriptsize
+  \item Build \#1: Guided (follow along)
+  \item Build \#2: Semi-guided (prompts only)
+  \item Build \#3: Independent (your problem)
+  \item Power Platform: Power Apps, Power Automate, SharePoint
+  \item Mandatory failure-sharing session
+  \item Begin frontier mapping
+\end{itemize}
+
+\column{0.32\textwidth}
+
+\navy{Course 4: Advanced Workshop}\\
+{\scriptsize 4 hours | Organizational capability}
+
+\begin{itemize}\scriptsize
+  \item Domain-specific frontier maps
+  \item Verification protocols \& QA checklists
+  \item Workflow playbooks (Human/AI labels)
+  \item The Apprentice Problem
+  \item 60-Second Teach exercise
+  \item Published deliverables for org
+\end{itemize}
+
+\column{0.32\textwidth}
+
+\navy{Course 5: Supervisor Orientation}\\
+{\scriptsize 30 min | Highest leverage}
+
+\begin{itemize}\scriptsize
+  \item Permission culture vs.\ fear culture
+  \item Evaluating AI-assisted work
+  \item Protecting junior development
+  \item One supervisor enables an entire section
+\end{itemize}
+
+\vspace{4pt}
+
+\navy{Course 6: Full-Stack Capstone}\\
+{\scriptsize 8 hours | Personal dev time}
+
+\begin{itemize}\scriptsize
+  \item Go + React + Docker + AI chat
+  \item Commercial frontier tools
+  \item Unclassified, off-network only
+  \item Readiness investment
+\end{itemize}
+
+\end{columns}
+
+\end{frame}
+
+% ---------------------------------------------------------------------------
+% Slide 9: The SOP
+% ---------------------------------------------------------------------------
+\begin{frame}[shrink=5]{Standard Operating Procedure: 8-Phase Workflow}
+
+\begin{center}
+{\tiny\bfseries
+\fcolorbox{scarlet}{scarlet!8}{\strut 1. Problem Def}%
+\,$\to$\,%
+\fcolorbox{navyblue}{navyblue!8}{\strut 2. Compliance}%
+\,$\to$\,%
+\fcolorbox{navyblue}{navyblue!8}{\strut 3. Prototype}%
+\,$\to$\,%
+\fcolorbox{navyblue}{navyblue!8}{\strut 4. User Test}%
+\,$\to$\,%
+\fcolorbox{navyblue}{navyblue!8}{\strut 5. Document}%
+\,$\to$\,%
+\fcolorbox{scarlet}{scarlet!8}{\strut 6. QA Review}%
+\,$\to$\,%
+\fcolorbox{navyblue}{navyblue!8}{\strut 7. Deploy}%
+\,$\to$\,%
+\fcolorbox{navyblue}{navyblue!8}{\strut 8. Sustain}%
+}
+\end{center}
+{\centering\scriptsize\color{scarlet} Phases 1 and 6 are governance gates (supervisor signature / independent QA review)\par}
+
+\vspace{2pt}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+
+\navy{Governance Gates:}
+\begin{itemize}\small
+  \item \hl{Supervisor signature} required before development begins
+  \item \hl{Compliance checklist} (Phase 2): data classification, PIA, platform
+  \item \hl{QA Review} (Phase 6): independent reviewer, 15-item checklist
+  \item CDAO RAI Toolkit alignment (QA Item 8)
+\end{itemize}
+
+\column{0.48\textwidth}
+
+\navy{Six Defined Roles:}
+\begin{itemize}\small
+  \item \textbf{Developer} --- builds the tool
+  \item \textbf{QA Reviewer} --- independent gate
+  \item \textbf{Supervisor} --- approves \& oversees
+  \item \textbf{Program Coordinator} --- registry, training, scaling
+  \item \textbf{Cybersecurity Office} --- security guidance
+  \item \textbf{Privacy Officer} --- PIA review
+\end{itemize}
+
+\end{columns}
+
+\vspace{4pt}
+{\small\navy{Documentation Package:} User Guide, Replication Guide, Adaptation Guide, Maintenance Guide. \emph{A new person can maintain the tool using only the documentation.}}
+
+\end{frame}
+
+% ---------------------------------------------------------------------------
+% Slide 10: Approved Tools & Platforms
+% ---------------------------------------------------------------------------
+\begin{frame}[shrink=5]{Approved Tools \& Platforms}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+
+\navy{AI Assistants:}
+
+\renewcommand{\arraystretch}{1.05}
+{\scriptsize
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Tool} & \textbf{Level} & \textbf{Best For} \\
+\midrule
+GenAI.mil & IL5 (CUI) & Primary portal \\
+CamoGPT & IL5/IL6 & Classified + API \\
+M365 Copilot & Enterprise & Docs, email, Excel \\
+Copilot Studio & Enterprise & Bots, workflows \\
+Azure OpenAI & FedRAMP High & Custom dev \\
+ChatGPT & Unclass only & Via GenAI.mil \\
+Gemini & Unclass only & Via GenAI.mil \\
+\bottomrule
+\end{tabular}
+}
+
+\vspace{8pt}
+
+\navy{Deployment Platforms:}
+\begin{itemize}\small
+  \item Power Platform (Power Apps, Power Automate)
+  \item SharePoint Online
+  \item Azure Government
+  \item GitHub (public, open-source)
+\end{itemize}
+
+\column{0.42\textwidth}
+
+\begin{block}{\faShield*\quad Security Decision Matrix}
+{\scriptsize
+\begin{tabular}{@{}ll@{}}
+CUI data? & GenAI.mil \\
+Classified? & CamoGPT (SIPR) \\
+Power App + AI? & Copilot / CamoGPT \\
+General coding? & GenAI.mil \\
+Correspondence? & M365 Copilot \\
+\end{tabular}
+}
+\end{block}
+
+\vspace{6pt}
+
+\begin{alertblock}{\faExclamationTriangle\quad Never}
+{\scriptsize
+\begin{itemize}
+  \item CUI in commercial ChatGPT/Gemini
+  \item PII without completed PIA
+  \item Classified outside CamoGPT SIPR
+\end{itemize}
+}
+\end{alertblock}
+
+\end{columns}
+
+\end{frame}
+
+% ---------------------------------------------------------------------------
+% Slide 11: Toolkit & Resources
+% ---------------------------------------------------------------------------
+\begin{frame}[shrink=10]{Toolkit \& Resources}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+
+\navy{\faWrench\quad Interactive Toolkit}
+\begin{itemize}\small
+  \item Searchable, filterable prompt database
+  \item Organized by development phase, platform, complexity
+  \item Copy-ready prompts with bracketed placeholders
+  \item Live at the EDD site --- no install required
+\end{itemize}
+
+\vspace{8pt}
+
+\navy{\faBook\quad Prompt Library}
+\begin{itemize}\small
+  \item Curated prompts by use case:
+  \begin{itemize}\scriptsize
+    \item Admin tools (equipment tracker, leave system, room booking)
+    \item Training tools (quiz generator, attendance tracker)
+    \item Data analysis \& reporting
+  \end{itemize}
+  \item Designed for M365 Copilot, GenAI.mil, Azure OpenAI
+\end{itemize}
+
+\column{0.48\textwidth}
+
+\navy{\faFile*\quad Templates (SOP Appendices)}
+\begin{itemize}\small
+  \item Problem Definition Worksheet (Phase 1)
+  \item Development Journal (Phase 2)
+  \item QA Review Checklist (Phase 6)
+  \item Tool Registry Entry (Phase 7)
+  \item PIA Threshold Analysis (Phase 2)
+  \item Compliance Checklist (Phase 2)
+\end{itemize}
+
+\vspace{8pt}
+
+\navy{\faQuestionCircle\quad FAQ}
+\begin{itemize}\small
+  \item ``Do I need to know how to code?'' --- \grn{No.}
+  \item ``How long does a first tool take?'' --- \hl{50--90 hours}
+  \item ``What platform should I use?'' --- Power Platform
+  \item ``What about classified?'' --- Never in unapproved tools
+  \item ``Do I need supervisor approval?'' --- \hl{Yes. Always.}
+\end{itemize}
+
+\end{columns}
+
+\end{frame}
+
+% ---------------------------------------------------------------------------
+% Slide 12: Proof of Concept
+% ---------------------------------------------------------------------------
+\begin{frame}[shrink=15]{Proof of Concept: Real Tools, Real Users, \$0 Cost}
+
+\vspace{4pt}
+
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}p{3.2cm}p{1.5cm}p{1.3cm}p{7.5cm}@{}}
+\toprule
+\textbf{Tool} & \textbf{Users} & \textbf{Cost} & \textbf{What It Does} \\
+\midrule
+MCD Tutoring App & 440 & \$0 &
+  Scheduling \& management for academic tutoring. Built in 30 hours. Power Platform. ATO approved. \\
+DonDocs & 300/day & \$0 &
+  Document management \& routing on MCEN. Recognized by Marine Innovation Unit. \\
+Tanaghum & Active & \$0 &
+  ILR-calibrated Arabic listening lessons. Built in 2 days. Used by MLIs. \\
+Harakat & Active & \$0 &
+  Arabic diacritization (tashkeel). 0.68\% error rate against expert benchmarks. \\
+Mutawazin & Active & \$0 &
+  Arabic typing proficiency trainer with structured practice. \\
+\bottomrule
+\end{tabular}
+
+\vspace{10pt}
+
+\begin{center}
+\statbox{440}{users on one tool}
+\hspace{16pt}
+\statbox{30 hrs}{to build MCD Tutoring}
+\hspace{16pt}
+\statbox{5 tools}{deployed, in production}
+\hspace{16pt}
+\statbox{\$0}{total development cost}
+\end{center}
+
+\end{frame}
+
+% ---------------------------------------------------------------------------
+% Slide 13: DoD AI Compliance
+% ---------------------------------------------------------------------------
+\begin{frame}[shrink=15]{Full DoD AI Compliance}
+
+{\small EDD has been crosswalked against every major DoD AI governance document. \grn{No gaps.}}
+
+\vspace{2pt}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+
+\renewcommand{\arraystretch}{1.05}
+{\scriptsize
+\begin{tabular}{@{}p{4.8cm}c@{}}
+\toprule
+\textbf{Framework} & \textbf{Status} \\
+\midrule
+DoD RAI 5 Principles & \grn{Covered} \\
+CDAO Guidelines \& Guardrails (Jul '24) & \grn{Covered} \\
+\quad Sec 1: Risk Criteria & \grn{Covered} \\
+\quad Sec 2: Suitability/Feasibility & \grn{Covered} \\
+\quad Sec 3: Training Data Quality & \grn{Covered} \\
+\quad Sec 4: Cyber Resilience & \grn{Covered} \\
+\quad Sec 5: Traceability & \grn{Covered} \\
+\quad Sec 6: Harms/Impacts/Risks & \grn{Covered} \\
+\quad Sec 7: Human-Machine Teaming & \grn{Covered} \\
+\bottomrule
+\end{tabular}
+}
+
+\column{0.48\textwidth}
+
+{\scriptsize
+\begin{tabular}{@{}p{4.8cm}c@{}}
+\toprule
+\textbf{Framework} & \textbf{Status} \\
+\midrule
+AI Cyber RM Tailoring Guide (Jul '25) & \grn{Covered} \\
+DON GenAI Guidance & \grn{Covered} \\
+FY2026 NDAA AI Provisions & \grn{Covered} \\
+DoW AI Strategy (Jan '26) & \grn{Covered} \\
+MARADMIN 018/26 & \grn{Covered} \\
+\bottomrule
+\end{tabular}
+}
+
+\vspace{8pt}
+
+\begin{block}{\faCheckCircle\quad Section 7 is the Knockout}
+{\small The CDAO memo \emph{recommends} GenAI training on risks, effective use, and capability limitations. EDD \emph{delivers} exactly that. Five courses. 12.5 hours. With exercises, QA protocols, and published deliverables.}
+\end{block}
+
+\end{columns}
+
+\vspace{4pt}
+{\small\navy{Course 6} uses commercial frontier tools on personal time/devices, unclassified only --- fully within the commercial-tools-for-unclassified lane.}
+
+\end{frame}
+
+% ---------------------------------------------------------------------------
+% Slide 14: Scaling & Metrics
+% ---------------------------------------------------------------------------
+\begin{frame}[shrink=5]{Scaling Model \& Metrics}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+
+\navy{90-Day Pilot Model:}
+\begin{enumerate}\small
+  \item \textbf{Days 1--15:} Program Coordinator designated. SOP adopted. Training scheduled.
+  \item \textbf{Days 16--30:} All-hands AI Fluency (Course 1). Identify 3--5 pilot builders.
+  \item \textbf{Days 31--60:} Builder courses (2--3). Pilot developers build first tools.
+  \item \textbf{Days 61--75:} QA reviews, remediation, deployment.
+  \item \textbf{Days 76--90:} Assessment, metrics review, expansion decision.
+\end{enumerate}
+
+\vspace{4pt}
+\navy{Expansion:}\\
+{\small Pilot devs become QA reviewers \& mentors. Certified instructors PCS with the capability. Tool Registry grows organically.}
+
+\column{0.48\textwidth}
+
+\navy{Program Metrics:}
+
+\renewcommand{\arraystretch}{1.15}
+{\small
+\begin{tabular}{@{}p{3.5cm}p{2cm}@{}}
+\toprule
+\textbf{Metric} & \textbf{Target} \\
+\midrule
+Course 1 completion & $>$90\% \\
+Builder completion & $>$70\% \\
+Tools deployed/quarter & $\geq$2 \\
+Active users per tool & $>$10 \\
+User satisfaction & $>$4.0/5 \\
+Doc compliance & 100\% \\
+Time to first deploy & $<$90 days \\
+\bottomrule
+\end{tabular}
+}
+
+\vspace{8pt}
+
+\navy{Success Criteria:}
+\begin{itemize}\small
+  \item $\geq$1 tool deployed within 90 days
+  \item $\geq$80\% Course 1 completion
+  \item $\geq$2 certified instructors
+  \item Positive user feedback
+\end{itemize}
+
+\end{columns}
+
+\end{frame}
+
+% ---------------------------------------------------------------------------
+% Slide 15: Call to Action
+% ---------------------------------------------------------------------------
+{
+\setbeamertemplate{footline}{}
+\begin{frame}[plain]
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[navyblue] (current page.north west) rectangle (current page.south east);
+  \fill[scarlet] ([yshift=-2.5cm]current page.north west) rectangle ([yshift=-2.7cm]current page.north east);
+  \node[anchor=north,white,font=\scriptsize\bfseries,yshift=-0.3cm] at (current page.north) {UNCLASSIFIED};
+  \node[anchor=south,white,font=\scriptsize,yshift=0.3cm] at (current page.south) {UNCLASSIFIED // Distribution Unlimited};
+\end{tikzpicture}
+
+\vspace{1cm}
+\begin{center}
+
+  {\LARGE\bfseries\color{white} ``The guardrails don't work if nobody}\\[0.15cm]
+  {\LARGE\bfseries\color{white} knows how to stay inside them.}\\[0.15cm]
+  {\LARGE\bfseries\color{white} That is what EDD solves.''}\\[1cm]
+
+  {\large\color{white!80} \faGlobe\quad jeranaias.github.io/ExpertDrivenDevelopment}\\[0.4cm]
+  {\large\color{white!80} \faGithub\quad github.com/jeranaias/ExpertDrivenDevelopment}\\[0.4cm]
+  {\large\color{white!80} \faEnvelope\quad jesse.morgan@dliflc.edu}\\[1cm]
+
+  {\normalsize\color{white!60} Open-source\quad |\quad MIT Licensed\quad |\quad Ready to deploy today}
+
+\end{center}
+\end{frame}
+}
+
+\end{document}
