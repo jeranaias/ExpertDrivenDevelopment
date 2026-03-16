@@ -83,6 +83,7 @@
 | 4.4 | Appropriate security controls are implemented                          |      |      |     |       |
 | 4.5 | Privacy Impact Assessment (PIA) completed (if required)                |      |      |     |       |
 | 4.6 | Data handling aligns with organizational policies                      |      |      |     |       |
+| 4.7 | Alignment confirmed with CDAO GenAI RAI Toolkit assessment questions   |      |      |     |       |
 
 ---
 
