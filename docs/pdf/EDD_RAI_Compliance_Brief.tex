@@ -1,0 +1,752 @@
+% =============================================================================
+% EDD Compliance with DoD AI Guidelines & Guardrails
+% Compiled with tectonic
+% =============================================================================
+\documentclass[11pt,letterpaper]{article}
+
+% ---------------------------------------------------------------------------
+% Packages
+% ---------------------------------------------------------------------------
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage[colorlinks=true,linkcolor=scarlet!80!black,urlcolor=blue!70!black,bookmarks=true]{hyperref}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{tocloft}
+\usepackage{lastpage}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{tikz}
+\usetikzlibrary{calc,shadows.blur}
+\usepackage{fontawesome5}
+
+% ---------------------------------------------------------------------------
+% Color definitions
+% ---------------------------------------------------------------------------
+\definecolor{scarlet}{RGB}{180,30,30}
+\definecolor{darkgray}{RGB}{60,60,60}
+\definecolor{navyblue}{RGB}{0,40,85}
+\definecolor{dodgreen}{RGB}{34,120,60}
+\definecolor{amber}{RGB}{200,140,20}
+\definecolor{lightgray}{RGB}{240,240,240}
+\definecolor{medgray}{RGB}{200,200,200}
+\definecolor{coveredgreen}{RGB}{220,245,220}
+\definecolor{gapamber}{RGB}{255,245,220}
+\definecolor{bannerblue}{RGB}{20,50,90}
+
+% ---------------------------------------------------------------------------
+% Header / Footer
+% ---------------------------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textsc{EDD Compliance with DoD AI Guidelines \& Guardrails}}
+\fancyhead[R]{\small\textbf{UNCLASSIFIED}}
+\fancyfoot[L]{\small January 2026}
+\fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ---------------------------------------------------------------------------
+% Section formatting
+% ---------------------------------------------------------------------------
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{scarlet}}
+  {\thesection.}{0.5em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{darkgray}}
+  {\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries}
+  {\thesubsubsection}{0.5em}{}
+
+% ---------------------------------------------------------------------------
+% TOC formatting
+% ---------------------------------------------------------------------------
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setcounter{tocdepth}{2}
+
+% ---------------------------------------------------------------------------
+% List formatting
+% ---------------------------------------------------------------------------
+\setlist[itemize]{nosep,left=0pt .. 1.5em}
+\setlist[enumerate]{nosep,left=0pt .. 1.5em}
+
+% Prevent overfull hbox warnings in dense prose
+\emergencystretch=2em
+
+% ---------------------------------------------------------------------------
+% Custom environments and commands
+% ---------------------------------------------------------------------------
+
+% Status badge
+\newcommand{\covered}{%
+  \tikz[baseline=(X.base)]{%
+    \node[fill=dodgreen!15,draw=dodgreen!60,rounded corners=2pt,
+          inner xsep=5pt,inner ysep=1.5pt,font=\small\bfseries\color{dodgreen}] (X) {COVERED};}}
+
+\newcommand{\partiallycovered}{%
+  \tikz[baseline=(X.base)]{%
+    \node[fill=amber!15,draw=amber!60,rounded corners=2pt,
+          inner xsep=5pt,inner ysep=1.5pt,font=\small\bfseries\color{amber!80!black}] (X) {MINOR GAP};}}
+
+% Callout box
+\newcommand{\calloutbox}[2]{%
+  \medskip
+  \noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{%
+    \textbf{#1}\par\smallskip #2}}%
+  \medskip
+}
+
+% Key quote environment
+\newenvironment{keyquote}{%
+  \begin{quote}\itshape\color{navyblue}
+}{%
+  \end{quote}
+}
+
+% Compliance row helper (principle, requirement, coverage)
+\newcommand{\comprow}[3]{%
+  \textbf{#1} & #2 & #3 & \covered \\
+}
+
+% =============================================================================
+\begin{document}
+
+% ---------------------------------------------------------------------------
+% Title Page
+% ---------------------------------------------------------------------------
+\begin{titlepage}
+\begin{tikzpicture}[remember picture,overlay]
+  % Top banner
+  \fill[bannerblue] (current page.north west) rectangle
+    ([yshift=-3.2cm]current page.north east);
+  \node[anchor=north,white,font=\large\bfseries,yshift=-0.6cm]
+    at (current page.north) {UNCLASSIFIED};
+  \node[anchor=north,white,font=\normalsize,yshift=-1.15cm]
+    at (current page.north) {Expert-Driven Development Program};
+  % Bottom banner
+  \fill[bannerblue] (current page.south west) rectangle
+    ([yshift=1.8cm]current page.south east);
+  \node[anchor=south,white,font=\normalsize,yshift=0.7cm]
+    at (current page.south) {UNCLASSIFIED // Distribution Unlimited};
+  % Red accent line
+  \fill[scarlet] ([yshift=-3.2cm]current page.north west) rectangle
+    ([yshift=-3.4cm]current page.north east);
+\end{tikzpicture}
+
+\vspace*{4.5cm}
+
+\begin{center}
+  {\Huge\bfseries\color{scarlet} Compliance Assessment}\\[0.6cm]
+  {\LARGE\bfseries\color{navyblue} EDD Alignment with DoD AI\\[0.2cm]
+   Guidelines \& Guardrails}\\[1.5cm]
+  {\large\color{darkgray}
+    A crosswalk of Expert-Driven Development training, governance,\\
+    and quality assurance against Department of Defense\\
+    Responsible AI principles, CDAO generative AI directives,\\
+    DON guidance, and FY2026 NDAA requirements.}\\[2.5cm]
+  \begin{tabular}{rl}
+    \textbf{Prepared by:} & SSgt Jesse C.\ Morgan \\
+    \textbf{Organization:} & Marine Corps Detachment, Presidio of Monterey \\
+    & Defense Language Institute Foreign Language Center \\
+    \textbf{Date:} & January 2026 \\
+    \textbf{Version:} & 1.0 \\
+  \end{tabular}
+\end{center}
+
+\end{titlepage}
+
+% ---------------------------------------------------------------------------
+% Table of Contents
+% ---------------------------------------------------------------------------
+\tableofcontents
+\newpage
+
+% =============================================================================
+\section{Executive Summary}
+% =============================================================================
+
+Expert-Driven Development (EDD) is a training methodology that teaches Department of Defense domain experts to build institutional software using AI as scaffolding.
+This document demonstrates that EDD is fully aligned with the DoD's AI governance framework, including:
+
+\begin{itemize}
+  \item The \textbf{Five DoD RAI Ethical Principles} (Responsible, Equitable, Traceable, Reliable, Governable)
+  \item The \textbf{CDAO Guidelines \& Guardrails for Governance of Generative AI} Memorandum (July 2024)
+  \item The \textbf{CDAO GenAI RAI Toolkit} (December 2024)
+  \item The \textbf{DoD AI Cybersecurity Risk Management Tailoring Guide} (Version 2, July 2025)
+  \item \textbf{DON Guidance on the Use of Generative AI}
+  \item \textbf{FY2026 NDAA AI Provisions} (workforce training, AI sandbox, assessment frameworks)
+  \item The \textbf{DoW AI Strategy} (January 2026) and \textbf{MARADMIN 018/26}
+\end{itemize}
+
+\begin{keyquote}
+``The DoD has five RAI principles: responsible, equitable, traceable, reliable, and governable.
+Most units have a memo about them.
+EDD has a training program that teaches people how to actually follow them---with exercises, QA protocols, verification checklists, and a governance SOP.
+The guardrails don't work if nobody knows how to stay inside them.
+That is what EDD solves.''
+\end{keyquote}
+
+\calloutbox{\faCheckCircle\quad Bottom Line}{%
+EDD addresses every DoD RAI principle and every major CDAO/DON generative AI guardrail.
+Course~6 (Full-Stack AI-Assisted Development), which uses commercial frontier AI tools, operates entirely in the unclassified, personal-time, off-network lane and is addressed in Section~\ref{sec:course6}.
+No gaps remain. The CDAO RAI Toolkit cross-reference has been incorporated into the SOP QA Checklist (Item~8).}
+
+% =============================================================================
+\section{DoD RAI Ethical Principles Crosswalk}
+\label{sec:rai}
+% =============================================================================
+
+The Department of Defense adopted five ethical principles for AI on 24 February 2020.
+These principles govern all AI development, deployment, and use across the Department.
+The table below maps each principle to specific EDD curriculum and SOP provisions.
+
+\medskip
+
+\renewcommand{\arraystretch}{1.45}
+\noindent
+\begin{longtable}{>{\raggedright\arraybackslash}p{2.35cm}
+                   >{\raggedright\arraybackslash}p{3.2cm}
+                   >{\raggedright\arraybackslash}p{5.55cm}
+                   >{\centering\arraybackslash}m{2.7cm}}
+\toprule
+\textbf{Principle} & \textbf{DoD Requirement} & \textbf{EDD Coverage} & \textbf{Status} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Principle} & \textbf{DoD Requirement} & \textbf{EDD Coverage} & \textbf{Status} \\
+\midrule
+\endhead
+
+\textbf{Responsible} &
+  Human beings exercise appropriate levels of judgment and remain responsible for AI outcomes. &
+  The entire curriculum is built on the management framing: ``You are not learning to use a tool---you are learning to manage one.''
+  \textbf{Quality Judgment} is a dedicated 201-level skill.
+  The Red Pen Review exercise in Course~1 teaches every student to verify AI output before signing.
+  The verification hierarchy (high / medium / low stakes) maps oversight intensity to consequence. &
+  \covered \\
+\midrule
+
+\textbf{Equitable} &
+  Minimize unintended bias in AI capabilities. &
+  \textbf{Frontier Recognition} explicitly teaches students to identify where AI fails---bias is a frontier issue.
+  Failure-sharing protocols (Courses~1--4) surface bias cases across the organization.
+  Shared frontier maps document known failure modes, including biased outputs, for the entire unit. &
+  \covered \\
+\midrule
+
+\textbf{Traceable} &
+  Transparent and auditable methodologies, data sources, design procedures, and documentation. &
+  The EDD SOP requires documentation for every tool: proposal, design, QA review, and approval.
+  Course~4 workflow playbooks label every step as \textbf{Human} or \textbf{AI}, creating an auditable record of who did what.
+  Frontier maps and QA checklists are published, shared artifacts. &
+  \covered \\
+\midrule
+
+\textbf{Reliable} &
+  Explicit, well-defined uses; testing and assurance within those uses across the AI capability life-cycle. &
+  Course~4 (Advanced Workshop) builds domain-specific verification protocols and QA checklists.
+  The EDD SOP mandates peer review and testing before any tool is deployed.
+  Course~3 (Platform Training) includes a mandatory failure-sharing session that identifies reliability boundaries. &
+  \covered \\
+\midrule
+
+\textbf{Governable} &
+  Detect and avoid unintended consequences; ability to disengage deployed systems. &
+  The four-layer framework (Train~$\to$~Build~$\to$~Document~$\to$~Scale) embeds governance at every stage.
+  The SOP defines proposal, review, and approval gates.
+  Tools are standard applications on standard DoD infrastructure (Power Platform, M365)---not black-box AI products.
+  The AI is scaffolding that is removed; the tool outlasts the AI. &
+  \covered \\
+
+\bottomrule
+\end{longtable}
+
+% =============================================================================
+\section{CDAO Generative AI Guidelines \& Guardrails}
+\label{sec:cdao}
+% =============================================================================
+
+The Chief Digital and Artificial Intelligence Officer published the \emph{Guidelines \& Guardrails to Inform Governance of Generative Artificial Intelligence} memorandum on July 12, 2024, followed by the GenAI RAI Toolkit in December 2024.
+The memo defines seven categories of guidelines (best practices) and guardrails (requirements) for all DoD GenAI use.
+The following crosswalk maps each section of the memo to EDD provisions.
+
+\subsection{Section 1: Risk Criteria}
+
+\noindent\textbf{Memo:} Components should develop clear criteria for determining appropriate governance processes for GenAI projects, including risk levels, data sensitivity, and organizational oversight roles.
+
+\medskip\noindent\textbf{EDD Coverage:} \covered
+
+\begin{itemize}
+  \item The EDD SOP \emph{is} the governance process---proposal $\rightarrow$ review $\rightarrow$ QA $\rightarrow$ approval---with defined roles (builder, reviewer, approver, Program Coordinator).
+  \item Frontier mapping categorizes tasks by risk level (Inside Frontier, Outside Frontier, Moving Frontier).
+  \item Course~5 (Supervisor Orientation) designates leadership responsibility for oversight.
+\end{itemize}
+
+\subsection{Section 2: Suitability, Feasibility, and Advisability}
+
+\noindent\textbf{Memo:} Before use, verify that GenAI is (1) suitable, (2) feasible, and (3) advisable for the proposed task.
+
+\medskip\noindent\textbf{EDD Coverage:} \covered
+
+\begin{itemize}
+  \item Course~1 teaches the \textbf{Delegation Equation} (Mollick's framework): How long does the task take you? How likely is AI to succeed? How long to evaluate?
+  This maps directly to the suitability/feasibility/advisability test.
+  \item \textbf{Task Decomposition} skill teaches students to decide what to delegate vs.\ retain---the core suitability judgment.
+  \item \textbf{Frontier Recognition} identifies tasks where GenAI is not suitable (outside the frontier).
+\end{itemize}
+
+\subsection{Section 3: Training Data Quality}
+
+\noindent\textbf{Memo:} Document training data provenance, monitor for data drift and concept drift, adhere to data governance and privacy policies.
+
+\medskip\noindent\textbf{EDD Coverage:} \covered\ (Limited applicability)
+
+\begin{itemize}
+  \item EDD does not train, fine-tune, or develop GenAI models.
+  EDD personnel \emph{use} authorized GenAI tools (GenAI.mil, CamoGPT) whose training data governance is managed by the platform providers.
+  \item For data \emph{input} to GenAI tools, \textbf{Context Assembly} skill teaches deliberate curation of what information to provide---directly relevant to data quality and sensitivity.
+\end{itemize}
+
+\subsection{Section 4: Cyber and Adversarial Resilience}
+
+\noindent\textbf{Memo:} Adhere to existing DoD cybersecurity policies (DoDI 8500.01, 8510.01, the AI Cybersecurity Risk Management Tailoring Guide). Consider adversarial risks. Report unexpected model behavior.
+
+\medskip\noindent\textbf{EDD Coverage:} \covered
+
+\begin{itemize}
+  \item EDD tools deploy on Power Platform / M365 with existing ATOs---no separate AI system authorization required.
+  \item Curriculum teaches approved platform selection: GenAI.mil for CUI/IL5, CamoGPT for IL6/SIPR, commercial tools for unclassified only.
+  \item The AI is scaffolding used during development; no AI model is deployed in production. The cybersecurity posture of the deployed tool inherits from the hosting platform's ATO.
+\end{itemize}
+
+\subsection{Section 5: Traceability and Understanding}
+
+\noindent\textbf{Memo:} Understand model capabilities and limitations. Implement techniques for traceability (RAG, chain-of-thought). Document with model/data/system cards.
+
+\medskip\noindent\textbf{EDD Coverage:} \covered
+
+\begin{itemize}
+  \item \textbf{Frontier Recognition} is dedicated to understanding AI capabilities and limitations---students build domain-specific frontier maps documenting where AI excels and where it fails.
+  \item Course~4 workflow playbooks label every step as \textbf{Human} or \textbf{AI}, creating traceable records.
+  \item Failure-sharing protocols (Courses~1--4) systematically document model limitations.
+\end{itemize}
+
+\subsection{Section 6: Harms, Impacts, and Risks}
+
+\noindent\textbf{Memo:} Address overdependency risks, bias, deskilling.
+Prohibit entry of CUI/\allowbreak CNSI/\allowbreak PII/\allowbreak proprietary information into unauthorized tools.
+Comply with copyright/IP laws.
+
+\medskip\noindent\textbf{EDD Coverage:} \covered
+
+\begin{itemize}
+  \item \textbf{Overdependency / deskilling (Sec 6(a)(1)):} EDD's Apprentice Problem protocol (Courses~4 and 5) directly addresses this---juniors must review AI output, explain \emph{why} it is correct or incorrect, and periodically perform tasks without AI.
+  \item \textbf{Bias (Sec 6(a)(2)):} Frontier Recognition and failure-sharing protocols surface bias cases across the organization.
+  \item \textbf{CUI/CNSI/PII prohibition (Sec 6(b)(1)):} Explicitly taught. Curriculum names GenAI.mil and CamoGPT as the \emph{only} approved platforms for CUI/classified work. Commercial tools are identified as unclassified-only.
+  \item \textbf{Proprietary information (Sec 6(b)(3)):} EDD tools are built on Power Platform (M365)---no proprietary code or data leaves the DoD boundary.
+  \item All EDD course materials are \textbf{UNCLASSIFIED // Distribution Unlimited}.
+\end{itemize}
+
+\subsection{Section 7: Human-Machine Teaming and Trust}
+
+This is EDD's strongest alignment. The memo states:
+
+\begin{keyquote}
+``Before the use stage of the AI lifecycle, DoD personnel should consider requiring potential users of a GenAI tool to take trainings on: (1) overall GenAI risks\ldots\ (2) effective and proper GenAI use---including prompt engineering---that provides awareness of potential for misuse, permissible and impermissible use, and potential deskilling; and (3) the capabilities and limitations of the specific GenAI tool.''
+
+--- CDAO Guidelines \& Guardrails, Section 7(b)
+\end{keyquote}
+
+\noindent\textbf{EDD Coverage:} \covered
+
+\begin{itemize}
+  \item \textbf{7(b)(1) --- GenAI risks:} Course~1 (AI Fluency Fundamentals) opens with the 80\% abandonment problem, the jagged frontier, and the BCG-Harvard finding that untrained users perform 19 percentage points \emph{worse}. This is 2 hours dedicated to GenAI risks.
+  \item \textbf{7(b)(2) --- Effective use, misuse awareness, deskilling:} Courses~2--4 are 10 hours of hands-on effective use. The Apprentice Problem protocol (Courses~4 and 5) explicitly addresses deskilling. The Red Pen Review exercise teaches misuse recognition.
+  \item \textbf{7(b)(3) --- Capabilities and limitations:} Frontier Recognition is an entire 201-level skill dedicated to this. Frontier maps are published, shared, and continuously updated.
+  \item \textbf{7(d)(1) --- Division of responsibilities:} This is literally Centaur/Cyborg mode. Course~3 builds three complete tools with explicit mode selection and phase-boundary verification at each step. Course~4 workflow playbooks document every Human/AI responsibility division.
+\end{itemize}
+
+\calloutbox{\faCheckCircle\quad Section 7 is the Knockout}{%
+The CDAO memo \emph{recommends} GenAI training covering risks, effective use, and capability limitations.
+EDD \emph{delivers} exactly that training---five courses, 12.5 hours, with exercises, QA protocols, and published deliverables.
+Most units have zero formal GenAI training.
+EDD is a ready-made implementation of Section~7.}
+
+% =============================================================================
+\section{DON-Specific Generative AI Guidance}
+\label{sec:don}
+% =============================================================================
+
+The Department of the Navy issued guidance on the use of generative AI establishing guardrails for all Navy and Marine Corps personnel.
+The DON has designated GenAI.mil as the enterprise IT service for CUI and IL5 generative AI use, with a transition deadline of 30 April 2026.
+
+\medskip
+
+\renewcommand{\arraystretch}{1.4}
+\noindent
+\begin{longtable}{>{\raggedright\arraybackslash}p{4.5cm}
+                   >{\raggedright\arraybackslash}p{7.5cm}
+                   c}
+\toprule
+\textbf{DON Requirement} & \textbf{EDD Coverage} & \textbf{Status} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{DON Requirement} & \textbf{EDD Coverage} & \textbf{Status} \\
+\midrule
+\endhead
+
+No CUI or classified data in unauthorized AI tools. &
+  Explicitly taught in Courses~1 and 5. Curriculum names GenAI.mil and CamoGPT as the only approved platforms for CUI/classified work. Commercial tools are identified as unclassified-only. &
+  \covered \\
+\midrule
+
+Transition to GenAI.mil as enterprise platform. &
+  Curriculum references MARADMIN 018/26 designating GenAI.mil as the Marine Corps enterprise platform. Already aligned. &
+  \covered \\
+\midrule
+
+Source code and proprietary information restrictions. &
+  EDD tools are built on Power Platform (M365)---no proprietary code leaves the DoD boundary. The curriculum repository is open-source under the MIT license. &
+  \covered \\
+\midrule
+
+Aggregation risk: prompts may inadvertently reveal sensitive information. &
+  Frontier Recognition training teaches students to consider what information they are providing to AI systems. Course~1, Module~4 (Quality Judgment) addresses the risk of over-sharing context. Supervisor Orientation reinforces guard rails. &
+  \covered \\
+
+\bottomrule
+\end{longtable}
+
+% =============================================================================
+\section{DoD AI Cybersecurity Risk Management Tailoring Guide}
+\label{sec:cyber}
+% =============================================================================
+
+The DoD CIO published the \emph{AI Cybersecurity Risk Management Tailoring Guide} (Version~2, July 2025) to establish cybersecurity risk management activities across the AI system lifecycle.
+This guide accompanies the CDAO RAI Toolkit and covers infrastructure security, model security, data security, supply chain risk, and authorization.
+
+\medskip
+
+\calloutbox{\faShield*\quad Scope Distinction}{%
+The Cybersecurity Tailoring Guide applies to \textbf{AI systems}---infrastructure layers, trained models, and operational deployments requiring RMF authorization (DoDI 8510.01).
+EDD tools are \textbf{not AI systems}. They are standard applications (Power Apps, web apps) built \emph{with AI assistance} on already-authorized DoD infrastructure.
+The AI is scaffolding used during development; it does not run in production.
+No AI model is trained, fine-tuned, or deployed as part of an EDD tool.
+Therefore, the cybersecurity controls for AI model development, AI infrastructure layers, and AI system authorization in this guide do not apply to EDD-produced tools.}
+
+\noindent However, EDD aligns with the guide's applicable requirements:
+
+\medskip
+
+\renewcommand{\arraystretch}{1.4}
+\noindent
+\begin{longtable}{>{\raggedright\arraybackslash}p{4.5cm}
+                   >{\raggedright\arraybackslash}p{7.5cm}
+                   c}
+\toprule
+\textbf{Guide Requirement} & \textbf{EDD Coverage} & \textbf{Status} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Guide Requirement} & \textbf{EDD Coverage} & \textbf{Status} \\
+\midrule
+\endhead
+
+Data security: protect confidentiality and integrity of input, training, and output data (Sec.~3.1.3). &
+  EDD trains students to use only authorized platforms for AI interaction (GenAI.mil for CUI/IL5, CamoGPT for IL6/SIPR). Context Assembly skill teaches deliberate input curation---students learn \emph{what} to share with AI and what to withhold. No training data is created or fine-tuned. &
+  \covered \\
+\midrule
+
+Aggregation risk: prompts may aggregate to reveal classified information (Sec.~3.1.3, Data Security). &
+  Course~1 Module~4 (Quality Judgment) and Frontier Recognition training explicitly address the risk of inadvertent disclosure through cumulative prompts. Supervisor Orientation reinforces classification guard rails. &
+  \covered \\
+\midrule
+
+Access control: limit system access to authorized users and approved transactions (Sec.~3.1.2). &
+  EDD tools deploy on Power Platform / M365 with existing DoD identity and access management. No separate AI system access is created. All access inherits from the organization's existing ATO. &
+  \covered \\
+\midrule
+
+Supply chain risk (Sec.~3.1.1): ensure trust and integrity in AI system components and data sources. &
+  EDD tools use no external AI dependencies in production. The AI (GenAI.mil, CamoGPT) is used only during development. Deployed tools are standard web/Power Apps running on DoD-authorized infrastructure with existing supply chain controls. &
+  \covered \\
+\midrule
+
+Authorization (Sec.~4): AI systems must be assessed and authorized per DoDI 8510.01 RMF. &
+  EDD tools inherit authorization from the hosting platform (Power Platform ATO, M365 ATO). No separate AI system authorization is required because no AI model is deployed. The MCD Tutoring Application received ATO approval through this inheritance model. &
+  \covered \\
+\midrule
+
+Continuous monitoring (Sec.~3.1.6): monitor AI systems for performance degradation and security incidents. &
+  Not directly applicable---EDD tools contain no AI models requiring performance monitoring. However, the EDD SOP includes maintenance and review cycles for deployed tools, and Course~4 teaches ongoing frontier mapping to detect when AI capabilities change. &
+  \covered \\
+
+\bottomrule
+\end{longtable}
+
+\medskip
+
+\calloutbox{\faInfoCircle\quad Key Insight}{%
+The Cybersecurity Tailoring Guide's most rigorous requirements---RMF authorization, model TEVV, SBOM documentation, DevSecOps pipelines, STIG compliance---apply to organizations \emph{building and deploying AI systems}.
+EDD is a program that \emph{uses} authorized AI tools (GenAI.mil, CamoGPT) to \emph{build standard applications}.
+The distinction is analogous to using a power drill (authorized tool) to build a shelf (standard product) versus manufacturing the power drill itself (requires safety certification).
+EDD teaches people to use the drill safely; it does not manufacture drills.}
+
+% =============================================================================
+\section{FY2026 NDAA AI Provisions}
+\label{sec:ndaa}
+% =============================================================================
+
+The Fiscal Year 2026 National Defense Authorization Act includes several AI-related mandates relevant to EDD's mission.
+
+\medskip
+
+\renewcommand{\arraystretch}{1.4}
+\noindent
+\begin{longtable}{>{\raggedright\arraybackslash}p{4.5cm}
+                   >{\raggedright\arraybackslash}p{7.5cm}
+                   c}
+\toprule
+\textbf{NDAA Requirement} & \textbf{EDD Coverage} & \textbf{Status} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{NDAA Requirement} & \textbf{EDD Coverage} & \textbf{Status} \\
+\midrule
+\endhead
+
+AI/ML workforce training and protections. &
+  This is the core mission of EDD: five courses, structured instructor certification, train-the-trainer model, succession planning for PCS cycles. &
+  \covered \\
+\midrule
+
+AI sandbox environments for experimentation, training, and model development. &
+  Courses~2--3 (Builder Orientation, Platform Training) are structured sandbox experiences---students build prototypes in safe environments before deployment. The EDD SOP separates development from production. &
+  \covered \\
+\midrule
+
+Standardized framework for assessing, governing, and approving AI models. &
+  The EDD SOP provides a standardized governance framework for AI-assisted tool development at the unit level: proposal $\rightarrow$ review $\rightarrow$ QA $\rightarrow$ approval $\rightarrow$ deployment $\rightarrow$ maintenance. &
+  \covered \\
+\midrule
+
+Cybersecurity governance for AI/ML. &
+  Tools are built on DoD-approved infrastructure (Power Platform, M365) with existing ATO coverage. No external AI dependencies ship in production---the AI is scaffolding, not runtime. &
+  \covered \\
+
+\bottomrule
+\end{longtable}
+
+% =============================================================================
+\section{DoW AI Strategy (January 2026) Alignment}
+\label{sec:dow}
+% =============================================================================
+
+The Department of War's January 2026 AI Strategy declares that ``2026 will be the year we emphatically raise the bar for Military AI Dominance.''
+The strategy emphasizes rapid adoption with the CDAO receiving enhanced resources to accelerate AI capability across the Department.
+
+\medskip
+
+EDD directly supports this mandate through:
+
+\begin{enumerate}
+  \item \textbf{Rapid adoption without the 80\% abandonment rate.}
+  Microsoft enterprise data shows most workers quit AI tools within weeks.
+  The UK Government deployment showed that workers with proper training saved 25 minutes per day and 80\%+ did not want to give up access.
+  EDD provides the training that converts access into adoption.
+
+  \item \textbf{Zero-budget capability generation.}
+  EDD proof-of-concept tools---MCD Tutoring (440 users), DonDocs (300 users/day on MCEN), Tanaghum (in-use by MLIs)---were built at \$0 cost on existing infrastructure.
+  No procurement. No contractors. No lead time.
+
+  \item \textbf{Organic scaling.}
+  The train-the-trainer model with instructor certification means capability spreads without central dependency.
+  Each unit maintains 2+ certified instructors.
+  Succession is planned for PCS cycles.
+
+  \item \textbf{Platform alignment.}
+  EDD builds on GenAI.mil (enterprise platform per MARADMIN 018/26), CamoGPT (classified), and Power Platform (M365)---all platforms the DoD already pays for and has deployed.
+\end{enumerate}
+
+% =============================================================================
+\section{The Six 201-Level Skills as Guardrail Implementation}
+\label{sec:skills}
+% =============================================================================
+
+DoD guardrails are policy documents.
+EDD's six 201-level skills are the \emph{training} that teaches people how to follow those policies.
+Every guardrail requires a human behavior change; the six skills provide the behavioral framework.
+
+\medskip
+
+\renewcommand{\arraystretch}{1.4}
+\noindent
+\begin{longtable}{>{\raggedright\arraybackslash}p{3.0cm}
+                   >{\raggedright\arraybackslash}p{4.5cm}
+                   >{\raggedright\arraybackslash}p{5.0cm}}
+\toprule
+\textbf{201 Skill} & \textbf{What It Teaches} & \textbf{Guardrail It Implements} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{201 Skill} & \textbf{What It Teaches} & \textbf{Guardrail It Implements} \\
+\midrule
+\endhead
+
+Context Assembly &
+  Curate background, constraints, and examples before tasking AI. &
+  Prevents over-sharing of sensitive data. Supports CUI/classification guard rails by teaching deliberate input selection. \\
+\midrule
+
+Quality Judgment &
+  Spot reliable vs.\ unreliable content within the same AI output. &
+  Implements \textbf{Responsible} and \textbf{Reliable} principles. Directly addresses human oversight requirements. \\
+\midrule
+
+Task Decomposition &
+  Break work into AI-appropriate subtasks; decide what to delegate vs.\ retain. &
+  Implements \textbf{Governable} principle. Ensures humans retain control over high-stakes decisions. \\
+\midrule
+
+Iterative Refinement &
+  Treat first output as starting point; direct structured revision. &
+  Implements \textbf{Reliable} principle. Prevents ``first draft accepted as final'' failure mode. \\
+\midrule
+
+Workflow Integration &
+  Embed AI into recurring processes with documented playbooks. &
+  Implements \textbf{Traceable} principle. Creates auditable, repeatable workflows with Human/AI labels. \\
+\midrule
+
+Frontier Recognition &
+  Know where AI excels and fails for your specific work; share failure cases. &
+  Implements \textbf{Equitable} principle. Surfaces bias and identifies capability boundaries before harm occurs. \\
+
+\bottomrule
+\end{longtable}
+
+% =============================================================================
+\section{Course 6: Full-Stack AI-Assisted Development}
+\label{sec:course6}
+% =============================================================================
+
+Course~6 is an \textbf{elective capstone} in the EDD Builder path.
+Unlike Courses~1--4, which operate entirely within approved DoD platforms and networks, Course~6 teaches advanced AI-assisted full-stack development using \textbf{commercial frontier AI tools on personal time and personal devices}.
+
+\calloutbox{\faInfoCircle\quad Platform Scope}{%
+\textbf{Courses 1--4:} Approved platforms (GenAI.mil, CamoGPT, M365 Copilot), government networks, on-duty.\\
+\textbf{Course 5:} Supervisor awareness --- platform-agnostic.\\
+\textbf{Course 6:} Commercial frontier AI tools (Claude, ChatGPT, Copilot), personal devices, off-network, \textbf{unclassified only}, personal/professional development time.}
+
+\subsection{Why This Course Exists}
+
+Approved DoD AI platforms are evolving rapidly.
+GenAI.mil today is not what GenAI.mil will be in 12 months.
+When advanced capabilities arrive on DoD networks---and they will---units need personnel who already know how to use them.
+
+Course~6 prepares Marines for that moment.
+Students who build a complete full-stack application with a frontier AI tool on their personal laptop will be \emph{dramatically} more effective when those same capabilities appear inside the DoD boundary.
+The skills are fully transferable: task decomposition, iterative code review, architecture decisions, AI-directed debugging---none of this is tool-specific.
+
+This is no different from a Marine reading a tactics manual that references weapons systems their unit does not currently field, or attending an industry conference to learn emerging techniques.
+It is a \textbf{readiness investment}, not a policy violation.
+
+\subsection{Compliance Posture}
+
+\begin{itemize}
+  \item \textbf{No government data.} Course~6 builds sample applications (staff trackers, inventory tools) with synthetic data only.
+  No CUI, CNSI, PII, or government-owned information enters any commercial AI system.
+  \item \textbf{No government networks.} All development occurs on personal devices, on personal internet connections, outside DoD infrastructure.
+  \item \textbf{Unclassified only.} Course materials are \textbf{UNCLASSIFIED // Distribution Unlimited}.
+  All code produced is open-source and publishable.
+  \item \textbf{Personal/professional development time.} Course~6 is positioned as voluntary professional development.
+  Marines routinely pursue off-duty education, certifications, and skill development --- this is the same.
+  \item \textbf{Commercial tools for unclassified use.} The CDAO memo (Section~6(b)(1)) and DON guidance restrict CUI/classified to approved platforms.
+  They do \emph{not} prohibit use of commercial AI tools for unclassified, personal-time professional development.
+  Course~6 operates entirely within this lane.
+\end{itemize}
+
+\subsection{Alignment with Section 7 of the CDAO Memo}
+
+Section~7(b) recommends training on ``the capabilities and limitations of the specific GenAI tool.''
+The DoD AI ecosystem is not limited to GenAI.mil and CamoGPT---frontier commercial models represent the leading edge of what is possible with generative AI.
+Teaching Marines what these tools can and cannot do directly satisfies the Section~7(b)(3) requirement.
+
+Marines who understand frontier model capabilities will:
+\begin{enumerate}
+  \item Recognize what is coming to DoD platforms and prepare workflows in advance.
+  \item Make better suitability/feasibility/advisability decisions (Section~2) because they understand the full spectrum of AI capability, not just what is currently fielded.
+  \item Bring proven patterns, architectures, and development skills back to their approved work environments, accelerating adoption when tools are approved.
+\end{enumerate}
+
+\calloutbox{\faCheckCircle\quad Course 6 Bottom Line}{%
+Course~6 does not violate any DoD AI guardrail.
+It operates in the unclassified, personal-time, personal-device lane that every commercial AI policy explicitly permits.
+It produces Marines who are ready for the next generation of DoD AI capabilities \emph{before} those capabilities arrive on network.
+The alternative---waiting until frontier tools are approved and then starting from zero---is the slower, more expensive, less competitive path.}
+
+% =============================================================================
+\section{Conclusion}
+% =============================================================================
+
+EDD is fully compliant with the DoD's AI governance framework.
+It addresses all five RAI ethical principles, satisfies CDAO generative AI guidelines and guardrails, aligns with DON-specific guidance, and supports FY2026 NDAA workforce training mandates.
+
+\medskip
+
+More importantly, EDD is one of the few programs in the Department that \emph{teaches} the guardrails rather than simply publishing them.
+A memo on a SharePoint site does not change behavior.
+A training program with exercises, verification protocols, QA checklists, and a governance SOP does.
+
+\begin{keyquote}
+``The guardrails don't work if nobody knows how to stay inside them.
+That is what EDD solves.''
+\end{keyquote}
+
+% =============================================================================
+\section*{References}
+% =============================================================================
+\addcontentsline{toc}{section}{References}
+
+\begin{enumerate}[label={[\arabic*]},leftmargin=2em]
+  \item Department of Defense. ``DoD Adopts Ethical Principles for Artificial Intelligence.'' 24 Feb 2020.
+  \item Deputy Secretary of Defense. ``Implementing Responsible Artificial Intelligence in the Department of Defense.'' 26 May 2021.
+  \item CDAO. ``Responsible AI Strategy and Implementation Pathway.'' October 2024.
+  \item CDAO. ``Guidelines \& Guardrails to Inform Governance of Generative Artificial Intelligence.'' 12 July 2024.
+  \item CDAO. ``Generative AI RAI Toolkit, Version 1.0.'' December 2024.
+  \item Defense Innovation Unit. ``Responsible AI Guidelines.'' 2024.
+  \item DoD CIO. ``AI Cybersecurity Risk Management Tailoring Guide, Version 2.'' 14 July 2025.
+  \item Department of the Navy CIO. ``Guidance on the Use of Generative Artificial Intelligence.'' 2024.
+  \item Department of War. ``Artificial Intelligence Strategy for the Department of War.'' January 2026.
+  \item MARADMIN 018/26. GenAI.mil Enterprise Platform Designation. 2026.
+  \item FY2026 National Defense Authorization Act. AI/ML Provisions.
+  \item Dell'Acqua, F., et al. ``Navigating the Jagged Technological Frontier.'' Harvard Business School, 2023.
+  \item Brynjolfsson, E., Li, D., \& Raymond, L. ``Generative AI at Work.'' \emph{QJE} 140(2), 2025.
+  \item Mollick, E. ``Management as AI Superpower.'' \emph{One Useful Thing}, January 2026.
+  \item OpenAI. ``GDPval: Evaluating AI Model Performance on Real-World Tasks.'' 2025.
+  \item UK Government Digital Services. Microsoft 365 Copilot Deployment Report. 2025.
+  \item Microsoft Work Trend Index. Enterprise AI Adoption Data. 2024--2025.
+\end{enumerate}
+
+% =============================================================================
+\section*{Point of Contact}
+% =============================================================================
+\addcontentsline{toc}{section}{Point of Contact}
+
+\begin{tabular}{rl}
+  \textbf{Name:} & SSgt Jesse C.\ Morgan \\
+  \textbf{Unit:} & Marine Corps Detachment, Presidio of Monterey \\
+  \textbf{Organization:} & Defense Language Institute Foreign Language Center \\
+  \textbf{Email:} & \href{mailto:jesse.morgan@dliflc.edu}{jesse.morgan@dliflc.edu} \\
+  \textbf{Repository:} & \href{https://github.com/jeranaias/ExpertDrivenDevelopment}{github.com/jeranaias/ExpertDrivenDevelopment} \\
+\end{tabular}
+
+\end{document}

@@ -18,6 +18,8 @@
 \usepackage{tocloft}
 \usepackage{lastpage}
 \usepackage{parskip}
+\usepackage{amssymb}
+\emergencystretch=1.5em
 
 % ---------------------------------------------------------------------------
 % Color definitions
@@ -640,7 +642,8 @@ on documentation; the investment decreases with experience.
 A designated QA Reviewer examines the tool and its documentation against the
 QA Checklist. The reviewer verifies functionality, security compliance,
 documentation completeness, and readiness for deployment. The reviewer must
-not be the same person who built the tool.
+not be the same person who built the tool. Before deployment, confirm alignment
+with the CDAO GenAI RAI Toolkit (Version 1.0, December 2024) assessment questions.
 
 \textbf{Output:} Completed QA Checklist with reviewer sign-off or remediation requirements.
 
@@ -1128,7 +1131,7 @@ Supervisor Approval & Name, rank, signature, date \\
 \section{QA Review Checklist}
 \label{app:qa-checklist}
 
-\begin{longtable}{@{}p{0.6cm}p{8cm}p{1.5cm}p{3cm}@{}}
+\begin{longtable}{@{}p{0.6cm}p{7.6cm}p{1.9cm}p{3cm}@{}}
 \toprule
 \textbf{\#} & \textbf{Item} & \textbf{Pass/Fail} & \textbf{Notes} \\
 \midrule
@@ -1157,23 +1160,25 @@ Supervisor Approval & Name, rank, signature, date \\
 \midrule
 7 & Compliance Checklist is complete and signed & & \\
 \midrule
+8 & Alignment confirmed with CDAO GenAI RAI Toolkit assessment questions & & \\
+\midrule
 \multicolumn{4}{l}{\textbf{Documentation}} \\
 \midrule
-8 & Documentation package is complete & & \\
+9 & Documentation package is complete & & \\
 \midrule
-9 & A new person could maintain the tool using only the documentation & & \\
+10 & A new person could maintain the tool using only the documentation & & \\
 \midrule
-10 & User guide is clear and accurate & & \\
+11 & User guide is clear and accurate & & \\
 \midrule
-11 & Technical documentation describes architecture and dependencies & & \\
+12 & Technical documentation describes architecture and dependencies & & \\
 \midrule
 \multicolumn{4}{l}{\textbf{Deployment Readiness}} \\
 \midrule
-12 & Tool is deployed on an approved platform & & \\
+13 & Tool is deployed on an approved platform & & \\
 \midrule
-13 & Sustainment plan identifies a maintainer & & \\
+14 & Sustainment plan identifies a maintainer & & \\
 \midrule
-14 & Tool Registry entry is complete & & \\
+15 & Tool Registry entry is complete & & \\
 \midrule
 \multicolumn{4}{l}{} \\
 \midrule
@@ -1299,7 +1304,7 @@ Complete this analysis during Phase 2 (Compliance Review) for every tool. If any
 
 Complete this checklist during Phase 2 (Compliance Review) before beginning development.
 
-\begin{longtable}{@{}p{0.6cm}p{9cm}p{1.2cm}p{2.5cm}@{}}
+\begin{longtable}{@{}p{0.6cm}p{8.9cm}p{1.3cm}p{2.5cm}@{}}
 \toprule
 \textbf{\#} & \textbf{Item} & \textbf{Status} & \textbf{Notes} \\
 \midrule
