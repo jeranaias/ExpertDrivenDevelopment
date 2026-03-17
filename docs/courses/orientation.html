@@ -338,28 +338,40 @@
 
                             <div class="prompt-block">
                                 <p><strong>Prompt to AI:</strong></p>
-                                <p>Give me the exact SharePoint list configuration: list name, all columns with data types, and any calculated columns for overdue status.</p>
+                                <p>Give me the exact SharePoint list configuration: list name, all columns with data types, and any calculated columns for overdue status. Include a CSV template I can import into SharePoint and tell me which columns I need to add manually after import.</p>
                             </div>
 
                             <div class="code-block">
                                 <p><strong>Expected AI Output:</strong></p>
                                 <pre>List Name: EquipmentCheckout
 
-Columns:
-1. Title (Single line of text) - Item Name
-2. SerialNumber (Single line of text)
-3. AssignedTo (Single line of text)
-4. DateOut (Date and Time)
-5. DateDue (Date and Time)
-6. Status (Choice: Checked Out, Checked In, Overdue)
-7. CheckedInDate (Date and Time) - nullable
+| Display Name    | Internal Name  | Type               | Required | Notes                        |
+|-----------------|----------------|--------------------|----------|------------------------------|
+| Title           | Title          | Single line of text | Yes      | Item name (built-in column)  |
+| Serial Number   | SerialNumber   | Single line of text | Yes      |                              |
+| Assigned To     | AssignedTo     | Single line of text | Yes      |                              |
+| Date Out        | DateOut        | Date and Time       | Yes      | Date only                    |
+| Date Due        | DateDue        | Date and Time       | Yes      | Date only                    |
+| Status          | Status         | Choice              | Yes      | Checked Out, Checked In, Overdue |
+| Checked In Date | CheckedInDate  | Date and Time       | No       |                              |
+| Is Overdue      | IsOverdue      | Calculated (Yes/No) | —       | Add after import             |
 
-Calculated Column:
-- IsOverdue (Yes/No): =IF(AND(Status="Checked Out",DateDue&lt;TODAY()),TRUE,FALSE)</pre>
+CSV Template (save as EquipmentCheckout.csv):
+Title,SerialNumber,AssignedTo,DateOut,DateDue,Status,CheckedInDate
+M4 Carbine,W123456,SSgt Morgan,2026-03-01,2026-03-15,Checked Out,
+
+Import steps:
+1. Save the CSV above in Notepad (UTF-8 encoding)
+2. SharePoint → Site Contents → New → List → From CSV → upload
+3. Convert Status column to Choice (add values: Checked Out, Checked In, Overdue)
+4. Add Calculated column "IsOverdue":
+   Formula: =IF(AND([Status]="Checked Out",[DateDue]&lt;TODAY()),TRUE,FALSE)
+   Return type: Yes/No
+5. Click Integrate → Power Apps → Create an app</pre>
                             </div>
 
                             <div class="callout callout--instructor">
-                                <p><strong>Action:</strong> Create this list in SharePoint now (or describe where you would). AI gave us the exact configuration &mdash; no guessing.</p>
+                                <p><strong>Action:</strong> Import this CSV into SharePoint now (or describe where you would). AI gave us the structure, the CSV, and the post-import steps &mdash; no manual column creation needed.</p>
                             </div>
                         </details>
 

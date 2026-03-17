@@ -384,67 +384,46 @@
                                     <li>Date Actioned (date and time)</li>
                                 </ul>
                                 <p>
-                                    Provide the step-by-step instructions to create this list in SharePoint Online.
+                                    Give me a CSV template I can import into SharePoint to create this list, plus tell me which columns I need to add manually after import.
                                 </p>
                             </div>
 
                             <div class="code-block">
                                 <strong>Expected AI Output:</strong>
                                 <pre>
-To create the "Leave Requests" SharePoint list:
+Leave Requests — Full Structure:
 
-1. Navigate to your SharePoint site for 1st Bn, 99th Marines
-2. Click "New" &gt; "List"
-3. Select "Blank list"
-4. Name it "Leave Requests"
-5. Click "Create"
+| Display Name     | Internal Name   | Type                  | Required | Notes                              |
+|------------------|-----------------|----------------------|----------|--------------------------------------|
+| Title            | Title           | Single line of text  | No       | Built-in, can hide or repurpose      |
+| Requester Name   | RequesterName   | Person               | Yes      | Add manually after import            |
+| Leave Type       | LeaveType       | Choice               | Yes      | Annual, Convalescent, Emergency, Special Liberty |
+| Start Date       | StartDate       | Date                 | Yes      | Date only                            |
+| End Date         | EndDate         | Date                 | Yes      | Date only                            |
+| Days Requested   | DaysRequested   | Calculated (Number)  | —        | Add after import: =[End Date]-[Start Date] |
+| Justification    | Justification   | Multiple lines text  | Yes      |                                      |
+| Status           | Status          | Choice               | Yes      | Pending, Approved, Denied, Cancelled |
+| Approver         | Approver        | Person               | No       | Add manually after import            |
+| Date Submitted   | DateSubmitted   | Date and Time        | No       | Default: =TODAY()                    |
+| Date Actioned    | DateActioned    | Date and Time        | No       |                                      |
 
-Add the following columns (Site Contents &gt; Leave Requests &gt; Add Column):
+CSV Template (save as LeaveRequests.csv):
+LeaveType,StartDate,EndDate,Justification,Status,DateSubmitted,DateActioned
+Annual,2026-04-01,2026-04-05,Block leave request,Pending,2026-03-16,
 
-1. Requester Name
-   - Type: Person
-   - Require this column: Yes
+Note: Person columns (RequesterName, Approver) and the Calculated column
+(DaysRequested) cannot be created via CSV. Add them after import.
 
-2. Leave Type
-   - Type: Choice
-   - Choices: Annual, Convalescent, Emergency, Special Liberty
-   - Default: Annual
-
-3. Start Date
-   - Type: Date and Time
-   - Format: Date Only
-   - Require this column: Yes
-
-4. End Date
-   - Type: Date and Time
-   - Format: Date Only
-   - Require this column: Yes
-
-5. Days Requested
-   - Type: Calculated
-   - Formula: =[End Date]-[Start Date]
-   - Return type: Number
-
-6. Justification
-   - Type: Multiple lines of text
-   - Require this column: Yes
-
-7. Status
-   - Type: Choice
-   - Choices: Pending, Approved, Denied, Cancelled
-   - Default: Pending
-
-8. Approver
-   - Type: Person
-   - Require this column: No
-
-9. Date Submitted
-   - Type: Date and Time
-   - Default: =TODAY()
-
-10. Date Actioned
-    - Type: Date and Time
-    - Require this column: No
+Post-import steps:
+1. Save CSV in Notepad (UTF-8) → SharePoint → Site Contents → New → List → From CSV
+2. Convert LeaveType to Choice: click column → Edit → type "Choice" → add values
+3. Convert Status to Choice: same steps → add Pending, Approved, Denied, Cancelled → default "Pending"
+4. Add Person column "RequesterName": Create column → Person or Group → Required: Yes
+5. Add Person column "Approver": Create column → Person or Group → Required: No
+6. Add Calculated column "DaysRequested": Create column → Calculated →
+   Formula: =[End Date]-[Start Date] → Return type: Number
+7. Set DateSubmitted default to =TODAY() in column settings
+8. Click Integrate → Power Apps → Create an app
                                 </pre>
                             </div>
 
@@ -1190,23 +1169,37 @@ is notified before the timeout expires.
                                     I need a training tracker for 1st Battalion, 99th Marines. We need to track which
                                     Marines have completed which training events. Start with a SharePoint list that can
                                     store: Marine name, training event name, completion date, and status (Complete,
-                                    Overdue, Scheduled). Give me the SharePoint list structure.
+                                    Overdue, Scheduled). Give me the SharePoint list structure and a CSV I can import.
                                 </p>
                             </div>
 
                             <div class="code-block">
                                 <strong>Expected AI Output:</strong>
                                 <pre>
-Create a SharePoint list called "Training Tracker":
+Training Tracker — Structure:
 
-1. Marine Name (Person field, required)
-2. Training Event (Choice field: Annual Rifle Qual, CBRN Awareness, Cyber Awareness, PFT/CFT, SAPR Training)
-3. Completion Date (Date field)
-4. Status (Choice field: Complete, Overdue, Scheduled)
-5. Due Date (Date field)
-6. Days Until Due (Calculated: =[Due Date]-TODAY())
+| Display Name    | Internal Name   | Type              | Required | Notes                       |
+|-----------------|-----------------|-------------------|----------|-----------------------------|
+| Marine Name     | MarineName      | Person            | Yes      | Add manually after import   |
+| Training Event  | TrainingEvent   | Choice            | Yes      | See values below            |
+| Completion Date | CompletionDate  | Date              | No       | Date only                   |
+| Status          | Status          | Choice            | Yes      | Complete, Overdue, Scheduled|
+| Due Date        | DueDate         | Date              | Yes      | Date only                   |
+| Days Until Due  | DaysUntilDue    | Calculated        | —        | Add after import            |
 
-This structure allows you to track individual training completions for each Marine.
+CSV Template (save as TrainingTracker.csv):
+TrainingEvent,CompletionDate,Status,DueDate
+Annual Rifle Qual,,Scheduled,2026-06-15
+
+Post-import steps:
+1. Convert TrainingEvent to Choice (values: Annual Rifle Qual, CBRN Awareness, Cyber Awareness, PFT/CFT, SAPR Training)
+2. Convert Status to Choice (values: Complete, Overdue, Scheduled)
+3. Add Person column "MarineName": Create column → Person or Group → Required
+4. Add Calculated column "DaysUntilDue": =[Due Date]-TODAY(), return type: Number
+   (Note: this only recalculates when the item is edited, not daily)
+5. Integrate → Power Apps → Create an app
+
+This structure creates one row per training event per Marine.
                                 </pre>
                             </div>
 
