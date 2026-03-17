@@ -655,39 +655,40 @@ Step 5: Send an email (V2) (Office 365 Outlook)
                             <div class="code-block">
                                 <strong>Expected AI Output:</strong>
                                 <pre>
-Modify your existing flow:
+Modify your existing flow. Replace Action 5 (Send an email) with an approval action:
 
-After Action 4 (Update item), add:
-
-Action 5: Start and wait for an approval
+Step 5: Start and wait for an approval (Approvals)
 - Approval type: Approve/Reject - First to respond
 - Title: Leave Request Approval Needed
-- Assigned to: {ApproverEmail}
+- Assigned to: [Expression: variables('ApproverEmail')]
 - Details:
-Requester: [Requester Name Display Name]
-Leave Type: [Leave Type Value]
-Dates: [Start Date] to [End Date]
-Days: [Days Requested]
-Justification: [Justification]
-
-Please approve or reject this leave request.
-
-- Item link: [Link to item]
+  Requester: [Dynamic Content: Requester Name DisplayName]
+  Leave Type: [Dynamic Content: Leave Type Value]
+  Dates: [Dynamic Content: Start Date] to [Dynamic Content: End Date]
+  Days: [Dynamic Content: Days Requested]
+  Justification: [Dynamic Content: Justification]
+- Item link: [Dynamic Content: Link to item]
 - Item link description: View in SharePoint
+- IMPORTANT: Open Settings on this action → set Timeout to P2D (2 days)
 
-Action 6: Condition - Check approval outcome
-- If: Outcome is equal to "Approve"
-  - Then: Update item (SharePoint)
-    - Status: {Value: "Approved"}
-    - Date Actioned: utcNow()
+Step 6: Condition — check approval outcome
+- [Dynamic Content: Outcome] is equal to "Approve"
 
-- Else: Update item (SharePoint)
-    - Status: {Value: "Denied"}
-    - Date Actioned: utcNow()
+  Yes branch:
+  Step 6a: Update item (SharePoint)
+  - Id: [Dynamic Content: ID]
+  - Status Value: Approved
+  - DateActioned: [Expression: utcNow()]
 
-Optional: Add "Approver Comments" column to SharePoint list (Multiple lines of text)
-Then add to both Update item actions:
-- Approver Comments: {Response summary from approval}
+  No branch:
+  Step 6b: Update item (SharePoint)
+  - Id: [Dynamic Content: ID]
+  - Status Value: Denied
+  - DateActioned: [Expression: utcNow()]
+
+To include approver comments (optional — add ApproverComments column to list first):
+Add to both Update item actions:
+- ApproverComments: [Dynamic Content: Responses Comments]
                                 </pre>
                             </div>
 
@@ -734,43 +735,41 @@ Then add to both Update item actions:
                             <div class="code-block">
                                 <strong>Expected AI Output:</strong>
                                 <pre>
-After Action 6 (the Condition checking approval outcome), add to both branches:
+Add a notification email inside each branch of the Condition (Step 6):
 
-In the "Approve" branch, add:
-Action 7a: Send an email (Office 365 Outlook)
-- To: [Requester Name Email]
+In the Yes (Approve) branch, after Update item:
+Step 7a: Send an email (V2) (Office 365 Outlook)
+- To: [Dynamic Content: Requester Name Email]
 - Subject: Your Leave Request Has Been Approved
 - Body:
-Your leave request has been APPROVED.
+  Your leave request has been APPROVED.
 
-Request Details:
-Leave Type: [Leave Type Value]
-Dates: [Start Date] to [End Date]
-Days: [Days Requested]
-Justification: [Justification]
+  Request Details:
+  Leave Type: [Dynamic Content: Leave Type Value]
+  Dates: [Dynamic Content: Start Date] to [Dynamic Content: End Date]
+  Days: [Dynamic Content: Days Requested]
 
-Approved by: {Approver DisplayName}
-Approver Comments: {Response summary from approval}
+  Approved by: [Dynamic Content: Responses Approver Name]
+  Comments: [Dynamic Content: Responses Comments]
 
-Your leave is now authorized. Ensure you complete any required checkout procedures.
+  Your leave is now authorized. Complete any required checkout procedures.
 
-In the "Reject" branch, add:
-Action 7b: Send an email (Office 365 Outlook)
-- To: [Requester Name Email]
+In the No (Reject) branch, after Update item:
+Step 7b: Send an email (V2) (Office 365 Outlook)
+- To: [Dynamic Content: Requester Name Email]
 - Subject: Your Leave Request Has Been Denied
 - Body:
-Your leave request has been DENIED.
+  Your leave request has been DENIED.
 
-Request Details:
-Leave Type: [Leave Type Value]
-Dates: [Start Date] to [End Date]
-Days: [Days Requested]
-Justification: [Justification]
+  Request Details:
+  Leave Type: [Dynamic Content: Leave Type Value]
+  Dates: [Dynamic Content: Start Date] to [Dynamic Content: End Date]
+  Days: [Dynamic Content: Days Requested]
 
-Denied by: {Approver DisplayName}
-Approver Comments: {Response summary from approval}
+  Denied by: [Dynamic Content: Responses Approver Name]
+  Comments: [Dynamic Content: Responses Comments]
 
-If you have questions about this decision, contact your approving authority.
+  Contact your approving authority if you have questions.
                                 </pre>
                             </div>
 
@@ -818,44 +817,44 @@ If you have questions about this decision, contact your approving authority.
                             <div class="code-block">
                                 <strong>Expected AI Output:</strong>
                                 <pre>
-Error Handling Configuration:
+Three additions to the flow:
 
-1. Configure Run After Settings:
-   - For Action 7a and 7b (Send email to requester), click the "..." menu
-   - Select "Configure run after"
-   - Check: "is successful", "has failed", "is skipped", "has timed out"
+1. TRY/CATCH ERROR HANDLING:
+   - Select all actions (Steps 1 through 7b) → click "Add a scope" → name it "Try"
+   - After the Try scope, add a new Scope → name it "Catch"
+   - Click "..." on the Catch scope → Configure run after → check ONLY "has failed" and "has timed out"
+   - Inside the Catch scope, add:
+     Send an email (V2) (Office 365 Outlook)
+     - To: admin@1bn99marines.mil
+     - Subject: Leave Request Flow Failure
+     - Body:
+       The leave request workflow failed.
+       Requester: [Dynamic Content: Requester Name DisplayName]
+       Item ID: [Dynamic Content: ID]
+       Review the flow run history:
+       [Expression: concat('https://high.flow.microsoft.us/manage/environments/', workflow()?['tags']?['environmentName'], '/flows/', workflow()?['name'], '/runs/', workflow()?['run']?['name'])]
 
-2. Add Scope Actions (for better error tracking):
-   - Wrap Actions 1-6 in a Scope called "Main Approval Process"
-   - After the scope, add a Parallel Branch
-   - Configure this branch's "Configure run after" to run only if the scope "has failed"
+2. APPROVAL TIMEOUT (do NOT use a Delay action):
+   - Go back to Step 5 (Start and wait for an approval)
+   - Open its Settings tab
+   - Set Timeout to: P2D (2 days = 48 hours)
+   - After the timeout expires, the flow continues to Step 6 (Condition)
+   - The Outcome will be empty/timed out — add a third branch:
+     Step 6c: If Outcome is empty (timed out):
+     - Send reminder email to approver: [Expression: variables('ApproverEmail')]
+     - Update Status to "Escalated" or re-route to default approver
 
-3. In the failure branch, add:
-   Action: Send an email (Office 365 Outlook)
-   - To: admin@1bn99marines.mil
-   - Subject: Leave Request Flow Failure
-   - Body:
-The leave request workflow failed for:
-Requester: [Requester Name Display Name]
-Item ID: [ID]
-Error: {outputs of the failed action}
+   Do NOT add a separate Delay action for timeouts. The approval action's
+   built-in Timeout property handles this correctly. A separate Delay would
+   run AFTER the approval completes, not in parallel with it.
 
-Please review the flow run history and the SharePoint list item.
-
-4. For the 48-hour reminder:
-   - After the "Start and wait for an approval" action, add a Delay action
-   - Delay: 2 days
-   - Then add a Condition: Check if Status is still "Pending"
-   - If Yes (still pending): Send reminder email to approver
-   - If No (already actioned): Do nothing (terminate)
-
-Note: The approval action has a built-in timeout, but the reminder ensures the approver
-is notified before the timeout expires.
-
-5. For invalid approver handling:
-   - In the initial routing logic (Action 2-3), add a final Else branch
-   - Set ApproverEmail to "co@1bn99marines.mil" (default)
-   - Add a parallel notification to admin about the routing fallback
+3. INVALID APPROVER FALLBACK:
+   - In Steps 2-3 (routing conditions), add a final Else branch
+   - Set variable ApproverEmail to "co@1bn99marines.mil" (default)
+   - Add: Send an email (V2) to admin@1bn99marines.mil
+     Subject: Leave Request Routing Fallback
+     Body: Could not determine approver for [Dynamic Content: Title].
+           Defaulted to CO. Days requested: [Dynamic Content: Days Requested].
                                 </pre>
                             </div>
 
@@ -1500,55 +1499,50 @@ many days remain for each training requirement.
                                 <pre>
 Create a Scheduled Cloud Flow in Power Automate:
 
-Trigger: Recurrence
+Step 1: [Trigger] Recurrence
 - Interval: 1 week
 - Day: Monday
 - Time: 08:00
 
-Action 1: Get items (SharePoint)
-- Site: [Your site]
+Step 2: Get items (SharePoint)
+- Site: [your site URL]
 - List: Training Status Dashboard
+- Top Count: 5000 (IMPORTANT — default is 100, will miss Marines)
 
-Action 2: Initialize variable "TotalTrainingEvents"
-- Type: Integer
-- Value: 0
+Step 3: Initialize variable "TotalEvents" (Integer, value: 0)
+Step 4: Initialize variable "CompleteEvents" (Integer, value: 0)
+Step 5: Initialize variable "OverdueItems" (String, value: "")
+Step 6: Initialize variable "ScheduledItems" (String, value: "")
 
-Action 3: Initialize variable "CompleteEvents"
-- Type: Integer
-- Value: 0
+Step 7: Apply to each
+- Input: [Dynamic Content: value] from Get items
+- Settings → Concurrency: 1 (keep sequential — we're incrementing counters)
 
-Action 4: Initialize variable "OverdueItems"
-- Type: String
-- Value: ""
+Inside the loop, for EACH of the 5 training columns:
+  Condition: [Dynamic Content: Annual Rifle Qual Value] equals "Complete"
+    Yes: Increment variable CompleteEvents by 1
+    No: Condition: equals "Overdue"
+      Yes: Append to string variable OverdueItems:
+           [Expression: concat(items('Apply_to_each')?['MarineName']?['DisplayName'], ' - Annual Rifle Qual', '\n')]
+  (Repeat for CBRN, Cyber, PFT/CFT, SAPR — 5 conditions total)
+  Increment variable TotalEvents by 5
 
-Action 5: Apply to each (loop through SharePoint items)
-- Input: value from Get items
+Step 8: Compose — calculate readiness percentage
+[Expression: mul(div(float(variables('CompleteEvents')), float(variables('TotalEvents'))), 100)]
+Note: float() prevents integer division from returning 0.
 
-Inside the loop:
-- Increment TotalTrainingEvents by 5 (five training events per Marine)
-- For each training status column, add a Condition:
-  - If status = "Complete", increment CompleteEvents
-  - If status = "Overdue", append to OverdueItems string:
-    "[Marine Name] - [Training Event] (Overdue)"
-
-Action 6: Compose (calculate readiness percentage)
-- Formula: div(variables('CompleteEvents'), variables('TotalTrainingEvents'))
-- Multiply by 100
-
-Action 7: Send an email (Office 365 Outlook)
+Step 9: Send an email (V2) (Office 365 Outlook)
 - To: s3@1bn99marines.mil
-- Subject: Weekly Training Readiness Report - 1st Bn, 99th Marines
+- Subject: [Expression: concat('Weekly Training Readiness - ', formatDateTime(utcNow(), 'dd MMM yyyy'))]
 - Body:
-As of [utcNow()]: Battalion maintains [percentage from Action 6]% training currency
-across five tracked events.
+  Battalion Training Readiness: [Dynamic Content: Outputs from Step 8]%
+  across 5 tracked events.
 
-Critical Overdue Items (>7 days):
-[OverdueItems variable]
+  CRITICAL OVERDUE (&gt;7 days):
+  [Expression: if(empty(variables('OverdueItems')), 'None', variables('OverdueItems'))]
 
-Scheduled Training (next 30 days):
-[Loop through items again and list where Status = "Scheduled"]
-
-No systemic compliance gaps identified.
+  UPCOMING SCHEDULED:
+  [Expression: if(empty(variables('ScheduledItems')), 'None', variables('ScheduledItems'))]
                                 </pre>
                             </div>
 
