@@ -667,6 +667,13 @@ Debugger — route when:
 - User says a flow "fails," "doesn't trigger," or "sends old data"
 - ALWAYS route here FIRST when something is broken — diagnose before fixing
 
+Power BI — no dedicated sub-agent. Handle directly:
+- User asks about DAX measures, calculated columns, or Power BI reports
+- Remind the user: DAX is a DIFFERENT language from Power Fx and WDL. Do not mix them.
+- Use SharePoint Online List connector (not OData) for SharePoint data sources
+- Specify: Measure vs Calculated Column, which table it belongs to
+- Power BI URL: app.powerbigov.us (not app.powerbi.com)
+
 STEP 3: HANDLE MULTI-STEP REQUESTS
 If a request spans multiple specialists, break it into ordered steps:
 
@@ -1210,7 +1217,8 @@ Power BI (check in this order):
 4. Data not refreshing from SharePoint — Power BI Desktop does not auto-refresh. Click Refresh in Home tab. For published reports: configure Scheduled Refresh in Power BI Service with SharePoint credentials.
 5. Data source path error — if report was built with a local file path (C:\...) instead of SharePoint URL, refresh will fail silently. Must rebuild connection: Get Data → SharePoint Online List or SharePoint Folder.
 
-GCC High specific (check for any platform):
+GCC HIGH — ALWAYS ASSUMED, NEVER ASK:
+The user is on a DoD network. GCC High is always the environment. Never ask to confirm.
 1. URL mismatch — .com used instead of .us (must be *.sharepoint.us, make.gov.powerapps.us, high.flow.microsoft.us, app.powerbigov.us)
 2. Connector unavailable — third-party or Premium connector not enabled in GCC High
 3. AI Builder/Copilot feature referenced — not available in GCC High
@@ -1429,6 +1437,13 @@ CORE RULES:
                             </div>
                         </details>
 
+                        <details class="rule-details">
+                            <summary>Rule 11 &mdash; Response Behavior</summary>
+                            <div class="rule-details__body">
+                                Gemini 2.5 is the most verbose major AI model. Without explicit tone instructions, it wraps every answer in motivational filler, restates the question, and adds unsolicited best practices. The response behavior rule forces direct output: formula first, brief explanation second, nothing else unless asked.
+                            </div>
+                        </details>
+
                         <h2 id="changelog">Changelog</h2>
                         <div class="table-wrapper">
                             <table>
@@ -1441,9 +1456,9 @@ CORE RULES:
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>17 Mar 2026</td>
-                                        <td>v1.0</td>
-                                        <td>Initial release. All 5 sub-agents + single agent + quick-paste fallback. CSV-first SharePoint workflow, auto-generated app awareness, approval patterns, trigger timing, Power BI debugging, issue categorization.</td>
+                                        <td data-label="Date">17 Mar 2026</td>
+                                        <td data-label="Version">v1.0</td>
+                                        <td data-label="Changes">Initial release. Coordinator + 4 specialist sub-agents + single agent + quick-paste fallback. CSV-first SharePoint workflow, auto-generated app awareness, approval patterns, trigger timing, Power BI debugging, issue categorization.</td>
                                     </tr>
                                 </tbody>
                             </table>
