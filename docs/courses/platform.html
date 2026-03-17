@@ -238,13 +238,23 @@
 
                         <div class="callout callout--warning">
                             <h3 class="callout__title">Pre-Flight Access Check</h3>
-                            <p>Before starting Module 2, confirm access to all four platforms. Do not proceed without all four &mdash; resolving access issues during a build wastes significant time.</p>
+                            <p>Before starting Module 2, confirm access to all four platforms <strong>and</strong> two critical capabilities. Do not proceed without all six &mdash; resolving access issues during a build wastes significant time.</p>
                             <ul>
                                 <li>SharePoint Online (<strong>*.sharepoint.us</strong>) &mdash; can create a list</li>
                                 <li>Power Apps (<strong>make.gov.powerapps.us</strong>) &mdash; can open the maker portal</li>
                                 <li>Power Automate (<strong>high.flow.microsoft.us</strong>) &mdash; can see "My flows"</li>
                                 <li>GenAI.mil &mdash; can open Agent Designer or start a conversation</li>
+                                <li><strong>Integrate button:</strong> Open any SharePoint list &rarr; look for <strong>Integrate</strong> in the command bar. If you see "Power Apps" and "Power Automate" options, you're good. If the Integrate button is missing, your tenant admin has disabled it &mdash; see fallback below.</li>
+                                <li><strong>Approvals connector:</strong> In Power Automate, click <strong>+ New flow</strong> &rarr; search connectors for "Approvals." If it appears, you're good. If not, Steps 5-6 of Build #1 (approval workflow) will not work &mdash; skip those steps and complete the core build (Steps 1-4) only.</li>
                             </ul>
+                        </div>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Fallback: If Integrate Button Is Unavailable</h3>
+                            <p>
+                                If the Integrate button is disabled in your tenant, create apps manually instead:
+                                Power Apps &rarr; <strong>Create</strong> &rarr; <strong>Canvas app from blank</strong> &rarr; add your SharePoint list as a data connection &rarr; insert an <strong>EditForm</strong> control &rarr; connect it to your list. This replaces the auto-generated app. You will need to build the browse screen and detail screen yourself. Adjust the prompts accordingly: instead of "I used Integrate," say "I created a canvas app from blank and added an EditForm connected to my SharePoint list."
+                            </p>
                         </div>
 
                         <p>
