@@ -70,7 +70,7 @@
                 <span class="badge">2 Hours</span>
                 <span class="badge badge--gold">Aspiring Builders</span>
             </div>
-            <p class="mt-lg"><strong>Prerequisite:</strong> AI Fluency Fundamentals</p>
+            <p class="mt-lg"><strong>Prerequisite:</strong> <a href="fundamentals.html">AI Fluency Fundamentals (Course 1)</a></p>
             <p><a href="student/orientation.html">View the Student Version</a></p>
         </div>
     </section>
@@ -384,7 +384,7 @@ Import steps:
                             </div>
 
                             <div class="callout callout--instructor">
-                                <p><strong>Action:</strong> Import this CSV into SharePoint now (or describe where you would). AI gave us the structure, the CSV, and the post-import steps &mdash; no manual column creation needed.</p>
+                                <p><strong>Action:</strong> Import this CSV into SharePoint now (or describe where you would). AI gave us the structure, the CSV, and the post-import steps. After import, complete the manual steps: convert Status to Choice, add the Calculated column for IsOverdue. CSV handles most columns &mdash; only Choice values, Calculated, and Person columns need post-import setup.</p>
                             </div>
                         </details>
 
@@ -482,8 +482,8 @@ RGBA(204, 0, 0, 1)</pre>
 
                             <div class="code-block">
                                 <p><strong>Expected:</strong></p>
-                                <p>The "in" operator expects text. SerialNumber may be a number. Fix:</p>
-                                <pre>SearchBox.Text in Text(SerialNumber)</pre>
+                                <p>Two issues: (1) The "in" operator expects text on both sides &mdash; SerialNumber may be a number. (2) Status is a Choice column &mdash; must use <code>Status.Value</code>. Fix:</p>
+                                <pre>Filter(EquipmentCheckout, Status.Value = "Checked Out" &amp;&amp; SearchBox.Text in Text(SerialNumber))</pre>
                             </div>
 
                             <div class="callout callout--instructor">
