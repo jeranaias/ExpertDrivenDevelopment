@@ -236,6 +236,17 @@
                         <h2>Module 1: Setup and Review</h2>
                         <p><strong>Duration:</strong> 15 minutes</p>
 
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Pre-Flight Access Check</h3>
+                            <p>Before starting Module 2, confirm access to all four platforms. Do not proceed without all four &mdash; resolving access issues during a build wastes significant time.</p>
+                            <ul>
+                                <li>SharePoint Online (<strong>*.sharepoint.us</strong>) &mdash; can create a list</li>
+                                <li>Power Apps (<strong>make.gov.powerapps.us</strong>) &mdash; can open the maker portal</li>
+                                <li>Power Automate (<strong>high.flow.microsoft.us</strong>) &mdash; can see "My flows"</li>
+                                <li>GenAI.mil &mdash; can open Agent Designer or start a conversation</li>
+                            </ul>
+                        </div>
+
                         <p>
                             Verify M365 access and Power Platform for all participants. Run a quick
                             centaur vs cyborg review to ensure everyone remembers the two modes from
@@ -266,6 +277,7 @@
                                 <strong>CamoGPT</strong> (Army-managed) so students can reference CUI-level unit data in their prompts (anonymize PII unless a PIA authorizes it). Fall back to commercial tools for unclassified exercises.
                                 See the <a href="../tools/">Approved Tools</a> page for the full list.
                             </p>
+                            <p><strong>Note:</strong> Agent Designer (persistent agent configuration) is only available on GenAI.mil. If using CamoGPT, paste the quick-start primer from the <a href="../resources/agent-setup.html#no-agent-designer">Agent Setup Guide</a> at the beginning of each session.</p>
                         </div>
 
                         <div class="callout callout--tip" style="border-left: 4px solid #228B22; background: #f0fff0; padding: 1rem; margin: 1rem 0;">
@@ -277,6 +289,13 @@
                                 GenAI.mil or your AI tool &mdash; now the AI can see exactly what you have and give you
                                 precise modifications instead of generic formulas.
                             </p>
+                        </div>
+
+                        <div class="callout callout--tip" style="border-left: 4px solid #228B22; background: #f0fff0; padding: 1rem; margin: 1rem 0;">
+                            <h3 class="callout__title">If Your GenAI.mil Session Resets</h3>
+                            <p>Your agent configuration (from Agent Designer) is saved permanently &mdash; you do not need to re-paste it. But your conversation context resets. Start a new conversation and re-establish context:</p>
+                            <p><em>"I'm building a Leave Request system. I have a SharePoint list called LeaveRequests with columns: [list them]. I have an auto-generated Power App from Integrate. I need to [describe where you left off]."</em></p>
+                            <p>You can also paste your current formula from Power Apps (Tree View &rarr; right-click &rarr; Copy) to give the agent your exact state.</p>
                         </div>
                     </section>
 
@@ -365,6 +384,19 @@
                             what the student submits to the AI. Each code block shows the expected output or result.
                             Instructor callouts indicate teaching moments and verification checkpoints.
                         </p>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">When AI Output Doesn't Match</h3>
+                            <p>
+                                The expected outputs below show what a well-configured agent <em>should</em> produce. Your AI may use different variable names, different ordering, or include extra explanation. This is normal. Check for three things:
+                            </p>
+                            <ol>
+                                <li><strong>Correct syntax patterns</strong> &mdash; <code>.Value</code> on Choice columns, <code>{Value: "..."}</code> for Patch, <code>[Dynamic Content:]</code> in flows</li>
+                                <li><strong>Correct function names</strong> &mdash; Power Fx (not JavaScript), WDL in flows (not Power Fx)</li>
+                                <li><strong>Delegation warnings</strong> on data formulas</li>
+                            </ol>
+                            <p>If those three are right, the output is usable even if it doesn't match word-for-word. If the AI produces JavaScript syntax (<code>forEach</code>, <code>=></code>) or non-existent functions, re-prompt: <em>"Use Power Fx only, not JavaScript."</em></p>
+                        </div>
 
                         <details open>
                             <summary><strong>Step 1: SharePoint List Setup</strong></summary>
@@ -712,8 +744,12 @@ Add to both Update item actions:
                             </div>
                         </details>
 
+                        <div class="callout callout--info">
+                            <p><strong>Steps 5-6 are extensions.</strong> The core build (Steps 1-4) is complete. Complete Steps 5-6 if time permits in class, or assign as post-class practice.</p>
+                        </div>
+
                         <details open>
-                            <summary><strong>Step 5: Requester Notification</strong></summary>
+                            <summary><strong>Step 5 (Extension): Requester Notification</strong></summary>
 
                             <div class="prompt-block">
                                 <strong>Student Prompt to AI:</strong>
@@ -797,7 +833,7 @@ Step 7b: Send an email (V2) (Office 365 Outlook)
                         </details>
 
                         <details open>
-                            <summary><strong>Step 6: Error Handling and Edge Cases</strong></summary>
+                            <summary><strong>Step 6 (Extension): Error Handling</strong></summary>
 
                             <div class="prompt-block">
                                 <strong>Student Prompt to AI:</strong>
@@ -1227,28 +1263,36 @@ This structure creates one row per training event per Marine.
                             <div class="code-block">
                                 <strong>Expected AI Output:</strong>
                                 <pre>
-You're right. For a dashboard view, restructure the SharePoint list like this:
+Restructure as one row per Marine:
 
-"Training Status Dashboard" list:
+| Display Name         | Internal Name       | Type    | Required | Notes                                  |
+|----------------------|---------------------|---------|----------|----------------------------------------|
+| Marine Name          | MarineName          | Person  | Yes      | Add manually after import              |
+| Rank                 | Rank                | Choice  | Yes      | PFC, LCpl, Cpl, Sgt, SSgt             |
+| Annual Rifle Qual    | AnnualRifleQual     | Choice  | No       | Complete, Overdue, Scheduled, Not Started |
+| Annual Rifle Qual Date | AnnualRifleQualDate | Date  | No       |                                        |
+| CBRN Awareness       | CBRNAwareness       | Choice  | No       | Same values as above                   |
+| CBRN Awareness Date  | CBRNAwarenessDate   | Date    | No       |                                        |
+| Cyber Awareness      | CyberAwareness      | Choice  | No       | Same values                            |
+| Cyber Awareness Date | CyberAwarenessDate  | Date    | No       |                                        |
+| PFT/CFT              | PFTCFT              | Choice  | No       | Same values                            |
+| PFT/CFT Date         | PFTCFTDate          | Date    | No       |                                        |
+| SAPR Training        | SAPRTraining        | Choice  | No       | Same values                            |
+| SAPR Training Date   | SAPRTrainingDate    | Date    | No       |                                        |
 
-1. Marine Name (Person field, required)
-2. Rank (Choice: PFC, LCpl, Cpl, Sgt, SSgt)
-3. Annual Rifle Qual (Choice: Complete, Overdue, Scheduled, Not Started)
-4. Annual Rifle Qual Date (Date)
-5. CBRN Awareness (Choice: Complete, Overdue, Scheduled, Not Started)
-6. CBRN Awareness Date (Date)
-7. Cyber Awareness (Choice: Complete, Overdue, Scheduled, Not Started)
-8. Cyber Awareness Date (Date)
-9. PFT/CFT (Choice: Complete, Overdue, Scheduled, Not Started)
-10. PFT/CFT Date (Date)
-11. SAPR Training (Choice: Complete, Overdue, Scheduled, Not Started)
-12. SAPR Training Date (Date)
+CSV Template (save as TrainingDashboard.csv):
+Rank,AnnualRifleQual,AnnualRifleQualDate,CBRNAwareness,CBRNAwarenessDate,CyberAwareness,CyberAwarenessDate,PFTCFT,PFTCFTDate,SAPRTraining,SAPRTrainingDate
+Cpl,Complete,2026-01-15,Overdue,,Scheduled,2026-04-01,Complete,2025-12-01,Not Started,
 
-This creates one row per Marine, with columns for each training event. Much better for
-dashboard visualization.
+Post-import steps:
+1. Convert all training status columns to Choice (add values: Complete, Overdue, Scheduled, Not Started)
+2. Add Rank as Choice (PFC, LCpl, Cpl, Sgt, SSgt)
+3. Add Person column "MarineName" manually
+4. Delete the old Training Tracker list
+5. Integrate &rarr; Power Apps &rarr; Create an app
 
-However, this structure is less flexible if you need to add new training events in the
-future. Consider whether you need flexibility or dashboard clarity.
+One row per Marine, all five training events visible at a glance. Trade-off: less
+flexible if you add new training events later (you'd need to add two new columns).
                                 </pre>
                             </div>
 
@@ -1260,7 +1304,7 @@ future. Consider whether you need flexibility or dashboard clarity.
                                 </p>
                                 <p>
                                     The AI offered a tradeoff (flexibility vs. dashboard clarity). In centaur mode, this
-                                    decision would have been made in the whiteboard phase. In cyborg mode, you discover
+                                    decision would have been made in the planning phase. In cyborg mode, you discover
                                     these tradeoffs as you build.
                                 </p>
                                 <p>
@@ -1269,6 +1313,11 @@ future. Consider whether you need flexibility or dashboard clarity.
                                 </p>
                             </div>
                         </details>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Power BI Prerequisite</h3>
+                            <p>Iterations 3-5 use Power BI Desktop. If you have not used Power BI before, pair with someone who has, or skip ahead to Iteration 6 (the Power Automate scheduled report) which does not require Power BI.</p>
+                        </div>
 
                         <details open>
                             <summary><strong>Iteration 3: Build Power BI Dashboard (First Draft)</strong></summary>
@@ -1658,6 +1707,19 @@ Step 9: Send an email (V2) (Office 365 Outlook)
                             <p>
                                 Each student's build declaration should be specific enough that the instructor can assess scope and feasibility in under one minute. "What they are building" should name the tool type and the user (e.g., "A vehicle dispatch tracker for the motor pool chief," not "something to help with vehicles"). The mode selection must include a reason tied to the task characteristics (e.g., "Centaur, because the approval chain has strict business rules that need upfront design"). Frontier issues should list at least two concrete risks (e.g., "AI may not know our unit's leave approval thresholds" or "SharePoint Person fields have caused errors in previous builds"). If a student's declaration is vague or lists zero frontier issues, have them revise before starting the build.
                             </p>
+                        </div>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Decomposition Template</h3>
+                            <p>Fill this out before writing your first prompt:</p>
+                            <ol>
+                                <li><strong>Data:</strong> What are you tracking? What columns does the list need?</li>
+                                <li><strong>Users:</strong> Who creates the data? Who reads it? Who updates it? Who approves it?</li>
+                                <li><strong>Workflow:</strong> What happens when a new item is created? Does it need routing or approval?</li>
+                                <li><strong>Output:</strong> What does leadership need to see? Dashboard, report, email summary?</li>
+                                <li><strong>Tech stack:</strong> SharePoint list &rarr; Power App (Integrate) &rarr; Power Automate flow? Or simpler?</li>
+                            </ol>
+                            <p>This takes 5 minutes and prevents the most common Build #3 failure: starting to code before knowing what you're building.</p>
                         </div>
 
                         <div class="callout callout--instructor">

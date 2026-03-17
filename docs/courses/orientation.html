@@ -311,6 +311,19 @@
                         </p>
                         <p>Narrate each prompt before typing it. Follow this sequence:</p>
 
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">When AI Output Doesn't Match</h3>
+                            <p>
+                                The expected outputs below show what a well-configured agent <em>should</em> produce. Your AI may use different variable names, different ordering, or include extra explanation. This is normal. Check for three things:
+                            </p>
+                            <ol>
+                                <li><strong>Correct syntax patterns</strong> &mdash; <code>.Value</code> on Choice columns, <code>{Value: "..."}</code> for Patch</li>
+                                <li><strong>Correct function names</strong> &mdash; Power Fx functions only, not JavaScript or DAX</li>
+                                <li><strong>Delegation warnings</strong> on data formulas</li>
+                            </ol>
+                            <p>If those three are right, the output is usable even if it doesn't match word-for-word. If the AI produces JavaScript syntax (<code>forEach</code>, <code>=></code>), re-prompt: <em>"Use Power Fx only, not JavaScript."</em></p>
+                        </div>
+
                         <details open>
                             <summary><strong>Prompt 1: Define the Problem (2 min)</strong></summary>
 

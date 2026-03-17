@@ -234,6 +234,18 @@
 
                     <!-- Module 1: Frontier Mapping for Your Domain -->
                     <section id="frontier-mapping">
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Instructor Prerequisite Check</h3>
+                            <p>Before teaching this course, verify you can do all of the following without AI assistance:</p>
+                            <ul>
+                                <li>Build a SharePoint list from a CSV import and complete post-import steps (Person columns, Choice conversion, Calculated columns)</li>
+                                <li>Write a Power Fx Filter formula with delegation awareness and explain why Search() is not delegable</li>
+                                <li>Configure a Try/Catch scope pattern in Power Automate with Run After settings</li>
+                                <li>Explain the difference between Power Fx, WDL, and DAX and when each is used</li>
+                            </ul>
+                            <p>If you cannot do any of these, complete Course 3: Platform Training before teaching this course. Students will ask questions that require hands-on experience to answer.</p>
+                        </div>
+
                         <h2>Module 1: Frontier Mapping for Your Domain</h2>
                         <p><strong>Duration:</strong> 30 minutes</p>
 
@@ -297,6 +309,48 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <h4>Issue Tracking Format</h4>
+                        <p>As you encounter specific issues during builds, log them in this format. Over time, this becomes your team's institutional knowledge of where AI helps and where it doesn't.</p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Issue</th>
+                                        <th>Platform</th>
+                                        <th>Category</th>
+                                        <th>Workaround</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>AI writes forEach instead of Filter</td>
+                                        <td>Power Apps</td>
+                                        <td>Frontier</td>
+                                        <td>Add "Power Fx only, not JavaScript" to prompt</td>
+                                        <td>17 Mar 2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Trigger sends stale data</td>
+                                        <td>Power Automate</td>
+                                        <td>Platform limitation</td>
+                                        <td>Add Get item action after trigger</td>
+                                        <td>17 Mar 2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td>AI suggests Delay for approval timeout</td>
+                                        <td>Power Automate</td>
+                                        <td>Context</td>
+                                        <td>Specify: use Timeout property on approval action (P2D)</td>
+                                        <td>17 Mar 2026</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p>Categories: <strong>Frontier</strong> (AI capability limit), <strong>Platform limitation</strong> (how the platform works, not an AI issue), <strong>Context</strong> (AI guessed wrong because prompt was insufficient).</p>
 
                         <p>
                             <strong>Deliverable:</strong> One-page frontier map published on the EDD site.

@@ -181,6 +181,25 @@
             .cheat-card, .agent-setup {
                 break-inside: avoid;
             }
+            .code-block__copy {
+                display: none !important;
+            }
+            .copy-field {
+                border: 1px solid #333 !important;
+                background: #f5f5f5 !important;
+                color: #000 !important;
+            }
+            .copy-field code {
+                color: #000 !important;
+            }
+            .prompt-block {
+                background: #f5f5f5 !important;
+                color: #000 !important;
+                border: 1px solid #333 !important;
+            }
+            .prompt-block pre {
+                color: #000 !important;
+            }
         }
     </style>
 </head>
@@ -258,6 +277,7 @@
                                 <li><a href="#cheat-card">Prompting Cheat Card</a></li>
                                 <li><a href="#no-agent-designer">No Agent Designer?</a></li>
                                 <li><a href="#why-each-rule">Why Each Rule Exists</a></li>
+                                <li><a href="#changelog">Changelog</a></li>
                             </ul>
                         </nav>
                     </aside>
@@ -325,7 +345,8 @@
 
                             <div class="field-label">Instructions</div>
                             <div class="field-hint">Paste the entire block below into the Instructions field</div>
-                            <div class="prompt-block"><pre>You are a Power Platform development assistant for DoD personnel building tools in Microsoft 365 GCC High. You help with SharePoint Online list design, Power Apps Canvas Apps (Power Fx), Power Automate Cloud Flows, and Power BI reports.
+                            <div class="prompt-block"><pre>[v1.0 — March 2026]
+You are a Power Platform development assistant for DoD personnel building tools in Microsoft 365 GCC High. You help with SharePoint Online list design, Power Apps Canvas Apps (Power Fx), Power Automate Cloud Flows, and Power BI reports.
 
 RULE 0: NEVER WRITE CODE UNTIL YOU HAVE THE CONTEXT
 
@@ -605,7 +626,8 @@ RULE 11: RESPONSE BEHAVIOR
                             <div class="prompt-block copy-field"><code>Routes Power Platform requests to specialist sub-agents for SharePoint, Power Fx, Power Automate, and debugging</code></div>
 
                             <div class="field-label">Instructions</div>
-                            <div class="prompt-block"><pre>You are a Power Platform development coordinator for DoD personnel in M365 GCC High. You do NOT write code yourself. Your job is to understand the user's intent, route to the correct specialist, and synthesize responses into a clear action plan.
+                            <div class="prompt-block"><pre>[v1.0 — March 2026]
+You are a Power Platform development coordinator for DoD personnel in M365 GCC High. You do NOT write code yourself. Your job is to understand the user's intent, route to the correct specialist, and synthesize responses into a clear action plan.
 
 STEP 1: UNDERSTAND THE REQUEST
 Before routing, determine:
@@ -695,7 +717,8 @@ RESPONSE STYLE:
                             <div class="prompt-block copy-field"><code>Designs SharePoint lists with CSV-ready output for instant import. Handles columns, indexing, and lookups.</code></div>
 
                             <div class="field-label">Instructions</div>
-                            <div class="prompt-block"><pre>You are a SharePoint Online architect for DoD M365 GCC High. You design list structures and hand users ready-to-import CSV files.
+                            <div class="prompt-block"><pre>[v1.0 — March 2026]
+You are a SharePoint Online architect for DoD M365 GCC High. You design list structures and hand users ready-to-import CSV files.
 
 RULE 1: ALWAYS ASK FIRST
 Before designing anything, ask:
@@ -811,7 +834,8 @@ OUTPUT BEHAVIOR:
                             <div class="prompt-block copy-field"><code>Writes Power Fx formulas for canvas apps. Enforces correct syntax, delegation rules, and GCC High limits.</code></div>
 
                             <div class="field-label">Instructions</div>
-                            <div class="prompt-block"><pre>You are a Power Fx specialist for Power Apps canvas apps in DoD M365 GCC High.
+                            <div class="prompt-block"><pre>[v1.0 — March 2026]
+You are a Power Fx specialist for Power Apps canvas apps in DoD M365 GCC High.
 
 RULE 0: ASK BEFORE CODING
 Before writing ANY formula, you MUST get:
@@ -982,7 +1006,8 @@ If uncertain a function exists in Power Fx, say so. Never invent functions.</pre
                             <div class="prompt-block copy-field"><code>Designs Power Automate cloud flows with exact action names, WDL expressions, and GCC High connectors.</code></div>
 
                             <div class="field-label">Instructions</div>
-                            <div class="prompt-block"><pre>You are a Power Automate cloud flow specialist for DoD M365 GCC High.
+                            <div class="prompt-block"><pre>[v1.0 — March 2026]
+You are a Power Automate cloud flow specialist for DoD M365 GCC High.
 
 RULE 0: ASK BEFORE DESIGNING
 Before designing ANY flow, ask:
@@ -1125,7 +1150,8 @@ If uncertain about a connector's availability in GCC High, say so.</pre></div>
                             <div class="prompt-block copy-field"><code>Diagnoses Power Platform errors across Power Apps, Power Automate, and SharePoint with structured steps.</code></div>
 
                             <div class="field-label">Instructions</div>
-                            <div class="prompt-block"><pre>You are a Power Platform debugging specialist for DoD M365 GCC High.
+                            <div class="prompt-block"><pre>[v1.0 — March 2026]
+You are a Power Platform debugging specialist for DoD M365 GCC High.
 
 RULE 1: COLLECT INFORMATION BEFORE DIAGNOSING
 When the user reports an error, get ALL of these before attempting a fix:
@@ -1272,7 +1298,8 @@ Actual: [what happened instead]</pre></div>
                             <p>This primer resets every session. For a permanent solution, use <a href="#single-agent">Single Agent</a> or <a href="#multi-agent">Multi-Agent</a> setup with Agent Designer.</p>
                         </div>
 
-                        <div class="prompt-block"><pre>You are a Power Platform assistant for DoD personnel in M365 GCC High. You help with SharePoint list design, Power Apps (Power Fx), Power Automate, and Power BI.
+                        <div class="prompt-block"><pre>[v1.0 — March 2026]
+You are a Power Platform assistant for DoD personnel in M365 GCC High. You help with SharePoint list design, Power Apps (Power Fx), Power Automate, and Power BI.
 
 CORE RULES:
 
@@ -1401,6 +1428,26 @@ CORE RULES:
                                 Patching SharePoint on every page of a multi-page form creates incomplete records if the user abandons mid-way. Accumulate locally, submit once on the final page.
                             </div>
                         </details>
+
+                        <h2 id="changelog">Changelog</h2>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Version</th>
+                                        <th>Changes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>17 Mar 2026</td>
+                                        <td>v1.0</td>
+                                        <td>Initial release. All 5 sub-agents + single agent + quick-paste fallback. CSV-first SharePoint workflow, auto-generated app awareness, approval patterns, trigger timing, Power BI debugging, issue categorization.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
                     </div>
                 </div>

@@ -285,28 +285,28 @@ Create a SharePoint list design for a request routing system. Columns needed:
 Request Title (single line text), Requester Name (person), Amount (currency),
 Justification (multi-line text), Status (choice: Pending/Approved/Denied/Withdrawn),
 Approver (person), Date Submitted (date), Date Resolved (date).
-Give me the column definitions I need to create in SharePoint.</div>
+Give me a CSV template I can import into SharePoint, plus which columns to add manually after import.</div>
 
                         <div class="prompt-block">
                             <div class="prompt-block__header">Prompt 2 &mdash; Power App Form</div>
-Design a Power Apps canvas app form for submitting requests to the SharePoint
-list above. The form should have: all required fields with validation (Amount
-must be > 0, Justification must be at least 20 characters), a submit button
-that writes to SharePoint, and a confirmation screen after submission.</div>
+I used Integrate &rarr; Power Apps &rarr; Create an app from the SharePoint list above.
+The auto-generated app has an EditForm with all fields wired up. Customize it
+to add: validation (Amount must be > 0, Justification must be at least 20
+characters), and a success notification after saving.</div>
 
                         <div class="prompt-block">
                             <div class="prompt-block__header">Prompt 3 &mdash; Power Automate Flow</div>
-Create a Power Automate flow that triggers when a new item is added to the
-SharePoint request list. The flow should: determine the approver based on
-amount (under $500 &rarr; Section Leader, $500-$2000 &rarr; Dept Head, over $2000 &rarr; CO),
-send an approval email to the right person, and update the SharePoint list
+I created a Power Automate flow from the SharePoint list using Integrate &rarr;
+Power Automate. The trigger 'When an item is created' is already wired. Add
+routing logic: under $500 &rarr; Section Leader, $500-$2000 &rarr; Dept Head, over
+$2000 &rarr; CO. Send an approval email to the right person and update the list
 with the decision.</div>
 
                         <!-- Phase 3 -->
                         <h4>Phase 3 &mdash; Human Verifies</h4>
                         <p>
                             This is the critical checkpoint. Walk through the AI output and verify it
-                            against your whiteboard design. Do not skip any item on this list.
+                            against your planning template. Do not skip any item on this list.
                         </p>
 
                         <div class="callout callout--warning">
