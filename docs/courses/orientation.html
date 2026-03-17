@@ -390,19 +390,21 @@ Import steps:
 
                             <div class="prompt-block">
                                 <p><strong>Prompt to AI:</strong></p>
-                                <p>I have a Power Apps Canvas app connected to my EquipmentCheckout SharePoint list. The auto-generated gallery shows all items. I want to: filter the gallery to only show checked-out items, color overdue items in red, and add a check-in button next to each item. Give me the formulas.</p>
+                                <p>I used Integrate &rarr; Power Apps &rarr; Create an app from my EquipmentCheckout SharePoint list. The auto-generated app has BrowseGallery1 showing all items. I want to: filter the gallery to only show checked-out items, color overdue items in red, and add a check-in button next to each gallery row. Give me the formulas.</p>
                             </div>
 
                             <div class="code-block">
                                 <p><strong>Expected AI Output:</strong></p>
-                                <pre>Gallery Items Property:
-Filter(EquipmentCheckout, Status = "Checked Out")
+                                <pre>// BrowseGallery1.Items
+Filter(EquipmentCheckout, Status.Value = "Checked Out")
 
-DateDue Label Color:
-If(ThisItem.IsOverdue, Red, Black)
+DELEGABLE — safe for large lists.
 
-Check In Button OnSelect:
-Patch(EquipmentCheckout, ThisItem, {Status: "Checked In", CheckedInDate: Now()})</pre>
+// lblDateDue.Color (label inside gallery)
+If(IsBlank(ThisItem.DateDue), Black, If(ThisItem.DateDue &lt; Today(), Red, Black))
+
+// btnCheckIn.OnSelect (button inside gallery)
+Patch(EquipmentCheckout, ThisItem, {Status: {Value: "Checked In"}, CheckedInDate: Now()})</pre>
                             </div>
 
                             <div class="callout callout--instructor">
@@ -419,23 +421,30 @@ Patch(EquipmentCheckout, ThisItem, {Status: "Checked In", CheckedInDate: Now()})
 
                             <div class="prompt-block">
                                 <p><strong>Prompt to AI:</strong></p>
-                                <p>Add a search bar to filter by item name or person, sort overdue items to the top, and add a red warning icon next to overdue items.</p>
+                                <p>I added a Text Input control named SearchBox above BrowseGallery1. I also added a Warning icon named icnOverdue inside each gallery row. Now update the gallery to: search by item name or assigned person, sort overdue items to the top, and show the warning icon only for overdue items.</p>
                             </div>
 
                             <div class="code-block">
                                 <p><strong>Expected AI Output:</strong></p>
-                                <pre>Add a Text Input control (name: SearchBox)
-
-Updated Gallery Items:
+                                <pre>// BrowseGallery1.Items
 SortByColumns(
     Filter(EquipmentCheckout,
-        Status = "Checked Out" &&
+        Status.Value = "Checked Out" &amp;&amp;
         (SearchBox.Text in Title || SearchBox.Text in AssignedTo)),
-    "IsOverdue", Descending)
+    "DateDue", Ascending)
 
-Add Icon in gallery: Icon.Warning
-Visible: ThisItem.IsOverdue
-Color: Red</pre>
+NOT DELEGABLE — the "in" operator is not delegable. Only the first 2,000
+rows are searched. For small lists this is fine. For large lists, use
+StartsWith(Title, SearchBox.Text) instead (delegable, but only matches
+the beginning of the text).
+
+Set SearchBox.DelayOutput to true (prevents a query on every keystroke).
+
+// icnOverdue.Visible
+!IsBlank(ThisItem.DateDue) &amp;&amp; ThisItem.DateDue &lt; Today()
+
+// icnOverdue.Color
+RGBA(204, 0, 0, 1)</pre>
                             </div>
 
                             <div class="callout callout--instructor">
@@ -519,14 +528,15 @@ Check In Button:
 Patch(EquipmentCheckout, ThisItem, {Status: "Returned"})
 
 Overdue Highlight:
-If(DateDue < Today(), Red, Black)</pre>
+If(DateDue &lt; Today(), Red, Black)</pre>
                             </div>
 
-                            <p><strong>Three bugs to diagnose as a class:</strong></p>
+                            <p><strong>Four bugs to diagnose as a class:</strong></p>
                             <ol>
-                                <li><strong>Bug 1:</strong> Status filter does not match the actual column values (should be "Checked Out" with space, not "CheckedOut")</li>
-                                <li><strong>Bug 2:</strong> Status value "Returned" does not exist in the Status choice column (should be "Checked In")</li>
-                                <li><strong>Bug 3:</strong> Overdue formula will error because DateDue might be blank for checked-in items (needs null check)</li>
+                                <li><strong>Bug 1:</strong> Status filter uses "CheckedOut" (no space) but the Choice value is "Checked Out" (with space). Must match exactly.</li>
+                                <li><strong>Bug 2:</strong> Status is a Choice column &mdash; must use <code>Status.Value</code> to compare, not bare <code>Status</code>.</li>
+                                <li><strong>Bug 3:</strong> Status value "Returned" does not exist in the Choice column. Should be "Checked In". And Patch must use Choice record syntax: <code>{Status: {Value: "Checked In"}}</code>.</li>
+                                <li><strong>Bug 4:</strong> Overdue formula errors when DateDue is blank (checked-in items). Needs null check: <code>If(IsBlank(DateDue), Black, If(DateDue &lt; Today(), Red, Black))</code></li>
                             </ol>
 
                             <p><strong>Class activity:</strong> Break into pairs. Give 5 minutes to identify bugs. Then discuss as group how to frame debugging prompts to AI. Example:</p>
