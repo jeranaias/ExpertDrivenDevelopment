@@ -338,11 +338,13 @@
 
                         <h4>Phase 2 &mdash; AI Builds</h4>
                         <p>
-                            Open GenAI.mil. Feed it your whiteboard design: &ldquo;I need a Power App with
-                            a request submission form that routes to approvers based on [your business rules].
-                            Here&rsquo;s the approval chain: [paste from whiteboard]. Build the Power Apps
-                            screen layout and the Power Automate flow logic.&rdquo; Copy generated code/logic
-                            into Power Platform.
+                            Open GenAI.mil. Feed it your whiteboard design: &ldquo;I need a SharePoint list
+                            to store leave requests with these columns: [paste from whiteboard]. Give me a CSV
+                            template I can import.&rdquo; Import the CSV into SharePoint, then click
+                            <strong>Integrate &rarr; Power Apps &rarr; Create an app</strong> to auto-generate
+                            your starting point. Go back to GenAI.mil: &ldquo;I have the auto-generated app.
+                            Now customize the form to validate [your business rules] and route approvals
+                            based on [your approval chain].&rdquo; Paste the AI&rsquo;s formulas into Power Apps.
                         </p>
 
                         <div class="callout callout--info">
@@ -445,89 +447,77 @@ Post-import steps:
                             </div>
                         </details>
 
+                        <div class="callout callout--tip" style="border-left: 4px solid #228B22; background: #f0fff0; padding: 1rem; margin: 1rem 0;">
+                            <p><strong>Shortcut: Instant App from SharePoint</strong></p>
+                            <p>You do not need to build the app from scratch. Go to the Leave Requests list, click <strong>Integrate</strong> &rarr; <strong>Power Apps</strong> &rarr; <strong>Create an app</strong>. Power Apps generates a fully functional app connected to your list in seconds &mdash; browse screen, detail screen, edit form, all wired up.</p>
+                            <p>This is your starting point. From here, use AI to <em>customize</em> the auto-generated app. The prompt below shows how.</p>
+                        </div>
+
                         <details open>
-                            <summary><strong>Step 2: Power Apps Form Creation</strong></summary>
+                            <summary><strong>Step 2: Customize the Auto-Generated App</strong></summary>
 
                             <div class="prompt-block">
                                 <strong>Student Prompt to AI:</strong>
                                 <p>
-                                    I need to create a Power Apps canvas app that connects to the "Leave Requests"
-                                    SharePoint list. The app should have:
+                                    I used Integrate &rarr; Power Apps &rarr; Create an app from my "Leave Requests"
+                                    SharePoint list. Power Apps auto-generated a browse screen, detail screen, and
+                                    edit form. I need to customize the edit form:
                                 </p>
                                 <ul>
-                                    <li>A form to submit new leave requests</li>
-                                    <li>Auto-populate the Requester Name with the current user</li>
+                                    <li>Auto-populate the Requester Name field with the current user (read-only)</li>
                                     <li>Validation: End Date must be after Start Date</li>
                                     <li>Validation: Justification must be at least 20 characters</li>
-                                    <li>A submit button that saves to the SharePoint list and shows a success message</li>
+                                    <li>Show a success message after saving</li>
                                 </ul>
                                 <p>
-                                    Provide the Power Apps formulas I need for each control and the OnSelect action
-                                    for the submit button.
+                                    The auto-generated form uses an EditForm control. Give me the formulas I need
+                                    to add these customizations.
                                 </p>
                             </div>
 
                             <div class="code-block">
                                 <strong>Expected AI Output:</strong>
                                 <pre>
-Create a new Canvas App from the SharePoint list:
+The auto-generated app already has an EditForm connected to your Leave Requests list
+with all fields wired up. You just need to customize these specific parts:
 
-1. In Power Apps (make.powerapps.com), click "Create" &gt; "Canvas app from blank"
-2. Name it "Leave Request Form"
-3. Format: Phone or Tablet (your choice)
-4. Add a data connection to your "Leave Requests" SharePoint list
+1. AUTO-POPULATE REQUESTER NAME
+In the EditForm, find the RequesterName data card. Set the Default of its text input:
+// DataCardValue_RequesterName.Default
+User().FullName
 
-Add these controls to your screen:
+Then lock it so users can't change it:
+// DataCardValue_RequesterName.DisplayMode
+DisplayMode.View
 
-Requester Name (Label + Display):
-- Default: User().FullName
-- DisplayMode: View (read-only)
-
-Leave Type (Dropdown):
-- Items: ["Annual", "Convalescent", "Emergency", "Special Liberty"]
-
-Start Date (DatePicker):
-- Default: Today()
-
-End Date (DatePicker):
-- Default: Today() + 1
-
-Justification (TextInput, Multiline):
-- Mode: MultiLine
-- HintText: "Enter at least 20 characters explaining your leave request"
-
-Submit Button:
-- OnSelect formula:
+2. VALIDATION — ADD TO THE SAVE BUTTON
+Find the save button (usually the checkmark icon). Replace its OnSelect with:
+// IconAccept1.OnSelect
 If(
-    DatePicker_EndDate.SelectedDate &lt;= DatePicker_StartDate.SelectedDate,
+    DataCardValue_EndDate.SelectedDate &lt;= DataCardValue_StartDate.SelectedDate,
     Notify("End Date must be after Start Date", NotificationType.Error),
     If(
-        Len(TextInput_Justification.Text) &lt; 20,
+        Len(DataCardValue_Justification.Text) &lt; 20,
         Notify("Justification must be at least 20 characters", NotificationType.Error),
-        Patch(
-            'Leave Requests',
-            Defaults('Leave Requests'),
-            {
-                'Requester Name': {
-                    '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedUser",
-                    Claims: "i:0#.f|membership|" &amp; User().Email,
-                    DisplayName: User().FullName,
-                    Email: User().Email
-                },
-                'Leave Type': {Value: Dropdown_LeaveType.Selected.Value},
-                'Start Date': DatePicker_StartDate.SelectedDate,
-                'End Date': DatePicker_EndDate.SelectedDate,
-                'Justification': TextInput_Justification.Text,
-                'Status': {Value: "Pending"},
-                'Date Submitted': Now()
-            }
-        );
+        SubmitForm(EditForm1);
         Notify("Leave request submitted successfully", NotificationType.Success);
-        Reset(TextInput_Justification);
-        Reset(DatePicker_StartDate);
-        Reset(DatePicker_EndDate)
+        Navigate(BrowseScreen1, ScreenTransition.None)
     )
 )
+
+Note: SubmitForm handles all the data writing — it reads every data card
+and patches the SharePoint list for you. You do NOT need a manual Patch()
+call when using an EditForm. The auto-generated form already handles
+Person fields, Choice fields, and date fields correctly.
+
+3. SET STATUS DEFAULT TO "PENDING"
+In the Status data card, set the Default:
+// DataCardValue_Status.DefaultSelectedItems
+{Value: "Pending"}
+
+4. SET DATE SUBMITTED DEFAULT TO TODAY
+// DataCardValue_DateSubmitted.DefaultDate
+Today()
                                 </pre>
                             </div>
 
@@ -543,9 +533,10 @@ If(
                                     <li>The item appears in the SharePoint list with Status = "Pending"</li>
                                 </ul>
                                 <p>
-                                    <strong>Expected issue:</strong> The Person field syntax for Requester Name often
-                                    causes errors. If students see "Invalid data type" errors, the AI likely provided
-                                    outdated syntax. Walk through the correct @odata.type structure.
+                                    <strong>Key teaching point:</strong> The auto-generated app already handles Person
+                                    fields, Choice fields, and data connections. Students only wrote validation logic
+                                    and defaults &mdash; the hard wiring was done by Power Apps. This is the pattern:
+                                    generate the foundation, then customize with AI.
                                 </p>
                             </div>
                         </details>
@@ -553,12 +544,17 @@ If(
                         <details open>
                             <summary><strong>Step 3: Routing Logic (Power Automate Flow Setup)</strong></summary>
 
+                            <div class="callout callout--tip" style="border-left: 4px solid #228B22; background: #f0fff0; padding: 1rem; margin: 1rem 0;">
+                                <p><strong>Shortcut: Start from SharePoint</strong></p>
+                                <p>From the Leave Requests list, click <strong>Integrate</strong> &rarr; <strong>Power Automate</strong> &rarr; <strong>Create a flow</strong>. Select "When a new item is created" &mdash; Power Automate pre-wires the trigger to your list automatically. Then use AI to add the routing logic.</p>
+                            </div>
+
                             <div class="prompt-block">
                                 <strong>Student Prompt to AI:</strong>
                                 <p>
-                                    I need a Power Automate flow that triggers when a new item is created in the
-                                    "Leave Requests" SharePoint list. The flow should determine the approver based on
-                                    the number of days requested:
+                                    I created a Power Automate flow from my "Leave Requests" SharePoint list using
+                                    Integrate &rarr; Power Automate. The trigger "When an item is created" is already
+                                    connected to the list. Now I need to add routing logic:
                                 </p>
                                 <ul>
                                     <li>1-3 days: Route to Section Leader (sectionlead@1bn99marines.mil)</li>
@@ -568,55 +564,49 @@ If(
                                 <p>
                                     The flow should update the Approver field in the SharePoint list with the
                                     appropriate person and send them an email notification with the request details.
-                                    Provide the complete flow structure.
+                                    Give me the actions to add after the trigger.
                                 </p>
                             </div>
 
                             <div class="code-block">
                                 <strong>Expected AI Output:</strong>
                                 <pre>
-Create a new Automated Cloud Flow in Power Automate:
+Your trigger is already wired. Add these actions after it:
 
-Trigger: "When an item is created" (SharePoint)
-- Site Address: [Your SharePoint site]
-- List Name: Leave Requests
-
-Action 1: Initialize variable "ApproverEmail"
+Step 1: Initialize variable "ApproverEmail"
 - Name: ApproverEmail
 - Type: String
 - Value: (leave blank)
 
-Action 2: Condition - Check days requested
-- If: Days Requested is less than or equal to 3
-  - Then: Set variable ApproverEmail to "sectionlead@1bn99marines.mil"
-  - Else: (add nested condition)
+Step 2: Condition — Check days requested
+- If: [Dynamic Content: Days Requested] is less than or equal to 3
+  - Yes: Set variable ApproverEmail to "sectionlead@1bn99marines.mil"
+  - No: (add nested condition below)
 
-Action 3: (Inside the Else branch) Condition - Check if 4-10 days
-- If: Days Requested is less than or equal to 10
-  - Then: Set variable ApproverEmail to "co@1bn99marines.mil"
-  - Else: Set variable ApproverEmail to "bn-co@1bn99marines.mil"
+Step 3: (Inside the No branch) Condition — Check if 4-10 days
+- If: [Dynamic Content: Days Requested] is less than or equal to 10
+  - Yes: Set variable ApproverEmail to "co@1bn99marines.mil"
+  - No: Set variable ApproverEmail to "bn-co@1bn99marines.mil"
 
-Action 4: Update item (SharePoint)
-- Site Address: [Your SharePoint site]
+Step 4: Update item (SharePoint)
+- Site Address: [your site URL]
 - List Name: Leave Requests
-- Id: [ID from trigger]
-- Approver: {ApproverEmail}
+- Id: [Dynamic Content: ID]
+- Approver Claims: [Expression: concat('i:0#.f|membership|', variables('ApproverEmail'))]
 
-Action 5: Send an email (Office 365 Outlook)
-- To: {ApproverEmail}
+Step 5: Send an email (V2) (Office 365 Outlook)
+- To: [Expression: variables('ApproverEmail')]
 - Subject: New Leave Request Pending Your Approval
 - Body:
-A new leave request requires your approval:
+  A new leave request requires your approval:
 
-Requester: [Requester Name Display Name]
-Leave Type: [Leave Type Value]
-Dates: [Start Date] to [End Date]
-Days: [Days Requested]
-Justification: [Justification]
+  Requester: [Dynamic Content: Requester Name DisplayName]
+  Leave Type: [Dynamic Content: Leave Type Value]
+  Dates: [Dynamic Content: Start Date] to [Dynamic Content: End Date]
+  Days: [Dynamic Content: Days Requested]
+  Justification: [Dynamic Content: Justification]
 
-Please review and approve or deny this request in the Leave Requests list.
-
-[Link to item]
+  [Dynamic Content: Link to item]
                                 </pre>
                             </div>
 
@@ -634,7 +624,8 @@ Please review and approve or deny this request in the Leave Requests list.
                                 <p>
                                     <strong>Common issue:</strong> The nested conditions often get the logic backwards.
                                     Students should verify by checking the flow run history and tracing which branches
-                                    executed.
+                                    executed. Also, the Person field (Approver) update requires Claims format &mdash;
+                                    if it fails, check that the expression uses the concat/Claims pattern.
                                 </p>
                             </div>
                         </details>
@@ -1026,18 +1017,22 @@ is notified before the timeout expires.
 
                         <p>
                             Start rough in GenAI.mil: <em>&ldquo;Build me a data model for tracking training
-                            completion&rdquo;</em> &rarr; copy to Power Apps &rarr; <em>&ldquo;Now I need an
-                            input form for this data model&rdquo;</em> &rarr; copy to Power Apps &rarr;
+                            completion&rdquo;</em> &rarr; AI gives CSV + list structure &rarr; import CSV into
+                            SharePoint &rarr; click <strong>Integrate &rarr; Power Apps &rarr; Create an app</strong>
+                            &rarr; <em>&ldquo;I have the auto-generated app. Now I need to customize the input form:
+                            [describe changes]&rdquo;</em> &rarr; paste formulas into Power Apps &rarr;
                             <em>&ldquo;That chart doesn&rsquo;t show what I need. Here&rsquo;s what I see:
-                            [describe or paste current formula]. Change the X axis to show completion by
+                            [paste current formula]. Change the X axis to show completion by
                             date.&rdquo;</em>
                         </p>
 
                         <p>Build incrementally:</p>
                         <ol>
-                            <li>Data model &mdash; what tables, what columns, what relationships</li>
-                            <li>Input form &mdash; how does training data get entered</li>
+                            <li>Data model &mdash; AI gives CSV template, you import into SharePoint</li>
+                            <li>App foundation &mdash; Integrate &rarr; Power Apps generates the starting point</li>
+                            <li>Customization &mdash; AI refines the auto-generated forms and galleries</li>
                             <li>Dashboard &mdash; what does leadership need to see at a glance</li>
+                            <li>Automation &mdash; Integrate &rarr; Power Automate for flows</li>
                             <li>Reports &mdash; what gets printed, emailed, or briefed</li>
                         </ol>
 
