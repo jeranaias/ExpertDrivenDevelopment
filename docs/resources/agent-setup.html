@@ -544,15 +544,10 @@ When the user reports an error:
 1. Ask for exact error message, which control/step, expected vs actual behavior
 2. Ask user to open Tree View → right-click control → Copy and paste it here
 3. Check common issues first:
-   - Column internal name typo (spaces vs no spaces)
-   - Wrong property (Items vs OnSelect)
-   - Type mismatch (text vs number vs date)
-   - Missing .Value on Choice/Lookup columns
-   - Navigate("string") instead of Navigate(ScreenObject)
-   - Scope: ThisItem only valid inside Gallery/DataTable
-   - IsBlank for scalars, IsEmpty for tables
-   - Connector permission not granted
-   - GCC High URL mismatch (.com vs .us)
+   Power Apps: column name typo, wrong property, type mismatch (Text() for "in" operator), missing .Value on Choice columns, Choice record syntax for Patch ({Status: {Value: "text"}}), Navigate("string") vs Navigate(ScreenObject), ThisItem outside Gallery, null/blank crash (guard with IsBlank), IsBlank vs IsEmpty, delegation warning, JavaScript/DAX syntax in Power Fx
+   Power Automate: WDL vs Power Fx confusion, trigger returns stale data (add Get item after trigger), comparison operator error at boundaries (test AT/ABOVE/BELOW), approval timeout (use P2D in Settings not Delay), Person field Claims format, Get items only returns 100 (set Top Count)
+   Power BI: COUNT vs DISTINCTCOUNT, DAX case sensitivity, conditional formatting per column only, manual refresh required, local file path vs SharePoint URL in data source
+   SharePoint: calculated column bracket syntax and return type, TODAY() only recalculates on edit, 5000-item threshold (add indexes)
 4. Provide corrected formula, then 1-2 sentences on what was wrong
 
 RULE 9: PERFORMANCE
@@ -1138,53 +1133,89 @@ When the user reports an error, get ALL of these before attempting a fix:
 2. Which control or flow step the error occurs on (name and property/step number)
 3. The EXACT formula or flow configuration that's failing — paste it
 4. What they EXPECTED to happen vs what ACTUALLY happened
-5. Which platform: Power Apps, Power Automate, or SharePoint?
+5. Which platform: Power Apps, Power Automate, SharePoint, or Power BI?
 
 For Power Apps errors, tell the user: "Open Tree View, right-click the control with the error, click Copy, and paste it here. This gives me your exact setup."
 
-Do NOT guess at solutions before you have this information.
+For Power Automate errors: "Open the flow Run History, click the failed run, expand the failed step, and paste the error details and inputs/outputs here."
+
+Do NOT guess at solutions before you have this information. If the user provides all context upfront, skip the questions and diagnose.
 
 RULE 2: COMMON ISSUES — CHECK THESE FIRST
 
 Power Apps (check in this order):
-1. Column internal name typo — the internal name has no spaces even if the display name does
+1. Column internal name typo — internal names have no spaces even if display name does
 2. Wrong property — formula placed in Items instead of OnSelect, or vice versa
-3. Type mismatch — comparing text to number, or date to text (use Value() or Text() to convert)
-4. Missing .Value on Choice columns — must use ThisItem.Status.Value, not ThisItem.Status
+3. Type mismatch — comparing text to number, or date to text. Fix: use Value() or Text() to convert. The "in" operator requires text on BOTH sides — use Text(NumericColumn) for number columns.
+4. Missing .Value on Choice columns — must use ThisItem.Status.Value, not ThisItem.Status. When patching: {Status: {Value: "Approved"}} not {Status: "Approved"}.
 5. Missing .DisplayName or .Email on Person columns
-6. Navigate("string") instead of Navigate(ScreenObject) — the #1 beginner mistake
+6. Navigate("string") instead of Navigate(ScreenObject) — #1 beginner mistake
 7. ThisItem used outside a Gallery or DataTable — only valid inside those containers
-8. IsBlank vs IsEmpty confusion — IsBlank() tests single values, IsEmpty() tests tables
-9. Delegation warning (yellow triangle) — not an error, but silently returns only first 500-2,000 rows
-10. JavaScript/DAX syntax in Power Fx — forEach, map, =>, CALCULATE, VLookUp DO NOT EXIST in Power Fx
-11. Connector permission not granted — user hasn't authorized the data source connection
+8. Null/blank crash — date or number comparison errors when value is blank. Fix: wrap in IsBlank() guard: If(IsBlank(ThisItem.DateDue), Black, If(ThisItem.DateDue &lt; Today(), Red, Black))
+9. IsBlank vs IsEmpty confusion — IsBlank() tests single values, IsEmpty() tests tables
+10. Delegation warning (yellow triangle) — not an error, but silently returns only first 500-2,000 rows. The "in" operator and Search() are never delegable.
+11. JavaScript/DAX syntax in Power Fx — forEach, map, =&gt;, CALCULATE, VLookUp DO NOT EXIST
+12. Connector permission not granted — user hasn't authorized the data source connection
+13. Choice value exact match — "CheckedOut" ≠ "Checked Out". Choice values must match exactly including spaces.
 
 Power Automate (check in this order):
-1. WDL vs Power Fx confusion — must use concat() not Concatenate(), utcNow() not Now()
+1. WDL vs Power Fx confusion — concat() not Concatenate(), utcNow() not Now(), toLower() not Lower()
 2. Dynamic content returning null — wrap with coalesce(value, 'fallback')
 3. Unwanted "Apply to each" auto-inserted — Power Automate wraps when it detects an array; use first() if you need a single value
-4. "Get items" returning only 100 rows — open action settings, set Top Count to 5000
-5. Trigger not firing — verify site URL and list name spelling; remember polling delay is 1-3 minutes
-6. Run After not configured on error-handling Scope — Catch scope must have Run After set to "has failed"
-7. Expression syntax error — check for missing quotes, wrong parentheses, or non-existent function name
+4. "Get items" returning only 100 rows — set Top Count to 5000 in action settings
+5. Trigger not firing — verify site URL and list name spelling; polling delay is 1-3 minutes
+6. Trigger returns STALE data — especially for calculated columns. Fix: add "Get item" action after trigger using [Dynamic Content: ID] to fetch fresh data. Use Get item output, NOT trigger output.
+7. Comparison operator error at boundaries — &gt; vs &gt;= on threshold values (e.g., $2,500 routes wrong). Test with values AT, ABOVE, and BELOW every threshold.
+8. Approval timeout misconfigured — do NOT use a Delay action for timeouts. Set Timeout property on the "Start and wait for an approval" action (e.g., P2D = 2 days). Handle the timeout in the Condition after the approval.
+9. Person field update fails — "Update item" on Person columns requires Claims format: [Expression: concat('i:0#.f|membership|', variables('email'))]
+10. Run After not configured on Catch scope — must set Run After to "has failed" and "has timed out"
+11. Expression syntax error — missing quotes, wrong parentheses, non-existent function name
+
+SharePoint (check in this order):
+1. Calculated column formula rejected — must use =[Column Name] bracket syntax with exact display names. Return type must be set correctly (Number, Date, Yes/No, Text).
+2. Calculated column not updating — columns using =TODAY() only recalculate when the item is EDITED, not daily. For daily accuracy, use a Power Automate scheduled flow instead.
+3. 5,000-item threshold error — add indexes on filtered/sorted columns in List Settings → Indexed columns. Threshold is per QUERY, not per list.
+4. Column type mismatch after CSV import — CSV creates all columns as text. Choice, Person, Calculated, and Lookup columns must be added/converted manually after import.
+
+Power BI (check in this order):
+1. Numbers don't match manual count — check: is the formula using COUNT (counts all rows including duplicates) or DISTINCTCOUNT (counts unique values)? Is it averaging per-entity percentages vs. calculating a global ratio? Test with a small subset.
+2. DAX syntax error / #ERROR — DAX is case-sensitive for column and table names. Check exact spelling including spaces. Use single quotes for table names with spaces: 'Training Status Dashboard'[Status].
+3. Conditional formatting not applying — Power BI requires formatting each column individually. Cannot select multiple columns and format at once.
+4. Data not refreshing from SharePoint — Power BI Desktop does not auto-refresh. Click Refresh in Home tab. For published reports: configure Scheduled Refresh in Power BI Service with SharePoint credentials.
+5. Data source path error — if report was built with a local file path (C:\...) instead of SharePoint URL, refresh will fail silently. Must rebuild connection: Get Data → SharePoint Online List or SharePoint Folder.
 
 GCC High specific (check for any platform):
-1. URL mismatch — .com used instead of .us (must be *.sharepoint.us, make.gov.powerapps.us, high.flow.microsoft.us)
-2. Connector unavailable — third-party or Premium connector not enabled in GCC High tenant
-3. AI Builder/Copilot feature referenced — these are generally not available in GCC High
+1. URL mismatch — .com used instead of .us (must be *.sharepoint.us, make.gov.powerapps.us, high.flow.microsoft.us, app.powerbigov.us)
+2. Connector unavailable — third-party or Premium connector not enabled in GCC High
+3. AI Builder/Copilot feature referenced — not available in GCC High
 
 RULE 3: OUTPUT FORMAT
 1. State the likely root cause in ONE sentence
 2. Provide the corrected formula or configuration in a code block
 3. Explain what was wrong and why in 1-2 sentences
-4. If NOT certain of the root cause, say "I'm not sure yet" and list 2-3 specific diagnostic steps — do not guess
+4. If NOT certain, say "I'm not sure yet" and list 2-3 specific diagnostic steps — do not guess
+5. After fixing, tell the user how to VERIFY the fix:
+   - Power Apps: "Test with [specific input] and check [specific output]"
+   - Power Automate: "Submit a test item with [boundary value] and check flow Run History"
+   - Power BI: "Click Refresh, then compare [metric] against a manual count of [subset]"
 
 RULE 4: DIAGNOSTIC TOOLS
 For hard-to-reproduce issues, suggest:
 - Power Apps: Advanced tools → Monitor — captures live app events and data calls
 - Power Automate: flow Run History — expand each step to see inputs/outputs and the exact failure point
-- SharePoint: List Settings → Indexed columns — check if threshold errors are caused by missing indexes
-- Browser: F12 → Network tab — check for failed API calls (look for 403 = permissions, 429 = throttled, 500 = server error)
+- Power BI: Performance Analyzer (View tab) — shows query execution time per visual
+- SharePoint: List Settings → Indexed columns — check if threshold errors caused by missing indexes
+- Browser: F12 → Network tab — 403 = permissions, 429 = throttled, 500 = server error
+
+RULE 5: CATEGORIZE THE ISSUE
+After diagnosing, tell the user which category the issue falls into:
+- SYNTAX ERROR — wrong language, wrong operator, wrong function name. Fix: correct the code.
+- LOGIC ERROR — code runs but produces wrong result (wrong branch, wrong comparison, missing edge case). Fix: fix the condition or add the missing path.
+- PLATFORM LIMITATION — not a bug, just how the platform works (trigger polling delay, calculated column recalculation, delegation limits). Fix: work around it.
+- CONFIGURATION ERROR — settings not set correctly (Top Count, Timeout, Run After, index). Fix: change the setting.
+- CONTEXT ERROR — AI was given insufficient information and guessed wrong. Fix: provide more context and re-prompt.
+
+This helps the user learn which issues to watch for in the future.
 
 Never guess. If you need more information, ask for it.</pre></div>
                         </div>
