@@ -103,6 +103,8 @@
                             <li><a href="#module-9">Module 9: External Integrations</a></li>
                             <li><a href="#module-10">Module 10: Docker &amp; Deployment</a></li>
                             <li><a href="#assessment">Assessment &amp; Wrap-Up</a></li>
+                            <li><a href="#knowledge-check">Knowledge Check</a></li>
+                            <li><a href="#completion-checklist">Completion Checklist</a></li>
                         </ul>
                     </nav>
                 </aside>
@@ -1472,6 +1474,248 @@ docker run -p 8080:8080 -e OPENAI_API_KEY=sk-... my-staff-app
             at the highest level &mdash; domain experts building exactly what they need, at the speed
             of conversation.
         </p>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- KNOWLEDGE CHECK                                               -->
+<!-- ============================================================ -->
+
+<section id="knowledge-check">
+    <h2>Knowledge Check</h2>
+    <p>
+        Six questions covering the Six Principles, the 3-Minute Rule, and the Cyborg pattern at
+        full-stack scale. Score 80% or higher to pass. There is a 2-minute minimum reading time
+        before you can submit.
+    </p>
+
+    <div class="knowledge-check" data-course="fullstack-student" data-module="all">
+        <div class="knowledge-check__module">
+            <h3 class="knowledge-check__title">End-of-Course Check</h3>
+
+            <div class="knowledge-check__question" data-correct="2">
+                <p class="knowledge-check__prompt">In Principle 1 (&ldquo;The Conversation is the IDE&rdquo;), what role does your code editor play during a full-stack build?</p>
+                <div class="knowledge-check__options">
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="0"><span>Primary authoring tool &mdash; you write the code, the AI reviews it</span>
+                    </label>
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="1"><span>Optional &mdash; the AI handles all editing inside the chat window</span>
+                    </label>
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="2"><span>Verification surface &mdash; you read AI output there to confirm it makes sense, then run it</span>
+                    </label>
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="3"><span>Source of truth &mdash; the editor overrides the chat when they disagree</span>
+                    </label>
+                </div>
+                <div class="knowledge-check__feedback" hidden>
+                    <p>The editor is for verification and execution, not authoring. The chat is where you direct work; the editor is where you confirm it.</p>
+                </div>
+            </div>
+
+            <div class="knowledge-check__question" data-correct="1">
+                <p class="knowledge-check__prompt">You are following Principle 2 (Scaffold &rarr; Flesh Out &rarr; Integrate). The AI just produced 600 lines that wire up the backend, the database, and three frontend pages in one shot. What should you do?</p>
+                <div class="knowledge-check__options">
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="0"><span>Run it &mdash; if it works, you saved hours</span>
+                    </label>
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="1"><span>Discard it and ask the AI to start with just a blank server returning &ldquo;hello&rdquo; on one route</span>
+                    </label>
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="2"><span>Keep it but comment out everything except the database layer</span>
+                    </label>
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="3"><span>Paste it into the editor and start manually fixing the parts that look wrong</span>
+                    </label>
+                </div>
+                <div class="knowledge-check__feedback" hidden>
+                    <p>The point of Scaffold &rarr; Flesh Out &rarr; Integrate is to never try to build everything at once. Start with the smallest thing that runs end-to-end, then add one capability at a time.</p>
+                </div>
+            </div>
+
+            <div class="knowledge-check__question" data-correct="3">
+                <p class="knowledge-check__prompt">You hit a runtime error. You spend three minutes reading the stack trace and trying small tweaks in the editor. The 3-Minute Rule says: what next?</p>
+                <div class="knowledge-check__options">
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="0"><span>Spend another 10 minutes &mdash; you almost have it</span>
+                    </label>
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="1"><span>Search the web for the error message</span>
+                    </label>
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="2"><span>Roll back to the last working commit and try a different approach yourself</span>
+                    </label>
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="3"><span>Paste the exact error message back to the AI and let it fix its own work</span>
+                    </label>
+                </div>
+                <div class="knowledge-check__feedback" hidden>
+                    <p>The 3-Minute Rule exists because manual debugging of AI-generated code is slow and tends to introduce a second bug. The AI wrote the code; the AI knows the most recent context; let it fix the error.</p>
+                </div>
+            </div>
+
+            <div class="knowledge-check__question" data-correct="0">
+                <p class="knowledge-check__prompt">Principle 4 says &ldquo;Incremental Deployment &mdash; deploy after every major feature.&rdquo; Why is waiting until the end to deploy actually slower?</p>
+                <div class="knowledge-check__options">
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="0"><span>You collapse all environment problems into one debugging session and lose hours that could have been spent on features</span>
+                    </label>
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="1"><span>Cloud platforms charge a setup fee per deployment</span>
+                    </label>
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="2"><span>The AI cannot help with deployment, so each deploy must be done by hand</span>
+                    </label>
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="3"><span>It is faster to deploy at the end &mdash; the principle is about safety, not speed</span>
+                    </label>
+                </div>
+                <div class="knowledge-check__feedback" hidden>
+                    <p>Environment issues (paths, secrets, permissions, container quirks) are harder to debug when they all surface at once. Catch them one at a time after each major feature.</p>
+                </div>
+            </div>
+
+            <div class="knowledge-check__question" data-correct="2">
+                <p class="knowledge-check__prompt">Principle 5 (Interface-First Design) tells you to specify <em>what</em> a component does before <em>how</em>. Which prompt below best follows that principle?</p>
+                <div class="knowledge-check__options">
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="0"><span>&ldquo;Write me a SQL query that joins users to roles.&rdquo;</span>
+                    </label>
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="1"><span>&ldquo;Use Sequelize ORM to set up the user model.&rdquo;</span>
+                    </label>
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="2"><span>&ldquo;I need a function that takes a student ID and returns their record, including their assigned role.&rdquo;</span>
+                    </label>
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="3"><span>&ldquo;Optimize the database for read performance.&rdquo;</span>
+                    </label>
+                </div>
+                <div class="knowledge-check__feedback" hidden>
+                    <p>Interface-first prompts describe inputs, outputs, and behavior &mdash; not implementation details. The AI will pick a reasonable implementation; you keep authority over the contract.</p>
+                </div>
+            </div>
+
+            <div class="knowledge-check__question" data-correct="1">
+                <p class="knowledge-check__prompt">Course 3 introduced the Cyborg pattern (fluid, continuous human/AI integration). Course 6 applies it at full-stack scale. Which sentence best describes the difference at this scale?</p>
+                <div class="knowledge-check__options">
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="0"><span>Full-stack work is Centaur, not Cyborg &mdash; the AI writes code in batches and you verify at phase boundaries only</span>
+                    </label>
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="1"><span>The Cyborg pattern still applies, but verification is denser: you read AI-generated code immediately, run it, and pipe errors back into the same conversation rather than letting drift accumulate</span>
+                    </label>
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="2"><span>At full-stack scale you stop verifying and trust the AI &mdash; otherwise the loop is too slow</span>
+                    </label>
+                    <label class="knowledge-check__option">
+                        <input type="radio" value="3"><span>Full-stack work is unique and does not fit either pattern</span>
+                    </label>
+                </div>
+                <div class="knowledge-check__feedback" hidden>
+                    <p>Cyborg with denser verification is the right framing. The 3-Minute Rule, incremental deployment, and the &ldquo;paste the error back&rdquo; reflex are all ways of keeping the loop tight enough to catch problems before they compound.</p>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn--primary knowledge-check__submit">Submit Answers</button>
+            <div class="knowledge-check__result" hidden></div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- COMPLETION CHECKLIST                                          -->
+<!-- ============================================================ -->
+
+<section id="completion-checklist">
+    <div class="course-checklist" data-course="fullstack-student">
+        <h3 class="course-checklist__title">Course Completion Checklist</h3>
+        <div class="course-progress-bar">
+            <div class="course-progress-bar__fill"></div>
+        </div>
+        <span class="course-progress-bar__text">0% Complete</span>
+        <ul class="course-checklist__list">
+            <li class="course-checklist__item">
+                <label>
+                    <input type="checkbox" data-item="module-1">
+                    <span>Module 1: The Full-Stack Frontier &mdash; Read and understood</span>
+                </label>
+            </li>
+            <li class="course-checklist__item">
+                <label>
+                    <input type="checkbox" data-item="module-2">
+                    <span>Module 2: Environment Setup &mdash; Toolchain installed and verified</span>
+                </label>
+            </li>
+            <li class="course-checklist__item">
+                <label>
+                    <input type="checkbox" data-item="module-3">
+                    <span>Module 3: Backend from Scratch &mdash; Go server returning a JSON response</span>
+                </label>
+            </li>
+            <li class="course-checklist__item">
+                <label>
+                    <input type="checkbox" data-item="module-4">
+                    <span>Module 4: Data Layer &mdash; Read/write working against JSON storage</span>
+                </label>
+            </li>
+            <li class="course-checklist__item">
+                <label>
+                    <input type="checkbox" data-item="module-5">
+                    <span>Module 5: Frontend from Scratch &mdash; React app loads and calls the backend</span>
+                </label>
+            </li>
+            <li class="course-checklist__item">
+                <label>
+                    <input type="checkbox" data-item="module-6">
+                    <span>Module 6: Pages &amp; Navigation &mdash; Multi-page routing in place</span>
+                </label>
+            </li>
+            <li class="course-checklist__item">
+                <label>
+                    <input type="checkbox" data-item="module-7">
+                    <span>Module 7: AI Chat Integration &mdash; Chat queries the data layer through tool use</span>
+                </label>
+            </li>
+            <li class="course-checklist__item">
+                <label>
+                    <input type="checkbox" data-item="module-8">
+                    <span>Module 8: Auth &amp; Middleware &mdash; Role-based access enforced</span>
+                </label>
+            </li>
+            <li class="course-checklist__item">
+                <label>
+                    <input type="checkbox" data-item="module-9">
+                    <span>Module 9: External Integrations &mdash; Outbound call working with proper error handling</span>
+                </label>
+            </li>
+            <li class="course-checklist__item">
+                <label>
+                    <input type="checkbox" data-item="module-10">
+                    <span>Module 10: Docker &amp; Deployment &mdash; App containerized and deployed (local or cloud)</span>
+                </label>
+            </li>
+            <li class="course-checklist__item">
+                <label>
+                    <input type="checkbox" data-item="knowledge-check">
+                    <span>Knowledge Check &mdash; Scored 80% or higher</span>
+                </label>
+            </li>
+            <li class="course-checklist__item">
+                <label>
+                    <input type="checkbox" data-item="capstone">
+                    <span>Capstone: Full-stack application running end-to-end</span>
+                </label>
+            </li>
+        </ul>
+        <div class="course-checklist__complete" hidden>
+            <div class="callout callout--success">
+                <h3 class="callout__title">Course Complete!</h3>
+                <p>You have completed Full-Stack AI-Assisted Development. <a href="../progress.html">View your progress dashboard</a> or <a href="../certificate.html">generate your certificate</a>.</p>
+            </div>
+        </div>
     </div>
 </section>
 
