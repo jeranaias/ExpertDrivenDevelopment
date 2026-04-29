@@ -181,22 +181,87 @@ talking; long blocks fail.
 | Number + `Enter` | Jump to slide N |
 | `N` | Toggle speaker-notes panel |
 | `F` | Toggle fullscreen |
+| `P` | Print / save as PDF (one slide per page + notes) |
 
 The same controller works for every weekly deck. Do not fork it.
 
 ---
 
-## How weeks 2–6 inherit this
+## File layout
+
+```
+docs/decks/
+├── index.html                          ← landing page with deck cards
+├── DESIGN.md                           ← this file
+├── css/deck.css                        ← single canonical stylesheet
+├── js/deck.js                          ← single canonical controller
+├── week-1-ai-fluency.html              ← Week 1 (the design contract)
+├── week-2-builder-orientation.html     ← Week 2
+├── week-3-platform-training.html       ← Week 3
+├── week-4-advanced.html                ← Week 4
+├── week-5-supervisor.html              ← Week 5
+└── week-6-fullstack.html               ← Week 6
+```
+
+Every deck links the same `css/deck.css` and `js/deck.js`. There are
+**no per-deck stylesheets or controllers** — the previous `shared/`,
+root `deck.css`, root `deck.js`, and `week-2/` directories were
+removed when this contract was finalized.
+
+---
+
+## How weeks 2–6 share the canonical CSS
+
+Each weekly deck declares its own body class so the canonical stylesheet
+can apply per-week compatibility rules without cross-week interference:
+
+| Week | `<body class="…">` | Notes |
+|---|---|---|
+| 1 | `deck-body` | Establishes the contract; rules are scoped to this class. |
+| 2 | `w2-deck` | 1920×1080 fixed frame, JS-scaled. Compat layer in `deck.css`. |
+| 3 | `w3-deck` | 1920×1080 fixed frame, JS-scaled. Compat layer in `deck.css`. |
+| 4 | `w4-deck` | 1920×1080 fixed frame, JS-scaled. Compat layer in `deck.css`. |
+| 5 | `w5-deck` | Self-scaling (CSS `aspect-ratio`); inline `<style>` for components. |
+| 6 | `w6-deck` | Self-scaling (CSS `aspect-ratio`); inline `<style>` for components. |
+
+Universal selectors (`.deck-chrome`, `.deck-notes`, `.notes`,
+`.speaker-notes`, the `:root` palette tokens, and the universal
+`@media print` block) are **unscoped** so every deck inherits them.
+
+To create a new weekly deck:
 
 1. Copy `week-1-ai-fluency.html` to `week-N-<slug>.html`.
 2. Update `<title>` and the cover-slide eyebrow / title.
 3. Update `slide__foot .foot__course` to the new course label.
 4. Replace slide bodies; **keep the layout classes**.
 5. Keep `<link rel="stylesheet" href="css/deck.css">` and
-   `<script src="js/deck.js">`.
+   `<script src="js/deck.js" defer></script>`.
 6. Re-author the `<aside class="notes">` block on every slide.
-7. Update `decks/index.html` to mark the new deck as available.
+7. Update `decks/index.html` to add the new deck card.
+8. Add a deck link in the matching `docs/courses/<slug>.html` page.
 
 If a new layout is genuinely needed, add it to `deck.css`, document it in
 this file, then use it. No bespoke per-deck styles inside the HTML — the
 whole point of this system is that the six decks look like one program.
+
+---
+
+## Print / Download as PDF
+
+Every deck ships with a universal print stylesheet (in `css/deck.css`
+under the `UNIVERSAL PRINT STYLESHEET` header) that lays out one slide
+per page in landscape 16:9 (13.333" × 7.5") followed by its speaker
+notes on the next page.
+
+To export a deck:
+
+1. Open the deck in Chrome or Edge.
+2. Press `P` from inside the deck, or use **File → Print** /
+   `Ctrl+P` / `Cmd+P`.
+3. In the print dialog, set **Destination** to *Save as PDF*.
+4. Set **Layout** to *Landscape*, **Margins** to *None*, and tick
+   *Background graphics*.
+5. Click **Save**.
+
+There is no separate PDF file in the repository — the print stylesheet
+generates the handout on demand from the live HTML.

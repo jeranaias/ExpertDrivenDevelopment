@@ -1,7 +1,15 @@
 /* ============================================================
    EDD Weekly Deck — minimal slide controller
-   Shared by all six weekly decks. Single static HTML file,
-   one slide visible at a time, hash-driven navigation.
+   Canonical script for all six weekly decks.
+
+   - One slide visible at a time, hash-driven navigation.
+   - Sets BOTH `.is-current` (Week 1 contract) and `.is-active`
+     (Weeks 2-6 contract) on the active slide so any of the
+     decks' CSS show/hide rules work without modification.
+   - Reads speaker notes from the current slide via `.notes`,
+     `.speaker-notes`, or `template.speaker-notes` (in that order).
+   - Injects its own chrome (.deck-chrome) and notes panel (.deck-notes)
+     unless the deck already provides one (#deck-chrome or #deck-notes).
 
    Keys:
      Right / Space / PgDn  -> next
@@ -10,12 +18,13 @@
      End                   -> last slide
      N                     -> toggle speaker notes panel
      F                     -> toggle fullscreen
-     Digits + Enter        -> jump to slide N (e.g. type "12" then Enter)
-                              digits buffer for ~700ms then auto-jump
+     P                     -> open print dialog (one slide per page)
+     Digits + Enter        -> jump to slide N
 
    URL params:
      #slide-12              -> open at slide 12
      ?notes=1               -> open with notes panel visible
+     ?print=1               -> open in print-ready layout
    ============================================================ */
 (function () {
   "use strict";
@@ -26,49 +35,83 @@
   var total = slides.length;
   var current = 0;
 
-  // Build chrome
-  var chrome = document.createElement("div");
-  chrome.className = "deck-chrome";
-  chrome.innerHTML =
-    '<button data-action="prev" aria-label="Previous slide">&larr; Prev</button>' +
-    '<span class="deck-counter"><span id="deck-cur">1</span> / <span id="deck-total">' + total + '</span></span>' +
-    '<button data-action="next" aria-label="Next slide">Next &rarr;</button>' +
-    '<button data-action="notes" aria-label="Toggle speaker notes">Notes</button>' +
-    '<button data-action="full" aria-label="Toggle fullscreen">Full</button>';
-  document.body.appendChild(chrome);
+  // ----- Build chrome (skip if deck already provides one) -----
+  var chrome = document.getElementById("deck-chrome");
+  if (!chrome) {
+    chrome = document.createElement("div");
+    chrome.id = "deck-chrome";
+    chrome.className = "deck-chrome";
+    chrome.innerHTML =
+      '<button data-action="prev" aria-label="Previous slide">&larr; Prev</button>' +
+      '<span class="deck-counter"><span id="deck-cur">1</span> / <span id="deck-total">' + total + '</span></span>' +
+      '<button data-action="next" aria-label="Next slide">Next &rarr;</button>' +
+      '<button data-action="notes" aria-label="Toggle speaker notes">Notes</button>' +
+      '<button data-action="full" aria-label="Toggle fullscreen">Full</button>' +
+      '<button data-action="print" aria-label="Print as PDF">Print</button>';
+    document.body.appendChild(chrome);
+  }
 
-  // Build notes panel
-  var notesPanel = document.createElement("aside");
-  notesPanel.className = "deck-notes";
-  notesPanel.setAttribute("aria-label", "Speaker notes");
-  notesPanel.innerHTML = '<h3>Speaker Notes</h3><div id="deck-notes-body"></div>';
-  document.body.appendChild(notesPanel);
+  var notesPanel = document.getElementById("deck-notes");
+  if (!notesPanel) {
+    notesPanel = document.createElement("aside");
+    notesPanel.id = "deck-notes";
+    notesPanel.className = "deck-notes";
+    notesPanel.setAttribute("aria-label", "Speaker notes");
+    notesPanel.innerHTML = '<h3>Speaker Notes</h3><div id="deck-notes-body"></div>';
+    document.body.appendChild(notesPanel);
+  }
 
-  var notesBody = notesPanel.querySelector("#deck-notes-body");
+  var notesBody = notesPanel.querySelector("#deck-notes-body") || notesPanel;
   var counterEl = chrome.querySelector("#deck-cur");
 
-  // Assign positional ids if missing & set foot numbers
+  // Assign positional ids if missing & set foot numbers (Week 1) and page-num (Weeks 2-6).
   slides.forEach(function (s, i) {
     if (!s.id) s.id = "slide-" + (i + 1);
     var foot = s.querySelector(".slide__foot .foot__num");
     if (foot && !foot.dataset.locked) {
       foot.textContent = String(i + 1).padStart(2, "0") + " / " + String(total).padStart(2, "0");
     }
+    var pageNum = s.querySelector(".page-num");
+    if (pageNum && !pageNum.dataset.locked) {
+      pageNum.textContent = (i + 1) + " / " + total;
+    }
   });
+
+  // External-notes fallback (Week 4): single <aside id="notes"> with one
+  // <div class="note-content"> per slide in slide order.
+  var externalNotes = (function () {
+    var aside = document.getElementById("notes");
+    if (!aside) return null;
+    var contents = aside.querySelectorAll(".note-content");
+    return contents.length ? contents : null;
+  })();
+
+  function readNotes(slide, index) {
+    // Prefer in-slide .notes (Week 1, 6); fall back to .speaker-notes (Week 3);
+    // then <template class="speaker-notes"> (Weeks 2, 5);
+    // finally external-notes block (Week 4).
+    var note = slide.querySelector(".notes");
+    if (note && note.tagName !== "TEMPLATE") return note.innerHTML;
+    var sn = slide.querySelector(".speaker-notes");
+    if (sn && sn.tagName !== "TEMPLATE") return sn.innerHTML;
+    var tpl = slide.querySelector("template.speaker-notes, template.notes");
+    if (tpl) return tpl.innerHTML;
+    if (externalNotes && externalNotes[index]) return externalNotes[index].innerHTML;
+    return "<p><em>No speaker notes for this slide.</em></p>";
+  }
 
   function show(i) {
     if (i < 0) i = 0;
     if (i >= total) i = total - 1;
     slides[current].classList.remove("is-current");
+    slides[current].classList.remove("is-active");
     current = i;
     slides[current].classList.add("is-current");
-    counterEl.textContent = String(current + 1);
+    slides[current].classList.add("is-active");
+    if (counterEl) counterEl.textContent = String(current + 1);
 
-    // Pull notes for this slide
-    var note = slides[current].querySelector(".notes");
-    notesBody.innerHTML = note ? note.innerHTML : "<p><em>No speaker notes for this slide.</em></p>";
+    notesBody.innerHTML = readNotes(slides[current], current);
 
-    // Sync hash (without scroll jumping)
     var newHash = "#" + slides[current].id;
     if (window.location.hash !== newHash) {
       history.replaceState(null, "", newHash);
@@ -94,6 +137,65 @@
     }
   }
 
+  function printDeck() {
+    // Toggle a print-mode body class so all slides become visible
+    // before opening the print dialog. The @media print stylesheet
+    // does the same job, but this also helps preview-in-browser.
+    document.body.classList.add("is-printing");
+    slides.forEach(function (s) {
+      s.classList.add("is-current");
+      s.classList.add("is-active");
+    });
+    setTimeout(function () { window.print(); }, 50);
+    var cleanup = function () {
+      document.body.classList.remove("is-printing");
+      slides.forEach(function (s, i) {
+        if (i !== current) {
+          s.classList.remove("is-current");
+          s.classList.remove("is-active");
+        }
+      });
+      window.removeEventListener("afterprint", cleanup);
+    };
+    window.addEventListener("afterprint", cleanup);
+  }
+
+  // ----- Fixed-frame auto-scaling (Weeks 2/4 use a 1920×1080 reference frame) -----
+  // If a slide has an explicit pixel width/height (set by CSS), scale-to-fit
+  // it via transform so the entire 16:9 stage fits the viewport.
+  //   - Week 1 (body.deck-body) uses viewport-relative units already.
+  //   - Week 3 (w3-deck) sizes its .deck to 100svw × 100svh and lets each
+  //     slide fill it via inset:0; no JS scale needed.
+  //   - Weeks 5/6 (w5-deck/w6-deck) wrap their deck in a self-scaling 16:9
+  //     frame using CSS aspect-ratio, so JS scaling would double-fit them.
+  var b = document.body;
+  var needsScale = b.classList.contains("w2-deck") ||
+                   b.classList.contains("w4-deck");
+  function fit() {
+    if (!needsScale) return;
+    var first = slides[0];
+    if (!first) return;
+    // Only scale if the slide has the canonical 1920×1080 fixed size.
+    var rect = first.getBoundingClientRect();
+    // Use the CSS-declared dimensions as the reference, not getBoundingClientRect
+    // (since we may have already applied transform).
+    var W = 1920, H = 1080;
+    var vw = window.innerWidth;
+    var vh = window.innerHeight;
+    var scale = Math.min(vw / W, vh / H);
+    slides.forEach(function (s) {
+      s.style.transform = "translate(-50%, -50%) scale(" + scale + ")";
+      s.style.left = "50%";
+      s.style.top = "50%";
+      s.style.position = "absolute";
+    });
+  }
+  if (needsScale) {
+    window.addEventListener("resize", fit);
+    // Defer first fit until layout is ready.
+    requestAnimationFrame(fit);
+  }
+
   // Buffered numeric input for jump-to-slide
   var numBuffer = "";
   var numTimer = null;
@@ -108,7 +210,6 @@
   }
 
   document.addEventListener("keydown", function (e) {
-    // Ignore if user is typing in an input
     var t = e.target;
     if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
 
@@ -130,6 +231,9 @@
       case "f":
       case "F":
         e.preventDefault(); toggleFullscreen(); break;
+      case "p":
+      case "P":
+        e.preventDefault(); printDeck(); break;
       case "Enter":
         if (numBuffer) {
           e.preventDefault();
@@ -155,14 +259,15 @@
       case "prev": prev(); break;
       case "notes": toggleNotes(); break;
       case "full": toggleFullscreen(); break;
+      case "print": printDeck(); break;
     }
   });
 
   // Click anywhere on the slide (but not on chrome / notes / links / buttons)
   // advances. Standard expectation for a presenter clicker.
   document.addEventListener("click", function (e) {
-    if (e.target.closest(".deck-chrome")) return;
-    if (e.target.closest(".deck-notes")) return;
+    if (e.target.closest("#deck-chrome, .deck-chrome")) return;
+    if (e.target.closest("#deck-notes, .deck-notes")) return;
     if (e.target.closest("a, button, input, textarea, select")) return;
     next();
   });
@@ -177,5 +282,8 @@
 
   if (/[?&]notes=1\b/.test(window.location.search)) {
     notesPanel.classList.add("is-open");
+  }
+  if (/[?&]print=1\b/.test(window.location.search)) {
+    setTimeout(printDeck, 250);
   }
 })();

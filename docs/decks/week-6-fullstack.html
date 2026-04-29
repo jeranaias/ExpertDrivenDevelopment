@@ -665,8 +665,10 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   @page { size: landscape; margin: 0.4in; }
 }
 </style>
+<link rel="stylesheet" href="css/deck.css">
+<script src="js/deck.js" defer></script>
 </head>
-<body>
+<body class="w6-deck">
 
 <div class="stage">
   <div class="deck" id="deck">
@@ -2679,119 +2681,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
 
   </div>
 </div>
-
-<!-- HUD -->
-<div class="hud" id="hud">
-  <button id="prev" title="Previous slide (←)">‹</button>
-  <span class="counter" id="counter">1 / 1</span>
-  <button id="next" title="Next slide (→)">›</button>
-  <span class="sep"></span>
-  <button id="notesBtn" title="Speaker notes (S)">Notes</button>
-  <button id="printBtn" title="Print / handout view (P)">Print</button>
-  <button id="fsBtn" title="Fullscreen (F)">⛶</button>
-  <span class="sep"></span>
-  <span class="hint">← → · S · P · F</span>
-</div>
-
-<!-- Speaker notes panel -->
-<aside class="notes-panel" id="notesPanel" aria-label="Speaker notes">
-  <header>
-    <strong>Speaker notes</strong>
-    <span id="notesCounter">Slide 1</span>
-  </header>
-  <div class="body" id="notesBody"></div>
 </aside>
-
-<script>
-(function(){
-  var deck = document.getElementById('deck');
-  var slides = Array.prototype.slice.call(deck.querySelectorAll('.slide'));
-  var counter = document.getElementById('counter');
-  var notesPanel = document.getElementById('notesPanel');
-  var notesBody = document.getElementById('notesBody');
-  var notesCounter = document.getElementById('notesCounter');
-  var idx = 0;
-
-  function show(i){
-    if (i < 0) i = 0;
-    if (i >= slides.length) i = slides.length - 1;
-    slides.forEach(function(s, n){ s.classList.toggle('is-active', n === i); });
-    idx = i;
-    counter.textContent = (i + 1) + ' / ' + slides.length;
-    var notes = slides[i].querySelector('.notes');
-    notesBody.innerHTML = notes ? notes.innerHTML : '<p style="color:#888;">No speaker notes for this slide.</p>';
-    notesCounter.textContent = 'Slide ' + (i + 1) + ' / ' + slides.length;
-    if (location.hash !== '#' + (i + 1)) {
-      history.replaceState(null, '', '#' + (i + 1));
-    }
-  }
-
-  function next(){ show(idx + 1); }
-  function prev(){ show(idx - 1); }
-
-  document.getElementById('next').addEventListener('click', next);
-  document.getElementById('prev').addEventListener('click', prev);
-  document.getElementById('notesBtn').addEventListener('click', function(){
-    notesPanel.classList.toggle('is-open');
-  });
-  document.getElementById('fsBtn').addEventListener('click', function(){
-    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
-    else document.exitFullscreen();
-  });
-  document.getElementById('printBtn').addEventListener('click', function(){
-    document.body.classList.toggle('print-mode');
-    if (document.body.classList.contains('print-mode')) {
-      window.scrollTo({ top: 0, behavior: 'instant' });
-    }
-  });
-
-  document.addEventListener('keydown', function(e){
-    if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
-    if (document.body.classList.contains('print-mode') && e.key !== 'Escape' && e.key !== 'p' && e.key !== 'P') return;
-    switch (e.key) {
-      case 'ArrowRight':
-      case 'PageDown':
-      case ' ':
-        e.preventDefault(); next(); break;
-      case 'ArrowLeft':
-      case 'PageUp':
-        e.preventDefault(); prev(); break;
-      case 'Home':
-        e.preventDefault(); show(0); break;
-      case 'End':
-        e.preventDefault(); show(slides.length - 1); break;
-      case 's':
-      case 'S':
-        notesPanel.classList.toggle('is-open'); break;
-      case 'f':
-      case 'F':
-        if (!document.fullscreenElement) document.documentElement.requestFullscreen();
-        else document.exitFullscreen();
-        break;
-      case 'p':
-      case 'P':
-        document.body.classList.toggle('print-mode');
-        break;
-      case 'Escape':
-        if (document.body.classList.contains('print-mode')) document.body.classList.remove('print-mode');
-        else if (notesPanel.classList.contains('is-open')) notesPanel.classList.remove('is-open');
-        break;
-    }
-  });
-
-  // Click anywhere on stage (not on HUD/notes) to advance
-  document.querySelector('.stage').addEventListener('click', function(e){
-    if (document.body.classList.contains('print-mode')) return;
-    if (e.target.closest('.hud') || e.target.closest('.notes-panel')) return;
-    next();
-  });
-
-  // Init from hash
-  var initial = parseInt((location.hash || '#1').slice(1), 10);
-  if (!isFinite(initial) || initial < 1) initial = 1;
-  show(initial - 1);
-})();
-</script>
 
 </body>
 </html>

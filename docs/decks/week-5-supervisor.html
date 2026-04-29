@@ -526,8 +526,10 @@
     .hud, .counter, .notes, .help { display: none !important; }
   }
 </style>
+<link rel="stylesheet" href="css/deck.css">
+<script src="js/deck.js" defer></script>
 </head>
-<body>
+<body class="w5-deck">
 
 <div class="stage">
   <div class="frame">
@@ -1620,139 +1622,7 @@
     </div>
   </div>
 </div>
-
-<!-- ============ Speaker notes overlay ============ -->
-<div class="notes" id="notes" aria-hidden="true">
-  <h3>
-    <span id="notes-title">Speaker notes</span>
-    <span class="badge badge--scarlet" id="notes-mode-briefing" style="font-size:11px;padding:2px 8px;">30-min briefing</span>
-    <span class="badge badge--gold" id="notes-mode-joint" style="font-size:11px;padding:2px 8px;">joint session</span>
-    <span class="close-hint" style="margin-left:auto;">Press <kbd style="background:#333;border:1px solid #555;border-radius:3px;padding:1px 6px;font-family:monospace;color:#fff;font-size:11px;">N</kbd> to close · <kbd style="background:#333;border:1px solid #555;border-radius:3px;padding:1px 6px;font-family:monospace;color:#fff;font-size:11px;">?</kbd> for help</span>
-  </h3>
-  <div id="notes-body"></div>
 </div>
-
-<!-- ============ HUD / counter / help ============ -->
-<div class="counter" id="counter">1 / 28</div>
-<div class="hud">
-  <button id="prev-btn" title="Previous slide (←)">◀ Prev</button>
-  <button id="notes-btn" title="Toggle speaker notes (N)">Notes</button>
-  <button id="help-btn" title="Help (?)">?</button>
-  <button id="next-btn" title="Next slide (→)">Next ▶</button>
-</div>
-
-<div class="help" id="help">
-  <div class="panel">
-    <h3>Keyboard controls</h3>
-    <table>
-      <tr><td><kbd>→</kbd> <kbd>Space</kbd> <kbd>PgDn</kbd></td><td>Next slide</td></tr>
-      <tr><td><kbd>←</kbd> <kbd>PgUp</kbd></td><td>Previous slide</td></tr>
-      <tr><td><kbd>Home</kbd> / <kbd>End</kbd></td><td>First / last slide</td></tr>
-      <tr><td><kbd>N</kbd></td><td>Toggle speaker notes</td></tr>
-      <tr><td><kbd>F</kbd></td><td>Toggle fullscreen</td></tr>
-      <tr><td><kbd>P</kbd></td><td>Print all slides (one per page)</td></tr>
-      <tr><td><kbd>?</kbd> / <kbd>Esc</kbd></td><td>Show / hide help</td></tr>
-    </table>
-    <div class="dismiss">Click anywhere or press Esc to close.</div>
-  </div>
-</div>
-
-<script>
-(function () {
-  var deck   = document.getElementById('deck');
-  var slides = Array.prototype.slice.call(deck.querySelectorAll('.slide'));
-  var notes  = document.getElementById('notes');
-  var notesBody = document.getElementById('notes-body');
-  var notesTitle = document.getElementById('notes-title');
-  var counter = document.getElementById('counter');
-  var help = document.getElementById('help');
-  var current = 0;
-
-  // Stamp page numbers and total
-  var total = slides.length;
-  slides.forEach(function (s, i) {
-    var foot = s.querySelector('.page-num');
-    if (foot) foot.textContent = (i + 1) + ' / ' + total;
-  });
-
-  function render() {
-    slides.forEach(function (s, i) {
-      s.classList.toggle('is-active', i === current);
-    });
-    counter.textContent = (current + 1) + ' / ' + total;
-    renderNotes();
-    if (location.hash !== '#' + (current + 1)) {
-      history.replaceState(null, '', '#' + (current + 1));
-    }
-  }
-
-  function renderNotes() {
-    var slide = slides[current];
-    var tpl = slide.querySelector('template.speaker-notes');
-    notesTitle.textContent = 'Speaker notes — slide ' + (current + 1) + ' / ' + total + ' · ' + (slide.dataset.title || '');
-    if (tpl) {
-      notesBody.innerHTML = tpl.innerHTML;
-    } else {
-      notesBody.innerHTML = '<p style="color:#888;">No speaker notes for this slide.</p>';
-    }
-  }
-
-  function go(n) {
-    if (n < 0) n = 0;
-    if (n >= total) n = total - 1;
-    current = n;
-    render();
-  }
-
-  function next() { if (current < total - 1) go(current + 1); }
-  function prev() { if (current > 0) go(current - 1); }
-
-  function toggleNotes() { notes.classList.toggle('is-open'); }
-  function toggleHelp() { help.classList.toggle('is-open'); }
-  function toggleFs() {
-    if (document.fullscreenElement) document.exitFullscreen();
-    else document.documentElement.requestFullscreen();
-  }
-
-  document.addEventListener('keydown', function (e) {
-    var k = e.key;
-    if (e.target && /input|textarea|select/i.test(e.target.tagName)) return;
-    if (k === 'ArrowRight' || k === 'PageDown' || k === ' ') { e.preventDefault(); next(); }
-    else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); prev(); }
-    else if (k === 'Home') { e.preventDefault(); go(0); }
-    else if (k === 'End') { e.preventDefault(); go(total - 1); }
-    else if (k === 'n' || k === 'N') { e.preventDefault(); toggleNotes(); }
-    else if (k === 'f' || k === 'F') { e.preventDefault(); toggleFs(); }
-    else if (k === 'p' || k === 'P') { e.preventDefault(); window.print(); }
-    else if (k === '?' || k === '/') { e.preventDefault(); toggleHelp(); }
-    else if (k === 'Escape') { help.classList.remove('is-open'); notes.classList.remove('is-open'); }
-  });
-
-  document.getElementById('next-btn').addEventListener('click', next);
-  document.getElementById('prev-btn').addEventListener('click', prev);
-  document.getElementById('notes-btn').addEventListener('click', toggleNotes);
-  document.getElementById('help-btn').addEventListener('click', toggleHelp);
-  help.addEventListener('click', function () { help.classList.remove('is-open'); });
-
-  // Click on slide edges to navigate
-  document.querySelector('.frame').addEventListener('click', function (e) {
-    if (e.target.closest('.hud') || e.target.closest('.notes') || e.target.closest('.help')) return;
-    var rect = this.getBoundingClientRect();
-    var x = e.clientX - rect.left;
-    if (x < rect.width * 0.35) prev();
-    else if (x > rect.width * 0.65) next();
-  });
-
-  // Hash deep-linking
-  function fromHash() {
-    var n = parseInt(location.hash.replace('#',''), 10);
-    if (!isNaN(n) && n >= 1 && n <= total) current = n - 1;
-  }
-  window.addEventListener('hashchange', function () { fromHash(); render(); });
-  fromHash();
-  render();
-})();
-</script>
 
 </body>
 </html>
