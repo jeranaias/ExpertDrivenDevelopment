@@ -1,76 +1,136 @@
+/* EDD Weekly Decks — shared slide navigation
+ * Keyboard:  ← →   PageUp/PageDn   Space (next)   Home/End   N (notes)   F (fullscreen)   ? (help)
+ * Click:     left-half = back, right-half = forward
+ */
 (function () {
-  "use strict";
+  var stage = document.querySelector('.stage');
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  if (!slides.length) return;
 
-  const slides = Array.from(document.querySelectorAll(".slide"));
-  const counter = document.getElementById("deck-counter");
-  const notesPanel = document.getElementById("deck-notes");
-  const notesBody = document.getElementById("deck-notes-body");
-  const notesTitle = document.getElementById("deck-notes-title");
-  const hint = document.getElementById("deck-hint");
-  let current = 0;
-  let notesVisible = false;
+  var notes = document.querySelector('.notes');
+  var noteContents = Array.prototype.slice.call(document.querySelectorAll('.note-content'));
+  var counter = document.querySelector('.hud .counter');
+  var help = document.querySelector('.help-overlay');
 
-  function updateNotes() {
-    const slide = slides[current];
-    const noteEl = slide.querySelector(".speaker-notes");
-    if (noteEl && notesBody) {
-      notesBody.innerHTML = noteEl.innerHTML;
-      notesTitle.textContent =
-        "Speaker notes — " + (slide.dataset.title || "Slide " + (current + 1));
+  var index = 0;
+  var total = slides.length;
+
+  // ---- read deep-link from hash on load (#3) ----
+  function readHash() {
+    var m = (location.hash || '').match(/^#(\d+)$/);
+    if (m) {
+      var n = parseInt(m[1], 10) - 1;
+      if (n >= 0 && n < total) return n;
     }
+    return 0;
   }
 
-  function show(index) {
-    if (index < 0) index = 0;
-    if (index >= slides.length) index = slides.length - 1;
-    slides[current].classList.remove("is-active");
-    current = index;
-    slides[current].classList.add("is-active");
-    if (counter) {
-      counter.textContent = (current + 1) + " / " + slides.length;
-    }
-    if (location.hash !== "#" + (current + 1)) {
-      history.replaceState(null, "", "#" + (current + 1));
-    }
-    updateNotes();
-    if (hint) hint.style.display = current === 0 ? "block" : "none";
+  function show(i) {
+    if (i < 0) i = 0;
+    if (i > total - 1) i = total - 1;
+    slides[index].classList.remove('is-active');
+    if (noteContents[index]) noteContents[index].classList.remove('is-current');
+    index = i;
+    slides[index].classList.add('is-active');
+    if (noteContents[index]) noteContents[index].classList.add('is-current');
+    if (counter) counter.textContent = (index + 1) + ' / ' + total;
+    history.replaceState(null, '', '#' + (index + 1));
+    fitToStage();
   }
 
-  function next() { show(current + 1); }
-  function prev() { show(current - 1); }
+  function next() { show(index + 1); }
+  function prev() { show(index - 1); }
+  function first() { show(0); }
+  function last()  { show(total - 1); }
 
-  function toggleNotes() {
-    notesVisible = !notesVisible;
-    if (notesPanel) notesPanel.classList.toggle("is-visible", notesVisible);
+  // ---- scale 1920x1080 slide to fit any window ----
+  function fitToStage() {
+    var slide = slides[index];
+    if (!slide) return;
+    var sw = window.innerWidth;
+    var sh = window.innerHeight;
+    var notesOpen = notes && notes.classList.contains('is-open');
+    if (notesOpen) sh = Math.round(sh * 0.62);
+    var scale = Math.min(sw / 1920, sh / 1080);
+    slide.style.transform = 'scale(' + scale + ')';
   }
 
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") {
-      e.preventDefault(); next();
-    } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
-      e.preventDefault(); prev();
-    } else if (e.key === "Home") {
-      e.preventDefault(); show(0);
-    } else if (e.key === "End") {
-      e.preventDefault(); show(slides.length - 1);
-    } else if (e.key === "n" || e.key === "N") {
-      e.preventDefault(); toggleNotes();
-    } else if (e.key === "p" || e.key === "P") {
-      e.preventDefault(); window.print();
+  // ---- keyboard ----
+  document.addEventListener('keydown', function (e) {
+    if (e.target && /input|textarea|select/i.test(e.target.tagName)) return;
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'PageDown':
+      case ' ':
+        e.preventDefault(); next(); break;
+      case 'ArrowLeft':
+      case 'PageUp':
+        e.preventDefault(); prev(); break;
+      case 'Home':
+        e.preventDefault(); first(); break;
+      case 'End':
+        e.preventDefault(); last(); break;
+      case 'n': case 'N':
+        e.preventDefault();
+        if (notes) { notes.classList.toggle('is-open'); fitToStage(); }
+        break;
+      case 'f': case 'F':
+        e.preventDefault();
+        if (!document.fullscreenElement) {
+          (document.documentElement.requestFullscreen || function(){}).call(document.documentElement);
+        } else {
+          (document.exitFullscreen || function(){}).call(document);
+        }
+        break;
+      case '?':
+        e.preventDefault();
+        if (help) help.classList.toggle('is-open');
+        break;
+      case 'Escape':
+        if (help && help.classList.contains('is-open')) {
+          help.classList.remove('is-open');
+        }
+        break;
     }
   });
 
-  document.addEventListener("click", function (e) {
-    if (e.target.closest("a, button, input, textarea, select, .notes, .deck__chrome, .deck__hint")) return;
-    const w = window.innerWidth;
-    if (e.clientX < w * 0.25) prev(); else next();
+  // ---- click navigation ----
+  if (stage) {
+    stage.addEventListener('click', function (e) {
+      // Ignore clicks on HUD buttons
+      if (e.target && e.target.closest('.hud, .notes, .help-overlay')) return;
+      var x = e.clientX;
+      if (x < window.innerWidth * 0.35) prev();
+      else next();
+    });
+  }
+
+  // ---- HUD wiring ----
+  document.querySelectorAll('[data-action]').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var a = btn.getAttribute('data-action');
+      if (a === 'prev') prev();
+      else if (a === 'next') next();
+      else if (a === 'notes' && notes) { notes.classList.toggle('is-open'); fitToStage(); }
+      else if (a === 'help' && help) help.classList.toggle('is-open');
+      else if (a === 'fullscreen') {
+        if (!document.fullscreenElement) {
+          (document.documentElement.requestFullscreen || function(){}).call(document.documentElement);
+        } else {
+          (document.exitFullscreen || function(){}).call(document);
+        }
+      }
+    });
   });
 
-  window.addEventListener("hashchange", function () {
-    const n = parseInt(location.hash.slice(1), 10);
-    if (!isNaN(n)) show(n - 1);
-  });
+  // ---- responsive fit ----
+  window.addEventListener('resize', fitToStage);
+  window.addEventListener('orientationchange', fitToStage);
 
-  const initial = parseInt(location.hash.slice(1), 10);
-  show(!isNaN(initial) && initial > 0 ? initial - 1 : 0);
+  // ---- init ----
+  show(readHash());
+  // refit after fonts settle
+  setTimeout(fitToStage, 100);
+  setTimeout(fitToStage, 500);
 })();
