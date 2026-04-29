@@ -8,7 +8,7 @@ Static HTML/CSS/JS site (originally hosted via GitHub Pages from the `docs/` dir
 
 ## Project Structure
 - `docs/` — site root (HTML pages, CSS, JS, PDFs, course materials)
-- `docs/decks/` — instructor-led weekly decks served from the static site (HTML slide decks for Microsoft Teams screen-share). Self-contained HTML decks (1920×1080, 16:9) built on `deck.css` and `deck.js` (USMC scarlet + gold identity). Features keyboard/click nav, hash deep-linking, speaker-notes pane (`N`), and 1920×1080 auto-scaling.
+- `docs/decks/` — instructor-led weekly decks served from the static site (HTML slide decks for Microsoft Teams screen-share). Self-contained HTML decks (1920×1080, 16:9) built on `deck.css` and `deck.js` (USMC scarlet + gold identity). Features keyboard/click nav, hash deep-linking, speaker-notes pane (`N`), 1920×1080 auto-scaling, and a print/PDF view (browser Print → one slide + speaker notes per page) for asynchronous attendees.
   - `docs/decks/shared/deck.css` — shared deck visual identity (palette, layouts, speaker-notes pane, HUD)
   - `docs/decks/shared/deck.js` — shared deck controller (keyboard nav, hash deep-linking, 1920×1080 auto-scaling, fullscreen, speaker-notes toggle)
   - `docs/decks/week-1-ai-fluency.html` — Course 1 (AI Fluency Fundamentals) deck, 51 slides

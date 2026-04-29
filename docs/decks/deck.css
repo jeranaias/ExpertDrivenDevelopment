@@ -705,14 +705,101 @@ html, body {
 .help-overlay td:first-child { color: var(--gold); font-family: var(--font-mono); width: 40%; }
 .help-overlay .close { margin-top: 20px; font-size: 13px; color: #aaa; }
 
-/* Print fallback (just in case) */
+/* ---------- Print-only per-slide speaker notes ----------
+   Injected by deck.js once per slide. Hidden on screen, shown in print. */
+.slide-print-notes { display: none; }
+.slide-print-notes .empty {
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+/* ---------- Print / PDF export ----------
+   One slide + its speaker notes per page. Page is sized to the
+   1920x1080 slide plus a 500px notes strip; the printer scales the
+   whole block to physical paper. */
+@page {
+  size: 1920px 1580px;
+  margin: 0;
+}
+
 @media print {
-  body { background: #fff; }
-  .stage { position: static; display: block; }
+  html, body {
+    background: #fff !important;
+    overflow: visible !important;
+    height: auto !important;
+  }
+  body { color: var(--ink); }
+
+  .stage {
+    position: static !important;
+    display: block !important;
+    background: #fff !important;
+    inset: auto !important;
+  }
+
   .slide {
     display: flex !important;
-    page-break-after: always;
-    box-shadow: none;
+    position: relative !important;
+    width: 1920px !important;
+    height: 1080px !important;
     transform: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    /* Default: end the page after the slide. The has-notes class
+       set by deck.js overrides this so the slide and its notes
+       stay on the same page. */
+    page-break-after: always;
+    break-after: page;
   }
-  .hud, .notes, .help-overlay { display: none !important; }
+  .slide.slide--has-notes {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .slide-print-notes {
+    display: block !important;
+    box-sizing: border-box;
+    width: 1920px;
+    height: 500px;
+    background: #fff;
+    color: var(--ink);
+    border-top: 6px solid var(--scarlet);
+    padding: 28px 64px 32px;
+    font-size: 22px;
+    line-height: 1.5;
+    overflow: hidden;
+    page-break-before: avoid;
+    break-before: avoid;
+    page-break-after: always;
+    break-after: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .slide-print-notes h4 {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--scarlet);
+    margin-bottom: 10px;
+  }
+  .slide-print-notes h4 .ref {
+    color: var(--ink-muted);
+    font-weight: 600;
+    margin-left: 12px;
+    letter-spacing: 0.08em;
+  }
+  .slide-print-notes p { margin-bottom: 8px; }
+  .slide-print-notes strong { color: var(--scarlet-dark); }
+  .slide-print-notes em { color: var(--ink-muted); font-style: italic; }
+  .slide-print-notes ul { padding-left: 28px; margin-bottom: 8px; }
+  .slide-print-notes li { margin-bottom: 4px; }
+
+  .hud,
+  .notes,
+  .help-overlay { display: none !important; }
+
+  a, a:visited { color: var(--ink); text-decoration: underline; }
+}

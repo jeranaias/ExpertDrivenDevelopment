@@ -12,6 +12,46 @@
   var counter = document.querySelector('.hud .counter');
   var help = document.querySelector('.help-overlay');
 
+  // Print/PDF view: clone each speaker note into a per-slide aside so
+  // the print stylesheet can render one slide + its notes per page.
+  // Skipped when the deck ships no notes at all.
+  (function injectPrintNotes() {
+    if (!noteContents.length) return;
+
+    slides.forEach(function (slide, i) {
+      var note = noteContents[i];
+      var wrapper = document.createElement('aside');
+      wrapper.className = 'slide-print-notes';
+      wrapper.setAttribute('aria-hidden', 'true');
+
+      var heading = document.createElement('h4');
+      heading.textContent = 'Speaker notes';
+      var ref = document.createElement('span');
+      ref.className = 'ref';
+      ref.textContent = 'Slide ' + (i + 1) + ' of ' + slides.length;
+      heading.appendChild(ref);
+      wrapper.appendChild(heading);
+
+      if (note) {
+        // Clone children, not the wrapper, so the on-screen
+        // .note-content keeps its is-current toggling intact.
+        Array.prototype.forEach.call(note.childNodes, function (child) {
+          wrapper.appendChild(child.cloneNode(true));
+        });
+      } else {
+        var p = document.createElement('p');
+        p.className = 'empty';
+        p.textContent = 'No speaker notes for this slide.';
+        wrapper.appendChild(p);
+      }
+
+      if (slide.parentNode) {
+        slide.parentNode.insertBefore(wrapper, slide.nextSibling);
+        slide.classList.add('slide--has-notes');
+      }
+    });
+  })();
+
   var index = 0;
   var total = slides.length;
 
