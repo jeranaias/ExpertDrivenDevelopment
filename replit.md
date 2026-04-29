@@ -14,6 +14,7 @@ Static HTML/CSS/JS site (originally hosted via GitHub Pages from the `docs/` dir
   - `docs/decks/week-1-ai-fluency.html` — Course 1 (AI Fluency Fundamentals) deck, 51 slides
   - `docs/decks/week-2/index.html` — Course 2 (Builder Orientation) deck, 28 slides, ~2-hour runtime
   - `docs/decks/week-4-advanced.html` — Course 4 (Advanced Workshop) deck, 38 slides, 4-hour runtime
+  - `docs/decks/week-4-handouts.html` — Week 4 facilitator hand-out pack: chat-paste-ready blocks (frontier-map starter for Slide 10, AI-generated SOP QA drill for Slide 28, workflow playbook blank template for Slide 35) with copy buttons, slide-number pills, cue lines, and a print fallback. Linked from the Week 4 deck cover footer and the Course 4 instructor page.
   - `docs/decks/DESIGN.md` — shared design system and navigation contract documentation.
 - `pdf/` — top-level reference PDFs
 - `templates/` — downloadable templates
