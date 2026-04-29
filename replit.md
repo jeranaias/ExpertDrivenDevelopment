@@ -8,6 +8,10 @@ Static HTML/CSS/JS site (originally hosted via GitHub Pages from the `docs/` dir
 
 ## Project Structure
 - `docs/` — site root (HTML pages, CSS, JS, PDFs, course materials)
+- `docs/decks/` — slide decks for the six-week training delivery
+  - `docs/decks/shared/deck.css` — shared deck visual identity (palette, layouts, speaker-notes pane, HUD)
+  - `docs/decks/shared/deck.js` — shared deck controller (keyboard nav, hash deep-linking, 1920×1080 auto-scaling, fullscreen, speaker-notes toggle)
+  - `docs/decks/week-2/index.html` — Course 2 (Builder Orientation) deck, 28 slides, ~2-hour runtime
 - `pdf/` — top-level reference PDFs
 - `templates/` — downloadable templates
 - `serve.py` — local Python static file server used by the Replit workflow
