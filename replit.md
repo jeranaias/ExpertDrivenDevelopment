@@ -20,3 +20,8 @@ Static HTML/CSS/JS site (originally hosted via GitHub Pages from the `docs/` dir
 ## Notes
 - No backend, database, or build step. Pure static files.
 - The only request that 404s is `/favicon.ico`, which the upstream repo does not include.
+
+## Weekly Decks (Microsoft Teams, 16:9)
+Self-contained HTML slide decks that mirror the EDD visual identity (USMC Scarlet `#CC0000`, Gold `#F5D130`, warm gray, near-black) inline. Each deck supports keyboard nav (← →, Space, Home/End), `N` toggles a speaker-notes overlay, `F` fullscreen, `P` print (one slide per page), `?` for help. Speaker notes are layered with parallel `[BRIEFING]` / `[JOINT]` / `[TRANSITION]` tracks so the same deck supports both the tight 30-min briefing and the extended joint session.
+
+- `docs/decks/week-5-supervisor.html` — Course 5 (Supervisor Orientation), 28 slides (cover, audience-shift framing, two delivery modes, agenda, core-message centerpiece, 5 module dividers + content, 3 decision exercises with paired debriefs, apprentice-problem centerpiece with Mollick quote + −35% / −13% / 5–10 yr stats, supervisor quick-reference 3×3 card, approved tools, links to `docs/pdf/EDD_Executive_Brief.pdf` and `docs/pdf/EDD_RAI_Compliance_Brief.pdf`, Week 6 preview, leadership-commitment close).
