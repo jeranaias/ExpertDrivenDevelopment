@@ -979,6 +979,35 @@ body.deck-body .u-pct-small { font-size: 0.5em; font-weight: 700; }
 }
 
 
+/* ===== Hide per-slide page counter on screen (the fixed chrome shows it).
+   The per-slide counter remains visible in print, where chrome is hidden.
+   Body-scoped per deck to avoid global collisions with other site pages.
+     - Week 1 (body.deck-body)   .slide__foot .foot__num
+     - Weeks 2,3,5 (body.w{2,3,5}-deck)   .page-num
+     - Week 4 (body.w4-deck)   .slide__footer .right
+     - Week 6 (body.w6-deck)   .slide__foot > span:last-child (unclassed)
+   visibility:hidden (not display:none) preserves footer flex spacing
+   so brand/context text on the left does not reflow. ===== */
+body.deck-body .slide__foot .foot__num,
+body.w2-deck .slide .page-num,
+body.w3-deck .slide .page-num,
+body.w5-deck .slide .page-num,
+body.w4-deck .slide__footer .right,
+body.w6-deck .slide__foot > span:last-child {
+  visibility: hidden;
+}
+@media print {
+  body.deck-body .slide__foot .foot__num,
+  body.w2-deck .slide .page-num,
+  body.w3-deck .slide .page-num,
+  body.w5-deck .slide .page-num,
+  body.w4-deck .slide__footer .right,
+  body.w6-deck .slide__foot > span:last-child {
+    visibility: visible;
+  }
+}
+
+
 /* ===== Print: prepare for printable handouts ===== */
 @media print {
 
