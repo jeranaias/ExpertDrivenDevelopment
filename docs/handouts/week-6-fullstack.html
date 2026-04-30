@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Week 6 student handout — Full-Stack Capstone. One-page printable take-home for the Course 6 session: key terms, the eight build cycles, and the deployed-container deliverable.">
+    <title>Week 6 Student Handout — Full-Stack Capstone | EDD</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/handout.css">
+</head>
+<body class="site-wrapper">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Student Handouts</a></li>
+                    <li aria-current="page">Week 6 — Full-Stack Capstone</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Week 6 Student Handout</h1>
+            <p class="page-header__desc">One-page take-home for the Course 6 capstone. Print landscape and bring it with you, or save as PDF.</p>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+            <div class="handout-intro">
+                <p>Print this page in <strong>landscape</strong> from Chrome or Edge: <kbd>Ctrl</kbd>+<kbd>P</kbd> &rarr; Layout <em>Landscape</em> &rarr; Margins <em>None</em> or <em>Default</em> &rarr; Background graphics <em>on</em>. The site chrome above is hidden in print.</p>
+            </div>
+
+            <article class="handout-page" aria-label="Week 6 student handout">
+
+                <!-- Header -->
+                <header class="hd-head">
+                    <div class="hd-head__week"><span class="num">6</span> Course 6 &middot; Student Handout</div>
+                    <div class="hd-head__title">
+                        <h1>Full-Stack Capstone</h1>
+                        <p class="sub">Eight build cycles. Light four architecture layers. Ship one deployed container by 1700 &mdash; React + Vite + TypeScript + Go + Docker.</p>
+                    </div>
+                    <div class="hd-head__meta">
+                        <div><span>Duration</span><strong>8 hr (2 breaks)</strong></div>
+                        <div><span>Audience</span><strong>Capstone candidates</strong></div>
+                        <div><span>Prereq</span><strong>Courses 1&ndash;4 + proposal</strong></div>
+                    </div>
+                </header>
+
+                <!-- Module strip -->
+                <section class="hd-modules" aria-label="Module timing">
+                    <div class="hd-modules__cell"><span class="t">0:00&ndash;0:50</span><span class="n">M1&ndash;2 Frontier &amp; Setup</span><span class="d">50 min &middot; framing</span></div>
+                    <div class="hd-modules__cell"><span class="t">0:50&ndash;1:50</span><span class="n">M3 Backend (L2 lit)</span><span class="d">60 min &middot; build</span></div>
+                    <div class="hd-modules__cell"><span class="t">1:50&ndash;2:50</span><span class="n">M4 Data Layer (L3 lit)</span><span class="d">60 min &middot; build</span></div>
+                    <div class="hd-modules__cell hd-modules__cell--break"><span class="t">2:50&ndash;3:00</span><span class="n">Break</span><span class="d">10 min</span></div>
+                    <div class="hd-modules__cell"><span class="t">3:00&ndash;4:00</span><span class="n">M5 Frontend (L1 lit)</span><span class="d">60 min &middot; build</span></div>
+                    <div class="hd-modules__cell"><span class="t">4:00&ndash;5:00</span><span class="n">M6 Pages &amp; Nav</span><span class="d">60 min &middot; build</span></div>
+                    <div class="hd-modules__cell hd-modules__cell--break"><span class="t">5:00&ndash;5:30</span><span class="n">Lunch</span><span class="d">30 min</span></div>
+                    <div class="hd-modules__cell"><span class="t">5:30&ndash;6:30</span><span class="n">M7 AI Chat + Tools</span><span class="d">60 min &middot; build</span></div>
+                    <div class="hd-modules__cell"><span class="t">6:30&ndash;7:15</span><span class="n">M8&ndash;9 Auth + Integrations</span><span class="d">45 min &middot; build</span></div>
+                    <div class="hd-modules__cell"><span class="t">7:15&ndash;7:45</span><span class="n">M10 Deploy (L4 lit)</span><span class="d">30 min &middot; build</span></div>
+                    <div class="hd-modules__cell"><span class="t">7:45&ndash;8:00</span><span class="n">M11 Assess &amp; Close</span><span class="d">15 min</span></div>
+                </section>
+
+                <!-- Body -->
+                <div class="hd-body">
+
+                    <!-- Bring with you -->
+                    <section class="hd-box hd-box--bring">
+                        <h2>Bring with you<span class="lede">Done before you walk in &mdash; setup is the dullest moment of the day</span></h2>
+                        <ul>
+                            <li><strong>Approved capstone proposal.</strong> One paragraph, accepted by the program lead. No proposal, no seat.</li>
+                            <li><strong>Five tools installed and signed in:</strong> a code editor (VS Code or similar), Node + Vite, the Go toolchain, Docker Desktop, and your AI tool of choice (GenAI.mil preferred).</li>
+                            <li><strong>Admin rights on your laptop</strong> (Docker requires it). If you don&rsquo;t, defer Docker to Module 10 and verify with the instructor.</li>
+                            <li><strong>Courses 1&ndash;4 complete</strong> with at least one shipped tool, your frontier map, and your workflow playbook. We reference all three today.</li>
+                            <li><strong>Headphones, charger, water.</strong> Eight hours, ten modules, one deployed container. Pace yourself.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Key terms -->
+                    <section class="hd-box hd-box--terms hd-box--gold">
+                        <h2>Key terms<span class="lede">The vocabulary you&rsquo;ll hear today</span></h2>
+                        <ul class="hd-terms">
+                            <li><span class="term">Full stack</span><span class="def">All four layers in one app: <em>frontend (L1) &middot; backend (L2) &middot; data (L3) &middot; deploy (L4).</em> One person directs all four with AI.</span></li>
+                            <li><span class="term">Light a layer</span><span class="def">Make one architecture box solid red on the diagram &mdash; verified working, not just scaffolded.</span></li>
+                            <li><span class="term">Build cycle</span><span class="def">Framing &rarr; build &rarr; module-complete check &rarr; back to deck. Repeated eight times. Same shape every time.</span></li>
+                            <li><span class="term">Module-complete check</span><span class="def">A short list at the end of each module that proves the layer is lit before you advance.</span></li>
+                            <li><span class="term">Tool use (AI chat)</span><span class="def">Module 7 pattern: the chat model calls your backend functions to read and write the app&rsquo;s data &mdash; not just generate text.</span></li>
+                            <li><span class="term">Container</span><span class="def">Module 10 deliverable. Your app, packaged, runnable on any machine with Docker. The proof you shipped.</span></li>
+                        </ul>
+                    </section>
+
+                    <!-- Exercises (tall column) -->
+                    <section class="hd-box hd-box--exercise hd-box--ink">
+                        <h2>Exercises in class<span class="lede">Eight build cycles &mdash; what each lights and what &ldquo;done&rdquo; looks like</span></h2>
+
+                        <p><strong>M3 &middot; Backend from scratch (60 min) &mdash; lights L2.</strong> A Go HTTP server returning a hardcoded array. <em>Done:</em> <code>curl</code> against your endpoint returns valid JSON; backend box solid on the diagram.</p>
+
+                        <p><strong>M4 &middot; Data layer (60 min) &mdash; lights L3.</strong> Replace the hardcoded array with a real store behind a clean interface. <em>Done:</em> the same endpoint now reads and writes persistent data; data box solid.</p>
+
+                        <p><strong>M5 &middot; Frontend from scratch (60 min) &mdash; lights L1.</strong> React + Vite + TypeScript view that calls your backend. First end-to-end view. <em>Done:</em> the page in the browser shows live data from your backend; frontend box solid &mdash; full stack end-to-end.</p>
+
+                        <p><strong>M6 &middot; Pages &amp; navigation (60 min) &mdash; fleshes L1.</strong> Multi-page app with routing. <em>Done:</em> the prototype is gone; you have a real application skeleton.</p>
+
+                        <p><strong>M7 &middot; AI chat with tool use (60 min).</strong> An LLM-backed chat that calls your backend functions to read and write app data. <em>Done:</em> a user sentence in chat causes a real change in your store, verified in the UI.</p>
+
+                        <p><strong>M8 &middot; Authentication (30 min).</strong> Sign-in flow protecting your endpoints. <em>Done:</em> unauthenticated requests rejected; authenticated requests succeed.</p>
+
+                        <p><strong>M9 &middot; External integrations (15&ndash;30 min &mdash; first to compress if running long).</strong> One outbound call to a real service or API. <em>Done:</em> one round-trip with a real response; everyone still ships a container.</p>
+
+                        <p><strong>M10 &middot; Deploy in a container (30 min) &mdash; lights L4.</strong> One Dockerfile, one <code>docker run</code>, your full app live in a container. <em>Done:</em> 4/4 layers lit on the diagram; you can hand the container to a teammate and they can run it.</p>
+
+                        <p><strong>M11 &middot; Assessment (15 min).</strong> Walk through the rubric, name your one biggest frontier surprise, name the one Marine you&rsquo;ll teach this to first.</p>
+
+                        <span class="hd-anchor"><strong>Anchor phrase</strong>You will not learn to code today. You will learn to direct a build.</span>
+                    </section>
+
+                    <!-- What you'll be able to do -->
+                    <section class="hd-box hd-box--learn">
+                        <h2>What you&rsquo;ll be able to do<span class="lede">By the end of the day</span></h2>
+                        <ul>
+                            <li>Direct AI to build all four layers of a real application &mdash; frontend, backend, data, deploy.</li>
+                            <li>Recover from any single-layer failure without losing the rest of the build.</li>
+                            <li>Wire an LLM into your own backend with tool use that mutates real data.</li>
+                            <li>Package and run your app as a container on any machine.</li>
+                            <li>Hand the container to a teammate with a one-page README.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Homework -->
+                    <section class="hd-box hd-box--homework hd-box--gold">
+                        <h2>Homework<span class="lede">Capstone close-out &middot; within 14 days</span></h2>
+                        <ul>
+                            <li><strong>Push your container</strong> to the program registry with a one-page README: what it does, who it&rsquo;s for, how to run it, known frontier issues.</li>
+                            <li><strong>Demo it once</strong> to your section &mdash; in person, not in chat. Capture the questions you couldn&rsquo;t answer and follow up.</li>
+                            <li><strong>File one frontier-map entry</strong> per layer (L1&ndash;L4) covering what AI handled well, what it didn&rsquo;t, and one re-test trigger for next quarter.</li>
+                            <li><strong>Pick the next two Marines you&rsquo;ll teach this to.</strong> Calendar the first session before you log off today.</li>
+                            <li><strong>Submit the rubric self-assessment</strong> (six categories) for instructor-track consideration.</li>
+                        </ul>
+                    </section>
+
+                </div>
+
+                <!-- Footer -->
+                <footer class="hd-foot">
+                    <div class="left"><strong>EDD &middot; Week 6 Student Handout</strong> &middot; UNCLASSIFIED &middot; print one-sided, landscape</div>
+                    <div class="right">
+                        <a href="../decks/week-6-fullstack.html">Week 6 Deck</a> &middot;
+                        <a href="../courses/fullstack.html">Course 6 page</a> &middot;
+                        <a href="./">All handouts</a>
+                    </div>
+                </footer>
+
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

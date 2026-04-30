@@ -1,0 +1,448 @@
+/* =========================================================
+   EDD Student Handout — shared one-page printable stylesheet
+   Built on the EDD palette (USMC scarlet, gold, warm grays).
+   On screen: legible web view inside the site chrome.
+   Print: A4 / Letter LANDSCAPE, one page, B&W readable.
+   Mirrors the print contract of facilitator/css/pack.css.
+   Student-facing only — no facilitator cues, no recovery scripts.
+   ========================================================= */
+
+:root {
+  --hd-scarlet: #CC0000;
+  --hd-scarlet-dark: #a30000;
+  --hd-gold: #F5D130;
+  --hd-gold-dark: #d4b11a;
+  --hd-ink: #1a1a1a;
+  --hd-ink-2: #4a4a4a;
+  --hd-ink-3: #6e6e6e;
+  --hd-paper: #ffffff;
+  --hd-paper-2: #f8f7f5;
+  --hd-rule: #d9d8d4;
+  --hd-rule-2: #e8e7e3;
+  --hd-tip-bg: #fef7e0;
+  --hd-tip-edge: #d4b11a;
+}
+
+/* ---------- On-screen presentation -----------------------
+   We sit inside the standard site-wrapper. Constrain the
+   handout to a "page" so students can preview the print
+   layout in the browser before sending to a printer. */
+
+.handout-page {
+  background: var(--hd-paper);
+  color: var(--hd-ink);
+  border: 1px solid var(--hd-rule);
+  border-radius: 6px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  padding: 0.45in 0.55in;
+  margin: 0 auto 2rem;
+  max-width: 11in;        /* Letter landscape width */
+  min-height: 8.5in;      /* Letter landscape height */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  font-size: 9.6pt;
+  line-height: 1.32;
+  display: flex;
+  flex-direction: column;
+  gap: 0.16in;
+}
+
+.handout-intro {
+  max-width: 11in;
+  margin: 0 auto 1.5rem;
+  color: var(--hd-ink-2);
+}
+.handout-intro p { margin: 0 0 0.4rem; }
+.handout-intro kbd {
+  display: inline-block;
+  padding: 1px 6px;
+  background: var(--hd-paper-2);
+  border: 1px solid var(--hd-rule);
+  border-radius: 3px;
+  font-family: "Cascadia Code", "Fira Code", Consolas, Monaco, monospace;
+  font-size: 0.85em;
+}
+
+/* ---------- Header bar ------------------------------------ */
+.hd-head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: end;
+  gap: 0.3in;
+  padding-bottom: 0.12in;
+  border-bottom: 3px solid var(--hd-scarlet);
+}
+.hd-head__week {
+  display: flex;
+  align-items: center;
+  gap: 0.12in;
+  font-size: 8.5pt;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hd-scarlet);
+}
+.hd-head__week .num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.32in;
+  height: 0.32in;
+  border-radius: 50%;
+  background: var(--hd-ink);
+  color: var(--hd-gold);
+  font-size: 13pt;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+.hd-head__title h1 {
+  margin: 0;
+  font-size: 19pt;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  font-weight: 800;
+  color: var(--hd-ink);
+}
+.hd-head__title .sub {
+  margin: 2px 0 0;
+  font-size: 9pt;
+  color: var(--hd-ink-2);
+  font-weight: 500;
+}
+.hd-head__meta {
+  font-size: 8pt;
+  text-align: right;
+  color: var(--hd-ink-2);
+  letter-spacing: 0.04em;
+}
+.hd-head__meta span {
+  display: inline-block;
+  margin-left: 0.18in;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--hd-ink-3);
+}
+.hd-head__meta strong {
+  display: inline-block;
+  margin-left: 0.06in;
+  color: var(--hd-ink);
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* ---------- Module strip (parallels facilitator timing) -- */
+.hd-modules {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 0;
+  border: 1px solid var(--hd-rule);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--hd-paper-2);
+}
+.hd-modules__cell {
+  padding: 4pt 6pt 5pt;
+  border-right: 1px solid var(--hd-rule);
+  display: flex;
+  flex-direction: column;
+  gap: 1pt;
+  min-width: 0;
+}
+.hd-modules__cell:last-child { border-right: 0; }
+.hd-modules__cell--break {
+  background: var(--hd-tip-bg);
+}
+.hd-modules__cell .t {
+  font-family: "Cascadia Code", "Fira Code", Consolas, Monaco, monospace;
+  font-size: 7.5pt;
+  color: var(--hd-scarlet);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.hd-modules__cell .n {
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: var(--hd-ink);
+  line-height: 1.2;
+}
+.hd-modules__cell .d {
+  font-size: 7pt;
+  color: var(--hd-ink-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+/* ---------- Body grid (5 boxes) --------------------------- */
+.hd-body {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr 1.15fr;
+  grid-template-rows: auto auto;
+  gap: 0.14in;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.hd-box {
+  border: 1px solid var(--hd-rule);
+  border-left: 4px solid var(--hd-scarlet);
+  border-radius: 0 4px 4px 0;
+  padding: 6pt 9pt 7pt;
+  background: var(--hd-paper);
+  display: flex;
+  flex-direction: column;
+  gap: 3pt;
+  min-width: 0;
+  min-height: 0;
+}
+.hd-box--gold     { border-left-color: var(--hd-gold-dark); }
+.hd-box--ink      { border-left-color: var(--hd-ink); }
+.hd-box--bring    { grid-column: 1; grid-row: 1; }
+.hd-box--terms    { grid-column: 2; grid-row: 1; }
+.hd-box--exercise { grid-column: 3; grid-row: 1 / span 2; }
+.hd-box--learn    { grid-column: 1; grid-row: 2; }
+.hd-box--homework { grid-column: 2; grid-row: 2; }
+
+.hd-box h2 {
+  margin: 0 0 1pt;
+  font-size: 9pt;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hd-scarlet);
+}
+.hd-box--gold h2 { color: var(--hd-gold-dark); }
+.hd-box--ink h2  { color: var(--hd-ink); }
+.hd-box h2 .lede {
+  display: block;
+  margin-top: 1pt;
+  font-size: 7.5pt;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--hd-ink-3);
+}
+
+.hd-box ul,
+.hd-box ol {
+  margin: 0;
+  padding-left: 12pt;
+  list-style-position: outside;
+}
+.hd-box li {
+  font-size: 8.6pt;
+  line-height: 1.32;
+  margin-bottom: 1.5pt;
+  color: var(--hd-ink-2);
+}
+.hd-box li strong { color: var(--hd-ink); font-weight: 700; }
+.hd-box li::marker { color: var(--hd-scarlet); }
+.hd-box--gold li::marker { color: var(--hd-gold-dark); }
+.hd-box--ink  li::marker { color: var(--hd-ink); }
+
+.hd-box p {
+  margin: 0 0 2pt;
+  font-size: 8.6pt;
+  color: var(--hd-ink-2);
+  line-height: 1.32;
+}
+
+/* Anchor / takeaway styles inside boxes */
+.hd-anchor {
+  display: block;
+  margin-top: 2pt;
+  padding: 3pt 6pt;
+  background: var(--hd-paper-2);
+  border-left: 3px solid var(--hd-gold-dark);
+  font-size: 8pt;
+  color: var(--hd-ink);
+  line-height: 1.3;
+}
+.hd-anchor strong {
+  display: inline-block;
+  margin-right: 4pt;
+  font-size: 7.2pt;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--hd-gold-dark);
+  font-weight: 800;
+}
+
+/* Glossary mini-list: term + definition */
+.hd-terms {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.hd-terms li {
+  margin-bottom: 3.5pt;
+  padding-left: 0;
+}
+.hd-terms li::marker { content: ""; }
+.hd-terms .term {
+  display: block;
+  font-weight: 700;
+  font-size: 8.6pt;
+  color: var(--hd-ink);
+  line-height: 1.25;
+}
+.hd-terms .term::before {
+  content: "▶";
+  color: var(--hd-scarlet);
+  margin-right: 4pt;
+  font-size: 7pt;
+  vertical-align: 1px;
+}
+.hd-terms .def {
+  display: block;
+  font-size: 8.4pt;
+  color: var(--hd-ink-2);
+  padding-left: 11pt;
+  line-height: 1.3;
+}
+
+/* Footer */
+.hd-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 5pt;
+  border-top: 1px solid var(--hd-rule-2);
+  font-size: 7.4pt;
+  color: var(--hd-ink-3);
+  letter-spacing: 0.06em;
+}
+.hd-foot strong {
+  color: var(--hd-ink);
+  letter-spacing: 0.04em;
+}
+.hd-foot .right a {
+  color: var(--hd-scarlet);
+  text-decoration: none;
+  font-weight: 700;
+}
+.hd-foot .right a:hover { text-decoration: underline; }
+
+/* ---------- Print -----------------------------------------
+   Paper-size-neutral: we declare only `landscape` orientation
+   so Letter (11×8.5in) and A4 (297×210mm = ~11.69×8.27in)
+   both print natively. The .handout-page is sized to fit
+   safely inside the smaller of the two (A4 height, Letter
+   width) minus a 0.32in margin all round, so neither paper
+   crops it. */
+@page {
+  size: landscape;
+  margin: 0.32in;
+}
+
+@media print {
+  /* Hide site chrome */
+  .site-header, .mobile-nav, .site-footer, .page-header,
+  .handout-intro, .skip-link {
+    display: none !important;
+  }
+
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .site-main { padding: 0 !important; margin: 0 !important; }
+  .site-main > .container { padding: 0 !important; max-width: none !important; }
+
+  .handout-page {
+    box-shadow: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    /* Min(Letter landscape, A4 landscape) − 0.32in margins.
+       Letter content area: 10.36in × 7.86in.
+       A4 content area:    ~11.05in × 7.63in.
+       Use the safe intersection so the handout never clips. */
+    width: 10.36in;
+    height: 7.63in;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Force colour fidelity on key marks even in B&W printing */
+  .hd-head { border-bottom-color: #000 !important; }
+  .hd-head__week { color: #000 !important; }
+  .hd-head__week .num { background: #000 !important; color: #fff !important; }
+  .hd-box { border-color: #000 !important; }
+  .hd-box--gold, .hd-box--ink { border-left-color: #000 !important; }
+  .hd-box h2, .hd-box--gold h2, .hd-box--ink h2 { color: #000 !important; }
+  .hd-anchor { background: #f0f0ee !important; border-left-color: #000 !important; }
+  .hd-anchor strong { color: #000 !important; }
+  .hd-modules__cell--break { background: #ececec !important; }
+  .hd-modules__cell .t { color: #000 !important; }
+  .hd-modules { border-color: #000 !important; }
+  .hd-modules__cell { border-right-color: #000 !important; }
+  .hd-terms .term::before { color: #000 !important; }
+  .hd-box li::marker { color: #000 !important; }
+  .hd-foot { border-top-color: #000 !important; }
+  .hd-foot .right a { color: #000 !important; text-decoration: underline; }
+
+  a { color: #000 !important; text-decoration: none; }
+}
+
+/* ---------- Landing page (index.html) cards --------------- */
+.handout-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+.handout-card {
+  background: var(--hd-paper);
+  border: 1px solid var(--hd-rule);
+  border-top: 4px solid var(--hd-scarlet);
+  border-radius: 6px;
+  padding: 1rem 1.1rem 1.1rem;
+  text-decoration: none;
+  color: var(--hd-ink);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.handout-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
+}
+.handout-card .tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--hd-scarlet);
+}
+.handout-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--hd-ink);
+}
+.handout-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--hd-ink-2);
+  line-height: 1.4;
+}
+.handout-card .meta {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--hd-ink-3);
+  letter-spacing: 0.04em;
+  border-top: 1px solid var(--hd-rule-2);
+}
