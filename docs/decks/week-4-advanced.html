@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Week 4 Deck — Course 4: Advanced Workshop. Frontier mapping, complex builds, group debugging, verification, teaching others. 4-hour Microsoft Teams workshop.">
+    <title>Week 4 — Advanced Workshop | EDD Deck</title>
+    <link rel="stylesheet" href="css/deck.css">
+</head>
+<body class="w4-deck">
+
+<!-- =========================================================
+     STAGE — slides render here, one at a time, scaled to fit.
+     ========================================================= -->
+<div class="stage">
+
+    <!-- ============================================================
+         SLIDE 1 — COVER
+         ============================================================ -->
+    <section class="slide slide--cover" data-id="1">
+        <div class="scarlet-bar"></div>
+        <div class="slide__body">
+            <div class="eyebrow">Week 4 &middot; Course 4</div>
+            <h1>Advanced Workshop</h1>
+            <p class="tagline">From individual capability to organizational capability — map the frontier, ship a complex build, debug together, teach others.</p>
+            <div class="meta">
+                <div><strong>Length</strong>4 hours (with one 10-min break)</div>
+                <div><strong>Format</strong>Microsoft Teams workshop &mdash; bring builds in progress</div>
+                <div><strong>Prereq</strong>At least one deployed tool</div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Expert-Driven Development &middot; Week 4 &middot; Facilitator hand-outs: <a href="week-4-handouts.html" target="_blank" rel="noopener">week-4-handouts.html</a></div>
+            <div class="right">Cover</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 2 — WELCOME & GROUND RULES
+         ============================================================ -->
+    <section class="slide slide--content" data-id="2">
+        <div class="slide__body">
+            <h2>Welcome &mdash; this is a workshop, not a lecture</h2>
+            <p class="subhead">How today is going to feel different from Weeks 1&ndash;3</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>What you do</h3>
+                    <ul>
+                        <li>Cameras on when you can</li>
+                        <li>Have your tool open in another window</li>
+                        <li>Bring at least one real problem to debug</li>
+                        <li>Drop questions in chat live &mdash; we&rsquo;ll surface them</li>
+                        <li>Be ready to share screen on short notice</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>What I do</h3>
+                    <ul>
+                        <li>Talk less, watch more</li>
+                        <li>Hold time on every activity</li>
+                        <li>Surface patterns out loud as I see them</li>
+                        <li>Refuse to fix your problem for you &mdash; coach you through it</li>
+                        <li>Capture frontier findings to share back to the unit</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Welcome &amp; Ground Rules</div>
+            <div class="right">2</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 3 — RECAP WEEKS 1-3
+         ============================================================ -->
+    <section class="slide slide--content" data-id="3">
+        <div class="slide__body">
+            <h2>You&rsquo;re here because you&rsquo;ve already done the work</h2>
+            <p class="subhead">Recap &mdash; what you brought into this room</p>
+            <div class="recap-strip">
+                <div class="recap-card">
+                    <div class="week">Week 1</div>
+                    <h3>AI Fluency Fundamentals</h3>
+                    <p>The six 201 skills, the jagged frontier, centaur vs. cyborg, the management framing.</p>
+                </div>
+                <div class="recap-card">
+                    <div class="week">Week 2</div>
+                    <h3>Builder Orientation</h3>
+                    <p>Your first prototype. Task decomposition and iterative refinement applied to a real problem.</p>
+                </div>
+                <div class="recap-card">
+                    <div class="week">Week 3</div>
+                    <h3>Platform Training</h3>
+                    <p>Three complete tools on Power Platform, deliberately switching between centaur and cyborg work.</p>
+                </div>
+            </div>
+            <p style="margin-top:24px;font-size:30px;color:var(--ink-soft);"><strong>Required to be here:</strong> at least one tool you have actually deployed and somebody else is using.</p>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Where We&rsquo;ve Been</div>
+            <div class="right">3</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 4 — WHAT THIS COURSE IS FOR
+         ============================================================ -->
+    <section class="slide slide--content" data-id="4">
+        <div class="slide__body">
+            <h2>What today is for</h2>
+            <p class="subhead">The shift from individual capability to organizational capability</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>You&rsquo;ve been here</h3>
+                    <ul>
+                        <li>Built a tool</li>
+                        <li>Made it work for you</li>
+                        <li>Solved your own problem</li>
+                        <li>Learned a few things the hard way</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>You&rsquo;re going here</h3>
+                    <ul>
+                        <li>Map the frontier for your domain so others don&rsquo;t fall in</li>
+                        <li>Ship something complex on purpose, not by accident</li>
+                        <li>Debug other people&rsquo;s tools, not just your own</li>
+                        <li>Build a QA habit you can hand to a junior Marine</li>
+                        <li>Teach the 201 skills forward</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Why This Course Exists</div>
+            <div class="right">4</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 5 — AGENDA
+         ============================================================ -->
+    <section class="slide slide--content" data-id="5">
+        <div class="slide__body">
+            <h2>Agenda &mdash; 4 hours</h2>
+            <p class="subhead">Workshop blocks are gold-coded throughout the deck</p>
+            <table class="agenda-table">
+                <thead>
+                    <tr><th>Time</th><th>Module</th><th>Duration</th><th>Mode</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="workshop"><td class="time">0:00&ndash;0:30</td><td class="module">M1 &mdash; Frontier mapping for your domain</td><td class="dur">30 min</td><td>Workshop</td></tr>
+                    <tr class="workshop"><td class="time">0:30&ndash;1:30</td><td class="module">M2 &mdash; Complex build (Unit Readiness Dashboard)</td><td class="dur">60 min</td><td>Live build</td></tr>
+                    <tr><td class="time">1:30&ndash;1:40</td><td class="module">Break</td><td class="dur">10 min</td><td>&mdash;</td></tr>
+                    <tr class="workshop"><td class="time">1:40&ndash;2:20</td><td class="module">M3 &mdash; Group debugging (real problems)</td><td class="dur">40 min</td><td>Clinic</td></tr>
+                    <tr><td class="time">2:20&ndash;2:50</td><td class="module">M4 &mdash; Verification protocols and QA</td><td class="dur">30 min</td><td>Reference + drill</td></tr>
+                    <tr class="workshop"><td class="time">2:50&ndash;3:20</td><td class="module">M5 &mdash; Teaching others (teach-back)</td><td class="dur">30 min</td><td>Workshop</td></tr>
+                    <tr class="workshop"><td class="time">3:20&ndash;3:50</td><td class="module">M6 &mdash; Workflow playbook</td><td class="dur">30 min</td><td>Workshop</td></tr>
+                    <tr><td class="time">3:50&ndash;4:00</td><td class="module">Wrap-up, certification, Week 5 preview</td><td class="dur">10 min</td><td>&mdash;</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Agenda</div>
+            <div class="right">5</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         MODULE 1 — FRONTIER MAPPING
+         ============================================================ -->
+
+    <!-- SLIDE 6 — Section divider -->
+    <section class="slide slide--section" data-id="6">
+        <div class="slide__body">
+            <div class="module-tag">Module 1</div>
+            <h1>Frontier mapping for your domain</h1>
+            <div class="timing">30 minutes</div>
+            <p class="blurb">Make the boundary between &ldquo;AI helps&rdquo; and &ldquo;AI hurts&rdquo; visible &mdash; for your specific work, in writing, shareable.</p>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 1 &middot; Frontier Mapping</div>
+            <div class="right">6</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 7 — Why frontier mapping matters -->
+    <section class="slide slide--content" data-id="7">
+        <div class="slide__body">
+            <h2>Why this map is the most valuable thing you&rsquo;ll make today</h2>
+            <div class="cols-2">
+                <div class="col">
+                    <div class="stat-big">
+                        <div class="num">&minus;19<span style="font-size:120px;">pp</span></div>
+                        <div class="label">Performance drop when consultants used AI on tasks <em>outside</em> the frontier &mdash; vs. working without AI at all.</div>
+                        <div class="source">BCG &middot; Harvard, 758 consultants, 2023</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <h3>What that means today</h3>
+                    <ul>
+                        <li>The boundary is real, and it&rsquo;s not where intuition puts it.</li>
+                        <li>People don&rsquo;t notice when they cross it.</li>
+                        <li>Quality collapses silently &mdash; the output still <em>looks</em> right.</li>
+                        <li>The map is what makes the boundary visible to your section.</li>
+                        <li>Most valuable artifact you&rsquo;ll leave with today.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 1 &middot; Why It Matters</div>
+            <div class="right">7</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 8 — Worked example -->
+    <section class="slide slide--content" data-id="8">
+        <div class="slide__body">
+            <h2>Worked example &mdash; 1st Bn, 99th Marines</h2>
+            <p class="subhead">A frontier map looks like this. Yours will look like this.</p>
+            <table class="map-table">
+                <thead>
+                    <tr>
+                        <th style="width:18%">Category</th>
+                        <th>Inside frontier (AI handles)</th>
+                        <th>Outside frontier (AI fails)</th>
+                        <th>Moving frontier (re-test)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="cat">Document generation</td>
+                        <td>Counseling drafts, award write-ups, memo formatting</td>
+                        <td>Local SOPs, exact regulation quotes, unit-specific policy</td>
+                        <td>Fitness report narratives, legal review summaries</td>
+                    </tr>
+                    <tr>
+                        <td class="cat">Data analysis</td>
+                        <td>Trend ID in clean data, dataset summaries, anomaly flagging</td>
+                        <td>Operational interpretation (&ldquo;why did readiness drop?&rdquo;)</td>
+                        <td>Predictive analysis &mdash; retention, maintenance forecasting</td>
+                    </tr>
+                    <tr>
+                        <td class="cat">Process automation</td>
+                        <td>Approval routing, notifications, status tracking</td>
+                        <td>Multi-system integrations with legacy DBs, judgment calls (hardship)</td>
+                        <td>Complex conditional workflows with clear business rules</td>
+                    </tr>
+                    <tr>
+                        <td class="cat">Reference lookup</td>
+                        <td>Finding MCOs/NAVMCs, summarizing policy docs</td>
+                        <td>How a regulation applies to <em>this</em> edge case</td>
+                        <td>Authoritative interpretation &mdash; still unreliable</td>
+                    </tr>
+                    <tr>
+                        <td class="cat">Training development</td>
+                        <td>Lesson outlines, quiz generation, slide structure</td>
+                        <td>Effectiveness evaluation, MOS-specific accuracy</td>
+                        <td>Full lesson plan generation &mdash; quality varies</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 1 &middot; Worked Example</div>
+            <div class="right">8</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 9 — What good looks like -->
+    <section class="slide slide--content" data-id="9">
+        <div class="slide__body">
+            <h2>What good looks like</h2>
+            <p class="subhead">Before you start typing &mdash; here&rsquo;s the bar</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>Specific, not generic</h3>
+                    <ul>
+                        <li><strong>Bad:</strong> &ldquo;writing&rdquo;</li>
+                        <li><strong>Good:</strong> &ldquo;counseling statement drafts for Page 11 entries&rdquo;</li>
+                        <li>Each cell is a real task somebody on your team does this month.</li>
+                    </ul>
+                    <h3>Tested, not guessed</h3>
+                    <ul>
+                        <li>Every &ldquo;outside frontier&rdquo; entry should be something you actually saw fail.</li>
+                        <li>If your &ldquo;outside&rdquo; column is empty, you&rsquo;re overestimating AI.</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Per tool, not in general</h3>
+                    <ul>
+                        <li>GenAI.mil and CamoGPT have different frontiers in your domain.</li>
+                        <li>Note which tool the entry applies to.</li>
+                    </ul>
+                    <h3>Living, not finished</h3>
+                    <ul>
+                        <li>&ldquo;Moving frontier&rdquo; entries get re-tested next quarter.</li>
+                        <li>Date the map. Initial it. Hand it off when you PCS.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 1 &middot; What Good Looks Like</div>
+            <div class="right">9</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 10 — WORKSHOP: Build your map now -->
+    <section class="slide slide--workshop" data-id="10">
+        <div class="slide__body">
+            <span class="activity-tag">Workshop &middot; Build now</span>
+            <h2>Build your frontier map &mdash; right now</h2>
+            <div class="timebox">15 minutes &middot; silent work, then share-out</div>
+            <div class="prompt-box">
+                <span class="label">Prompt</span>
+                Open a blank doc. Make four columns: <strong>Category &middot; Inside &middot; Outside &middot; Moving</strong>.
+                Pick <strong>five categories</strong> that cover what your section actually does this month.
+                Fill at least one specific, real example in every cell &mdash; tasks you have personally seen succeed or fail.
+            </div>
+            <div class="what-good">
+                <strong>What good looks like in 15 minutes:</strong> 5 rows, every cell has at least one specific task (not a topic), and your &ldquo;outside frontier&rdquo; column is not empty. If you&rsquo;re stuck, look at your last 30 days of work and ask: where did AI save me time, and where did it cost me time?
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 1 &middot; Workshop</div>
+            <div class="right">10</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 11 — Share-out facilitation -->
+    <section class="slide slide--shareout" data-id="11">
+        <div class="slide__body">
+            <h2>Share-out &mdash; round the room</h2>
+            <p class="subhead">10 minutes &middot; 90 seconds each &middot; we are listening for patterns</p>
+            <div class="grid">
+                <div class="panel">
+                    <h3>What to share</h3>
+                    <ul style="font-size:28px;line-height:1.4;padding-left:30px;">
+                        <li>One <em>inside-frontier</em> task that surprised you (AI is better at this than you thought).</li>
+                        <li>One <em>outside-frontier</em> task you have personally seen fail.</li>
+                        <li>One thing you&rsquo;d add to the &ldquo;moving frontier&rdquo; column that you want to re-check next quarter.</li>
+                    </ul>
+                </div>
+                <div class="panel">
+                    <h3>What I&rsquo;m capturing in chat</h3>
+                    <ul style="font-size:28px;line-height:1.4;padding-left:30px;">
+                        <li>Failure cases &mdash; these become unit-wide frontier intel.</li>
+                        <li>Cross-tool differences (GenAI.mil vs. CamoGPT).</li>
+                        <li>Anything 2+ people independently discovered.</li>
+                    </ul>
+                    <p style="font-size:26px;color:var(--scarlet-dark);font-weight:600;margin-top:8px;">Hard stop at 10 minutes. If we don&rsquo;t get to you, drop your map in chat.</p>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 1 &middot; Share-Out</div>
+            <div class="right">11</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 12 — Module 1 close -->
+    <section class="slide slide--content" data-id="12">
+        <div class="slide__body">
+            <h2>Module 1 &mdash; takeaway</h2>
+            <div class="pullquote">
+                The frontier map is the artifact that prevents the 19-point performance drop. When you can name where AI fails in your domain, you stop trusting it there &mdash; and you stop the rest of your section from trusting it there too.
+                <span class="attrib">Keep your map. Date it. Share it back to your unit by EOW.</span>
+            </div>
+            <p style="font-size:30px;color:var(--ink-soft);">Coming up next: a build hard enough that you&rsquo;ll have to deliberately switch modes <em>three times</em>.</p>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 1 &middot; Takeaway</div>
+            <div class="right">12</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         MODULE 2 — COMPLEX BUILD
+         ============================================================ -->
+
+    <!-- SLIDE 13 — Section divider -->
+    <section class="slide slide--section" data-id="13">
+        <div class="slide__body">
+            <div class="module-tag">Module 2</div>
+            <h1>Complex build &mdash; multi-component system</h1>
+            <div class="timing">60 minutes</div>
+            <p class="blurb">Unit Readiness Dashboard. Three phases. Three deliberate mode switches. The point is the decision-making, not the polish.</p>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 2 &middot; Complex Build</div>
+            <div class="right">13</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 14 — Pre-build framing -->
+    <section class="slide slide--content" data-id="14">
+        <div class="slide__body">
+            <h2>Before we touch the keyboard</h2>
+            <p class="subhead">The thing I&rsquo;m grading is your mode-switching, not your dashboard</p>
+            <div class="pullquote" style="font-size:36px;">
+                Mode-switching is the goal. Watch for the moments where you should slow down for accuracy and the moments where you should iterate fast. That&rsquo;s the skill.
+            </div>
+            <ul style="margin-top:8px;">
+                <li><strong>Centaur</strong> &mdash; you frame, AI drafts, you verify before moving on. Use it when errors compound.</li>
+                <li><strong>Cyborg</strong> &mdash; rapid back-and-forth, fail fast, feed errors back in. Use it when iteration is cheaper than verification.</li>
+                <li><strong>The trap:</strong> staying in cyborg mode for accuracy-critical work because it feels productive. It isn&rsquo;t.</li>
+            </ul>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 2 &middot; Pre-Build Framing</div>
+            <div class="right">14</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 15 — Build goal -->
+    <section class="slide slide--content" data-id="15">
+        <div class="slide__body">
+            <h2>Build goal &mdash; Unit Readiness Dashboard</h2>
+            <p class="subhead">Power BI &middot; pulls from three data sources &middot; ~10 prompts &middot; ~45 minutes</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>Inputs</h3>
+                    <ul>
+                        <li>Training tracker (Excel)</li>
+                        <li>Equipment status (CSV from GCSS-MC, or simulated)</li>
+                        <li>Personnel roster (Alpha roster, or simulated)</li>
+                    </ul>
+                    <h3>Outputs</h3>
+                    <ul>
+                        <li>Overall readiness % (color-coded card)</li>
+                        <li>Bar chart by company (Alpha, Bravo, Charlie, Weapons)</li>
+                        <li>Table of personnel <em>not</em> ready</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>You will switch modes 3 times</h3>
+                    <ul>
+                        <li><strong>Phase 1</strong> &mdash; Centaur (data architecture)</li>
+                        <li><strong>Phase 2</strong> &mdash; Cyborg (data ingestion)</li>
+                        <li><strong>Phase 3</strong> &mdash; Centaur (visualization)</li>
+                    </ul>
+                    <p style="font-size:28px;color:var(--scarlet-dark);font-weight:600;">If you finish, the dashboard is a bonus. The grade is the mode-switching.</p>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 2 &middot; Build Goal</div>
+            <div class="right">15</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 16 — Three phases / mode switching -->
+    <section class="slide slide--content" data-id="16">
+        <div class="slide__body">
+            <h2>Three phases &mdash; map your mode switches</h2>
+            <div class="phases">
+                <div class="phase">
+                    <div class="pnum">Phase 1 &middot; 15 min</div>
+                    <h3>Data architecture</h3>
+                    <span class="mode">Centaur</span>
+                    <p><strong>Why:</strong> schema errors compound. Verify before building.</p>
+                    <ul>
+                        <li>Prompt for star schema</li>
+                        <li>Verify columns exist in real data</li>
+                        <li>Decide: rename source, or map in Power Query?</li>
+                    </ul>
+                    <p style="font-weight:700;color:var(--scarlet-dark);">Checkpoint: schema matches your actual columns.</p>
+                </div>
+                <div class="phase">
+                    <div class="pnum">Phase 2 &middot; 15 min</div>
+                    <h3>Data ingestion</h3>
+                    <span class="mode mode--cyborg">Cyborg</span>
+                    <p><strong>Why:</strong> things will break. Feed errors back in.</p>
+                    <ul>
+                        <li>Generate M code per source</li>
+                        <li>It will fail &mdash; that&rsquo;s expected</li>
+                        <li>Paste error + actual file structure back in</li>
+                    </ul>
+                    <p style="font-weight:700;color:var(--scarlet-dark);">Checkpoint: all three sources load clean.</p>
+                </div>
+                <div class="phase">
+                    <div class="pnum">Phase 3 &middot; 20 min</div>
+                    <h3>Visualization</h3>
+                    <span class="mode">Centaur</span>
+                    <p><strong>Why:</strong> leadership briefs from these numbers.</p>
+                    <ul>
+                        <li>DAX measure for readiness %</li>
+                        <li>Hand-calc one company &mdash; numbers must match</li>
+                        <li>Spot-check one Marine in the &ldquo;not ready&rdquo; list</li>
+                    </ul>
+                    <p style="font-weight:700;color:var(--scarlet-dark);">Checkpoint: every number traces to source data.</p>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 2 &middot; Three Phases</div>
+            <div class="right">16</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 17 — SWITCH TO LIVE BUILD CUE -->
+    <section class="slide slide--cue" data-id="17">
+        <div class="slide__body">
+            <div class="ring">
+                <div class="eyebrow">Switch &middot; Live build</div>
+                <h2>Open Power BI &middot; share screen if asked</h2>
+                <p>You have <strong>45 minutes</strong>. I will walk the room.</p>
+                <p>Type your phase number in chat when you switch modes &mdash; <strong>P1 &middot; P2 &middot; P3</strong>.</p>
+                <p style="margin-top:32px;font-size:30px;color:var(--gold);">If you finish early: help your neighbor. Don&rsquo;t polish.</p>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 2 &middot; Live Build &mdash; 45 min</div>
+            <div class="right">17</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 18 — Return to deck checkpoint -->
+    <section class="slide slide--content" data-id="18">
+        <div class="slide__body">
+            <h2>Welcome back &mdash; debrief</h2>
+            <p class="subhead">10 minutes &middot; volunteers, then anyone I haven&rsquo;t heard from yet</p>
+            <ul>
+                <li>Where did you switch modes? Why <em>there</em>?</li>
+                <li>Where did the AI fail? Was it a frontier issue, a context issue, or a platform quirk?</li>
+                <li>If you had to build this again tomorrow, what would you do differently?</li>
+                <li>How long did it take you? How long would it have taken without AI?</li>
+            </ul>
+            <div class="pullquote" style="font-size:32px;">
+                10 prompts. 3 mode switches. At least 2 error-recovery cycles. <strong>That&rsquo;s normal.</strong> The students who finished are the ones who verified at each phase boundary and fed errors back in.
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 2 &middot; Debrief</div>
+            <div class="right">18</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 19 — Module 2 close -->
+    <section class="slide slide--content" data-id="19">
+        <div class="slide__body">
+            <h2>Module 2 &mdash; takeaway</h2>
+            <div class="pullquote">
+                Complex builds aren&rsquo;t harder because the prompts are harder. They&rsquo;re harder because you have to keep changing how you work with the AI. The skill we&rsquo;re grading is noticing the moment you should switch modes &mdash; and actually switching.
+            </div>
+            <p style="font-size:30px;color:var(--ink-soft);">Time for a 10-minute break. We come back at the time on the clock, not the time you sit down.</p>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 2 &middot; Takeaway</div>
+            <div class="right">19</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         BREAK
+         ============================================================ -->
+    <section class="slide slide--break" data-id="20">
+        <div class="slide__body">
+            <h1>BREAK</h1>
+            <div class="returns">10 minutes &middot; back at the time on screen</div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Break</div>
+            <div class="right">20</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         MODULE 3 — GROUP DEBUGGING
+         ============================================================ -->
+
+    <!-- SLIDE 21 — Section divider -->
+    <section class="slide slide--section" data-id="21">
+        <div class="slide__body">
+            <div class="module-tag">Module 3</div>
+            <h1>Group debugging &mdash; real problems</h1>
+            <div class="timing">40 minutes</div>
+            <p class="blurb">You brought broken tools. We&rsquo;re going to fix the diagnostic pattern, not the tool. 5 problems &middot; 7 minutes each.</p>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 3 &middot; Debugging</div>
+            <div class="right">21</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 22 — Debugging Clinic Protocol -->
+    <section class="slide slide--reference" data-id="22">
+        <div class="slide__body">
+            <h2>Debugging clinic protocol</h2>
+            <p class="subhead">Same four steps for every problem &middot; 7 minutes total &middot; this slide stays up</p>
+            <div class="ref-grid">
+                <div class="ref-card">
+                    <div class="num">Step 1 &middot; 2 min</div>
+                    <h3>Student presents</h3>
+                    <p><strong>Format:</strong> &ldquo;Expected behavior &hellip; Actual behavior &hellip; Steps I&rsquo;ve already taken.&rdquo; No story-telling. No theories. Just those three lines.</p>
+                </div>
+                <div class="ref-card">
+                    <div class="num">Step 2 &middot; 3 min</div>
+                    <h3>Group diagnosis</h3>
+                    <p>Group asks clarifying questions and proposes hypotheses. I&rsquo;ll prompt: data or logic? input or output? Have we seen this pattern before?</p>
+                </div>
+                <div class="ref-card">
+                    <div class="num">Step 3 &middot; 2 min</div>
+                    <h3>Instructor synthesis</h3>
+                    <p>I name the root cause category &mdash; <em>frontier limitation, missing context, wrong assumption, integration failure, data quality</em> &mdash; and how to approach the fix.</p>
+                </div>
+                <div class="ref-card">
+                    <div class="num">Step 4 &middot; in chat</div>
+                    <h3>Document the pattern</h3>
+                    <p>The failure case goes on the collective frontier map &mdash; even if we didn&rsquo;t fully fix it. The pattern is the deliverable, not the fix.</p>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 3 &middot; Clinic Protocol</div>
+            <div class="right">22</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 23 — Facilitation: keep it inclusive, when to move on -->
+    <section class="slide slide--facilitation" data-id="23">
+        <div class="slide__body">
+            <h2>Facilitation rules &mdash; for the room and for me</h2>
+            <p class="subhead">When someone shares a real problem &middot; how to keep it inclusive &middot; when to cut it</p>
+            <div class="facil-grid">
+                <div class="facil-panel">
+                    <h3>Make it safe to share</h3>
+                    <ul>
+                        <li>Praise the broken tool out loud &mdash; this is the most useful thing you brought.</li>
+                        <li>Never let &ldquo;you should have known&rdquo; into the chat.</li>
+                        <li>Reframe blame as pattern: &ldquo;That&rsquo;s a context-gap pattern, not a you-pattern.&rdquo;</li>
+                        <li>Ask the presenter what kind of help they want before the group jumps in.</li>
+                    </ul>
+                </div>
+                <div class="facil-panel">
+                    <h3>Keep it inclusive</h3>
+                    <ul>
+                        <li>Call on different people each round &mdash; not just the loudest hand.</li>
+                        <li>Quiet folks: invite them by name for clarifying questions, not solutions.</li>
+                        <li>Run hypotheses in chat in parallel with voice &mdash; gives introverts a lane.</li>
+                        <li>Two-question max per group member per problem.</li>
+                    </ul>
+                </div>
+                <div class="facil-panel">
+                    <h3>When to move on</h3>
+                    <ul>
+                        <li>Hard stop at 7 minutes. Set a visible timer.</li>
+                        <li>If we name the root-cause category, that&rsquo;s a win &mdash; even unfixed.</li>
+                        <li>If the group is rabbit-holing on syntax, I cut it: &ldquo;Pattern named, post fix in chat after class.&rdquo;</li>
+                        <li>Aim for 5 problems in 35 minutes. Save 5 minutes for synthesis.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 3 &middot; Facilitation</div>
+            <div class="right">23</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 24 — Pre-built scenarios (backup) -->
+    <section class="slide slide--content" data-id="24">
+        <div class="slide__body">
+            <h2>Backup scenarios &mdash; if the room is light on real problems</h2>
+            <p class="subhead">Use one of these to fill the queue. Full write-ups in the instructor guide.</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>Scenario A &mdash; Stale data in flow</h3>
+                    <p style="font-size:26px;">Power Automate fires on update, but the email always has the <em>old</em> values.</p>
+                    <p style="font-size:26px;color:var(--scarlet-dark);"><strong>Pattern:</strong> platform timing quirk &mdash; not a frontier issue.</p>
+                </div>
+                <div class="col">
+                    <h3>Scenario B &mdash; Form saves invalid data</h3>
+                    <p style="font-size:26px;">Power Apps phone-number validation &ldquo;works,&rdquo; but the submit button still accepts &ldquo;abc123.&rdquo;</p>
+                    <p style="font-size:26px;color:var(--scarlet-dark);"><strong>Pattern:</strong> context gap &mdash; AI wasn&rsquo;t told the button must respect the validation state.</p>
+                </div>
+            </div>
+            <div class="cols-2" style="margin-top:8px;">
+                <div class="col">
+                    <h3>Scenario C &mdash; Dashboard shows stale data</h3>
+                    <p style="font-size:26px;">Power BI scheduled refresh &ldquo;completes successfully&rdquo; but nothing updates.</p>
+                    <p style="font-size:26px;color:var(--scarlet-dark);"><strong>Pattern:</strong> domain knowledge &mdash; data source pointed at a local C:\ path, not SharePoint URL.</p>
+                </div>
+                <div class="col">
+                    <h3>Notice the through-line</h3>
+                    <p style="font-size:26px;">All three look like AI failures. None of them are. They&rsquo;re context gaps and platform quirks.</p>
+                    <p style="font-size:26px;font-weight:700;color:var(--scarlet-dark);">That&rsquo;s the pattern most debugging surfaces.</p>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 3 &middot; Backup Scenarios</div>
+            <div class="right">24</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 25 — Final synthesis -->
+    <section class="slide slide--content" data-id="25">
+        <div class="slide__body">
+            <h2>Synthesis &mdash; what did the room just learn?</h2>
+            <p class="subhead">5 minutes &middot; group discussion before we move on</p>
+            <ul>
+                <li>What patterns repeated? (Most problems are context gaps, not frontier limits.)</li>
+                <li>How many were &ldquo;AI couldn&rsquo;t&rdquo; vs. &ldquo;we didn&rsquo;t tell it enough&rdquo;?</li>
+                <li>What questions should we ask the AI <em>differently</em> next time?</li>
+                <li>Which problems belong on the frontier map?</li>
+            </ul>
+            <div class="pullquote">
+                Most debugging is one of three things: the AI didn&rsquo;t have enough context, the platform has a quirk the AI doesn&rsquo;t know about, or we hit a real frontier. Categories 1 and 2 we can fix. Category 3 goes on the map.
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 3 &middot; Synthesis</div>
+            <div class="right">25</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         MODULE 4 — VERIFICATION & QA
+         ============================================================ -->
+
+    <!-- SLIDE 26 — Section divider -->
+    <section class="slide slide--section" data-id="26">
+        <div class="slide__body">
+            <div class="module-tag">Module 4</div>
+            <h1>Verification protocols and QA</h1>
+            <div class="timing">30 minutes</div>
+            <p class="blurb">A reference card you can hand to a junior Marine, plus a timed drill that proves you can spot what AI gets wrong.</p>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 4 &middot; Verification &amp; QA</div>
+            <div class="right">26</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 27 — QA Reference Card -->
+    <section class="slide slide--reference" data-id="27">
+        <div class="slide__body">
+            <h2>QA reference card &mdash; the five protocols</h2>
+            <p class="subhead">This slide stays on screen for the discussion. Screenshot it.</p>
+            <div class="ref-grid">
+                <div class="ref-card">
+                    <div class="num">Protocol 1</div>
+                    <h3>Source verification</h3>
+                    <p>AI fabricates references. Every citation, regulation number, NAVMC form, and URL is independently verified against the official publication system. <em>If it can&rsquo;t be found, it&rsquo;s wrong.</em></p>
+                </div>
+                <div class="ref-card">
+                    <div class="num">Protocol 2</div>
+                    <h3>Data accuracy</h3>
+                    <p>Every number, date, name, rank, and quantity gets checked against source data. Spot-check at minimum. AI confidently uses plausible-but-wrong figures.</p>
+                </div>
+                <div class="ref-card">
+                    <div class="num">Protocol 3</div>
+                    <h3>Logic check</h3>
+                    <p>Does the reasoning hold end to end? Are conclusions supported by the premises? Watch for steps in wrong order, contradictory timelines, and silent assumptions.</p>
+                </div>
+                <div class="ref-card">
+                    <div class="num">Protocol 4</div>
+                    <h3>Format compliance</h3>
+                    <p>Does the output match required formats, templates, DTGs, and standards? AI loses formatting consistency in long documents &mdash; especially in numbered lists and procedures.</p>
+                </div>
+                <div class="ref-card" style="grid-column:1 / span 2;">
+                    <div class="num">Protocol 5 &middot; the one nobody can skip</div>
+                    <h3>Domain review</h3>
+                    <p>Does this pass the smell test for someone who actually does this work? Hand it to the SME before you sign it. The other four protocols are mechanical &mdash; this one is judgment, and it&rsquo;s the one AI can&rsquo;t do for you.</p>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 4 &middot; QA Reference</div>
+            <div class="right">27</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 28 — WORKSHOP: Timed QA review -->
+    <section class="slide slide--workshop" data-id="28">
+        <div class="slide__body">
+            <span class="activity-tag">Workshop &middot; Timed drill</span>
+            <h2>Find the five errors</h2>
+            <div class="timebox">10 minutes &middot; silent &middot; then 10-minute debrief</div>
+            <div class="prompt-box">
+                <span class="label">Prompt</span>
+                I&rsquo;m sharing a one-page AI-generated SOP excerpt in chat now. Run it through all five protocols. Mark <strong>every</strong> issue you would not sign. Number them.
+                There are <strong>five planted errors</strong>: two fabricated references, one contradictory timeline, one logic error, one format break. Find all five.
+            </div>
+            <div class="what-good">
+                <strong>What good looks like:</strong> all five errors found in under 10 minutes, with the protocol number that caught each one. If you only find three, you&rsquo;re skipping a protocol &mdash; usually source verification, because it requires looking things up. <em>Looking things up is the protocol.</em>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 4 &middot; Timed QA Drill</div>
+            <div class="right">28</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         MODULE 5 — TEACHING OTHERS
+         ============================================================ -->
+
+    <!-- SLIDE 29 — Section divider -->
+    <section class="slide slide--section" data-id="29">
+        <div class="slide__body">
+            <div class="module-tag">Module 5</div>
+            <h1>Teaching others &mdash; the 201 multiplier</h1>
+            <div class="timing">30 minutes</div>
+            <p class="blurb">You don&rsquo;t leave this room as a graduate. You leave as the person who teaches the next two Marines what you just learned.</p>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 5 &middot; Teaching Others</div>
+            <div class="right">29</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 30 — What you owe forward + train-the-trainer tie-in -->
+    <section class="slide slide--content" data-id="30">
+        <div class="slide__body">
+            <h2>What you owe forward</h2>
+            <p class="subhead">The 201 multiplier &middot; ties to the EDD train-the-trainer guidance</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>The owe</h3>
+                    <ul>
+                        <li>You teach <strong>two Marines</strong> the 201 skills before your next PCS.</li>
+                        <li>You sit in on someone else&rsquo;s session and give one piece of feedback.</li>
+                        <li>You contribute one entry to the unit&rsquo;s frontier map per quarter.</li>
+                        <li>When you PCS, your replacement is certified before you walk.</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Why it&rsquo;s on you</h3>
+                    <ul>
+                        <li>Mollick: workers are using AI but hiding it. Shadow culture, no shared practice.</li>
+                        <li>Your job is to surface it, formalize it, and pass it on.</li>
+                        <li>Each unit needs <strong>2 certified instructors</strong> at all times &mdash; succession is your responsibility.</li>
+                        <li>Train-the-trainer pathway is in the EDD guidance: shadow &rarr; co-teach &rarr; deliver.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 5 &middot; The Owe</div>
+            <div class="right">30</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 31 — Apprentice problem + protocol for juniors -->
+    <section class="slide slide--content" data-id="31">
+        <div class="slide__body">
+            <h2>The apprentice problem &mdash; and the four protocols</h2>
+            <p class="subhead">Entry-level postings dropped 35% in AI-exposed jobs from 2023&ndash;2025. If juniors never write the doc, how do they learn to spot when AI&rsquo;s draft is wrong?</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>What you do with juniors</h3>
+                    <ul>
+                        <li><strong>Require review and explanation</strong> &mdash; they have to defend <em>why</em> AI&rsquo;s output is right or wrong.</li>
+                        <li><strong>Periodically work without AI</strong> &mdash; key tasks done from scratch monthly to keep the muscle.</li>
+                        <li><strong>Use AI output as a teaching tool</strong> &mdash; hand them a flawed draft, have them find the issues.</li>
+                        <li><strong>Rotate them through QA</strong> &mdash; the only way they build judgment is exposure to bad output.</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>What you don&rsquo;t do</h3>
+                    <ul>
+                        <li>Skip the apprentice phase because AI is faster.</li>
+                        <li>Let juniors paste output directly into final products.</li>
+                        <li>Use AI to grade AI without a human in the loop.</li>
+                        <li>Assume the section will be fine if you stop developing the next generation.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 5 &middot; Apprentice Problem</div>
+            <div class="right">31</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 32 — WORKSHOP: Teach-back exercise -->
+    <section class="slide slide--workshop" data-id="32">
+        <div class="slide__body">
+            <span class="activity-tag">Workshop &middot; Teach-back</span>
+            <h2>Teach one concept &mdash; 3 minutes</h2>
+            <div class="timebox">2 min pick &middot; 5 min prep &middot; 10 min round-robin in breakouts &middot; 5 min debrief</div>
+            <div class="prompt-box">
+                <span class="label">Prompt</span>
+                Pick <strong>one</strong> concept from EDD: centaur vs. cyborg, frontier mapping, context-building, iterative refinement, verification protocols, the jagged frontier. Use the template: <strong>one-sentence definition &middot; why it matters &middot; one real example from your job &middot; one common mistake &middot; one takeaway.</strong>
+                Then teach it in 3 minutes in your breakout room.
+            </div>
+            <div class="what-good">
+                <strong>Peers grade you on three things:</strong> could they explain it back to someone else, was your example concrete enough to be believable, and do they know what to do differently tomorrow because of you. <em>Time-box hard. Brevity is the teaching skill.</em>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 5 &middot; Teach-Back</div>
+            <div class="right">32</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         MODULE 6 — WORKFLOW PLAYBOOK
+         ============================================================ -->
+
+    <!-- SLIDE 33 — Section divider -->
+    <section class="slide slide--section" data-id="33">
+        <div class="slide__body">
+            <div class="module-tag">Module 6</div>
+            <h1>Workflow playbook &amp; wrap-up</h1>
+            <div class="timing">30 minutes</div>
+            <p class="blurb">One page. One recurring task. One AI-integrated workflow your section can run without you. The deliverable that proves you graduated.</p>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 6 &middot; Playbook</div>
+            <div class="right">33</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 34 — Workflow playbook example -->
+    <section class="slide slide--content" data-id="34">
+        <div class="slide__body">
+            <h2>What a finished playbook looks like</h2>
+            <p class="subhead">Worked example &middot; weekly training schedule publication</p>
+            <table class="map-table">
+                <tbody>
+                    <tr><td class="cat" style="width:24%">Task</td><td>Weekly training schedule for the section</td></tr>
+                    <tr><td class="cat">Frequency &amp; mode</td><td>Every Thursday by 1600 &middot; <strong>Cyborg</strong> (continuous back-and-forth)</td></tr>
+                    <tr><td class="cat">Steps (Human / AI)</td><td>
+                        1. <strong>H:</strong> Pull events from calendar, OPORD, taskings.<br>
+                        2. <strong>AI:</strong> Draft schedule in standard weekly format.<br>
+                        3. <strong>H:</strong> Cross-reference range bookings, vehicles, instructor availability.<br>
+                        4. <strong>AI:</strong> Format conflicts as a decision matrix with options.<br>
+                        5. <strong>H:</strong> Decide conflicts, add section leader notes.<br>
+                        6. <strong>AI:</strong> Generate the final formatted schedule for distribution.
+                    </td></tr>
+                    <tr><td class="cat">Verification checklist</td><td>Every event has a confirmed location &middot; all times in 24-hour &middot; no double-bookings &middot; uniform specified &middot; POC listed.</td></tr>
+                    <tr><td class="cat">Known frontier issues</td><td>AI invents room numbers &middot; cannot check range availability &middot; sometimes reverts to 12-hour time.</td></tr>
+                    <tr><td class="cat">Time savings</td><td>~3 hours without AI &rarr; ~45 minutes with AI.</td></tr>
+                    <tr><td class="cat">Junior development</td><td>Rotate schedule duty among juniors weekly. They brief why each event is scheduled. Once a month: schedule built without AI to keep the baseline skill.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 6 &middot; Example Playbook</div>
+            <div class="right">34</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 35 — WORKSHOP: Build your playbook -->
+    <section class="slide slide--workshop" data-id="35">
+        <div class="slide__body">
+            <span class="activity-tag">Workshop &middot; Build now</span>
+            <h2>Write your playbook &mdash; one page, one workflow</h2>
+            <div class="timebox">20 minutes &middot; silent work &middot; submit in chat by the timer</div>
+            <div class="prompt-box">
+                <span class="label">Prompt</span>
+                Pick a real, recurring task from your job. Fill the seven fields:
+                <strong>task &middot; frequency &amp; mode &middot; 4&ndash;8 H/AI steps &middot; verification checklist (3&ndash;5 items) &middot; known frontier issues &middot; time savings &middot; junior development note</strong>.
+                It must be specific enough that a junior Marine could run it without you in the room.
+            </div>
+            <div class="what-good">
+                <strong>Completion bar:</strong> 4+ steps, each labeled H or AI, a verification checklist with 3+ items, at least one real frontier issue you&rsquo;ve hit, a time savings estimate from your own data, and a junior development note that&rsquo;s actionable. <em>If your playbook has no verification checklist, it isn&rsquo;t done.</em>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 6 &middot; Build Playbook</div>
+            <div class="right">35</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 36 — Reflection -->
+    <section class="slide slide--content" data-id="36">
+        <div class="slide__body">
+            <h2>Reflection &mdash; before you close the laptop</h2>
+            <p class="subhead">3 prompts &middot; drop one-line answers in chat</p>
+            <ul style="font-size:34px;line-height:1.4;">
+                <li>What&rsquo;s the <strong>one thing</strong> from today you&rsquo;re going to do differently next week?</li>
+                <li>Which of the six 201 skills did you feel <strong>weakest</strong> on today &mdash; and what&rsquo;s your plan?</li>
+                <li>Who&rsquo;s the <strong>first person</strong> you&rsquo;re going to teach this to, and when?</li>
+            </ul>
+            <p style="font-size:28px;color:var(--ink-soft);margin-top:8px;">I&rsquo;ll save the chat and send the synthesis to your section lead.</p>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Reflection</div>
+            <div class="right">36</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 37 — Certification path -->
+    <section class="slide slide--content" data-id="37">
+        <div class="slide__body">
+            <h2>Certification path &mdash; what it takes</h2>
+            <p class="subhead">Meets-or-better in 5 of 6 categories &middot; recommended for instructor track</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>The six rubric categories</h3>
+                    <ul style="font-size:26px;">
+                        <li>Frontier map completeness (M1)</li>
+                        <li>Complex build &amp; mode-switching (M2)</li>
+                        <li>Debugging contribution (M3)</li>
+                        <li>QA protocol rigor (M4)</li>
+                        <li>Teaching effectiveness (M5)</li>
+                        <li>Workflow playbook completeness (M6)</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>What &ldquo;graduated&rdquo; unlocks</h3>
+                    <ul style="font-size:26px;">
+                        <li>Serve as a <strong>Platform Training instructor</strong>.</li>
+                        <li>Lead tool-development projects in your unit.</li>
+                        <li>Mentor junior personnel in AI-assisted workflows.</li>
+                        <li>Contribute to frontier map and workflow playbook libraries.</li>
+                        <li>Path to QA reviewer &rarr; Advanced Workshop instructor.</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="font-size:26px;color:var(--ink-soft);">Didn&rsquo;t hit the bar today? Build 1&ndash;2 more tools, attempt Advanced Workshop again. We&rsquo;ll keep the seat.</p>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Certification</div>
+            <div class="right">37</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 38 — Week 5 preview -->
+    <section class="slide slide--content" data-id="38">
+        <div class="slide__body">
+            <h2>Next week &mdash; Week 5: Supervisor Orientation</h2>
+            <p class="subhead">30 minutes &middot; for leadership &middot; you should encourage your chain to take it</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>What it covers</h3>
+                    <ul>
+                        <li>How to evaluate AI tool proposals from your Marines.</li>
+                        <li>How to create a permission culture so people stop hiding their AI use.</li>
+                        <li>The apprentice problem &mdash; from the supervisor&rsquo;s seat.</li>
+                        <li>What to ask in a 1-on-1 about AI work.</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Your action item</h3>
+                    <ul>
+                        <li>Forward the Week 5 invite to your section leadership today.</li>
+                        <li>Bring your frontier map to your next 1-on-1 with your supervisor.</li>
+                        <li>Submit your playbook to the unit registry by EOW.</li>
+                    </ul>
+                    <p style="font-size:30px;font-weight:700;color:var(--scarlet-dark);margin-top:8px;">Thank you. Now go teach somebody.</p>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Week 5 Preview</div>
+            <div class="right">38</div>
+        </footer>
+    </section>
+
+</div><!-- /.stage -->
+
+
+<!-- =========================================================
+     SPEAKER NOTES PANE — toggle with N
+     One <div class="note-content"> per slide, in slide order.
+     ========================================================= -->
+<aside class="notes" aria-label="Speaker notes" id="notes">
+    <h4>Speaker notes &middot; press <em>N</em> to hide</h4>
+
+    <!-- 1 Cover -->
+    <div class="note-content">
+        <p><strong>Open the meeting on this slide and wait 30 seconds while people join.</strong> When you start, low-energy and direct: &ldquo;Welcome to Week 4. This is the workshop. The next four hours look different from the first three weeks &mdash; I&rsquo;m going to talk less, you&rsquo;re going to do more.&rsquo;</p>
+        <p>Confirm the prereq out loud: <strong>everyone in this room has at least one tool deployed</strong>. If anyone doesn&rsquo;t, name it kindly and tell them they should be in Platform Training instead.</p>
+        <p><em>Time on slide: 90 seconds. Click forward when you&rsquo;ve confirmed the room is set.</em></p>
+    </div>
+
+    <!-- 2 Welcome & ground rules -->
+    <div class="note-content">
+        <p>Set the workshop tone explicitly. Read the right-hand column out loud first &mdash; people need to hear that you&rsquo;re refusing to fix their problems for them. Then walk the left column.</p>
+        <p>Make the chat ask concrete: &ldquo;Drop one thing you&rsquo;re hoping to leave with today in chat right now.&rdquo; That gets the chat warm so it stays warm during workshops.</p>
+        <p><em>Time on slide: 3 minutes. Total 0:00&ndash;0:05.</em></p>
+    </div>
+
+    <!-- 3 Recap weeks 1-3 -->
+    <div class="note-content">
+        <p>Don&rsquo;t re-teach the prior weeks &mdash; just remind. 30 seconds per card. Land the punchline: <strong>you&rsquo;re here because you&rsquo;ve already done the work</strong>. The room earned its way in.</p>
+        <p>If somebody says they haven&rsquo;t deployed a tool, redirect kindly to Platform Training. Don&rsquo;t shame; just protect the workshop.</p>
+        <p><em>Time on slide: 2 minutes.</em></p>
+    </div>
+
+    <!-- 4 What today is for -->
+    <div class="note-content">
+        <p>Frame the shift: <em>individual capability &rarr; organizational capability</em>. That sentence is the spine of the whole day. Say it twice.</p>
+        <p>Name the implicit promise: &ldquo;By the end of today, the things in your head become things your section can use without you in the room.&rdquo; That&rsquo;s the &ldquo;graduated&rdquo; bar.</p>
+        <p><em>Time on slide: 2 minutes.</em></p>
+    </div>
+
+    <!-- 5 Agenda -->
+    <div class="note-content">
+        <p>Walk the agenda, but spend most of the time on the <strong>workshop blocks</strong> (gold rows). Tell the room: &ldquo;When you see a gold-coded slide, that&rsquo;s your cue to stop watching and start working.&rdquo;</p>
+        <p>Confirm the break time &mdash; people will plan around it. <strong>One break, 10 minutes, hard time.</strong></p>
+        <p><em>Time on slide: 3 minutes. Aim to enter Module 1 at 0:10.</em></p>
+    </div>
+
+    <!-- 6 M1 divider -->
+    <div class="note-content">
+        <p>Pause on this slide for 5 seconds before talking. Section dividers are a visual reset for the room.</p>
+        <p>Land the timing: &ldquo;30 minutes total. 5 minutes of context, 15 minutes of silent work, 10 minutes of share-out.&rdquo;</p>
+        <p><em>Module 1 starts at 0:10. End at 0:30.</em></p>
+    </div>
+
+    <!-- 7 Why frontier mapping matters -->
+    <div class="note-content">
+        <p>Lead with the stat. Read the &minus;19pp number out loud, then the source. Say: &ldquo;That&rsquo;s the most important number in this whole day.&rdquo;</p>
+        <p>The right column is the unlock: <strong>quality collapses silently &mdash; the output still <em>looks</em> right.</strong> That&rsquo;s why the map matters: it&rsquo;s the only way to know where you&rsquo;re standing.</p>
+        <p><em>Time on slide: 3 minutes.</em></p>
+    </div>
+
+    <!-- 8 Worked example -->
+    <div class="note-content">
+        <p>Walk one row out loud as a model &mdash; <strong>Document generation</strong> works well. Show how each cell is a real, specific task.</p>
+        <p>Don&rsquo;t read the whole table. Say: &ldquo;Yours is going to look like this. Look how specific each cell is.&rdquo;</p>
+        <p><em>Time on slide: 3 minutes.</em></p>
+    </div>
+
+    <!-- 9 What good looks like -->
+    <div class="note-content">
+        <p>This is the &ldquo;before you start typing&rdquo; slide. Hit the four bars: specific, tested, per-tool, living.</p>
+        <p>Land hard on: <strong>&ldquo;If your outside-frontier column is empty, you&rsquo;re overestimating AI.&rdquo;</strong> Most people&rsquo;s first draft has an empty &ldquo;outside&rdquo; column &mdash; flag it now so they don&rsquo;t leave it blank.</p>
+        <p><em>Time on slide: 2 minutes. Move into the workshop at 0:18.</em></p>
+    </div>
+
+    <!-- 10 WORKSHOP: Build your map -->
+    <div class="note-content">
+        <p><strong>This is a hard timebox: 15 minutes silent work.</strong> Set a visible timer (Teams or your phone). Mute yourself once you&rsquo;ve set the timer.</p>
+        <p>Read the prompt out loud once. Repeat it once. Say nothing else for 30 seconds &mdash; let the silence settle the room into work.</p>
+        <p>At the 7-minute mark, drop a chat message: <em>&ldquo;Halfway. If your &lsquo;outside frontier&rsquo; column is still empty, that&rsquo;s the column to fill now.&rdquo;</em></p>
+        <p>At 13 minutes: &ldquo;2 minutes left.&rdquo; At 15: hard stop. Move on even if people aren&rsquo;t finished &mdash; the share-out is part of the learning.</p>
+        <p><em>Time on slide: 15 minutes (0:18&ndash;0:33). Note: this is 2 minutes long against the 30-minute module &mdash; cut share-out by 1 minute and start the divider for M2 cleanly at 0:33. We absorb 3 min into the M2 60-minute block.</em></p>
+    </div>
+
+    <!-- 11 Share-out -->
+    <div class="note-content">
+        <p>Hard timebox: 10 minutes. 90 seconds per person. Use a list of names so you don&rsquo;t accidentally only call on the loudest hands.</p>
+        <p>Drop in the chat as people share: <em>&ldquo;Failure case captured: [thing].&rdquo;</em> This is how you build the unit-wide frontier intel asset, and people see it happening live.</p>
+        <p>If 2+ people independently report the same failure, call it out: &ldquo;That&rsquo;s a pattern &mdash; on the unit map.&rdquo;</p>
+        <p>Hard stop at 10 minutes. &ldquo;If we didn&rsquo;t get to you, drop your map in chat &mdash; I&rsquo;ll fold it in.&rdquo;</p>
+        <p><em>Time on slide: 10 minutes (0:33&ndash;0:43, drifted +3 min from agenda).</em></p>
+    </div>
+
+    <!-- 12 M1 close -->
+    <div class="note-content">
+        <p>Read the pull-quote. That&rsquo;s the takeaway. Don&rsquo;t over-explain.</p>
+        <p>Hand the action: <strong>date your map, share it back to your unit by EOW.</strong> That&rsquo;s the homework.</p>
+        <p>Bridge into Module 2: &ldquo;Now we&rsquo;re going to build something hard enough that you&rsquo;ll have to switch modes three times on purpose.&rdquo;</p>
+        <p><em>Time on slide: 90 seconds. Move into M2 divider.</em></p>
+    </div>
+
+    <!-- 13 M2 divider -->
+    <div class="note-content">
+        <p>Pause again. Section dividers are a reset.</p>
+        <p>Set expectations: &ldquo;60 minutes total. 10 minutes of pre-build framing, 45 minutes live build, 10 minutes debrief. The grade is the mode-switching, not the dashboard.&rdquo; Say that line twice &mdash; people will try to perfect their dashboard.</p>
+        <p><em>Time on slide: 30 seconds. Enter pre-build at 0:43.</em></p>
+    </div>
+
+    <!-- 14 Pre-build framing -->
+    <div class="note-content">
+        <p>Read the pull-quote first. Then walk the three bullets &mdash; especially <strong>&ldquo;the trap.&rdquo;</strong> Most students will default to cyborg mode for everything because it feels productive. Name that trap explicitly so they can catch themselves.</p>
+        <p>Ask the room: &ldquo;Where did you stay in cyborg mode last month and pay for it later?&rdquo; Take 1&ndash;2 answers in voice or chat.</p>
+        <p><em>Time on slide: 3 minutes.</em></p>
+    </div>
+
+    <!-- 15 Build goal -->
+    <div class="note-content">
+        <p>Walk inputs and outputs once. Don&rsquo;t demo the dashboard &mdash; that defeats the build.</p>
+        <p>Land the line: <strong>&ldquo;If you finish, the dashboard is a bonus. The grade is the mode-switching.&rdquo;</strong> This frees the people who feel slow.</p>
+        <p><em>Time on slide: 3 minutes.</em></p>
+    </div>
+
+    <!-- 16 Three phases -->
+    <div class="note-content">
+        <p>Walk all three phases at the conceptual level &mdash; <em>why this mode for this phase</em>. Don&rsquo;t walk every prompt; the instructor guide has the prompt sequences.</p>
+        <p>Land each &ldquo;Checkpoint&rdquo; line. Those are the verification gates. Tell the room: <strong>&ldquo;If your checkpoint fails, stop. Don&rsquo;t move to the next phase.&rdquo;</strong></p>
+        <p><em>Time on slide: 4 minutes. Total pre-build framing: 0:43&ndash;0:53. Hand to live build at 0:53.</em></p>
+    </div>
+
+    <!-- 17 SWITCH TO LIVE BUILD CUE -->
+    <div class="note-content">
+        <p>This slide is the explicit handoff. Read it out loud and then <strong>shut up</strong>. Switch your camera off if you can &mdash; signals that you&rsquo;re moving from front-of-room to walking-the-room.</p>
+        <p>Set a 45-minute timer visible to the room. Drop the timer link in chat.</p>
+        <p>Walk the room: pop into individual breakouts or DMs. Watch for people stuck in cyborg mode on Phase 1 (the most common failure). Coach with a question, not a fix: <em>&ldquo;What mode are you in right now? Is that the right mode for this phase?&rdquo;</em></p>
+        <p>At 35 minutes: chat-broadcast <em>&ldquo;10 minutes left. If you&rsquo;re still in Phase 2, that&rsquo;s fine &mdash; you&rsquo;ll learn from the debrief either way.&rdquo;</em></p>
+        <p>At 45 minutes: hard stop. Bring the room back. Move to the debrief slide.</p>
+        <p><em>Time on slide: 45 minutes (0:53&ndash;1:38). This puts the break starting 8 min late vs. agenda &mdash; trim debrief if you need to recover.</em></p>
+    </div>
+
+    <!-- 18 Debrief -->
+    <div class="note-content">
+        <p>10-minute debrief. Don&rsquo;t use all four questions if you&rsquo;re tight on time &mdash; pick Q1 and Q2.</p>
+        <p>Surface the patterns out loud: &ldquo;Three of you said Phase 2 broke and you switched modes &mdash; that&rsquo;s exactly the muscle we&rsquo;re building.&rdquo;</p>
+        <p>Read the pull-quote to close. <strong>3 mode switches, 2 error-recovery cycles &mdash; that&rsquo;s normal.</strong> Reframes &ldquo;I struggled&rdquo; as &ldquo;I did the work.&rdquo;</p>
+        <p><em>Time on slide: 8&ndash;10 minutes (1:38&ndash;1:46/1:48).</em></p>
+    </div>
+
+    <!-- 19 M2 close -->
+    <div class="note-content">
+        <p>Read the pull-quote. Bridge to break.</p>
+        <p>Set the break time explicitly &mdash; <strong>&ldquo;10 minutes from the time on screen, not the time you sit down.&rdquo;</strong> Drop the resume time in chat.</p>
+        <p><em>Time on slide: 60 seconds.</em></p>
+    </div>
+
+    <!-- 20 BREAK -->
+    <div class="note-content">
+        <p>Mute your mic. Camera off. Set a 10-minute timer visible on screen if you can.</p>
+        <p>Use the break to skim the chat from M1 share-out and pull 2&ndash;3 frontier-map findings you can refer back to during M3 debugging.</p>
+        <p><em>Time on slide: 10 minutes (1:48&ndash;1:58). Aim to be back live at 1:58.</em></p>
+    </div>
+
+    <!-- 21 M3 divider -->
+    <div class="note-content">
+        <p>Welcome people back briskly &mdash; don&rsquo;t restart from cold. <strong>&ldquo;You brought broken tools. We&rsquo;re going to fix the diagnostic pattern, not the tool.&rsquo;</strong></p>
+        <p>Set expectations: &ldquo;5 problems, 7 minutes each. We will not fully fix everything. The pattern is the deliverable.&rdquo;</p>
+        <p><em>Time on slide: 90 seconds.</em></p>
+    </div>
+
+    <!-- 22 Debugging Clinic Protocol -->
+    <div class="note-content">
+        <p>This slide stays on screen for the first problem so people can see the structure as you run it.</p>
+        <p>Walk the four steps. Be explicit: <strong>&ldquo;Step 1 is two minutes. If your story takes longer than two minutes, I&rsquo;ll cut you. It&rsquo;s for the room&rsquo;s benefit, not against you.&rdquo;</strong></p>
+        <p>Ask for the first volunteer. If nobody volunteers in 10 seconds, call on someone you saw in the M2 build who had an interesting failure.</p>
+        <p><em>Time on slide: 3 minutes intro + the protocol stays visible during clinics. Move to facilitation slide between problems if pace allows.</em></p>
+    </div>
+
+    <!-- 23 Facilitation -->
+    <div class="note-content">
+        <p>This is for <em>you</em> as much as for the room. The three columns are your facilitation playbook.</p>
+        <p>Read the &ldquo;Make it safe&rdquo; column out loud to the room &mdash; sets the cultural tone before the first problem hits.</p>
+        <p>Use the &ldquo;Keep it inclusive&rdquo; rules silently. Have a name list.</p>
+        <p>Use the &ldquo;When to move on&rdquo; rules visibly &mdash; with a timer the room can see. The cut is easier when it&rsquo;s the timer that ends the problem, not you.</p>
+        <p><em>Time on slide: 1&ndash;2 minutes if you treat it as a content slide; otherwise glance at it between problems.</em></p>
+    </div>
+
+    <!-- 24 Backup scenarios -->
+    <div class="note-content">
+        <p>Only land on this slide if your queue is light. If you have 5 real problems, skip past it.</p>
+        <p>If you use one, walk the situation, ask the room to diagnose, then reveal the pattern. Full write-ups are in the instructor guide &mdash; you should have skimmed scenarios A&ndash;C before class.</p>
+        <p>Land the through-line: <strong>two of three are not AI failures. They&rsquo;re context gaps and platform quirks.</strong> That reframes everything.</p>
+        <p><em>Time on slide: only used if needed.</em></p>
+    </div>
+
+    <!-- 25 Synthesis -->
+    <div class="note-content">
+        <p>5 minutes max. Walk the four questions briskly &mdash; you&rsquo;re reinforcing the pattern, not opening a new discussion.</p>
+        <p>Read the pull-quote to close: <strong>&ldquo;Most debugging is one of three things&hellip;&rdquo;</strong> That sentence is what people will remember tomorrow.</p>
+        <p><em>Time on slide: 5 minutes (2:33&ndash;2:38). Aim to enter M4 at 2:38.</em></p>
+    </div>
+
+    <!-- 26 M4 divider -->
+    <div class="note-content">
+        <p>Brisk transition. <strong>&ldquo;Now we&rsquo;re going to build the QA habit you can hand to a junior Marine.&rdquo;</strong></p>
+        <p>Set the structure: 5 minutes on the reference card, 10 minutes silent drill, 10 minutes debrief.</p>
+        <p><em>Time on slide: 30 seconds.</em></p>
+    </div>
+
+    <!-- 27 QA Reference Card -->
+    <div class="note-content">
+        <p><strong>This slide is designed to stay on screen for the entire discussion of the protocols and to get screenshotted.</strong> Tell people: &ldquo;Take a screenshot of this. This is the artifact you give to a junior.&rdquo;</p>
+        <p>Walk all five protocols. Spend extra time on Protocol 5 (domain review) &mdash; that&rsquo;s the one nobody can skip and the one AI can&rsquo;t do for you.</p>
+        <p>Cite the GDPval finding (1.4&times; faster, 1.6&times; cheaper with human review) once. <strong>&ldquo;The review step is where value is created.&rdquo;</strong></p>
+        <p><em>Time on slide: 8 minutes total &mdash; 5 min walk-through + stays up during the drill that follows.</em></p>
+    </div>
+
+    <!-- 28 WORKSHOP: Timed QA -->
+    <div class="note-content">
+        <p>Drop the AI-generated SOP excerpt into chat as you start the timer. (The excerpt is in the instructor guide &mdash; copy it ahead of class.)</p>
+        <p>10 minutes silent. <strong>Mute yourself.</strong> Don&rsquo;t answer chat questions during the drill &mdash; that defeats it.</p>
+        <p>At 10 minutes: hard stop. Reveal the five planted errors one by one. Ask: &ldquo;Which protocol caught it?&rsquo;</p>
+        <p>If most of the room only found 3, name it kindly: &ldquo;Three is the average &mdash; that&rsquo;s why the drill exists. Source verification requires actually looking the references up. <em>Looking things up is the protocol.</em>&rsquo;</p>
+        <p><em>Time on slide: 10 min drill + 10 min debrief (2:38&ndash;2:58 if on time, drift OK).</em></p>
+    </div>
+
+    <!-- 29 M5 divider -->
+    <div class="note-content">
+        <p>This is the slide where you change the energy. <strong>&ldquo;You don&rsquo;t leave this room as a graduate. You leave as the person who teaches the next two Marines.&rdquo;</strong></p>
+        <p>Set timing: 5 min framing + 5 min apprentice problem + 20 min teach-back exercise.</p>
+        <p><em>Time on slide: 30 seconds.</em></p>
+    </div>
+
+    <!-- 30 What you owe forward -->
+    <div class="note-content">
+        <p>Read the four owes out loud. They are concrete and personal &mdash; that&rsquo;s the point.</p>
+        <p>Cite the EDD train-the-trainer pathway directly: <strong>shadow &rarr; co-teach &rarr; deliver.</strong> Tell people they can register interest with the Program Coordinator after this course.</p>
+        <p>If you have specific train-the-trainer dates coming up at the unit, drop them in chat now.</p>
+        <p><em>Time on slide: 3 minutes.</em></p>
+    </div>
+
+    <!-- 31 Apprentice problem -->
+    <div class="note-content">
+        <p>Lead with the stat (35% drop in entry-level postings). Don&rsquo;t belabor it &mdash; the room knows the labor market.</p>
+        <p>The four protocols on the left are practical and immediately usable. Ask: &ldquo;Which of these are you already doing? Which are you not?&rdquo; 2&ndash;3 chat answers max.</p>
+        <p>The right column is the &ldquo;don&rsquo;t&rsquo; list. Don&rsquo;t shame; just name the patterns.</p>
+        <p><em>Time on slide: 5 minutes. Move into the teach-back at ~3:08.</em></p>
+    </div>
+
+    <!-- 32 WORKSHOP: Teach-back -->
+    <div class="note-content">
+        <p><strong>Hard timebox &mdash; this one will sprawl if you let it.</strong> 2 min pick concept, 5 min prep silent, 10 min in breakouts (3 min per teach + 1 min feedback, rotate), 5 min full-room debrief.</p>
+        <p>Before sending to breakouts: <strong>model the template yourself</strong> with one filled-in example. The instructor guide has a centaur-vs-cyborg example you can read verbatim. People do better when they&rsquo;ve seen the shape.</p>
+        <p>Use Teams breakout rooms of 3&ndash;4 people. 10-minute timer on the breakout. Pop into 1&ndash;2 rooms during.</p>
+        <p>When everyone returns: ask for one volunteer to teach to the full room (optional, but powerful) and give live feedback against the rubric. That&rsquo;s the teaching-of-teaching moment.</p>
+        <p><em>Time on slide: 22 minutes total (3:08&ndash;3:30, drifted 10 min behind agenda &mdash; absorb in M6 timing).</em></p>
+    </div>
+
+    <!-- 33 M6 divider -->
+    <div class="note-content">
+        <p>Brisk: <strong>&ldquo;One page. One workflow. The deliverable that proves you graduated.&rdquo;</strong></p>
+        <p>Set timing: 5 min walk the example, 20 min silent build, 5 min reflection &amp; close.</p>
+        <p><em>Time on slide: 30 seconds.</em></p>
+    </div>
+
+    <!-- 34 Workflow playbook example -->
+    <div class="note-content">
+        <p>Walk one row of the example out loud &mdash; the <strong>Steps</strong> row is the one that shows what good looks like (numbered, H/AI labels, concrete actions).</p>
+        <p>Don&rsquo;t read every cell. Tell people: &ldquo;Yours doesn&rsquo;t need to be this polished. Specific is more important than pretty.&rdquo;</p>
+        <p><em>Time on slide: 5 minutes.</em></p>
+    </div>
+
+    <!-- 35 WORKSHOP: Build playbook -->
+    <div class="note-content">
+        <p>20 minutes silent. Set the timer. Read the prompt once. Repeat the completion bar once.</p>
+        <p>Tell people to <strong>submit their playbook in chat at the timer</strong> &mdash; that creates a public commitment and lets you compile them after.</p>
+        <p>At 10 minutes: chat broadcast: <em>&ldquo;Halfway. The verification checklist is the field people skip &mdash; make sure you have one.&rdquo;</em></p>
+        <p>At 18 minutes: &ldquo;2 minutes left. If you&rsquo;re not done, submit what you have.&rdquo;</p>
+        <p>Hard stop at 20. Move to reflection.</p>
+        <p><em>Time on slide: 20 minutes (3:30&ndash;3:50).</em></p>
+    </div>
+
+    <!-- 36 Reflection -->
+    <div class="note-content">
+        <p>3 minutes. Pure chat-driven. Don&rsquo;t read every chat answer out loud &mdash; let them be private notes-to-self.</p>
+        <p>If 1&ndash;2 striking answers come in, surface them: <strong>&ldquo;[Name] said they&rsquo;re going to teach this to their squad leader Friday. That&rsquo;s the bar.&rdquo;</strong></p>
+        <p><em>Time on slide: 3 minutes.</em></p>
+    </div>
+
+    <!-- 37 Certification path -->
+    <div class="note-content">
+        <p>Walk the 6 categories briefly &mdash; people have seen them throughout the day, this is just the recap.</p>
+        <p>The unlock list on the right is the why. Land hard on <strong>&ldquo;Path to QA reviewer &rarr; Advanced Workshop instructor.&rdquo;</strong></p>
+        <p>Be honest about the &ldquo;didn&rsquo;t hit the bar&rdquo; line &mdash; nobody fails out, they re-attempt. We keep the seat.</p>
+        <p><em>Time on slide: 3 minutes.</em></p>
+    </div>
+
+    <!-- 38 Week 5 preview -->
+    <div class="note-content">
+        <p>Brief and warm. Tell them <strong>Week 5 is for their leadership</strong>, not for them &mdash; their action item is to forward the invite up the chain.</p>
+        <p>Land the closing line: <strong>&ldquo;Thank you. Now go teach somebody.&rdquo;</strong> Pause for 3 seconds before ending the meeting. People will type in the chat &mdash; honor that.</p>
+        <p><strong>After class, instructor only:</strong> save the chat transcript, compile the playbooks people submitted, fold any new frontier findings into the unit map, and send the synthesis to section leads within 24 hours.</p>
+        <p><em>Time on slide: 2 minutes. Total runtime ~3:55. Buffer absorbed across the day. End on time.</em></p>
+    </div>
+
+</aside>
+
+
+<!-- =========================================================
+     HUD — top-right controls
+     ========================================================= -->
+
+
+
+<!-- =========================================================
+     HELP OVERLAY
+     ========================================================= -->
+
+
+<script src="js/deck.js"></script>
+</body>
+</html>

@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 2 — Builder Orientation | EDD Slide Deck</title>
+<meta name="description" content="Slide deck for Course 2: Builder Orientation. 2-hour live session for aspiring builders. Speaker notes on every slide.">
+<link rel="stylesheet" href="css/deck.css">
+</head>
+<body class="w2-deck">
+
+<div class="deck">
+  <div class="stage" role="main">
+
+    <!-- ========================================================
+         SLIDE 1 — COVER
+         ======================================================== -->
+    <section class="slide slide--cover" data-module="Cover" data-title="Cover">
+      <div class="cover-body">
+        <div class="cover-eyebrow">Course 2 of 6 · Expert-Driven Development</div>
+        <h1 class="cover-title">Builder<br>Orientation</h1>
+        <p class="cover-sub">From AI user to AI-assisted builder. Two hours, mostly hands-on, with one rule: decompose before you build.</p>
+      </div>
+      <div class="cover-meta">
+        <div class="cover-meta__cell"><div class="label">Duration</div><div class="value">2 hours</div></div>
+        <div class="cover-meta__cell"><div class="label">Audience</div><div class="value">Aspiring builders</div></div>
+        <div class="cover-meta__cell"><div class="label">Prerequisite</div><div class="value">AI Fluency Fundamentals</div></div>
+        <div class="cover-meta__cell"><div class="label">Outcome</div><div class="value">A working prototype + a real plan</div></div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue">Open</span> Welcome students by name as they join the Teams meeting. Share your screen now and put this slide up before the start time hits.</p>
+        <p><strong>Say (60 seconds):</strong> &ldquo;Welcome to Builder Orientation. This is Course 2 of 6. Course 1 was about using AI well. Today is about <em>building</em> with it. Two hours. Most of it is hands-on. By the end you will have a working prototype, even if it is rough, and a real plan you will execute before Course 3.&rdquo;</p>
+        <p><strong>Set the contract:</strong> &ldquo;This is not a lecture. There are about 30 minutes of me talking spread across two hours. The other 90 minutes is you typing, decomposing on paper, and reviewing each other&rsquo;s work. Cameras on if you can. Mics off unless you have a question.&rdquo;</p>
+        <p><strong>Verify prerequisite:</strong> Ask the room: &ldquo;Quick check &mdash; raise a hand or type in chat if you have <em>not</em> completed AI Fluency Fundamentals.&rdquo; If anyone hasn&rsquo;t, note them privately and pair them with a stronger partner for Module 3.</p>
+        <p><strong>Transition:</strong> &ldquo;Before we look at today&rsquo;s agenda, let me anchor where we left off in Week 1.&rdquo;</p>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SLIDE 2 — Where we left off (Week 1 recap)
+         ======================================================== -->
+    <section class="slide slide--content" data-module="Recap" data-title="Where we left off — Week 1 takeaways">
+      <div class="slide__edge"></div>
+      <div class="slide__eyebrow">Where we left off</div>
+      <h2 class="slide__title">Week 1 gave you the management skills.<br>Week 2 puts them on a build.</h2>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:12px;">
+        <div>
+          <h3 style="font-size:24px;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-scarlet);margin-bottom:18px;font-weight:700;">From Week 1, you should remember</h3>
+          <ul class="bullets bullets--inline">
+            <li>The six 201 skills &mdash; Context, Quality, Decomposition, Iteration, Workflow, Frontier</li>
+            <li>The Delegation Equation &mdash; your time vs. AI&rsquo;s success rate vs. review cost</li>
+            <li>Centaur (clear handoffs) and Cyborg (continuous loop)</li>
+            <li>The jagged frontier &mdash; AI is uneven, and the boundary is not intuitive</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-size:24px;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-scarlet);margin-bottom:18px;font-weight:700;">What changes today</h3>
+          <ul class="bullets bullets--inline bullets--gold">
+            <li>You stop managing one conversation. You start managing a project.</li>
+            <li>Decomposition graduates from a prompt skill to a system-design skill.</li>
+            <li>You meet your first errors. You debug them on purpose.</li>
+            <li>You leave with a real prototype, or a real plan to build one.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue">Recap</span> Spend 60&ndash;90 seconds here. Don&rsquo;t re-teach Week 1 &mdash; just <em>name</em> the anchors so the room remembers them.</p>
+        <p><strong>Say:</strong> &ldquo;Show of hands &mdash; how many of you have used an AI tool at work since Week 1?&rdquo; Note who is active and who is not. Active builders will lead Module 3.</p>
+        <p><strong>Then:</strong> &ldquo;Today we move from being good <em>users</em> to being functional <em>builders</em>. The skills are the same. The scope is bigger. Instead of one conversation, you are managing a whole project through AI.&rdquo;</p>
+        <p><strong>Frontier reminder:</strong> &ldquo;Building has its own frontier. Some things AI builds beautifully. Some things break in interesting ways. We will see both today.&rdquo;</p>
+        <p><strong>Transition:</strong> &ldquo;Here is the next two hours.&rdquo;</p>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SLIDE 3 — Agenda
+         ======================================================== -->
+    <section class="slide slide--content" data-module="Agenda" data-title="Today's agenda — five modules in two hours">
+      <div class="slide__edge"></div>
+      <div class="slide__eyebrow">Agenda · 120 minutes</div>
+      <h2 class="slide__title">Five modules. Mostly hands-on.</h2>
+
+      <ul class="bullets" style="max-width:1500px;">
+        <li><strong>0:00 &ndash; 0:15 &nbsp; Module 1</strong> &nbsp; From User to Builder &nbsp; <span style="color:var(--c-muted);font-size:24px;letter-spacing:0.18em;text-transform:uppercase;">15 min · talking</span></li>
+        <li><strong>0:15 &ndash; 0:40 &nbsp; Module 2</strong> &nbsp; Live Build &mdash; Equipment Tracker &nbsp; <span style="color:var(--c-scarlet);font-size:24px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;">25 min · live build</span></li>
+        <li><strong>0:40 &ndash; 0:50 &nbsp; Break</strong> &nbsp; <span style="color:var(--c-muted);font-size:24px;letter-spacing:0.18em;text-transform:uppercase;">10 min</span></li>
+        <li><strong>0:50 &ndash; 1:30 &nbsp; Module 3</strong> &nbsp; Student Build + When Something Breaks &nbsp; <span style="color:var(--c-scarlet);font-size:24px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;">40 min · hands-on</span></li>
+        <li><strong>1:30 &ndash; 1:50 &nbsp; Module 4</strong> &nbsp; Decomposition Framework &nbsp; <span style="color:var(--c-scarlet);font-size:24px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;">20 min · exercise</span></li>
+        <li><strong>1:50 &ndash; 2:00 &nbsp; Module 5</strong> &nbsp; Wrap-Up &amp; Assignment &nbsp; <span style="color:var(--c-muted);font-size:24px;letter-spacing:0.18em;text-transform:uppercase;">10 min · talking</span></li>
+      </ul>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue">Pacing</span> Read the agenda quickly. Emphasise the ratio.</p>
+        <p><strong>Say:</strong> &ldquo;Out of 120 minutes, about 30 minutes is me talking. The other 90 minutes is you working &mdash; with me on a live build, on your own, with a partner, and with paper. Plan accordingly. Have your laptop ready, have a piece of paper ready, and have GenAI.mil or your AI tool open in a tab.&rdquo;</p>
+        <p><strong>Tooling check:</strong> &ldquo;Take 15 seconds right now &mdash; open GenAI.mil or your approved AI tool. If you can&rsquo;t reach it, drop a note in chat now, not in 40 minutes when we start the live build.&rdquo;</p>
+        <p><strong>Transition:</strong> &ldquo;Let&rsquo;s start with the only theory section we have today.&rdquo; Click forward.</p>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         MODULE 1 — From User to Builder (15 min)
+         ======================================================== -->
+
+    <!-- SLIDE 4 — Module 1 divider -->
+    <section class="slide slide--section" data-module="Module 1" data-title="Module 1 — From User to Builder">
+      <div class="section-wrap">
+        <div class="module-tag">Module 01 of 05</div>
+        <h2 class="module-title">From user to<br>builder.</h2>
+        <div class="module-meta">
+          <div><strong>15 minutes</strong> &nbsp; · &nbsp; talking + room poll</div>
+          <div class="duration">201 skill: Task Decomposition</div>
+        </div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue">Section divider</span> Pause for one beat on this slide so it lands. Don&rsquo;t read the title aloud.</p>
+        <p><strong>Say:</strong> &ldquo;Module 1. Fifteen minutes. This is the only stretch of the day where I will talk uninterrupted. Lock in.&rdquo;</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 5 — Bridge: same skills, larger scope -->
+    <section class="slide slide--content" data-module="Module 1" data-title="Bridge — same skills, bigger scope">
+      <div class="slide__edge"></div>
+      <div class="slide__eyebrow">Module 1 · The bridge</div>
+      <h2 class="slide__title">Building is the same skills, at a bigger scope.</h2>
+
+      <div class="two-col" style="margin-top:8px;">
+        <div class="col-card">
+          <div class="col-card__label col-card__label--scarlet">As a user</div>
+          <div class="col-card__title">You manage one conversation.</div>
+          <div class="col-card__body">
+            <p>One prompt. One iteration loop. One output. You judge if it&rsquo;s good and move on.</p>
+          </div>
+        </div>
+        <div class="col-card">
+          <div class="col-card__label col-card__label--gold">As a builder</div>
+          <div class="col-card__title">You manage a project through AI.</div>
+          <div class="col-card__body">
+            <p>Many prompts, in a sequence you designed. AI generates code; you decide if it works in a system. The bottleneck is your decomposition, not AI&rsquo;s talent.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout--gold" style="margin-top:24px;">A user asks AI to draft an email. A builder asks AI to create the system that drafts, tracks, and sends emails. The difference is decomposition.</div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue">Anchor</span> This is the central idea of the whole course. Don&rsquo;t rush.</p>
+        <p><strong>Say:</strong> &ldquo;In Week 1 you managed one conversation. You typed something, you got something back, you judged it, you iterated. Today you do the same thing &mdash; but in <em>sequence</em>, across an entire project. The skills don&rsquo;t change. The scope does.&rdquo;</p>
+        <p><strong>Drive the point home:</strong> &ldquo;A user asks AI to draft an email. A builder asks AI to create the system that drafts, tracks, and sends emails. Same skills. Different scope. The difference is not talent. It&rsquo;s decomposition.&rdquo;</p>
+        <p><strong>Avoid:</strong> Don&rsquo;t romanticise &lsquo;builders.&rsquo; Most students in this room manage Marines. They already break work into pieces every day. We&rsquo;re just applying that to AI.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 6 — The builder mindset: decompose first -->
+    <section class="slide slide--quote" data-module="Module 1" data-title="The builder mindset — decompose first">
+      <div class="slide__edge"></div>
+      <span class="quote-mark">&ldquo;</span>
+      <div>
+        <blockquote>Before you open any tool &mdash; before you type a single prompt &mdash; decompose on paper.</blockquote>
+        <div class="attrib">The Builder Mindset · Course 2, Module 1</div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue">Big idea</span> Hold this slide for a beat. It&rsquo;s the tattoo for the day.</p>
+        <p><strong>Say:</strong> &ldquo;If you remember nothing else from today, remember this. Decompose <em>first</em>. On paper. With nobody&rsquo;s tool open. The number-one mistake new builders make is opening the tool first and trying to figure it out as they go. That works for simple things. It fails completely for anything with three or more moving parts.&rdquo;</p>
+        <p><strong>Ask the room:</strong> &ldquo;Anyone here ever tried to build a Power App by just opening Power Apps and clicking around?&rdquo; (You&rsquo;ll get a laugh and a few hands.) &ldquo;How did that go?&rdquo;</p>
+        <p><strong>Transition:</strong> &ldquo;The reason decomposition matters so much is that the quality of your plan predicts the quality of your build. A vague plan produces a vague tool. A specific plan produces a specific tool.&rdquo;</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 7 — Quick six-skills check -->
+    <section class="slide slide--content" data-module="Module 1" data-title="Six-skill quick check — name three">
+      <div class="slide__edge"></div>
+      <div class="slide__eyebrow">Module 1 · Room check</div>
+      <h2 class="slide__title slide__title--md">Quick check &mdash; name three of the six 201 skills.</h2>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:24px;">
+        <div class="col-card" style="padding:32px;"><div class="col-card__label col-card__label--scarlet">01</div><div class="col-card__title" style="font-size:32px;margin-bottom:8px;">Context Assembly</div><div class="col-card__body" style="font-size:22px;">What information to provide and why.</div></div>
+        <div class="col-card" style="padding:32px;"><div class="col-card__label col-card__label--scarlet">02</div><div class="col-card__title" style="font-size:32px;margin-bottom:8px;">Quality Judgment</div><div class="col-card__body" style="font-size:22px;">When to trust output and when to verify.</div></div>
+        <div class="col-card" style="padding:32px;"><div class="col-card__label col-card__label--scarlet">03</div><div class="col-card__title" style="font-size:32px;margin-bottom:8px;">Task Decomposition</div><div class="col-card__body" style="font-size:22px;">Breaking work into AI-appropriate chunks.</div></div>
+        <div class="col-card" style="padding:32px;"><div class="col-card__label col-card__label--scarlet">04</div><div class="col-card__title" style="font-size:32px;margin-bottom:8px;">Iterative Refinement</div><div class="col-card__body" style="font-size:22px;">Moving from 70% to 95% in passes.</div></div>
+        <div class="col-card" style="padding:32px;"><div class="col-card__label col-card__label--scarlet">05</div><div class="col-card__title" style="font-size:32px;margin-bottom:8px;">Workflow Integration</div><div class="col-card__body" style="font-size:22px;">Embedding AI into how work gets done.</div></div>
+        <div class="col-card" style="padding:32px;"><div class="col-card__label col-card__label--scarlet">06</div><div class="col-card__title" style="font-size:32px;margin-bottom:8px;">Frontier Recognition</div><div class="col-card__body" style="font-size:22px;">Knowing when you&rsquo;re outside AI&rsquo;s capability.</div></div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue">Activity (3 min)</span> Cold-call two or three students. Ask each to name a 201 skill from memory <em>before</em> revealing the grid &mdash; if you flip to this slide too fast they&rsquo;ll just read it.</p>
+        <p><strong>Say:</strong> &ldquo;Without looking, name three of the six 201 skills.&rdquo; Wait. Pick someone. Then someone else.</p>
+        <p><strong>If the room can&rsquo;t name 4+:</strong> Pause. Do a 2-minute refresher right here. Walk through all six in the grid, point at each card, and read the one-line description. Don&rsquo;t go back to Course 1 &mdash; just refresh.</p>
+        <p><strong>If the room nails it:</strong> Move on quickly. &ldquo;Good. We&rsquo;ll apply Decomposition, Context Assembly, and Iterative Refinement most heavily today. Quality Judgment shows up when we debug. Frontier Recognition shows up when something breaks.&rdquo;</p>
+        <p><strong>Transition:</strong> &ldquo;Module 1 done. Time to build something. Eyes back on me.&rdquo;</p>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         MODULE 2 — Live Build #1 (25 min)
+         ======================================================== -->
+
+    <!-- SLIDE 8 — Module 2 divider -->
+    <section class="slide slide--section" data-module="Module 2" data-title="Module 2 — Live Build #1: Equipment Tracker">
+      <div class="section-wrap">
+        <div class="module-tag">Module 02 of 05</div>
+        <h2 class="module-title">Live build &mdash;<br>Equipment Tracker.</h2>
+        <div class="module-meta">
+          <div><strong>25 minutes</strong> &nbsp; · &nbsp; you watch, I narrate every decision</div>
+          <div class="duration">Live · Decompose → Build → Iterate</div>
+        </div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue">Section divider</span> One beat on this slide. Read the duration aloud so people pace themselves.</p>
+        <p><strong>Say:</strong> &ldquo;Module 2. Twenty-five minutes. I am going to build a real tool live, in front of you, from scratch. You watch. You don&rsquo;t type along. The value is not the finished app &mdash; the value is hearing me narrate every decision.&rdquo;</p>
+        <p><strong>Setup check:</strong> Confirm GenAI.mil is open in one browser tab and Power Apps (or your live-build target) is open in another. <em>Do NOT have anything pre-built.</em> The whole point is that the room watches you make decisions in real time.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 9 — Live build framing -->
+    <section class="slide slide--live-build" data-module="Module 2" data-title="What we're building — and the rules">
+      <div class="slide__edge"></div>
+      <span class="lb-tag">Live Build · Watching, not typing</span>
+      <h2 class="slide__title slide__title--md">&ldquo;I need to track equipment checkout for my section.&rdquo;</h2>
+      <p class="slide__lede" style="max-width:1500px;">A rifle section &mdash; about 30 Marines, about 50 items. Items get checked out, checked back in, and sometimes go overdue. We need one screen that handles all three.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:24px;">
+        <div>
+          <h3 style="font-size:24px;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-scarlet);margin-bottom:14px;font-weight:700;">Three rules for the next 25 minutes</h3>
+          <ul class="bullets bullets--inline">
+            <li>I narrate every decision out loud, including the ones I reject.</li>
+            <li>You watch. You don&rsquo;t type along. Take notes if you want.</li>
+            <li>If something breaks, I debug it live &mdash; that&rsquo;s the most useful part.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-size:24px;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-scarlet);margin-bottom:14px;font-weight:700;">Tooling for this build</h3>
+          <ul class="bullets bullets--inline bullets--gold">
+            <li><strong>GenAI.mil</strong> for prompting (preferred for CUI)</li>
+            <li><strong>Power Apps</strong> as the build surface</li>
+            <li><strong>SharePoint</strong> as the data backend</li>
+            <li>No pre-built code. We start from blank.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue">Frame the build</span> 60 seconds tops on this slide.</p>
+        <p><strong>Say:</strong> &ldquo;The problem is real. I built one of these for my own section last quarter. It took me about 30 minutes total. Today I&rsquo;m going to do it in 25 in front of you.&rdquo;</p>
+        <p><strong>Set the rules:</strong> Read the three rules aloud. Especially: &ldquo;Don&rsquo;t type along. If you try to follow my prompts in real time you&rsquo;ll fall behind and stop listening to <em>why</em> I&rsquo;m making each choice. Watch first. You get your turn in Module 3.&rdquo;</p>
+        <p><strong>Data-handling reminder:</strong> &ldquo;GenAI.mil and CamoGPT are authorised for CUI &mdash; anonymise PII unless a PIA covers it. Commercial tools like ChatGPT and Gemini are unclassified-only. We&rsquo;re using fake names today, but the rule sticks.&rdquo;</p>
+        <p><strong>Transition:</strong> &ldquo;Step one is not opening the tool. Step one is on a piece of paper.&rdquo;</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 10 — Decompose first (whiteboard) -->
+    <section class="slide slide--exercise" data-module="Module 2" data-title="Decompose before touching AI (whiteboard, 5 min)">
+      <div class="ex-banner">
+        <span class="label">Whiteboard · Before AI</span>
+        <span class="timer">5 minutes</span>
+      </div>
+      <div class="ex-body">
+        <h2 class="ex-prompt">Decompose first &mdash; on the board, before any tool.</h2>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:48px;">
+          <div>
+            <h3 style="font-size:24px;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-scarlet);margin-bottom:14px;font-weight:700;">Four questions</h3>
+            <ul class="bullets bullets--inline">
+              <li>What data fields do we need?</li>
+              <li>What does the user need to do?</li>
+              <li>What is the simplest useful version?</li>
+              <li>What data structure backs it?</li>
+            </ul>
+          </div>
+          <div>
+            <h3 style="font-size:24px;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-gold-dark);margin-bottom:14px;font-weight:700;">Why this matters</h3>
+            <p style="font-size:28px;line-height:1.4;">These five minutes on paper are the most valuable five minutes of the build. Bad decomposition means you spend 30 minutes building the wrong thing.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue cue--gold">Activity · 5 min</span> This is a <em>group</em> whiteboard, not a private exercise. Ask the room and write down what they call out. Use a real whiteboard, a Teams whiteboard, or a notepad shared on screen.</p>
+        <p><strong>Say:</strong> &ldquo;I&rsquo;m not opening any tool yet. Five minutes on the board first. Tell me &mdash; what data fields do we need to track equipment?&rdquo;</p>
+        <p><strong>Expected answers (write them up):</strong></p>
+        <ul>
+          <li>Item name, serial number, assigned to (name), date out, date due, status (out / in / overdue)</li>
+          <li>User actions: check out, check in, see what&rsquo;s out, see what&rsquo;s overdue</li>
+          <li>Simplest version: a form + a list with current status</li>
+          <li>Data structure: one row per item, table or SharePoint list</li>
+        </ul>
+        <p><strong>Drive home:</strong> &ldquo;We just spent five minutes on paper. This is the most important five minutes of the whole build. Watch what happens when I open AI now &mdash; my prompts are going to be specific because I already know what I want.&rdquo;</p>
+        <p><strong>Transition:</strong> &ldquo;Now to AI. The next slide previews the five prompts I&rsquo;ll use. After that, I switch to the live build.&rdquo;</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 11 — Five prompts overview -->
+    <section class="slide slide--content" data-module="Module 2" data-title="The five prompts you'll see me run">
+      <div class="slide__edge"></div>
+      <div class="slide__eyebrow">Module 2 · Live build prompt sequence</div>
+      <h2 class="slide__title slide__title--md">Five prompts. In order. Each one builds on the last.</h2>
+
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:24px;">
+        <div class="col-card" style="padding:28px;"><div class="col-card__label col-card__label--scarlet">01</div><div class="col-card__title" style="font-size:26px;margin-bottom:10px;">Define the problem</div><div class="col-card__body" style="font-size:20px;">Ask for a plan, not code.</div></div>
+        <div class="col-card" style="padding:28px;"><div class="col-card__label col-card__label--scarlet">02</div><div class="col-card__title" style="font-size:26px;margin-bottom:10px;">Data structure</div><div class="col-card__body" style="font-size:20px;">SharePoint list + CSV template.</div></div>
+        <div class="col-card" style="padding:28px;"><div class="col-card__label col-card__label--scarlet">03</div><div class="col-card__title" style="font-size:26px;margin-bottom:10px;">Form + gallery</div><div class="col-card__body" style="font-size:20px;">Auto-app, then refine.</div></div>
+        <div class="col-card" style="padding:28px;"><div class="col-card__label col-card__label--scarlet">04</div><div class="col-card__title" style="font-size:26px;margin-bottom:10px;">Overdue logic</div><div class="col-card__body" style="font-size:20px;">Highlight + check-in button.</div></div>
+        <div class="col-card" style="padding:28px;"><div class="col-card__label col-card__label--scarlet">05</div><div class="col-card__title" style="font-size:26px;margin-bottom:10px;">Polish</div><div class="col-card__body" style="font-size:20px;">Color scheme + summary counts.</div></div>
+      </div>
+
+      <div class="callout" style="margin-top:32px;">Watch the verbs. I never say <em>&ldquo;build me an app.&rdquo;</em> I say <em>&ldquo;give me a plan,&rdquo; &ldquo;give me the exact list configuration,&rdquo; &ldquo;refine this one piece.&rdquo;</em> Each prompt has one job.</div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue">Quick map</span> 30 seconds on this slide. Don&rsquo;t read each card &mdash; just point and call out the verbs.</p>
+        <p><strong>Say:</strong> &ldquo;You&rsquo;ll see me run roughly five prompts. The first asks for a plan, not code. The second asks for the exact data structure. The third generates the form and the list. The fourth adds the business logic &mdash; overdue highlighting and a check-in button. The fifth is polish &mdash; color scheme and summary counts.&rdquo;</p>
+        <p><strong>Big idea:</strong> &ldquo;Watch what I <em>don&rsquo;t</em> do. I never say &lsquo;build me an app.&rsquo; That&rsquo;s a 101 prompt and you&rsquo;ll get garbage. I break the work down and feed AI one job at a time.&rdquo;</p>
+        <p><strong>Set the parking expectation:</strong> &ldquo;I&rsquo;m about to switch out of this deck. The next slide is a parking screen so you know where we are while I&rsquo;m building. When I come back to the deck, we&rsquo;ll debrief what just happened.&rdquo;</p>
+        <p><strong>Transition:</strong> Click forward to the parking screen, then immediately ALT-TAB to GenAI.mil. Don&rsquo;t leave the parking slide hanging in silence &mdash; start narrating Prompt 1 within five seconds.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 12 — LIVE BUILD PARK -->
+    <section class="slide slide--live-park" data-module="Module 2" data-title="LIVE BUILD — switch to GenAI.mil + Power Apps now">
+      <div class="park-bar">
+        <span class="live">Live · Switch to build window now</span>
+        <span>Module 02 · Equipment Tracker</span>
+      </div>
+      <div class="park-body">
+        <div class="park-eyebrow">Presenter has left the deck</div>
+        <h2 class="park-headline">Live build in progress.</h2>
+        <p class="park-sub">Watch the presenter&rsquo;s GenAI.mil and Power Apps windows. We&rsquo;ll return to this deck for the debrief in roughly 20 minutes.</p>
+
+        <div class="park-checklist">
+          <div class="park-checklist__item"><span class="num">Watching for</span>How the prompt names a domain (rifle section, ~30 people, ~50 items).</div>
+          <div class="park-checklist__item"><span class="num">Watching for</span>How the presenter rejects an AI suggestion and says <em>why</em>.</div>
+          <div class="park-checklist__item"><span class="num">Watching for</span>How the first error gets diagnosed &mdash; not panicked over.</div>
+        </div>
+      </div>
+      <div class="park-foot">
+        <span>Don&rsquo;t type along · Take notes · Questions go in chat</span>
+        <span>Return cue: presenter says &ldquo;Back to the deck.&rdquo;</span>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue cue--amber">Park the deck</span> This is the slide that stays up while you&rsquo;re in GenAI.mil and Power Apps. <strong>Switch to your build windows now.</strong></p>
+        <p><strong>Pacing across 20 minutes (target):</strong></p>
+        <ul>
+          <li><strong>0&ndash;3 min &mdash; Prompt 1:</strong> Define the problem, ask for a plan. Narrate: &ldquo;I start with WHO uses this and WHAT platform we have. I ask for a plan, not code.&rdquo;</li>
+          <li><strong>3&ndash;7 min &mdash; Prompt 2:</strong> Data structure + CSV template. Narrate: &ldquo;Now I get the exact data structure. I specify field names and types because I know my domain.&rdquo;</li>
+          <li><strong>7&ndash;11 min &mdash; Prompt 3:</strong> Generate the form + gallery (or use SharePoint Integrate → Power Apps shortcut). Narrate the shortcut.</li>
+          <li><strong>11&ndash;16 min &mdash; Prompt 4:</strong> Add overdue highlighting and check-in button. <em>Expect at least one error here</em> &mdash; common ones are Choice column syntax (<code>Status.Value</code>) and missing null checks. Debug live, narrate every step.</li>
+          <li><strong>16&ndash;19 min &mdash; Prompt 5:</strong> Color scheme + summary counts.</li>
+          <li><strong>19&ndash;20 min:</strong> Hit ALT-TAB back to the deck and say &ldquo;Back to the deck.&rdquo;</li>
+        </ul>
+        <p><strong>If something breaks (it should):</strong> Don&rsquo;t hide it. Stop, read the error message out loud, narrate the debug prompt you&rsquo;d send. This <em>is</em> the lesson.</p>
+        <p><strong>If everything works smoothly:</strong> Add a stretch &mdash; ask AI to add a search box or a date picker. Force one error so the room sees the debug loop.</p>
+        <p><strong>If the tools fail entirely:</strong> Switch to the contingency on the instructor page (&ldquo;Decomposition Exercise Fallback&rdquo;). Show the four-bug code block on screen and walk the room through diagnosing it as a class.</p>
+        <p><strong>Return cue:</strong> When you ALT-TAB back to the deck, say <em>&ldquo;Back to the deck.&rdquo;</em> out loud so the room re-anchors.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 13 — Checkpoint: return to deck -->
+    <section class="slide slide--checkpoint" data-module="Module 2" data-title="Checkpoint — back to the deck, debrief the build">
+      <div class="cp-banner">
+        <span class="stamp">Back to the deck</span>
+        <span>Module 02 · Live build debrief</span>
+      </div>
+      <div class="cp-body">
+        <h2 class="cp-title">What just happened.</h2>
+        <p class="slide__lede" style="margin-bottom:24px;">Three things to name from what you saw &mdash; even if my build wasn&rsquo;t perfect.</p>
+        <div class="cp-grid">
+          <div class="cp-grid__item">
+            <div class="h">Decomposition first</div>
+            <div class="t">Five minutes on the whiteboard before any tool. I knew what I wanted before I asked.</div>
+          </div>
+          <div class="cp-grid__item">
+            <div class="h">Prompts had one job</div>
+            <div class="t">&ldquo;Give me a plan.&rdquo; &ldquo;Give me the data structure.&rdquo; &ldquo;Refine this one piece.&rdquo; Never &ldquo;build me an app.&rdquo;</div>
+          </div>
+          <div class="cp-grid__item">
+            <div class="h">Errors were normal</div>
+            <div class="t">When something broke, I read the error, framed a debug prompt, and kept moving. Errors are part of the process.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue">Debrief · 3 min</span> This is the &ldquo;return to deck&rdquo; landing. Use it to recap what they just watched, then take questions.</p>
+        <p><strong>Say:</strong> &ldquo;Back to the deck. Three things I want you to name from what you just saw.&rdquo; Walk through the three cards.</p>
+        <p><strong>Ask the room:</strong> Two questions max &mdash;</p>
+        <ul>
+          <li>&ldquo;What surprised you about the process?&rdquo;</li>
+          <li>&ldquo;How long do you think this would have taken before AI?&rdquo; (Expected answer: days or weeks for a custom app.)</li>
+        </ul>
+        <p><strong>If a student asks how to handle an error you didn&rsquo;t cover:</strong> Defer to Module 3 &mdash; they&rsquo;re about to debug live. &ldquo;Hold that. You&rsquo;re going to hit it yourself in 15 minutes.&rdquo;</p>
+        <p><strong>Don&rsquo;t:</strong> Don&rsquo;t walk through your code line by line. The point is the <em>process</em>, not the artifact.</p>
+        <p><strong>Transition:</strong> &ldquo;Take ten. When you come back, you&rsquo;re building.&rdquo;</p>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         BREAK
+         ======================================================== -->
+    <section class="slide slide--break" data-module="Break" data-title="Ten-minute break">
+      <div class="break-wrap">
+        <div class="break-eyebrow">Course 2 · 0:40 — 0:50</div>
+        <div class="break-title">10:00</div>
+        <div class="break-sub">Stretch. Refill. Open your AI tool. We build at the top of the hour.</div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue cue--gold">Break · 10 min</span></p>
+        <p><strong>Before you go silent:</strong> &ldquo;Ten-minute break. When you come back, have GenAI.mil <em>and</em> a piece of paper open in front of you. We start Module 3 with you typing, not me.&rdquo;</p>
+        <p><strong>During the break:</strong> Don&rsquo;t leave the room. Use the time to (1) confirm everyone has tool access, (2) spot anyone who looked lost in Module 2 and check in privately, (3) reset your own browser tabs so you&rsquo;re ready to circulate during the build.</p>
+        <p><strong>Mute:</strong> Mute yourself in Teams during the break. Set a visible 10-minute timer if you can.</p>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         MODULE 3 — Student Build + Peer Review (40 min)
+         ======================================================== -->
+
+    <!-- SLIDE 15 — Module 3 divider -->
+    <section class="slide slide--section" data-module="Module 3" data-title="Module 3 — Student Build + Peer Review">
+      <div class="section-wrap">
+        <div class="module-tag">Module 03 of 05</div>
+        <h2 class="module-title">Your turn.<br>Build something.</h2>
+        <div class="module-meta">
+          <div><strong>40 minutes</strong> &nbsp; · &nbsp; 25 build · 15 peer review</div>
+          <div class="duration">All six 201 skills, in practice</div>
+        </div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue">Section divider</span> One beat. Then immediately into the assignment slide.</p>
+        <p><strong>Say:</strong> &ldquo;Module 3. Forty minutes. The first 25 you build. The last 15 you and a partner review what you built. I am circulating the whole time &mdash; I will not solve your problems for you, but I will ask the question that gets you unstuck.&rdquo;</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 16 — Pick your starter problem (exercise) -->
+    <section class="slide slide--exercise" data-module="Module 3" data-title="Pick your starter problem (25 min build)">
+      <div class="ex-banner">
+        <span class="label">Build · Pick one and start</span>
+        <span class="timer">25 minutes</span>
+      </div>
+      <div class="ex-body">
+        <h2 class="ex-prompt">Pick one starter problem &mdash; or your own.</h2>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:32px;margin-top:8px;">
+          <div class="col-card"><div class="col-card__label col-card__label--scarlet">Option 1</div><div class="col-card__title" style="font-size:32px;">Leave request tracker</div><div class="col-card__body" style="font-size:24px;">Who, dates, type, approval status.</div></div>
+          <div class="col-card"><div class="col-card__label col-card__label--scarlet">Option 2</div><div class="col-card__title" style="font-size:32px;">Training attendance log</div><div class="col-card__body" style="font-size:24px;">Event, date, attendees, completion.</div></div>
+          <div class="col-card"><div class="col-card__label col-card__label--scarlet">Option 3</div><div class="col-card__title" style="font-size:32px;">Vehicle inspection checklist</div><div class="col-card__body" style="font-size:24px;">Vehicle ID, date, items, pass/fail.</div></div>
+          <div class="col-card"><div class="col-card__label col-card__label--gold">Option 4</div><div class="col-card__title" style="font-size:32px;">Your own section problem</div><div class="col-card__body" style="font-size:24px;">Get instructor sign-off on scope first.</div></div>
+        </div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue cue--gold">Activity · 25 min</span> Set a visible timer. Tell the room you&rsquo;ll call out the 15- and 5-minute marks.</p>
+        <p><strong>Say:</strong> &ldquo;Pick one of these four. If you pick Option 4, ping me first &mdash; I want to make sure your scope is buildable in 25 minutes. Decompose on paper for two minutes. Then start prompting.&rdquo;</p>
+        <p><strong>What &lsquo;done&rsquo; looks like:</strong> A working core function &mdash; even if rough. Not pretty. Not complete. <em>Working.</em></p>
+        <p><strong>Circulate constantly.</strong> Do NOT let any student struggle silently for more than three minutes. Use these scripts:</p>
+        <ul>
+          <li>Stuck on decomposition: &ldquo;What is the simplest version that would be useful?&rdquo;</li>
+          <li>Stuck on a prompt: &ldquo;Read me your prompt out loud.&rdquo; (They usually catch it themselves.)</li>
+          <li>Stuck on an error: &ldquo;What does the error message say? Copy it exactly and ask AI to explain it.&rdquo;</li>
+          <li>Building too big: &ldquo;Stop. What is the one core function this needs to do? Build only that first.&rdquo;</li>
+        </ul>
+        <p><strong>Don&rsquo;t fix their code.</strong> Ask the question that leads them to the answer. The debugging process <em>is</em> the lesson.</p>
+        <p><strong>When errors appear (and they will):</strong> Click forward to the &ldquo;When something breaks&rdquo; slides &mdash; show the room the debugging loop, then send them back to their build. Even better: pick a real error a student is hitting and walk through it on screen.</p>
+        <p><strong>Time cues:</strong> Call &ldquo;15 minutes left,&rdquo; &ldquo;5 minutes left,&rdquo; and a hard stop at 25.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 17 — WHEN SOMETHING BREAKS · Title -->
+    <section class="slide slide--breaks" data-module="Module 3" data-title="When something breaks — first response">
+      <div class="br-banner">
+        <span class="icon">When something breaks</span>
+        <span>Use this when &mdash; not if &mdash; an error shows up</span>
+      </div>
+      <div class="br-body">
+        <h2 class="br-title">Errors are not failure.<br>They are the whole job.</h2>
+        <p class="br-lede">The first time something breaks, most people quit. That is the 80% who stop building. Builders expect errors and know how to fix them. You are about to be a builder.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:8px;">
+          <div class="br-step">
+            <div class="num">First</div>
+            <div class="h">Read the error out loud.</div>
+            <div class="b">Don&rsquo;t guess. Don&rsquo;t skim. Read exactly what the system says, word for word. Most of the &ldquo;hard&rdquo; problems explain themselves once you read them.</div>
+          </div>
+          <div class="br-step">
+            <div class="num">Then</div>
+            <div class="h">Copy it &mdash; don&rsquo;t paraphrase.</div>
+            <div class="b">Copy the exact error message including any codes or line numbers. Paraphrasing strips the information AI needs to diagnose it.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue cue--amber">When something breaks · interruption slide</span> Click here when you spot the first real error in the room. Stop the build clock briefly. Use this as a teaching moment for the whole class.</p>
+        <p><strong>Say:</strong> &ldquo;Hold up. Eyes on me for two minutes. Someone just hit an error &mdash; that&rsquo;s the most useful moment of the day. Here&rsquo;s what builders do.&rdquo;</p>
+        <p><strong>Hammer the framing:</strong> &ldquo;The first time something breaks, most people quit. That is the 80% from Week 1 &mdash; the people who stop using AI. Today, every one of you is going to break something. The difference between you and the 80% is what you do next.&rdquo;</p>
+        <p><strong>Two-step rule:</strong> Read the error out loud. Copy it word-for-word. That&rsquo;s slide 1. Slide 2 covers the debug loop. Slide 3 shows the prompt template.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 18 — WHEN SOMETHING BREAKS · The debugging loop -->
+    <section class="slide slide--breaks" data-module="Module 3" data-title="When something breaks — the debugging loop">
+      <div class="br-banner">
+        <span class="icon">When something breaks · the loop</span>
+        <span>Power Apps shows · GenAI.mil diagnoses · You apply</span>
+      </div>
+      <div class="br-body">
+        <h2 class="br-title">Three windows. One loop.</h2>
+        <div class="br-steps">
+          <div class="br-step">
+            <div class="num">Step 1</div>
+            <div class="h">Power Apps shows the error.</div>
+            <div class="b">Read it. Copy it. Don&rsquo;t close the window &mdash; you&rsquo;ll need it again.</div>
+          </div>
+          <div class="br-step">
+            <div class="num">Step 2</div>
+            <div class="h">GenAI.mil diagnoses it.</div>
+            <div class="b">Paste the error <em>and</em> what you were trying to do <em>and</em> the relevant code or column setup. Three things, not one.</div>
+          </div>
+          <div class="br-step">
+            <div class="num">Step 3</div>
+            <div class="h">You apply the fix.</div>
+            <div class="b">Copy the corrected code back into Power Apps. Test it. If it still breaks, repeat &mdash; don&rsquo;t try a fourth different fix.</div>
+          </div>
+        </div>
+        <div class="callout callout--amber" style="margin-top:32px;background:rgba(245,166,35,0.1);color:#fff;border-left-color:var(--c-amber);">Different tool, same loop. If you&rsquo;re stuck on CamoGPT, paste the same error into ChatGPT or Gemini for a second opinion (unclassified prompts only). Using multiple tools is a valid strategy.</div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue cue--amber">Show the loop</span> 60 seconds on this slide.</p>
+        <p><strong>Say:</strong> &ldquo;Three windows. One loop. Power Apps shows the error. You copy it &mdash; not paraphrase, copy &mdash; into GenAI.mil. GenAI.mil tells you what&rsquo;s wrong. You apply the fix in Power Apps. That&rsquo;s the whole job.&rdquo;</p>
+        <p><strong>Common mistake to call out:</strong> &ldquo;If your fix doesn&rsquo;t work, don&rsquo;t try a fourth different fix. Repeat the loop &mdash; copy the new error in and ask again. Random changes make it worse.&rdquo;</p>
+        <p><strong>Tool flexibility:</strong> &ldquo;If GenAI.mil is giving you weird answers on a specific error, paste the same error into ChatGPT or Gemini for a second opinion. Just remember &mdash; commercial tools are unclassified-only. Don&rsquo;t paste CUI in.&rdquo;</p>
+        <p><strong>Transition:</strong> &ldquo;Last slide on this. The shape of a debug prompt.&rdquo;</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 19 — WHEN SOMETHING BREAKS · Anatomy of a debug prompt -->
+    <section class="slide slide--breaks" data-module="Module 3" data-title="When something breaks — anatomy of a debug prompt">
+      <div class="br-banner">
+        <span class="icon">When something breaks · the prompt</span>
+        <span>Three pieces · context, code, exact error</span>
+      </div>
+      <div class="br-body">
+        <h2 class="br-title">A debug prompt has three pieces.</h2>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:start;margin-top:8px;">
+          <div class="code-card">I am building a leave request tracker in Power Apps.
+
+I added this formula to my gallery:
+
+  Filter(LeaveRequests, Status = "Pending"
+         &amp;&amp; RequestDate &gt; Today())
+
+I am getting this error:
+  "The function 'Filter' has some
+   invalid arguments."
+
+The RequestDate column is a Date field
+in my SharePoint list.
+
+What is wrong and how do I fix it?</div>
+          <div>
+            <ul class="bullets bullets--inline" style="color:#fff;">
+              <li><strong style="color:var(--c-amber);">Context</strong> &mdash; what you&rsquo;re building and where this code lives.</li>
+              <li><strong style="color:var(--c-amber);">Exact code</strong> &mdash; copied from your tool, not retyped.</li>
+              <li><strong style="color:var(--c-amber);">Exact error</strong> &mdash; the real message, in quotes.</li>
+              <li><strong style="color:var(--c-amber);">Plus relevant setup</strong> &mdash; column types, choice values, anything AI can&rsquo;t see.</li>
+            </ul>
+            <p style="font-size:24px;line-height:1.4;color:rgba(255,255,255,0.78);margin-top:24px;">If you&rsquo;ve sent a debug prompt and it didn&rsquo;t work, ask: <em>which of these four did I leave out?</em></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue cue--amber">Anatomy of a debug prompt</span> 90 seconds on this slide.</p>
+        <p><strong>Say:</strong> &ldquo;Look at this prompt. It&rsquo;s four sentences and a code block. Most students send AI a one-line cry for help &mdash; <em>&lsquo;my filter doesn&rsquo;t work&rsquo;</em> &mdash; and then wonder why AI gives them garbage. Look at the four pieces here.&rdquo;</p>
+        <p><strong>Walk through:</strong></p>
+        <ul>
+          <li>Context: <em>&ldquo;I am building a leave request tracker in Power Apps.&rdquo;</em></li>
+          <li>Exact code: copied straight from the tool.</li>
+          <li>Exact error message: in quotes.</li>
+          <li>Setup AI can&rsquo;t see: <em>&ldquo;The RequestDate column is a Date field.&rdquo;</em></li>
+        </ul>
+        <p><strong>Test the room:</strong> &ldquo;If you send a debug prompt and it doesn&rsquo;t fix it, ask yourself: which of these four did I leave out? Almost always, the answer is the setup AI can&rsquo;t see &mdash; the column types, the choice values, what your data actually looks like.&rdquo;</p>
+        <p><strong>Send them back to the build:</strong> &ldquo;OK. Back to your builds. Use this template when you hit your next error. I&rsquo;m circulating.&rdquo;</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 20 — Peer review framing -->
+    <section class="slide slide--exercise" data-module="Module 3" data-title="Peer review (15 min) — what good looks like">
+      <div class="ex-banner">
+        <span class="label">Peer review · Pair up</span>
+        <span class="timer">15 minutes</span>
+      </div>
+      <div class="ex-body">
+        <h2 class="ex-prompt">Show your partner what you built &mdash; even if it&rsquo;s rough.</h2>
+        <p class="ex-task" style="margin-bottom:32px;">Each person gets ~6 minutes. Demonstrate it. Then your partner walks you through the four checks below before you swap.</p>
+
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
+          <div class="col-card" style="padding:28px;"><div class="col-card__label col-card__label--scarlet">Check 01</div><div class="col-card__title" style="font-size:24px;margin-bottom:10px;">Clear problem statement</div><div class="col-card__body" style="font-size:20px;">Can the builder explain the problem in one sentence?</div></div>
+          <div class="col-card" style="padding:28px;"><div class="col-card__label col-card__label--scarlet">Check 02</div><div class="col-card__title" style="font-size:24px;margin-bottom:10px;">Core function works</div><div class="col-card__body" style="font-size:20px;">Does the basic version do what it needs to do?</div></div>
+          <div class="col-card" style="padding:28px;"><div class="col-card__label col-card__label--scarlet">Check 03</div><div class="col-card__title" style="font-size:24px;margin-bottom:10px;">Evidence of iteration</div><div class="col-card__body" style="font-size:20px;">Did the builder refine at least once?</div></div>
+          <div class="col-card" style="padding:28px;"><div class="col-card__label col-card__label--scarlet">Check 04</div><div class="col-card__title" style="font-size:24px;margin-bottom:10px;">Can explain decisions</div><div class="col-card__body" style="font-size:20px;">Can the builder say <em>why</em> they made the choices they made?</div></div>
+        </div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue cue--gold">Peer review · 15 min</span> Set a visible timer. Pair students yourself &mdash; don&rsquo;t leave it to chance, you&rsquo;ll get one strong + one weak in each pair on purpose.</p>
+        <p><strong>Time slices:</strong></p>
+        <ul>
+          <li>0&ndash;2 min: explain the four checks.</li>
+          <li>2&ndash;8 min: Partner A demos, Partner B reviews.</li>
+          <li>8&ndash;14 min: Partner B demos, Partner A reviews.</li>
+          <li>14&ndash;15 min: Whole-class debrief &mdash; one or two standout examples.</li>
+        </ul>
+        <p><strong>Circulate:</strong> Listen for constructive feedback. If a reviewer is being too soft (&ldquo;looks great&rdquo;), step in and ask the four checks yourself. If a reviewer is being harsh, redirect to specifics.</p>
+        <p><strong>Watch for:</strong> Builders who can&rsquo;t answer Check 04 (&ldquo;why did you make that choice?&rdquo;) usually didn&rsquo;t decompose &mdash; they just copy-pasted what AI gave them. Flag this for Module 4.</p>
+        <p><strong>Debrief question:</strong> &ldquo;What did you learn from seeing your partner&rsquo;s approach that you didn&rsquo;t see in your own?&rdquo; Get one or two answers. Move on.</p>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         MODULE 4 — Decomposition Framework (20 min)
+         ======================================================== -->
+
+    <!-- SLIDE 21 — Module 4 divider -->
+    <section class="slide slide--section" data-module="Module 4" data-title="Module 4 — Decomposition Framework">
+      <div class="section-wrap">
+        <div class="module-tag">Module 04 of 05</div>
+        <h2 class="module-title">Decomposition,<br>applied to your problem.</h2>
+        <div class="module-meta">
+          <div><strong>20 minutes</strong> &nbsp; · &nbsp; 10 individual · 8 pair · 2 debrief</div>
+          <div class="duration">The make-or-break exercise of the day</div>
+        </div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue">Section divider</span> Hold for one beat.</p>
+        <p><strong>Say:</strong> &ldquo;Module 4. Twenty minutes. This is the most important exercise of the day. The decomposition you walk out with is the assignment you&rsquo;ll execute before Course 3. Take it seriously.&rdquo;</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 22 — The decomposition exercise -->
+    <section class="slide slide--exercise" data-module="Module 4" data-title="Decompose a real problem from your unit (10 min individual)">
+      <div class="ex-banner">
+        <span class="label">Individual · One real problem</span>
+        <span class="timer">10 minutes</span>
+      </div>
+      <div class="ex-body">
+        <h2 class="ex-prompt">Pick one real problem from your section. Decompose it on paper.</h2>
+        <p class="ex-task" style="margin-bottom:24px;">Not a fake one. Not a clever one. The annoying recurring one you&rsquo;ve been meaning to fix.</p>
+        <ul class="bullets" style="max-width:1500px;">
+          <li><strong>Problem statement</strong> &mdash; one sentence. Concrete enough that a Marine outside your unit could understand it.</li>
+          <li><strong>Core requirements</strong> &mdash; what must this do? List them.</li>
+          <li><strong>4&ndash;6 subtasks</strong> &mdash; with a Human role, an AI role, and the pattern (Centaur or Cyborg) for each.</li>
+          <li><strong>Frontier risks</strong> &mdash; what might AI struggle with? Authentication? Integration with a legacy system? Domain-specific calcs?</li>
+          <li><strong>Simplest useful version</strong> &mdash; what could you ship in 1&ndash;2 hours that would still help?</li>
+        </ul>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue cue--gold">Activity · 10 min individual</span> Set a visible timer. The worksheet template is in their student companion (or hand out a paper copy if you printed them).</p>
+        <p><strong>Say:</strong> &ldquo;Pick a real problem from your section. Not a clever one &mdash; the annoying recurring one you&rsquo;ve been meaning to fix. Decompose it on paper. You have ten minutes. Go.&rdquo;</p>
+        <p><strong>Walk the room actively.</strong> Quality of decomposition predicts quality of build. Watch for these failure modes:</p>
+        <ul>
+          <li><strong>Problem too big:</strong> if subtasks list more than 8 items, scope is wrong. Help them narrow to one slice.</li>
+          <li><strong>Problem too vague:</strong> if the statement uses words like &ldquo;better&rdquo; or &ldquo;improved,&rdquo; push for concrete requirements. &ldquo;What does &lsquo;better&rsquo; mean? Faster? Fewer steps? Less paperwork?&rdquo;</li>
+          <li><strong>No frontier recognition:</strong> if they don&rsquo;t list any AI limitations, prompt: &ldquo;What part of this might be hard for AI?&rdquo;</li>
+          <li><strong>All-AI subtasks:</strong> if every subtask says &ldquo;AI builds,&rdquo; remind them &mdash; the human provides domain knowledge. Where does theirs show up?</li>
+        </ul>
+        <p><strong>Time cues:</strong> 5-minute warning. 1-minute warning. Hard stop at 10.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 23 — Pair review of decompositions -->
+    <section class="slide slide--exercise" data-module="Module 4" data-title="Pair review the decompositions (8 min)">
+      <div class="ex-banner">
+        <span class="label">Pair review · 4 min each</span>
+        <span class="timer">8 minutes</span>
+      </div>
+      <div class="ex-body">
+        <h2 class="ex-prompt">Trade worksheets. Run the four checks.</h2>
+        <p class="ex-task" style="margin-bottom:32px;">Four minutes per person. Use a visible timer. Don&rsquo;t fix it for them &mdash; ask the question that surfaces the gap.</p>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:32px;">
+          <div class="col-card"><div class="col-card__label col-card__label--scarlet">Clarity check</div><div class="col-card__body" style="font-size:24px;">Could someone outside the unit understand the problem? If not, push for specifics.</div></div>
+          <div class="col-card"><div class="col-card__label col-card__label--scarlet">Scope check</div><div class="col-card__body" style="font-size:24px;">Is any subtask too big? Should it be broken down further?</div></div>
+          <div class="col-card"><div class="col-card__label col-card__label--gold">Frontier check</div><div class="col-card__body" style="font-size:24px;">What did the builder miss? Authentication? Data security? Legacy integration?</div></div>
+          <div class="col-card"><div class="col-card__label col-card__label--gold">MVP check</div><div class="col-card__body" style="font-size:24px;">Is the simplest useful version actually simple? Could you build it in 1&ndash;2 hours?</div></div>
+        </div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue cue--gold">Pair review · 8 min</span> Same pairs as Module 3, or re-pair if the chemistry was off. Visible timer.</p>
+        <p><strong>Say:</strong> &ldquo;Trade worksheets. Four minutes per person. Use the four checks. Your job isn&rsquo;t to fix it &mdash; your job is to ask the question that helps your partner see the gap.&rdquo;</p>
+        <p><strong>Intervention signal:</strong> If a pair is stuck on clarifying the problem for more than 2 minutes, step in. Ask the builder: &ldquo;What does success look like? Describe the end state.&rdquo;</p>
+        <p><strong>Listen for:</strong> Builders who realise mid-review that their MVP isn&rsquo;t actually minimal. Highlight that on debrief &mdash; &ldquo;narrowing scope is the most common &lsquo;aha.&rsquo;&rdquo;</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 24 — Debrief -->
+    <section class="slide slide--content" data-module="Module 4" data-title="Decomposition debrief — what your partner caught">
+      <div class="slide__edge"></div>
+      <div class="slide__eyebrow">Module 4 · 2-minute debrief</div>
+      <h2 class="slide__title slide__title--md">Decomposition is a skill. You will get better with reps.</h2>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:24px;">
+        <div>
+          <h3 style="font-size:24px;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-scarlet);margin-bottom:18px;font-weight:700;">Two questions for the room</h3>
+          <ul class="bullets bullets--inline">
+            <li>Who changed their decomposition based on partner feedback?</li>
+            <li>What did your partner catch that you missed?</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-size:24px;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-gold-dark);margin-bottom:18px;font-weight:700;">The pattern</h3>
+          <p style="font-size:28px;line-height:1.4;">The first time you decompose anything, you will miss things. That&rsquo;s normal. The second time you decompose the same problem, you will miss fewer. By the tenth time, decomposition is automatic.</p>
+        </div>
+      </div>
+
+      <div class="callout callout--gold" style="margin-top:32px;">By the end of this module, every student should walk out with a one-page decomposition of a real problem they will build before Course 3. If yours is still vague, grab me at the break before Module 5.</div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue">Debrief · 2 min</span> Quick. Hands and one or two examples.</p>
+        <p><strong>Say:</strong> &ldquo;Show of hands &mdash; who changed their decomposition based on what your partner said?&rdquo; (Most should raise hands. If nobody does, ask why &mdash; usually means partners were too soft.)</p>
+        <p><strong>Take 1&ndash;2 examples:</strong> &ldquo;What did your partner catch that you missed?&rdquo; Pick someone who looked engaged. Don&rsquo;t cold-call someone who looked frustrated.</p>
+        <p><strong>Drive home:</strong> &ldquo;Decomposition is a skill. You&rsquo;ll get better with reps. The first time you decompose anything, you will miss things. That&rsquo;s normal. By the tenth time, it&rsquo;s automatic.&rdquo;</p>
+        <p><strong>Pull aside privately (after class):</strong> any student whose worksheet is blank or vague. They&rsquo;re not ready for the assignment &mdash; help them scope.</p>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         MODULE 5 — Wrap-Up & Assignment (10 min)
+         ======================================================== -->
+
+    <!-- SLIDE 25 — Module 5 divider -->
+    <section class="slide slide--section" data-module="Module 5" data-title="Module 5 — Wrap-Up & Assignment">
+      <div class="section-wrap">
+        <div class="module-tag">Module 05 of 05</div>
+        <h2 class="module-title">Wrap-up.<br>Then your homework.</h2>
+        <div class="module-meta">
+          <div><strong>10 minutes</strong> &nbsp; · &nbsp; recap · assignment · what&rsquo;s next</div>
+          <div class="duration">You leave with a real plan</div>
+        </div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue">Section divider</span> One beat. Energy back up &mdash; this is the close.</p>
+        <p><strong>Say:</strong> &ldquo;Last ten minutes. Three things &mdash; quick recap of what you learned, the assignment before Course 3, and a preview of what&rsquo;s next.&rdquo;</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 26 — Knowledge check / recap -->
+    <section class="slide slide--knowledge" data-module="Module 5" data-title="Knowledge check — name it from memory">
+      <div class="slide__edge"></div>
+      <div class="slide__eyebrow">Module 5 · Recap · 3 min</div>
+      <h2 class="slide__title slide__title--md">Four questions. Answer in your head, then check.</h2>
+
+      <div class="kc-grid">
+        <div class="kc-card">
+          <div class="qnum">1</div>
+          <div>
+            <div class="qtext">What is the first thing a builder does &mdash; before any tool?</div>
+            <div class="qansw"><strong>Decompose on paper.</strong> Data fields, user actions, simplest useful version.</div>
+          </div>
+        </div>
+        <div class="kc-card">
+          <div class="qnum">2</div>
+          <div>
+            <div class="qtext">What are the three pieces of a good debug prompt?</div>
+            <div class="qansw"><strong>Context, exact code, exact error</strong> &mdash; plus relevant setup AI can&rsquo;t see.</div>
+          </div>
+        </div>
+        <div class="kc-card">
+          <div class="qnum">3</div>
+          <div>
+            <div class="qtext">When AI gives you the wrong answer, what do you do?</div>
+            <div class="qansw"><strong>Re-prompt with what was wrong.</strong> Don&rsquo;t accept the first output. Don&rsquo;t make random changes.</div>
+          </div>
+        </div>
+        <div class="kc-card">
+          <div class="qnum">4</div>
+          <div>
+            <div class="qtext">What separates the 20% who keep building from the 80% who quit?</div>
+            <div class="qansw"><strong>Builders expect errors and debug them.</strong> Quitters treat the first error as failure.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue">Recap · 3 min</span> Cover the question. Ask the room. <em>Then</em> reveal the answer.</p>
+        <p><strong>Say:</strong> &ldquo;Four questions. Answer in your head before I show the answer. If you can answer all four, you&rsquo;re ready for Module 4&rsquo;s assignment.&rdquo;</p>
+        <p><strong>For each question:</strong> Read the question. Pause for 5 seconds (it will feel longer than you think). Take one volunteer answer. Then point to the answer on screen.</p>
+        <p><strong>If the room is shaky on Q1:</strong> Re-state &mdash; &ldquo;Decompose. On paper. Before any tool. If you remember nothing else, remember that.&rdquo;</p>
+        <p><strong>Transition:</strong> &ldquo;Here&rsquo;s your assignment.&rdquo;</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 27 — Assignment -->
+    <section class="slide slide--exercise" data-module="Module 5" data-title="Assignment — come to Course 3 with…">
+      <div class="ex-banner">
+        <span class="label">Assignment · Before Course 3</span>
+        <span class="timer">2&ndash;4 hours</span>
+      </div>
+      <div class="ex-body">
+        <h2 class="ex-prompt">Come to Course 3 with four things.</h2>
+        <ul class="bullets" style="max-width:1500px;margin-top:8px;">
+          <li><strong>One.</strong> A working (or partially working) prototype of the problem you decomposed today.</li>
+          <li><strong>Two.</strong> Notes on what worked &mdash; prompts that landed, features that came together fast.</li>
+          <li><strong>Three.</strong> Notes on what didn&rsquo;t &mdash; errors you hit, features you cut, dead ends.</li>
+          <li><strong>Four.</strong> One failure case worth sharing &mdash; something AI got wrong that other builders should know about.</li>
+        </ul>
+        <div class="callout callout--gold" style="margin-top:32px;">Time budget: 2&ndash;4 hours over the next week. Not a finished product. A real attempt. Office hours and the #builder-orientation Teams channel are open if you get stuck.</div>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue cue--gold">Assignment</span> Slow down here. People will tune out at the end of class &mdash; this is what they&rsquo;re paid to remember.</p>
+        <p><strong>Say:</strong> &ldquo;Four things. One: a working or partially working prototype of the problem you just decomposed. Two: notes on what worked. Three: notes on what didn&rsquo;t. Four: one failure case worth sharing &mdash; something AI got wrong that other builders should know about.&rdquo;</p>
+        <p><strong>Set realistic expectations:</strong> &ldquo;Two to four hours total over the week. This is not a finished product. It&rsquo;s a real attempt. If your prototype only does the simplest version of the simplest version, that&rsquo;s fine &mdash; show up with it anyway.&rdquo;</p>
+        <p><strong>Why the failure case matters:</strong> &ldquo;Course 3 starts with failure sharing. Every failure case you bring saves another builder an hour of confusion. That&rsquo;s how the unit&rsquo;s frontier map gets built.&rdquo;</p>
+        <p><strong>Support resources:</strong> Office hours (Wed 1500&ndash;1600), #builder-orientation Teams channel, ai-builders@1stbn99thmar.mil. State the times out loud.</p>
+        <p><strong>If anyone looks lost:</strong> Note them. Catch them after class for a 5-minute scoping conversation.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 28 — Week 3 preview -->
+    <section class="slide slide--closing" data-module="Module 5" data-title="Week 3 preview — Platform Training">
+      <div class="cl-bar">
+        <span>Course 3 of 6 · Next session</span>
+        <span>Platform Training · 4 hours · Builders</span>
+      </div>
+      <div class="cl-body">
+        <div>
+          <div class="cl-eyebrow">What&rsquo;s next</div>
+          <h2 class="cl-title">Week 3 &mdash;<br>Platform<br>Training.</h2>
+          <p class="cl-sub">Four hours. Three complete tools. You practice both Centaur and Cyborg patterns and walk out able to deploy under the EDD SOP.</p>
+        </div>
+        <div class="cl-modules">
+          <div class="cl-modules__item"><span class="lbl">Setup &amp; Review</span><span class="dur">15 min</span></div>
+          <div class="cl-modules__item"><span class="lbl">Build #1 &mdash; Centaur Mode</span><span class="dur">60 min</span></div>
+          <div class="cl-modules__item"><span class="lbl">Failure Sharing (during break)</span><span class="dur">15 min</span></div>
+          <div class="cl-modules__item"><span class="lbl">Build #2 &mdash; Cyborg Mode</span><span class="dur">60 min</span></div>
+          <div class="cl-modules__item"><span class="lbl">Build #3 &mdash; Your Problem</span><span class="dur">60 min</span></div>
+          <div class="cl-modules__item"><span class="lbl">Frontier Map Update &amp; Wrap</span><span class="dur">15 min</span></div>
+        </div>
+      </div>
+      <div class="cl-foot">
+        <span>Bring your prototype · Bring your failure case · Bring your laptop</span>
+        <span>See you at Course 3</span>
+      </div>
+
+      <div class="speaker-notes" hidden>
+        <p><span class="cue">Week 3 preview</span> 60 seconds. Set the expectation, then close.</p>
+        <p><strong>Say:</strong> &ldquo;Course 3 is Platform Training. Four hours. You&rsquo;ll build three complete tools &mdash; one in Centaur mode with explicit handoffs, one in Cyborg mode with continuous AI back-and-forth, and one of your own.&rdquo;</p>
+        <p><strong>Failure sharing reminder:</strong> &ldquo;The failure-sharing block during the break is not optional. It&rsquo;s one of the most valuable 15 minutes in the whole program. That&rsquo;s why I asked you to bring a failure case.&rdquo;</p>
+        <p><strong>Logistics:</strong> Confirm the date and time of Course 3. Remind them: bring the prototype on a laptop, thumb drive, or screenshots.</p>
+        <p><strong>Closing message:</strong> &ldquo;You are not expected to be experts after two hours. You are expected to try. Every builder hits errors. The difference is that builders debug instead of quit. Decomposition is the skill that makes everything else work. Help each other. Share failures openly. That&rsquo;s how we all get better.&rdquo;</p>
+        <p><strong>End on time.</strong> Stop the screen share. Stay on the call for five more minutes for one-on-one questions.</p>
+      </div>
+    </section>
+
+  </div><!-- /.stage -->
+
+  <!-- ========================================================
+       Speaker notes pane (toggle with N or P)
+       ======================================================== -->
+  
+
+</div><!-- /.deck -->
+
+<script src="js/deck.js"></script>
+</body>
+</html>

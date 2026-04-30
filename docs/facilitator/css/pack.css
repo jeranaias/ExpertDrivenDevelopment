@@ -1,0 +1,500 @@
+/* =========================================================
+   EDD Facilitator Pack — shared one-page printable stylesheet
+   Built on the EDD palette (USMC scarlet, gold, warm grays).
+   On screen: legible web view inside the site chrome.
+   Print: A4 / Letter LANDSCAPE, one page, B&W readable.
+   ========================================================= */
+
+:root {
+  --pk-scarlet: #CC0000;
+  --pk-scarlet-dark: #a30000;
+  --pk-gold: #F5D130;
+  --pk-gold-dark: #d4b11a;
+  --pk-ink: #1a1a1a;
+  --pk-ink-2: #4a4a4a;
+  --pk-ink-3: #6e6e6e;
+  --pk-paper: #ffffff;
+  --pk-paper-2: #f8f7f5;
+  --pk-rule: #d9d8d4;
+  --pk-rule-2: #e8e7e3;
+  --pk-warn-bg: #fef7e0;
+  --pk-warn-edge: #d4b11a;
+}
+
+/* ---------- On-screen presentation -----------------------
+   We sit inside the standard site-wrapper. Constrain the
+   pack to a "page" so authors can preview the print layout
+   in the browser before sending to a printer. */
+
+.pack-page {
+  background: var(--pk-paper);
+  color: var(--pk-ink);
+  border: 1px solid var(--pk-rule);
+  border-radius: 6px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  padding: 0.45in 0.55in;
+  margin: 0 auto 2rem;
+  max-width: 11in;        /* Letter landscape width */
+  min-height: 8.5in;      /* Letter landscape height */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  font-size: 9.6pt;
+  line-height: 1.32;
+  display: flex;
+  flex-direction: column;
+  gap: 0.16in;
+}
+
+.pack-intro {
+  max-width: 11in;
+  margin: 0 auto 1.5rem;
+  color: var(--pk-ink-2);
+}
+.pack-intro p { margin: 0 0 0.4rem; }
+.pack-intro kbd {
+  display: inline-block;
+  padding: 1px 6px;
+  background: var(--pk-paper-2);
+  border: 1px solid var(--pk-rule);
+  border-radius: 3px;
+  font-family: "Cascadia Code", "Fira Code", Consolas, Monaco, monospace;
+  font-size: 0.85em;
+}
+
+/* ---------- Header bar ------------------------------------ */
+.pk-head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: end;
+  gap: 0.3in;
+  padding-bottom: 0.12in;
+  border-bottom: 3px solid var(--pk-scarlet);
+}
+.pk-head__week {
+  display: flex;
+  align-items: center;
+  gap: 0.12in;
+  font-size: 8.5pt;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pk-scarlet);
+}
+.pk-head__week .num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.32in;
+  height: 0.32in;
+  border-radius: 50%;
+  background: var(--pk-ink);
+  color: var(--pk-gold);
+  font-size: 13pt;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+.pk-head__title h1 {
+  margin: 0;
+  font-size: 19pt;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  font-weight: 800;
+  color: var(--pk-ink);
+}
+.pk-head__title .sub {
+  margin: 2px 0 0;
+  font-size: 9pt;
+  color: var(--pk-ink-2);
+  font-weight: 500;
+}
+.pk-head__meta {
+  font-size: 8pt;
+  text-align: right;
+  color: var(--pk-ink-2);
+  letter-spacing: 0.04em;
+}
+.pk-head__meta span {
+  display: inline-block;
+  margin-left: 0.18in;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--pk-ink-3);
+}
+.pk-head__meta strong {
+  display: inline-block;
+  margin-left: 0.06in;
+  color: var(--pk-ink);
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* ---------- Timing strip ---------------------------------- */
+.pk-timing {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 0;
+  border: 1px solid var(--pk-rule);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--pk-paper-2);
+}
+.pk-timing__cell {
+  padding: 4pt 6pt 5pt;
+  border-right: 1px solid var(--pk-rule);
+  display: flex;
+  flex-direction: column;
+  gap: 1pt;
+  min-width: 0;
+}
+.pk-timing__cell:last-child { border-right: 0; }
+.pk-timing__cell--break {
+  background: var(--pk-warn-bg);
+  border-right-color: var(--pk-rule);
+}
+.pk-timing__cell .t {
+  font-family: "Cascadia Code", "Fira Code", Consolas, Monaco, monospace;
+  font-size: 7.5pt;
+  color: var(--pk-scarlet);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.pk-timing__cell .n {
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: var(--pk-ink);
+  line-height: 1.2;
+}
+.pk-timing__cell .d {
+  font-size: 7pt;
+  color: var(--pk-ink-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+/* ---------- Body grid (5 boxes) --------------------------- */
+.pk-body {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr 1.15fr;
+  grid-template-rows: auto auto;
+  gap: 0.14in;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.pk-box {
+  border: 1px solid var(--pk-rule);
+  border-left: 4px solid var(--pk-scarlet);
+  border-radius: 0 4px 4px 0;
+  padding: 6pt 9pt 7pt;
+  background: var(--pk-paper);
+  display: flex;
+  flex-direction: column;
+  gap: 3pt;
+  min-width: 0;
+  min-height: 0;
+}
+.pk-box--gold     { border-left-color: var(--pk-gold-dark); }
+.pk-box--ink      { border-left-color: var(--pk-ink); }
+.pk-box--prep     { grid-column: 1; grid-row: 1; }
+.pk-box--handoff  { grid-column: 2; grid-row: 1; }
+.pk-box--exercise { grid-column: 3; grid-row: 1 / span 2; }
+.pk-box--sideways { grid-column: 1; grid-row: 2; }
+.pk-box--homework { grid-column: 2; grid-row: 2; }
+
+.pk-box h2 {
+  margin: 0 0 1pt;
+  font-size: 9pt;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pk-scarlet);
+}
+.pk-box--gold h2 { color: var(--pk-gold-dark); }
+.pk-box--ink h2  { color: var(--pk-ink); }
+.pk-box h2 .lede {
+  display: block;
+  margin-top: 1pt;
+  font-size: 7.5pt;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--pk-ink-3);
+}
+
+.pk-box ul,
+.pk-box ol {
+  margin: 0;
+  padding-left: 12pt;
+  list-style-position: outside;
+}
+.pk-box li {
+  font-size: 8.6pt;
+  line-height: 1.32;
+  margin-bottom: 1.5pt;
+  color: var(--pk-ink-2);
+}
+.pk-box li strong { color: var(--pk-ink); font-weight: 700; }
+.pk-box li::marker { color: var(--pk-scarlet); }
+.pk-box--gold li::marker { color: var(--pk-gold-dark); }
+.pk-box--ink  li::marker { color: var(--pk-ink); }
+
+.pk-box p {
+  margin: 0 0 2pt;
+  font-size: 8.6pt;
+  color: var(--pk-ink-2);
+  line-height: 1.32;
+}
+
+/* Cue / quote styles inside boxes */
+.pk-cue {
+  display: block;
+  margin-top: 2pt;
+  padding: 3pt 6pt;
+  background: var(--pk-paper-2);
+  border-left: 3px solid var(--pk-gold-dark);
+  font-size: 8pt;
+  color: var(--pk-ink);
+  line-height: 1.3;
+}
+.pk-cue strong {
+  display: inline-block;
+  margin-right: 4pt;
+  font-size: 7.2pt;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pk-gold-dark);
+  font-weight: 800;
+}
+
+/* Sideways mini-table style: tight 2-line entries */
+.pk-fail {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.pk-fail li {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-bottom: 3.5pt;
+  padding-left: 0;
+}
+.pk-fail li::marker { content: ""; }
+.pk-fail .sym {
+  display: block;
+  font-weight: 700;
+  font-size: 8.6pt;
+  color: var(--pk-ink);
+  line-height: 1.25;
+}
+.pk-fail .sym::before {
+  content: "▶";
+  color: var(--pk-scarlet);
+  margin-right: 4pt;
+  font-size: 7pt;
+  vertical-align: 1px;
+}
+.pk-fail .fix {
+  display: block;
+  font-size: 8.4pt;
+  color: var(--pk-ink-2);
+  padding-left: 11pt;
+  line-height: 1.3;
+}
+.pk-fail .fix::before {
+  content: "→ ";
+  color: var(--pk-scarlet);
+  font-weight: 700;
+}
+
+/* Footer */
+.pk-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 5pt;
+  border-top: 1px solid var(--pk-rule-2);
+  font-size: 7.4pt;
+  color: var(--pk-ink-3);
+  letter-spacing: 0.06em;
+}
+.pk-foot strong {
+  color: var(--pk-ink);
+  letter-spacing: 0.04em;
+}
+.pk-foot .right a {
+  color: var(--pk-scarlet);
+  text-decoration: none;
+  font-weight: 700;
+}
+.pk-foot .right a:hover { text-decoration: underline; }
+
+/* ---------- Print -----------------------------------------
+   Paper-size-neutral: we declare only `landscape` orientation
+   so Letter (11×8.5in) and A4 (297×210mm = ~11.69×8.27in)
+   both print natively. The .pack-page is sized to fit safely
+   inside the smaller of the two (A4 height, Letter width)
+   minus a 0.32in margin all round, so neither paper crops it. */
+@page {
+  size: landscape;
+  margin: 0.32in;
+}
+
+@media print {
+  /* Hide site chrome */
+  .site-header, .mobile-nav, .site-footer, .page-header,
+  .pack-intro, .skip-link {
+    display: none !important;
+  }
+
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .site-main { padding: 0 !important; margin: 0 !important; }
+  .site-main > .container { padding: 0 !important; max-width: none !important; }
+
+  .pack-page {
+    box-shadow: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    /* Min(Letter landscape, A4 landscape) − 0.32in margins.
+       Letter content area: 10.36in × 7.86in.
+       A4 content area:    ~11.05in × 7.63in.
+       Use the safe intersection so the pack never clips. */
+    width: 10.36in;
+    height: 7.63in;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Force colour fidelity on key marks even in B&W printing */
+  .pk-head { border-bottom-color: #000 !important; }
+  .pk-head__week { color: #000 !important; }
+  .pk-head__week .num { background: #000 !important; color: #fff !important; }
+  .pk-box { border-color: #000 !important; }
+  .pk-box--gold, .pk-box--ink { border-left-color: #000 !important; }
+  .pk-box h2, .pk-box--gold h2, .pk-box--ink h2 { color: #000 !important; }
+  .pk-cue { background: #f0f0ee !important; border-left-color: #000 !important; }
+  .pk-cue strong { color: #000 !important; }
+  .pk-timing__cell--break { background: #ececec !important; }
+  .pk-timing__cell .t { color: #000 !important; }
+  .pk-timing { border-color: #000 !important; }
+  .pk-timing__cell { border-right-color: #000 !important; }
+  .pk-fail .sym::before, .pk-fail .fix::before { color: #000 !important; }
+  .pk-box li::marker { color: #000 !important; }
+  .pk-foot { border-top-color: #000 !important; }
+  .pk-foot .right a { color: #000 !important; text-decoration: underline; }
+
+  a { color: #000 !important; text-decoration: none; }
+}
+
+/* ---------- Landing page (index.html) cards --------------- */
+.pack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+.pack-card {
+  background: var(--pk-paper);
+  border: 1px solid var(--pk-rule);
+  border-top: 4px solid var(--pk-scarlet);
+  border-radius: 6px;
+  padding: 1rem 1.1rem 1.1rem;
+  text-decoration: none;
+  color: var(--pk-ink);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.pack-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
+}
+.pack-card .tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pk-scarlet);
+}
+.pack-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--pk-ink);
+}
+.pack-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--pk-ink-2);
+  line-height: 1.4;
+}
+.pack-card .meta {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--pk-ink-3);
+  letter-spacing: 0.04em;
+  border-top: 1px solid var(--pk-rule-2);
+}
+
+/* ---------- PDF download UI (on-screen only) ---------------
+   Used on the index page to list pre-rendered PDFs and on each
+   pack page for the "Download PDF" affordance. Wrapped in
+   @media screen so we never alter the print output. */
+@media screen {
+  .pack-pdf-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0.6rem 1rem;
+  }
+  .pack-pdf-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--pk-ink-2);
+    font-size: 0.92rem;
+  }
+  .pack-pdf-list .btn { white-space: nowrap; }
+  .pack-pdf-regen { margin-bottom: 1.5rem; color: var(--pk-ink-2); }
+  .pack-pdf-regen summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--pk-ink);
+    padding: 0.3rem 0;
+  }
+  .pack-pdf-regen .muted { color: var(--pk-ink-3); font-size: 0.85rem; }
+  .pack-pdf-regen code {
+    background: var(--pk-paper-2);
+    border: 1px solid var(--pk-rule-2);
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: 0.88em;
+  }
+  .pack-intro__pdf {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    font-size: 0.92rem;
+    color: var(--pk-ink-2);
+  }
+}

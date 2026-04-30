@@ -1,0 +1,2687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Week 6 (Course 6) instructor deck — Full-Stack AI-Assisted Development. The capstone of the six-week Expert-Driven Development program.">
+<title>Week 6 Deck — Full-Stack AI-Assisted Development | EDD</title>
+<style>
+/* ============================================================
+   EDD Deck — Week 6: Full-Stack AI-Assisted Development
+   Capstone visual identity, inheriting Week 1 palette/layouts.
+   - 16:9 single-slide presentation view
+   - Press ← / → or Space to navigate
+   - Press S to toggle speaker notes panel
+   - Press F to toggle fullscreen
+   - Press P to enter print/handout view (each slide on its own page)
+   - Press Esc to exit print view
+   ============================================================ */
+
+:root {
+  --scarlet: #CC0000;
+  --scarlet-dark: #a30000;
+  --gold: #F5D130;
+  --gold-dark: #d4b11a;
+  --ink: #1a1a1a;
+  --ink-2: #4a4a4a;
+  --ink-3: #6e6e6e;
+  --paper: #ffffff;
+  --paper-2: #f8f7f5;
+  --paper-3: #efeee9;
+  --line: #d9d8d4;
+  --line-2: #e8e7e3;
+  --code-bg: #1a1a1a;
+  --code-fg: #e8e7e3;
+  --info: #1a3a6b;
+  --info-bg: #e8f0fe;
+  --warn: #5f4b08;
+  --warn-bg: #fef7e0;
+  --success: #0d652d;
+  --success-bg: #e6f4ea;
+
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: "Cascadia Code", "Fira Code", Consolas, Monaco, "Courier New", monospace;
+
+  /* Stage = 16:9 reference. We size in vw/vh inside the slide so layouts scale. */
+  --stage-w: 1920;
+  --stage-h: 1080;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  font-family: var(--sans);
+  background: #0c0c0c;
+  color: var(--ink);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   Stage — centers a 16:9 slide in the viewport (presentation mode)
+   ============================================================ */
+.stage {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0c0c0c;
+}
+
+.deck {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  max-width: calc(100vh * 16 / 9);
+  max-height: calc(100vw * 9 / 16);
+  background: var(--paper);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+
+/* All slides stack inside .deck; only the active one is shown. */
+.slide {
+  position: absolute;
+  inset: 0;
+  display: none !important;
+  flex-direction: column;
+  padding: 4.5vh 5vw;
+  background: var(--paper);
+  color: var(--ink);
+}
+.slide.is-active { display: flex !important; }
+
+/* Speaker notes are hidden in presentation view; revealed via panel. */
+.notes { display: none; }
+
+/* ============================================================
+   Common slide chrome
+   ============================================================ */
+.slide__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2vw;
+  padding-bottom: 1.4vh;
+  margin-bottom: 2.2vh;
+  border-bottom: 2px solid var(--line-2);
+}
+.slide__eyebrow {
+  font-size: 1.1vw;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--scarlet);
+}
+.slide__eyebrow .dot {
+  display: inline-block; width: 0.5vw; height: 0.5vw; border-radius: 50%;
+  background: var(--gold); margin: 0 0.6em; vertical-align: middle;
+}
+.slide__minutes {
+  font-size: 1vw;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 600;
+}
+.slide__title {
+  font-size: 3.6vw;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 0.4vh;
+}
+.slide__subtitle {
+  font-size: 1.6vw;
+  color: var(--ink-2);
+  font-weight: 500;
+  max-width: 80ch;
+}
+.slide__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.2vh;
+  font-size: 1.7vw;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.slide__foot {
+  margin-top: 2vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.95vw;
+  color: var(--ink-3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-top: 1px solid var(--line-2);
+  padding-top: 1.2vh;
+}
+.slide__foot .brand-mark {
+  display: inline-block; width: 0.4vw; height: 1.6vh; background: var(--scarlet);
+  border-radius: 1px; margin-right: 0.5vw; vertical-align: middle;
+}
+
+/* ============================================================
+   Cover & section dividers
+   ============================================================ */
+.slide--cover, .slide--section, .slide--break, .slide--close {
+  padding: 0;
+  overflow: hidden;
+}
+
+/* COVER */
+.slide--cover {
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(245,209,48,0.18), transparent 55%),
+    radial-gradient(ellipse at 10% 90%, rgba(204,0,0,0.18), transparent 55%),
+    var(--paper);
+  display: flex; align-items: stretch; justify-content: stretch;
+}
+.cover-inner {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-content: space-between;
+  padding: 6vh 6vw;
+}
+.cover-top {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 1.05vw; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--ink-3); font-weight: 700;
+}
+.cover-top .brand {
+  display: inline-flex; align-items: center; gap: 0.7vw; color: var(--ink);
+}
+.cover-top .brand .mark {
+  width: 0.5vw; height: 2.4vh; background: var(--scarlet); border-radius: 2px;
+}
+.cover-top .stamp {
+  padding: 0.6vh 1vw; border: 2px solid var(--scarlet); color: var(--scarlet);
+  border-radius: 999px; font-weight: 800;
+}
+.cover-mid h1 {
+  font-size: 6vw; line-height: 0.98; letter-spacing: -0.025em;
+  font-weight: 900; color: var(--ink);
+}
+.cover-mid .h1-accent {
+  display: block; color: var(--scarlet);
+}
+.cover-mid .lede {
+  margin-top: 3vh;
+  font-size: 1.7vw; color: var(--ink-2); max-width: 70ch; line-height: 1.4;
+}
+.cover-mid .rule {
+  width: 14vw; height: 0.7vh;
+  background: linear-gradient(90deg, var(--scarlet), var(--gold));
+  margin: 4vh 0 2vh;
+  border-radius: 2px;
+}
+.cover-bottom {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  font-size: 1.1vw; color: var(--ink-3);
+}
+.cover-bottom .meta { display: flex; gap: 2.2vw; }
+.cover-bottom .meta div strong {
+  display: block; color: var(--ink); font-size: 1.4vw; letter-spacing: -0.01em;
+}
+.cover-bottom .week-pip {
+  display: inline-flex; align-items: center; gap: 0.6vw;
+  background: var(--ink); color: var(--paper);
+  padding: 0.9vh 1.4vw; border-radius: 999px;
+  font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: 1vw;
+}
+.cover-bottom .week-pip .six {
+  background: var(--gold); color: var(--ink);
+  width: 2.6vh; height: 2.6vh; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 900;
+}
+
+/* SECTION DIVIDER */
+.slide--section {
+  background: var(--ink); color: var(--paper);
+}
+.section-inner {
+  flex: 1; display: grid; grid-template-columns: 1fr 1fr;
+  width: 100%; height: 100%;
+}
+.section-left {
+  padding: 6vh 5vw; display: flex; flex-direction: column; justify-content: center;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0c0c0c 100%);
+  position: relative;
+}
+.section-left::after {
+  content: ""; position: absolute; right: 0; top: 12vh; bottom: 12vh;
+  width: 0.4vw; background: var(--scarlet);
+}
+.section-left .module-eyebrow {
+  font-size: 1.2vw; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); font-weight: 800; margin-bottom: 2vh;
+}
+.section-left .module-no {
+  font-size: 11vw; line-height: 0.9; font-weight: 900; color: var(--paper);
+  letter-spacing: -0.04em;
+}
+.section-left .module-no .of {
+  font-size: 2.2vw; color: var(--ink-3); font-weight: 600; margin-left: 1vw;
+}
+.section-right {
+  padding: 6vh 5vw; display: flex; flex-direction: column; justify-content: center;
+}
+.section-right .module-name {
+  font-size: 4.4vw; font-weight: 800; line-height: 1.02; color: var(--paper);
+  letter-spacing: -0.02em; margin-bottom: 3vh;
+}
+.section-right .module-meta {
+  display: flex; gap: 2vw; margin-bottom: 3vh;
+}
+.section-right .module-meta .pill {
+  display: inline-flex; align-items: center; gap: 0.5vw;
+  padding: 0.8vh 1.2vw; border: 1.5px solid #444; border-radius: 999px;
+  color: var(--paper); font-size: 1vw; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.section-right .module-meta .pill--build {
+  border-color: var(--scarlet); color: var(--paper);
+  background: var(--scarlet);
+}
+.section-right .module-meta .pill--gold {
+  border-color: var(--gold); color: var(--ink);
+  background: var(--gold);
+}
+.section-right .module-blurb {
+  font-size: 1.5vw; line-height: 1.45; color: #c8c8c8; max-width: 56ch;
+}
+
+/* BREAK */
+.slide--break {
+  background: var(--paper-2);
+  display: flex; align-items: center; justify-content: center; text-align: center;
+}
+.break-inner {
+  display: flex; flex-direction: column; align-items: center; gap: 2.4vh;
+}
+.break-inner .lab { font-size: 1.4vw; letter-spacing: 0.4em; text-transform: uppercase; color: var(--scarlet); font-weight: 800; }
+.break-inner .num { font-size: 18vw; font-weight: 900; line-height: 0.9; color: var(--ink); letter-spacing: -0.05em; }
+.break-inner .num small { font-size: 3vw; color: var(--ink-3); font-weight: 700; margin-left: 0.4vw; }
+.break-inner .sub { font-size: 1.6vw; color: var(--ink-2); max-width: 60ch; }
+
+/* CLOSE / Capstone closing */
+.slide--close {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(245,209,48,0.25), transparent 50%),
+    radial-gradient(ellipse at 50% 110%, rgba(204,0,0,0.4), transparent 60%),
+    #0c0c0c;
+  color: var(--paper);
+  display: flex; align-items: center; justify-content: center; text-align: center;
+}
+.close-inner { display: flex; flex-direction: column; align-items: center; gap: 3vh; padding: 0 6vw; }
+.close-inner .stamp {
+  display: inline-flex; align-items: center; gap: 0.8vw;
+  padding: 0.8vh 1.6vw; border: 2px solid var(--gold); color: var(--gold);
+  border-radius: 999px; font-size: 1.1vw; letter-spacing: 0.25em;
+  text-transform: uppercase; font-weight: 800;
+}
+.close-inner h1 {
+  font-size: 6.5vw; line-height: 0.98; letter-spacing: -0.025em; font-weight: 900;
+}
+.close-inner h1 em { color: var(--gold); font-style: normal; }
+.close-inner .lede { font-size: 1.6vw; color: #d8d8d8; max-width: 70ch; line-height: 1.4; }
+.close-inner .rule {
+  width: 18vw; height: 0.5vh; background: linear-gradient(90deg, var(--scarlet), var(--gold));
+  border-radius: 2px;
+}
+.close-inner .sig { font-size: 1vw; letter-spacing: 0.3em; text-transform: uppercase; color: #999; font-weight: 700; }
+
+/* ============================================================
+   Content patterns
+   ============================================================ */
+
+/* Two-column layout */
+.cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3vw; align-items: stretch; }
+.cols-2--6040 { grid-template-columns: 6fr 4fr; }
+.cols-2--4060 { grid-template-columns: 4fr 6fr; }
+
+/* Cards */
+.card {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 2.6vh 1.8vw;
+}
+.card--accent {
+  background: var(--paper);
+  border-left: 6px solid var(--scarlet);
+}
+.card--gold { border-left-color: var(--gold); }
+.card--ink { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.card--ink h3 { color: var(--gold); }
+.card h3 {
+  font-size: 1.6vw; margin-bottom: 1vh; color: var(--ink);
+  letter-spacing: -0.005em;
+}
+.card p, .card li { font-size: 1.35vw; color: var(--ink-2); line-height: 1.4; }
+.card--ink p, .card--ink li { color: #d8d8d8; }
+.card ul, .card ol { padding-left: 1.4vw; }
+.card li + li { margin-top: 0.6vh; }
+
+/* Stat row */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2vw; }
+.stat {
+  background: var(--paper-2); border: 1px solid var(--line); border-radius: 12px;
+  padding: 2.4vh 1.4vw; display: flex; flex-direction: column; gap: 0.8vh;
+}
+.stat .num {
+  font-size: 3.6vw; font-weight: 900; color: var(--scarlet); line-height: 1;
+  letter-spacing: -0.02em;
+}
+.stat .lab { font-size: 1vw; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); font-weight: 700; }
+.stat .desc { font-size: 1.1vw; color: var(--ink-2); }
+
+/* Pills */
+.pillrow { display: flex; flex-wrap: wrap; gap: 0.7vw; }
+.pill {
+  display: inline-flex; align-items: center; gap: 0.4vw;
+  padding: 0.6vh 1vw; border-radius: 999px;
+  background: var(--paper-2); border: 1px solid var(--line);
+  font-size: 1.1vw; color: var(--ink-2); font-weight: 600;
+}
+.pill--scarlet { background: var(--scarlet); color: var(--paper); border-color: var(--scarlet); }
+.pill--gold { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+.pill--ink { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.pill--out { background: transparent; }
+
+/* Bullets — large */
+.bullets-lg { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1.4vh; }
+.bullets-lg li {
+  display: grid; grid-template-columns: 2.2vw 1fr; align-items: baseline;
+  font-size: 1.6vw; color: var(--ink); line-height: 1.4;
+}
+.bullets-lg li::before {
+  content: ""; display: block; width: 0.8vw; height: 0.8vw;
+  background: var(--scarlet); border-radius: 50%; margin-top: 0.6vh;
+}
+.bullets-lg li strong { color: var(--ink); }
+
+/* Numbered checklist (Module Complete When) */
+.checklist { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1.4vh; }
+.checklist li {
+  display: grid; grid-template-columns: 3vw 1fr; align-items: start;
+  font-size: 1.5vw; color: var(--ink); line-height: 1.4;
+}
+.checklist li::before {
+  content: "✓"; display: inline-flex; align-items: center; justify-content: center;
+  width: 2.2vw; height: 2.2vw; border-radius: 6px;
+  background: var(--success-bg); color: var(--success);
+  font-weight: 900; font-size: 1.4vw;
+}
+
+/* Code blocks */
+.code {
+  background: var(--code-bg); color: var(--code-fg); border-radius: 10px;
+  padding: 2vh 1.6vw; font-family: var(--mono); font-size: 1.05vw; line-height: 1.55;
+  overflow: hidden; white-space: pre; tab-size: 2;
+  border: 1px solid #2a2a2a;
+}
+.code__label {
+  font-family: var(--sans); font-size: 0.85vw; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold); font-weight: 700;
+  margin-bottom: 1vh; display: block;
+}
+.code .c { color: #8a8a8a; }
+.code .k { color: #f5d130; }
+.code .s { color: #a3d99c; }
+.code .n { color: #ffb86b; }
+
+/* Prompt block — for the "this is what you say to the AI" pattern */
+.prompt {
+  background: var(--info-bg);
+  border-left: 6px solid var(--info);
+  border-radius: 0 10px 10px 0;
+  padding: 2vh 1.6vw;
+  font-size: 1.35vw;
+  color: var(--info);
+  line-height: 1.45;
+}
+.prompt strong { display: block; font-size: 0.9vw; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--info); margin-bottom: 0.6vh; }
+
+/* Switch-to-editor cue slide */
+.slide--editor { background: linear-gradient(180deg, #1a1a1a 0%, #050505 100%); color: var(--paper); padding: 0; }
+.editor-inner { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6vh 6vw; text-align: center; gap: 3vh; }
+.editor-inner .badge {
+  display: inline-flex; align-items: center; gap: 0.6vw;
+  padding: 0.8vh 1.4vw; border-radius: 999px;
+  background: var(--scarlet); color: var(--paper);
+  font-size: 1.1vw; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 800;
+}
+.editor-inner .arrow { font-size: 6vw; line-height: 1; color: var(--gold); }
+.editor-inner h2 { font-size: 5.4vw; line-height: 1; letter-spacing: -0.02em; font-weight: 900; }
+.editor-inner h2 em { color: var(--gold); font-style: normal; }
+.editor-inner .what { font-size: 1.5vw; color: #c0c0c0; max-width: 70ch; line-height: 1.4; }
+.editor-inner .timer { font-family: var(--mono); font-size: 1.3vw; color: var(--gold); letter-spacing: 0.12em; }
+
+/* Back-to-deck debrief */
+.slide--debrief .slide__head { border-bottom-color: var(--gold); }
+.slide--debrief .slide__eyebrow { color: var(--gold-dark); }
+
+/* Build framing */
+.slide--build .slide__eyebrow { color: var(--scarlet); }
+.build-banner {
+  display: inline-flex; align-items: center; gap: 0.6vw;
+  background: var(--scarlet); color: var(--paper);
+  padding: 0.7vh 1.2vw; border-radius: 6px;
+  font-size: 1vw; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 800;
+}
+
+/* ============================================================
+   Architecture Diagram (persistent, growing)
+   ============================================================ */
+.arch {
+  display: grid; grid-template-rows: repeat(4, 1fr); gap: 1.2vh;
+  height: 100%; min-height: 0;
+}
+.arch__layer {
+  display: grid; grid-template-columns: 9vw 1fr 1fr; align-items: center; gap: 1vw;
+  padding: 1.6vh 1.4vw;
+  background: var(--paper-2);
+  border: 2px dashed var(--line);
+  border-radius: 12px;
+  opacity: 0.55;
+  transition: all 200ms ease;
+}
+.arch__layer.is-built {
+  background: var(--paper);
+  border: 2px solid var(--scarlet);
+  opacity: 1;
+  box-shadow: 0 4px 14px rgba(204,0,0,0.08);
+}
+.arch__layer.is-current {
+  background: linear-gradient(90deg, rgba(245,209,48,0.18), rgba(245,209,48,0.04));
+  border-color: var(--gold);
+  border-style: solid;
+  opacity: 1;
+}
+.arch__no {
+  font-family: var(--mono); font-size: 1vw; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--ink-3); font-weight: 800;
+}
+.arch__name { font-size: 1.6vw; font-weight: 800; color: var(--ink); }
+.arch__desc { font-size: 1.1vw; color: var(--ink-2); }
+.arch__layer.is-built .arch__no { color: var(--scarlet); }
+.arch__check {
+  display: inline-block; width: 1.6vw; height: 1.6vw; border-radius: 50%;
+  background: var(--success-bg); color: var(--success); text-align: center;
+  line-height: 1.6vw; font-weight: 900; margin-left: 0.6vw; font-size: 1vw;
+  visibility: hidden;
+}
+.arch__layer.is-built .arch__check { visibility: visible; }
+
+.arch-callout {
+  margin-top: 2vh; padding: 1.4vh 1.4vw; border-radius: 10px;
+  background: var(--ink); color: var(--paper);
+  font-size: 1.15vw; line-height: 1.4;
+}
+.arch-callout strong { color: var(--gold); }
+
+/* ============================================================
+   Agenda timeline
+   ============================================================ */
+.agenda {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2vw 1.6vw;
+}
+.agenda__item {
+  display: grid; grid-template-columns: 5.5vw 1fr; gap: 0.8vw;
+  align-items: baseline; padding: 1vh 0;
+  border-top: 1px solid var(--line-2);
+}
+.agenda__time {
+  font-family: var(--mono); font-size: 1vw; color: var(--scarlet); font-weight: 700;
+}
+.agenda__name { font-size: 1.2vw; color: var(--ink); font-weight: 600; line-height: 1.25; }
+.agenda__name span { display: block; font-size: 0.85vw; color: var(--ink-3); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.2vh; }
+
+/* Comparison table (lightweight) */
+.compare {
+  width: 100%; border-collapse: collapse; font-size: 1.2vw;
+}
+.compare th, .compare td {
+  padding: 1.2vh 1vw; text-align: left;
+  border-bottom: 1px solid var(--line-2);
+  vertical-align: top;
+}
+.compare thead th {
+  font-size: 0.95vw; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-3); font-weight: 700;
+  border-bottom: 2px solid var(--ink);
+}
+.compare tbody tr:nth-child(odd) { background: var(--paper-2); }
+.compare td.dim { color: var(--ink-3); }
+.compare td.win { color: var(--scarlet); font-weight: 700; }
+
+/* Quote */
+.pullquote {
+  font-size: 3vw; line-height: 1.2; font-weight: 700;
+  color: var(--ink); letter-spacing: -0.01em;
+  border-left: 6px solid var(--gold); padding-left: 1.6vw;
+  max-width: 75ch;
+}
+.pullquote .attr { display: block; margin-top: 2vh; font-size: 1.2vw; color: var(--ink-3); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
+
+/* ============================================================
+   HUD — speaker controls (off-stage)
+   ============================================================ */
+.hud {
+  position: fixed; right: 1vw; bottom: 1vh; z-index: 50;
+  display: flex; gap: 0.5vw; align-items: center;
+  background: rgba(20,20,20,0.85); color: #ddd;
+  padding: 0.5vh 0.8vw; border-radius: 999px;
+  font: 600 12px var(--sans); letter-spacing: 0.05em;
+  backdrop-filter: blur(6px);
+}
+.hud button {
+  background: transparent; border: none; color: #ddd;
+  font: inherit; cursor: pointer; padding: 0.3vh 0.5vw;
+  border-radius: 4px;
+}
+.hud button:hover { background: rgba(255,255,255,0.1); }
+.hud .sep { width: 1px; height: 14px; background: #444; }
+.hud .counter { color: var(--gold); font-variant-numeric: tabular-nums; }
+.hud .hint { color: #999; font-weight: 500; }
+
+/* Speaker notes panel */
+.notes-panel {
+  position: fixed; right: 0; bottom: 0; top: 0; width: 32vw; max-width: 520px;
+  background: #111; color: #eee; z-index: 40;
+  display: none; flex-direction: column;
+  border-left: 1px solid #222;
+  font: 14px/1.55 var(--sans);
+  transform: translateX(100%); transition: transform 220ms ease;
+}
+.notes-panel.is-open { display: flex; transform: translateX(0); }
+.notes-panel header {
+  padding: 12px 16px; background: #1a1a1a; border-bottom: 1px solid #2a2a2a;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.notes-panel header strong { color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; font-size: 11px; }
+.notes-panel header span { color: #aaa; font-size: 12px; }
+.notes-panel .body {
+  padding: 16px 18px; overflow-y: auto; flex: 1;
+}
+.notes-panel .body h4 { color: var(--gold); margin: 14px 0 6px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; }
+.notes-panel .body h4:first-child { margin-top: 0; }
+.notes-panel .body p { margin-bottom: 10px; color: #d8d8d8; }
+.notes-panel .body ul { margin: 6px 0 12px 18px; }
+.notes-panel .body li { margin-bottom: 4px; color: #cfcfcf; }
+.notes-panel .body em { color: var(--gold); font-style: normal; font-weight: 600; }
+.notes-panel .body code { background: #222; padding: 1px 5px; border-radius: 3px; font-family: var(--mono); font-size: 12.5px; color: #f5d130; }
+.notes-panel .cue {
+  margin: 12px 0; padding: 10px 12px; background: #2a1a00;
+  border-left: 3px solid var(--gold); border-radius: 0 4px 4px 0; color: #fce7a8;
+}
+.notes-panel .cue strong { color: var(--gold); }
+
+/* ============================================================
+   Print / handout view
+   ============================================================ */
+body.print-mode { overflow: auto; background: var(--paper-2); }
+body.print-mode .stage { position: static; padding: 24px; background: var(--paper-2); }
+body.print-mode .deck {
+  position: static; max-width: none; max-height: none;
+  width: 100%; height: auto; box-shadow: none; background: transparent;
+}
+body.print-mode .slide {
+  position: relative; display: flex !important;
+  width: 1280px; height: 720px; margin: 0 auto 28px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.12); background: var(--paper);
+  page-break-after: always;
+}
+body.print-mode .notes {
+  display: block; width: 1280px; margin: 0 auto 40px;
+  padding: 18px 24px; background: var(--paper);
+  border: 1px solid var(--line); border-top: 4px solid var(--gold);
+  border-radius: 6px;
+  font: 13px/1.55 var(--sans); color: var(--ink-2);
+  page-break-after: always;
+}
+body.print-mode .notes h4 { color: var(--scarlet); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; margin: 10px 0 5px; }
+body.print-mode .notes h4:first-child { margin-top: 0; }
+body.print-mode .notes ul { margin: 4px 0 10px 18px; }
+body.print-mode .notes .cue { background: #fff8df; border-left: 3px solid var(--scarlet); padding: 8px 10px; margin: 8px 0; border-radius: 0 4px 4px 0; }
+body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
+
+@media print {
+  body { background: white; }
+  body.print-mode .stage { padding: 0; }
+  body.print-mode .slide { box-shadow: none; margin-bottom: 0; }
+  body.print-mode .notes { box-shadow: none; }
+  @page { size: landscape; margin: 0.4in; }
+}
+</style>
+<link rel="stylesheet" href="css/deck.css">
+<script src="js/deck.js" defer></script>
+</head>
+<body class="w6-deck">
+
+<div class="stage">
+  <div class="deck" id="deck">
+
+  <!-- ========================================================
+       0.1 — COVER
+       ======================================================== -->
+  <section class="slide slide--cover">
+    <div class="cover-inner">
+      <div class="cover-top">
+        <div class="brand"><span class="mark"></span> Expert-Driven Development</div>
+        <div class="stamp">Capstone</div>
+      </div>
+      <div class="cover-mid">
+        <h1>
+          Full-Stack
+          <span class="h1-accent">AI-Assisted Development</span>
+        </h1>
+        <div class="rule"></div>
+        <p class="lede">
+          Direct AI to build, run, and deploy a complete web application — backend, frontend,
+          data, chat, auth, integrations, container — in a single day.
+        </p>
+      </div>
+      <div class="cover-bottom">
+        <div class="meta">
+          <div><strong>Course 6</strong>The Capstone</div>
+          <div><strong>8 Hours</strong>10 modules + assessment</div>
+          <div><strong>Bonus / Elective</strong>Advanced Builders</div>
+        </div>
+        <div class="week-pip"><span class="six">6</span> Week Six of Six</div>
+      </div>
+    </div>
+
+    <aside class="notes">
+      <h4>Open</h4>
+      <p>Welcome to Week 6 — the capstone. Six weeks ago you took AI Fluency. Today you finish the program by directing AI to build a complete full-stack application from zero. Take a beat. This is not theory.</p>
+      <h4>Set the room</h4>
+      <ul>
+        <li>Confirm everyone can see your screen at full size in Teams.</li>
+        <li>Tell them: "We will switch back and forth between this deck and a live editor a lot today. The deck is the map. The editor is the ground."</li>
+        <li>Say out loud: "Speaker notes are on every slide if you're following along on the student page."</li>
+      </ul>
+      <h4>Tone</h4>
+      <p>Calm, confident, slightly ceremonial — this is the capstone of the program. Avoid being precious; treat it as the natural next step from Course 4.</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Before we start, let's do a quick recap of how we got here."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       0.2 — RECAP OF WEEKS 1–5
+       ======================================================== -->
+  <section class="slide">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Recap <span class="dot"></span> Weeks 1 through 5</div>
+      <div class="slide__minutes">~3 min</div>
+    </div>
+    <h2 class="slide__title">How we got here</h2>
+    <p class="slide__subtitle">The six-week arc that ends today.</p>
+
+    <div class="slide__body">
+      <div class="cols-2">
+        <div>
+          <ul class="bullets-lg">
+            <li><strong>Week 1 — AI Fluency.</strong> Six 201-level skills. The 80% quit problem. Centaur and Cyborg.</li>
+            <li><strong>Week 2 — Builder Orientation.</strong> First real prototype. Decomposition under fire.</li>
+            <li><strong>Week 3 — Platform Training.</strong> Three deployed Power Platform tools.</li>
+          </ul>
+        </div>
+        <div>
+          <ul class="bullets-lg">
+            <li><strong>Week 4 — Advanced Workshop.</strong> You mapped your frontier. You taught someone else.</li>
+            <li><strong>Week 5 — Supervisor Orientation.</strong> Leaders learned to evaluate proposals and protect the apprentice pipeline.</li>
+            <li><strong>Week 6 — Today.</strong> The frontier moves out from under Power Platform. You build the whole stack.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>EDD · Week 6 · Course 6</span><span>Recap</span></div>
+
+    <aside class="notes">
+      <h4>What to say</h4>
+      <p>Run this fast. The room has lived through five weeks of training; you are reminding them of the runway, not re-teaching it.</p>
+      <h4>Anchor each week in one sentence</h4>
+      <ul>
+        <li>Week 1 is the foundation — the management framing, not the prompt tricks.</li>
+        <li>Weeks 2–3 made everyone a builder inside the Power Platform envelope.</li>
+        <li>Week 4 stretched the envelope and taught them to teach.</li>
+        <li>Week 5 made sure leaders could say "yes" intelligently.</li>
+      </ul>
+      <h4>Land it</h4>
+      <p>"Today is the week the envelope itself goes away. The skill is the same. The ceiling is much higher."</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Here's how today actually runs."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       0.3 — HOW TODAY RUNS
+       ======================================================== -->
+  <section class="slide">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Today <span class="dot"></span> Format</div>
+      <div class="slide__minutes">~2 min</div>
+    </div>
+    <h2 class="slide__title">How today runs</h2>
+    <p class="slide__subtitle">Deck → editor → deck. Repeated ten times.</p>
+
+    <div class="slide__body">
+      <div class="cols-2">
+        <div class="card card--accent">
+          <h3>The deck is the map</h3>
+          <ul>
+            <li>Sets the stage for each module.</li>
+            <li>Holds the architecture diagram we'll return to after each build.</li>
+            <li>Marks every checkpoint and every break.</li>
+          </ul>
+        </div>
+        <div class="card card--ink">
+          <h3>The editor is the ground</h3>
+          <ul>
+            <li>For each build module I will leave the deck and we will work in the editor.</li>
+            <li>You don't have to keep up live — checkpoints will catch you up.</li>
+            <li>If the AI's output doesn't work in 3 minutes, paste the error back. Don't manually debug AI code.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pillrow">
+        <span class="pill pill--scarlet">Switch cues are red</span>
+        <span class="pill pill--gold">Return cues are gold</span>
+        <span class="pill">Speaker notes live on every slide</span>
+        <span class="pill">2 breaks · 15 min each</span>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>EDD · Week 6 · Course 6</span><span>Format</span></div>
+
+    <aside class="notes">
+      <h4>Set expectations</h4>
+      <p>The single most important thing you can do here is calibrate the room's expectation. They are about to watch you switch context constantly. Tell them why.</p>
+      <h4>Say verbatim</h4>
+      <p>"You are going to see me leave this deck a lot. Every time we leave, we are building. Every time we come back, we will look at the same architecture diagram and color in another piece. If you fall behind in the editor, that is fine — we'll have a checkpoint version of the code at the end of every module."</p>
+      <h4>Reinforce the 3-Minute Rule</h4>
+      <p>Repeat this once now and at every debrief. It is the core operating discipline of the day.</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Six principles we'll lean on all day."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       0.4 — SIX PRINCIPLES
+       ======================================================== -->
+  <section class="slide">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Operating Principles</div>
+      <div class="slide__minutes">~3 min</div>
+    </div>
+    <h2 class="slide__title">Six principles for the day</h2>
+    <p class="slide__subtitle">Carry these into every prompt, every debrief, every deploy.</p>
+
+    <div class="slide__body">
+      <div class="cols-2">
+        <div>
+          <ul class="bullets-lg">
+            <li><strong>1. The conversation is the IDE.</strong> The AI chat is your primary tool; the editor is for verification.</li>
+            <li><strong>2. Scaffold → flesh out → integrate.</strong> Skeleton first. Always.</li>
+            <li><strong>3. The 3-minute rule.</strong> Stuck for 3 minutes? Paste the error back to the AI.</li>
+          </ul>
+        </div>
+        <div>
+          <ul class="bullets-lg">
+            <li><strong>4. Incremental deployment.</strong> Deploy after every major feature, not at the end.</li>
+            <li><strong>5. Interface-first design.</strong> Define <em>what</em> before <em>how</em>.</li>
+            <li><strong>6. Copy the error, not your frustration.</strong> Give the AI the message, not the mood.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>EDD · Week 6 · Course 6</span><span>Principles</span></div>
+
+    <aside class="notes">
+      <h4>Treat as a creed</h4>
+      <p>You'll come back to numbers 3 and 6 every time something breaks today. Plant them now.</p>
+      <h4>Story for principle 5</h4>
+      <p>Briefly tell the room: "Saying 'write me a SQL query' constrains the AI. Saying 'I need a function that takes a student ID and returns their record' lets it pick the right tool. The interface comes first — the implementation is a detail."</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Here's the day at a glance."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       0.5 — AGENDA
+       ======================================================== -->
+  <section class="slide">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Agenda</div>
+      <div class="slide__minutes">~2 min</div>
+    </div>
+    <h2 class="slide__title">The day at a glance</h2>
+    <p class="slide__subtitle">Ten modules. Two breaks. One deployed application.</p>
+
+    <div class="slide__body">
+      <div class="agenda">
+        <div class="agenda__item"><span class="agenda__time">0:00</span><span class="agenda__name">1. The Full-Stack Frontier <span>30 min · framing</span></span></div>
+        <div class="agenda__item"><span class="agenda__time">0:30</span><span class="agenda__name">2. Environment Setup <span>45 min · setup</span></span></div>
+        <div class="agenda__item"><span class="agenda__time">1:15</span><span class="agenda__name">3. Backend from Scratch <span>45 min · build</span></span></div>
+        <div class="agenda__item"><span class="agenda__time">2:00</span><span class="agenda__name">4. Data Layer <span>45 min · build</span></span></div>
+        <div class="agenda__item"><span class="agenda__time">2:45</span><span class="agenda__name">— BREAK — <span>15 min</span></span></div>
+        <div class="agenda__item"><span class="agenda__time">3:00</span><span class="agenda__name">5. Frontend from Scratch <span>45 min · build</span></span></div>
+        <div class="agenda__item"><span class="agenda__time">3:45</span><span class="agenda__name">6. Pages &amp; Navigation <span>45 min · build</span></span></div>
+        <div class="agenda__item"><span class="agenda__time">4:30</span><span class="agenda__name">7. AI Chat Integration <span>45 min · build</span></span></div>
+        <div class="agenda__item"><span class="agenda__time">5:15</span><span class="agenda__name">— BREAK — <span>15 min</span></span></div>
+        <div class="agenda__item"><span class="agenda__time">5:30</span><span class="agenda__name">8. Auth &amp; Middleware <span>45 min · build</span></span></div>
+        <div class="agenda__item"><span class="agenda__time">6:15</span><span class="agenda__name">9. External Integrations <span>45 min · build</span></span></div>
+        <div class="agenda__item"><span class="agenda__time">7:00</span><span class="agenda__name">10. Docker &amp; Deployment <span>45 min · build</span></span></div>
+        <div class="agenda__item"><span class="agenda__time">7:45</span><span class="agenda__name">Assessment &amp; Wrap-Up <span>15 min · close</span></span></div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>EDD · Week 6 · Course 6</span><span>Agenda</span></div>
+
+    <aside class="notes">
+      <h4>Pacing</h4>
+      <p>Don't read this list. Glance at it, then summarize: "First two modules are framing and setup. Modules 3 through 10 are eight build cycles. Last fifteen minutes are assessment and a program close."</p>
+      <h4>Pacing escape valve</h4>
+      <p>Tell them now: "If we run long, the module I will compress is Module 9, External Integrations — it's the most independent. Everyone will still ship a deployed container today."</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Quick look at what we're going to build."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       0.6 — TARGET (HEYWOOD DEMO HOOK)
+       ======================================================== -->
+  <section class="slide">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Target</div>
+      <div class="slide__minutes">~3 min</div>
+    </div>
+    <h2 class="slide__title">What you walk out with today</h2>
+    <p class="slide__subtitle">A working full-stack app, modeled on Heywood TBS — built in one day, by you, with AI.</p>
+
+    <div class="slide__body">
+      <div class="stats">
+        <div class="stat"><div class="num">8.4k</div><div class="lab">Backend LOC</div><div class="desc">Go HTTP server, router, handlers, store interface, middleware.</div></div>
+        <div class="stat"><div class="num">4.4k</div><div class="lab">Frontend LOC</div><div class="desc">React + Vite + TypeScript, multi-page, role-aware UI.</div></div>
+        <div class="stat"><div class="num">35</div><div class="lab">API endpoints</div><div class="desc">Reference target — your version will start with ~5.</div></div>
+        <div class="stat"><div class="num">1</div><div class="lab">Docker container</div><div class="desc">Backend + built frontend + data, runs anywhere.</div></div>
+      </div>
+      <p class="slide__subtitle">Reference: Heywood TBS — built in days, by one person, working with AI. No team, no six-month timeline, no $2M budget.</p>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>EDD · Week 6 · Course 6</span><span>Target</span></div>
+
+    <aside class="notes">
+      <h4>Demo cue</h4>
+      <p>If Heywood is reachable on your machine, switch to it now and walk through Dashboard → Chat ("morning brief") → Settings → role picker. Two minutes total.</p>
+      <h4>Land the reveal</h4>
+      <p>After the demo, return to this slide and say verbatim: "8,400 lines of Go. 4,400 lines of React. 35 endpoints. Microsoft Graph. CAC. FIPS 140-3. Built in days, by one person, working with AI. Today you build the seed of that. Same skill, smaller scope."</p>
+      <h4>What you actually ship</h4>
+      <p>Set realistic expectations: "Your version today will have ~5 endpoints, three or four pages, a chat that calls one tool, role switching, and a container. That's the right scope for one day."</p>
+      <div class="cue"><strong>TRANSITION →</strong> Section divider for Module 1.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       MODULE 1 — DIVIDER
+       ======================================================== -->
+  <section class="slide slide--section">
+    <div class="section-inner">
+      <div class="section-left">
+        <div class="module-eyebrow">Module</div>
+        <div class="module-no">01<span class="of">/ 10</span></div>
+      </div>
+      <div class="section-right">
+        <div class="module-name">The Full-Stack Frontier</div>
+        <div class="module-meta">
+          <span class="pill pill--gold">30 min</span>
+          <span class="pill">Framing · no code</span>
+        </div>
+        <p class="module-blurb">A short mental-model shift from "I build Power Apps" to "I direct AI to build whatever the problem needs." We anchor the architecture we'll grow all day.</p>
+      </div>
+    </div>
+
+    <aside class="notes">
+      <h4>Pace</h4>
+      <p>Total 30 minutes. Three slides plus the architecture anchor — keep it tight.</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Why full-stack? Here's where Power Platform stops."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       1.1 — WHY FULL-STACK
+       ======================================================== -->
+  <section class="slide">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Module 1 · Why Full-Stack</div>
+      <div class="slide__minutes">~10 min</div>
+    </div>
+    <h2 class="slide__title">Where Power Platform stops</h2>
+    <p class="slide__subtitle">Most Marines never need to leave the low-code envelope. Some problems do.</p>
+
+    <div class="slide__body">
+      <table class="compare">
+        <thead><tr><th>Limitation</th><th>Power Platform</th><th>Full-Stack</th></tr></thead>
+        <tbody>
+          <tr><td>Custom AI chat with tool use</td><td class="dim">Not really possible</td><td class="win">Build exactly what you need</td></tr>
+          <tr><td>Role-based dashboards</td><td class="dim">Power BI RLS, complex</td><td class="win">One app, four views</td></tr>
+          <tr><td>Offline / disconnected ops</td><td class="dim">Needs internet + M365</td><td class="win">Container runs anywhere</td></tr>
+          <tr><td>Data sovereignty</td><td class="dim">Lives in Microsoft cloud</td><td class="win">Lives where you put it</td></tr>
+          <tr><td>Cost per user</td><td class="dim">$20+/user/mo</td><td class="win">$0 — open source, self-hosted</td></tr>
+          <tr><td>Deployment flexibility</td><td class="dim">Microsoft cloud only</td><td class="win">Azure, AWS, on-prem, ship, field</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 1 · The Full-Stack Frontier</span><span>1.1</span></div>
+
+    <aside class="notes">
+      <h4>Be honest about Power Platform</h4>
+      <p>Don't trash it. Open with: "Power Platform is the right answer for most problems most of the time. The point of today isn't 'low-code is bad' — it's 'here's what to do when low-code can't reach the problem.'"</p>
+      <h4>Concrete examples</h4>
+      <ul>
+        <li>Custom AI chat → "Copilot Studio is a great chatbot host but it can't run arbitrary tool calls against your private data the way we will today."</li>
+        <li>Offline → "Imagine doing this on a ship without comms. Power Apps stops. A container does not."</li>
+      </ul>
+      <div class="cue"><strong>TRANSITION →</strong> "Here is the architecture we are going to grow all day."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       1.2 — ARCHITECTURE (FIRST APPEARANCE — empty)
+       ======================================================== -->
+  <section class="slide slide--debrief">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Architecture <span class="dot"></span> Anchor diagram</div>
+      <div class="slide__minutes">~7 min</div>
+    </div>
+    <h2 class="slide__title">The four layers — empty for now</h2>
+    <p class="slide__subtitle">We will return to this exact diagram after every build module and color in another layer.</p>
+
+    <div class="slide__body">
+      <div class="arch">
+        <div class="arch__layer"><div class="arch__no">L1 · Frontend</div><div class="arch__name">React Frontend<span class="arch__check">✓</span></div><div class="arch__desc">What the user sees and clicks. Sends requests to the backend.</div></div>
+        <div class="arch__layer"><div class="arch__no">L2 · Backend</div><div class="arch__name">Go HTTP Server<span class="arch__check">✓</span></div><div class="arch__desc">Receives requests, processes data, returns JSON.</div></div>
+        <div class="arch__layer"><div class="arch__no">L3 · Data</div><div class="arch__name">Data Layer<span class="arch__check">✓</span></div><div class="arch__desc">Where the data lives. JSON now, SQLite or Postgres later.</div></div>
+        <div class="arch__layer"><div class="arch__no">L4 · External</div><div class="arch__name">External Services<span class="arch__check">✓</span></div><div class="arch__desc">OpenAI for chat, Microsoft Graph for Outlook, etc.</div></div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 1 · The Full-Stack Frontier</span><span>Architecture · 0/4</span></div>
+
+    <aside class="notes">
+      <h4>Why this slide matters</h4>
+      <p>This is the most important visual in the deck. It is the spine. Tell the room: "Mark this slide. We will see it eight more times today, and each time another box will light up."</p>
+      <h4>Walk the layers</h4>
+      <ul>
+        <li>L1 Frontend: "browser, what the user clicks."</li>
+        <li>L2 Backend: "your server, the brain."</li>
+        <li>L3 Data: "where state lives."</li>
+        <li>L4 External: "anything you call out to — AI, Graph, weather, whatever."</li>
+      </ul>
+      <div class="cue"><strong>TRANSITION →</strong> "How AI changes who can build this."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       1.3 — HOW AI CHANGES IT
+       ======================================================== -->
+  <section class="slide">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Module 1 · The Skill</div>
+      <div class="slide__minutes">~8 min</div>
+    </div>
+    <h2 class="slide__title">You will not learn to code today</h2>
+    <p class="slide__subtitle">You will learn to direct AI to write code, verify it works, and keep going when it doesn't.</p>
+
+    <div class="slide__body">
+      <div class="cols-2">
+        <div class="card card--accent">
+          <h3>What you actually need</h3>
+          <ul>
+            <li><strong>What to ask for</strong> — requirements (you learned this in Courses 1–4).</li>
+            <li><strong>How to verify</strong> — run it, check the browser, read the response.</li>
+            <li><strong>How to debug</strong> — paste errors back to the AI.</li>
+            <li><strong>When to move on</strong> — the 3-Minute Rule.</li>
+          </ul>
+        </div>
+        <div class="card card--ink">
+          <h3>What changes vs. Power Platform</h3>
+          <ul>
+            <li>The conversation is your IDE.</li>
+            <li>The error message is your debugger.</li>
+            <li>The interface is your design tool.</li>
+            <li>The container is your deployment.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 1 · The Full-Stack Frontier</span><span>1.3 · Module Complete</span></div>
+
+    <aside class="notes">
+      <h4>Reassurance</h4>
+      <p>The room will be intimidated. Say it out loud: "You felt the same way before Course 2 when you built your first Power App. By the end of today, you will have a deployed web application. Same process. Higher ceiling."</p>
+      <h4>Module 1 complete check</h4>
+      <ul>
+        <li>Can articulate the four layers.</li>
+        <li>Understands they will not "learn to code" — they will direct AI to code.</li>
+        <li>Has the architecture diagram in their head.</li>
+      </ul>
+      <div class="cue"><strong>TRANSITION →</strong> "Now we earn the right to start. Module 2 — environment setup."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       MODULE 2 — DIVIDER
+       ======================================================== -->
+  <section class="slide slide--section">
+    <div class="section-inner">
+      <div class="section-left">
+        <div class="module-eyebrow">Module</div>
+        <div class="module-no">02<span class="of">/ 10</span></div>
+      </div>
+      <div class="section-right">
+        <div class="module-name">Environment Setup</div>
+        <div class="module-meta">
+          <span class="pill pill--gold">45 min</span>
+          <span class="pill">AI-guided install</span>
+        </div>
+        <p class="module-blurb">The most boring module and the most critical. If the environment isn't right, nothing else works. Today, we let the AI walk every student through their own machine.</p>
+      </div>
+    </div>
+
+    <aside class="notes">
+      <h4>Plan</h4>
+      <p>Two slides: required tools and the "ask the AI to install them" prompt. Then we go to the editor and you actually do it. Expect 30–50% of the room to need help.</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Five tools. The AI installs them for you."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       2.1 — REQUIRED TOOLS
+       ======================================================== -->
+  <section class="slide slide--build">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Module 2 · Tools <span class="dot"></span> Build framing</div>
+      <div class="slide__minutes">~5 min</div>
+    </div>
+    <h2 class="slide__title">Five tools, then we go</h2>
+    <p class="slide__subtitle">Don't memorize the install steps. Hand the list to your AI and let it walk you through your OS.</p>
+
+    <div class="slide__body">
+      <div class="cols-2">
+        <div>
+          <ul class="bullets-lg">
+            <li><strong>Go 1.22+</strong> — backend language. <span style="color:var(--ink-3);">go.dev/dl</span></li>
+            <li><strong>Node.js 20+</strong> — frontend build. <span style="color:var(--ink-3);">nodejs.org</span></li>
+            <li><strong>Git</strong> — version control. <span style="color:var(--ink-3);">git-scm.com</span></li>
+            <li><strong>VS Code</strong> — editor. <span style="color:var(--ink-3);">code.visualstudio.com</span></li>
+            <li><strong>Docker Desktop</strong> — container runtime (Module 10). <span style="color:var(--ink-3);">docker.com</span></li>
+          </ul>
+        </div>
+        <div class="prompt">
+          <strong>Student prompt — use as-is</strong>
+          I need to set up a development environment on [Windows / Mac]. Install Go 1.22+, Node.js 20 LTS, Git, VS Code, and Docker Desktop. Give me step-by-step instructions for my OS, including how to verify each install. After installation I should be able to run <code>go version</code>, <code>node --version</code>, <code>npm --version</code>, <code>git --version</code> and see numbers for all four.
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 2 · Environment Setup</span><span>2.1 · build framing</span></div>
+
+    <aside class="notes">
+      <h4>The teaching moment</h4>
+      <p>This is the first lesson in AI-assisted development: <em>let the AI install your tools.</em> Marines try to memorize commands; show them they don't have to.</p>
+      <h4>Common gotchas (call out before going to editor)</h4>
+      <ul>
+        <li>Go not on PATH → restart terminal.</li>
+        <li><code>npm create vite</code> fails → <code>npm install -g npm@latest</code>.</li>
+        <li>Docker requires admin → defer to Module 10 if needed.</li>
+      </ul>
+      <div class="cue"><strong>TRANSITION →</strong> Switch-to-editor cue is next. Take a breath before you swap windows.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       2.2 — SWITCH TO EDITOR (install + scaffold)
+       ======================================================== -->
+  <section class="slide slide--editor">
+    <div class="editor-inner">
+      <span class="badge">▶ Switch to the editor</span>
+      <div class="arrow">→</div>
+      <h2>Install &amp; <em>scaffold the project</em></h2>
+      <p class="what">
+        Walk through: paste the install prompt, verify the four versions, then create the project skeleton:
+        <code style="color:#f5d130; font-family:var(--mono);">my-staff-app</code> with <code style="color:#f5d130; font-family:var(--mono);">cmd/server/</code>, <code style="color:#f5d130; font-family:var(--mono);">internal/</code>, <code style="color:#f5d130; font-family:var(--mono);">web/</code> (Vite + React + TypeScript), and <code style="color:#f5d130; font-family:var(--mono);">data/</code>.
+      </p>
+      <div class="timer">~30 min in editor — circulate while students install</div>
+    </div>
+
+    <aside class="notes">
+      <h4>Live work</h4>
+      <p>Share the terminal. Run the prompt. Talk through what the AI is doing. Then run the four verification commands.</p>
+      <h4>Scaffold commands</h4>
+      <ul>
+        <li><code>mkdir my-staff-app &amp;&amp; cd my-staff-app</code></li>
+        <li><code>go mod init my-staff-app</code></li>
+        <li><code>mkdir -p cmd/server internal data</code></li>
+        <li><code>npm create vite@latest web -- --template react-ts</code></li>
+        <li><code>cd web &amp;&amp; npm install &amp;&amp; cd ..</code></li>
+      </ul>
+      <div class="cue"><strong>BACK TO DECK →</strong> When every student has all four versions printing AND the project directory exists, return.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       2.3 — BACK TO DECK: ENV READY (architecture still empty)
+       ======================================================== -->
+  <section class="slide slide--debrief">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Back to deck <span class="dot"></span> Environment ready</div>
+      <div class="slide__minutes">~3 min</div>
+    </div>
+    <h2 class="slide__title">Module 2 complete — runway built</h2>
+    <p class="slide__subtitle">The stack is still empty. Tomorrow it grows.</p>
+
+    <div class="slide__body">
+      <div class="cols-2 cols-2--6040">
+        <div class="arch">
+          <div class="arch__layer"><div class="arch__no">L1 · Frontend</div><div class="arch__name">React Frontend<span class="arch__check">✓</span></div><div class="arch__desc">Vite + React + TypeScript scaffolded in <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">web/</code>.</div></div>
+          <div class="arch__layer"><div class="arch__no">L2 · Backend</div><div class="arch__name">Go HTTP Server<span class="arch__check">✓</span></div><div class="arch__desc">Module initialised. Empty <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">cmd/server/</code> waiting for code.</div></div>
+          <div class="arch__layer"><div class="arch__no">L3 · Data</div><div class="arch__name">Data Layer<span class="arch__check">✓</span></div><div class="arch__desc">Empty <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">data/</code> directory. No store yet.</div></div>
+          <div class="arch__layer"><div class="arch__no">L4 · External</div><div class="arch__name">External Services<span class="arch__check">✓</span></div><div class="arch__desc">No external services wired up.</div></div>
+        </div>
+        <div>
+          <ul class="checklist">
+            <li>Go, Node, Git, VS Code installed and verified.</li>
+            <li>Project directory exists with <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">go.mod</code> and <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">web/package.json</code>.</li>
+            <li>Students used AI to install — not the docs.</li>
+          </ul>
+          <div class="arch-callout">Diagram status: <strong>0 of 4 layers built.</strong> Empty runway. We light the first lamp in Module 3.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 2 · Environment Setup</span><span>Module 2 complete · Architecture 0/4</span></div>
+
+    <aside class="notes">
+      <h4>Anchor the rhythm</h4>
+      <p>This is the first time you return to the architecture diagram. Stop. Point at it. Say: "We will see this exact picture eight more times today. After Module 3, the backend box will be solid red. After Module 5, the frontend box. By the end of Module 10, every box is solid and we have shipped a container."</p>
+      <h4>Pacing</h4>
+      <p>If you are running long here, skip the celebration and move straight to Module 3. Setup is supposed to be the dullest moment of the day.</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Module 3 — first server. Real code."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       MODULE 3 — DIVIDER (BUILD)
+       ======================================================== -->
+  <section class="slide slide--section">
+    <div class="section-inner">
+      <div class="section-left">
+        <div class="module-eyebrow">Module · Build</div>
+        <div class="module-no">03<span class="of">/ 10</span></div>
+      </div>
+      <div class="section-right">
+        <div class="module-name">Backend from Scratch</div>
+        <div class="module-meta">
+          <span class="pill pill--build">Build module</span>
+          <span class="pill pill--gold">45 min</span>
+        </div>
+        <p class="module-blurb">First real server-side code — or rather, first time directing AI to write it. By the end, every student has a Go HTTP server returning JSON to a curl request.</p>
+      </div>
+    </div>
+
+    <aside class="notes">
+      <h4>Pace</h4>
+      <p>~45 min. Five slides plus heavy editor time. Plan: framing → editor → debrief → architecture → checkpoint.</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Here's what we're building and why."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       3.1 — BUILD FRAMING
+       ======================================================== -->
+  <section class="slide slide--build">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Module 3 · Build framing</div>
+      <div class="slide__minutes">~5 min</div>
+    </div>
+    <h2 class="slide__title">Your first HTTP server</h2>
+    <p class="slide__subtitle">Stand up a Go server with one health endpoint and one items endpoint. Get to JSON in the browser.</p>
+
+    <div class="slide__body">
+      <div class="cols-2">
+        <div>
+          <span class="build-banner">▶ What we're adding</span>
+          <ul class="bullets-lg" style="margin-top:1.6vh;">
+            <li>A Go HTTP server on port 8080.</li>
+            <li>A <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/api/v1/health</code> endpoint that returns <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">{"status":"ok"}</code>.</li>
+            <li>A separate <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">internal/api/router.go</code> with helpers.</li>
+            <li>A <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/api/v1/items</code> endpoint with hardcoded JSON.</li>
+          </ul>
+        </div>
+        <div class="card card--gold">
+          <h3>Why this fits the architecture</h3>
+          <p>This is layer L2 — the Go HTTP Server. Today it serves a hardcoded array; in Module 4 we'll wire it to a real data store; in Module 5 the React frontend will call it.</p>
+          <p style="margin-top:1.4vh;"><strong>Principle in play:</strong> Scaffold → flesh out → integrate. We start with a server that does almost nothing. We make sure it works. <em>Then</em> we add features.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 3 · Backend from Scratch</span><span>3.1 · framing</span></div>
+
+    <aside class="notes">
+      <h4>Posture</h4>
+      <p>Start naming the principles aloud as you frame each build. Today you say "scaffold → flesh out → integrate." Tomorrow students say it back to you.</p>
+      <h4>Tone</h4>
+      <p>Make the goal small. "We're trying to get five characters — <code>{"status":"ok"}</code> — into a browser. That is the whole goal of this module. Everything else is bonus."</p>
+      <div class="cue"><strong>TRANSITION →</strong> Switch-to-editor cue is next.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       3.2 — SWITCH TO EDITOR
+       ======================================================== -->
+  <section class="slide slide--editor">
+    <div class="editor-inner">
+      <span class="badge">▶ Switch to the editor</span>
+      <div class="arrow">→</div>
+      <h2>Build the <em>first server</em></h2>
+      <p class="what">Three prompts in sequence: stand up the server, extract a router, add the items endpoint. Run each, hit it with curl or the browser, paste any error back to the AI before debugging.</p>
+      <div class="timer">~30 min in editor</div>
+    </div>
+
+    <aside class="notes">
+      <h4>Demo flow</h4>
+      <ul>
+        <li>Prompt 1 — single-file server with health endpoint and <code>-port</code>/<code>-dev</code> flags.</li>
+        <li>Run <code>go run ./cmd/server -dev</code>. Hit <code>/api/v1/health</code> in the browser. Celebrate.</li>
+        <li>Prompt 2 — extract <code>SetupRouter</code> into <code>internal/api/router.go</code> with <code>writeJSON</code> / <code>writeError</code> helpers.</li>
+        <li>Prompt 3 — add hardcoded <code>/api/v1/items</code> with five military-flavored items.</li>
+      </ul>
+      <h4>Common errors to expect (and let students see you fix)</h4>
+      <ul>
+        <li>Port already in use → switch to 8081.</li>
+        <li>Module-name mismatch → <code>go.mod</code> module name vs imports.</li>
+        <li>Missing <code>go.sum</code> → <code>go mod tidy</code>.</li>
+      </ul>
+      <h4>3-Minute Rule in action</h4>
+      <p>Demonstrate it. The first time you hit an error, count to three out loud, then paste it into the AI. Make the discipline visible.</p>
+      <div class="cue"><strong>BACK TO DECK →</strong> When every student sees JSON in the browser for both endpoints, return.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       3.3 — DEBRIEF: FIRST VICTORY + ARCHITECTURE (BACKEND ✓)
+       ======================================================== -->
+  <section class="slide slide--debrief">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Back to deck <span class="dot"></span> First victory</div>
+      <div class="slide__minutes">~5 min</div>
+    </div>
+    <h2 class="slide__title">L2 lit — your first web server</h2>
+    <p class="slide__subtitle">Five characters of JSON. Zero lines of code you wrote yourself. Welcome to AI-assisted backend development.</p>
+
+    <div class="slide__body">
+      <div class="cols-2 cols-2--6040">
+        <div class="arch">
+          <div class="arch__layer"><div class="arch__no">L1 · Frontend</div><div class="arch__name">React Frontend<span class="arch__check">✓</span></div><div class="arch__desc">Scaffolded but not wired. Coming in Module 5.</div></div>
+          <div class="arch__layer is-built is-current"><div class="arch__no">L2 · Backend</div><div class="arch__name">Go HTTP Server<span class="arch__check">✓</span></div><div class="arch__desc">Server, router, helpers, two endpoints. JSON over HTTP.</div></div>
+          <div class="arch__layer"><div class="arch__no">L3 · Data</div><div class="arch__name">Data Layer<span class="arch__check">✓</span></div><div class="arch__desc">Hardcoded array for now. Real store in Module 4.</div></div>
+          <div class="arch__layer"><div class="arch__no">L4 · External</div><div class="arch__name">External Services<span class="arch__check">✓</span></div><div class="arch__desc">Nothing external yet.</div></div>
+        </div>
+        <div>
+          <ul class="checklist">
+            <li><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">go run ./cmd/server -dev</code> runs cleanly.</li>
+            <li>Browser hits return real JSON on both endpoints.</li>
+            <li>Code is split: <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">cmd/server/main.go</code> + <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">internal/api/router.go</code>.</li>
+            <li>Each student ran the prompt → verify → iterate cycle at least twice.</li>
+          </ul>
+          <div class="arch-callout">Architecture status: <strong>1 of 4 layers built (L2).</strong> The first lamp is on.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 3 · Backend from Scratch</span><span>Module 3 complete · Architecture 1/4</span></div>
+
+    <aside class="notes">
+      <h4>Mark the moment</h4>
+      <p>This is the first emotional checkpoint of the day. Marines who five hours ago thought they couldn't write code now have a server they can curl. Stop and acknowledge it. Twenty seconds of silence is fine.</p>
+      <h4>Vocabulary check</h4>
+      <p>Ask the room: "What does the backend do, in one sentence?" Cold-call. Expected answer: "Receives a request, returns JSON." Anything close to that is right.</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Hardcoded data is fake. Module 4 makes it real."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       MODULE 4 — DIVIDER (BUILD)
+       ======================================================== -->
+  <section class="slide slide--section">
+    <div class="section-inner">
+      <div class="section-left">
+        <div class="module-eyebrow">Module · Build</div>
+        <div class="module-no">04<span class="of">/ 10</span></div>
+      </div>
+      <div class="section-right">
+        <div class="module-name">Data Layer</div>
+        <div class="module-meta">
+          <span class="pill pill--build">Build module</span>
+          <span class="pill pill--gold">45 min</span>
+        </div>
+        <p class="module-blurb">The most important conceptual move of the day: interface-first design. Define <em>what</em> the data layer does before you decide <em>how</em> it stores anything.</p>
+      </div>
+    </div>
+
+    <aside class="notes">
+      <h4>The point of this module</h4>
+      <p>If they take one architecture lesson out of today, it's this one. Interfaces are the lever that lets a domain expert direct an AI without becoming a software engineer.</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Here's why interface-first matters."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       4.1 — INTERFACE-FIRST FRAMING
+       ======================================================== -->
+  <section class="slide slide--build">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Module 4 · Build framing</div>
+      <div class="slide__minutes">~7 min</div>
+    </div>
+    <h2 class="slide__title">Interface first. Implementation later.</h2>
+    <p class="slide__subtitle">Define the contract — <em>list, get, create, update</em> — before you pick a backend.</p>
+
+    <div class="slide__body">
+      <div class="cols-2">
+        <div>
+          <span class="build-banner">▶ What we're adding</span>
+          <ul class="bullets-lg" style="margin-top:1.6vh;">
+            <li>A <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">DataStore</code> Go interface in <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">internal/data/store.go</code>.</li>
+            <li>An <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">Item</code> struct with proper JSON tags.</li>
+            <li>A <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">JSONStore</code> implementation reading <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">data/items.json</code>.</li>
+            <li>The items endpoint rewired to read from the store.</li>
+          </ul>
+        </div>
+        <div class="card card--gold">
+          <h3>Why interfaces are the lever</h3>
+          <p>The Heywood DataStore has 27 methods and 5 backends — JSON, SQLite, Postgres, Excel, Hybrid. The rest of the application doesn't know which one is active. Define the interface today and you can:</p>
+          <ul>
+            <li>Start with JSON files (no setup).</li>
+            <li>Upgrade to SQLite later (no other code changes).</li>
+            <li>Switch to Postgres for prod (config change).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 4 · Data Layer</span><span>4.1 · framing</span></div>
+
+    <aside class="notes">
+      <h4>Lean on principle 5</h4>
+      <p>Principle 5 from the opening: <em>interface-first design</em>. Tell the room: "This is where you actually feel that principle pay off. We are not asking the AI to write a database. We are asking it to satisfy a contract. The same contract will be satisfied later by SQLite without us touching the rest of the app."</p>
+      <h4>Vocabulary</h4>
+      <p>Check the room knows what an interface is. Define it in one sentence and write it on the whiteboard if you have one: <em>"A contract that says any data store must support these operations."</em></p>
+      <div class="cue"><strong>TRANSITION →</strong> Switch-to-editor.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       4.2 — SWITCH TO EDITOR
+       ======================================================== -->
+  <section class="slide slide--editor">
+    <div class="editor-inner">
+      <span class="badge">▶ Switch to the editor</span>
+      <div class="arrow">→</div>
+      <h2>Define the <em>DataStore interface</em></h2>
+      <p class="what">Three prompts: define <code style="color:#f5d130; font-family:var(--mono);">DataStore</code> + <code style="color:#f5d130; font-family:var(--mono);">Item</code> + <code style="color:#f5d130; font-family:var(--mono);">JSONStore</code>; generate 20 realistic seed items in <code style="color:#f5d130; font-family:var(--mono);">data/items.json</code>; rewire <code style="color:#f5d130; font-family:var(--mono);">main.go</code> to load the store and serve from it. Add <code style="color:#f5d130; font-family:var(--mono);">/api/v1/items/{id}</code>.</p>
+      <div class="timer">~30 min in editor</div>
+    </div>
+
+    <aside class="notes">
+      <h4>Live work</h4>
+      <ul>
+        <li>Have students examine the generated <code>store.go</code> together. Read the interface aloud.</li>
+        <li>Use the AI to seed 20 items with military-flavored content. Look at the JSON file together.</li>
+        <li>Curl <code>/api/v1/items</code> and <code>/api/v1/items/3</code>. Show that the data is now flowing through the store.</li>
+      </ul>
+      <h4>Watch for</h4>
+      <p>Marines copying interface methods into the JSON store and forgetting to satisfy them. Let the compiler error guide them — and let the AI fix it.</p>
+      <div class="cue"><strong>BACK TO DECK →</strong> When every student returns 20 items and a single item, return.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       4.3 — DEBRIEF + ARCHITECTURE (DATA ✓)
+       ======================================================== -->
+  <section class="slide slide--debrief">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Back to deck <span class="dot"></span> Data layer live</div>
+      <div class="slide__minutes">~3 min</div>
+    </div>
+    <h2 class="slide__title">L3 lit — real data, behind a contract</h2>
+    <p class="slide__subtitle">The frontend doesn't exist yet, but the data path is real and the interface is the door.</p>
+
+    <div class="slide__body">
+      <div class="cols-2 cols-2--6040">
+        <div class="arch">
+          <div class="arch__layer"><div class="arch__no">L1 · Frontend</div><div class="arch__name">React Frontend<span class="arch__check">✓</span></div><div class="arch__desc">Scaffolded. Wires up in Module 5.</div></div>
+          <div class="arch__layer is-built"><div class="arch__no">L2 · Backend</div><div class="arch__name">Go HTTP Server<span class="arch__check">✓</span></div><div class="arch__desc">Reads from the store now, not hardcoded data.</div></div>
+          <div class="arch__layer is-built is-current"><div class="arch__no">L3 · Data</div><div class="arch__name">Data Layer<span class="arch__check">✓</span></div><div class="arch__desc"><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">DataStore</code> interface + <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">JSONStore</code> + 20 seed items.</div></div>
+          <div class="arch__layer"><div class="arch__no">L4 · External</div><div class="arch__name">External Services<span class="arch__check">✓</span></div><div class="arch__desc">Nothing external yet.</div></div>
+        </div>
+        <div>
+          <ul class="checklist">
+            <li>Interface defined with 4+ methods.</li>
+            <li><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">JSONStore</code> reads from <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">data/items.json</code>.</li>
+            <li>API serves real data; <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/items</code> and <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/items/{id}</code> both work.</li>
+            <li>Each student can define "interface" in one sentence.</li>
+          </ul>
+          <div class="arch-callout">Architecture status: <strong>2 of 4 layers built (L2 + L3).</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 4 · Data Layer</span><span>Module 4 complete · Architecture 2/4</span></div>
+
+    <aside class="notes">
+      <h4>Quick recap</h4>
+      <p>Pause and ask the room to recite: "Interface first. Implementation later." Get them to say it back. This is the most reused concept of the day.</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Break time. Fifteen minutes. Be back at [time]."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       BREAK 1
+       ======================================================== -->
+  <section class="slide slide--break">
+    <div class="break-inner">
+      <div class="lab">Break · Be back at H+3:00</div>
+      <div class="num">15<small>min</small></div>
+      <div class="sub">Stretch. Drink water. Don't open Slack. The next stretch is the longest of the day.</div>
+    </div>
+
+    <aside class="notes">
+      <h4>Hold the break</h4>
+      <p>Hold a hard 15. Resist the urge to start early. Marines who fell behind in setup may use this time to catch up — circulate quietly.</p>
+      <h4>Pre-flight before Module 5</h4>
+      <ul>
+        <li>Confirm everyone's backend still runs after the break (terminal didn't get killed).</li>
+        <li>Have the next prompt loaded so you can paste it the moment you're back.</li>
+      </ul>
+      <div class="cue"><strong>RETURN →</strong> Module 5 — frontend.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       MODULE 5 — DIVIDER (BUILD)
+       ======================================================== -->
+  <section class="slide slide--section">
+    <div class="section-inner">
+      <div class="section-left">
+        <div class="module-eyebrow">Module · Build</div>
+        <div class="module-no">05<span class="of">/ 10</span></div>
+      </div>
+      <div class="section-right">
+        <div class="module-name">Frontend from Scratch</div>
+        <div class="module-meta">
+          <span class="pill pill--build">Build module</span>
+          <span class="pill pill--gold">45 min</span>
+        </div>
+        <p class="module-blurb">Stand up React + Vite + TypeScript, configure a proxy to the Go backend, and render the items table in a styled UI. The first end-to-end full-stack moment of the day.</p>
+      </div>
+    </div>
+
+    <aside class="notes">
+      <h4>Energy check</h4>
+      <p>Coming back from break — re-anchor briefly. Two sentences: "Backend is live, data is real. Now we make humans able to see it."</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Frontend framing."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       5.1 — BUILD FRAMING
+       ======================================================== -->
+  <section class="slide slide--build">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Module 5 · Build framing</div>
+      <div class="slide__minutes">~5 min</div>
+    </div>
+    <h2 class="slide__title">First end-to-end view</h2>
+    <p class="slide__subtitle">React fetches your Go API and renders a styled table. JSON file → Go server → React → browser.</p>
+
+    <div class="slide__body">
+      <div class="cols-2">
+        <div>
+          <span class="build-banner">▶ What we're adding</span>
+          <ul class="bullets-lg" style="margin-top:1.6vh;">
+            <li>Tailwind CSS configured in <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">web/</code>.</li>
+            <li>Vite proxy: <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/api</code> → <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">localhost:8080</code>.</li>
+            <li>API client at <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">web/src/lib/api.ts</code>.</li>
+            <li><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">ItemsPage.tsx</code> — table with status / priority color-coding, loading + error states.</li>
+          </ul>
+        </div>
+        <div class="card card--gold">
+          <h3>Why this fits the architecture</h3>
+          <p>This module connects L1 to L2 — the frontend pulls data from your server through the proxy. Two terminals running side by side. From the user's point of view, this is the first time the application "exists."</p>
+          <p style="margin-top:1.4vh;"><strong>Principle in play:</strong> Scaffold first. We are not styling. We are not adding features. We are getting <em>any</em> data on screen.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 5 · Frontend from Scratch</span><span>5.1 · framing</span></div>
+
+    <aside class="notes">
+      <h4>Watch the temptation</h4>
+      <p>Some students will want to make the table beautiful. Resist this. The job today is to get data on the page; we add features in Module 6.</p>
+      <div class="cue"><strong>TRANSITION →</strong> Switch-to-editor.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       5.2 — SWITCH TO EDITOR
+       ======================================================== -->
+  <section class="slide slide--editor">
+    <div class="editor-inner">
+      <span class="badge">▶ Switch to the editor</span>
+      <div class="arrow">→</div>
+      <h2>Wire the <em>frontend to the backend</em></h2>
+      <p class="what">
+        Two terminals: backend in one, <code style="color:#f5d130; font-family:var(--mono);">npm run dev</code> in the other.
+        Configure Tailwind, set up the Vite proxy, build the API client, and render the items table at <code style="color:#f5d130; font-family:var(--mono);">localhost:5173</code>.
+      </p>
+      <div class="timer">~30 min in editor</div>
+    </div>
+
+    <aside class="notes">
+      <h4>Demo flow</h4>
+      <ul>
+        <li>Show two terminals side by side. Make the proxy concept visible.</li>
+        <li>Common error to demo: CORS error → fix is the proxy, not CORS middleware.</li>
+        <li>Show the network tab. Trace one request from React → Vite proxy → Go.</li>
+      </ul>
+      <h4>If a student is stuck</h4>
+      <p>Most failures here are PostCSS / Tailwind config or a missing proxy block in <code>vite.config.ts</code>. Both are 30-second AI fixes once they paste the error.</p>
+      <div class="cue"><strong>BACK TO DECK →</strong> When every student sees a styled table at <code>localhost:5173</code>, return.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       5.3 — DEBRIEF: SECOND VICTORY + ARCHITECTURE (FRONTEND ✓)
+       ======================================================== -->
+  <section class="slide slide--debrief">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Back to deck <span class="dot"></span> Second victory</div>
+      <div class="slide__minutes">~5 min</div>
+    </div>
+    <h2 class="slide__title">L1 lit — full stack, end to end</h2>
+    <p class="slide__subtitle">JSON file → Go server → React → browser. Three of four layers are now real.</p>
+
+    <div class="slide__body">
+      <div class="cols-2 cols-2--6040">
+        <div class="arch">
+          <div class="arch__layer is-built is-current"><div class="arch__no">L1 · Frontend</div><div class="arch__name">React Frontend<span class="arch__check">✓</span></div><div class="arch__desc">Items table at <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">localhost:5173</code>, color-coded.</div></div>
+          <div class="arch__layer is-built"><div class="arch__no">L2 · Backend</div><div class="arch__name">Go HTTP Server<span class="arch__check">✓</span></div><div class="arch__desc">Serving JSON to the proxied frontend.</div></div>
+          <div class="arch__layer is-built"><div class="arch__no">L3 · Data</div><div class="arch__name">Data Layer<span class="arch__check">✓</span></div><div class="arch__desc">JSON store backing the items endpoint.</div></div>
+          <div class="arch__layer"><div class="arch__no">L4 · External</div><div class="arch__name">External Services<span class="arch__check">✓</span></div><div class="arch__desc">Coming online in Module 7 (OpenAI).</div></div>
+        </div>
+        <div>
+          <ul class="checklist">
+            <li>React app loads at <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">localhost:5173</code>.</li>
+            <li>Items table fetches and renders Go data.</li>
+            <li>Status + priority columns color-coded.</li>
+            <li>No console errors in dev tools.</li>
+          </ul>
+          <div class="arch-callout">Architecture status: <strong>3 of 4 layers built.</strong> The application now exists from a user's point of view.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 5 · Frontend from Scratch</span><span>Module 5 complete · Architecture 3/4</span></div>
+
+    <aside class="notes">
+      <h4>Mark the moment — second victory</h4>
+      <p>This is bigger than Module 3. The data is now visible to a human. Stop. Have one student share their screen briefly so the rest of the room can see somebody else's work, not just yours.</p>
+      <div class="cue"><strong>TRANSITION →</strong> "One page is not an app. Module 6 makes it one."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       MODULE 6 — DIVIDER (BUILD)
+       ======================================================== -->
+  <section class="slide slide--section">
+    <div class="section-inner">
+      <div class="section-left">
+        <div class="module-eyebrow">Module · Build</div>
+        <div class="module-no">06<span class="of">/ 10</span></div>
+      </div>
+      <div class="section-right">
+        <div class="module-name">Pages &amp; Navigation</div>
+        <div class="module-meta">
+          <span class="pill pill--build">Build module</span>
+          <span class="pill pill--gold">45 min</span>
+        </div>
+        <p class="module-blurb">Sidebar layout, client-side routing, dashboard with stats, item detail page. Turn the prototype into something that looks and feels like an application.</p>
+      </div>
+    </div>
+
+    <aside class="notes">
+      <h4>Pace</h4>
+      <p>This is a UI module. Visible progress is fast and motivating, but easy to over-style. Keep students focused on structure, not pixels.</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Framing."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       6.1 — BUILD FRAMING
+       ======================================================== -->
+  <section class="slide slide--build">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Module 6 · Build framing</div>
+      <div class="slide__minutes">~5 min</div>
+    </div>
+    <h2 class="slide__title">From one page to a real application</h2>
+    <p class="slide__subtitle">Layout, routes, dashboard, detail page. The shape of every internal tool you'll ever build.</p>
+
+    <div class="slide__body">
+      <div class="cols-2">
+        <div>
+          <span class="build-banner">▶ What we're adding</span>
+          <ul class="bullets-lg" style="margin-top:1.6vh;">
+            <li><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">react-router-dom</code> with Layout, Dashboard, Items, Settings.</li>
+            <li>Dark sidebar (navy <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">#1a1f36</code>) with nav highlighting.</li>
+            <li>Item detail page at <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/items/:id</code>.</li>
+            <li>Dashboard stat cards, recent items, quick actions.</li>
+          </ul>
+        </div>
+        <div class="card card--gold">
+          <h3>Why this fits the architecture</h3>
+          <p>L1 is now a real frontend, not a single page. We're not adding new layers — we're filling out the one we just lit.</p>
+          <p style="margin-top:1.4vh;"><strong>Principle in play:</strong> Iterative refinement. The first prompt gets you 70% there; the next two prompts get you to 95%.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 6 · Pages &amp; Navigation</span><span>6.1 · framing</span></div>
+
+    <aside class="notes">
+      <h4>Set the constraint</h4>
+      <p>Tell the room: "We are using Tailwind defaults. We are not picking fonts. We are not designing icons. The point is shape, not paint."</p>
+      <div class="cue"><strong>TRANSITION →</strong> Switch-to-editor.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       6.2 — SWITCH TO EDITOR
+       ======================================================== -->
+  <section class="slide slide--editor">
+    <div class="editor-inner">
+      <span class="badge">▶ Switch to the editor</span>
+      <div class="arrow">→</div>
+      <h2>Build the <em>multi-page UI</em></h2>
+      <p class="what">
+        Three prompts in sequence: routing + sidebar layout, item detail page, dashboard with stats and recent items.
+        Use Tailwind defaults. Active nav highlighting. Make titles in the items table click through to detail.
+      </p>
+      <div class="timer">~30 min in editor</div>
+    </div>
+
+    <aside class="notes">
+      <h4>Live work</h4>
+      <ul>
+        <li>Demo navigating between pages — show URL changes without page reload.</li>
+        <li>When the active link doesn't highlight, paste the issue back to the AI; this is the textbook iterative refinement loop.</li>
+      </ul>
+      <h4>Watch for</h4>
+      <p>404s on routes that look like they should work — usually missing route definition or wrong path. Let the AI fix.</p>
+      <div class="cue"><strong>BACK TO DECK →</strong> When every student has a working sidebar, dashboard, item list with click-through, and detail page.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       6.3 — DEBRIEF + ARCHITECTURE (still 3/4)
+       ======================================================== -->
+  <section class="slide slide--debrief">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Back to deck <span class="dot"></span> Real application shape</div>
+      <div class="slide__minutes">~3 min</div>
+    </div>
+    <h2 class="slide__title">L1 fleshed out — the prototype is gone</h2>
+    <p class="slide__subtitle">Same diagram. The frontend layer is now a real multi-page app, not a one-page demo.</p>
+
+    <div class="slide__body">
+      <div class="cols-2 cols-2--6040">
+        <div class="arch">
+          <div class="arch__layer is-built is-current"><div class="arch__no">L1 · Frontend</div><div class="arch__name">React Frontend<span class="arch__check">✓</span></div><div class="arch__desc">Sidebar, routing, dashboard, items, detail. Looks like an app.</div></div>
+          <div class="arch__layer is-built"><div class="arch__no">L2 · Backend</div><div class="arch__name">Go HTTP Server<span class="arch__check">✓</span></div><div class="arch__desc">Same endpoints, more callers.</div></div>
+          <div class="arch__layer is-built"><div class="arch__no">L3 · Data</div><div class="arch__name">Data Layer<span class="arch__check">✓</span></div><div class="arch__desc">JSON store still backing everything.</div></div>
+          <div class="arch__layer"><div class="arch__no">L4 · External</div><div class="arch__name">External Services<span class="arch__check">✓</span></div><div class="arch__desc">Next module — OpenAI.</div></div>
+        </div>
+        <div>
+          <ul class="checklist">
+            <li>Sidebar nav works without page reload.</li>
+            <li>Dashboard shows stats from API data.</li>
+            <li>Detail page loads from items list.</li>
+            <li>Active page highlighted in sidebar.</li>
+          </ul>
+          <div class="arch-callout">Architecture status: <strong>3 of 4 layers built — L1 fully fleshed out.</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 6 · Pages &amp; Navigation</span><span>Module 6 complete · Architecture 3/4</span></div>
+
+    <aside class="notes">
+      <h4>Set up Module 7</h4>
+      <p>Module 7 is the most exciting module of the day for most rooms — it's when the AI starts calling their code. Tee it up: "Right now your app is a database with a face. In the next 45 minutes it grows a brain that can answer questions about itself."</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Module 7 — AI chat with tool use."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       MODULE 7 — DIVIDER (BUILD)
+       ======================================================== -->
+  <section class="slide slide--section">
+    <div class="section-inner">
+      <div class="section-left">
+        <div class="module-eyebrow">Module · Build</div>
+        <div class="module-no">07<span class="of">/ 10</span></div>
+      </div>
+      <div class="section-right">
+        <div class="module-name">AI Chat Integration</div>
+        <div class="module-meta">
+          <span class="pill pill--build">Build module</span>
+          <span class="pill pill--gold">45 min</span>
+        </div>
+        <p class="module-blurb">A chat backend that calls OpenAI, a tool the AI can call back into your data store, and a chat page on the frontend. The brain inside the app.</p>
+      </div>
+    </div>
+
+    <aside class="notes">
+      <h4>Why this is the high point of the day</h4>
+      <p>This is the module that makes the whole curriculum worth it. The AI calls <em>your</em> code and answers questions about <em>your</em> data — no hallucination, real lookups.</p>
+      <div class="cue"><strong>TRANSITION →</strong> "What we're building."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       7.1 — TOOL USE EXPLAINER + FRAMING
+       ======================================================== -->
+  <section class="slide slide--build">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Module 7 · Build framing</div>
+      <div class="slide__minutes">~7 min</div>
+    </div>
+    <h2 class="slide__title">Tool use — the AI calls your code</h2>
+    <p class="slide__subtitle">When a user asks "how many high-priority items do I have?", the AI doesn't guess. It calls your <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">lookup_items</code> tool and reports the real count.</p>
+
+    <div class="slide__body">
+      <div class="cols-2">
+        <div>
+          <span class="build-banner">▶ What we're adding</span>
+          <ul class="bullets-lg" style="margin-top:1.6vh;">
+            <li>Chat service in <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">internal/ai/chat.go</code> calling <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">gpt-4o</code>.</li>
+            <li>A <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">lookup_items</code> tool with status / priority / query params.</li>
+            <li><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">POST /api/v1/chat</code> endpoint.</li>
+            <li><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">ChatPage.tsx</code> with markdown rendering and loading states.</li>
+          </ul>
+        </div>
+        <div class="card card--ink">
+          <h3>What is tool use?</h3>
+          <p>Function calling lets the AI invoke functions in your application. The AI sees a list of tools you've offered, decides which to call, and uses the result in its answer.</p>
+          <p>This is what makes Heywood real. It does not hallucinate about student data. It queries the database and reports facts.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 7 · AI Chat Integration</span><span>7.1 · framing</span></div>
+
+    <aside class="notes">
+      <h4>Make it concrete</h4>
+      <p>Walk the room through the round trip: user types question → frontend POSTs to <code>/chat</code> → Go calls OpenAI with the tool description → OpenAI says "call lookup_items with priority=high" → Go runs the lookup against the DataStore → Go sends the result back to OpenAI → OpenAI writes a sentence using the real numbers → Go returns the sentence to the frontend.</p>
+      <h4>Pre-flight</h4>
+      <p>Confirm everyone has <code>OPENAI_API_KEY</code> set in their shell. If not, do that first — this is the most common stuck-point.</p>
+      <div class="cue"><strong>TRANSITION →</strong> Switch-to-editor.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       7.2 — SWITCH TO EDITOR
+       ======================================================== -->
+  <section class="slide slide--editor">
+    <div class="editor-inner">
+      <span class="badge">▶ Switch to the editor</span>
+      <div class="arrow">→</div>
+      <h2>Build the <em>chat with tool use</em></h2>
+      <p class="what">
+        Three prompts: chat service against OpenAI; <code style="color:#f5d130; font-family:var(--mono);">lookup_items</code> tool definition; chat page with markdown rendering. End: ask "what are my high-priority items?" and watch the AI call your code.
+      </p>
+      <div class="timer">~30 min in editor</div>
+    </div>
+
+    <aside class="notes">
+      <h4>The moment to land</h4>
+      <p>Watch the server logs while you ask the question in the chat. Make sure students see the tool call printed in the terminal. That is the moment the abstraction becomes real.</p>
+      <h4>Common stuck-points</h4>
+      <ul>
+        <li>API key not set → <code>export OPENAI_API_KEY=…</code>.</li>
+        <li>CORS on <code>/chat</code> → add to existing middleware.</li>
+        <li>Tool response format wrong → paste the OpenAI error to the AI; it will fix its own tool definition.</li>
+      </ul>
+      <div class="cue"><strong>BACK TO DECK →</strong> When every student gets a real, data-grounded answer from the chat.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       7.3 — DEBRIEF + ARCHITECTURE (EXTERNAL ✓)
+       ======================================================== -->
+  <section class="slide slide--debrief">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Back to deck <span class="dot"></span> AI on board</div>
+      <div class="slide__minutes">~5 min</div>
+    </div>
+    <h2 class="slide__title">L4 lit — the brain comes online</h2>
+    <p class="slide__subtitle">All four layers built. Your application can now answer questions about itself, grounded in real data.</p>
+
+    <div class="slide__body">
+      <div class="cols-2 cols-2--6040">
+        <div class="arch">
+          <div class="arch__layer is-built"><div class="arch__no">L1 · Frontend</div><div class="arch__name">React Frontend<span class="arch__check">✓</span></div><div class="arch__desc">+ ChatPage with markdown rendering.</div></div>
+          <div class="arch__layer is-built"><div class="arch__no">L2 · Backend</div><div class="arch__name">Go HTTP Server<span class="arch__check">✓</span></div><div class="arch__desc">+ <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/chat</code> endpoint and chat service.</div></div>
+          <div class="arch__layer is-built"><div class="arch__no">L3 · Data</div><div class="arch__name">Data Layer<span class="arch__check">✓</span></div><div class="arch__desc">Now consumed by humans <em>and</em> the AI tool.</div></div>
+          <div class="arch__layer is-built is-current"><div class="arch__no">L4 · External</div><div class="arch__name">External Services<span class="arch__check">✓</span></div><div class="arch__desc">OpenAI <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">gpt-4o</code> with tool use.</div></div>
+        </div>
+        <div>
+          <ul class="checklist">
+            <li>Chat sends and receives messages.</li>
+            <li>AI uses tool calling to query the DataStore.</li>
+            <li>Responses contain real data, not hallucinated items.</li>
+            <li>Markdown renders correctly.</li>
+          </ul>
+          <div class="arch-callout">Architecture status: <strong>4 of 4 layers built.</strong> Every layer is real. The rest of the day is hardening.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 7 · AI Chat Integration</span><span>Module 7 complete · Architecture 4/4</span></div>
+
+    <aside class="notes">
+      <h4>This is the apex</h4>
+      <p>Stop and let it land. This is the moment a Power Platform user crosses the line into something Power Platform cannot do. Acknowledge it: "Right now you are doing something Copilot Studio cannot do. You have built a chat that runs your code against your data inside your app. That is the threshold."</p>
+      <h4>Set up the second half</h4>
+      <p>The remaining three modules harden the app: auth, an external integration, and a deployable container. Tell the room: "From here, every module makes the application more real-world."</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Break two. Fifteen minutes."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       BREAK 2
+       ======================================================== -->
+  <section class="slide slide--break">
+    <div class="break-inner">
+      <div class="lab">Break · Be back at H+5:30</div>
+      <div class="num">15<small>min</small></div>
+      <div class="sub">Halfway through the back half. Stretch, water, kill any zombie servers in your terminal.</div>
+    </div>
+
+    <aside class="notes">
+      <h4>Tell them</h4>
+      <p>"After the break we have three modules. Two are short and one is the deploy. We will end on time."</p>
+      <h4>Pre-flight before Module 8</h4>
+      <ul>
+        <li>Confirm chat still works after the break.</li>
+        <li>Have the auth middleware prompt loaded.</li>
+      </ul>
+      <div class="cue"><strong>RETURN →</strong> Module 8 — auth.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       MODULE 8 — DIVIDER (BUILD)
+       ======================================================== -->
+  <section class="slide slide--section">
+    <div class="section-inner">
+      <div class="section-left">
+        <div class="module-eyebrow">Module · Build</div>
+        <div class="module-no">08<span class="of">/ 10</span></div>
+      </div>
+      <div class="section-right">
+        <div class="module-name">Auth &amp; Middleware</div>
+        <div class="module-meta">
+          <span class="pill pill--build">Build module</span>
+          <span class="pill pill--gold">45 min</span>
+        </div>
+        <p class="module-blurb">Different users see different data. Middleware is the gate guard that runs before every request reaches your handler. Today we build the role-aware version.</p>
+      </div>
+    </div>
+
+    <aside class="notes">
+      <h4>Frame the metaphor</h4>
+      <p>Use the gate guard image early. It's the easiest way for a Marine audience to internalize middleware.</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Framing."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       8.1 — BUILD FRAMING
+       ======================================================== -->
+  <section class="slide slide--build">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Module 8 · Build framing</div>
+      <div class="slide__minutes">~5 min</div>
+    </div>
+    <h2 class="slide__title">Middleware = gate guard</h2>
+    <p class="slide__subtitle">Code that runs before every request — checking credentials before anyone gets into the building.</p>
+
+    <div class="slide__body">
+      <div class="cols-2">
+        <div>
+          <span class="build-banner">▶ What we're adding</span>
+          <ul class="bullets-lg" style="margin-top:1.6vh;">
+            <li>Middleware package: CORS, security headers, auth, chain.</li>
+            <li><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/auth/me</code> + <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/auth/switch</code> endpoints.</li>
+            <li>Role picker dropdown in the header (Admin / Staff / User).</li>
+            <li>Role-based filtering — Admin sees all, User sees only their items.</li>
+          </ul>
+        </div>
+        <div class="card card--gold">
+          <h3>Why this fits the architecture</h3>
+          <p>No new layers. We're hardening L2 (the backend) and L1 (the frontend). The same data store now serves different users different views.</p>
+          <p style="margin-top:1.4vh;"><strong>Principle in play:</strong> Scaffold, then layer. Today we use a cookie. In a real deployment this becomes CAC, OIDC, or whatever the unit standard is.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 8 · Auth &amp; Middleware</span><span>8.1 · framing</span></div>
+
+    <aside class="notes">
+      <h4>Set the realism dial</h4>
+      <p>This is demo auth, not production auth. Say so out loud. "We are using a role cookie because it's the smallest thing that demonstrates the pattern. In production this is CAC + OIDC + a real session store. The pattern is the same."</p>
+      <div class="cue"><strong>TRANSITION →</strong> Switch-to-editor.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       8.2 — SWITCH TO EDITOR
+       ======================================================== -->
+  <section class="slide slide--editor">
+    <div class="editor-inner">
+      <span class="badge">▶ Switch to the editor</span>
+      <div class="arrow">→</div>
+      <h2>Add <em>auth, middleware, role switcher</em></h2>
+      <p class="what">Three prompts: middleware package; auth endpoints + frontend role picker; role-based data filtering across the existing endpoints.</p>
+      <div class="timer">~30 min in editor</div>
+    </div>
+
+    <aside class="notes">
+      <h4>Demo flow</h4>
+      <ul>
+        <li>Switch role to "User" — show fewer items.</li>
+        <li>Switch role to "Admin" — show everything.</li>
+        <li>Open dev tools → Application → Cookies, show the role cookie.</li>
+        <li>Inspect the request headers — show the middleware setting role on the context.</li>
+      </ul>
+      <h4>Common stuck-points</h4>
+      <ul>
+        <li>Cookie not sticking → check <code>SameSite</code> and credentials in fetch.</li>
+        <li>Settings link still visible to Staff/User → conditional render in sidebar.</li>
+      </ul>
+      <div class="cue"><strong>BACK TO DECK →</strong> When every student can switch roles and see different data.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       8.3 — DEBRIEF + ARCHITECTURE (still 4/4 — hardened)
+       ======================================================== -->
+  <section class="slide slide--debrief">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Back to deck <span class="dot"></span> Auth in place</div>
+      <div class="slide__minutes">~3 min</div>
+    </div>
+    <h2 class="slide__title">All four layers — now role-aware</h2>
+    <p class="slide__subtitle">Same diagram. The application now treats different humans differently.</p>
+
+    <div class="slide__body">
+      <div class="cols-2 cols-2--6040">
+        <div class="arch">
+          <div class="arch__layer is-built is-current"><div class="arch__no">L1 · Frontend</div><div class="arch__name">React Frontend<span class="arch__check">✓</span></div><div class="arch__desc">Role picker; conditional sidebar.</div></div>
+          <div class="arch__layer is-built is-current"><div class="arch__no">L2 · Backend</div><div class="arch__name">Go HTTP Server<span class="arch__check">✓</span></div><div class="arch__desc">Middleware chain — CORS, security headers, auth.</div></div>
+          <div class="arch__layer is-built"><div class="arch__no">L3 · Data</div><div class="arch__name">Data Layer<span class="arch__check">✓</span></div><div class="arch__desc">Filtered per-role at the handler.</div></div>
+          <div class="arch__layer is-built"><div class="arch__no">L4 · External</div><div class="arch__name">External Services<span class="arch__check">✓</span></div><div class="arch__desc">Same OpenAI integration.</div></div>
+        </div>
+        <div>
+          <ul class="checklist">
+            <li>CORS, security headers, auth middleware all chained.</li>
+            <li>Role picker persists across reload.</li>
+            <li>Data is filtered by role.</li>
+            <li>Students can define middleware in one sentence: "code that runs before every request."</li>
+          </ul>
+          <div class="arch-callout">Architecture status: <strong>4 of 4 layers — hardened with auth.</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 8 · Auth &amp; Middleware</span><span>Module 8 complete · Architecture 4/4 (hardened)</span></div>
+
+    <aside class="notes">
+      <h4>Quick check</h4>
+      <p>Cold-call: "What does middleware do?" Looking for: "Runs before every request — checks something, sets something, then lets the request continue."</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Module 9 — your application meets the outside world."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       MODULE 9 — DIVIDER (BUILD)
+       ======================================================== -->
+  <section class="slide slide--section">
+    <div class="section-inner">
+      <div class="section-left">
+        <div class="module-eyebrow">Module · Build</div>
+        <div class="module-no">09<span class="of">/ 10</span></div>
+      </div>
+      <div class="section-right">
+        <div class="module-name">External Integrations</div>
+        <div class="module-meta">
+          <span class="pill pill--build">Build module</span>
+          <span class="pill pill--gold">45 min</span>
+        </div>
+        <p class="module-blurb">Choose your path. Path A — replace JSON with SQLite (no external accounts). Path B — connect to Outlook via Microsoft Graph (Azure AD required). Both prove the integration pattern.</p>
+      </div>
+    </div>
+
+    <aside class="notes">
+      <h4>Pacing valve</h4>
+      <p>This is the module to compress if you're behind schedule. Tell the room up front: "Path A is the default. Path B is for Marines who already have Azure AD access. Either path counts."</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Pick a path."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       9.1 — BUILD FRAMING (PATH A vs B)
+       ======================================================== -->
+  <section class="slide slide--build">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Module 9 · Build framing</div>
+      <div class="slide__minutes">~5 min</div>
+    </div>
+    <h2 class="slide__title">Choose your path</h2>
+    <p class="slide__subtitle">The interface from Module 4 means you can swap the implementation without breaking anything else.</p>
+
+    <div class="slide__body">
+      <div class="cols-2">
+        <div class="card card--accent">
+          <h3>Path A — SQLite backend</h3>
+          <p><strong>Default for most students.</strong> No external account needed.</p>
+          <ul>
+            <li>New <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">DataStore</code> implementation using <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">modernc.org/sqlite</code> (pure Go).</li>
+            <li>Auto-create tables on startup.</li>
+            <li>Parameterized queries.</li>
+            <li><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">-db</code> flag toggles JSON vs SQLite.</li>
+          </ul>
+        </div>
+        <div class="card card--gold">
+          <h3>Path B — Microsoft Graph</h3>
+          <p><strong>For students with Azure AD access.</strong> Live Outlook data.</p>
+          <ul>
+            <li>OAuth2 client credentials flow.</li>
+            <li>Token caching.</li>
+            <li>Commercial &amp; GCC High endpoints.</li>
+            <li>New endpoints: <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/calendar/today</code> and <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/mail/summary</code>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 9 · External Integrations</span><span>9.1 · framing</span></div>
+
+    <aside class="notes">
+      <h4>Be opinionated</h4>
+      <p>Recommend Path A out loud. "If you don't have Azure AD app registration credentials in front of you right now, do Path A. Path B can wait until next week — and the SQLite skill is broadly more useful."</p>
+      <h4>Why Path A is the textbook payoff</h4>
+      <p>This is where Module 4's interface earns its keep. Tell the room: "We are about to swap the engine. Nothing else in the application changes. That is what interface-first design <em>buys you</em>."</p>
+      <div class="cue"><strong>TRANSITION →</strong> Switch-to-editor.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       9.2 — SWITCH TO EDITOR
+       ======================================================== -->
+  <section class="slide slide--editor">
+    <div class="editor-inner">
+      <span class="badge">▶ Switch to the editor</span>
+      <div class="arrow">→</div>
+      <h2>Wire your <em>chosen integration</em></h2>
+      <p class="what">Path A: build the SQLite store, run with <code style="color:#f5d130; font-family:var(--mono);">-db sqlite</code>, restart, confirm data persists. Path B: build the Graph client, fetch today's calendar.</p>
+      <div class="timer">~30 min in editor</div>
+    </div>
+
+    <aside class="notes">
+      <h4>Live work — Path A</h4>
+      <ul>
+        <li>Show the new SQLite store satisfying the existing interface.</li>
+        <li>Restart with <code>-db sqlite</code>. Add an item via curl. Restart again. Show the item is still there.</li>
+        <li>Switch back to <code>-db json</code> to show the upgrade is reversible.</li>
+      </ul>
+      <h4>Live work — Path B</h4>
+      <ul>
+        <li>Demo the OAuth2 token request flow once.</li>
+        <li>Make sure your Tenant ID, Client ID, and Client Secret are in env vars before class — never hardcode.</li>
+      </ul>
+      <div class="cue"><strong>BACK TO DECK →</strong> When every student has at least one external integration responding with real data.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       9.3 — DEBRIEF + ARCHITECTURE
+       ======================================================== -->
+  <section class="slide slide--debrief">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Back to deck <span class="dot"></span> Integration live</div>
+      <div class="slide__minutes">~3 min</div>
+    </div>
+    <h2 class="slide__title">L3 or L4 deepened — interfaces paid off</h2>
+    <p class="slide__subtitle">Whichever path you took, the rest of the application didn't change. That is the interface paying its rent.</p>
+
+    <div class="slide__body">
+      <div class="cols-2 cols-2--6040">
+        <div class="arch">
+          <div class="arch__layer is-built"><div class="arch__no">L1 · Frontend</div><div class="arch__name">React Frontend<span class="arch__check">✓</span></div><div class="arch__desc">Unchanged.</div></div>
+          <div class="arch__layer is-built"><div class="arch__no">L2 · Backend</div><div class="arch__name">Go HTTP Server<span class="arch__check">✓</span></div><div class="arch__desc">Unchanged.</div></div>
+          <div class="arch__layer is-built is-current"><div class="arch__no">L3 · Data</div><div class="arch__name">Data Layer<span class="arch__check">✓</span></div><div class="arch__desc">Path A: now SQLite-backed; data persists across restart.</div></div>
+          <div class="arch__layer is-built is-current"><div class="arch__no">L4 · External</div><div class="arch__name">External Services<span class="arch__check">✓</span></div><div class="arch__desc">Path B: OpenAI + Microsoft Graph (Outlook).</div></div>
+        </div>
+        <div>
+          <ul class="checklist">
+            <li>App connected to at least one external service.</li>
+            <li>Integration works end-to-end.</li>
+            <li>Rest of the app didn't need to change — interfaces did the work.</li>
+          </ul>
+          <div class="arch-callout">Architecture status: <strong>4 of 4 — deepened.</strong> Time to ship.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 9 · External Integrations</span><span>Module 9 complete · Architecture 4/4 (deepened)</span></div>
+
+    <aside class="notes">
+      <h4>Connect the dots</h4>
+      <p>Spell it out: "Six modules ago we wrote an interface. We just swapped the implementation behind it and nothing else in the app moved. <em>That</em> is the lever. Remember it for everything you build after today."</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Final build module — package and ship."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       MODULE 10 — DIVIDER (BUILD)
+       ======================================================== -->
+  <section class="slide slide--section">
+    <div class="section-inner">
+      <div class="section-left">
+        <div class="module-eyebrow">Module · Build · Final</div>
+        <div class="module-no">10<span class="of">/ 10</span></div>
+      </div>
+      <div class="section-right">
+        <div class="module-name">Docker &amp; Deployment</div>
+        <div class="module-meta">
+          <span class="pill pill--build">Build module</span>
+          <span class="pill pill--gold">45 min</span>
+        </div>
+        <p class="module-blurb">A multi-stage Dockerfile bundles backend, frontend, and data into one container. It runs identically on a laptop, a server, Azure, a ship, or a field TOC.</p>
+      </div>
+    </div>
+
+    <aside class="notes">
+      <h4>Frame the stakes</h4>
+      <p>"This is the third victory of the day. Right now your app exists on your laptop. After this module, it exists everywhere — same bytes, any machine."</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Framing."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       10.1 — BUILD FRAMING
+       ======================================================== -->
+  <section class="slide slide--build">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Module 10 · Build framing</div>
+      <div class="slide__minutes">~5 min</div>
+    </div>
+    <h2 class="slide__title">One container. Runs anywhere.</h2>
+    <p class="slide__subtitle">Multi-stage build — Node bakes the frontend, Go compiles the binary, Alpine runs the result.</p>
+
+    <div class="slide__body">
+      <div class="cols-2">
+        <div>
+          <span class="build-banner">▶ What we're adding</span>
+          <ul class="bullets-lg" style="margin-top:1.6vh;">
+            <li>Multi-stage <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">Dockerfile</code>: web-builder, go-builder, runtime.</li>
+            <li>Go server serves the React build in production mode.</li>
+            <li>SPA fallback for non-API routes.</li>
+            <li><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">docker build</code> + <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">docker run</code> locally on port 8080.</li>
+            <li><em>Optional:</em> push to ACR and deploy to Azure Container Apps.</li>
+          </ul>
+        </div>
+        <div class="card card--gold">
+          <h3>Why this fits the architecture</h3>
+          <p>The container collapses L1, L2, and L3 into a single artifact. L4 (OpenAI, Graph) stays external — you pass keys via environment variables.</p>
+          <p style="margin-top:1.4vh;"><strong>Principle in play:</strong> Incremental deployment. We are not waiting until "the end" to ship. The container <em>is</em> the end.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 10 · Docker &amp; Deployment</span><span>10.1 · framing</span></div>
+
+    <aside class="notes">
+      <h4>Whiteboard the three stages</h4>
+      <p>Sketch the multi-stage build out loud: stage 1 builds the React bundle, stage 2 compiles the Go binary, stage 3 is a tiny Alpine image with just the binary, the bundle, and the data folder.</p>
+      <div class="cue"><strong>TRANSITION →</strong> Switch-to-editor.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       10.2 — SWITCH TO EDITOR
+       ======================================================== -->
+  <section class="slide slide--editor">
+    <div class="editor-inner">
+      <span class="badge">▶ Switch to the editor</span>
+      <div class="arrow">→</div>
+      <h2>Build &amp; <em>run the container</em></h2>
+      <p class="what">
+        Generate the multi-stage Dockerfile. <code style="color:#f5d130; font-family:var(--mono);">docker build -t my-staff-app .</code>. <code style="color:#f5d130; font-family:var(--mono);">docker run -p 8080:8080 -e OPENAI_API_KEY=…</code>. Open <code style="color:#f5d130; font-family:var(--mono);">localhost:8080</code> — full app from a single container. Optional: deploy to Azure.
+      </p>
+      <div class="timer">~30 min in editor</div>
+    </div>
+
+    <aside class="notes">
+      <h4>Demo discipline</h4>
+      <ul>
+        <li>Show the image size — talk about why multi-stage builds matter.</li>
+        <li>Run the container, then stop your local dev servers — show the app still works because everything is now in the container.</li>
+      </ul>
+      <h4>Common stuck-points</h4>
+      <ul>
+        <li>No <code>.dockerignore</code> → image bloated by <code>node_modules</code>.</li>
+        <li>SPA fallback missing → 404 on direct navigation to non-root pages.</li>
+        <li>Azure CLI not logged in → <code>az login</code> first.</li>
+      </ul>
+      <div class="cue"><strong>BACK TO DECK →</strong> When every student has the app running from the container on <code>localhost:8080</code>.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       10.3 — DEBRIEF: THIRD VICTORY + ARCHITECTURE (DEPLOYED)
+       ======================================================== -->
+  <section class="slide slide--debrief">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Back to deck <span class="dot"></span> Third victory — the big one</div>
+      <div class="slide__minutes">~5 min</div>
+    </div>
+    <h2 class="slide__title">All four layers, packaged and shipped</h2>
+    <p class="slide__subtitle">The application now exists outside your laptop. Same bytes, any machine, any environment.</p>
+
+    <div class="slide__body">
+      <div class="cols-2 cols-2--6040">
+        <div class="arch">
+          <div class="arch__layer is-built is-current"><div class="arch__no">L1 · Frontend</div><div class="arch__name">React Frontend<span class="arch__check">✓</span></div><div class="arch__desc">Built bundle, served by Go in prod mode.</div></div>
+          <div class="arch__layer is-built is-current"><div class="arch__no">L2 · Backend</div><div class="arch__name">Go HTTP Server<span class="arch__check">✓</span></div><div class="arch__desc">Single binary. Serves the API <em>and</em> the SPA.</div></div>
+          <div class="arch__layer is-built is-current"><div class="arch__no">L3 · Data</div><div class="arch__name">Data Layer<span class="arch__check">✓</span></div><div class="arch__desc">Bundled into the image (or mounted as a volume).</div></div>
+          <div class="arch__layer is-built is-current"><div class="arch__no">L4 · External</div><div class="arch__name">External Services<span class="arch__check">✓</span></div><div class="arch__desc">Wired via environment variables — OpenAI, Graph, etc.</div></div>
+        </div>
+        <div>
+          <ul class="checklist">
+            <li>Image builds successfully.</li>
+            <li>Container runs and serves the full application.</li>
+            <li>Students understand: <em>one container = entire application.</em></li>
+            <li><em>(Bonus)</em> Deployed to Azure with a public URL.</li>
+          </ul>
+          <div class="arch-callout">Architecture status: <strong>4 of 4 layers — packaged.</strong> The application now lives anywhere.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 10 · Docker &amp; Deployment</span><span>Module 10 complete · Architecture 4/4 (shipped)</span></div>
+
+    <aside class="notes">
+      <h4>Land the moment</h4>
+      <p>Pause for ten seconds. Look at the diagram together. Say it out loud: "Eight hours ago this diagram was empty. Now every layer is solid and the whole thing fits in one container that you can run anywhere. You did this. AI wrote the code. You directed the work."</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Last fifteen minutes — assessment, then we close the program."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       ASSESSMENT — DIVIDER
+       ======================================================== -->
+  <section class="slide slide--section">
+    <div class="section-inner">
+      <div class="section-left">
+        <div class="module-eyebrow">Closing</div>
+        <div class="module-no">A<span class="of">/ Assess</span></div>
+      </div>
+      <div class="section-right">
+        <div class="module-name">Assessment &amp; Wrap-Up</div>
+        <div class="module-meta">
+          <span class="pill pill--gold">15 min</span>
+          <span class="pill">Self-assessment + handoff</span>
+        </div>
+        <p class="module-blurb">Confirm what you shipped against the rubric. Update your frontier map. Submit for the certificate. Then we close the six-week program.</p>
+      </div>
+    </div>
+
+    <aside class="notes">
+      <h4>Rhythm</h4>
+      <p>Three slides for assessment, then we move into the program close. Keep this brisk so the close has time to land.</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Rubric."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       A.1 — ASSESSMENT RUBRIC
+       ======================================================== -->
+  <section class="slide">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Assessment · Rubric</div>
+      <div class="slide__minutes">~5 min</div>
+    </div>
+    <h2 class="slide__title">What &ldquo;done&rdquo; looks like</h2>
+    <p class="slide__subtitle">Minimum gets you certified. Target is the bar to set for your real-world build.</p>
+
+    <div class="slide__body">
+      <table class="compare">
+        <thead><tr><th>Criterion</th><th>Minimum (certified)</th><th>Target</th></tr></thead>
+        <tbody>
+          <tr><td>API endpoints</td><td>3 returning JSON</td><td class="win">5+ with full CRUD</td></tr>
+          <tr><td>Frontend pages</td><td>2 with navigation</td><td class="win">4+ with sidebar, routes, detail</td></tr>
+          <tr><td>Data layer</td><td>Reads from JSON</td><td class="win">Interface-based, swappable</td></tr>
+          <tr><td>AI integration</td><td>Chat sends/receives</td><td class="win">Tool use against live data</td></tr>
+          <tr><td>Authentication</td><td>Role picker present</td><td class="win">Role-based filtering</td></tr>
+          <tr><td>Deployment</td><td>Container runs locally</td><td class="win">Deployed to Azure with a public URL</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Assessment &amp; Wrap-Up</span><span>A.1 · Rubric</span></div>
+
+    <aside class="notes">
+      <h4>How to use this slide</h4>
+      <p>Have students self-assess against the minimum column right now. If they hit every cell on the left, they pass. If they hit cells on the right, they have something portfolio-worthy.</p>
+      <h4>Be generous on minimums</h4>
+      <p>The point of today was the rep, not the polish. If a Marine has a container running on their laptop with chat working against their data, that is a pass.</p>
+      <div class="cue"><strong>TRANSITION →</strong> "How to submit, frontier map, and what comes next."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       A.2 — SUBMIT + CERTIFICATE HANDOFF
+       ======================================================== -->
+  <section class="slide">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Assessment · Submit</div>
+      <div class="slide__minutes">~3 min</div>
+    </div>
+    <h2 class="slide__title">Submit &amp; certify</h2>
+    <p class="slide__subtitle">Finish the student-page checklist, then generate your certificate from the EDD site.</p>
+
+    <div class="slide__body">
+      <div class="cols-2">
+        <div class="card card--accent">
+          <h3>Three steps</h3>
+          <ol style="font-size:1.4vw; padding-left:1.6vw; color:var(--ink-2); line-height:1.6;">
+            <li>Open the student version of this course and check off every box on the completion checklist.</li>
+            <li>Take the knowledge check at the bottom of the page.</li>
+            <li>Go to <em>Generate Certificate</em>, pick <em>Full-Stack AI-Assisted Development</em>, fill in your name / rank / unit, and print or save as PDF.</li>
+          </ol>
+        </div>
+        <div class="card card--gold">
+          <h3>Where to find it</h3>
+          <ul>
+            <li><strong>Student page:</strong> <em>/courses/student/fullstack.html</em></li>
+            <li><strong>Progress dashboard:</strong> <em>/courses/progress.html</em></li>
+            <li><strong>Certificate:</strong> <em>/courses/certificate.html</em></li>
+          </ul>
+          <p style="margin-top:1.4vh; font-size:1.2vw;">Your progress is saved in your browser. To carry it across machines, use <em>Export Training Record</em> on the progress page.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Assessment &amp; Wrap-Up</span><span>A.2 · Submit</span></div>
+
+    <aside class="notes">
+      <h4>Handoff to the certificate flow</h4>
+      <p>Walk the room through the three pages briefly — student page, progress, certificate. The certificate generator will only show this course in the dropdown once every box on the completion checklist is checked. Make sure students know that.</p>
+      <h4>Quick reminder</h4>
+      <p>Storage is per-browser. If they took earlier courses on a different machine, they'll only see today's certificate available. That's expected.</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Update your frontier map."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       A.3 — FRONTIER MAP UPDATE + WHAT'S NEXT
+       ======================================================== -->
+  <section class="slide">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Assessment · Reflect</div>
+      <div class="slide__minutes">~5 min</div>
+    </div>
+    <h2 class="slide__title">Move your frontier</h2>
+    <p class="slide__subtitle">Update your map from Course 1. The boundary just shifted.</p>
+
+    <div class="slide__body">
+      <div class="cols-2">
+        <div class="card card--accent">
+          <h3>Add to your map</h3>
+          <ul>
+            <li><strong>Can now do:</strong> direct AI to build &amp; deploy a full-stack web app.</li>
+            <li><strong>Still learning:</strong> complex DB design, prod security hardening, CI/CD.</li>
+            <li><strong>Next frontier:</strong> what problem at your unit needs a custom application that Power Platform can't solve?</li>
+          </ul>
+        </div>
+        <div class="card card--gold">
+          <h3>What comes next (recommended)</h3>
+          <ul>
+            <li><strong>Week 1–2 after class:</strong> rebuild today's app from scratch, no notes. Muscle memory.</li>
+            <li><strong>Week 3–4:</strong> pick a real unit problem. Use the Problem Definition Worksheet (Course 3).</li>
+            <li><strong>Week 5–8:</strong> build it. Same prompt → verify → iterate cycle. Plan 80–120 hours.</li>
+            <li><strong>Week 9+:</strong> deploy, gather feedback, iterate. Document with the Documentation Package.</li>
+          </ul>
+        </div>
+      </div>
+      <p style="font-size:1.2vw; color:var(--ink-3); text-align:center;">For comparison: a contractor would quote 6–12 months and $500K+ for the same application.</p>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Assessment &amp; Wrap-Up</span><span>A.3 · Reflect &amp; plan</span></div>
+
+    <aside class="notes">
+      <h4>Time expectations</h4>
+      <p>Be honest about the curve. First real full-stack app: 80–120 hours. Second: 40–60. Third: 20–30. The skill compounds because they get better at <em>asking</em> — not at typing.</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Now we close the six-week program."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       PROGRAM WRAP-UP — DIVIDER
+       ======================================================== -->
+  <section class="slide slide--section">
+    <div class="section-inner">
+      <div class="section-left">
+        <div class="module-eyebrow">Program · Capstone Close</div>
+        <div class="module-no">VI<span class="of">/ Six Weeks</span></div>
+      </div>
+      <div class="section-right">
+        <div class="module-name">Closing the Six-Week Program</div>
+        <div class="module-meta">
+          <span class="pill pill--gold">~7 min</span>
+          <span class="pill">All hands</span>
+        </div>
+        <p class="module-blurb">A short, honest close. Where you started. What you built across the cohort. What you owe forward. Where to keep going.</p>
+      </div>
+    </div>
+
+    <aside class="notes">
+      <h4>Posture shift</h4>
+      <p>Slow down here. The next four slides are the program close. Speak more deliberately. Make eye contact (or its Teams equivalent — pause and watch reactions).</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Look at the journey."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       C.1 — JOURNEY: WEEKS 1→6
+       ======================================================== -->
+  <section class="slide">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Six weeks <span class="dot"></span> Journey</div>
+      <div class="slide__minutes">~2 min</div>
+    </div>
+    <h2 class="slide__title">Where you started, where you stand</h2>
+    <p class="slide__subtitle">The arc, in one slide.</p>
+
+    <div class="slide__body">
+      <div class="agenda">
+        <div class="agenda__item"><span class="agenda__time">W1</span><span class="agenda__name">AI Fluency Fundamentals <span>You learned the management framing. The 80% quit problem.</span></span></div>
+        <div class="agenda__item"><span class="agenda__time">W2</span><span class="agenda__name">Builder Orientation <span>Your first prototype. Decomposition under pressure.</span></span></div>
+        <div class="agenda__item"><span class="agenda__time">W3</span><span class="agenda__name">Platform Training <span>Three deployed Power Platform tools. Centaur and Cyborg.</span></span></div>
+        <div class="agenda__item"><span class="agenda__time">W4</span><span class="agenda__name">Advanced Workshop <span>You mapped your frontier. You taught someone else.</span></span></div>
+        <div class="agenda__item"><span class="agenda__time">W5</span><span class="agenda__name">Supervisor Orientation <span>Leaders learned to evaluate proposals and protect the apprentice pipeline.</span></span></div>
+        <div class="agenda__item"><span class="agenda__time">W6</span><span class="agenda__name">Full-Stack (today) <span>You shipped a containerized application built end-to-end with AI.</span></span></div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Program Close</span><span>C.1 · Journey</span></div>
+
+    <aside class="notes">
+      <h4>Read it slow</h4>
+      <p>Don't speed-read. Pause on each line. The point is not information — they lived it. The point is collective acknowledgement.</p>
+      <h4>If you have cohort numbers</h4>
+      <p>If you have data on how many tools the cohort built across all six weeks, name it: "Across this cohort, we shipped <em>N</em> Power Platform tools and <em>M</em> containers." Specifics make this slide land harder than abstractions.</p>
+      <div class="cue"><strong>TRANSITION →</strong> "What you owe forward."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       C.2 — WHAT YOU OWE FORWARD
+       ======================================================== -->
+  <section class="slide">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Closing thought <span class="dot"></span> The apprentice problem</div>
+      <div class="slide__minutes">~3 min</div>
+    </div>
+    <h2 class="slide__title">What you owe forward</h2>
+    <p class="slide__subtitle">The pipeline only stays open if you choose to hold it open.</p>
+
+    <div class="slide__body">
+      <div class="pullquote">
+        &ldquo;That training pipeline that was always implicit has broken, and it has to be reconstructed.&rdquo;
+        <span class="attr">— Mollick, on the apprenticeship crisis (Course 1)</span>
+      </div>
+      <div class="cols-2">
+        <div class="card card--accent">
+          <h3>Three commitments</h3>
+          <ul>
+            <li><strong>Make a junior Marine review your AI output</strong> before you ship it. They learn judgment by reading good work and bad.</li>
+            <li><strong>Share your failure cases.</strong> Where AI degrades your work is as valuable as where it accelerates it.</li>
+            <li><strong>Teach the next cohort.</strong> Co-teach a course. Run a section meeting. Write up one tool.</li>
+          </ul>
+        </div>
+        <div class="card card--gold">
+          <h3>The line you do not cross</h3>
+          <ul>
+            <li>Don't cut a junior role because AI handled the routine work.</li>
+            <li>Architects who never laid a brick build buildings that fall down.</li>
+            <li>Your bench in five years is the room you protect today.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Program Close</span><span>C.2 · Owe forward</span></div>
+
+    <aside class="notes">
+      <h4>Posture</h4>
+      <p>This is the most serious slide in the deck. Slow down. Mean it.</p>
+      <h4>Tie back to Course 5</h4>
+      <p>If supervisors are in the room, name the connection: "This is the same point Course 5 makes to leaders. It's the same point you make to yourselves now that you can build at this speed."</p>
+      <div class="cue"><strong>TRANSITION →</strong> "Where to keep going."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       C.3 — WHERE TO KEEP GOING
+       ======================================================== -->
+  <section class="slide">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Continue <span class="dot"></span> Resources</div>
+      <div class="slide__minutes">~1 min</div>
+    </div>
+    <h2 class="slide__title">Where to keep going</h2>
+    <p class="slide__subtitle">Bookmark these. Use them in the order that fits the next problem you pick.</p>
+
+    <div class="slide__body">
+      <div class="cols-2">
+        <div class="card card--accent">
+          <h3>On the EDD site</h3>
+          <ul>
+            <li><strong>SOP</strong> — the operating doctrine for AI-assisted builds.</li>
+            <li><strong>Toolkit</strong> — interactive worksheets and checklists.</li>
+            <li><strong>Templates</strong> — Problem Definition, Documentation Package, prompt patterns.</li>
+            <li><strong>Resources</strong> — readings, references, links to the underlying research.</li>
+          </ul>
+        </div>
+        <div class="card card--ink">
+          <h3>Practice</h3>
+          <ul>
+            <li>Rebuild today's app from scratch. No prompts. No notes.</li>
+            <li>Find a real unit problem. Define it. Build it.</li>
+            <li>Co-teach one course. Anyone in this room is qualified to start.</li>
+            <li>Push your work to the EDD GitHub. Other units learn from it.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Program Close</span><span>C.3 · Continue</span></div>
+
+    <aside class="notes">
+      <h4>Tactical close</h4>
+      <p>Tell the room exactly what to do in the next 24 hours: "Tonight, generate your certificate. This week, pick one of these four practice steps. Don't pick all four. Don't pick none."</p>
+      <div class="cue"><strong>TRANSITION →</strong> Final slide. Capstone close.</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
+       C.4 — FINAL CAPSTONE CLOSE
+       ======================================================== -->
+  <section class="slide slide--close">
+    <div class="close-inner">
+      <span class="stamp">Course 6 · Capstone Complete</span>
+      <h1>You wrote the requirements.<br/><em>AI wrote the code.</em><br/>You shipped the container.</h1>
+      <div class="rule"></div>
+      <p class="lede">That is not &ldquo;learning to code.&rdquo; That is Expert-Driven Development at the highest level — domain experts building exactly what they need, at the speed of conversation. Now go build something your unit actually needs.</p>
+      <div class="sig">Expert-Driven Development · Week 6 of 6 · MCD-Monterey</div>
+    </div>
+
+    <aside class="notes">
+      <h4>Land it</h4>
+      <p>Read the headline aloud, slowly. Pause for three full seconds before you say "Now go build something your unit actually needs." Then thank the room and stop talking.</p>
+      <h4>What to do after class</h4>
+      <ul>
+        <li>Post the recording (if any) to the cohort channel.</li>
+        <li>Drop the certificate page link in the channel.</li>
+        <li>Schedule a 30-minute office hour 1 week out for the rebuild attempt.</li>
+        <li>Identify the two strongest students in the room as candidates for instructor certification on this course.</li>
+      </ul>
+      <div class="cue"><strong>END →</strong> Stop sharing. Done.</div>
+    </aside>
+  </section>
+
+  </div>
+</div>
+</aside>
+
+</body>
+</html>

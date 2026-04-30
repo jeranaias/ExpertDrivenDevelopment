@@ -1,0 +1,4438 @@
+/* ============================================================
+   EDD Weekly Deck Stylesheet
+   Shared visual identity for all six weekly instructor decks.
+   Inherits palette and base tokens from /docs/css/style.css.
+   See ../DESIGN.md for the full rationale.
+   ============================================================ */
+:root {
+  /* Reuse site tokens; redeclare here so the deck is self-contained
+     even if loaded standalone. */
+  --c-scarlet: #CC0000;
+  --c-scarlet-dark: #a30000;
+  --c-gold: #F5D130;
+  --c-gold-dark: #d4b11a;
+  --c-ink: #1a1a1a;
+  --c-ink-soft: #2a2a2a;
+  --c-text: #1a1a1a;
+  --c-text-mute: #555;
+  --c-text-faint: #888;
+  --c-paper: #ffffff;
+  --c-paper-warm: #faf9f6;
+  --c-rule: #e5e3dd;
+  --c-band: #1a1a1a;
+
+  --font-display: "Inter", "Helvetica Neue", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Arial, sans-serif;
+  --font-body: "Inter", "Helvetica Neue", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Arial, sans-serif;
+  --font-mono: "Cascadia Code", "Consolas", "Monaco", "Courier New", monospace;
+
+  /* Slide stage: scaled to viewport. The deck container sets a 16:9 box. */
+  --stage-pad-x: 7vw;
+  --stage-pad-y: 6vh;
+}
+
+
+/* ===== Reset / base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body.deck-body {
+  font-family: var(--font-body);
+  color: var(--c-text);
+  background: #0a0a0a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+
+/* ===== Stage / slide sizing =====
+   Each slide fills the viewport while preserving 16:9 readability.
+   On non-16:9 screens we letterbox with the dark page background. */
+body.deck-body .deck {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.deck-body .slide {
+  position: absolute;
+  inset: 0;
+  display: none !important;
+  width: 100vw;
+  height: 100vh;
+  background: var(--c-paper);
+  color: var(--c-text);
+  overflow: hidden;
+  padding: var(--stage-pad-y) var(--stage-pad-x);
+  font-size: clamp(16px, 1.6vw, 28px);
+  line-height: 1.45;
+}
+
+body.deck-body .slide.is-current { display: flex !important; flex-direction: column; }
+
+body.deck-body .slide.is-current.slide--section { display: grid !important; grid-template-columns: 1fr 1fr; align-items: center; gap: 4vw; }
+
+body.deck-body .slide.is-current.slide--two { display: grid !important; grid-template-rows: auto 1fr; }
+
+body.deck-body .slide.is-current.slide--stat { display: grid !important; grid-template-columns: 1.2fr 1fr; align-items: center; gap: 4vw; }
+
+body.deck-body .slide.is-current.slide--quote { display: flex !important; align-items: center; justify-content: center; }
+
+body.deck-body .slide.is-current.slide--image { display: grid !important; grid-template-columns: 1fr 1fr; align-items: stretch; }
+
+body.deck-body .slide.is-current.slide--debrief { display: grid !important; grid-template-rows: auto 1fr; }
+
+
+/* ===== Top brand bar present on every slide ===== */
+body.deck-body .slide__bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 8px;
+  background: linear-gradient(
+    90deg,
+    var(--c-scarlet) 0%,
+    var(--c-scarlet) 70%,
+    var(--c-gold) 70%,
+    var(--c-gold) 100%
+  );
+  z-index: 2;
+}
+
+
+/* ===== Slide foot: course tag + slide number on every slide ===== */
+body.deck-body .slide__foot {
+  position: absolute;
+  left: var(--stage-pad-x);
+  right: var(--stage-pad-x);
+  bottom: 2.4vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.85rem;
+  color: var(--c-text-faint);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  z-index: 1;
+  pointer-events: none;
+}
+
+body.deck-body .slide__foot .foot__course { color: var(--c-text-mute); }
+
+body.deck-body .slide__foot .foot__num { font-variant-numeric: tabular-nums; }
+
+
+/* ===== Typography primitives ===== */
+body.deck-body .eyebrow {
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--c-scarlet);
+}
+
+body.deck-body .eyebrow--ink { color: var(--c-ink); }
+
+body.deck-body .eyebrow--gold { color: var(--c-gold-dark); }
+
+body.deck-body h1.title-xxl {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 7.2vw, 140px);
+  line-height: 0.95;
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  color: var(--c-ink);
+}
+
+body.deck-body h2.title-xl {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5.2vw, 96px);
+  line-height: 1.0;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--c-ink);
+}
+
+body.deck-body h2.title-lg {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.8vw, 68px);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  color: var(--c-ink);
+}
+
+body.deck-body h3.title-md {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.4vw, 40px);
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  color: var(--c-ink);
+}
+
+body.deck-body .subtitle {
+  font-size: clamp(18px, 1.9vw, 32px);
+  line-height: 1.35;
+  font-weight: 400;
+  color: var(--c-text-mute);
+  max-width: 60ch;
+}
+
+body.deck-body .lede {
+  font-size: clamp(20px, 2.1vw, 36px);
+  line-height: 1.3;
+  font-weight: 500;
+  color: var(--c-ink);
+  max-width: 30ch;
+}
+
+body.deck-body .byline {
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: var(--c-text-mute);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+body.deck-body .bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: clamp(10px, 1.6vh, 22px);
+}
+
+body.deck-body .bullet-list li {
+  position: relative;
+  padding-left: 1.4em;
+  font-size: clamp(18px, 1.85vw, 30px);
+  line-height: 1.35;
+  color: var(--c-text);
+}
+
+body.deck-body .bullet-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.7em;
+  height: 0.18em;
+  background: var(--c-scarlet);
+  border-radius: 1px;
+}
+
+body.deck-body .bullet-list--gold li::before { background: var(--c-gold-dark); }
+
+body.deck-body .bullet-list--ink li::before { background: var(--c-ink); }
+
+body.deck-body .bullet-list strong { color: var(--c-ink); font-weight: 700; }
+
+body.deck-body .kicker {
+  display: inline-block;
+  background: var(--c-ink);
+  color: #fff;
+  padding: 0.25em 0.7em;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+body.deck-body .kicker--gold { background: var(--c-gold); color: var(--c-ink); }
+
+body.deck-body .kicker--scarlet { background: var(--c-scarlet); color: #fff; }
+
+
+/* ===== Layout: COVER ===== */
+body.deck-body .slide--cover {
+  background: var(--c-ink);
+  color: #fff;
+}
+
+body.deck-body .slide--cover .slide__bar { height: 14px; }
+
+body.deck-body .slide--cover .cover__content {
+  margin-top: auto;
+  margin-bottom: auto;
+  display: grid;
+  gap: 2vh;
+  max-width: 22ch;
+}
+
+body.deck-body .slide--cover .eyebrow { color: var(--c-gold); }
+
+body.deck-body .slide--cover h1 { color: #fff; }
+
+body.deck-body .slide--cover .subtitle { color: rgba(255,255,255,0.78); max-width: 28ch; }
+
+body.deck-body .slide--cover .byline { color: rgba(255,255,255,0.55); }
+
+body.deck-body .slide--cover .slide__foot { color: rgba(255,255,255,0.55); }
+
+body.deck-body .slide--cover .slide__foot .foot__course { color: rgba(255,255,255,0.7); }
+
+body.deck-body .slide--cover .cover__rule {
+  width: 12vw;
+  height: 4px;
+  background: var(--c-scarlet);
+}
+
+
+/* ===== Layout: SECTION DIVIDER ===== */
+body.deck-body .slide--section {
+  background: var(--c-ink);
+  color: #fff;
+}
+
+body.deck-body .slide--section .section__module {
+  font-family: var(--font-display);
+  font-size: clamp(80px, 16vw, 280px);
+  line-height: 0.85;
+  font-weight: 900;
+  color: var(--c-scarlet);
+  letter-spacing: -0.04em;
+}
+
+body.deck-body .slide--section .section__body { display: grid; gap: 2vh; }
+
+body.deck-body .slide--section h2 { color: #fff; }
+
+body.deck-body .slide--section .eyebrow { color: var(--c-gold); }
+
+body.deck-body .slide--section .section__meta {
+  display: flex;
+  gap: 1.4vw;
+  flex-wrap: wrap;
+  margin-top: 1vh;
+}
+
+body.deck-body .slide--section .meta-pill {
+  border: 1px solid rgba(255,255,255,0.25);
+  padding: 0.4em 0.9em;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+}
+
+body.deck-body .slide--section .meta-pill--gold {
+  background: var(--c-gold);
+  color: var(--c-ink);
+  border-color: var(--c-gold);
+  font-weight: 700;
+}
+
+body.deck-body .slide--section .slide__foot { color: rgba(255,255,255,0.5); }
+
+body.deck-body .slide--section .slide__foot .foot__course { color: rgba(255,255,255,0.65); }
+
+
+/* ===== Layout: CONTENT (title + body) ===== */
+body.deck-body .slide--content { background: var(--c-paper); }
+
+body.deck-body .slide--content .content__head { display: grid; gap: 1.2vh; max-width: 32ch; }
+
+body.deck-body .slide--content .content__body {
+  margin-top: 4vh;
+  display: grid;
+  gap: 2.4vh;
+  max-width: 60ch;
+}
+
+
+/* ===== Layout: TWO-COLUMN ===== */
+body.deck-body .slide--two {
+  background: var(--c-paper);
+}
+
+body.deck-body .slide--two .two__head { display: grid; gap: 1.2vh; margin-bottom: 3.5vh; max-width: 50ch; }
+
+body.deck-body .slide--two .two__cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4vw;
+  align-items: start;
+}
+
+body.deck-body .slide--two .col__title {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.8vw, 28px);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--c-text-mute);
+  border-bottom: 2px solid var(--c-rule);
+  padding-bottom: 1vh;
+  margin-bottom: 1.6vh;
+}
+
+body.deck-body .slide--two .col__title--scarlet { color: var(--c-scarlet); border-color: var(--c-scarlet); }
+
+body.deck-body .slide--two .col__title--gold { color: var(--c-gold-dark); border-color: var(--c-gold-dark); }
+
+body.deck-body .slide--two .col__body p {
+  font-size: clamp(17px, 1.7vw, 26px);
+  line-height: 1.4;
+  margin-bottom: 1.4vh;
+}
+
+
+/* ===== Layout: STAT (single big number) ===== */
+body.deck-body .slide--stat {
+  background: var(--c-paper-warm);
+}
+
+body.deck-body .slide--stat .stat__num {
+  font-family: var(--font-display);
+  font-size: clamp(110px, 18vw, 320px);
+  line-height: 0.9;
+  font-weight: 900;
+  color: var(--c-scarlet);
+  letter-spacing: -0.04em;
+}
+
+body.deck-body .slide--stat .stat__num small {
+  font-size: 0.45em;
+  font-weight: 800;
+  color: var(--c-ink);
+}
+
+body.deck-body .slide--stat .stat__body { display: grid; gap: 1.6vh; max-width: 28ch; }
+
+
+/* ===== Layout: QUOTE / EMPHASIS ===== */
+body.deck-body .slide--quote {
+  background: var(--c-paper);
+}
+
+body.deck-body .slide--quote .quote__inner {
+  margin: auto;
+  max-width: 28ch;
+  text-align: left;
+  display: grid;
+  gap: 3vh;
+}
+
+body.deck-body .slide--quote .quote__mark {
+  font-family: var(--font-display);
+  font-size: clamp(80px, 12vw, 200px);
+  line-height: 0.6;
+  color: var(--c-gold);
+  font-weight: 900;
+}
+
+body.deck-body .slide--quote .quote__text {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4.4vw, 80px);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--c-ink);
+}
+
+body.deck-body .slide--quote .quote__attr {
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-text-mute);
+  font-weight: 600;
+}
+
+
+/* ===== Layout: IMAGE-DOMINANT ===== */
+body.deck-body .slide--image {
+  background: var(--c-ink);
+  color: #fff;
+}
+
+body.deck-body .slide.is-current.slide--image { padding: 0; }
+
+body.deck-body .slide--image .image__art {
+  background: linear-gradient(135deg, var(--c-scarlet) 0%, var(--c-scarlet-dark) 60%, var(--c-ink) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+body.deck-body .slide--image .image__art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(245,209,48,0.18) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.08) 0%, transparent 50%);
+}
+
+body.deck-body .slide--image .image__copy {
+  padding: var(--stage-pad-y) var(--stage-pad-x);
+  display: grid;
+  align-content: center;
+  gap: 2vh;
+  max-width: 32ch;
+}
+
+body.deck-body .slide--image h2 { color: #fff; }
+
+body.deck-body .slide--image .subtitle { color: rgba(255,255,255,0.75); }
+
+
+/* ===== Layout: EXERCISE — distinct so presenter knows to STOP CLICKING ===== */
+body.deck-body .slide--exercise {
+  background: var(--c-gold);
+  color: var(--c-ink);
+}
+
+body.deck-body .slide--exercise .slide__bar {
+  background: var(--c-ink);
+}
+
+body.deck-body .slide--exercise .ex__head {
+  display: flex;
+  gap: 1.4vw;
+  align-items: center;
+  margin-bottom: 3.5vh;
+}
+
+body.deck-body .slide--exercise .ex__badge {
+  background: var(--c-ink);
+  color: var(--c-gold);
+  padding: 0.45em 1.1em;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(14px, 1.4vw, 22px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+body.deck-body .slide--exercise .ex__time {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2vw, 36px);
+  font-weight: 800;
+  color: var(--c-ink);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+body.deck-body .slide--exercise h2 { color: var(--c-ink); }
+
+body.deck-body .slide--exercise .ex__body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4vw;
+  margin-top: 3vh;
+}
+
+body.deck-body .slide--exercise .ex__col h3 {
+  font-size: clamp(16px, 1.5vw, 24px);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-ink);
+  margin-bottom: 1.4vh;
+  font-weight: 800;
+}
+
+body.deck-body .slide--exercise .ex__col ol, body.deck-body .slide--exercise .ex__col ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1.2vh;
+}
+
+body.deck-body .slide--exercise .ex__col li {
+  font-size: clamp(16px, 1.6vw, 26px);
+  line-height: 1.35;
+  padding-left: 1.6em;
+  position: relative;
+  color: var(--c-ink);
+}
+
+body.deck-body .slide--exercise .ex__col ol { counter-reset: ex; }
+
+body.deck-body .slide--exercise .ex__col ol li {
+  counter-increment: ex;
+}
+
+body.deck-body .slide--exercise .ex__col ol li::before {
+  content: counter(ex, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.05em;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.9em;
+  color: var(--c-scarlet);
+}
+
+body.deck-body .slide--exercise .ex__col ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.8em;
+  height: 0.18em;
+  background: var(--c-ink);
+}
+
+body.deck-body .slide--exercise .slide__foot { color: rgba(0,0,0,0.55); }
+
+body.deck-body .slide--exercise .slide__foot .foot__course { color: rgba(0,0,0,0.7); }
+
+
+/* ===== Layout: KNOWLEDGE-CHECK ===== */
+body.deck-body .slide--check {
+  background: var(--c-paper);
+  border-top: 14px solid var(--c-scarlet);
+  padding-top: calc(var(--stage-pad-y) + 6px);
+}
+
+body.deck-body .slide--check .slide__bar { display: none; }
+
+body.deck-body .slide--check .check__badge {
+  display: inline-block;
+  background: var(--c-scarlet);
+  color: #fff;
+  padding: 0.4em 1em;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(14px, 1.4vw, 22px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 2.6vh;
+}
+
+body.deck-body .slide--check .check__q {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.6vw, 60px);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  color: var(--c-ink);
+  max-width: 22ch;
+  margin-bottom: 3.5vh;
+}
+
+body.deck-body .slide--check .check__answer {
+  border-left: 4px solid var(--c-gold-dark);
+  padding-left: 1.4em;
+  max-width: 50ch;
+  font-size: clamp(18px, 1.85vw, 30px);
+  line-height: 1.4;
+  color: var(--c-text);
+}
+
+body.deck-body .slide--check .check__answer strong { color: var(--c-ink); }
+
+
+/* ===== Layout: DEBRIEF (review of an exercise output) ===== */
+body.deck-body .slide--debrief {
+  background: var(--c-paper-warm);
+}
+
+body.deck-body .slide--debrief .debrief__head { display: grid; gap: 1.2vh; margin-bottom: 3vh; max-width: 60ch; }
+
+body.deck-body .slide--debrief .debrief__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3vw;
+  align-items: start;
+}
+
+body.deck-body .slide--debrief .debrief__card {
+  background: #fff;
+  border: 1px solid var(--c-rule);
+  padding: 2.2vh 1.8vw;
+  border-top: 4px solid var(--c-scarlet);
+}
+
+body.deck-body .slide--debrief .debrief__card--ok { border-top-color: #2e7d32; }
+
+body.deck-body .slide--debrief .debrief__card h4 {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.4vw, 22px);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-ink);
+  margin-bottom: 1.4vh;
+  font-weight: 800;
+}
+
+body.deck-body .slide--debrief .debrief__card ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1vh;
+}
+
+body.deck-body .slide--debrief .debrief__card li {
+  font-size: clamp(15px, 1.45vw, 22px);
+  line-height: 1.4;
+  padding-left: 1.2em;
+  position: relative;
+}
+
+body.deck-body .slide--debrief .debrief__card li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--c-scarlet);
+  font-weight: 800;
+}
+
+body.deck-body .slide--debrief .debrief__card--ok li::before { color: #2e7d32; }
+
+
+/* ===== Layout: RECAP (end-of-section / closing) ===== */
+body.deck-body .slide--recap { background: var(--c-paper); }
+
+body.deck-body .slide--recap .recap__head { display: grid; gap: 1.2vh; margin-bottom: 3vh; max-width: 32ch; }
+
+body.deck-body .slide--recap .recap__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.4vw;
+  margin-top: 2vh;
+}
+
+body.deck-body .slide--recap .recap__cell {
+  border-top: 3px solid var(--c-ink);
+  padding-top: 1.6vh;
+}
+
+body.deck-body .slide--recap .recap__cell--scarlet { border-color: var(--c-scarlet); }
+
+body.deck-body .slide--recap .recap__cell--gold { border-color: var(--c-gold-dark); }
+
+body.deck-body .slide--recap .recap__num {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4vw, 64px);
+  font-weight: 900;
+  color: var(--c-ink);
+  line-height: 1;
+  margin-bottom: 0.6vh;
+}
+
+body.deck-body .slide--recap .recap__lab {
+  font-size: clamp(15px, 1.5vw, 22px);
+  line-height: 1.35;
+  color: var(--c-text-mute);
+  font-weight: 500;
+}
+
+
+/* ===== Layout: TABLE / GRID (six skills, agenda) ===== */
+body.deck-body .slide--grid { background: var(--c-paper); }
+
+body.deck-body .slide--grid .grid__head { display: grid; gap: 1.2vh; margin-bottom: 3vh; max-width: 60ch; }
+
+body.deck-body .slide--grid .grid__rows {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: 1.4vh 2vw;
+  align-items: baseline;
+  font-size: clamp(15px, 1.55vw, 24px);
+}
+
+body.deck-body .slide--grid .grid__rows .gr-time {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--c-scarlet);
+  letter-spacing: 0.02em;
+}
+
+body.deck-body .slide--grid .grid__rows .gr-title {
+  font-weight: 700;
+  color: var(--c-ink);
+}
+
+body.deck-body .slide--grid .grid__rows .gr-meta {
+  color: var(--c-text-mute);
+  font-size: 0.92em;
+}
+
+body.deck-body .slide--grid .grid__rows .gr-row-break {
+  grid-column: 1 / -1;
+  height: 1px;
+  background: var(--c-rule);
+}
+
+
+/* Six-skill matrix (3x2) */
+body.deck-body .skill-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2vh 2vw;
+  margin-top: 2vh;
+}
+
+body.deck-body .skill-cell {
+  display: grid;
+  gap: 0.8vh;
+  border-top: 3px solid var(--c-ink);
+  padding-top: 1.4vh;
+}
+
+body.deck-body .skill-cell:nth-child(2) { border-color: var(--c-scarlet); }
+
+body.deck-body .skill-cell:nth-child(4) { border-color: var(--c-scarlet); }
+
+body.deck-body .skill-cell:nth-child(6) { border-color: var(--c-gold-dark); }
+
+body.deck-body .skill-cell .sk-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(14px, 1.3vw, 20px);
+  color: var(--c-text-faint);
+  letter-spacing: 0.18em;
+}
+
+body.deck-body .skill-cell .sk-name {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.2vw, 36px);
+  font-weight: 800;
+  color: var(--c-ink);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+body.deck-body .skill-cell .sk-desc {
+  font-size: clamp(14px, 1.4vw, 22px);
+  color: var(--c-text-mute);
+  line-height: 1.35;
+}
+
+
+/* 101 vs 201 split */
+body.deck-body .compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.4vw;
+  margin-top: 2vh;
+}
+
+body.deck-body .compare__cell {
+  background: #fff;
+  border: 1px solid var(--c-rule);
+  padding: 2.2vh 1.6vw;
+}
+
+body.deck-body .compare__cell--bad { border-top: 4px solid var(--c-text-mute); }
+
+body.deck-body .compare__cell--good { border-top: 4px solid var(--c-scarlet); }
+
+body.deck-body .compare__cell h4 {
+  font-family: var(--font-display);
+  font-size: clamp(14px, 1.3vw, 20px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-text-mute);
+  margin-bottom: 1.2vh;
+  font-weight: 800;
+}
+
+body.deck-body .compare__cell--good h4 { color: var(--c-scarlet); }
+
+body.deck-body .compare__cell .quote-block {
+  font-family: var(--font-mono);
+  font-size: clamp(13px, 1.25vw, 19px);
+  background: var(--c-paper-warm);
+  padding: 1.6vh 1.2vw;
+  white-space: pre-wrap;
+  border-left: 3px solid var(--c-rule);
+  color: var(--c-text);
+  line-height: 1.45;
+}
+
+body.deck-body .compare__cell--good .quote-block { border-left-color: var(--c-scarlet); }
+
+
+/* ===== Layout: CLOSING ===== */
+body.deck-body .slide--closing {
+  background: var(--c-ink);
+  color: #fff;
+}
+
+body.deck-body .slide--closing h2 { color: #fff; }
+
+body.deck-body .slide--closing .closing__inner { margin: auto 0; display: grid; gap: 2.6vh; max-width: 32ch; }
+
+body.deck-body .slide--closing .eyebrow { color: var(--c-gold); }
+
+body.deck-body .slide--closing .subtitle { color: rgba(255,255,255,0.78); }
+
+body.deck-body .slide--closing .byline { color: rgba(255,255,255,0.55); }
+
+body.deck-body .slide--closing .slide__foot { color: rgba(255,255,255,0.55); }
+
+body.deck-body .slide--closing .slide__foot .foot__course { color: rgba(255,255,255,0.7); }
+
+
+/* ===== Speaker notes (hidden by default) ===== */
+.notes { display: none; }
+
+/* Runtime-injected per-slide printable notes block (deck.js).
+   Hidden in normal view; revealed by the universal @media print
+   stylesheet at the bottom of this file. */
+.slide-print-notes { display: none; }
+
+
+/* Notes panel toggled on screen */
+.deck-notes {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 38vh;
+  background: rgba(15,15,15,0.96);
+  color: #f5f5f5;
+  border-top: 3px solid var(--c-gold);
+  padding: 2vh 4vw 3vh;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  overflow-y: auto;
+  z-index: 50;
+  display: none;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.4);
+}
+
+.deck-notes.is-open { display: block; }
+
+.deck-notes h3 {
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin-bottom: 1vh;
+  font-weight: 700;
+}
+
+.deck-notes p { margin-bottom: 0.8em; }
+
+.deck-notes p:last-child { margin-bottom: 0; }
+
+.deck-notes strong { color: #fff; }
+
+
+/* ===== Spacing & text utilities (kept small on purpose) =====
+   Use these from slide HTML to fine-tune the rhythm of stacked
+   text blocks. Anything beyond these utilities should be promoted
+   to a layout class in DESIGN.md, not added inline. */
+body.deck-body .u-mt-1 { margin-top: 1.4vh; }
+
+body.deck-body .u-mt-2 { margin-top: 2vh; }
+
+body.deck-body .u-mt-3 { margin-top: 2.4vh; }
+
+body.deck-body .u-mt-4 { margin-top: 4vh; }
+
+body.deck-body .u-text-mute { color: var(--c-text-mute); }
+
+body.deck-body .u-pct-small { font-size: 0.5em; font-weight: 700; }
+
+
+/* ===== Navigation chrome ===== */
+.deck-chrome {
+  position: fixed;
+  bottom: 1.2vh;
+  right: 1.2vw;
+  display: flex;
+  gap: 6px;
+  z-index: 100;
+  font-family: var(--font-body);
+}
+
+.deck-chrome button {
+  appearance: none;
+  border: none;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: 3px;
+  transition: background 120ms ease;
+}
+
+.deck-chrome button:hover { background: var(--c-scarlet); }
+
+.deck-chrome .deck-counter {
+  background: rgba(0,0,0,0.55);
+  color: rgba(255,255,255,0.85);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  padding: 6px 12px;
+  font-variant-numeric: tabular-nums;
+  border-radius: 3px;
+}
+
+
+/* ===== Hide per-slide page counter on screen (the fixed chrome shows it).
+   The per-slide counter remains visible in print, where chrome is hidden.
+   Body-scoped per deck to avoid global collisions with other site pages.
+     - Week 1 (body.deck-body)   .slide__foot .foot__num
+     - Weeks 2,3,5 (body.w{2,3,5}-deck)   .page-num
+     - Week 4 (body.w4-deck)   .slide__footer .right
+     - Week 6 (body.w6-deck)   .slide__foot > span:last-child (unclassed)
+   visibility:hidden (not display:none) preserves footer flex spacing
+   so brand/context text on the left does not reflow. ===== */
+body.deck-body .slide__foot .foot__num,
+body.w2-deck .slide .page-num,
+body.w3-deck .slide .page-num,
+body.w5-deck .slide .page-num,
+body.w4-deck .slide__footer .right,
+body.w6-deck .slide__foot > span:last-child {
+  visibility: hidden;
+}
+@media print {
+  body.deck-body .slide__foot .foot__num,
+  body.w2-deck .slide .page-num,
+  body.w3-deck .slide .page-num,
+  body.w5-deck .slide .page-num,
+  body.w4-deck .slide__footer .right,
+  body.w6-deck .slide__foot > span:last-child {
+    visibility: visible;
+  }
+}
+
+
+/* ===== Print: prepare for printable handouts ===== */
+@media print {
+
+body.deck-body { background: #fff; overflow: visible; }
+
+body.deck-body .deck { display: block; height: auto; width: auto; }
+
+body.deck-body .slide {
+    display: flex !important;
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 100vh;
+    page-break-after: always;
+    box-shadow: none;
+  }
+
+.deck-chrome, .deck-notes { display: none !important; }
+
+.notes {
+    display: block;
+    position: relative;
+    margin-top: 4vh;
+    padding-top: 2vh;
+    border-top: 1px dashed #999;
+    font-size: 11pt;
+    color: #333;
+    max-width: 80ch;
+  }
+
+
+}
+
+
+
+/* ============================================================
+   COMPATIBILITY LAYER — Weeks 2–6
+   Each week is scoped to its own body class so per-week styles
+   never compete. Week 1 (body.deck-body) and the universal chrome
+   selectors (.deck-chrome, .deck-notes, .notes) sit above this.
+
+   Source files (originally separate, now consolidated here):
+     - docs/decks/shared/deck.css         → Week 2 (body.w2-deck)
+     - Week 3 deck.css from git 521d88e   → Week 3 (body.w3-deck)
+     - docs/decks/deck.css                → Week 4 (body.w4-deck)
+
+   Weeks 5 and 6 keep their bespoke component CSS inline because
+   they contain many one-off layout components.
+   ============================================================ */
+
+/* ----- Week 2: Builder Orientation (was shared/deck.css) ----- */
+/* ============================================================
+   EDD Training — Shared Slide Deck Stylesheet
+   Visual identity inherited across Weeks 1–6
+   ============================================================
+   Palette:
+     USMC Scarlet  #CC0000   (primary accent, section dividers)
+     USMC Gold     #F5D130   (secondary accent, callouts)
+     Near-black    #1a1a1a   (text, dark backgrounds)
+     Warm gray     #f8f7f5   (light slide background)
+     White         #ffffff   (content panels)
+     Caution amber #F5A623   ("when something breaks" treatment)
+
+   Type:
+     Display — Inter / system sans, semibold–black, tight tracking
+     Body    — Inter / system sans, regular–medium
+
+   Slide layouts (.slide variants):
+     .slide--cover          Title slide (cover)
+     .slide--section        Module/section divider with timing
+     .slide--content        Title + body content slide
+     .slide--two-col        Two-column compare slide
+     .slide--quote          Pull-quote / hero statement
+     .slide--exercise       Hands-on exercise prompt (gold rule, banner)
+     .slide--live-build     Live-build framing slide
+     .slide--live-park      "Switch to live build" parking screen
+     .slide--checkpoint     Return-to-deck checkpoint after live build
+     .slide--break          Break slide
+     .slide--breaks         "When something breaks" treatment (amber)
+     .slide--knowledge      Knowledge-check / recap
+     .slide--closing        Closing / Week N preview
+   ============================================================ */
+body.w2-deck {
+  --c-scarlet: #CC0000;
+  --c-scarlet-dark: #a30000;
+  --c-gold: #F5D130;
+  --c-gold-dark: #d4b11a;
+  --c-ink: #1a1a1a;
+  --c-ink-soft: #2a2a2a;
+  --c-paper: #f8f7f5;
+  --c-paper-dark: #ecebe6;
+  --c-white: #ffffff;
+  --c-amber: #F5A623;
+  --c-amber-dark: #b07410;
+  --c-muted: #6e6e6e;
+  --c-rule: #d9d8d4;
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Cascadia Code", "Fira Code", "Consolas", "Monaco",
+    "Courier New", monospace;
+
+  /* Reference slide is 1920 x 1080. All sizing in vw/vh keeps it
+     proportional whether projected, screen-shared, or in PiP. */
+  --pad-h: 8vw;
+  --pad-v: 8vh;
+}
+
+body.w2-deck * { box-sizing: border-box; margin: 0; padding: 0; }
+
+body.w2-deck, body.w2-deck {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  color: var(--c-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+body.w2-deck {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ----- Slide stage (16:9 letterbox container) ----- */
+body.w2-deck .deck {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+body.w2-deck .stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Each slide is 1920x1080 reference, scaled with object-fit-style transform */
+body.w2-deck .slide {
+  position: absolute;
+  width: 1920px;
+  height: 1080px;
+  background: var(--c-paper);
+  color: var(--c-ink);
+  display: none;
+  overflow: hidden;
+  transform-origin: center center;
+}
+
+body.w2-deck .slide.is-active { display: block; }
+
+
+/* Common slide chrome --------------------------------------- */
+body.w2-deck .slide__edge {
+  position: absolute;
+  top: 0; left: 0;
+  width: 16px;
+  height: 100%;
+  background: var(--c-scarlet);
+}
+
+body.w2-deck .slide__footer {
+  position: absolute;
+  left: 96px; right: 96px; bottom: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  color: var(--c-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+body.w2-deck .slide__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  color: var(--c-ink);
+}
+
+body.w2-deck .slide__brand::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 22px;
+  background: var(--c-scarlet);
+  border-radius: 2px;
+}
+
+body.w2-deck .slide__counter { font-variant-numeric: tabular-nums; }
+
+
+/* ===========================================================
+   Layout: COVER
+   =========================================================== */
+body.w2-deck .slide--cover {
+  background: var(--c-ink);
+  color: var(--c-white);
+  display: none;
+  padding: 0;
+}
+
+body.w2-deck .slide--cover.is-active {
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+body.w2-deck .slide--cover .cover-body {
+  padding: 120px 140px 0 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+body.w2-deck .slide--cover .cover-eyebrow {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin-bottom: 32px;
+}
+
+body.w2-deck .slide--cover .cover-title {
+  font-size: 132px;
+  line-height: 0.95;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+  max-width: 1500px;
+}
+
+body.w2-deck .slide--cover .cover-sub {
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: rgba(255,255,255,0.78);
+  max-width: 1300px;
+}
+
+body.w2-deck .slide--cover .cover-meta {
+  background: var(--c-scarlet);
+  color: var(--c-white);
+  padding: 40px 140px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 48px;
+}
+
+body.w2-deck .cover-meta__cell .label {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  opacity: 0.78;
+  margin-bottom: 8px;
+}
+
+body.w2-deck .cover-meta__cell .value {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+
+/* ===========================================================
+   Layout: SECTION DIVIDER
+   =========================================================== */
+body.w2-deck .slide--section {
+  background: var(--c-ink);
+  color: var(--c-white);
+}
+
+body.w2-deck .slide--section .section-wrap {
+  position: absolute;
+  inset: 0;
+  padding: 120px 140px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+body.w2-deck .slide--section .module-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+}
+
+body.w2-deck .slide--section .module-tag::before {
+  content: "";
+  display: inline-block;
+  width: 56px;
+  height: 4px;
+  background: var(--c-gold);
+}
+
+body.w2-deck .slide--section .module-title {
+  font-size: 124px;
+  line-height: 0.95;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  align-self: end;
+  max-width: 1500px;
+}
+
+body.w2-deck .slide--section .module-meta {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  font-size: 28px;
+  color: rgba(255,255,255,0.78);
+}
+
+body.w2-deck .slide--section .module-meta strong {
+  color: var(--c-white);
+  font-weight: 700;
+}
+
+body.w2-deck .slide--section .module-meta .duration {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 28px;
+  border: 2px solid var(--c-gold);
+  color: var(--c-gold);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+
+/* ===========================================================
+   Layout: CONTENT (title + body)
+   =========================================================== */
+body.w2-deck .slide--content { padding: 96px 140px 120px 156px; }
+
+body.w2-deck .slide__eyebrow {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--c-scarlet);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+body.w2-deck .slide__title {
+  font-size: 76px;
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  color: var(--c-ink);
+  margin-bottom: 48px;
+  max-width: 1600px;
+}
+
+body.w2-deck .slide__title--md {
+  font-size: 64px;
+  margin-bottom: 36px;
+}
+
+body.w2-deck .slide__lede {
+  font-size: 34px;
+  line-height: 1.4;
+  color: var(--c-ink-soft);
+  max-width: 1500px;
+  font-weight: 400;
+  margin-bottom: 32px;
+}
+
+body.w2-deck .slide__body {
+  font-size: 30px;
+  line-height: 1.5;
+  color: var(--c-ink);
+}
+
+body.w2-deck .bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+body.w2-deck .bullets > li {
+  position: relative;
+  padding: 18px 0 18px 56px;
+  font-size: 32px;
+  line-height: 1.4;
+  border-bottom: 1px solid var(--c-rule);
+}
+
+body.w2-deck .bullets > li:last-child { border-bottom: none; }
+
+body.w2-deck .bullets > li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 32px;
+  width: 32px; height: 4px;
+  background: var(--c-scarlet);
+}
+
+body.w2-deck .bullets--gold > li::before { background: var(--c-gold); }
+
+body.w2-deck .bullets--inline > li {
+  border-bottom: none;
+  padding: 10px 0 10px 44px;
+  font-size: 30px;
+}
+
+body.w2-deck .bullets--inline > li::before {
+  width: 24px; height: 3px; top: 24px;
+}
+
+
+/* ===========================================================
+   Layout: TWO-COLUMN
+   =========================================================== */
+body.w2-deck .slide--two-col { padding: 96px 140px 120px 156px; }
+
+body.w2-deck .two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  margin-top: 32px;
+}
+
+body.w2-deck .col-card {
+  background: var(--c-white);
+  border: 2px solid var(--c-rule);
+  border-radius: 6px;
+  padding: 48px;
+}
+
+body.w2-deck .col-card__label {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+body.w2-deck .col-card__label--scarlet { color: var(--c-scarlet); }
+
+body.w2-deck .col-card__label--gold { color: var(--c-gold-dark); }
+
+body.w2-deck .col-card__title {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 24px;
+}
+
+body.w2-deck .col-card__body {
+  font-size: 28px;
+  line-height: 1.45;
+  color: var(--c-ink-soft);
+}
+
+body.w2-deck .col-card__body p + p { margin-top: 18px; }
+
+
+/* ===========================================================
+   Layout: QUOTE
+   =========================================================== */
+body.w2-deck .slide--quote {
+  background: var(--c-paper);
+  padding: 140px 200px;
+  display: none;
+  align-items: center;
+}
+
+body.w2-deck .slide--quote.is-active { display: flex; }
+
+body.w2-deck .slide--quote .quote-mark {
+  position: absolute;
+  top: 80px; left: 156px;
+  font-size: 240px;
+  line-height: 1;
+  color: var(--c-scarlet);
+  font-weight: 900;
+}
+
+body.w2-deck .slide--quote blockquote {
+  font-size: 64px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--c-ink);
+  letter-spacing: -0.01em;
+  max-width: 1500px;
+}
+
+body.w2-deck .slide--quote .attrib {
+  margin-top: 48px;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+
+/* ===========================================================
+   Layout: EXERCISE PROMPT (gold banner)
+   =========================================================== */
+body.w2-deck .slide--exercise {
+  background: var(--c-paper);
+  padding: 0;
+  display: none;
+  grid-template-rows: auto 1fr;
+}
+
+body.w2-deck .slide--exercise.is-active { display: grid; }
+
+body.w2-deck .slide--exercise .ex-banner {
+  background: var(--c-gold);
+  color: var(--c-ink);
+  padding: 36px 156px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+body.w2-deck .slide--exercise .ex-banner .label { font-size: 24px; }
+
+body.w2-deck .slide--exercise .ex-banner .timer {
+  font-size: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 20px;
+  border: 2px solid var(--c-ink);
+}
+
+body.w2-deck .slide--exercise .ex-body {
+  padding: 64px 156px 96px 156px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+body.w2-deck .slide--exercise .ex-prompt {
+  font-size: 64px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  color: var(--c-ink);
+  margin-bottom: 36px;
+  max-width: 1600px;
+}
+
+body.w2-deck .slide--exercise .ex-task {
+  font-size: 30px;
+  line-height: 1.45;
+  color: var(--c-ink-soft);
+  max-width: 1500px;
+}
+
+
+/* ===========================================================
+   Layout: LIVE BUILD framing
+   =========================================================== */
+body.w2-deck .slide--live-build {
+  padding: 96px 140px 120px 156px;
+  background: var(--c-paper);
+}
+
+body.w2-deck .slide--live-build .lb-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--c-scarlet);
+  color: var(--c-white);
+  padding: 12px 24px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+
+body.w2-deck .slide--live-build .lb-tag::before {
+  content: "";
+  width: 12px; height: 12px;
+  background: var(--c-gold);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(245,209,48,0.3);
+}
+
+
+/* ===========================================================
+   Layout: LIVE BUILD PARKING
+   =========================================================== */
+body.w2-deck .slide--live-park {
+  background: var(--c-ink);
+  color: var(--c-white);
+  display: none;
+  padding: 0;
+}
+
+body.w2-deck .slide--live-park.is-active {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+body.w2-deck .slide--live-park .park-bar {
+  background: var(--c-scarlet);
+  padding: 28px 140px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+body.w2-deck .slide--live-park .park-bar .live {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+}
+
+body.w2-deck .slide--live-park .park-bar .live::before {
+  content: "";
+  width: 14px; height: 14px;
+  background: var(--c-gold);
+  border-radius: 50%;
+}
+
+body.w2-deck .slide--live-park .park-body {
+  padding: 80px 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+body.w2-deck .slide--live-park .park-eyebrow {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin-bottom: 32px;
+}
+
+body.w2-deck .slide--live-park .park-headline {
+  font-size: 124px;
+  line-height: 0.95;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 48px;
+  max-width: 1500px;
+}
+
+body.w2-deck .slide--live-park .park-sub {
+  font-size: 36px;
+  line-height: 1.35;
+  color: rgba(255,255,255,0.82);
+  max-width: 1400px;
+}
+
+body.w2-deck .slide--live-park .park-checklist {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1500px;
+}
+
+body.w2-deck .park-checklist__item {
+  border: 2px solid rgba(255,255,255,0.18);
+  padding: 22px 26px;
+  font-size: 24px;
+  line-height: 1.3;
+  color: rgba(255,255,255,0.92);
+}
+
+body.w2-deck .park-checklist__item .num {
+  display: block;
+  font-size: 14px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+body.w2-deck .slide--live-park .park-foot {
+  background: rgba(255,255,255,0.05);
+  padding: 28px 140px;
+  font-size: 22px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  display: flex;
+  justify-content: space-between;
+}
+
+
+/* ===========================================================
+   Layout: CHECKPOINT (return from live build)
+   =========================================================== */
+body.w2-deck .slide--checkpoint {
+  background: var(--c-paper);
+  padding: 0;
+  display: none;
+  grid-template-rows: auto 1fr;
+}
+
+body.w2-deck .slide--checkpoint.is-active { display: grid; }
+
+body.w2-deck .slide--checkpoint .cp-banner {
+  background: var(--c-ink);
+  color: var(--c-white);
+  padding: 32px 156px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: 22px;
+}
+
+body.w2-deck .slide--checkpoint .cp-banner .stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--c-gold);
+}
+
+body.w2-deck .slide--checkpoint .cp-banner .stamp::before {
+  content: "";
+  width: 18px; height: 18px;
+  border: 3px solid var(--c-gold);
+  display: inline-block;
+}
+
+body.w2-deck .slide--checkpoint .cp-body {
+  padding: 64px 156px 96px 156px;
+}
+
+body.w2-deck .slide--checkpoint .cp-title {
+  font-size: 76px;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  margin-bottom: 36px;
+  max-width: 1500px;
+  line-height: 1.05;
+}
+
+body.w2-deck .slide--checkpoint .cp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  margin-top: 24px;
+}
+
+body.w2-deck .cp-grid__item {
+  background: var(--c-white);
+  border-top: 6px solid var(--c-scarlet);
+  padding: 36px 32px;
+}
+
+body.w2-deck .cp-grid__item .h {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-scarlet);
+  margin-bottom: 16px;
+}
+
+body.w2-deck .cp-grid__item .t {
+  font-size: 28px;
+  line-height: 1.35;
+  color: var(--c-ink);
+}
+
+
+/* ===========================================================
+   Layout: BREAK
+   =========================================================== */
+body.w2-deck .slide--break {
+  background: var(--c-gold);
+  color: var(--c-ink);
+  display: none;
+  padding: 0;
+}
+
+body.w2-deck .slide--break.is-active { display: flex; }
+
+body.w2-deck .slide--break {
+  align-items: center;
+  justify-content: center;
+}
+
+body.w2-deck .slide--break .break-wrap {
+  text-align: center;
+}
+
+body.w2-deck .slide--break .break-eyebrow {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--c-ink-soft);
+  margin-bottom: 36px;
+}
+
+body.w2-deck .slide--break .break-title {
+  font-size: 220px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+
+body.w2-deck .slide--break .break-sub {
+  margin-top: 36px;
+  font-size: 36px;
+  font-weight: 600;
+}
+
+
+/* ===========================================================
+   Layout: WHEN SOMETHING BREAKS (amber treatment)
+   =========================================================== */
+body.w2-deck .slide--breaks {
+  background: var(--c-ink);
+  color: var(--c-white);
+  padding: 0;
+  display: none;
+  grid-template-rows: auto 1fr;
+}
+
+body.w2-deck .slide--breaks.is-active { display: grid; }
+
+body.w2-deck .slide--breaks .br-banner {
+  background: var(--c-amber);
+  color: var(--c-ink);
+  padding: 36px 156px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 64px;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: 22px;
+}
+
+body.w2-deck .slide--breaks .br-banner > span:last-child { font-weight: 600; opacity: 0.78; text-align: right; }
+
+body.w2-deck .slide--breaks .br-banner .icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+}
+
+body.w2-deck .slide--breaks .br-banner .icon::before {
+  content: "";
+  width: 0; height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-bottom: 30px solid var(--c-ink);
+}
+
+body.w2-deck .slide--breaks .br-body {
+  padding: 80px 156px;
+}
+
+body.w2-deck .slide--breaks .br-title {
+  font-size: 88px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--c-amber);
+  margin-bottom: 40px;
+  max-width: 1500px;
+}
+
+body.w2-deck .slide--breaks .br-lede {
+  font-size: 34px;
+  line-height: 1.4;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 40px;
+  max-width: 1500px;
+}
+
+body.w2-deck .slide--breaks .br-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+body.w2-deck .br-step {
+  border: 2px solid rgba(245,166,35,0.35);
+  padding: 32px 28px;
+  background: rgba(245,166,35,0.08);
+}
+
+body.w2-deck .br-step .num {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--c-amber);
+  margin-bottom: 16px;
+}
+
+body.w2-deck .br-step .h {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+
+body.w2-deck .br-step .b {
+  font-size: 22px;
+  line-height: 1.4;
+  color: rgba(255,255,255,0.82);
+}
+
+
+/* Code-snippet inside breaks treatment */
+body.w2-deck .code-card {
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(245,166,35,0.4);
+  padding: 24px 28px;
+  font-family: var(--font-mono);
+  font-size: 22px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.95);
+  border-radius: 4px;
+  white-space: pre;
+  overflow: hidden;
+}
+
+
+/* ===========================================================
+   Layout: KNOWLEDGE CHECK
+   =========================================================== */
+body.w2-deck .slide--knowledge {
+  padding: 96px 140px 120px 156px;
+  background: var(--c-paper);
+}
+
+body.w2-deck .kc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-top: 24px;
+}
+
+body.w2-deck .kc-card {
+  background: var(--c-white);
+  border: 2px solid var(--c-rule);
+  padding: 36px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+body.w2-deck .kc-card .qnum {
+  width: 64px; height: 64px;
+  background: var(--c-scarlet);
+  color: var(--c-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: 800;
+  border-radius: 50%;
+}
+
+body.w2-deck .kc-card .qtext {
+  font-size: 28px;
+  line-height: 1.35;
+  color: var(--c-ink);
+  font-weight: 600;
+}
+
+body.w2-deck .kc-card .qansw {
+  grid-column: 2;
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--c-muted);
+  margin-top: 8px;
+}
+
+
+/* ===========================================================
+   Layout: CLOSING / Week N preview
+   =========================================================== */
+body.w2-deck .slide--closing {
+  background: var(--c-ink);
+  color: var(--c-white);
+  padding: 0;
+  display: none;
+  grid-template-rows: auto 1fr auto;
+}
+
+body.w2-deck .slide--closing.is-active { display: grid; }
+
+body.w2-deck .slide--closing .cl-bar {
+  background: var(--c-scarlet);
+  padding: 28px 140px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-size: 22px;
+}
+
+body.w2-deck .slide--closing .cl-body {
+  padding: 80px 140px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 96px;
+  align-items: center;
+}
+
+body.w2-deck .slide--closing .cl-eyebrow {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin-bottom: 28px;
+}
+
+body.w2-deck .slide--closing .cl-title {
+  font-size: 96px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+}
+
+body.w2-deck .slide--closing .cl-sub {
+  font-size: 28px;
+  line-height: 1.4;
+  color: rgba(255,255,255,0.78);
+}
+
+body.w2-deck .cl-modules {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+body.w2-deck .cl-modules__item {
+  border-left: 4px solid var(--c-gold);
+  padding: 14px 24px;
+  font-size: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  color: rgba(255,255,255,0.92);
+}
+
+body.w2-deck .cl-modules__item .lbl {
+  font-weight: 600;
+}
+
+body.w2-deck .cl-modules__item .dur {
+  color: rgba(255,255,255,0.55);
+  font-size: 20px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+body.w2-deck .slide--closing .cl-foot {
+  background: rgba(255,255,255,0.06);
+  padding: 28px 140px;
+  font-size: 22px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.66);
+  display: flex;
+  justify-content: space-between;
+}
+
+
+/* ===========================================================
+   Inline atoms
+   =========================================================== */
+body.w2-deck .tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  background: var(--c-scarlet);
+  color: var(--c-white);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-right: 8px;
+}
+
+body.w2-deck .tag--gold { background: var(--c-gold); color: var(--c-ink); }
+
+body.w2-deck .tag--ghost {
+  background: transparent;
+  color: var(--c-ink);
+  border: 2px solid var(--c-ink);
+}
+
+body.w2-deck .kbd {
+  display: inline-block;
+  padding: 4px 12px;
+  font-family: var(--font-mono);
+  font-size: 22px;
+  background: var(--c-paper-dark);
+  border: 1px solid var(--c-rule);
+  border-radius: 4px;
+}
+
+body.w2-deck .callout {
+  border-left: 6px solid var(--c-scarlet);
+  background: var(--c-white);
+  padding: 28px 32px;
+  font-size: 28px;
+  line-height: 1.4;
+  margin-top: 24px;
+}
+
+body.w2-deck .callout--gold { border-left-color: var(--c-gold); }
+
+body.w2-deck .callout--amber { border-left-color: var(--c-amber); }
+
+body.w2-deck .code-block {
+  background: var(--c-ink);
+  color: var(--c-paper);
+  padding: 28px 32px;
+  font-family: var(--font-mono);
+  font-size: 24px;
+  line-height: 1.45;
+  border-radius: 4px;
+  white-space: pre;
+  overflow: hidden;
+}
+
+
+/* ===========================================================
+   Speaker notes pane (toggle with N or P)
+   =========================================================== */
+body.w2-deck .notes {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  max-height: 38vh;
+  background: rgba(15,15,15,0.96);
+  color: #f4f3f0;
+  padding: 24px 36px 32px 36px;
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.5;
+  border-top: 4px solid var(--c-scarlet);
+  overflow-y: auto;
+  display: none;
+  z-index: 50;
+}
+
+body.w2-deck .notes.is-open { display: block; }
+
+body.w2-deck .notes__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 14px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  font-weight: 700;
+}
+
+body.w2-deck .notes__title {
+  color: var(--c-white);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  margin-bottom: 12px;
+}
+
+body.w2-deck .notes p { margin-bottom: 10px; }
+
+body.w2-deck .notes ul { margin: 8px 0 12px 24px; }
+
+body.w2-deck .notes li { margin-bottom: 6px; }
+
+body.w2-deck .notes strong { color: var(--c-gold); font-weight: 700; }
+
+body.w2-deck .notes .cue {
+  display: inline-block;
+  background: var(--c-scarlet);
+  color: var(--c-white);
+  padding: 2px 10px;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-right: 8px;
+  border-radius: 2px;
+}
+
+body.w2-deck .notes .cue--gold { background: var(--c-gold); color: var(--c-ink); }
+
+body.w2-deck .notes .cue--amber { background: var(--c-amber); color: var(--c-ink); }
+
+
+/* HUD ------------------------------------------------------- */
+body.w2-deck .hud {
+  position: fixed;
+  bottom: 12px; right: 14px;
+  background: rgba(15,15,15,0.55);
+  color: var(--c-white);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 3px;
+  z-index: 60;
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.45;
+  transition: opacity 0.25s ease;
+}
+
+body.w2-deck .deck:hover .hud { opacity: 0.75; }
+
+body.w2-deck .help {
+  position: fixed;
+  bottom: 12px; left: 14px;
+  background: rgba(15,15,15,0.55);
+  color: var(--c-white);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 3px;
+  z-index: 60;
+  opacity: 0.35;
+  transition: opacity 0.25s ease;
+}
+
+body.w2-deck .deck:hover .help { opacity: 0.7; }
+
+
+/* Print / export view --------------------------------------- */
+@media print {
+
+body.w2-deck, body.w2-deck { background: white; overflow: visible; }
+
+body.w2-deck .deck { width: auto; height: auto; }
+
+body.w2-deck .stage { position: static; }
+
+body.w2-deck .slide {
+    display: block !important;
+    position: relative !important;
+    width: 1920px;
+    height: 1080px;
+    transform: none !important;
+    page-break-after: always;
+    break-after: page;
+    box-shadow: none;
+  }
+
+body.w2-deck .hud, body.w2-deck .help, body.w2-deck .notes { display: none !important; }
+
+
+}
+
+
+
+/* ----- Week 3: Platform Training (restored from git 521d88e) ----- */
+/* ============================================================
+   EDD Training — Shared Deck Stylesheet
+   Visual identity inherited from the EDD site (style.css):
+   USMC Scarlet #CC0000, Gold #F5D130, white + warm gray.
+   Used by every weekly course deck.
+   ============================================================ */
+body.w3-deck {
+  --c-scarlet: #CC0000;
+  --c-scarlet-dk: #a30000;
+  --c-gold: #F5D130;
+  --c-gold-dk: #d4b11a;
+  --c-bg: #ffffff;
+  --c-bg-warm: #f8f7f5;
+  --c-bg-dark: #1a1a1a;
+  --c-bg-quiet: #f1efe9;
+  --c-ink: #1a1a1a;
+  --c-ink-soft: #4a4a4a;
+  --c-ink-muted: #6e6e6e;
+  --c-rule: #d9d8d4;
+  --c-rule-soft: #e8e7e3;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Cascadia Code", "Consolas", "Monaco", monospace;
+
+  /* Slide-relative unit. 1 svw on a 1920-wide slide ≈ 19.2px. */
+  --u: 1svw;
+}
+
+body.w3-deck * { box-sizing: border-box; margin: 0; padding: 0; }
+
+body.w3-deck, body.w3-deck {
+  background: var(--c-bg-dark);
+  color: var(--c-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+
+/* --------- Deck shell --------- */
+body.w3-deck .deck {
+  position: relative;
+  width: 100svw;
+  height: 100svh;
+  overflow: hidden;
+}
+
+body.w3-deck .slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+  background: var(--c-bg);
+  color: var(--c-ink);
+  padding: calc(6 * var(--u)) calc(7 * var(--u));
+  font-size: calc(1.6 * var(--u));
+  line-height: 1.45;
+  overflow: hidden;
+}
+
+body.w3-deck .slide.is-active { display: flex; flex-direction: column; }
+
+
+/* --------- Chrome (counter + brand mark + module label) --------- */
+body.w3-deck .deck__chrome {
+  position: fixed;
+  bottom: calc(1.4 * var(--u));
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 calc(2 * var(--u));
+  font-size: calc(0.95 * var(--u));
+  color: var(--c-ink-muted);
+  pointer-events: none;
+  z-index: 10;
+}
+
+body.w3-deck .deck__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(0.6 * var(--u));
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+body.w3-deck .deck__brand::before {
+  content: "";
+  display: inline-block;
+  width: calc(0.4 * var(--u));
+  height: calc(1.1 * var(--u));
+  background: var(--c-scarlet);
+  border-radius: 1px;
+}
+
+body.w3-deck .deck__counter { font-variant-numeric: tabular-nums; }
+
+
+/* --------- Slide-level header (module + time chip) --------- */
+body.w3-deck .slide__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: calc(2.2 * var(--u));
+  flex-shrink: 0;
+}
+
+body.w3-deck .slide__eyebrow {
+  font-size: calc(0.95 * var(--u));
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--c-scarlet);
+}
+
+body.w3-deck .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(0.4 * var(--u));
+  background: var(--c-bg-warm);
+  border: 1px solid var(--c-rule);
+  border-radius: 999px;
+  padding: calc(0.4 * var(--u)) calc(1.0 * var(--u));
+  font-size: calc(0.9 * var(--u));
+  font-weight: 600;
+  color: var(--c-ink-soft);
+}
+
+body.w3-deck .chip--gold { background: var(--c-gold); border-color: var(--c-gold-dk); color: var(--c-bg-dark); }
+
+body.w3-deck .chip--scarlet { background: var(--c-scarlet); border-color: var(--c-scarlet-dk); color: #fff; }
+
+body.w3-deck .chip--ghost { background: transparent; }
+
+
+/* --------- Headlines --------- */
+body.w3-deck h1, body.w3-deck h2, body.w3-deck h3, body.w3-deck h4 {
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+body.w3-deck .h-display {
+  font-size: calc(5.0 * var(--u));
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.0;
+}
+
+body.w3-deck .h-title { font-size: calc(3.4 * var(--u)); }
+
+body.w3-deck .h-section { font-size: calc(2.2 * var(--u)); }
+
+body.w3-deck .h-sub { font-size: calc(1.4 * var(--u)); color: var(--c-ink-soft); font-weight: 500; }
+
+body.w3-deck p { font-size: calc(1.55 * var(--u)); }
+
+body.w3-deck .lead { font-size: calc(1.85 * var(--u)); color: var(--c-ink-soft); line-height: 1.4; }
+
+body.w3-deck ul, body.w3-deck ol { padding-left: calc(2.2 * var(--u)); }
+
+body.w3-deck li { margin-bottom: calc(0.7 * var(--u)); font-size: calc(1.5 * var(--u)); }
+
+body.w3-deck li::marker { color: var(--c-scarlet); }
+
+body.w3-deck strong { color: var(--c-ink); font-weight: 700; }
+
+body.w3-deck em { font-style: italic; color: var(--c-ink-soft); }
+
+body.w3-deck .rule {
+  height: 3px;
+  width: calc(7 * var(--u));
+  background: var(--c-scarlet);
+  border-radius: 2px;
+  margin: calc(1.2 * var(--u)) 0;
+}
+
+
+/* --------- Layouts --------- */
+
+/* COVER */
+body.w3-deck .layout-cover {
+  background:
+    radial-gradient(ellipse at top right, rgba(245,209,48,0.12), transparent 55%),
+    linear-gradient(180deg, #ffffff 0%, #f8f7f5 100%);
+  justify-content: space-between;
+}
+
+body.w3-deck .layout-cover .cover__top { display: flex; align-items: center; gap: calc(0.6 * var(--u)); font-weight: 700; letter-spacing: 0.04em; }
+
+body.w3-deck .layout-cover .cover__top::before {
+  content: "";
+  width: calc(0.5 * var(--u));
+  height: calc(2.0 * var(--u));
+  background: var(--c-scarlet);
+  border-radius: 2px;
+}
+
+body.w3-deck .layout-cover .cover__week { font-size: calc(1.2 * var(--u)); letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-scarlet); font-weight: 700; margin-bottom: calc(1.0 * var(--u)); }
+
+body.w3-deck .layout-cover .cover__title { font-size: calc(6.5 * var(--u)); font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; max-width: 80%; }
+
+body.w3-deck .layout-cover .cover__sub { font-size: calc(1.8 * var(--u)); color: var(--c-ink-soft); margin-top: calc(1.4 * var(--u)); max-width: 70%; line-height: 1.4; }
+
+body.w3-deck .layout-cover .cover__meta {
+  display: flex;
+  gap: calc(2.0 * var(--u));
+  align-items: center;
+  font-size: calc(1.1 * var(--u));
+  color: var(--c-ink-muted);
+}
+
+body.w3-deck .layout-cover .cover__meta strong { color: var(--c-ink); }
+
+
+/* SECTION DIVIDER */
+body.w3-deck .layout-section {
+  background: var(--c-bg-dark);
+  color: #fff;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+body.w3-deck .layout-section .h-display { color: #fff; max-width: 90%; }
+
+body.w3-deck .layout-section .section__eyebrow {
+  font-size: calc(1.1 * var(--u));
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  font-weight: 700;
+  margin-bottom: calc(1.4 * var(--u));
+}
+
+body.w3-deck .layout-section .section__meta {
+  display: flex;
+  gap: calc(1.0 * var(--u));
+  margin-top: calc(2.0 * var(--u));
+}
+
+body.w3-deck .layout-section .chip { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.18); color: #fff; }
+
+body.w3-deck .layout-section .chip--gold { background: var(--c-gold); color: var(--c-bg-dark); }
+
+body.w3-deck .layout-section .rule { background: var(--c-gold); }
+
+
+/* CONTENT */
+body.w3-deck .layout-content { background: var(--c-bg); }
+
+body.w3-deck .layout-content .body { flex: 1; display: flex; flex-direction: column; gap: calc(1.4 * var(--u)); min-height: 0; }
+
+
+/* TWO-COLUMN */
+body.w3-deck .layout-two .body { display: grid; grid-template-columns: 1fr 1fr; gap: calc(2.6 * var(--u)); flex: 1; min-height: 0; }
+
+body.w3-deck .layout-two .col { display: flex; flex-direction: column; gap: calc(0.9 * var(--u)); }
+
+body.w3-deck .layout-two .col__head { font-size: calc(1.3 * var(--u)); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-scarlet); }
+
+
+/* AGENDA / TIMELINE */
+body.w3-deck .layout-agenda .body { flex: 1; display: flex; flex-direction: column; gap: calc(0.6 * var(--u)); }
+
+body.w3-deck .timeline {
+  display: grid;
+  grid-template-columns: calc(8 * var(--u)) 1fr calc(10 * var(--u));
+  gap: calc(0.6 * var(--u)) calc(1.6 * var(--u));
+  align-items: center;
+}
+
+body.w3-deck .timeline__time { font-weight: 700; font-variant-numeric: tabular-nums; color: var(--c-scarlet); font-size: calc(1.4 * var(--u)); }
+
+body.w3-deck .timeline__what { font-size: calc(1.5 * var(--u)); font-weight: 600; }
+
+body.w3-deck .timeline__meta { font-size: calc(1.05 * var(--u)); color: var(--c-ink-muted); text-align: right; }
+
+body.w3-deck .timeline__row--break .timeline__time { color: var(--c-gold-dk); }
+
+body.w3-deck .timeline__row--break .timeline__what { color: var(--c-ink-soft); font-style: italic; font-weight: 500; }
+
+
+/* BUILD FRAMING */
+body.w3-deck .layout-frame { background: var(--c-bg); }
+
+body.w3-deck .layout-frame .body { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: calc(2.6 * var(--u)); min-height: 0; }
+
+body.w3-deck .frame__hero {
+  background: var(--c-bg-warm);
+  border-left: 5px solid var(--c-scarlet);
+  padding: calc(2.0 * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(0.8 * var(--u));
+}
+
+body.w3-deck .frame__hero .frame__label { font-size: calc(0.95 * var(--u)); letter-spacing: 0.2em; text-transform: uppercase; color: var(--c-scarlet); font-weight: 700; }
+
+body.w3-deck .frame__hero h2 { font-size: calc(2.4 * var(--u)); }
+
+body.w3-deck .frame__hero p { font-size: calc(1.45 * var(--u)); color: var(--c-ink-soft); }
+
+body.w3-deck .frame__cards { display: grid; grid-template-rows: 1fr 1fr; gap: calc(1.2 * var(--u)); }
+
+body.w3-deck .frame__card {
+  background: #fff;
+  border: 1px solid var(--c-rule);
+  padding: calc(1.4 * var(--u)) calc(1.6 * var(--u));
+}
+
+body.w3-deck .frame__card .card__label { font-size: calc(0.95 * var(--u)); letter-spacing: 0.2em; text-transform: uppercase; color: var(--c-ink-muted); font-weight: 700; margin-bottom: calc(0.4 * var(--u)); }
+
+body.w3-deck .frame__card .card__value { font-size: calc(1.55 * var(--u)); font-weight: 600; }
+
+body.w3-deck .frame__card .card__value strong { color: var(--c-scarlet); }
+
+body.w3-deck .frame__card .card__value.gold strong { color: var(--c-gold-dk); }
+
+body.w3-deck .frame__card .card__sub { font-size: calc(1.2 * var(--u)); color: var(--c-ink-muted); margin-top: calc(0.3 * var(--u)); }
+
+
+/* SWITCH-TO-PLATFORM (live build cue) */
+body.w3-deck .layout-switch {
+  background:
+    repeating-linear-gradient(135deg, #fffaf0 0 calc(2 * var(--u)), #fff 0 calc(4 * var(--u)));
+  justify-content: center;
+  align-items: flex-start;
+}
+
+body.w3-deck .layout-switch .switch__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(0.6 * var(--u));
+  background: var(--c-gold);
+  color: var(--c-bg-dark);
+  padding: calc(0.6 * var(--u)) calc(1.4 * var(--u));
+  border-radius: 999px;
+  font-size: calc(1.0 * var(--u));
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+body.w3-deck .layout-switch h2 {
+  font-size: calc(5.0 * var(--u));
+  margin-top: calc(1.6 * var(--u));
+  max-width: 85%;
+  letter-spacing: -0.02em;
+  line-height: 1.0;
+}
+
+body.w3-deck .layout-switch .switch__caption { font-size: calc(1.6 * var(--u)); color: var(--c-ink-soft); margin-top: calc(1.2 * var(--u)); max-width: 70%; }
+
+body.w3-deck .layout-switch .switch__chips {
+  margin-top: calc(2.0 * var(--u));
+  display: flex;
+  gap: calc(0.8 * var(--u));
+  flex-wrap: wrap;
+}
+
+
+/* RETURN / DEBRIEF */
+body.w3-deck .layout-debrief { background: var(--c-bg); }
+
+body.w3-deck .layout-debrief .return__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(0.5 * var(--u));
+  background: var(--c-bg-warm);
+  border: 1px solid var(--c-rule);
+  padding: calc(0.4 * var(--u)) calc(1.0 * var(--u));
+  border-radius: 4px;
+  font-size: calc(0.95 * var(--u));
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--c-ink-soft);
+  margin-bottom: calc(1.0 * var(--u));
+  align-self: flex-start;
+}
+
+body.w3-deck .debrief__grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(2.0 * var(--u));
+  min-height: 0;
+}
+
+body.w3-deck .debrief__panel {
+  background: var(--c-bg-warm);
+  padding: calc(1.6 * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(0.6 * var(--u));
+}
+
+body.w3-deck .debrief__panel h3 { font-size: calc(1.5 * var(--u)); color: var(--c-scarlet); }
+
+body.w3-deck .debrief__panel li { font-size: calc(1.35 * var(--u)); }
+
+
+/* QUIET / FAILURE-SHARING (low visual noise) */
+body.w3-deck .layout-quiet {
+  background: var(--c-bg-quiet);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: calc(8 * var(--u)) calc(12 * var(--u));
+}
+
+body.w3-deck .layout-quiet .quiet__eyebrow { font-size: calc(1.0 * var(--u)); letter-spacing: 0.3em; text-transform: uppercase; color: var(--c-ink-muted); margin-bottom: calc(1.2 * var(--u)); font-weight: 600; }
+
+body.w3-deck .layout-quiet h2 { font-size: calc(3.6 * var(--u)); font-weight: 600; max-width: 90%; line-height: 1.15; color: var(--c-ink); }
+
+body.w3-deck .layout-quiet .quiet__lead { font-size: calc(1.5 * var(--u)); color: var(--c-ink-soft); margin-top: calc(1.6 * var(--u)); max-width: 70%; line-height: 1.5; }
+
+body.w3-deck .layout-quiet .quiet__prompts {
+  margin-top: calc(2.4 * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(0.8 * var(--u));
+  text-align: left;
+  max-width: 70%;
+}
+
+body.w3-deck .layout-quiet .quiet__prompts li { list-style: none; font-size: calc(1.4 * var(--u)); color: var(--c-ink-soft); padding-left: calc(1.4 * var(--u)); position: relative; }
+
+body.w3-deck .layout-quiet .quiet__prompts li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--c-scarlet);
+  font-weight: 700;
+}
+
+
+/* BREAK */
+body.w3-deck .layout-break {
+  background: var(--c-bg-dark);
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+body.w3-deck .layout-break .break__label { font-size: calc(1.2 * var(--u)); letter-spacing: 0.3em; text-transform: uppercase; color: var(--c-gold); margin-bottom: calc(1.0 * var(--u)); font-weight: 700; }
+
+body.w3-deck .layout-break h2 { font-size: calc(7.0 * var(--u)); font-weight: 800; letter-spacing: -0.02em; }
+
+body.w3-deck .layout-break .break__sub { font-size: calc(1.5 * var(--u)); color: rgba(255,255,255,0.75); margin-top: calc(1.2 * var(--u)); }
+
+
+/* FRONTIER MAP REFERENCE */
+body.w3-deck .layout-map .map {
+  flex: 1;
+  display: grid;
+  grid-template-columns: calc(13 * var(--u)) 1fr 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--c-rule);
+  background: #fff;
+}
+
+body.w3-deck .map__cell {
+  padding: calc(1.0 * var(--u)) calc(1.2 * var(--u));
+  border-right: 1px solid var(--c-rule-soft);
+  border-bottom: 1px solid var(--c-rule-soft);
+  font-size: calc(1.2 * var(--u));
+  display: flex;
+  align-items: center;
+}
+
+body.w3-deck .map__cell--head {
+  background: var(--c-bg-warm);
+  font-weight: 700;
+  font-size: calc(1.05 * var(--u));
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--c-ink-soft);
+}
+
+body.w3-deck .map__cell--task { font-weight: 700; color: var(--c-ink); }
+
+body.w3-deck .map__cell--good { color: #0d652d; }
+
+body.w3-deck .map__cell--bad { color: var(--c-scarlet); }
+
+body.w3-deck .map__cell--check { color: var(--c-ink-soft); }
+
+body.w3-deck .map__cell:nth-child(4n) { border-right: none; }
+
+body.w3-deck .map__row-empty { color: var(--c-ink-muted); font-style: italic; font-size: calc(1.0 * var(--u)); }
+
+
+/* WORKTIME */
+body.w3-deck .layout-worktime {
+  background: var(--c-bg-warm);
+  justify-content: center;
+  align-items: flex-start;
+}
+
+body.w3-deck .layout-worktime h2 { font-size: calc(4.4 * var(--u)); }
+
+body.w3-deck .layout-worktime .worktime__sub { font-size: calc(1.6 * var(--u)); color: var(--c-ink-soft); margin-top: calc(1.0 * var(--u)); max-width: 70%; }
+
+body.w3-deck .layout-worktime .worktime__timer {
+  margin-top: calc(2.6 * var(--u));
+  display: inline-flex;
+  align-items: baseline;
+  gap: calc(0.8 * var(--u));
+  background: #fff;
+  border: 1px solid var(--c-rule);
+  padding: calc(1.4 * var(--u)) calc(2.2 * var(--u));
+}
+
+body.w3-deck .layout-worktime .worktime__timer .num { font-size: calc(4.4 * var(--u)); font-weight: 800; color: var(--c-scarlet); line-height: 1; }
+
+body.w3-deck .layout-worktime .worktime__timer .label { font-size: calc(1.2 * var(--u)); color: var(--c-ink-muted); letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; }
+
+
+/* PREVIEW (next week) */
+body.w3-deck .layout-preview {
+  background: linear-gradient(135deg, #fff 0%, #f8f7f5 100%);
+}
+
+body.w3-deck .layout-preview .preview__badge { font-size: calc(1.0 * var(--u)); letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-scarlet); font-weight: 700; margin-bottom: calc(0.8 * var(--u)); }
+
+body.w3-deck .layout-preview .preview__title { font-size: calc(4.2 * var(--u)); font-weight: 800; letter-spacing: -0.02em; }
+
+body.w3-deck .layout-preview .preview__sub { font-size: calc(1.6 * var(--u)); color: var(--c-ink-soft); margin-top: calc(1.0 * var(--u)); max-width: 70%; }
+
+body.w3-deck .layout-preview .preview__list { margin-top: calc(2.0 * var(--u)); columns: 2; column-gap: calc(2.4 * var(--u)); max-width: 90%; }
+
+body.w3-deck .layout-preview .preview__list li { break-inside: avoid; font-size: calc(1.4 * var(--u)); }
+
+
+/* CLOSING */
+body.w3-deck .layout-closing {
+  background: var(--c-bg-dark);
+  color: #fff;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+body.w3-deck .layout-closing h2 { font-size: calc(6.5 * var(--u)); font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+
+body.w3-deck .layout-closing .closing__sub { font-size: calc(1.8 * var(--u)); color: rgba(255,255,255,0.75); margin-top: calc(1.4 * var(--u)); }
+
+body.w3-deck .layout-closing .rule { background: var(--c-gold); margin: calc(2.0 * var(--u)) auto; }
+
+
+/* --------- Speaker notes --------- */
+
+/* Hidden source-of-truth notes embedded inside each slide. The deck JS
+   reads these and renders the active slide's notes into the .notes panel. */
+body.w3-deck .speaker-notes { display: none; }
+
+body.w3-deck .notes {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(26,26,26,0.96);
+  color: #f4f3f0;
+  padding: calc(1.6 * var(--u)) calc(2.6 * var(--u));
+  max-height: 38svh;
+  overflow-y: auto;
+  font-size: calc(1.0 * var(--u));
+  line-height: 1.55;
+  border-top: 3px solid var(--c-gold);
+  display: none;
+  z-index: 50;
+}
+
+body.w3-deck .notes.is-visible { display: block; }
+
+body.w3-deck .notes h4 {
+  color: var(--c-gold);
+  font-size: calc(0.95 * var(--u));
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: calc(0.4 * var(--u));
+}
+
+body.w3-deck .notes .notes__body { font-size: calc(1.05 * var(--u)); }
+
+body.w3-deck .notes .notes__body p + p { margin-top: calc(0.5 * var(--u)); }
+
+body.w3-deck .notes .notes__cue {
+  display: inline-block;
+  background: var(--c-gold);
+  color: var(--c-bg-dark);
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-weight: 700;
+  font-size: 0.95em;
+  margin-right: 6px;
+  letter-spacing: 0.04em;
+}
+
+
+/* Help hint shown on the cover slide only */
+body.w3-deck .deck__hint {
+  position: fixed;
+  top: calc(1.4 * var(--u));
+  right: calc(2 * var(--u));
+  font-size: calc(0.85 * var(--u));
+  color: var(--c-ink-muted);
+  z-index: 10;
+  background: rgba(255,255,255,0.85);
+  padding: calc(0.4 * var(--u)) calc(0.8 * var(--u));
+  border: 1px solid var(--c-rule);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+body.w3-deck .deck__hint kbd {
+  font-family: var(--font-mono);
+  background: #fff;
+  border: 1px solid var(--c-rule);
+  border-radius: 3px;
+  padding: 0 4px;
+  font-size: 0.95em;
+}
+
+
+/* --------- Print: notes pages --------- */
+@media print {
+
+@page { size: 13.333in 7.5in; margin: 0; }
+
+body.w3-deck, body.w3-deck { background: #fff; height: auto; overflow: visible; }
+
+body.w3-deck .deck__chrome, body.w3-deck .deck__hint { display: none; }
+
+body.w3-deck .deck { width: auto; height: auto; }
+
+body.w3-deck .slide {
+    display: flex !important;
+    position: relative;
+    width: 13.333in;
+    height: 7.5in;
+    page-break-after: always;
+    box-shadow: none;
+    inset: auto;
+  }
+
+  /* Hide the live overlay panel during print and let each slide's
+     embedded .speaker-notes block follow it on its own page instead. */
+body.w3-deck .notes { display: none !important; }
+
+body.w3-deck .speaker-notes {
+    display: block;
+    position: relative;
+    width: 13.333in;
+    background: #fff;
+    color: #1a1a1a;
+    border-top: 2px solid var(--c-scarlet);
+    page-break-after: always;
+    padding: 0.5in;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+
+body.w3-deck .speaker-notes p + p { margin-top: 0.4em; }
+
+body.w3-deck .speaker-notes .notes__cue {
+    display: inline-block;
+    background: var(--c-gold);
+    color: var(--c-bg-dark);
+    padding: 1px 6px;
+    border-radius: 2px;
+    font-weight: 700;
+    margin-right: 6px;
+  }
+
+
+}
+
+
+
+/* ----- Week 4: Advanced Workshop (was root deck.css) ----- */
+/* ============================================================
+   EDD Weekly Decks — Shared Slide-Deck Stylesheet
+   Visual identity: USMC scarlet + gold on warm gray / white.
+   Reused across Weeks 1-6.
+   ============================================================ */
+body.w4-deck {
+  --scarlet: #CC0000;
+  --scarlet-dark: #a30000;
+  --gold: #F5D130;
+  --gold-soft: #fff3b0;
+  --bg: #ffffff;
+  --bg-warm: #f8f7f5;
+  --bg-dark: #1a1a1a;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-muted: #6e6e6e;
+  --rule: #d9d8d4;
+  --rule-light: #e8e7e3;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Cascadia Code", "Fira Code", Consolas, Monaco, monospace;
+}
+
+
+/* ---------- Page reset ---------- */
+body.w4-deck *, body.w4-deck *::before, body.w4-deck *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body.w4-deck, body.w4-deck {
+  background: #111;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  height: 100%;
+}
+
+
+/* ---------- Stage (the screen-share area) ---------- */
+body.w4-deck .stage {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #111;
+}
+
+
+/* ---------- Slide container — fixed 16:9, scaled by JS ---------- */
+body.w4-deck .slide {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  background: var(--bg);
+  color: var(--ink);
+  overflow: hidden;
+  display: none;            /* one slide at a time */
+  flex-direction: column;
+  transform-origin: center center;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+}
+
+body.w4-deck .slide.is-active { display: flex; }
+
+
+/* Default padding for slide bodies */
+body.w4-deck .slide__body {
+  flex: 1;
+  padding: 96px 128px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-height: 0;
+}
+
+
+/* Footer: course + module + slide # */
+body.w4-deck .slide__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 64px;
+  border-top: 4px solid var(--scarlet);
+  background: var(--bg-warm);
+  font-size: 22px;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+body.w4-deck .slide__footer .left { display: flex; align-items: center; gap: 18px; }
+
+body.w4-deck .slide__footer .brand-mark {
+  display: inline-block;
+  width: 8px; height: 30px;
+  background: var(--scarlet);
+  border-radius: 2px;
+}
+
+body.w4-deck .slide__footer .right { font-variant-numeric: tabular-nums; }
+
+
+/* ---------- Slide kinds ---------- */
+
+/* Cover */
+body.w4-deck .slide--cover .slide__body {
+  background: linear-gradient(135deg, #0e0e0e 0%, #1a1a1a 60%, #2a0a0a 100%);
+  color: #fff;
+  padding: 140px 160px;
+  justify-content: center;
+}
+
+body.w4-deck .slide--cover .eyebrow {
+  font-size: 36px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+body.w4-deck .slide--cover h1 {
+  font-size: 132px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+  margin-bottom: 32px;
+  color: #fff;
+  max-width: 1500px;
+}
+
+body.w4-deck .slide--cover .tagline {
+  font-size: 44px;
+  font-weight: 500;
+  color: #f0f0f0;
+  max-width: 1400px;
+  margin-bottom: 64px;
+  line-height: 1.3;
+}
+
+body.w4-deck .slide--cover .meta {
+  display: flex;
+  gap: 64px;
+  font-size: 28px;
+  color: #d0d0d0;
+}
+
+body.w4-deck .slide--cover .meta strong { color: var(--gold); display: block; font-size: 22px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+
+body.w4-deck .slide--cover .scarlet-bar {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 24px;
+  background: var(--scarlet);
+}
+
+
+/* Section divider */
+body.w4-deck .slide--section .slide__body {
+  background: var(--scarlet);
+  color: #fff;
+  padding: 140px 160px;
+  justify-content: center;
+}
+
+body.w4-deck .slide--section .module-tag {
+  font-size: 32px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 28px;
+}
+
+body.w4-deck .slide--section h1 {
+  font-size: 116px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 48px;
+  max-width: 1500px;
+}
+
+body.w4-deck .slide--section .timing {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--bg-dark);
+  padding: 18px 36px;
+  font-size: 36px;
+  font-weight: 700;
+  border-radius: 8px;
+  margin-bottom: 32px;
+}
+
+body.w4-deck .slide--section .blurb {
+  font-size: 32px;
+  line-height: 1.4;
+  color: #fff5f5;
+  max-width: 1400px;
+}
+
+
+/* Standard content slide */
+body.w4-deck .slide--content h2 {
+  font-size: 76px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+body.w4-deck .slide--content .subhead {
+  font-size: 32px;
+  color: var(--scarlet);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+body.w4-deck .slide--content p, body.w4-deck .slide--content li {
+  font-size: 32px;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+body.w4-deck .slide--content ul, body.w4-deck .slide--content ol {
+  padding-left: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+body.w4-deck .slide--content li::marker { color: var(--scarlet); }
+
+body.w4-deck .slide--content strong { color: var(--scarlet-dark); }
+
+
+/* Two-column layout */
+body.w4-deck .cols-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  flex: 1;
+  min-height: 0;
+}
+
+body.w4-deck .cols-2 .col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+body.w4-deck .cols-2 .col h3 {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--scarlet);
+  border-bottom: 3px solid var(--gold);
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+}
+
+body.w4-deck .cols-2 .col p, body.w4-deck .cols-2 .col li { font-size: 28px; line-height: 1.45; }
+
+
+/* Big stat */
+body.w4-deck .stat-big {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 24px 0;
+}
+
+body.w4-deck .stat-big .num {
+  font-size: 220px;
+  font-weight: 800;
+  color: var(--scarlet);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+body.w4-deck .stat-big .label {
+  font-size: 38px;
+  color: var(--ink-soft);
+  max-width: 1200px;
+  line-height: 1.3;
+}
+
+body.w4-deck .stat-big .source {
+  font-size: 22px;
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+
+/* Quote / pull-out */
+body.w4-deck .pullquote {
+  background: var(--bg-warm);
+  border-left: 12px solid var(--gold);
+  padding: 48px 56px;
+  font-size: 40px;
+  line-height: 1.4;
+  color: var(--ink);
+  font-style: italic;
+}
+
+body.w4-deck .pullquote .attrib {
+  display: block;
+  margin-top: 20px;
+  font-size: 26px;
+  color: var(--ink-muted);
+  font-style: normal;
+}
+
+
+/* Workshop / activity slide — gold-coded so the presenter knows to stop clicking */
+body.w4-deck .slide--workshop .slide__body {
+  background: linear-gradient(180deg, #fffbe6 0%, #fff7d1 100%);
+  border-left: 24px solid var(--gold);
+  padding: 96px 128px;
+}
+
+body.w4-deck .slide--workshop .activity-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--bg-dark);
+  color: var(--gold);
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+body.w4-deck .slide--workshop .activity-tag::before {
+  content: "";
+  display: inline-block;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 12px var(--gold);
+}
+
+body.w4-deck .slide--workshop h2 {
+  font-size: 84px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--ink);
+}
+
+body.w4-deck .slide--workshop .timebox {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--scarlet);
+}
+
+body.w4-deck .slide--workshop .prompt-box {
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  padding: 36px 40px;
+  font-size: 30px;
+  line-height: 1.45;
+}
+
+body.w4-deck .slide--workshop .prompt-box .label {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--scarlet);
+  margin-bottom: 12px;
+}
+
+body.w4-deck .slide--workshop .what-good {
+  background: #fffce6;
+  border: 2px dashed var(--scarlet);
+  border-radius: 12px;
+  padding: 24px 32px;
+  font-size: 26px;
+  line-height: 1.4;
+}
+
+body.w4-deck .slide--workshop .what-good strong { color: var(--scarlet-dark); }
+
+
+/* Live-build cue slide — full-bleed black with gold ring */
+body.w4-deck .slide--cue .slide__body {
+  background: var(--bg-dark);
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px;
+}
+
+body.w4-deck .slide--cue .ring {
+  border: 8px solid var(--gold);
+  border-radius: 24px;
+  padding: 80px 120px;
+  max-width: 1500px;
+}
+
+body.w4-deck .slide--cue h2 {
+  font-size: 96px;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  line-height: 1.05;
+}
+
+body.w4-deck .slide--cue p {
+  font-size: 38px;
+  color: #f0f0f0;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+body.w4-deck .slide--cue .eyebrow {
+  font-size: 28px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--scarlet);
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+
+/* Reference card slide — denser, designed to stay on screen */
+body.w4-deck .slide--reference h2 {
+  font-size: 60px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 0;
+}
+
+body.w4-deck .slide--reference .subhead {
+  font-size: 26px;
+  color: var(--ink-muted);
+  margin-bottom: 8px;
+}
+
+body.w4-deck .slide--reference .ref-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  flex: 1;
+  min-height: 0;
+}
+
+body.w4-deck .slide--reference .ref-card {
+  background: var(--bg-warm);
+  border-left: 8px solid var(--scarlet);
+  padding: 24px 28px;
+  border-radius: 0 8px 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+body.w4-deck .slide--reference .ref-card .num {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--scarlet);
+  text-transform: uppercase;
+}
+
+body.w4-deck .slide--reference .ref-card h3 {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+body.w4-deck .slide--reference .ref-card p {
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+
+/* Facilitation slide — split panels */
+body.w4-deck .slide--facilitation h2 {
+  font-size: 60px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+body.w4-deck .slide--facilitation .subhead {
+  font-size: 28px;
+  color: var(--ink-muted);
+  margin-bottom: 8px;
+}
+
+body.w4-deck .slide--facilitation .facil-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  flex: 1;
+  min-height: 0;
+}
+
+body.w4-deck .slide--facilitation .facil-panel {
+  background: var(--bg-warm);
+  border-top: 6px solid var(--scarlet);
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+body.w4-deck .slide--facilitation .facil-panel h3 {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--scarlet);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+body.w4-deck .slide--facilitation .facil-panel ul { padding-left: 22px; gap: 8px; }
+
+body.w4-deck .slide--facilitation .facil-panel li {
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+
+/* Share-out grid slide */
+body.w4-deck .slide--shareout .panel {
+  background: var(--bg-warm);
+  border-radius: 8px;
+  padding: 32px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+body.w4-deck .slide--shareout .panel h3 {
+  font-size: 32px;
+  color: var(--scarlet);
+  font-weight: 800;
+}
+
+body.w4-deck .slide--shareout .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  flex: 1;
+  min-height: 0;
+}
+
+
+/* Break slide */
+body.w4-deck .slide--break .slide__body {
+  background: linear-gradient(135deg, var(--gold) 0%, #ffe06b 100%);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+body.w4-deck .slide--break h1 {
+  font-size: 220px;
+  font-weight: 800;
+  color: var(--bg-dark);
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  margin-bottom: 24px;
+}
+
+body.w4-deck .slide--break .returns {
+  font-size: 48px;
+  color: var(--bg-dark);
+  font-weight: 600;
+}
+
+
+/* Worked-example map (table) */
+body.w4-deck .map-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 22px;
+  table-layout: fixed;
+}
+
+body.w4-deck .map-table th {
+  background: var(--bg-dark);
+  color: #fff;
+  text-align: left;
+  padding: 14px 16px;
+  font-weight: 700;
+  font-size: 22px;
+  border: 1px solid var(--bg-dark);
+}
+
+body.w4-deck .map-table td {
+  padding: 14px 16px;
+  vertical-align: top;
+  border: 1px solid var(--rule);
+  background: #fff;
+  line-height: 1.35;
+}
+
+body.w4-deck .map-table tr:nth-child(even) td { background: var(--bg-warm); }
+
+body.w4-deck .map-table .cat { font-weight: 700; color: var(--scarlet-dark); width: 16%; }
+
+
+/* Phase-walk (horizontal flow) */
+body.w4-deck .phases {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  flex: 1;
+  min-height: 0;
+}
+
+body.w4-deck .phase {
+  background: var(--bg-warm);
+  border-top: 6px solid var(--scarlet);
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+body.w4-deck .phase .pnum { font-size: 22px; font-weight: 800; color: var(--scarlet); letter-spacing: 0.12em; text-transform: uppercase; }
+
+body.w4-deck .phase h3 { font-size: 32px; font-weight: 800; }
+
+body.w4-deck .phase .mode {
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--bg-dark);
+  color: var(--gold);
+  font-size: 18px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 999px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+body.w4-deck .phase .mode--cyborg { background: var(--scarlet); color: #fff; }
+
+body.w4-deck .phase p, body.w4-deck .phase li { font-size: 22px; line-height: 1.4; }
+
+body.w4-deck .phase ul { padding-left: 22px; gap: 8px; }
+
+
+/* Recap module strip */
+body.w4-deck .recap-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  flex: 1;
+  min-height: 0;
+}
+
+body.w4-deck .recap-card {
+  background: var(--bg-warm);
+  border-left: 6px solid var(--scarlet);
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+body.w4-deck .recap-card .week { font-size: 22px; color: var(--scarlet); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+
+body.w4-deck .recap-card h3 { font-size: 30px; font-weight: 800; }
+
+body.w4-deck .recap-card p { font-size: 22px; line-height: 1.4; color: var(--ink-soft); }
+
+
+/* Agenda table */
+body.w4-deck .agenda-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 26px;
+}
+
+body.w4-deck .agenda-table th, body.w4-deck .agenda-table td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid var(--rule);
+}
+
+body.w4-deck .agenda-table th {
+  background: var(--bg-dark);
+  color: #fff;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+body.w4-deck .agenda-table tr.workshop td { background: var(--gold-soft); }
+
+body.w4-deck .agenda-table .time { font-variant-numeric: tabular-nums; width: 18%; font-weight: 600; color: var(--scarlet-dark); }
+
+body.w4-deck .agenda-table .dur { width: 12%; color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+
+body.w4-deck .agenda-table .module { font-weight: 600; }
+
+
+/* ---------- Speaker notes pane ---------- */
+body.w4-deck .notes {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  background: rgba(20,20,20,0.96);
+  color: #f5f5f5;
+  border-top: 4px solid var(--scarlet);
+  padding: 18px 28px 22px;
+  max-height: 38vh;
+  overflow-y: auto;
+  display: none;
+  z-index: 50;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+body.w4-deck .notes.is-open { display: block; }
+
+body.w4-deck .notes h4 {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+body.w4-deck .notes .note-content { display: none; }
+
+body.w4-deck .notes .note-content.is-current { display: block; }
+
+body.w4-deck .notes p { margin-bottom: 10px; }
+
+body.w4-deck .notes strong { color: var(--gold); }
+
+body.w4-deck .notes em { color: #ffb3b3; font-style: normal; }
+
+body.w4-deck .notes ul { padding-left: 22px; margin-bottom: 10px; }
+
+body.w4-deck .notes li { margin-bottom: 4px; }
+
+
+/* ---------- Controls (top-right HUD) ---------- */
+body.w4-deck .hud {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+  z-index: 100;
+  font-family: var(--font-sans);
+}
+
+body.w4-deck .hud button {
+  background: rgba(0,0,0,0.65);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+}
+
+body.w4-deck .hud button:hover { background: rgba(204,0,0,0.85); border-color: var(--scarlet); }
+
+body.w4-deck .hud .counter {
+  background: rgba(0,0,0,0.65);
+  color: #fff;
+  padding: 8px 14px;
+  font-size: 13px;
+  border-radius: 6px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+
+/* Help overlay */
+body.w4-deck .help-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  color: #fff;
+  font-family: var(--font-sans);
+}
+
+body.w4-deck .help-overlay.is-open { display: flex; }
+
+body.w4-deck .help-overlay .panel {
+  background: #1a1a1a;
+  border: 2px solid var(--scarlet);
+  padding: 36px 48px;
+  max-width: 600px;
+  border-radius: 12px;
+}
+
+body.w4-deck .help-overlay h3 { color: var(--gold); font-size: 22px; margin-bottom: 16px; }
+
+body.w4-deck .help-overlay table { width: 100%; font-size: 16px; line-height: 1.6; }
+
+body.w4-deck .help-overlay td { padding: 4px 0; }
+
+body.w4-deck .help-overlay td:first-child { color: var(--gold); font-family: var(--font-mono); width: 40%; }
+
+body.w4-deck .help-overlay .close { margin-top: 20px; font-size: 13px; color: #aaa; }
+
+
+/* Print fallback (just in case) */
+@media print {
+
+body.w4-deck { background: #fff; }
+
+body.w4-deck .stage { position: static; display: block; }
+
+body.w4-deck .slide {
+    display: flex !important;
+    page-break-after: always;
+    box-shadow: none;
+    transform: none !important;
+  }
+
+body.w4-deck .hud, body.w4-deck .notes, body.w4-deck .help-overlay { display: none !important; }
+
+}
+
+
+/* ----- Compat: support is-active visibility for Weeks 5/6 ----- */
+body.w5-deck .slide.is-active, body.w6-deck .slide.is-active { display: flex; flex-direction: column; }
+
+
+  /* ============================================================
+     UNIVERSAL PRINT STYLESHEET
+     Applies to ALL decks regardless of body class. Renders one
+     slide per page followed by its speaker notes on the next page.
+     Activated by:
+       - Press P in the deck (calls printDeck() in deck.js)
+       - File → Print / Ctrl+P / Cmd+P
+     ============================================================ */
+  @media print {
+    /* Page setup: landscape 16:9-ish handout */
+    @page {
+      size: 13.333in 7.5in;
+      margin: 0;
+    }
+
+    html, body {
+      background: #fff !important;
+      overflow: visible !important;
+      height: auto !important;
+      width: auto !important;
+    }
+
+    /* Hide all on-screen chrome */
+    .deck-chrome, .deck-notes,
+    .hud, .help, .help-overlay, .counter,
+    .notes-panel, #notesPanel, #hud,
+    .deck__chrome, .deck__hint {
+      display: none !important;
+    }
+
+    /* Stage / deck containers become flow blocks */
+    .stage, .deck, .frame {
+      position: static !important;
+      display: block !important;
+      width: auto !important;
+      height: auto !important;
+      max-width: none !important;
+      max-height: none !important;
+      transform: none !important;
+      box-shadow: none !important;
+      inset: auto !important;
+      background: #fff !important;
+    }
+
+    /* Each slide: full page, with a hard page break after */
+    .slide {
+      display: flex !important;
+      flex-direction: column;
+      position: relative !important;
+      inset: auto !important;
+      width: 13.333in !important;
+      height: 7.5in !important;
+      max-width: 13.333in !important;
+      max-height: 7.5in !important;
+      page-break-after: always;
+      page-break-inside: avoid;
+      break-after: page;
+      break-inside: avoid;
+      box-shadow: none !important;
+      transform: none !important;
+      margin: 0 !important;
+      overflow: hidden;
+    }
+
+    /* Speaker notes follow each slide on their own page */
+    .notes, .speaker-notes {
+      display: block !important;
+      position: relative !important;
+      inset: auto !important;
+      width: 13.333in !important;
+      min-height: 7.5in;
+      max-width: none !important;
+      background: #fff !important;
+      color: #1a1a1a !important;
+      border-top: 4px solid #cc0000;
+      padding: 0.6in 0.75in !important;
+      page-break-before: always;
+      page-break-after: always;
+      break-before: page;
+      break-after: page;
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      font-size: 11pt;
+      line-height: 1.55;
+    }
+
+    .notes h3, .speaker-notes h3 {
+      font-size: 10pt;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #cc0000;
+      margin: 0 0 0.25in 0;
+      font-weight: 700;
+    }
+
+    .notes p, .speaker-notes p { margin: 0 0 0.18in 0; color: #1a1a1a; }
+    .notes strong, .speaker-notes strong { color: #000; }
+    .notes em, .speaker-notes em { color: #cc0000; font-style: normal; font-weight: 600; }
+
+    /* The .notes label that prints before each slide's notes block */
+    .notes::before, .speaker-notes::before {
+      content: "Speaker notes";
+      display: block;
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #cc0000;
+      margin-bottom: 0.2in;
+      font-weight: 700;
+    }
+  }
+  
+
+/* ============================================================
+   UNIVERSAL HANDOUT PRINT STYLESHEET
+   Renders every weekly deck as: one slide + its speaker notes
+   per printed page. Activated by:
+     - Press P in the deck (calls printDeck() in deck.js)
+     - File → Print / Ctrl+P / Cmd+P
+   Works for all six weekly decks regardless of how their
+   speaker notes are encoded in source — the runtime-injected
+   <aside class="slide-print-notes"> (see deck.js) carries the
+   notes content into the printable DOM.
+   This block is appended LAST so it overrides any earlier
+   per-week @media print rules.
+   ============================================================ */
+@media print {
+  @page { size: 1920px 1580px; margin: 0; }
+
+  html, body {
+    background: #fff !important;
+    overflow: visible !important;
+    height: auto !important;
+    width: auto !important;
+  }
+
+  /* Hide every variant of on-screen chrome / HUD / overlays */
+  .deck-chrome, .deck-notes,
+  .deck__chrome, .deck__hint,
+  .hud, .help, .help-overlay, .counter,
+  .notes-panel, #notesPanel, #hud {
+    display: none !important;
+  }
+
+  /* Containers become flow blocks so multiple slides don't overlap.
+     Reset font-size on .frame to break out of vw/vh-based scaling
+     for Weeks 5 and 6 (their .frame uses font-size: 1.2vw). */
+  .stage, .deck, .frame {
+    position: static !important;
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    transform: none !important;
+    box-shadow: none !important;
+    inset: auto !important;
+    background: #fff !important;
+    overflow: visible !important;
+  }
+  .frame { font-size: 16px !important; }
+
+  /* Each slide: 1920×1080 fixed; sits at the top of its 1920×1580 page.
+     Keep with the following .slide-print-notes (no break between).
+     The !important on the break properties is required to override the
+     per-week `body.<wN>-deck .slide { page-break-after: always; }` rules
+     that pre-existed for Weeks 1-4. */
+  .slide {
+    display: flex !important;
+    flex-direction: column;
+    position: relative !important;
+    inset: auto !important;
+    width: 1920px !important;
+    height: 1080px !important;
+    max-width: 1920px !important;
+    max-height: 1080px !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+    overflow: hidden;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  /* Hide every original notes container — content is mirrored into
+     the runtime-injected .slide-print-notes block below the slide. */
+  .notes, .speaker-notes,
+  aside.notes, aside#notes,
+  div.speaker-notes,
+  template.speaker-notes, template.notes {
+    display: none !important;
+  }
+
+  /* The runtime-injected printable notes block, one per slide.
+     Sits in the bottom 500px of the 1920×1580 page; hard page break
+     after each so the next slide starts on its own page. */
+  .slide-print-notes {
+    display: block !important;
+    visibility: visible !important;
+    position: relative !important;
+    inset: auto !important;
+    width: 1920px !important;
+    min-height: 460px;
+    max-width: none !important;
+    background: #fff !important;
+    color: #1a1a1a !important;
+    border-top: 4px solid #cc0000;
+    padding: 32px 56px !important;
+    margin: 0 !important;
+    page-break-after: always;
+    break-after: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    box-sizing: border-box;
+  }
+
+  .slide-print-notes::before {
+    content: "Speaker notes";
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #cc0000;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .slide-print-notes h3, .slide-print-notes h4 {
+    color: #cc0000;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin: 14px 0 8px;
+    font-weight: 700;
+  }
+  .slide-print-notes h3:first-child, .slide-print-notes h4:first-child { margin-top: 0; }
+
+  .slide-print-notes p { margin: 0 0 10px 0; color: #1a1a1a; }
+  .slide-print-notes ul, .slide-print-notes ol { margin: 0 0 10px 24px; }
+  .slide-print-notes li { margin-bottom: 4px; color: #1a1a1a; }
+  .slide-print-notes strong { color: #000; }
+  .slide-print-notes em { color: #cc0000; font-style: normal; font-weight: 600; }
+  .slide-print-notes code {
+    background: #f0f0f0;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: "Cascadia Code", "Fira Code", Consolas, Monaco, monospace;
+    font-size: 16px;
+    color: #5c0000;
+  }
+
+  /* Week 2 / Week 3 inline cue marker (e.g. <span class="cue">Open</span>) */
+  .slide-print-notes .cue, .slide-print-notes .notes__cue {
+    display: inline-block;
+    background: #f5d130;
+    color: #1a1a1a;
+    padding: 1px 7px;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-right: 8px;
+    vertical-align: baseline;
+  }
+
+  /* Week 5 dual-mode notes (Briefing / Joint / Transition blocks).
+     Source markup: <div class="note-block briefing|joint|transition">
+                      <span class="tag">…</span> <p>…</p>
+                    </div>  */
+  .slide-print-notes .note-block {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-left: 4px solid #cc0000;
+    background: #fafafa;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .slide-print-notes .note-block:first-of-type { margin-top: 8px; }
+  .slide-print-notes .note-block.briefing { border-left-color: #cc0000; background: #fff5f5; }
+  .slide-print-notes .note-block.joint { border-left-color: #d4b11a; background: #fffbe6; }
+  .slide-print-notes .note-block.transition { border-left-color: #4a4a4a; background: #f4f4f4; }
+  .slide-print-notes .note-block .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    background: #cc0000;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .slide-print-notes .note-block.joint .tag { background: #d4b11a; color: #1a1a1a; }
+  .slide-print-notes .note-block.transition .tag { background: #4a4a4a; color: #fff; }
+  .slide-print-notes .note-block p { color: #1a1a1a; margin: 6px 0 0; }
+}
+
+  /* ============================================================
+     UNIVERSAL HANDOUT VIEW
+     Activated by ?handout=1 / ?handout=2 (default 2-up) or ?handout=4.
+     deck.js (buildHandout) re-arranges the document so each .slide is
+     moved into a thumbnail frame paired with its rendered speaker notes.
+     This stylesheet handles the on-screen preview AND the print layout
+     so File -> Print / Cmd+P -> "Save as PDF" produces a clean handout.
+     ============================================================ */
+  body.is-handout {
+    background: #eef0f2 !important;
+    color: #1a1a1a;
+    overflow: auto !important;
+    height: auto !important;
+    width: auto !important;
+    display: block !important;
+    font-family: "Inter", "Helvetica Neue", -apple-system, BlinkMacSystemFont,
+      "Segoe UI", Roboto, Arial, sans-serif;
+  }
+
+  /* Hide every direct child of <body> except the generated handout container.
+     This wipes the original .deck/.stage shells, the floating chrome and
+     notes panels, and any external <aside id="notes"> block (Week 4) so the
+     handout flow is the only visible content. */
+  body.is-handout > *:not(.handout) {
+    display: none !important;
+  }
+
+  body.is-handout .handout {
+    display: block;
+    box-sizing: border-box;
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 0.4in 0.4in 0.6in;
+  }
+
+  body.is-handout .handout__header {
+    margin-bottom: 0.3in;
+    padding-bottom: 0.2in;
+    border-bottom: 2px solid #cc0000;
+  }
+
+  body.is-handout .handout__title {
+    font-size: 18pt;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: #1a1a1a;
+    margin: 0 0 0.08in 0;
+    line-height: 1.15;
+  }
+
+  body.is-handout .handout__meta {
+    font-size: 9.5pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #555;
+    margin: 0;
+  }
+
+  /* Per-density tokens. The thumbnail width drives both the column layout
+     and the scale factor used to shrink a 1920x1080 reference slide. */
+  body.is-handout.handout-2up {
+    --handout-thumb-w: 4.3in;
+    --handout-scale: 0.215;
+  }
+  body.is-handout.handout-4up {
+    --handout-thumb-w: 3.0in;
+    --handout-scale: 0.150;
+  }
+
+  body.is-handout .handout-row {
+    display: grid;
+    grid-template-columns: var(--handout-thumb-w) 1fr;
+    gap: 0.3in;
+    align-items: start;
+    background: #fff;
+    padding: 0.22in;
+    margin: 0 0 0.2in 0;
+    border-top: 3px solid #cc0000;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  body.is-handout .handout-row__slide {
+    width: var(--handout-thumb-w);
+    height: calc(var(--handout-thumb-w) * 9 / 16);
+    overflow: hidden;
+    background: #000;
+    position: relative;
+    border: 1px solid #d8d8d8;
+  }
+
+  /* The frame holds the un-shrunk 1920x1080 reference area. The slide is
+     positioned absolutely inside; the whole frame is then scaled visually
+     via transform so the thumbnail box crops to the scaled image. */
+  body.is-handout .handout-row__frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 1080px;
+    transform: scale(var(--handout-scale));
+    transform-origin: top left;
+  }
+
+  /* Force every slide visible inside the handout frame, regardless of which
+     visibility contract the original deck uses (.is-current vs .is-active vs
+     display:none). Keep them anchored at 0,0 of the frame at 1920x1080 so
+     the transform scales them uniformly. */
+  body.is-handout .handout-row__frame > .slide,
+  body.is-handout .handout-row__frame > .slide.is-current,
+  body.is-handout .handout-row__frame > .slide.is-active {
+    display: flex !important;
+    flex-direction: column;
+    position: absolute !important;
+    inset: 0 !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 1920px !important;
+    height: 1080px !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Hide in-slide speaker-notes inside the thumbnail (they are rendered in
+     the column alongside). Without this, decks that ship notes inline
+     (Week 1's <aside class="notes">) would print them inside the thumbnail
+     too, doubling them up. */
+  body.is-handout .handout-row__frame .notes,
+  body.is-handout .handout-row__frame .speaker-notes {
+    display: none !important;
+  }
+
+  body.is-handout .handout-row__notes {
+    font-size: 10pt;
+    line-height: 1.5;
+    color: #1a1a1a;
+    min-width: 0;
+  }
+
+  body.is-handout.handout-4up .handout-row__notes {
+    font-size: 9pt;
+    line-height: 1.4;
+  }
+
+  body.is-handout .handout-row__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5em;
+    border-bottom: 1px solid #e5e3dd;
+    padding-bottom: 0.12in;
+    margin-bottom: 0.14in;
+  }
+
+  body.is-handout .handout-row__num {
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    color: #cc0000;
+    font-variant-numeric: tabular-nums;
+  }
+
+  body.is-handout .handout-row__title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.25;
+  }
+
+  body.is-handout .handout-row__module {
+    margin-left: auto;
+    font-size: 8pt;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #777;
+  }
+
+  body.is-handout .handout-row__body p {
+    margin: 0 0 0.5em 0;
+  }
+
+  body.is-handout .handout-row__body p:last-child { margin-bottom: 0; }
+
+  body.is-handout .handout-row__body strong { color: #000; font-weight: 700; }
+
+  body.is-handout .handout-row__body em {
+    font-style: normal;
+    font-weight: 600;
+    color: #cc0000;
+  }
+
+  body.is-handout .handout-row__body ul,
+  body.is-handout .handout-row__body ol {
+    margin: 0.3em 0 0.5em 1.2em;
+    padding: 0;
+  }
+
+  body.is-handout .handout-row__body li { margin-bottom: 0.2em; }
+
+  body.is-handout .handout-row__body .cue {
+    display: inline-block;
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 8pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 0.1em 0.5em;
+    margin-right: 0.4em;
+  }
+
+  /* ----- Print rules for the handout view -----
+     These must override the universal one-slide-per-page print sheet
+     above; rely on body.is-handout specificity + !important where needed. */
+  @media print {
+    @page {
+      size: 8.5in 11in;
+      margin: 0.4in;
+    }
+
+    body.is-handout {
+      background: #fff !important;
+    }
+
+    body.is-handout .handout {
+      max-width: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    body.is-handout .handout__header {
+      margin-bottom: 0.18in;
+    }
+
+    body.is-handout .handout-row {
+      box-shadow: none;
+      margin: 0 0 0.18in 0;
+    }
+
+    /* Strict-ish N-per-page pacing.
+       The 2-up / 4-up labels describe density, not a hard guarantee:
+       speaker-note length varies wildly across slides, and we keep
+       `page-break-inside: avoid` on each row so a long-notes slide is
+       allowed to push to the next page rather than have its notes
+       truncated. The min-heights below set the *minimum* row size so
+       short-note slides do not collapse and waste page space, which
+       in practice keeps Letter-portrait pages near the target density
+       (2 rows per page for 2-up, 4 rows per page for 4-up). */
+    body.is-handout.handout-2up .handout-row {
+      min-height: 4.6in;
+    }
+    body.is-handout.handout-4up .handout-row {
+      min-height: 2.2in;
+    }
+
+    /* Override the universal .slide print rules (which would force every
+       slide to a 13.333in landscape page and break after each). Inside the
+       handout, the slide is a thumbnail and must NOT trigger a page break. */
+    body.is-handout .handout-row__frame > .slide {
+      width: 1920px !important;
+      height: 1080px !important;
+      max-width: none !important;
+      max-height: none !important;
+      page-break-after: auto !important;
+      page-break-before: auto !important;
+      page-break-inside: avoid !important;
+      break-after: auto !important;
+      break-before: auto !important;
+    }
+
+    /* Same for inline .notes/.speaker-notes: the universal sheet would
+       turn them into full-page blocks. Keep them hidden inside thumbnails. */
+    body.is-handout .handout-row__frame .notes,
+    body.is-handout .handout-row__frame .speaker-notes {
+      display: none !important;
+      width: auto !important;
+      min-height: 0 !important;
+      page-break-before: auto !important;
+      page-break-after: auto !important;
+      break-before: auto !important;
+      break-after: auto !important;
+      border: 0 !important;
+      padding: 0 !important;
+    }
+
+    body.is-handout .handout-row__frame .notes::before,
+    body.is-handout .handout-row__frame .speaker-notes::before {
+      content: none !important;
+    }
+  }

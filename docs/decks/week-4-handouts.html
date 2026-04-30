@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Week 4 Advanced Workshop facilitator hand-outs. Chat-paste-ready blocks for the Module 1 frontier-map starter, the Module 4 SOP QA drill, the Module 5 teach-back template, and the Module 6 workflow playbook template.">
+    <title>Week 4 Facilitator Hand-Outs | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* --- Hand-out specific styles ---
+           Built on top of the site stylesheet so the page reads as a
+           regular EDD doc, with one extra "copy-block" component. */
+
+        .handout-intro {
+            background: var(--color-bg-secondary);
+            border-left: 4px solid var(--color-scarlet);
+            padding: var(--space-lg) var(--space-xl);
+            margin-bottom: var(--space-xl);
+            border-radius: 0 var(--space-sm) var(--space-sm) 0;
+        }
+        .handout-intro p { margin: 0 0 var(--space-sm); }
+        .handout-intro p:last-child { margin-bottom: 0; }
+
+        .handout-toc {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-md);
+            margin: var(--space-xl) 0 var(--space-2xl);
+        }
+        .handout-toc a {
+            display: block;
+            padding: var(--space-md);
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--space-sm);
+            text-decoration: none;
+            color: var(--color-text-primary);
+            transition: border-color 0.15s, transform 0.15s;
+        }
+        .handout-toc a:hover {
+            border-color: var(--color-scarlet);
+            transform: translateY(-1px);
+        }
+        .handout-toc .slide-tag {
+            display: inline-block;
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-bold);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-scarlet);
+            margin-bottom: var(--space-xs);
+        }
+        .handout-toc .toc-title {
+            display: block;
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-md);
+        }
+
+        .copy-block {
+            border: 1px solid var(--color-border);
+            border-radius: var(--space-sm);
+            margin: var(--space-lg) 0 var(--space-2xl);
+            overflow: hidden;
+            background: var(--color-bg-primary);
+        }
+        .copy-block__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--color-bg-dark);
+            color: var(--color-text-inverse);
+            flex-wrap: wrap;
+        }
+        .copy-block__label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+        .slide-pill {
+            display: inline-block;
+            padding: 2px 10px;
+            background: var(--color-gold);
+            color: var(--color-text-primary);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-bold);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-radius: 999px;
+        }
+        .copy-block__title {
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-base);
+        }
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--color-scarlet);
+            color: var(--color-text-inverse);
+            border: 0;
+            border-radius: var(--space-sm);
+            font-family: var(--font-family-sans);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+            transition: background-color 0.15s;
+        }
+        .copy-btn:hover { background: var(--color-scarlet-dark); }
+        .copy-btn:focus-visible {
+            outline: 2px solid var(--color-gold);
+            outline-offset: 2px;
+        }
+        .copy-btn.is-copied { background: var(--color-success-border); }
+
+        .copy-block__cue {
+            padding: var(--space-md) var(--space-lg);
+            background: var(--color-warning-bg);
+            border-bottom: 1px solid var(--color-warning-border);
+            font-size: var(--font-size-sm);
+            color: var(--color-warning-text);
+        }
+        .copy-block__cue strong { color: var(--color-warning-text); }
+
+        .copy-block__body {
+            margin: 0;
+            padding: var(--space-lg);
+            white-space: pre-wrap;
+            font-family: var(--font-family-mono);
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-normal);
+            color: var(--color-text-primary);
+            background: var(--color-bg-code);
+            max-height: 520px;
+            overflow: auto;
+        }
+
+        .back-bar {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-md);
+            font-size: var(--font-size-sm);
+        }
+
+        @media print {
+            .site-header, .mobile-nav, .site-footer, .copy-btn,
+            .handout-toc, .back-bar { display: none !important; }
+            .copy-block { page-break-inside: avoid; border-color: #999; }
+            .copy-block__header { background: #1a1a1a !important; -webkit-print-color-adjust: exact; }
+            .copy-block__cue  { background: #fef7e0 !important; -webkit-print-color-adjust: exact; }
+            .copy-block__body { background: #f4f3f0 !important; -webkit-print-color-adjust: exact; max-height: none; overflow: visible; }
+        }
+    </style>
+</head>
+<body class="site-wrapper">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Site Header -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/" class="active">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/" class="active">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="../resources/">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../courses/advanced.html">Advanced Workshop</a></li>
+                    <li aria-current="page">Facilitator Hand-Outs</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Week 4 Facilitator Hand-Outs</h1>
+            <p class="page-header__desc">
+                Four chat-paste-ready blocks for the Course 4 Advanced Workshop.
+                Open this tab in a second window before the session, then copy each
+                block into Microsoft Teams chat at the slide it pairs with.
+            </p>
+            <div class="back-bar mt-md">
+                <a href="week-4-advanced.html">&larr; Back to Week 4 Slide Deck</a>
+                <span aria-hidden="true">&middot;</span>
+                <a href="../courses/advanced.html">Course 4 Instructor Page</a>
+            </div>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container container--narrow">
+
+            <div class="handout-intro">
+                <p><strong>How to use this page.</strong> Keep it open in a second browser tab. When the deck reaches the slide called out on each block&rsquo;s gold pill, click <em>Copy</em>, then paste into the Teams chat. Plain text is intentional &mdash; it survives the Teams paste cleanly and stays legible on a 13&Prime; laptop.</p>
+                <p><strong>Print fallback.</strong> If you lose your second-screen, this page prints to one or two clean pages with the copy buttons hidden &mdash; use <kbd>Ctrl</kbd>+<kbd>P</kbd> / <kbd>&#8984;</kbd>+<kbd>P</kbd>.</p>
+            </div>
+
+            <nav class="handout-toc" aria-label="Hand-out jump links">
+                <a href="#handout-frontier-map">
+                    <span class="slide-tag">Slide 10 &middot; Module 1</span>
+                    <span class="toc-title">Frontier-map starter template</span>
+                </a>
+                <a href="#handout-sop-drill">
+                    <span class="slide-tag">Slide 28 &middot; Module 4</span>
+                    <span class="toc-title">SOP QA drill (5 planted errors)</span>
+                </a>
+                <a href="#handout-teach-back">
+                    <span class="slide-tag">Slide 32 &middot; Module 5</span>
+                    <span class="toc-title">Teach-back preparation template</span>
+                </a>
+                <a href="#handout-playbook">
+                    <span class="slide-tag">Slide 35 &middot; Module 6</span>
+                    <span class="toc-title">Workflow playbook blank template</span>
+                </a>
+            </nav>
+
+            <!-- ===========================================================
+                 BLOCK 1 — Slide 10 — Frontier-map starter
+                 =========================================================== -->
+            <article id="handout-frontier-map">
+                <h2>Frontier-map starter template</h2>
+                <p>
+                    Slide 10 asks the room to open a blank doc and build a four-column
+                    frontier map in 15 minutes. Drop this scaffold into chat as you
+                    start the timer so people don&rsquo;t lose 60 seconds making a table.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Slide 10 &middot; Module 1 workshop</span>
+                            <span class="copy-block__title">Frontier-map starter</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-frontier-map" aria-label="Copy frontier-map starter to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;Scaffold is in chat. Five rows. Every cell needs a real, specific task. If your &lsquo;Outside&rsquo; column is empty at 7 minutes, that&rsquo;s the column to fill next.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-frontier-map">FRONTIER MAP — [Your section]
+Tool tested:  [GenAI.mil / CamoGPT / other — note one]
+Date / Initials:  [DDMMMYY] / [Initials]
+
+Rules of the road
+- Each cell = one specific task somebody on your team did this month.
+- "Inside"  = AI handled it well.   "Outside" = AI failed (you saw it).
+- "Moving"  = re-test next quarter; mark a date.
+- If "Outside" is empty, you are overestimating AI. Fix that before the share-out.
+
+| # | Category                       | Inside frontier (AI handles) | Outside frontier (AI fails) | Moving frontier (re-test by) |
+|---|--------------------------------|------------------------------|-----------------------------|------------------------------|
+| 1 | [e.g. Document generation]     |                              |                             |                              |
+| 2 | [e.g. Data analysis]           |                              |                             |                              |
+| 3 | [e.g. Process automation]      |                              |                             |                              |
+| 4 | [e.g. Reference lookup]        |                              |                             |                              |
+| 5 | [e.g. Training development]    |                              |                             |                              |
+
+Share-out (90 sec each):
+  1) One INSIDE-frontier task that surprised you.
+  2) One OUTSIDE-frontier task you have personally seen fail.
+  3) One MOVING-frontier item to re-check next quarter.
+</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 2 — Slide 28 — SOP QA drill
+                 =========================================================== -->
+            <article id="handout-sop-drill">
+                <h2>SOP QA drill &mdash; AI-generated excerpt with five planted errors</h2>
+                <p>
+                    Slide 28 is the timed QA drill that pairs with the QA Reference
+                    Card on Slide 27. Drop the excerpt into chat as you start the
+                    10-minute silent timer. Reveal the answer key one error at a time
+                    in the debrief &mdash; do <em>not</em> paste the answer key into
+                    chat.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Slide 28 &middot; Module 4 timed QA drill</span>
+                            <span class="copy-block__title">AI-generated SOP excerpt</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-sop-drill" aria-label="Copy SOP excerpt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;Excerpt is in chat. 10 minutes silent. Run the five protocols from Slide 27. I&rsquo;m muting. Don&rsquo;t answer chat questions during the drill &mdash; that defeats it.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-sop-drill">QA DRILL — Find the 5 issues. Time yourself. Typical: 5–10 minutes.
+Apply the five protocols: Source • Data • Logic • Format • Domain.
+
+----------------------------------------------------------------
+STANDARD OPERATING PROCEDURE
+Marine Corps Detachment, 99th Training Group
+
+Subject:   Unit Check-In / Check-Out Procedure
+Reference: (a) MCO 1000.6B, Individual Records Administration
+           (b) NAVMC 11800/4 (Rev 03-2025), Check-In/Check-Out Sheet
+
+1. Purpose. To establish standardized procedures for all personnel
+checking in to and checking out of Marine Corps Detachment, 99th
+Training Group. All personnel shall complete check-in within 72 hours
+of reporting aboard.
+
+2. Scope. This SOP applies to all Marines, Sailors, and civilian
+personnel assigned to or transferring from the Detachment.
+
+3. Procedure — Check-In. Personnel reporting aboard shall complete
+the following steps in order:
+
+  Step 1: Report to the Officer of the Day (OOD) with original orders
+          and ten copies of PCS orders.
+  Step 2: Obtain a check-in sheet per reference (b).
+  Step 3: Receive unit orientation brief from S-1 covering unit
+          organization, key personnel, and local policies.
+  Step 4: Report to assigned section SNCOIC/OIC for introduction and
+          initial task assignment.
+  5.      Report to S-1 for initial in-processing, including service
+          record book review and page 11 entry.
+  6.      Complete remaining check-in sheet signatures (S-3, S-4,
+          Medical, Dental, IPAC) within 48 hours of reporting.
+
+4. Procedure — Check-Out. Personnel transferring from the unit shall
+initiate check-out procedures no later than 10 working days prior to
+the date of detachment.
+----------------------------------------------------------------
+
+Drop your findings in chat at the timer. We will reveal the five
+errors one at a time in the debrief.
+</pre>
+                </div>
+
+                <details class="callout callout--instructor" style="margin-top:-1rem;">
+                    <summary><strong>Facilitator-only answer key (do not paste into chat)</strong></summary>
+                    <ol>
+                        <li><strong>Fabricated reference #1.</strong> &ldquo;MCO 1000.6B&rdquo; does not exist &mdash; AI-generated regulation numbers must be verified against the Marine Corps Publications System. <em>Catches with: Source verification.</em></li>
+                        <li><strong>Fabricated reference #2.</strong> &ldquo;NAVMC 11800/4 (Rev 03-2025)&rdquo; is a fabricated form number. <em>Catches with: Source verification.</em></li>
+                        <li><strong>Contradictory timelines.</strong> Para 1 says check-in within 72 hours; Step 6 says 48 hours. <em>Catches with: Data accuracy.</em></li>
+                        <li><strong>Steps out of order.</strong> Marine receives the S-1 orientation brief (Step 3) <em>before</em> in-processing at S-1 (Step 5). <em>Catches with: Logic check.</em></li>
+                        <li><strong>Inconsistent numbering.</strong> &ldquo;Step 1:&rdquo; format flips to bare &ldquo;5.&rdquo; / &ldquo;6.&rdquo; mid-procedure. <em>Catches with: Format compliance.</em></li>
+                    </ol>
+                    <p>If most of the room finds only three, name it kindly: <em>&ldquo;Three is the average &mdash; that&rsquo;s why the drill exists. Source verification requires actually looking the references up. <strong>Looking things up is the protocol.</strong>&rdquo;</em></p>
+                </details>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 3 — Slide 32 — Module 5 teach-back template
+                 =========================================================== -->
+            <article id="handout-teach-back">
+                <h2>Teach-back preparation template</h2>
+                <p>
+                    Slide 32 is the 22-minute teach-back workshop. The speaker
+                    notes call for you to <strong>model the template yourself</strong>
+                    with the worked Centaur-vs-Cyborg example before sending the
+                    room into breakouts. Drop this block into chat as you set the
+                    5-minute prep timer &mdash; the blank template gives people
+                    the shape to fill, and the worked example shows them what
+                    &ldquo;good&rdquo; looks like in plain text.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Slide 32 &middot; Module 5 teach-back</span>
+                            <span class="copy-block__title">Teach-back template + worked example</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-teach-back" aria-label="Copy teach-back template to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;Template is in chat, with one worked example below it so you can see the shape. 5 minutes silent prep, then breakouts of 3&ndash;4. You teach for 3 minutes, your group gives 1 minute of feedback against the rubric, then rotate. Brevity is the teaching skill.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-teach-back">TEACH-BACK PREPARATION TEMPLATE — fill this in 5 minutes, then teach in 3.
+
+Pick ONE concept from EDD:
+  centaur vs. cyborg • frontier mapping • context-building •
+  iterative refinement • verification protocols • the jagged frontier
+
+Concept:                  [Which concept are you teaching?]
+One-sentence definition:  [Define the concept in one clear sentence.]
+Why it matters:           [One sentence on why this concept is important.]
+Real example from your work:
+                          [A specific example from your actual job where
+                           this concept applied. Names, dates, the task.]
+Common mistake:           [One mistake people make when applying it.]
+Key takeaway:             [One sentence the audience should remember.]
+
+Peers grade you on three things:
+  1) Could they explain it back to someone else?
+  2) Was your example concrete enough to be believable?
+  3) Do they know what to do differently tomorrow because of you?
+
+----------------------------------------------------------------
+WORKED EXAMPLE — Centaur vs. Cyborg (read this verbatim if helpful)
+
+Concept:                  Centaur vs. Cyborg modes.
+One-sentence definition:  Centaur mode means human does some tasks and
+                          AI does others separately; Cyborg mode means
+                          human and AI work together iteratively on the
+                          same task.
+Why it matters:           Using the wrong mode causes either wasted time
+                          or quality failures.
+Real example from my work:
+                          When I built a training schedule, I used Cyborg
+                          mode for the draft but switched to Centaur mode
+                          for the final verification because accuracy was
+                          critical.
+Common mistake:           People stay in Cyborg mode for accuracy-critical
+                          work and don't slow down to verify.
+Key takeaway:             Match the mode to the risk level of the task.
+----------------------------------------------------------------
+
+Pick your concept now. 5 minutes silent. Breakouts open at the timer.
+</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 4 — Slide 35 — Workflow playbook blank template
+                 =========================================================== -->
+            <article id="handout-playbook">
+                <h2>Workflow playbook blank template</h2>
+                <p>
+                    Slide 35 is the 20-minute silent build of the final deliverable.
+                    Drop this template into chat as you start the timer; tell the room
+                    to submit their completed playbook back into chat at the buzzer.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Slide 35 &middot; Module 6 workshop</span>
+                            <span class="copy-block__title">Workflow playbook &mdash; blank</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-playbook" aria-label="Copy workflow playbook template to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;Template is in chat. 20 minutes silent. Fill the seven fields for one real, recurring task. Submit your playbook back in chat at the timer &mdash; that&rsquo;s the public commitment.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-playbook">WORKFLOW PLAYBOOK — one page, one workflow
+
+Author:    [Name / Section]
+Date:      [DDMMMYY]
+
+| Field                  | Content                                                       |
+|------------------------|---------------------------------------------------------------|
+| Task                   | [A specific, recurring task from your job]                    |
+| Frequency              | [How often you perform this task]                             |
+| Mode                   | [Centaur / Cyborg — pick one and say why]                     |
+| Step 1                 | [H or AI:]  [Concrete action]                                 |
+| Step 2                 | [H or AI:]  [Concrete action]                                 |
+| Step 3                 | [H or AI:]  [Concrete action]                                 |
+| Step 4                 | [H or AI:]  [Concrete action]                                 |
+| Step 5 (optional)      | [H or AI:]  [Concrete action]                                 |
+| Step 6 (optional)      | [H or AI:]  [Concrete action]                                 |
+| Verification checklist | [3–5 items that MUST be checked before output is final]       |
+| Known frontier issues  | [Where AI has failed on this task before — your real data]    |
+| Time savings estimate  | [Without AI: ~__ hrs   →   With AI: ~__ hrs]                  |
+| Junior development     | [How this preserves skill-building for junior personnel]      |
+
+Completion bar
+- 4+ steps, each labeled H or AI.
+- Verification checklist with 3+ items.
+- At least one real frontier issue you have personally hit.
+- A time savings estimate from your own data, not a guess.
+- A junior development note that is actionable.
+
+If your playbook has no verification checklist, it is not done.
+Submit your playbook in this chat at the 20-minute mark.
+</pre>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>
+                        Open-source AI-assisted development training for DoW personnel.
+                        Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../courses/">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="../toolkit/">Toolkit</a></li>
+                        <li><a href="../tools/">Tools</a></li>
+                        <li><a href="../resources/">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Project</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            // Mobile nav toggle (matches docs/courses/advanced.html behaviour)
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function () {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+
+            // Copy-block buttons
+            document.querySelectorAll('.copy-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var targetId = btn.getAttribute('data-copy-target');
+                    var target = document.getElementById(targetId);
+                    if (!target) return;
+                    var text = target.textContent;
+                    var label = btn.querySelector('.copy-btn__label');
+                    var originalLabel = label ? label.textContent : '';
+
+                    var done = function () {
+                        btn.classList.add('is-copied');
+                        if (label) label.textContent = 'Copied';
+                        setTimeout(function () {
+                            btn.classList.remove('is-copied');
+                            if (label) label.textContent = originalLabel;
+                        }, 1800);
+                    };
+                    var fail = function () {
+                        if (label) label.textContent = 'Copy failed — select & ⌘/Ctrl+C';
+                        setTimeout(function () {
+                            if (label) label.textContent = originalLabel;
+                        }, 2500);
+                    };
+
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(text).then(done).catch(function () {
+                            // Fallback for older / restricted contexts
+                            try {
+                                var range = document.createRange();
+                                range.selectNodeContents(target);
+                                var sel = window.getSelection();
+                                sel.removeAllRanges();
+                                sel.addRange(range);
+                                document.execCommand('copy');
+                                sel.removeAllRanges();
+                                done();
+                            } catch (err) { fail(); }
+                        });
+                    } else {
+                        try {
+                            var range = document.createRange();
+                            range.selectNodeContents(target);
+                            var sel = window.getSelection();
+                            sel.removeAllRanges();
+                            sel.addRange(range);
+                            document.execCommand('copy');
+                            sel.removeAllRanges();
+                            done();
+                        } catch (err) { fail(); }
+                    }
+                });
+            });
+        })();
+    </script>
+
+</body>
+</html>

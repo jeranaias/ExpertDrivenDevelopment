@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "title": "Replace 3rd Squad NVG mount adapters",
+    "status": "in_progress",
+    "priority": "high",
+    "assigneeId": "staff",
+    "notes": "Three adapters cracked during last MOUT cycle. Reorder POC: S-4 supply.",
+    "createdAt": "2026-04-15T13:20:00Z",
+    "updatedAt": "2026-04-22T18:05:00Z"
+  },
+  {
+    "id": 2,
+    "title": "Schedule annual armory inventory \u2014 Bldg 4216",
+    "status": "open",
+    "priority": "medium",
+    "assigneeId": "staff",
+    "notes": "Coordinate with armorer SSgt Vega. Block out two days.",
+    "createdAt": "2026-04-12T09:00:00Z",
+    "updatedAt": "2026-04-12T09:00:00Z"
+  },
+  {
+    "id": 3,
+    "title": "JLTV pre-deployment maintenance \u2014 vehicle 14",
+    "status": "blocked",
+    "priority": "critical",
+    "assigneeId": "admin",
+    "notes": "Awaiting parts on national back-order. Escalated to MEF G-4 last Friday.",
+    "createdAt": "2026-04-08T14:30:00Z",
+    "updatedAt": "2026-04-25T11:45:00Z"
+  },
+  {
+    "id": 4,
+    "title": "Refresh range safety briefing slides",
+    "status": "done",
+    "priority": "low",
+    "assigneeId": "staff",
+    "notes": "Pushed to shared drive. Approved by Range Control.",
+    "createdAt": "2026-03-28T08:00:00Z",
+    "updatedAt": "2026-04-10T16:20:00Z"
+  },
+  {
+    "id": 5,
+    "title": "MOPP gear sizing audit for new joins",
+    "status": "open",
+    "priority": "high",
+    "assigneeId": "staff",
+    "notes": "12 Marines reporting next quarter. Need sizes by R-day minus 30.",
+    "createdAt": "2026-04-18T10:15:00Z",
+    "updatedAt": "2026-04-18T10:15:00Z"
+  },
+  {
+    "id": 6,
+    "title": "Comms exercise \u2014 encrypted radio handoff drill",
+    "status": "in_progress",
+    "priority": "medium",
+    "assigneeId": "user",
+    "notes": "Two-day drill, Tue/Wed. Coordinating with Comm Co.",
+    "createdAt": "2026-04-19T13:00:00Z",
+    "updatedAt": "2026-04-26T07:30:00Z"
+  },
+  {
+    "id": 7,
+    "title": "Replace torn camo netting at OP Foxtrot",
+    "status": "open",
+    "priority": "low",
+    "assigneeId": "user",
+    "notes": "Identified during last route recon. Two sections needed.",
+    "createdAt": "2026-04-21T16:40:00Z",
+    "updatedAt": "2026-04-21T16:40:00Z"
+  },
+  {
+    "id": 8,
+    "title": "Update PMCS log retention SOP",
+    "status": "open",
+    "priority": "medium",
+    "assigneeId": "admin",
+    "notes": "Align with new MARADMIN; circulate to subordinate units for review.",
+    "createdAt": "2026-04-20T08:55:00Z",
+    "updatedAt": "2026-04-23T12:10:00Z"
+  },
+  {
+    "id": 9,
+    "title": "Generator 3kW \u2014 load test before exercise",
+    "status": "in_progress",
+    "priority": "high",
+    "assigneeId": "staff",
+    "notes": "Last test six months back. Maintenance window booked Saturday.",
+    "createdAt": "2026-04-17T09:30:00Z",
+    "updatedAt": "2026-04-24T15:00:00Z"
+  },
+  {
+    "id": 10,
+    "title": "Reorder MRE pallet \u2014 case-A short by 14",
+    "status": "open",
+    "priority": "medium",
+    "assigneeId": "staff",
+    "notes": "Run on chow consumption higher than projected.",
+    "createdAt": "2026-04-22T11:25:00Z",
+    "updatedAt": "2026-04-22T11:25:00Z"
+  },
+  {
+    "id": 11,
+    "title": "Battery audit \u2014 handheld GPS units",
+    "status": "done",
+    "priority": "low",
+    "assigneeId": "user",
+    "notes": "All 28 units serviceable. Spares topped off.",
+    "createdAt": "2026-03-30T14:00:00Z",
+    "updatedAt": "2026-04-05T10:00:00Z"
+  },
+  {
+    "id": 12,
+    "title": "Field expedient antenna training plan",
+    "status": "in_progress",
+    "priority": "medium",
+    "assigneeId": "staff",
+    "notes": "Module 3 ready. Working with comm chief on hands-on portion.",
+    "createdAt": "2026-04-14T12:00:00Z",
+    "updatedAt": "2026-04-26T09:15:00Z"
+  },
+  {
+    "id": 13,
+    "title": "Replace ACU patch stock for new arrivals",
+    "status": "open",
+    "priority": "low",
+    "assigneeId": "user",
+    "notes": "Inventory 18 patches; need 35 for next class.",
+    "createdAt": "2026-04-23T07:50:00Z",
+    "updatedAt": "2026-04-23T07:50:00Z"
+  },
+  {
+    "id": 14,
+    "title": "Coordinate motor pool crane maintenance",
+    "status": "blocked",
+    "priority": "high",
+    "assigneeId": "admin",
+    "notes": "Vendor schedule conflict; chasing alternate slot for next week.",
+    "createdAt": "2026-04-09T15:35:00Z",
+    "updatedAt": "2026-04-25T17:25:00Z"
+  },
+  {
+    "id": 15,
+    "title": "Reissue tactical med kit consumables",
+    "status": "in_progress",
+    "priority": "high",
+    "assigneeId": "staff",
+    "notes": "Tourniquets within shelf life; gauze + chest seals out of date.",
+    "createdAt": "2026-04-11T10:10:00Z",
+    "updatedAt": "2026-04-26T13:45:00Z"
+  },
+  {
+    "id": 16,
+    "title": "Update unit phone roster",
+    "status": "done",
+    "priority": "low",
+    "assigneeId": "user",
+    "notes": "Sent to leadership; pinned in Teams channel.",
+    "createdAt": "2026-04-02T09:00:00Z",
+    "updatedAt": "2026-04-04T16:40:00Z"
+  },
+  {
+    "id": 17,
+    "title": "Audit weapons cleaning kits",
+    "status": "open",
+    "priority": "medium",
+    "assigneeId": "staff",
+    "notes": "Pull every kit, inventory components, reorder shortfalls.",
+    "createdAt": "2026-04-24T08:30:00Z",
+    "updatedAt": "2026-04-24T08:30:00Z"
+  },
+  {
+    "id": 18,
+    "title": "Replace cracked optic \u2014 TA31RCO #07",
+    "status": "blocked",
+    "priority": "critical",
+    "assigneeId": "admin",
+    "notes": "DRMO turn-in initiated; awaiting replacement issue.",
+    "createdAt": "2026-04-06T13:15:00Z",
+    "updatedAt": "2026-04-22T14:55:00Z"
+  },
+  {
+    "id": 19,
+    "title": "Plan brown-bag on AI-assisted SOP drafting",
+    "status": "open",
+    "priority": "low",
+    "assigneeId": "admin",
+    "notes": "Companion to Week 4 advanced workshop content.",
+    "createdAt": "2026-04-25T16:00:00Z",
+    "updatedAt": "2026-04-25T16:00:00Z"
+  },
+  {
+    "id": 20,
+    "title": "Quarterly armory key control verification",
+    "status": "in_progress",
+    "priority": "high",
+    "assigneeId": "admin",
+    "notes": "Witnessed walkthrough scheduled; signature card refreshed.",
+    "createdAt": "2026-04-13T11:00:00Z",
+    "updatedAt": "2026-04-27T08:20:00Z"
+  }
+]
