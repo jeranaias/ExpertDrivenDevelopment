@@ -878,6 +878,11 @@ body.deck-body .slide--closing .slide__foot .foot__course { color: rgba(255,255,
 /* ===== Speaker notes (hidden by default) ===== */
 .notes { display: none; }
 
+/* Runtime-injected per-slide printable notes block (deck.js).
+   Hidden in normal view; revealed by the universal @media print
+   stylesheet at the bottom of this file. */
+.slide-print-notes { display: none; }
+
 
 /* Notes panel toggled on screen */
 .deck-notes {
@@ -3914,6 +3919,199 @@ body.w5-deck .slide.is-active, body.w6-deck .slide.is-active { display: flex; fl
     }
   }
   
+
+/* ============================================================
+   UNIVERSAL HANDOUT PRINT STYLESHEET
+   Renders every weekly deck as: one slide + its speaker notes
+   per printed page. Activated by:
+     - Press P in the deck (calls printDeck() in deck.js)
+     - File → Print / Ctrl+P / Cmd+P
+   Works for all six weekly decks regardless of how their
+   speaker notes are encoded in source — the runtime-injected
+   <aside class="slide-print-notes"> (see deck.js) carries the
+   notes content into the printable DOM.
+   This block is appended LAST so it overrides any earlier
+   per-week @media print rules.
+   ============================================================ */
+@media print {
+  @page { size: 1920px 1580px; margin: 0; }
+
+  html, body {
+    background: #fff !important;
+    overflow: visible !important;
+    height: auto !important;
+    width: auto !important;
+  }
+
+  /* Hide every variant of on-screen chrome / HUD / overlays */
+  .deck-chrome, .deck-notes,
+  .deck__chrome, .deck__hint,
+  .hud, .help, .help-overlay, .counter,
+  .notes-panel, #notesPanel, #hud {
+    display: none !important;
+  }
+
+  /* Containers become flow blocks so multiple slides don't overlap.
+     Reset font-size on .frame to break out of vw/vh-based scaling
+     for Weeks 5 and 6 (their .frame uses font-size: 1.2vw). */
+  .stage, .deck, .frame {
+    position: static !important;
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    transform: none !important;
+    box-shadow: none !important;
+    inset: auto !important;
+    background: #fff !important;
+    overflow: visible !important;
+  }
+  .frame { font-size: 16px !important; }
+
+  /* Each slide: 1920×1080 fixed; sits at the top of its 1920×1580 page.
+     Keep with the following .slide-print-notes (no break between).
+     The !important on the break properties is required to override the
+     per-week `body.<wN>-deck .slide { page-break-after: always; }` rules
+     that pre-existed for Weeks 1-4. */
+  .slide {
+    display: flex !important;
+    flex-direction: column;
+    position: relative !important;
+    inset: auto !important;
+    width: 1920px !important;
+    height: 1080px !important;
+    max-width: 1920px !important;
+    max-height: 1080px !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+    overflow: hidden;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  /* Hide every original notes container — content is mirrored into
+     the runtime-injected .slide-print-notes block below the slide. */
+  .notes, .speaker-notes,
+  aside.notes, aside#notes,
+  div.speaker-notes,
+  template.speaker-notes, template.notes {
+    display: none !important;
+  }
+
+  /* The runtime-injected printable notes block, one per slide.
+     Sits in the bottom 500px of the 1920×1580 page; hard page break
+     after each so the next slide starts on its own page. */
+  .slide-print-notes {
+    display: block !important;
+    visibility: visible !important;
+    position: relative !important;
+    inset: auto !important;
+    width: 1920px !important;
+    min-height: 460px;
+    max-width: none !important;
+    background: #fff !important;
+    color: #1a1a1a !important;
+    border-top: 4px solid #cc0000;
+    padding: 32px 56px !important;
+    margin: 0 !important;
+    page-break-after: always;
+    break-after: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    box-sizing: border-box;
+  }
+
+  .slide-print-notes::before {
+    content: "Speaker notes";
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #cc0000;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .slide-print-notes h3, .slide-print-notes h4 {
+    color: #cc0000;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin: 14px 0 8px;
+    font-weight: 700;
+  }
+  .slide-print-notes h3:first-child, .slide-print-notes h4:first-child { margin-top: 0; }
+
+  .slide-print-notes p { margin: 0 0 10px 0; color: #1a1a1a; }
+  .slide-print-notes ul, .slide-print-notes ol { margin: 0 0 10px 24px; }
+  .slide-print-notes li { margin-bottom: 4px; color: #1a1a1a; }
+  .slide-print-notes strong { color: #000; }
+  .slide-print-notes em { color: #cc0000; font-style: normal; font-weight: 600; }
+  .slide-print-notes code {
+    background: #f0f0f0;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: "Cascadia Code", "Fira Code", Consolas, Monaco, monospace;
+    font-size: 16px;
+    color: #5c0000;
+  }
+
+  /* Week 2 / Week 3 inline cue marker (e.g. <span class="cue">Open</span>) */
+  .slide-print-notes .cue, .slide-print-notes .notes__cue {
+    display: inline-block;
+    background: #f5d130;
+    color: #1a1a1a;
+    padding: 1px 7px;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-right: 8px;
+    vertical-align: baseline;
+  }
+
+  /* Week 5 dual-mode notes (Briefing / Joint / Transition blocks).
+     Source markup: <div class="note-block briefing|joint|transition">
+                      <span class="tag">…</span> <p>…</p>
+                    </div>  */
+  .slide-print-notes .note-block {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-left: 4px solid #cc0000;
+    background: #fafafa;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .slide-print-notes .note-block:first-of-type { margin-top: 8px; }
+  .slide-print-notes .note-block.briefing { border-left-color: #cc0000; background: #fff5f5; }
+  .slide-print-notes .note-block.joint { border-left-color: #d4b11a; background: #fffbe6; }
+  .slide-print-notes .note-block.transition { border-left-color: #4a4a4a; background: #f4f4f4; }
+  .slide-print-notes .note-block .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    background: #cc0000;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .slide-print-notes .note-block.joint .tag { background: #d4b11a; color: #1a1a1a; }
+  .slide-print-notes .note-block.transition .tag { background: #4a4a4a; color: #fff; }
+  .slide-print-notes .note-block p { color: #1a1a1a; margin: 6px 0 0; }
+}
 
   /* ============================================================
      UNIVERSAL HANDOUT VIEW

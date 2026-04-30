@@ -119,6 +119,27 @@
     return "<p><em>No speaker notes for this slide.</em></p>";
   }
 
+  // ----- Inject printable speaker-notes blocks (one per slide) -----
+  // Add a <aside class="slide-print-notes"> immediately after each slide
+  // so the browser's Print / Save-as-PDF view can render the slide and
+  // its notes together. Hidden in normal view via CSS; revealed by the
+  // @media print stylesheet in deck.css. This works uniformly for every
+  // weekly deck regardless of whether the source notes live in
+  // <aside class="notes">, <div class="speaker-notes" hidden>,
+  // <template class="speaker-notes">, or an external <aside id="notes">.
+  slides.forEach(function (slide, i) {
+    var nextSibling = slide.nextElementSibling;
+    if (nextSibling && nextSibling.classList.contains("slide-print-notes")) return;
+    var aside = document.createElement("aside");
+    aside.className = "slide-print-notes";
+    aside.setAttribute("aria-hidden", "true");
+    aside.dataset.printFor = slide.id || ("slide-" + (i + 1));
+    aside.innerHTML = readNotes(slide, i);
+    if (slide.parentNode) {
+      slide.parentNode.insertBefore(aside, slide.nextSibling);
+    }
+  });
+
   function show(i) {
     if (i < 0) i = 0;
     if (i >= total) i = total - 1;
