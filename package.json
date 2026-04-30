@@ -7,6 +7,7 @@
     "build:facilitator-pdfs": "node scripts/build-facilitator-pdfs.js"
   },
   "dependencies": {
+    "@replit/connectors-sdk": "^0.4.0",
     "puppeteer-core": "^24.42.0"
   }
 }
