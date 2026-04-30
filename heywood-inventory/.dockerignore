@@ -1,0 +1,8 @@
+.git
+.gitignore
+**/.DS_Store
+**/node_modules
+web/dist
+docs/*.md
+README.md
+*.md

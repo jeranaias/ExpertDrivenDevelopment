@@ -1,0 +1,13 @@
+{
+  "name": "edd-site-tooling",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Build tooling for the Expert-Driven Development static site (PDF generation, etc).",
+  "scripts": {
+    "build:facilitator-pdfs": "node scripts/build-facilitator-pdfs.js"
+  },
+  "dependencies": {
+    "@replit/connectors-sdk": "^0.4.0",
+    "puppeteer-core": "^24.42.0"
+  }
+}

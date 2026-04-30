@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="One-page printable instructor cheat sheet for the Week 6 Full-Stack Capstone — module-by-module timing, prompt scripts to paste, architecture milestones, breaks, and the assessment rubric.">
+    <title>Week 6 Instructor Cheat Sheet — Full-Stack Capstone | EDD</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* =========================================================
+           Week 6 Cheat Sheet — at-the-podium reference card
+           Designed to print on TWO US-Letter pages, portrait.
+           On screen: sits inside the standard site chrome and
+           previews the printed page. In print: site chrome and
+           the screen-only preview frame are hidden, and the
+           cheat sheet flows directly onto paper.
+           ========================================================= */
+
+        :root {
+            --cs-scarlet: #CC0000;
+            --cs-scarlet-dark: #a30000;
+            --cs-gold: #F5D130;
+            --cs-gold-dark: #d4b11a;
+            --cs-ink: #1a1a1a;
+            --cs-ink-2: #4a4a4a;
+            --cs-ink-3: #6e6e6e;
+            --cs-paper: #ffffff;
+            --cs-paper-2: #f8f7f5;
+            --cs-paper-3: #efeee9;
+            --cs-rule: #d9d8d4;
+            --cs-rule-2: #e8e7e3;
+            --cs-warn: #5f4b08;
+            --cs-warn-bg: #fef7e0;
+            --cs-warn-edge: #d4b11a;
+            --cs-mono: "Cascadia Code", "Fira Code", Consolas, Monaco, "Courier New", monospace;
+        }
+
+        .cheat-intro {
+            max-width: 8.5in;
+            margin: 0 auto 1.25rem;
+            background: var(--color-bg-secondary);
+            border-left: 4px solid var(--cs-scarlet);
+            padding: var(--space-md) var(--space-lg);
+            border-radius: 0 var(--space-sm) var(--space-sm) 0;
+        }
+        .cheat-intro p { margin: 0; }
+        .cheat-intro p + p { margin-top: var(--space-sm); }
+
+        /* The page frame mimics letter portrait (8.5 x 11) so the
+           author can preview pagination on screen. */
+        .cheat-page {
+            background: var(--cs-paper);
+            color: var(--cs-ink);
+            border: 1px solid var(--cs-rule);
+            border-radius: 6px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+            margin: 0 auto 2rem;
+            max-width: 8.5in;
+            min-height: 11in;
+            padding: 0.5in 0.55in;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                         "Helvetica Neue", Arial, sans-serif;
+            font-size: 9.4pt;
+            line-height: 1.3;
+            display: flex;
+            flex-direction: column;
+            gap: 0.16in;
+        }
+
+        .cs-head {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 0.22in;
+            align-items: center;
+            padding-bottom: 0.12in;
+            border-bottom: 2px solid var(--cs-ink);
+        }
+        .cs-head__week {
+            display: flex;
+            align-items: baseline;
+            gap: 0.12in;
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--cs-ink-3);
+            font-weight: 700;
+        }
+        .cs-head__week .num {
+            display: inline-block;
+            min-width: 0.6in;
+            font-size: 28pt;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--cs-scarlet);
+            letter-spacing: -0.02em;
+        }
+        .cs-head__title h1 {
+            font-size: 18pt;
+            line-height: 1.05;
+            margin: 0;
+            color: var(--cs-ink);
+            letter-spacing: -0.01em;
+        }
+        .cs-head__title .sub {
+            margin: 0.05in 0 0;
+            color: var(--cs-ink-2);
+            font-size: 9pt;
+        }
+        .cs-head__meta {
+            text-align: right;
+            font-size: 8.2pt;
+            color: var(--cs-ink-2);
+            line-height: 1.35;
+        }
+        .cs-head__meta strong { color: var(--cs-ink); }
+
+        /* ---------- Pacing strip ----------------------------- */
+        .cs-pacing {
+            display: grid;
+            grid-template-columns: repeat(13, 1fr);
+            border: 1px solid var(--cs-rule);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .cs-pacing__cell {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0.06in 0.04in;
+            border-right: 1px solid var(--cs-rule-2);
+            background: var(--cs-paper-2);
+            min-height: 0.5in;
+            font-size: 7.2pt;
+            line-height: 1.18;
+            text-align: center;
+        }
+        .cs-pacing__cell:last-child { border-right: 0; }
+        .cs-pacing__cell .t {
+            font-weight: 700;
+            color: var(--cs-ink);
+            font-size: 7.4pt;
+            letter-spacing: 0.02em;
+        }
+        .cs-pacing__cell .n {
+            color: var(--cs-ink-2);
+            font-size: 7pt;
+            margin-top: 1px;
+        }
+        .cs-pacing__cell--break {
+            background: var(--cs-warn-bg);
+            color: var(--cs-warn);
+        }
+        .cs-pacing__cell--break .t {
+            color: var(--cs-scarlet-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .cs-pacing__cell--break .n {
+            color: var(--cs-ink-2);
+            font-weight: 700;
+        }
+        .cs-pacing__cell--build .t::before {
+            content: "▶ ";
+            color: var(--cs-scarlet);
+        }
+
+        /* ---------- Module table ----------------------------- */
+        .cs-modules {
+            border: 1px solid var(--cs-rule);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .cs-mod {
+            display: grid;
+            grid-template-columns: 0.55in 1.85in 1fr 1.55in;
+            gap: 0;
+            border-bottom: 1px solid var(--cs-rule-2);
+            page-break-inside: avoid;
+        }
+        .cs-mod:last-child { border-bottom: 0; }
+        .cs-mod__no {
+            background: var(--cs-paper-3);
+            padding: 0.08in 0.06in;
+            text-align: center;
+            border-right: 1px solid var(--cs-rule-2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1px;
+        }
+        .cs-mod__no .n {
+            font-size: 14pt;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--cs-ink);
+            letter-spacing: -0.02em;
+        }
+        .cs-mod__no .dur {
+            font-size: 7pt;
+            color: var(--cs-ink-3);
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .cs-mod--build .cs-mod__no {
+            background: #fbecec;
+        }
+        .cs-mod--build .cs-mod__no .n { color: var(--cs-scarlet); }
+
+        .cs-mod__name {
+            padding: 0.07in 0.08in;
+            border-right: 1px solid var(--cs-rule-2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1px;
+        }
+        .cs-mod__name .title {
+            font-weight: 700;
+            font-size: 9.6pt;
+            color: var(--cs-ink);
+            line-height: 1.18;
+        }
+        .cs-mod__name .clock {
+            font-size: 7.6pt;
+            color: var(--cs-ink-3);
+            font-family: var(--cs-mono);
+            letter-spacing: 0.02em;
+        }
+        .cs-mod__name .kind {
+            font-size: 7pt;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--cs-scarlet);
+            font-weight: 700;
+            margin-top: 1px;
+        }
+        .cs-mod--framing .cs-mod__name .kind { color: var(--cs-ink-3); }
+
+        .cs-mod__prompts {
+            padding: 0.07in 0.08in;
+            border-right: 1px solid var(--cs-rule-2);
+        }
+        .cs-mod__prompts ol {
+            margin: 0;
+            padding-left: 0.18in;
+            color: var(--cs-ink-2);
+            font-size: 8.4pt;
+            line-height: 1.32;
+        }
+        .cs-mod__prompts ol li + li { margin-top: 1px; }
+        .cs-mod__prompts ol li strong {
+            color: var(--cs-ink);
+            font-weight: 700;
+        }
+        .cs-mod__prompts code {
+            font-family: var(--cs-mono);
+            font-size: 7.8pt;
+            background: var(--cs-paper-3);
+            padding: 0 3px;
+            border-radius: 2px;
+            color: var(--cs-ink);
+        }
+        .cs-mod__prompts .none {
+            font-style: italic;
+            color: var(--cs-ink-3);
+            font-size: 8.4pt;
+        }
+
+        .cs-mod__milestone {
+            padding: 0.07in 0.08in;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2px;
+            background: #fcfbf6;
+        }
+        .cs-mod__milestone .layer {
+            font-size: 7.2pt;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--cs-gold-dark);
+            font-weight: 800;
+        }
+        .cs-mod__milestone .arch {
+            font-size: 8.4pt;
+            color: var(--cs-ink);
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        .cs-mod__milestone .desc {
+            font-size: 7.6pt;
+            color: var(--cs-ink-2);
+            line-height: 1.2;
+        }
+
+        .cs-mod--break {
+            grid-template-columns: 0.55in 1fr;
+            background: var(--cs-warn-bg);
+        }
+        .cs-mod--break .cs-mod__no {
+            background: var(--cs-warn-bg);
+            border-right: 1px solid var(--cs-warn-edge);
+        }
+        .cs-mod--break .cs-mod__no .n {
+            font-size: 11pt;
+            color: var(--cs-scarlet);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 800;
+        }
+        .cs-mod--break .cs-mod__line {
+            grid-column: 2;
+            padding: 0.06in 0.1in;
+            font-size: 8.4pt;
+            color: var(--cs-ink);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.2in;
+        }
+        .cs-mod--break .cs-mod__line .when {
+            font-family: var(--cs-mono);
+            color: var(--cs-ink-3);
+        }
+
+        /* ---------- Two-column section (page 2) -------------- */
+        .cs-cols {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 0.18in;
+        }
+        .cs-box {
+            border: 1px solid var(--cs-rule);
+            border-radius: 4px;
+            padding: 0.1in 0.14in 0.12in;
+            background: var(--cs-paper);
+            page-break-inside: avoid;
+        }
+        .cs-box h2 {
+            font-size: 9.2pt;
+            margin: 0 0 0.05in;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--cs-scarlet);
+            border-bottom: 1px solid var(--cs-rule);
+            padding-bottom: 3px;
+        }
+        .cs-box h2 .lede {
+            display: block;
+            text-transform: none;
+            letter-spacing: 0;
+            font-weight: 400;
+            color: var(--cs-ink-3);
+            font-size: 8pt;
+            margin-top: 1px;
+        }
+        .cs-box ul {
+            margin: 0;
+            padding-left: 0.18in;
+            color: var(--cs-ink-2);
+            font-size: 8.4pt;
+            line-height: 1.32;
+        }
+        .cs-box ul li + li { margin-top: 2px; }
+        .cs-box ul li strong { color: var(--cs-ink); }
+
+        /* Rubric */
+        .cs-rubric {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8.4pt;
+        }
+        .cs-rubric th,
+        .cs-rubric td {
+            text-align: left;
+            padding: 4px 6px;
+            border-bottom: 1px solid var(--cs-rule-2);
+            vertical-align: top;
+        }
+        .cs-rubric thead th {
+            border-bottom: 1.5px solid var(--cs-ink);
+            font-size: 7.6pt;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--cs-ink-3);
+        }
+        .cs-rubric tbody tr:last-child td { border-bottom: 0; }
+        .cs-rubric td.criterion { font-weight: 700; color: var(--cs-ink); }
+        .cs-rubric td.target { color: var(--cs-scarlet-dark); font-weight: 600; }
+
+        /* Footer note */
+        .cs-foot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 7.8pt;
+            color: var(--cs-ink-3);
+            border-top: 1px solid var(--cs-rule);
+            padding-top: 0.08in;
+        }
+        .cs-foot .lhs { display: flex; gap: 0.16in; align-items: center; }
+        .cs-foot strong { color: var(--cs-ink); }
+        .cs-foot .mark {
+            display: inline-block;
+            width: 0.16in;
+            height: 0.16in;
+            background: var(--cs-scarlet);
+            border-radius: 2px;
+        }
+
+        /* Force a clean page break between page 1 and page 2 */
+        .cheat-page + .cheat-page { page-break-before: always; }
+
+        /* ---------- PRINT ----------------------------------- */
+        @page {
+            size: Letter portrait;
+            margin: 0.4in;
+        }
+        @media print {
+            html, body {
+                background: #fff !important;
+                color: #000;
+            }
+            .site-header,
+            .site-footer,
+            .page-header,
+            .skip-link,
+            .cheat-intro {
+                display: none !important;
+            }
+            .site-main { padding: 0 !important; }
+            .container { padding: 0 !important; max-width: none !important; }
+
+            .cheat-page {
+                box-shadow: none;
+                border: 0;
+                border-radius: 0;
+                margin: 0 auto;
+                padding: 0;
+                max-width: none;
+                min-height: 0;
+                width: 100%;
+            }
+
+            /* Keep pacing strip / module rows from splitting badly */
+            .cs-pacing,
+            .cs-mod,
+            .cs-box,
+            .cs-rubric tr {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body class="site-wrapper">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Weekly Decks</a></li>
+                    <li aria-current="page">Week 6 — Instructor Cheat Sheet</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Week 6 Instructor Cheat Sheet</h1>
+            <p class="page-header__desc">A two-page printable reference card for the Week 6 Full-Stack Capstone &mdash; designed to sit next to the deck during the eight-hour Teams session, so you never have to scrub back through 57 slides for a prompt or a milestone.</p>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+
+            <div class="cheat-intro">
+                <p><strong>Print:</strong> <kbd>Ctrl</kbd>+<kbd>P</kbd> &rarr; Layout <em>Portrait</em>, Margins <em>Default</em>, Background graphics <em>on</em>. Two US-Letter pages. Site chrome and this preview note are hidden in print.</p>
+                <p><strong>Use:</strong> page 1 is the live-delivery card &mdash; pacing strip, every module&rsquo;s prompts to paste, and the architecture layer that lights up at each debrief. Page 2 is the assessment rubric, the operating principles, and the recovery cues you may need under fire.</p>
+            </div>
+
+            <!-- ============================================================
+                 PAGE 1 — Pacing strip + per-module prompts & milestones
+                 ============================================================ -->
+            <article class="cheat-page" aria-label="Week 6 cheat sheet, page 1">
+
+                <header class="cs-head">
+                    <div class="cs-head__week"><span class="num">6</span><span>Course 6 &middot; Capstone<br>Instructor cheat sheet</span></div>
+                    <div class="cs-head__title">
+                        <h1>Full-Stack AI-Assisted Development</h1>
+                        <p class="sub">Eight build cycles &middot; one architecture &middot; one shipped container. Deck &harr; editor, ten times. Architecture diagram is the spine.</p>
+                    </div>
+                    <div class="cs-head__meta">
+                        <div><strong>8 hr</strong> &middot; 10 modules + assessment</div>
+                        <div>57 slides &middot; 2 breaks &middot; 1 deploy</div>
+                        <div>Companion to <strong>week-6-fullstack.html</strong></div>
+                    </div>
+                </header>
+
+                <!-- Pacing strip -->
+                <section class="cs-pacing" aria-label="Day pacing strip">
+                    <div class="cs-pacing__cell"><span class="t">0:00</span><span class="n">M1 Frontier</span></div>
+                    <div class="cs-pacing__cell"><span class="t">0:30</span><span class="n">M2 Setup</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">1:15</span><span class="n">M3 Backend</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">2:00</span><span class="n">M4 Data</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--break"><span class="t">2:45</span><span class="n">Break 15&prime;</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">3:00</span><span class="n">M5 Frontend</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">3:45</span><span class="n">M6 Pages</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">4:30</span><span class="n">M7 AI Chat</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--break"><span class="t">5:15</span><span class="n">Break 15&prime;</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">5:30</span><span class="n">M8 Auth</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">6:15</span><span class="n">M9 Integ.</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">7:00</span><span class="n">M10 Deploy</span></div>
+                    <div class="cs-pacing__cell"><span class="t">7:45</span><span class="n">Wrap</span></div>
+                </section>
+
+                <!-- Module-by-module prompts and architecture milestones -->
+                <section class="cs-modules" aria-label="Per-module prompts and architecture milestones">
+
+                    <div class="cs-mod cs-mod--framing">
+                        <div class="cs-mod__no"><span class="n">1</span><span class="dur">30 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">The Full-Stack Frontier</span>
+                            <span class="clock">0:00&ndash;0:30</span>
+                            <span class="kind">Framing &middot; no code</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <span class="none">No editor prompts. Show the empty four-layer architecture diagram and tell the room: &ldquo;Mark this slide. We see it eight more times today.&rdquo;</span>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Architecture 0/4</span>
+                            <span class="arch">Empty runway</span>
+                            <span class="desc">L1, L2, L3, L4 all dim. The diagram is anchored.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">2</span><span class="dur">45 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Environment Setup</span>
+                            <span class="clock">0:30&ndash;1:15</span>
+                            <span class="kind">AI-guided install</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Install prompt (paste verbatim):</strong> &ldquo;I need to set up a development environment on [Windows / Mac]. Install Go 1.22+, Node.js 20 LTS, Git, VS Code, and Docker Desktop. Step-by-step for my OS, including verify. After install I should run <code>go version</code>, <code>node --version</code>, <code>npm --version</code>, <code>git --version</code> and see numbers for all four.&rdquo;</li>
+                                <li><strong>Scaffold</strong> in terminal: <code>mkdir my-staff-app &amp;&amp; cd my-staff-app</code> &rarr; <code>go mod init my-staff-app</code> &rarr; <code>mkdir -p cmd/server internal data</code> &rarr; <code>npm create vite@latest web -- --template react-ts</code>.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Architecture 0/4</span>
+                            <span class="arch">Runway built &mdash; no layers lit</span>
+                            <span class="desc">Tooling verified, project skeleton on disk. Stack still empty.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">3</span><span class="dur">45 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Backend from Scratch</span>
+                            <span class="clock">1:15&ndash;2:00</span>
+                            <span class="kind">Build &middot; first server</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Prompt 1:</strong> single-file Go server in <code>cmd/server/main.go</code>, port 8080, <code>-port</code> and <code>-dev</code> flags, <code>/api/v1/health</code> returning <code>{"status":"ok"}</code>.</li>
+                                <li><strong>Prompt 2:</strong> extract <code>SetupRouter</code> into <code>internal/api/router.go</code> with <code>writeJSON</code> / <code>writeError</code> helpers.</li>
+                                <li><strong>Prompt 3:</strong> add hardcoded <code>/api/v1/items</code> with five military-flavored items.</li>
+                                <li><em>Verify after each:</em> <code>go run ./cmd/server -dev</code> &rarr; hit endpoint in browser. Paste any error back &mdash; do not hand-debug.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Architecture 1/4 &middot; L2 lit</span>
+                            <span class="arch">Go HTTP Server</span>
+                            <span class="desc">Server, router, helpers, two endpoints returning JSON.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">4</span><span class="dur">45 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Data Layer</span>
+                            <span class="clock">2:00&ndash;2:45</span>
+                            <span class="kind">Build &middot; interface-first</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Prompt 1:</strong> define a <code>DataStore</code> Go interface and an <code>Item</code> struct in <code>internal/data/store.go</code> (list, get, create, update). Plus a <code>JSONStore</code> implementation reading <code>data/items.json</code>.</li>
+                                <li><strong>Prompt 2:</strong> generate 20 realistic, military-flavored seed items into <code>data/items.json</code>.</li>
+                                <li><strong>Prompt 3:</strong> rewire <code>main.go</code> to load the store and serve from it; add <code>/api/v1/items/{id}</code>.</li>
+                                <li><em>Verify:</em> <code>curl /api/v1/items</code> and <code>/api/v1/items/3</code>.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Architecture 2/4 &middot; L3 lit</span>
+                            <span class="arch">Data Layer (behind a contract)</span>
+                            <span class="desc">JSONStore satisfies the interface. Same door, swappable engine.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--break">
+                        <div class="cs-mod__no"><span class="n">BRK</span><span class="dur">15 min</span></div>
+                        <div class="cs-mod__line">
+                            <span><strong>Break 1.</strong> Be back at H+3:00. Pre-flight: confirm everyone&rsquo;s backend still runs; have the next prompt loaded so you paste the moment you return.</span>
+                            <span class="when">2:45&ndash;3:00</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">5</span><span class="dur">45 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Frontend from Scratch</span>
+                            <span class="clock">3:00&ndash;3:45</span>
+                            <span class="kind">Build &middot; first end-to-end</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Prompt 1:</strong> add Tailwind CSS to the existing Vite + React + TS app in <code>web/</code>; configure PostCSS.</li>
+                                <li><strong>Prompt 2:</strong> set up a Vite dev proxy in <code>web/vite.config.ts</code> that forwards <code>/api</code> to <code>http://localhost:8080</code>.</li>
+                                <li><strong>Prompt 3:</strong> write a small API client and render the items table at <code>localhost:5173</code>.</li>
+                                <li><em>Two terminals:</em> backend in one, <code>npm run dev</code> in the other. CORS error &rarr; fix is the proxy, not middleware.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Architecture 3/4 &middot; L1 lit</span>
+                            <span class="arch">React Frontend &mdash; full stack, end to end</span>
+                            <span class="desc">First time the app is visible to a human. Stop. Have one student share their screen.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">6</span><span class="dur">45 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Pages &amp; Navigation</span>
+                            <span class="clock">3:45&ndash;4:30</span>
+                            <span class="kind">Build &middot; multi-page UI</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Prompt 1:</strong> add <code>react-router-dom</code> with a Layout, Dashboard, Items, Settings; dark sidebar (navy <code>#1a1f36</code>) with active-link highlighting.</li>
+                                <li><strong>Prompt 2:</strong> item detail page at <code>/items/:id</code>; make titles in the items table click through.</li>
+                                <li><strong>Prompt 3:</strong> dashboard with stat cards, recent items, quick actions &mdash; using API data, Tailwind defaults.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Architecture 3/4 &middot; L1 fleshed out</span>
+                            <span class="arch">Same diagram, real-app shape</span>
+                            <span class="desc">Sidebar nav, dashboard, detail page. The prototype look is gone.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">7</span><span class="dur">45 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">AI Chat Integration</span>
+                            <span class="clock">4:30&ndash;5:15</span>
+                            <span class="kind">Build &middot; tool use</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Pre-flight:</strong> confirm <code>OPENAI_API_KEY</code> is set in every shell.</li>
+                                <li><strong>Prompt 1:</strong> chat service in <code>internal/ai/chat.go</code> against <code>gpt-4o</code>; expose <code>POST /api/v1/chat</code>.</li>
+                                <li><strong>Prompt 2:</strong> register a <code>lookup_items</code> tool with status / priority / query params; call into <code>DataStore</code>.</li>
+                                <li><strong>Prompt 3:</strong> <code>ChatPage.tsx</code> with markdown rendering and loading states.</li>
+                                <li><em>Land it:</em> ask &ldquo;what are my high-priority items?&rdquo; &mdash; show the tool call in the server log.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Architecture 4/4 &middot; L4 lit</span>
+                            <span class="arch">External Services &mdash; the brain comes online</span>
+                            <span class="desc">All four layers real. Apex of the day. Pause and let it land.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--break">
+                        <div class="cs-mod__no"><span class="n">BRK</span><span class="dur">15 min</span></div>
+                        <div class="cs-mod__line">
+                            <span><strong>Break 2.</strong> Be back at H+5:30. Pre-flight: confirm chat still works; have the auth-middleware prompt loaded.</span>
+                            <span class="when">5:15&ndash;5:30</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">8</span><span class="dur">45 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Auth &amp; Middleware</span>
+                            <span class="clock">5:30&ndash;6:15</span>
+                            <span class="kind">Build &middot; gate-guard</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Prompt 1:</strong> middleware package &mdash; CORS, security headers, auth, chain helper.</li>
+                                <li><strong>Prompt 2:</strong> <code>/auth/me</code> + <code>/auth/switch</code> endpoints; role picker dropdown in the header (Admin / Staff / User) with a role cookie.</li>
+                                <li><strong>Prompt 3:</strong> role-based filtering across existing handlers (Admin sees all, User sees only their items); conditional sidebar.</li>
+                                <li><em>Demo:</em> dev tools &rarr; cookies &rarr; show role; switch role &rarr; data changes.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Architecture 4/4 &middot; hardened</span>
+                            <span class="arch">All four layers, role-aware</span>
+                            <span class="desc">Same diagram. Application now treats different humans differently.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">9</span><span class="dur">45 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">External Integrations</span>
+                            <span class="clock">6:15&ndash;7:00</span>
+                            <span class="kind">Build &middot; compress here if behind</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Path A &mdash; default (no Azure needed):</strong> add a SQLite-backed <code>DataStore</code> implementation using <code>modernc.org/sqlite</code> (pure Go); auto-create tables; parameterized queries; <code>-db</code> flag toggles JSON vs SQLite.</li>
+                                <li><strong>Path B &mdash; Azure AD shop:</strong> Microsoft Graph client (OAuth2 client-credentials, token cache, commercial &amp; GCC High); add <code>/calendar/today</code> and <code>/mail/summary</code>.</li>
+                                <li><em>Verify (A):</em> restart with <code>-db sqlite</code>, add an item, restart again, confirm it persists; flip back to <code>-db json</code>.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Architecture 4/4 &middot; deepened</span>
+                            <span class="arch">L3 (Path A) or L4 (Path B) deepened</span>
+                            <span class="desc">Engine swapped behind the same interface &mdash; the Module 4 lever pays off.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">10</span><span class="dur">45 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Docker &amp; Deployment</span>
+                            <span class="clock">7:00&ndash;7:45</span>
+                            <span class="kind">Build &middot; ship it</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Prompt 1:</strong> generate a multi-stage <code>Dockerfile</code> &mdash; web-builder (Node), go-builder (Go), runtime (Alpine). Go server serves the React build in production. SPA fallback for non-API routes. Include a <code>.dockerignore</code>.</li>
+                                <li><strong>Build:</strong> <code>docker build -t my-staff-app .</code></li>
+                                <li><strong>Run:</strong> <code>docker run -p 8080:8080 -e OPENAI_API_KEY=&hellip; my-staff-app</code> &rarr; open <code>localhost:8080</code>.</li>
+                                <li><em>Optional:</em> push to ACR; deploy to Azure Container Apps for a public URL.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Architecture 4/4 &middot; shipped</span>
+                            <span class="arch">All four layers, packaged</span>
+                            <span class="desc">One image. Same bytes, any machine. The third victory of the day.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--framing">
+                        <div class="cs-mod__no"><span class="n">A</span><span class="dur">15 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Assessment &amp; Wrap-Up</span>
+                            <span class="clock">7:45&ndash;8:00</span>
+                            <span class="kind">Self-assess + handoff</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <span class="none">Walk the rubric on page 2; students self-check, take the knowledge check on the student page, then generate the certificate. Update the frontier map. Close the program.</span>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Architecture 4/4 &middot; done</span>
+                            <span class="arch">Capstone shipped</span>
+                            <span class="desc">Container running, rubric met. Then the program close.</span>
+                        </div>
+                    </div>
+
+                </section>
+
+                <div class="cs-foot">
+                    <span class="lhs"><span class="mark" aria-hidden="true"></span><strong>EDD &middot; Week 6 cheat sheet</strong> &middot; page 1 of 2 &middot; pacing, prompts, milestones</span>
+                    <span>Print landscape <em>off</em> &middot; portrait, default margins, background graphics on</span>
+                </div>
+            </article>
+
+            <!-- ============================================================
+                 PAGE 2 — Rubric, principles, recovery cues
+                 ============================================================ -->
+            <article class="cheat-page" aria-label="Week 6 cheat sheet, page 2">
+
+                <header class="cs-head">
+                    <div class="cs-head__week"><span class="num">6</span><span>Course 6 &middot; Capstone<br>Cheat sheet &middot; page 2</span></div>
+                    <div class="cs-head__title">
+                        <h1>Rubric, principles, recovery</h1>
+                        <p class="sub">The rubric you grade against in the last 15 minutes, the principles you repeat all day, and the recovery cues for when something breaks live.</p>
+                    </div>
+                    <div class="cs-head__meta">
+                        <div><strong>Use during:</strong> assessment block</div>
+                        <div><strong>Use during:</strong> any stuck moment</div>
+                        <div>Companion to <strong>week-6-fullstack.html</strong></div>
+                    </div>
+                </header>
+
+                <!-- Rubric -->
+                <section class="cs-box" aria-label="Assessment rubric">
+                    <h2>Assessment rubric<span class="lede">Hit the Minimum column to certify. Target column is the bar to set for the real-world build that follows class.</span></h2>
+                    <table class="cs-rubric">
+                        <thead>
+                            <tr>
+                                <th style="width:1.4in;">Criterion</th>
+                                <th style="width:2.2in;">Minimum (certified)</th>
+                                <th>Target</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="criterion">API endpoints</td><td>3 returning JSON</td><td class="target">5+ with full CRUD</td></tr>
+                            <tr><td class="criterion">Frontend pages</td><td>2 with navigation</td><td class="target">4+ with sidebar, routes, detail</td></tr>
+                            <tr><td class="criterion">Data layer</td><td>Reads from JSON</td><td class="target">Interface-based, swappable</td></tr>
+                            <tr><td class="criterion">AI integration</td><td>Chat sends / receives</td><td class="target">Tool use against live data</td></tr>
+                            <tr><td class="criterion">Authentication</td><td>Role picker present</td><td class="target">Role-based filtering enforced</td></tr>
+                            <tr><td class="criterion">Deployment</td><td>Container runs locally</td><td class="target">Deployed to Azure with a public URL</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Two-column: principles + recovery -->
+                <div class="cs-cols">
+                    <section class="cs-box" aria-label="Six operating principles">
+                        <h2>Six principles to repeat all day<span class="lede">Plant in the opening; cite by number when something breaks.</span></h2>
+                        <ul>
+                            <li><strong>1. The conversation is the IDE.</strong> The AI chat is the primary tool; the editor is for verification.</li>
+                            <li><strong>2. Scaffold &rarr; flesh out &rarr; integrate.</strong> Skeleton first. Always. Make it work before you make it pretty.</li>
+                            <li><strong>3. The 3-minute rule.</strong> Stuck for 3 minutes? Paste the error back to the AI. Demonstrate this aloud the first time it happens.</li>
+                            <li><strong>4. Incremental deployment.</strong> Verify after each prompt. Container is the end &mdash; not a finale.</li>
+                            <li><strong>5. Interface first. Implementation later.</strong> Define <em>what</em> before <em>how</em>. (Module 4 is where this earns its keep; Module 9 is where it gets paid.)</li>
+                            <li><strong>6. Copy the error, not your frustration.</strong> Give the AI the message, not the mood.</li>
+                        </ul>
+                    </section>
+
+                    <section class="cs-box" aria-label="Recovery and pacing cues">
+                        <h2>Recovery &amp; pacing cues<span class="lede">When the room slips, this is the order of operations.</span></h2>
+                        <ul>
+                            <li><strong>Pacing valve.</strong> If you fall behind, compress <strong>Module 9</strong> (External Integrations &mdash; default to Path A only). Everyone still ships a container.</li>
+                            <li><strong>Module 2 gotchas.</strong> Go not on PATH &rarr; restart terminal. <code>npm create vite</code> fails &rarr; <code>npm install -g npm@latest</code>. Docker needs admin &rarr; defer to Module 10.</li>
+                            <li><strong>Module 3 gotchas.</strong> Port 8080 in use &rarr; switch to 8081. Module-name mismatch &rarr; align <code>go.mod</code>. Missing <code>go.sum</code> &rarr; <code>go mod tidy</code>.</li>
+                            <li><strong>Module 5 gotchas.</strong> CORS error &rarr; the fix is the Vite proxy, <em>not</em> CORS middleware. PostCSS / Tailwind config is the other 30-second fix.</li>
+                            <li><strong>Module 7 gotcha.</strong> No <code>OPENAI_API_KEY</code> &rarr; <code>export OPENAI_API_KEY=&hellip;</code>. Tool-format errors: paste the OpenAI error back &mdash; it fixes its own definition.</li>
+                            <li><strong>Module 10 gotcha.</strong> Bloated image &rarr; <code>.dockerignore</code>. SPA 404 on direct nav &rarr; SPA fallback missing. Azure: <code>az login</code> first.</li>
+                            <li><strong>Architecture cadence.</strong> Return to the diagram <em>nine times</em> today &mdash; once empty (M1), once after setup (M2 &middot; 0/4), then after every build module (M3 1/4 &rarr; M4 2/4 &rarr; M5 3/4 &rarr; M6 still 3/4 &rarr; M7 4/4 &rarr; M8 hardened &rarr; M9 deepened &rarr; M10 shipped). It is the spine of the day.</li>
+                            <li><strong>Tone shifts.</strong> M3 &mdash; first JSON in browser, twenty seconds of silence is fine. M5 &mdash; have a student share screen. M7 &mdash; this is the apex; let it land. M10 &mdash; pause ten seconds at the diagram and name what they did.</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <div class="cs-foot">
+                    <span class="lhs"><span class="mark" aria-hidden="true"></span><strong>EDD &middot; Week 6 cheat sheet</strong> &middot; page 2 of 2 &middot; rubric, principles, recovery</span>
+                    <span>Pair with the Week 6 Facilitator Pack for prep / homework / debrief detail</span>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

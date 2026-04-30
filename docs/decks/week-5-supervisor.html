@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 5 — Supervisor Orientation | EDD Teams Deck</title>
+<meta name="description" content="Course 5 (Supervisor Orientation) instructor-led slide deck. Microsoft Teams 16:9 deck with dual-mode speaker notes (30-min briefing or extended joint session).">
+<style>
+  /* ============================================================
+     EDD Weekly Deck Identity (inherits Week 1 visual identity)
+     Palette and type scale mirror docs/css/style.css
+     ============================================================ */
+  :root {
+    --scarlet: #CC0000;
+    --scarlet-dark: #a30000;
+    --scarlet-deep: #5c0000;
+    --gold: #F5D130;
+    --gold-dark: #d4b11a;
+    --gold-light: #f9e06b;
+
+    --bg: #f8f7f5;
+    --surface: #ffffff;
+    --ink: #1a1a1a;
+    --ink-2: #4a4a4a;
+    --ink-3: #6e6e6e;
+    --rule: #d9d8d4;
+    --rule-light: #e8e7e3;
+
+    --info-bg:    #e8f0fe;
+    --info-edge:  #4285f4;
+    --warn-bg:    #fef7e0;
+    --warn-edge:  #f9ab00;
+    --warn-text:  #5f4b08;
+    --good-bg:    #e6f4ea;
+    --good-edge:  #34a853;
+    --good-text:  #0d652d;
+    --instr-bg:   #fce8e8;
+    --instr-edge: #CC0000;
+    --instr-text: #5c0000;
+
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "Cascadia Code", "Fira Code", Consolas, Monaco, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: #111;
+    color: var(--ink);
+    font-family: var(--font-sans);
+    overflow: hidden;
+  }
+
+  /* ---- Stage / 16:9 frame ----------------------------------- */
+  .stage {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+  }
+  .frame {
+    width: min(100vw, calc(100vh * 16 / 9));
+    aspect-ratio: 16 / 9;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+  }
+  .deck { width: 100%; height: 100%; position: relative; }
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    padding: 4.5vh 5vw 5vh;
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .slide.is-active { display: flex; }
+
+  /* Type scale — vw based so it scales with the 16:9 frame */
+  .frame { font-size: 1.2vw; }
+  h1, h2, h3, h4 { font-weight: 700; line-height: 1.18; letter-spacing: -0.01em; }
+  h1 { font-size: 4.4vw; }
+  h2 { font-size: 3.2vw; }
+  h3 { font-size: 2.0vw; margin-bottom: 1vh; }
+  h4 { font-size: 1.4vw; margin-bottom: 0.6vh; }
+  p, li { font-size: 1.4vw; line-height: 1.45; }
+  .lead { font-size: 1.7vw; line-height: 1.45; color: var(--ink-2); }
+  .small { font-size: 1.1vw; color: var(--ink-3); }
+  .micro { font-size: 0.95vw; color: var(--ink-3); letter-spacing: 0.04em; text-transform: uppercase; font-weight: 600; }
+
+  ul, ol { padding-left: 2.4vw; }
+  li { margin-bottom: 0.7vh; }
+  li::marker { color: var(--scarlet); }
+
+  /* ---- Slide chrome ----------------------------------------- */
+  .slide__head {
+    display: flex;
+    align-items: center;
+    gap: 1.2vw;
+    margin-bottom: 2.2vh;
+    padding-bottom: 1.2vh;
+    border-bottom: 2px solid var(--rule-light);
+  }
+  .slide__head .badge { white-space: nowrap; }
+  .slide__head h2 { flex: 1; }
+  .slide__title { font-size: 2.6vw; }
+
+  .slide__foot {
+    position: absolute;
+    left: 5vw; right: 5vw; bottom: 2vh;
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--ink-3); font-size: 0.95vw;
+    border-top: 1px solid var(--rule-light);
+    padding-top: 1vh;
+  }
+  .slide__foot .scarlet-mark {
+    display: inline-block; width: 0.5vw; height: 1.6vh;
+    background: var(--scarlet); border-radius: 2px; margin-right: 0.6vw;
+    vertical-align: middle;
+  }
+
+  /* ---- Badges ----------------------------------------------- */
+  .badge {
+    display: inline-block;
+    padding: 0.4vh 0.9vw;
+    background: var(--rule-light);
+    color: var(--ink-2);
+    font-size: 0.95vw;
+    font-weight: 600;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .badge--scarlet { background: var(--scarlet); color: #fff; }
+  .badge--gold { background: var(--gold); color: var(--ink); }
+  .badge--ghost { background: transparent; border: 1.5px solid var(--rule); color: var(--ink-2); }
+  .badge--instr { background: var(--instr-bg); color: var(--instr-text); border: 1px solid var(--instr-edge); }
+
+  /* ---- Callouts --------------------------------------------- */
+  .callout {
+    border-left: 6px solid var(--rule);
+    background: var(--surface);
+    padding: 2vh 1.6vw;
+    border-radius: 0 8px 8px 0;
+    margin-top: 1.4vh;
+  }
+  .callout h4 { color: var(--ink); margin-bottom: 0.6vh; }
+  .callout--info { border-color: var(--info-edge); background: var(--info-bg); }
+  .callout--warn { border-color: var(--warn-edge); background: var(--warn-bg); color: var(--warn-text); }
+  .callout--good { border-color: var(--good-edge); background: var(--good-bg); color: var(--good-text); }
+  .callout--scarlet { border-color: var(--scarlet); background: #fff; }
+
+  /* ---- Two-column ------------------------------------------- */
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.4vw;
+    flex: 1;
+    min-height: 0;
+  }
+  .cols--3 { grid-template-columns: 1fr 1fr 1fr; }
+  .col { display: flex; flex-direction: column; }
+  .col__head {
+    font-size: 1.2vw;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 1vh;
+    padding-bottom: 0.6vh;
+    border-bottom: 2px solid var(--rule-light);
+  }
+  .col__head--good { color: var(--good-text); border-color: var(--good-edge); }
+  .col__head--bad  { color: var(--scarlet-deep); border-color: var(--scarlet); }
+  .col__head--neutral { color: var(--ink-2); }
+
+  /* ---- Cover slide ------------------------------------------ */
+  .cover {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a0606 60%, var(--scarlet-deep) 100%);
+    color: #fff;
+    padding: 6vh 5vw;
+  }
+  .cover .eyebrow { color: var(--gold); font-size: 1.2vw; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; }
+  .cover h1 { color: #fff; font-size: 5.4vw; line-height: 1.05; max-width: 80%; margin-top: 1.2vh; }
+  .cover .deck-sub { color: rgba(255,255,255,0.8); font-size: 1.6vw; margin-top: 2vh; max-width: 70%; line-height: 1.4; }
+  .cover .cover-meta { display: flex; gap: 1vw; margin-top: 4vh; }
+  .cover .cover-meta .badge { background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.25); }
+  .cover .cover-meta .badge--gold { background: var(--gold); color: var(--ink); border: none; }
+  .cover .scarlet-bar {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: 1vh; background: var(--scarlet);
+  }
+  .cover .gold-bar {
+    position: absolute; left: 0; right: 0; bottom: 1vh;
+    height: 0.4vh; background: var(--gold);
+  }
+  .cover .corner {
+    position: absolute; top: 4vh; right: 5vw; color: rgba(255,255,255,0.6);
+    font-size: 0.95vw; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .cover .corner strong { color: var(--gold); }
+
+  /* ---- Section divider -------------------------------------- */
+  .divider {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a0606 100%);
+    color: #fff;
+    padding: 6vh 6vw;
+    justify-content: center;
+  }
+  .divider .module-num { color: var(--gold); font-size: 1.4vw; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; }
+  .divider h1 { color: #fff; font-size: 5vw; max-width: 85%; margin-top: 1.4vh; line-height: 1.05; }
+  .divider .module-meta { color: rgba(255,255,255,0.75); font-size: 1.4vw; margin-top: 2.4vh; }
+  .divider .scarlet-bar {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 1vh; background: var(--scarlet);
+  }
+
+  /* ---- Centerpieces ----------------------------------------- */
+  .centerpiece {
+    background: #fff;
+    border: 1px solid var(--rule-light);
+    border-top: 8px solid var(--scarlet);
+    border-radius: 8px;
+    padding: 5vh 4vw;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+  }
+  .centerpiece .pull {
+    font-size: 4.6vw;
+    font-weight: 800;
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+    max-width: 90%;
+    color: var(--ink);
+  }
+  .centerpiece .pull em { color: var(--scarlet); font-style: normal; }
+  .centerpiece .attribution {
+    margin-top: 3vh; color: var(--ink-3); font-size: 1.2vw; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+
+  /* Apprentice problem visual */
+  .apprentice {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 2.4vw;
+    align-items: stretch;
+  }
+  .apprentice .quote {
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 8px;
+    padding: 4vh 2.4vw;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .apprentice .quote::before {
+    content: "“";
+    position: absolute; top: -3vh; left: 1vw;
+    font-family: Georgia, serif;
+    font-size: 12vw; color: var(--scarlet); opacity: 0.5; line-height: 1;
+  }
+  .apprentice .quote .q {
+    position: relative; z-index: 1;
+    font-size: 2.6vw; font-weight: 700; line-height: 1.15; max-width: 95%;
+  }
+  .apprentice .quote .by { color: var(--gold); margin-top: 2vh; font-size: 1vw; letter-spacing: 0.12em; text-transform: uppercase; }
+  .apprentice .stats { display: grid; grid-template-rows: 1fr 1fr 1fr; gap: 1.2vh; min-height: 0; }
+  .apprentice .stat {
+    background: #fff; border: 1px solid var(--rule-light); border-radius: 8px;
+    padding: 1.2vh 1.2vw; display: flex; flex-direction: column; justify-content: center;
+    border-left: 6px solid var(--scarlet);
+    min-height: 0;
+  }
+  .apprentice .stat .num { font-size: 2.6vw; font-weight: 800; color: var(--scarlet); line-height: 1; }
+  .apprentice .stat .lbl { font-size: 1.0vw; color: var(--ink-2); margin-top: 0.4vh; line-height: 1.3; }
+
+  /* Stat row used on data slide */
+  .stat-row {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 1vw; margin: 2vh 0;
+  }
+  .stat-row .stat {
+    background: #fff; border: 1px solid var(--rule-light); border-radius: 8px;
+    padding: 1.8vh 0.8vw; text-align: center; border-top: 4px solid var(--scarlet);
+  }
+  .stat-row .stat .num { font-size: 2.4vw; font-weight: 800; color: var(--scarlet); line-height: 1; }
+  .stat-row .stat .lbl { font-size: 0.95vw; color: var(--ink-2); margin-top: 0.6vh; }
+
+  /* ---- Tables ----------------------------------------------- */
+  table.deck-tbl {
+    width: 100%; border-collapse: collapse; background: #fff;
+    border-radius: 8px; overflow: hidden;
+    border: 1px solid var(--rule-light);
+  }
+  table.deck-tbl th, table.deck-tbl td {
+    padding: 1.2vh 1vw; text-align: left; font-size: 1.1vw; vertical-align: top;
+    border-bottom: 1px solid var(--rule-light);
+  }
+  table.deck-tbl th { background: #1a1a1a; color: #fff; font-weight: 700; letter-spacing: 0.04em; }
+  table.deck-tbl tr:last-child td { border-bottom: none; }
+  table.deck-tbl tr:nth-child(even) td { background: #fafaf8; }
+
+  /* ---- Numbered list big ------------------------------------ */
+  .big-list { counter-reset: bigli; padding-left: 0; list-style: none; }
+  .big-list li {
+    counter-increment: bigli;
+    display: grid; grid-template-columns: auto 1fr; gap: 1.2vw; align-items: start;
+    margin-bottom: 1.6vh;
+  }
+  .big-list li::before {
+    content: counter(bigli);
+    background: var(--scarlet); color: #fff; font-weight: 800;
+    width: 3vw; height: 3vw; border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 1.6vw;
+  }
+  .big-list li > div { padding-top: 0.4vh; }
+  .big-list li strong { font-size: 1.4vw; color: var(--ink); }
+  .big-list li p { font-size: 1.15vw; color: var(--ink-2); margin-top: 0.3vh; }
+
+  /* Exercise / scenario card */
+  .scenario {
+    background: #fff;
+    border: 1px solid var(--rule-light);
+    border-left: 6px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 2.2vh 1.8vw;
+    margin-top: 1vh;
+  }
+  .scenario .scenario__label {
+    font-size: 0.95vw; color: var(--gold-dark); font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.6vh;
+  }
+  .scenario p { font-size: 1.3vw; line-height: 1.5; }
+
+  .prompt-box {
+    margin-top: 1.4vh;
+    background: #1a1a1a; color: #fff;
+    border-radius: 6px; padding: 1.4vh 1.4vw;
+    font-size: 1.15vw;
+  }
+  .prompt-box .label { color: var(--gold); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.9vw; display: block; margin-bottom: 0.4vh; }
+
+  /* Quick reference grid */
+  .qref {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.4vw;
+    flex: 1; min-height: 0;
+  }
+  .qref .card {
+    background: #fff; border: 1px solid var(--rule-light); border-radius: 8px;
+    padding: 2vh 1.4vw; display: flex; flex-direction: column;
+    border-top: 5px solid var(--scarlet);
+  }
+  .qref .card h4 { font-size: 1.2vw; text-transform: uppercase; letter-spacing: 0.06em; }
+  .qref .card ul { padding-left: 1.4vw; }
+  .qref .card li { font-size: 1.05vw; line-height: 1.4; margin-bottom: 0.7vh; }
+  .qref .card.good { border-top-color: var(--good-edge); }
+  .qref .card.warn { border-top-color: var(--warn-edge); }
+  .qref .card.warn h4 { color: var(--warn-text); }
+  .qref .card.good h4 { color: var(--good-text); }
+  .qref .card.scarlet h4 { color: var(--scarlet-deep); }
+
+  /* Closing slide */
+  .closing {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a0606 100%);
+    color: #fff;
+    justify-content: center;
+    padding: 6vh 6vw;
+  }
+  .closing .eyebrow { color: var(--gold); font-size: 1.2vw; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; }
+  .closing h1 { color: #fff; font-size: 4.6vw; max-width: 90%; margin-top: 1.6vh; }
+  .closing .ask { margin-top: 3vh; padding: 2vh 1.8vw; background: rgba(245,209,48,0.12); border-left: 4px solid var(--gold); border-radius: 0 8px 8px 0; max-width: 80%; }
+  .closing .ask .label { color: var(--gold); font-size: 0.95vw; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
+  .closing .ask p { color: #fff; font-size: 1.6vw; margin-top: 0.6vh; line-height: 1.4; }
+  .closing .scarlet-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 1vh; background: var(--scarlet); }
+
+  /* Audience-shift framing slide */
+  .audience-shift {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.4vw;
+    align-items: stretch;
+  }
+  .audience-shift .panel {
+    background: #fff; border: 1px solid var(--rule-light); border-radius: 8px;
+    padding: 3vh 2vw;
+    display: flex; flex-direction: column;
+  }
+  .audience-shift .panel h3 { font-size: 1.7vw; color: var(--ink); }
+  .audience-shift .panel .who {
+    font-size: 1.05vw; color: var(--ink-3); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700;
+    margin-bottom: 0.8vh;
+  }
+  .audience-shift .panel.this-week { border-top: 6px solid var(--scarlet); }
+  .audience-shift .panel.prior { border-top: 6px solid var(--rule); opacity: 0.92; }
+  .audience-shift .panel li { font-size: 1.15vw; }
+
+  /* Delivery modes slide */
+  .modes {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.4vw;
+  }
+  .modes .mode {
+    background: #fff; border: 1px solid var(--rule-light); border-radius: 8px;
+    padding: 3vh 2vw; display: flex; flex-direction: column;
+    border-top: 6px solid var(--gold);
+  }
+  .modes .mode.long { border-top-color: var(--scarlet); }
+  .modes .mode .mode__time { font-size: 1.0vw; color: var(--ink-3); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
+  .modes .mode h3 { font-size: 1.9vw; margin-top: 0.4vh; }
+  .modes .mode p { font-size: 1.15vw; color: var(--ink-2); }
+  .modes .mode ul { margin-top: 1vh; }
+  .modes .mode li { font-size: 1.1vw; }
+
+  /* Source/footer line under content */
+  .source { margin-top: 1.6vh; color: var(--ink-3); font-size: 0.95vw; font-style: italic; }
+
+  /* ---- Speaker notes overlay -------------------------------- */
+  .notes {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    max-height: 50vh;
+    background: rgba(15,15,15,0.97);
+    color: #f0f0f0;
+    border-top: 4px solid var(--scarlet);
+    padding: 18px 24px 24px;
+    overflow-y: auto;
+    transform: translateY(110%);
+    transition: transform 280ms ease;
+    z-index: 50;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .notes.is-open { transform: translateY(0); }
+  .notes h3 { color: #fff; font-size: 16px; margin-bottom: 8px; display: flex; gap: 12px; align-items: center; }
+  .notes .note-block { margin-top: 10px; }
+  .notes .note-block .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--scarlet);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .notes .note-block.joint .tag { background: var(--gold); color: #1a1a1a; }
+  .notes .note-block.transition .tag { background: #4a4a4a; }
+  .notes .note-block p { color: #e0e0e0; margin-top: 4px; }
+  .notes .note-block ul { padding-left: 20px; margin-top: 4px; }
+  .notes .note-block li { color: #e0e0e0; font-size: 13.5px; margin-bottom: 3px; }
+  .notes .close-hint { color: #999; font-size: 12px; }
+
+  /* ---- HUD -------------------------------------------------- */
+  .hud {
+    position: fixed; right: 14px; top: 14px;
+    display: flex; gap: 6px; z-index: 30; opacity: 0.35;
+    transition: opacity 200ms ease;
+  }
+  .hud:hover { opacity: 1; }
+  .hud button {
+    background: rgba(20,20,20,0.85); color: #f0f0f0; border: 1px solid #444;
+    padding: 5px 9px; border-radius: 5px; cursor: pointer; font: 600 11px var(--font-sans);
+    letter-spacing: 0.04em;
+  }
+  .hud button:hover { background: var(--scarlet); border-color: var(--scarlet); }
+  .counter {
+    position: fixed; left: 14px; top: 14px;
+    color: rgba(255,255,255,0.55);
+    font: 600 11px var(--font-mono);
+    z-index: 30;
+    background: rgba(20,20,20,0.6); padding: 3px 9px; border-radius: 4px;
+    opacity: 0.5;
+  }
+  .counter:hover { opacity: 1; }
+
+  /* Help overlay */
+  .help {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+    display: none; place-items: center; z-index: 60; padding: 5vh;
+  }
+  .help.is-open { display: grid; }
+  .help .panel {
+    background: #1a1a1a; color: #fff; border: 1px solid #333;
+    border-top: 4px solid var(--scarlet);
+    padding: 28px 32px; max-width: 520px; border-radius: 8px;
+    font-size: 14px;
+  }
+  .help h3 { color: var(--gold); font-size: 16px; margin-bottom: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .help kbd {
+    background: #333; border: 1px solid #555; border-radius: 4px;
+    padding: 1px 7px; font: 600 12px var(--font-mono); color: #fff;
+  }
+  .help table { width: 100%; border-collapse: collapse; margin-top: 4px; }
+  .help td { padding: 4px 6px; }
+  .help td:first-child { width: 130px; }
+  .help .dismiss { margin-top: 16px; color: #aaa; font-size: 12px; text-align: right; }
+
+  /* Print: one slide per page */
+  @media print {
+    @page { size: 11in 6.1875in; margin: 0; }
+    body { background: #fff; overflow: visible; }
+    .stage, .frame { position: static; width: 100%; height: auto; box-shadow: none; }
+    .deck { display: block; }
+    .slide {
+      display: flex !important;
+      position: relative; inset: auto;
+      width: 100%; height: 6.1875in;
+      page-break-after: always;
+      break-after: page;
+    }
+    .frame { font-size: 12pt; aspect-ratio: auto; }
+    .hud, .counter, .notes, .help { display: none !important; }
+    /* Speaker notes live in <template> elements; the shared deck.css
+       universal print rules force `.speaker-notes { display: block }`
+       which makes the empty template tag render as a blank "Speaker
+       notes" panel under each slide. Suppress that for PDF export so
+       the deck prints as 28 clean slide pages with notes excluded. */
+    template.speaker-notes,
+    .slide > template,
+    .slide > .speaker-notes { display: none !important; }
+  }
+</style>
+<link rel="stylesheet" href="css/deck.css">
+<script src="js/deck.js" defer></script>
+</head>
+<body class="w5-deck">
+
+<div class="stage">
+  <div class="frame">
+    <div class="deck" id="deck">
+
+      <!-- ============ 1. COVER ============ -->
+      <section class="slide cover" data-title="Cover" data-section="Cover">
+        <div class="corner"><strong>Course 5</strong> · Week 5 of 6</div>
+        <div class="eyebrow">Expert-Driven Development · Supervisor Orientation</div>
+        <h1>Your people are waiting for you to say&nbsp;yes.</h1>
+        <p class="deck-sub">A leadership briefing on permission culture, evaluating AI-assisted work, and the apprentice problem.</p>
+        <div class="cover-meta">
+          <span class="badge badge--gold">Week 5</span>
+          <span class="badge">Leadership briefing</span>
+          <span class="badge">30 min · or extended joint session</span>
+        </div>
+        <div class="gold-bar"></div>
+        <div class="scarlet-bar"></div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Open warm. Eye contact. "Welcome — this is the highest-leverage 30 minutes in the entire EDD program. One supervisor creating permission culture enables an entire section. One supervisor creating fear culture kills adoption across their command. We're going to make sure you're the first kind."</p>
+            <p>State the contract: <em>"I'll respect your 30 minutes. In exchange, I need you fully here — not on email."</em> Then advance.</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>If supervisors are sitting alongside their builders, name it: "The people you supervise are in this room. By the end, they should know exactly what 'yes' sounds like from you, and you should know exactly what to ask them when they bring you AI-assisted work."</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"Before we get into anything — let me explain why this week looks a little different from Weeks 1 through 4."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 2. WHO THIS WEEK IS FOR ============ -->
+      <section class="slide" data-title="Who this week is for" data-section="Framing">
+        <div class="slide__head">
+          <span class="badge badge--scarlet">Audience shift</span>
+          <h2 class="slide__title">Who this week is for</h2>
+        </div>
+
+        <div class="audience-shift">
+          <div class="panel prior">
+            <span class="who">Weeks 1–4 · Builders</span>
+            <h3>Marines learning to use AI and build tools</h3>
+            <ul>
+              <li>Fluency, prototyping, Power Platform, advanced workshops</li>
+              <li>Hands-on by design — students were the workers</li>
+              <li>Time was spent <em>building</em></li>
+            </ul>
+          </div>
+          <div class="panel this-week">
+            <span class="who">Week 5 · Leadership</span>
+            <h3>Supervisors and decision-makers</h3>
+            <ul>
+              <li>Section leaders, OICs, SNCOs, civilians who approve work</li>
+              <li>You don't need to build — you need to <em>evaluate</em> and <em>permit</em></li>
+              <li>Time is spent on culture, judgment, and three decision exercises</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Week 5 · Supervisor Orientation</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>"Up to this week, the EDD program has been about helping Marines build with AI. This week is about you — the people who decide whether they're allowed to. Different audience, different objective."</p>
+            <p>Be direct: nobody is asking supervisors to write Python or stand up a Power App. The ask is to recognize good AI-assisted work when it lands on your desk and to set the conditions where good work can land on your desk in the first place.</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>If builders are present: "Builders, today the spotlight is on your supervisors. You're here as observers and as coaches — by the end, your supervisors will know what to ask you, and you'll know what they'll be looking for."</p>
+            <p>Pause and check the room. Ask one supervisor: "What's been your experience with AI in your section so far — anyone using it that you know of?" Listen. This sets up Module 2.</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"Because we know your time is limited, this same deck supports two delivery modes. Let me show you the choice."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 3. TWO DELIVERY MODES ============ -->
+      <section class="slide" data-title="Two delivery modes" data-section="Framing">
+        <div class="slide__head">
+          <span class="badge">Same deck · two modes</span>
+          <h2 class="slide__title">Pick the mode that fits today</h2>
+        </div>
+
+        <div class="modes">
+          <div class="mode">
+            <span class="mode__time">Mode A · 30 minutes</span>
+            <h3>Leadership briefing</h3>
+            <p>The standalone briefing. Five short modules. Tight script. Closes with one specific ask.</p>
+            <ul>
+              <li>5 min · Why this matters now</li>
+              <li>5 min · Permission culture</li>
+              <li>10 min · Evaluating AI-assisted output (2 scenarios, light debrief)</li>
+              <li>5 min · The apprentice problem</li>
+              <li>5 min · Quick reference + close</li>
+            </ul>
+          </div>
+          <div class="mode long">
+            <span class="mode__time">Mode B · 60–90 minutes</span>
+            <h3>Joint session with builders</h3>
+            <p>Same slides. Speaker notes branch into discussion prompts and a third decision exercise.</p>
+            <ul>
+              <li>Each module pauses for floor discussion</li>
+              <li>Scenarios A and B run as paired-talk + report-out</li>
+              <li>Adds Exercise C (Spot the Apprentice Risk)</li>
+              <li>Builders share one real artifact for live evaluation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Week 5 · Supervisor Orientation</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>"We're running the 30-minute version today. I'll narrate, you absorb, we close on time. There are two scenarios and a quick-reference card you can screenshot."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>"We're running the joint version. Same slides, but at three points I'm going to stop and ask you to talk to the supervisor or builder next to you for 3–5 minutes, then we'll surface what you heard."</p>
+            <p>Set expectations on participation. "If you're a supervisor, your job is to ask; if you're a builder, your job is to answer like you'd answer your boss."</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"Here's the route."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 4. AGENDA ============ -->
+      <section class="slide" data-title="Agenda" data-section="Framing">
+        <div class="slide__head">
+          <span class="badge">Agenda</span>
+          <h2 class="slide__title">Five modules · 30 minutes (or 60–90 in joint mode)</h2>
+        </div>
+
+        <table class="deck-tbl">
+          <thead>
+            <tr><th style="width: 18%;">Time</th><th style="width: 32%;">Module</th><th>Focus</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0:00 – 0:05</td><td>1. Why this matters now</td><td>The permission gap, the data, the directive</td></tr>
+            <tr><td>0:05 – 0:10</td><td>2. Permission culture</td><td>What "yes" sounds like; what kills adoption; guard rails (not roadblocks)</td></tr>
+            <tr><td>0:10 – 0:20</td><td>3. Evaluating AI-assisted output</td><td>Four questions; <strong>Exercises A &amp; B</strong></td></tr>
+            <tr><td>0:20 – 0:25</td><td>4. The apprentice problem</td><td>Junior development, three supervision checks; <strong>Exercise C</strong> (joint)</td></tr>
+            <tr><td>0:25 – 0:30</td><td>5. Quick reference &amp; commit</td><td>Reference card, leadership commitment, Week 6 preview</td></tr>
+          </tbody>
+        </table>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Week 5 · Supervisor Orientation</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Walk the row quickly: "Five modules. Three are short briefing blocks. Two — Module 3 and Module 4 — have decision exercises so you leave with practiced reps, not just talking points."</p>
+            <p>Do NOT read every cell aloud. Land the tempo: "Five short blocks, two with hands-on judgment work."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Add: "In joint mode, every module ends with floor discussion. Plan on 60–90 minutes total. Builders are paired with their supervisors for the scenario debriefs."</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"Before any of that — here's the one sentence you need to leave with if you forget everything else I say."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 5. CORE MESSAGE CENTERPIECE ============ -->
+      <section class="slide" data-title="Core message" data-section="Framing">
+        <div class="slide__head">
+          <span class="badge badge--scarlet">If you remember nothing else</span>
+          <h2 class="slide__title">The one sentence</h2>
+        </div>
+
+        <div class="centerpiece">
+          <div class="pull">Your people are <em>already</em> using AI.<br>They're waiting for you to say <em>yes</em>.</div>
+          <div class="attribution">Source: Mollick, <em>One Useful Thing</em> · enterprise field research</div>
+        </div>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Week 5 · Supervisor Orientation</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Slow down. Let the slide breathe for a beat before you talk.</p>
+            <p>"Mollick's research is explicit: across organizations, workers are already using AI tools. They're not asking permission, and they're not telling management. They're worried about how their organization will react. The permission gap — not the technology — is the largest barrier in your section."</p>
+            <p>Put a fine point on it: "If you do nothing else this week, decide whether your section knows you've said yes."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Pause for honest answers. Ask the supervisors: "Raise your hand if you suspect someone in your section is using AI for official work that you haven't formally approved."</p>
+            <p>Then ask the builders (without singling anyone out): "Raise your hand if you've ever used AI for work and not mentioned it to your supervisor." The hands tell the story.</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"Why now? Why this year? Five data points."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 6. MODULE 1 DIVIDER ============ -->
+      <section class="slide divider" data-title="Module 1" data-section="Module 1">
+        <div class="module-num">Module 1 · 5 minutes</div>
+        <h1>Why this matters now</h1>
+        <div class="module-meta">The data, the directive, and what it means for your section.</div>
+        <div class="scarlet-bar"></div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Quick beat. "Five minutes on context. The data is unambiguous: AI adoption with leadership support produces measurable results. AI adoption without it fails consistently."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Same intro. Add: "Builders, listen for which of these data points you'll cite the next time someone asks why we're doing this."</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>Advance to the data wall.</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 7. THE DATA WALL ============ -->
+      <section class="slide" data-title="The data wall" data-section="Module 1">
+        <div class="slide__head">
+          <span class="badge">Module 1 · the data</span>
+          <h2 class="slide__title">Five reasons "later" is no longer an option</h2>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat"><div class="num">~80%</div><div class="lbl">workers abandon AI within weeks <em>without</em> support<br><span class="micro">Microsoft</span></div></div>
+          <div class="stat"><div class="num">25 min</div><div class="lbl">/day saved <em>with</em> proper support<br><span class="micro">UK Gov · 20K employees</span></div></div>
+          <div class="stat"><div class="num">2026</div><div class="lbl">"Year of Military AI Dominance"<br><span class="micro">DoW AI Strategy · Jan 2026</span></div></div>
+          <div class="stat"><div class="num">49B</div><div class="lbl">new dedicated AI/ML officer career field<br><span class="micro">Army · Oct 2025</span></div></div>
+          <div class="stat"><div class="num">018/26</div><div class="lbl">MARADMIN designating GenAI.mil enterprise<br><span class="micro">Marine Corps</span></div></div>
+        </div>
+
+        <p class="lead" style="margin-top: 1vh;">The pattern: <strong>everywhere AI deployment was paired with leadership support, it stuck.</strong> Everywhere it wasn't, it died.</p>
+
+        <p class="source">Sources: Microsoft Work Trend Index · UK GDS 2025 · DoW AI Strategy Jan 2026 · Army HRC · MARADMIN 018/26.</p>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Module 1 · Why this matters now</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Read these as a row, not as bullets. "Microsoft tracked hundreds of thousands of users — 80% quit within weeks when there was no support. UK government gave 20,000 workers AI with training; they got 25 minutes back per day. DoW called 2026 the Year of Military AI Dominance. Army stood up an AI officer career field. Marine Corps designated the enterprise platform. Five different organizations, one direction of travel."</p>
+            <p>Don't apologize for the urgency. The Marines in this room respond to "this is the directive."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Pause after the data. Ask: "Which of these five is most likely to land with your CO if you have to defend an AI decision next week?" Take 2–3 answers.</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"So what does that mean operationally?"</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 8. AI IS A SITREP ITEM ============ -->
+      <section class="slide" data-title="AI is a SITREP item" data-section="Module 1">
+        <div class="slide__head">
+          <span class="badge badge--scarlet">Operational framing</span>
+          <h2 class="slide__title">AI is a SITREP item</h2>
+        </div>
+
+        <div class="centerpiece">
+          <div class="pull">It's <em>not optional</em> anymore.</div>
+          <p class="lead" style="margin-top: 2vh; max-width: 80%;">Your command directed it. The DoW directed it. The other services are already past the starting line. Your section is either reporting AI activity or reporting why it isn't.</p>
+        </div>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Module 1 · Why this matters now</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Short and direct. "AI is a SITREP item. That phrase is the ammunition you carry out of this room. When somebody says 'we're not doing the AI thing yet,' you have a one-line answer: it's a SITREP item."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Optional: "Builders — when your supervisor says 'AI is a SITREP item,' that's the green light. Bring them something to report."</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"Now — your role. Module 2 is the shortest of the day, and the most important behavior change."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 9. MODULE 2 DIVIDER ============ -->
+      <section class="slide divider" data-title="Module 2" data-section="Module 2">
+        <div class="module-num">Module 2 · 5 minutes</div>
+        <h1>Permission culture</h1>
+        <div class="module-meta">What "yes" sounds like · what kills adoption · guard rails, not roadblocks.</div>
+        <div class="scarlet-bar"></div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Frame it: "Five minutes. The behavior change you make starting Monday. We'll do the language of 'yes' first, then the things that quietly kill adoption, then the boundaries you should keep."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Add: "Builders — you're going to hear specific phrases from your supervisor today. Notice which ones you've already heard, and which ones you'd like to hear."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 10. WHAT YES vs WHAT KILLS ============ -->
+      <section class="slide" data-title="What yes / what kills" data-section="Module 2">
+        <div class="slide__head">
+          <span class="badge">Module 2 · culture</span>
+          <h2 class="slide__title">The language your section is listening for</h2>
+        </div>
+
+        <div class="cols">
+          <div class="col">
+            <div class="col__head col__head--good">What "yes" sounds like</div>
+            <ul>
+              <li>"Try it. Show me what you build."</li>
+              <li>"I don't need to understand <em>how</em> it works. I need to understand <em>what</em> it does."</li>
+              <li>"If it saves time and meets quality standards, we should do it."</li>
+              <li>Protected time for learning — even 30 minutes a week.</li>
+              <li>Public recognition when somebody builds something useful.</li>
+            </ul>
+          </div>
+          <div class="col">
+            <div class="col__head col__head--bad">What kills adoption</div>
+            <ul>
+              <li>"I need to approve every AI interaction."</li>
+              <li>"Don't use AI for anything official."</li>
+              <li>"We'll wait until there's a formal policy."</li>
+              <li>Punishing experimentation failures.</li>
+              <li>Treating AI use as suspicious or lazy.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Module 2 · Permission culture</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Read 1–2 from each column, don't read all. "On the left, the language of yes. On the right, the four phrases that quietly drive AI use underground in every organization where they're spoken."</p>
+            <p>Land it: "Pick one phrase from the left to use this week. Pick one phrase from the right to <em>stop</em> using."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Run the room. "Supervisors — turn to the builder you came in with and tell them which left-column phrase you commit to using this month. Builders — tell your supervisor which right-column phrase you've heard at least once. Two minutes."</p>
+            <p>Surface 2–3 commitments out loud. Do NOT name-and-shame the right-column phrases.</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"Beyond language — four behaviors specifically not to do."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 11. WHAT NOT TO DO ============ -->
+      <section class="slide" data-title="What NOT to do" data-section="Module 2">
+        <div class="slide__head">
+          <span class="badge badge--scarlet">Anti-patterns</span>
+          <h2 class="slide__title">What supervisors should <em>not</em> do</h2>
+        </div>
+
+        <div class="callout callout--warn" style="flex: 1;">
+          <ol class="big-list">
+            <li>
+              <div>
+                <strong>Don't ban AI use outright.</strong>
+                <p>Prohibition drives it underground where you can't guide it. You lose visibility and you lose control.</p>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Don't require approval for every AI interaction.</strong>
+                <p>Creates a bottleneck that kills velocity. Review the output, not every query.</p>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Don't assume AI output is automatically wrong.</strong>
+                <p>Reflexive skepticism kills adoption. Verify like any work product — evidence-based, not assumption-based.</p>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Don't skip verification because the Marine is experienced.</strong>
+                <p>Seniority does not eliminate hallucination risk. Everyone verifies.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Module 2 · Permission culture</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Walk the four. Each one a single beat: "Don't ban it. Don't gate every interaction. Don't assume it's wrong. Don't skip review for senior Marines."</p>
+            <p>Anchor #1 emphatically: "Prohibition is the worst possible position. You don't get less AI use — you get the same AI use, but invisible."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Ask: "Which of these four is the easiest mistake to make?" Most rooms pick #2 (gating every interaction). Use that as the bridge to guard rails.</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"The alternative isn't 'no rules.' It's the right rules in the right places. Guard rails, not roadblocks."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 12. GUARD RAILS NOT ROADBLOCKS ============ -->
+      <section class="slide" data-title="Guard rails not roadblocks" data-section="Module 2">
+        <div class="slide__head">
+          <span class="badge">Module 2 · boundaries</span>
+          <h2 class="slide__title">Guard rails, not roadblocks</h2>
+        </div>
+
+        <div class="cols">
+          <div class="col">
+            <h3>The four boundaries that always apply</h3>
+            <ul>
+              <li>All tools go through the <strong>EDD SOP</strong> before deployment.</li>
+              <li>AI-generated content for official use must be <strong>human-reviewed</strong>.</li>
+              <li><strong>Sensitive or classified information</strong> never enters unauthorized AI systems.</li>
+              <li>Failed experiments are <strong>shared as learning</strong> — not punished as waste.</li>
+            </ul>
+          </div>
+          <div class="col" style="justify-content: center;">
+            <div class="callout callout--good">
+              <h3 style="color: var(--good-text);">Default posture</h3>
+              <p style="font-size: 1.6vw; font-weight: 700; line-height: 1.3; color: var(--good-text);">"Yes, with appropriate review."</p>
+              <p style="margin-top: 1vh;">That single sentence is your operating policy until something specific tells you otherwise.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Module 2 · Permission culture</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>"Four boundaries. Tools go through the SOP. Official output gets reviewed. Classified data never touches an unauthorized system. Failures get shared, not punished."</p>
+            <p>Then anchor on the green box: "Your default answer when somebody asks if they can try AI for a task: 'Yes, with appropriate review.' Memorize that sentence."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Ask supervisors: "Which of the four boundaries is currently the weakest in your section?" Take 2–3 honest answers — usually it's #4 (sharing failures).</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"Now — when a Marine actually shows up at your desk with AI-assisted work, what do you ask? Module 3."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 13. MODULE 3 DIVIDER ============ -->
+      <section class="slide divider" data-title="Module 3" data-section="Module 3">
+        <div class="module-num">Module 3 · 10 minutes</div>
+        <h1>Evaluating AI-assisted output</h1>
+        <div class="module-meta">Four questions · two practice scenarios · the standard you already use.</div>
+        <div class="scarlet-bar"></div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>"This is the longest block — ten minutes — because evaluation is the supervisor skill. Four questions, then two scenarios so you've practiced the questions before you need them on Monday."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Add: "In joint mode, supervisor and builder pair up for each scenario. Supervisor asks the four questions; builder responds as if their own work were under review."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 14. FOUR QUESTIONS ============ -->
+      <section class="slide" data-title="Four questions" data-section="Module 3">
+        <div class="slide__head">
+          <span class="badge">Module 3 · the framework</span>
+          <h2 class="slide__title">Four questions — every time</h2>
+        </div>
+
+        <ol class="big-list" style="flex: 1;">
+          <li>
+            <div>
+              <strong>Does it work?</strong>
+              <p>Can you demonstrate it doing what it claims to do — live, end to end?</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>Is the output accurate?</strong>
+              <p>Are facts, references, citations, numbers, and dates verifiable against source material?</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>Does it follow the SOP?</strong>
+              <p>Has it gone through the proper review path (peer, SME, security as required)?</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>Does it save time?</strong>
+              <p>Is there a credible before/after comparison — and is the QA time reasonable for the gain?</p>
+            </div>
+          </li>
+        </ol>
+
+        <p class="lead" style="margin-top: 0.6vh;">You do <em>not</em> need to evaluate <em>how</em> AI produced it. The same standards as any work product apply: <strong>if a Marine handed this to you without mentioning AI, would you sign it?</strong></p>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Module 3 · Evaluating output</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Walk the four crisply. Don't read the sub-text on each — paraphrase: "Does it work — show me. Is it accurate — verify the facts. Did it follow the SOP — was it reviewed properly. Does it save time — what's the before-and-after."</p>
+            <p>The takeaway sentence is the punchline. Read it word for word: "If a Marine handed this to you without mentioning AI, would you sign it? That is the standard."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>"Builders — those four questions are also your pre-flight checklist. If you can answer them before you walk into your supervisor's office, you'll get to yes faster every time."</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"Let's apply them. Scenario A."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 15. EXERCISE A — SCENARIO ============ -->
+      <section class="slide" data-title="Exercise A — scenario" data-section="Module 3">
+        <div class="slide__head">
+          <span class="badge badge--gold">Exercise A · scenario</span>
+          <h2 class="slide__title">AI-generated leave policy summary</h2>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario__label">Scenario</div>
+          <p>A Marine presents you with a one-page summary of leave policy for Emergency Leave Authorization. The summary is clear, well-formatted, and cites <strong>MCO P1050.3K</strong>. The Marine tells you it was generated using ChatGPT and reviewed for accuracy. They want to distribute it to the section.</p>
+        </div>
+
+        <div class="prompt-box">
+          <span class="label">Your move</span>
+          What do you ask first? What gets the green light? What earns a "not yet"?
+        </div>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Module 3 · Exercise A</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Read the scenario aloud. Then give the room 30 seconds of silent thinking. Take ONE answer from one supervisor: "What's the first thing you'd ask?" Don't grade the answer — just receive it. Advance.</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Run as paired discussion. Three minutes. Each supervisor asks their builder partner the four questions against this scenario. Then surface 2–3 questions from the room before advancing to the debrief slide.</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"Here are the questions a strong supervisor lands on this scenario."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 16. EXERCISE A — DEBRIEF ============ -->
+      <section class="slide" data-title="Exercise A — debrief" data-section="Module 3">
+        <div class="slide__head">
+          <span class="badge">Exercise A · debrief</span>
+          <h2 class="slide__title">What a strong supervisor asks</h2>
+        </div>
+
+        <div class="cols">
+          <div class="col">
+            <ul>
+              <li><strong>Can you verify the MCO citation?</strong> Pull up the actual order. Does the summary match?</li>
+              <li><strong>What did you give the AI as input?</strong> Full MCO text, or general questions? Context quality drives output quality.</li>
+              <li><strong>Who reviewed this for accuracy?</strong> AI-generated policy needs SME verification — not just proofreading.</li>
+              <li><strong>What's the update path?</strong> If policy changes, who refreshes this — or do outdated summaries circulate forever?</li>
+            </ul>
+          </div>
+          <div class="col" style="justify-content: center;">
+            <div class="callout callout--info">
+              <h4>The principle</h4>
+              <p>The Marine did the right thing — they brought it to you. Your job is to verify the <em>output</em> and the <em>process</em>, not interrogate the tool. Approve, ask for SME sign-off, or send it back with a specific gap.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Module 3 · Exercise A debrief</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Walk the four prompts as your modeled response. Don't lecture — model. "These are the four questions I would ask. Yours might be sharper. The point is having four ready instead of one panicked one."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Ask supervisors: "Did your version of these questions get to the same place?" Then ask builders: "If your supervisor asked you these four, which one would you have the weakest answer to?"</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"Different shape of work — Scenario B."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 17. EXERCISE B — SCENARIO ============ -->
+      <section class="slide" data-title="Exercise B — scenario" data-section="Module 3">
+        <div class="slide__head">
+          <span class="badge badge--gold">Exercise B · scenario</span>
+          <h2 class="slide__title">Automated reporting tool</h2>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario__label">Scenario</div>
+          <p>A Marine built a Python script that pulls data from a shared spreadsheet and auto-generates the weekly operations summary. <strong>It runs in 30 seconds. The manual process took 90 minutes.</strong> The Marine wants approval to use it for official reporting.</p>
+        </div>
+
+        <div class="prompt-box">
+          <span class="label">Your move</span>
+          The time savings are real. The risk is also real. Which questions go first?
+        </div>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Module 3 · Exercise B</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Same drill as Scenario A. Read it, 30 seconds of silence, take one answer, advance.</p>
+            <p>Note that this scenario is harder — the time savings are seductive, and the failure modes are subtle. Hold the room from rushing to "approved."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Paired discussion, three minutes. Builders should respond honestly — most have built something like this and most have <em>not</em> done all the QA. Use this as the teaching moment.</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"Here's the strong-supervisor playbook for an automation tool."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 18. EXERCISE B — DEBRIEF ============ -->
+      <section class="slide" data-title="Exercise B — debrief" data-section="Module 3">
+        <div class="slide__head">
+          <span class="badge">Exercise B · debrief</span>
+          <h2 class="slide__title">What a strong supervisor asks</h2>
+        </div>
+
+        <div class="cols">
+          <div class="col">
+            <ul>
+              <li><strong>Can you demonstrate it with live data?</strong> Show input, process, output. Walk through one full cycle in front of me.</li>
+              <li><strong>What happens when input data is malformed?</strong> Does it fail gracefully — or does it generate confident, incorrect reports?</li>
+              <li><strong>Who else has reviewed this code?</strong> Per the EDD SOP, automation tools need peer review and security review before operational use.</li>
+              <li><strong>How do we verify accuracy each week?</strong> Sampling checks, output validation — what's the ongoing QA?</li>
+            </ul>
+          </div>
+          <div class="col" style="justify-content: center;">
+            <div class="callout callout--scarlet">
+              <h4>The trap</h4>
+              <p>"It saves 89 minutes" is not a Yes. It's a reason to take the four questions <em>more</em> seriously, not fewer. The most dangerous AI-assisted work is the kind that's obviously valuable.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Module 3 · Exercise B debrief</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Walk the four. Then land the trap: "When the time savings look obviously good, that's exactly when supervisors skip the verification questions. Don't."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Optional builder follow-up: "Of the builders here, who has actually run their own tool through the SOP peer + security review?" The honest hand count tells you where your gap is.</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"Two scenarios in your pocket. Now — the long-term risk that supervisors are uniquely positioned to prevent. Module 4."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 19. MODULE 4 DIVIDER ============ -->
+      <section class="slide divider" data-title="Module 4" data-section="Module 4">
+        <div class="module-num">Module 4 · 5 minutes</div>
+        <h1>The apprentice problem</h1>
+        <div class="module-meta">The risk you can't see this year — and that no one else will catch.</div>
+        <div class="scarlet-bar"></div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Mark a tonal shift: "We've talked about today. This block is about five years from now. It's the strategic risk only supervisors can prevent, because nobody else is positioned to see it."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>"Supervisors — this module is for you. Builders — listen for what your career path looks like if your supervisors get this wrong."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 20. APPRENTICE PROBLEM CENTERPIECE ============ -->
+      <section class="slide" data-title="Apprentice problem — centerpiece" data-section="Module 4">
+        <div class="slide__head">
+          <span class="badge badge--scarlet">Centerpiece</span>
+          <h2 class="slide__title">Architects who never laid a brick</h2>
+        </div>
+
+        <div class="apprentice">
+          <div class="quote">
+            <p class="q">"That training pipeline that was always implicit has broken — and it has to be reconstructed."</p>
+            <div class="by">— Ethan Mollick · Wharton, 2025</div>
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <div class="num">−35%</div>
+              <div class="lbl">Entry-level job postings in AI-exposed occupations <em>(Jan 2023 → Jun 2025)</em></div>
+            </div>
+            <div class="stat">
+              <div class="num">−13%</div>
+              <div class="lbl">Employment among workers age 22–25 in those fields</div>
+            </div>
+            <div class="stat">
+              <div class="num">5–10 yrs</div>
+              <div class="lbl">until organizations that cut junior roles face an expertise shortage they cannot hire out of</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Module 4 · The apprentice problem</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Slow down. Read the Mollick quote with weight, then walk the three numbers right to left.</p>
+            <p>"Entry-level postings in AI-exposed jobs are down 35%. Employment among 22- to 25-year-olds in those fields is down 13%. The civilian world is producing a generation of architects who never laid a brick — people who can operate AI but cannot operate without it. The military cannot afford that. We will be operating without it sometimes."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Ask the room: "Think about the most formative task of your first three years. The one where you learned judgment, not just procedure. Now imagine AI had done it for you. What didn't you learn?" Take 2–3 answers.</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"So what does a supervisor actually do about it? Three checks."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 21. THREE SUPERVISION CHECKS ============ -->
+      <section class="slide" data-title="Three supervision checks" data-section="Module 4">
+        <div class="slide__head">
+          <span class="badge">Module 4 · the protocol</span>
+          <h2 class="slide__title">Three supervision checks for junior development</h2>
+        </div>
+
+        <ol class="big-list" style="flex: 1;">
+          <li>
+            <div>
+              <strong>Can the Marine explain the output without referencing AI?</strong>
+              <p>If they can't walk you through the logic, they didn't learn — they copied.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>Require periodic tasks completed without AI.</strong>
+              <p>Preserves baseline competency. If the tool disappears, can they still operate?</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>Use AI output as a teaching tool.</strong>
+              <p>"Is this correct? How would you verify it? What would happen if this number were wrong?" That's where judgment is built.</p>
+            </div>
+          </li>
+        </ol>
+
+        <p class="lead"><strong>Goal:</strong> AI-augmented Marines, <em>not</em> AI-dependent ones.</p>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Module 4 · The apprentice problem</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Walk the three. Anchor each: explain-without-AI, periodic-without-AI, AI-as-teaching-tool.</p>
+            <p>Land the goal sentence: "Augmented, not dependent. That's your sign-off line on every junior Marine's development plan."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Ask supervisors: "Which of these three are you already doing — and which are you going to add?" Get specific commitments aloud where possible.</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"One more apprentice-problem reminder before we get to the wrap."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 22. EXERCISE C — SPOT THE RISK ============ -->
+      <section class="slide" data-title="Exercise C — spot the apprentice risk" data-section="Module 4">
+        <div class="slide__head">
+          <span class="badge badge--gold">Exercise C · apprentice risk</span>
+          <h2 class="slide__title">Spot the apprentice risk</h2>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario__label">Scenario · joint discussion</div>
+          <p>A new SgtSec NCO is assigned to draft initial counseling statements for three junior Marines. They use ChatGPT to produce all three drafts in under five minutes. The drafts are technically correct. They sign and submit them. Their supervisor approves them without comment.</p>
+        </div>
+
+        <div class="cols" style="margin-top: 1.4vh;">
+          <div class="col">
+            <h4 style="color: var(--scarlet-deep);">What was lost</h4>
+            <ul>
+              <li>The new NCO never wrestled with how to characterize a Marine's performance.</li>
+              <li>They didn't develop the language a counseling statement actually requires.</li>
+              <li>They learned that AI handles people work — and that the supervisor doesn't notice.</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4 style="color: var(--good-text);">What a permission-culture supervisor does</h4>
+            <ul>
+              <li>Approves AI for the <em>format and structure</em>, not the judgment.</li>
+              <li>Requires the NCO to write the assessment paragraphs from scratch.</li>
+              <li>Reviews together: "What did the AI miss about this Marine?"</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Module 4 · Exercise C</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>If you're tight on time, walk the scenario quickly and skip the cols. The point is to plant the pattern: developmental tasks deserve a different default than routine tasks.</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Run as full-room discussion, 5–7 minutes. Ask: "What would you have done differently as either the NCO or the supervisor?" Capture answers visibly. End with: "Counseling statements are a developmental task. Name another developmental task in your section that AI is currently doing instead of being a teaching tool."</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"Last block — the reference card you'll actually carry."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 23. MODULE 5 DIVIDER ============ -->
+      <section class="slide divider" data-title="Module 5" data-section="Module 5">
+        <div class="module-num">Module 5 · 5 minutes</div>
+        <h1>Quick reference &amp; commit</h1>
+        <div class="module-meta">A card for your screen · the tools · further reading · Week 6 preview · the ask.</div>
+        <div class="scarlet-bar"></div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>"Five minutes left. We're going to give you a screenshot-able reference card, name the tools your Marines should be using, point at two short briefs you can hand your CO, preview Week 6, and close with the one specific ask."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>If running long, the apprentice exercise can extend; this module is mostly reference and can be condensed if needed.</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 24. SUPERVISOR QUICK REFERENCE ============ -->
+      <section class="slide" data-title="Supervisor quick reference" data-section="Module 5">
+        <div class="slide__head">
+          <span class="badge badge--gold">Take a screenshot of this slide</span>
+          <h2 class="slide__title">Supervisor quick reference: AI-assisted work</h2>
+        </div>
+
+        <div class="qref">
+          <div class="card scarlet">
+            <h4>3 questions before you approve</h4>
+            <ul>
+              <li><strong>Demonstrate it.</strong> Live demo with real inputs.</li>
+              <li><strong>Verify accuracy.</strong> Specific checks, not general trust.</li>
+              <li><strong>Who reviewed it?</strong> Peer · SME · security per the SOP.</li>
+            </ul>
+          </div>
+          <div class="card good">
+            <h4>3 signs of healthy AI use</h4>
+            <ul>
+              <li>The Marine can explain the output <em>without</em> referencing AI.</li>
+              <li>Failed experiments are shared openly — learning culture.</li>
+              <li>AI is saving time on routine tasks, not replacing judgment tasks.</li>
+            </ul>
+          </div>
+          <div class="card warn">
+            <h4>3 warning signs</h4>
+            <ul>
+              <li>Marine cannot answer basic questions about their own output.</li>
+              <li>AI use is hidden or apologized for — sign of a fear culture.</li>
+              <li>Junior Marines are skipping foundational tasks entirely.</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="lead" style="margin-top: 1.4vh;"><strong>Default posture: "Yes, with appropriate review."</strong></p>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Module 5 · Quick reference</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Tell the room directly: "Take a phone picture of this slide right now. This is the card. Three to ask, three healthy signs, three warning signs, one default posture."</p>
+            <p>Don't read all nine. Read the three card headlines and the default posture. The card does the rest.</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Have one supervisor read each card out loud. Reinforces ownership without adding lecture time.</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"Quick note on what tools your Marines should actually be using."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 25. TOOLS YOUR MARINES WILL USE ============ -->
+      <section class="slide" data-title="Approved tools" data-section="Module 5">
+        <div class="slide__head">
+          <span class="badge">Module 5 · approved tools</span>
+          <h2 class="slide__title">Tools your Marines will use</h2>
+        </div>
+
+        <div class="cols cols--3">
+          <div class="col">
+            <div class="callout callout--scarlet" style="height: 100%;">
+              <h4>GenAI.mil</h4>
+              <p><strong>Default for DoD networks.</strong> IL5-authorized for CUI per MARADMIN 018/26. Hosts Gemini, Grok, ChatGPT inside the DoD boundary. ~1.1M users.</p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="callout callout--info" style="height: 100%;">
+              <h4>CamoGPT (Army)</h4>
+              <p>Supplementary capabilities: API access, tool calling, file upload, shared workspaces, IL6/SIPR access for classified network use.</p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="callout" style="height: 100%; border-color: var(--rule);">
+              <h4>Commercial: ChatGPT, Gemini</h4>
+              <p>Approved for <strong>unclassified</strong> work only via vendor websites. Supplement DoD tools when CUI is not involved. Also available inside GenAI.mil.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout callout--warn" style="margin-top: 1.4vh;">
+          <h4>Always</h4>
+          <p>PII must be anonymized on every platform unless a PIA explicitly authorizes it. Sensitive or classified data never enters unauthorized systems. See the EDD <em>Approved Tools</em> page.</p>
+        </div>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Module 5 · Approved tools</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Fast walk: "Default is GenAI.mil — IL5, CUI, MARADMIN-designated. CamoGPT for Army-shared capabilities including SIPR/IL6. ChatGPT and Gemini via the public sites for unclassified only. PII gets anonymized everywhere unless a PIA says otherwise."</p>
+            <p>If a supervisor asks about a specific tool not on the slide, point at the EDD Approved Tools page.</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Ask builders: "Which platform are you on most days, and what made you pick it?" Quick room calibration.</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"Two short documents to hand your CO if you need air cover."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 26. FURTHER READING ============ -->
+      <section class="slide" data-title="Further reading" data-section="Module 5">
+        <div class="slide__head">
+          <span class="badge">Module 5 · further reading</span>
+          <h2 class="slide__title">Two briefs to hand your CO</h2>
+        </div>
+
+        <div class="cols">
+          <div class="col">
+            <div class="callout callout--scarlet" style="height: 100%;">
+              <h4>EDD Executive Brief</h4>
+              <p>15-slide Teams briefing. The "what is EDD, why now, what we're asking from leadership" deck — designed for an O-5/O-6 audience.</p>
+              <p class="small"><code>docs/pdf/EDD_Executive_Brief.pdf</code></p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="callout callout--info" style="height: 100%;">
+              <h4>EDD RAI Compliance Brief</h4>
+              <p>One-page compliance map: how the EDD program aligns with DoD AI guidelines and Responsible AI guardrails. The document for your staff judge advocate or compliance officer.</p>
+              <p class="small"><code>docs/pdf/EDD_RAI_Compliance_Brief.pdf</code></p>
+            </div>
+          </div>
+        </div>
+
+        <p class="lead" style="margin-top: 1vh;">If you only forward one thing after this session: <strong>send the Executive Brief to your O-5/O-6 with one sentence — "We are doing this; here is the structure."</strong></p>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Module 5 · Further reading</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>"Two PDFs in the EDD repo. Executive Brief is your air-cover document with senior leadership. RAI Compliance Brief is your air-cover document with your judge advocate or compliance officer. Both are short. Both are designed to be read once and forwarded."</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>If running joint, ask: "Who in this room has already had the AI conversation with leadership? What worked, what didn't?" 60 seconds, then advance.</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"Brief look at next week so you know what your builders are heading into."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 27. WEEK 6 PREVIEW ============ -->
+      <section class="slide" data-title="Week 6 preview" data-section="Module 5">
+        <div class="slide__head">
+          <span class="badge">Up next</span>
+          <h2 class="slide__title">Week 6 · Full-Stack AI-Assisted Development</h2>
+        </div>
+
+        <div class="cols">
+          <div class="col">
+            <h3>The bonus capstone</h3>
+            <ul>
+              <li><strong>Audience:</strong> advanced builders only (elective — has prerequisites)</li>
+              <li><strong>Duration:</strong> 8 hours, builder-track</li>
+              <li><strong>Outcome:</strong> direct AI to write a complete Go + React + Docker application</li>
+              <li><strong>Pattern:</strong> full Cyborg-mode at full-stack scale</li>
+              <li><strong>Prereq:</strong> Advanced Workshop completed + at least one deployed tool</li>
+            </ul>
+          </div>
+          <div class="col" style="justify-content: center;">
+            <div class="callout callout--info">
+              <h4>What this means for supervisors</h4>
+              <p>Most of your Marines will <em>not</em> take Course 6 — and that's by design. It's for the small group whose problems exceed the Power Platform envelope.</p>
+              <p>If a builder in your section asks about it, the question to ask is: <em>"Show me the deployed tool you built first."</em></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide__foot">
+          <span><span class="scarlet-mark"></span>Module 5 · Week 6 preview</span>
+          <span class="page-num"></span>
+        </div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>Quick. "Week 6 is the full-stack capstone. Most of your section won't take it. The ones who do will already have a deployed tool and a clear use case the Power Platform can't handle."</p>
+            <p>Don't oversell it — supervisors don't need to evaluate Go/React/Docker. They need to evaluate whether a Marine has earned the seat: deployed tool first, fancy stack second.</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Ask any builders present: "Anyone planning on Course 6? What's the problem you can't solve in Power Platform?" Calibrates the room on what "earned the seat" actually looks like.</p>
+          </div>
+          <div class="note-block transition"><span class="tag">Transition</span>
+            <p>"Last slide. The commitment."</p>
+          </div>
+        </template>
+      </section>
+
+      <!-- ============ 28. LEADERSHIP COMMITMENT / CLOSING ============ -->
+      <section class="slide closing" data-title="Leadership commitment" data-section="Closing">
+        <div class="eyebrow">Leadership Commitment</div>
+        <h1>The structure exists. Your people have the motivation. Your job is to give the&nbsp;permission.</h1>
+        <div class="ask">
+          <span class="label">Within the next week</span>
+          <p>Ask one person in your section what they'd build if they had permission. Listen to the answer. Then say <em>yes, with appropriate review</em>.</p>
+        </div>
+        <div class="scarlet-bar"></div>
+
+        <template class="speaker-notes">
+          <div class="note-block briefing"><span class="tag">Briefing — 30 min</span>
+            <p>End on time. Don't add slides. Read the headline aloud, then the ask, then thank them and stop.</p>
+            <p>"Within the next week, ask one person in your section what they'd build if they had permission. That's the only homework. If you do that one thing, this 30 minutes was worth your time."</p>
+            <p>Hold a beat. Don't rush off. Let the ask sit.</p>
+          </div>
+          <div class="note-block joint"><span class="tag">Joint Session — extended</span>
+            <p>Build a closing accountability moment: "Supervisors — say out loud who you're going to ask, and by when. Two sentences each. Builders — your job is to remember who said your name." Quick round, then close.</p>
+            <p>Final sentence: "EDD provides the structure. You provide the permission. Go give it."</p>
+          </div>
+          <div class="note-block transition"><span class="tag">After class</span>
+            <p>Send the Executive Brief link to anyone who asked. Note any supervisors who pushed back — they're follow-up coffees, not adversaries. Log attendance.</p>
+          </div>
+        </template>
+      </section>
+
+    </div>
+  </div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,11 +1,13 @@
-# Expert-Driven Development — Training Curricula v5.0
-## Revised February 2026
+# Expert-Driven Development — Training Curricula v5.1
+## Revised February 2026 · Course 6 Bonus capstone added April 2026
 
 ### What Changed From v4.0
 
 The v4.0 curriculum restructured training around six 201-level skills. That was the right move. But it crammed two different audiences into the same opening course: people who need to *use* AI effectively and people who want to *build* tools with AI. Those are different training objectives for different populations.
 
-This revision adds a fifth course — AI Fluency Fundamentals — as a standalone 2-hour universal requirement. Every Marine, sailor, and civilian at MCCES takes this course. It teaches the six 201-level skills, the jagged frontier, centaur/cyborg work patterns, and quality judgment. No tool-building required. No Power Platform. Just the applied judgment skills that research shows actually predict sustained AI adoption.
+The v5.0 revision added a fifth course — AI Fluency Fundamentals — as a standalone 2-hour universal requirement. Every Marine, sailor, and civilian at MCCES takes this course. It teaches the six 201-level skills, the jagged frontier, centaur/cyborg work patterns, and quality judgment. No tool-building required. No Power Platform. Just the applied judgment skills that research shows actually predict sustained AI adoption.
+
+The v5.1 revision adds a sixth course — **Full-Stack AI-Assisted Development** — as a Bonus capstone for builders whose problems exceed the Power Platform envelope. It is elective, runs after Advanced Workshop, and teaches Marines to direct AI to write a complete Go + React + Docker application. The full per-module instructor script lives on the EDD site (`docs/courses/fullstack.html`); only the headline summary is reproduced in the table below.
 
 The builder courses (Trainings 1–3) now assume students arrive with the 201 framework already internalized. They spend zero time on theory and 100% of time building.
 
@@ -115,15 +117,18 @@ This means Frontier Recognition can't be learned once and memorized. It has to b
 
 ## Training Overview
 
-### Five Courses, One Goal
+### Six Courses, One Goal
+
+Five core courses plus one Bonus capstone. The first five form the standard EDD program; Course 6 is an elective for builders whose problems exceed the Power Platform envelope.
 
 | Course | Duration | Audience | Prerequisite | Outcome |
 |--------|----------|----------|--------------|---------|
-| **AI Fluency Fundamentals** | 2 hours | All personnel | None | Understand the six 201 skills, recognize the jagged frontier, know when to trust AI output, map AI into your workflow |
-| **Builder Orientation** | 2 hours | Aspiring builders | AI Fluency Fundamentals | Build a working prototype, apply task decomposition and iterative refinement in practice |
-| **Platform Training** | 4 hours | Builders | Builder Orientation | Build 3 complete tools on Power Platform using centaur and cyborg work patterns |
-| **Advanced Workshop** | 4 hours | Experienced builders | At least one deployed tool | Map the frontier for your domain, build verification protocols, teach others |
-| **Supervisor Orientation** | 30 minutes | Leadership | None | Evaluate proposals, create permission culture, understand the apprentice problem |
+| **1. AI Fluency Fundamentals** | 2 hours | All personnel | None | Understand the six 201 skills, recognize the jagged frontier, know when to trust AI output, map AI into your workflow |
+| **2. Builder Orientation** | 2 hours | Aspiring builders | AI Fluency Fundamentals | Build a working prototype, apply task decomposition and iterative refinement in practice |
+| **3. Platform Training** | 4 hours | Builders | Builder Orientation | Build 3 complete tools on Power Platform using centaur and cyborg work patterns |
+| **4. Advanced Workshop** | 4 hours | Experienced builders | At least one deployed tool | Map the frontier for your domain, build verification protocols, teach others |
+| **5. Supervisor Orientation** | 30 minutes | Leadership | None | Evaluate proposals, create permission culture, understand the apprentice problem |
+| **6. Full-Stack AI-Assisted Development** *(Bonus, elective)* | 8 hours | Advanced builders | Advanced Workshop + at least one deployed tool | Direct AI to build and deploy a complete Go + React + Docker application; apply the Cyborg pattern at full-stack scale |
 
 ### Prerequisites
 
@@ -658,7 +663,7 @@ Mollick's research is explicit: workers are already using AI and hiding it. They
 | Time | Module | Focus |
 |------|--------|-------|
 | 0:00–0:05 | Why This Matters Now | The 80% problem, DoW AI Strategy, rapid adoption mandate |
-| 0:05–0:12 | What EDD Is | Five courses, six 201 skills, research foundation (headline level) |
+| 0:05–0:12 | What EDD Is | Six courses (five core plus one Bonus capstone), six 201 skills, research foundation (headline level) |
 | 0:12–0:20 | Your Role: Creating Permission | What "yes" looks like, what kills adoption, guard rails |
 | 0:20–0:27 | Evaluating Proposals and Output | Four questions to ask, what quality looks like |
 | 0:27–0:30 | The Apprentice Problem | Preserving junior development while gaining efficiency |
@@ -676,7 +681,7 @@ Mollick's research is explicit: workers are already using AI and hiding it. They
 
 **The four-layer framework:**
 1. SOP — Governance: How tools are proposed, reviewed, approved, and maintained
-2. Training — Education: Five courses from universal fluency to advanced building
+2. Training — Education: Six courses (five core plus one Bonus capstone) from universal fluency to advanced building
 3. QA — Quality: Peer review, security assessment, and user verification
 4. Community — Sustainability: Shared frontier maps, workflow playbooks, cross-unit mentoring
 
@@ -828,6 +833,7 @@ Mollick's research is explicit: workers are already using AI and hiding it. They
 | v3.0 | Jan 2026 | Restructured around EDD SOP, added QA framework |
 | v4.0 | Feb 2026 | Restructured around 201-level skills, jagged frontier, centaur/cyborg patterns, quality judgment exercises, frontier mapping |
 | v5.0 | Feb 2026 | Added AI Fluency Fundamentals as universal 5th course; expanded research foundation with GDPval, Mollick delegation equation, Brynjolfsson skill-leveling, UK Government study; added delegation equation module; strengthened apprentice problem protocols; added junior development field to workflow playbooks; full research source appendix |
+| v5.1 | Apr 2026 | Added Course 6 (Full-Stack AI-Assisted Development) as a Bonus elective capstone; updated headline counts from "five courses" to "six courses (five core plus one Bonus capstone)"; per-module instructor script for Course 6 lives on the EDD site rather than in the master MD |
 
 ---
 
