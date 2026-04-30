@@ -3914,3 +3914,298 @@ body.w5-deck .slide.is-active, body.w6-deck .slide.is-active { display: flex; fl
     }
   }
   
+
+  /* ============================================================
+     UNIVERSAL HANDOUT VIEW
+     Activated by ?handout=1 / ?handout=2 (default 2-up) or ?handout=4.
+     deck.js (buildHandout) re-arranges the document so each .slide is
+     moved into a thumbnail frame paired with its rendered speaker notes.
+     This stylesheet handles the on-screen preview AND the print layout
+     so File -> Print / Cmd+P -> "Save as PDF" produces a clean handout.
+     ============================================================ */
+  body.is-handout {
+    background: #eef0f2 !important;
+    color: #1a1a1a;
+    overflow: auto !important;
+    height: auto !important;
+    width: auto !important;
+    display: block !important;
+    font-family: "Inter", "Helvetica Neue", -apple-system, BlinkMacSystemFont,
+      "Segoe UI", Roboto, Arial, sans-serif;
+  }
+
+  /* Hide every direct child of <body> except the generated handout container.
+     This wipes the original .deck/.stage shells, the floating chrome and
+     notes panels, and any external <aside id="notes"> block (Week 4) so the
+     handout flow is the only visible content. */
+  body.is-handout > *:not(.handout) {
+    display: none !important;
+  }
+
+  body.is-handout .handout {
+    display: block;
+    box-sizing: border-box;
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 0.4in 0.4in 0.6in;
+  }
+
+  body.is-handout .handout__header {
+    margin-bottom: 0.3in;
+    padding-bottom: 0.2in;
+    border-bottom: 2px solid #cc0000;
+  }
+
+  body.is-handout .handout__title {
+    font-size: 18pt;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: #1a1a1a;
+    margin: 0 0 0.08in 0;
+    line-height: 1.15;
+  }
+
+  body.is-handout .handout__meta {
+    font-size: 9.5pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #555;
+    margin: 0;
+  }
+
+  /* Per-density tokens. The thumbnail width drives both the column layout
+     and the scale factor used to shrink a 1920x1080 reference slide. */
+  body.is-handout.handout-2up {
+    --handout-thumb-w: 4.3in;
+    --handout-scale: 0.215;
+  }
+  body.is-handout.handout-4up {
+    --handout-thumb-w: 3.0in;
+    --handout-scale: 0.150;
+  }
+
+  body.is-handout .handout-row {
+    display: grid;
+    grid-template-columns: var(--handout-thumb-w) 1fr;
+    gap: 0.3in;
+    align-items: start;
+    background: #fff;
+    padding: 0.22in;
+    margin: 0 0 0.2in 0;
+    border-top: 3px solid #cc0000;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  body.is-handout .handout-row__slide {
+    width: var(--handout-thumb-w);
+    height: calc(var(--handout-thumb-w) * 9 / 16);
+    overflow: hidden;
+    background: #000;
+    position: relative;
+    border: 1px solid #d8d8d8;
+  }
+
+  /* The frame holds the un-shrunk 1920x1080 reference area. The slide is
+     positioned absolutely inside; the whole frame is then scaled visually
+     via transform so the thumbnail box crops to the scaled image. */
+  body.is-handout .handout-row__frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 1080px;
+    transform: scale(var(--handout-scale));
+    transform-origin: top left;
+  }
+
+  /* Force every slide visible inside the handout frame, regardless of which
+     visibility contract the original deck uses (.is-current vs .is-active vs
+     display:none). Keep them anchored at 0,0 of the frame at 1920x1080 so
+     the transform scales them uniformly. */
+  body.is-handout .handout-row__frame > .slide,
+  body.is-handout .handout-row__frame > .slide.is-current,
+  body.is-handout .handout-row__frame > .slide.is-active {
+    display: flex !important;
+    flex-direction: column;
+    position: absolute !important;
+    inset: 0 !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 1920px !important;
+    height: 1080px !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Hide in-slide speaker-notes inside the thumbnail (they are rendered in
+     the column alongside). Without this, decks that ship notes inline
+     (Week 1's <aside class="notes">) would print them inside the thumbnail
+     too, doubling them up. */
+  body.is-handout .handout-row__frame .notes,
+  body.is-handout .handout-row__frame .speaker-notes {
+    display: none !important;
+  }
+
+  body.is-handout .handout-row__notes {
+    font-size: 10pt;
+    line-height: 1.5;
+    color: #1a1a1a;
+    min-width: 0;
+  }
+
+  body.is-handout.handout-4up .handout-row__notes {
+    font-size: 9pt;
+    line-height: 1.4;
+  }
+
+  body.is-handout .handout-row__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5em;
+    border-bottom: 1px solid #e5e3dd;
+    padding-bottom: 0.12in;
+    margin-bottom: 0.14in;
+  }
+
+  body.is-handout .handout-row__num {
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    color: #cc0000;
+    font-variant-numeric: tabular-nums;
+  }
+
+  body.is-handout .handout-row__title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.25;
+  }
+
+  body.is-handout .handout-row__module {
+    margin-left: auto;
+    font-size: 8pt;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #777;
+  }
+
+  body.is-handout .handout-row__body p {
+    margin: 0 0 0.5em 0;
+  }
+
+  body.is-handout .handout-row__body p:last-child { margin-bottom: 0; }
+
+  body.is-handout .handout-row__body strong { color: #000; font-weight: 700; }
+
+  body.is-handout .handout-row__body em {
+    font-style: normal;
+    font-weight: 600;
+    color: #cc0000;
+  }
+
+  body.is-handout .handout-row__body ul,
+  body.is-handout .handout-row__body ol {
+    margin: 0.3em 0 0.5em 1.2em;
+    padding: 0;
+  }
+
+  body.is-handout .handout-row__body li { margin-bottom: 0.2em; }
+
+  body.is-handout .handout-row__body .cue {
+    display: inline-block;
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 8pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 0.1em 0.5em;
+    margin-right: 0.4em;
+  }
+
+  /* ----- Print rules for the handout view -----
+     These must override the universal one-slide-per-page print sheet
+     above; rely on body.is-handout specificity + !important where needed. */
+  @media print {
+    @page {
+      size: 8.5in 11in;
+      margin: 0.4in;
+    }
+
+    body.is-handout {
+      background: #fff !important;
+    }
+
+    body.is-handout .handout {
+      max-width: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    body.is-handout .handout__header {
+      margin-bottom: 0.18in;
+    }
+
+    body.is-handout .handout-row {
+      box-shadow: none;
+      margin: 0 0 0.18in 0;
+    }
+
+    /* Strict-ish N-per-page pacing.
+       The 2-up / 4-up labels describe density, not a hard guarantee:
+       speaker-note length varies wildly across slides, and we keep
+       `page-break-inside: avoid` on each row so a long-notes slide is
+       allowed to push to the next page rather than have its notes
+       truncated. The min-heights below set the *minimum* row size so
+       short-note slides do not collapse and waste page space, which
+       in practice keeps Letter-portrait pages near the target density
+       (2 rows per page for 2-up, 4 rows per page for 4-up). */
+    body.is-handout.handout-2up .handout-row {
+      min-height: 4.6in;
+    }
+    body.is-handout.handout-4up .handout-row {
+      min-height: 2.2in;
+    }
+
+    /* Override the universal .slide print rules (which would force every
+       slide to a 13.333in landscape page and break after each). Inside the
+       handout, the slide is a thumbnail and must NOT trigger a page break. */
+    body.is-handout .handout-row__frame > .slide {
+      width: 1920px !important;
+      height: 1080px !important;
+      max-width: none !important;
+      max-height: none !important;
+      page-break-after: auto !important;
+      page-break-before: auto !important;
+      page-break-inside: avoid !important;
+      break-after: auto !important;
+      break-before: auto !important;
+    }
+
+    /* Same for inline .notes/.speaker-notes: the universal sheet would
+       turn them into full-page blocks. Keep them hidden inside thumbnails. */
+    body.is-handout .handout-row__frame .notes,
+    body.is-handout .handout-row__frame .speaker-notes {
+      display: none !important;
+      width: auto !important;
+      min-height: 0 !important;
+      page-break-before: auto !important;
+      page-break-after: auto !important;
+      break-before: auto !important;
+      break-after: auto !important;
+      border: 0 !important;
+      padding: 0 !important;
+    }
+
+    body.is-handout .handout-row__frame .notes::before,
+    body.is-handout .handout-row__frame .speaker-notes::before {
+      content: none !important;
+    }
+  }

@@ -25,12 +25,31 @@
      #slide-12              -> open at slide 12
      ?notes=1               -> open with notes panel visible
      ?print=1               -> open in print-ready layout
+     ?handout=1|2           -> printable handout: 2-up thumbnails + notes
+     ?handout=4             -> printable handout: 4-up thumbnails + notes
+       (combine with &print=1 to auto-open the print dialog)
    ============================================================ */
 (function () {
   "use strict";
 
   var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
   if (!slides.length) return;
+
+  // ----- HANDOUT MODE -----
+  // Renders all slides as scaled thumbnails alongside their speaker notes,
+  // formatted as a single flowing document for printing/saving as PDF.
+  // Returns early so the regular presenter controller (chrome, navigation,
+  // single-slide visibility, fixed-frame auto-scaling) is bypassed.
+  var handoutMatch = window.location.search.match(/[?&]handout=(\d*)/);
+  if (handoutMatch) {
+    var perPage = parseInt(handoutMatch[1], 10);
+    if (perPage !== 4) perPage = 2;
+    buildHandout(slides, perPage);
+    if (/[?&]print=1\b/.test(window.location.search)) {
+      setTimeout(function () { window.print(); }, 400);
+    }
+    return;
+  }
 
   var total = slides.length;
   var current = 0;
@@ -285,5 +304,96 @@
   }
   if (/[?&]print=1\b/.test(window.location.search)) {
     setTimeout(printDeck, 250);
+  }
+
+  // ----- Handout view builder -----
+  // Reorganises the document into a printable handout: each slide is moved
+  // into a thumbnail frame and paired with the rendered speaker notes.
+  // Notes resolution mirrors readNotes() above so every deck variant works:
+  //   .notes  -> .speaker-notes  -> template.speaker-notes -> external #notes
+  function buildHandout(allSlides, perPage) {
+    var ext = (function () {
+      var aside = document.getElementById("notes");
+      if (!aside) return null;
+      var c = aside.querySelectorAll(".note-content");
+      return c.length ? c : null;
+    })();
+
+    function getNotes(slide, i) {
+      var n = slide.querySelector(".notes");
+      if (n && n.tagName !== "TEMPLATE") return n.innerHTML;
+      var sn = slide.querySelector(".speaker-notes");
+      if (sn && sn.tagName !== "TEMPLATE") return sn.innerHTML;
+      var tpl = slide.querySelector("template.speaker-notes, template.notes");
+      if (tpl) return tpl.innerHTML;
+      if (ext && ext[i]) return ext[i].innerHTML;
+      return "<p><em>No speaker notes for this slide.</em></p>";
+    }
+
+    function escape(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+      });
+    }
+
+    document.body.classList.add("is-handout");
+    document.body.classList.add("handout-" + perPage + "up");
+
+    var total = allSlides.length;
+    var container = document.createElement("div");
+    container.className = "handout";
+
+    var header = document.createElement("header");
+    header.className = "handout__header";
+    var docTitle = (document.title || "Slide deck handout").replace(/\s*\|.*$/, "");
+    header.innerHTML =
+      '<h1 class="handout__title">' + escape(docTitle) + '</h1>' +
+      '<p class="handout__meta">' + total + ' slides &middot; ' + perPage +
+      '-up handout with speaker notes &middot; print or save as PDF</p>';
+    container.appendChild(header);
+
+    allSlides.forEach(function (slide, i) {
+      var notesHTML = getNotes(slide, i);
+
+      var row = document.createElement("article");
+      row.className = "handout-row";
+
+      var slideCell = document.createElement("div");
+      slideCell.className = "handout-row__slide";
+
+      var frame = document.createElement("div");
+      frame.className = "handout-row__frame";
+
+      slide.classList.add("is-current", "is-active");
+      // Strip any inline transform left over from prior fixed-frame scaling.
+      slide.style.transform = "";
+      slide.style.left = "";
+      slide.style.top = "";
+      slide.style.position = "";
+
+      frame.appendChild(slide);
+      slideCell.appendChild(frame);
+
+      var notesCell = document.createElement("div");
+      notesCell.className = "handout-row__notes";
+
+      var titleAttr = slide.dataset.title || "";
+      var moduleAttr = slide.dataset.module || "";
+      var head =
+        '<div class="handout-row__head">' +
+          '<span class="handout-row__num">' +
+            String(i + 1).padStart(2, "0") + " / " + String(total).padStart(2, "0") +
+          '</span>' +
+          (titleAttr ? '<span class="handout-row__title">' + escape(titleAttr) + '</span>' : "") +
+          (moduleAttr ? '<span class="handout-row__module">' + escape(moduleAttr) + '</span>' : "") +
+        '</div>';
+      notesCell.innerHTML = head + '<div class="handout-row__body">' + notesHTML + '</div>';
+
+      row.appendChild(slideCell);
+      row.appendChild(notesCell);
+      container.appendChild(row);
+    });
+
+    document.body.appendChild(container);
   }
 })();
