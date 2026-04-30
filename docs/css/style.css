@@ -773,6 +773,9 @@ kbd {
 }
 
 .card__footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
   margin-top: var(--space-lg);
   padding-top: var(--space-md);
   border-top: 1px solid var(--color-border-light);
@@ -1861,6 +1864,12 @@ legend {
   font-size: var(--font-size-md);
   margin-bottom: 0;
   max-width: 65ch;
+}
+
+.page-header__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
 }
 
 /* Breadcrumb navigation */
