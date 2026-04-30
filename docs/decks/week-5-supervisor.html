@@ -524,6 +524,14 @@
     }
     .frame { font-size: 12pt; aspect-ratio: auto; }
     .hud, .counter, .notes, .help { display: none !important; }
+    /* Speaker notes live in <template> elements; the shared deck.css
+       universal print rules force `.speaker-notes { display: block }`
+       which makes the empty template tag render as a blank "Speaker
+       notes" panel under each slide. Suppress that for PDF export so
+       the deck prints as 28 clean slide pages with notes excluded. */
+    template.speaker-notes,
+    .slide > template,
+    .slide > .speaker-notes { display: none !important; }
   }
 </style>
 <link rel="stylesheet" href="css/deck.css">
