@@ -26,6 +26,7 @@ Static HTML/CSS/JS site (originally hosted via GitHub Pages from the `docs/` dir
 - `pdf/` — top-level reference PDFs
 - `templates/` — downloadable templates
 - `serve.py` — local Python static file server used by the Replit workflow
+- `heywood-inventory/` — Week 6 capstone reference application ("answer key" for the full-stack module). Working full-stack sample mirroring the deck's 4-layer architecture: L1 React+Vite+TS frontend (`web/`), L2 Go 1.22 stdlib HTTP server (`cmd/server`, `internal/api`), L3 swappable JSON/SQLite data layer (`internal/data`, `data/items.json`), L4 OpenAI tool-use chat (`internal/ai/chat.go`) with one `lookup_items` tool. Includes role-based middleware (`internal/middleware`), optional Microsoft Graph integration (`internal/integrations`, env-gated), 3-stage Dockerfile, instructor/student/architecture/prompts docs in `heywood-inventory/docs/`. Default build is pure Go stdlib + stock React; SQLite path is build-tagged (`-tags sqlite`). Not served by the static site — it's a separate buildable repo, used by instructors to validate prompts and by students as a comparison reference when stuck.
 
 ## Replit Setup
 - **Workflow:** "Start application" runs `python3 serve.py` on port 5000.

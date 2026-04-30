@@ -1,4 +1,4 @@
-modules = ["python-3.11", "nodejs-20"]
+modules = ["python-3.11", "nodejs-20", "go-1.25"]
 [agent]
 expertMode = true
 stack = "BEST_EFFORT_FALLBACK"
