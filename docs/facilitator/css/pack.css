@@ -451,3 +451,50 @@
   letter-spacing: 0.04em;
   border-top: 1px solid var(--pk-rule-2);
 }
+
+/* ---------- PDF download UI (on-screen only) ---------------
+   Used on the index page to list pre-rendered PDFs and on each
+   pack page for the "Download PDF" affordance. Wrapped in
+   @media screen so we never alter the print output. */
+@media screen {
+  .pack-pdf-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0.6rem 1rem;
+  }
+  .pack-pdf-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--pk-ink-2);
+    font-size: 0.92rem;
+  }
+  .pack-pdf-list .btn { white-space: nowrap; }
+  .pack-pdf-regen { margin-bottom: 1.5rem; color: var(--pk-ink-2); }
+  .pack-pdf-regen summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--pk-ink);
+    padding: 0.3rem 0;
+  }
+  .pack-pdf-regen .muted { color: var(--pk-ink-3); font-size: 0.85rem; }
+  .pack-pdf-regen code {
+    background: var(--pk-paper-2);
+    border: 1px solid var(--pk-rule-2);
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: 0.88em;
+  }
+  .pack-intro__pdf {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    font-size: 0.92rem;
+    color: var(--pk-ink-2);
+  }
+}

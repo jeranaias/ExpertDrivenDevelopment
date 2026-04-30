@@ -55,7 +55,7 @@
             <h2>How to use a pack</h2>
             <ol>
                 <li>Open the pack for the week you are teaching alongside the slide deck.</li>
-                <li>Print landscape, single-sided, A4 or US&nbsp;Letter. Use Chrome or Edge for best fidelity (<kbd>Ctrl</kbd>+<kbd>P</kbd> &rarr; Layout <em>Landscape</em> &rarr; Margins <em>Default</em> &rarr; Background graphics <em>on</em>).</li>
+                <li>Print landscape, single-sided, A4 or US&nbsp;Letter. Use Chrome or Edge for best fidelity (<kbd>Ctrl</kbd>+<kbd>P</kbd> &rarr; Layout <em>Landscape</em> &rarr; Margins <em>Default</em> &rarr; Background graphics <em>on</em>) &mdash; or grab the pre-rendered PDF from each pack&rsquo;s page below.</li>
                 <li>Keep the printed sheet beside your laptop while presenting. The deck holds your speaker notes; the pack holds your timing, your hand-offs, and your fail-modes.</li>
                 <li>Do <em>not</em> hand the pack to students &mdash; it is an instructor artefact. Student-facing material lives on each course page.</li>
             </ol>
@@ -106,6 +106,44 @@
                 </a>
 
             </div>
+
+            <h2 class="mt-xl">Pre-rendered PDFs</h2>
+            <p>
+                Each pack ships as a one-page Letter-landscape PDF rendered from
+                the same HTML source. Use these when you want a known-good
+                printable file (e.g. emailing to a co-instructor, queuing on a
+                shared printer, or archiving with a course package). The
+                browser-print path above remains the fastest route &mdash; the
+                PDFs are a convenience, not the source of truth.
+            </p>
+            <ul class="pack-pdf-list">
+                <li><a class="btn btn--secondary btn--sm" href="pdf/week-1-ai-fluency.pdf" download>Download Week&nbsp;1 PDF</a> &mdash; AI Fluency Fundamentals</li>
+                <li><a class="btn btn--secondary btn--sm" href="pdf/week-2-builder-orientation.pdf" download>Download Week&nbsp;2 PDF</a> &mdash; Builder Orientation</li>
+                <li><a class="btn btn--secondary btn--sm" href="pdf/week-3-platform-training.pdf" download>Download Week&nbsp;3 PDF</a> &mdash; Platform Training</li>
+                <li><a class="btn btn--secondary btn--sm" href="pdf/week-4-advanced.pdf" download>Download Week&nbsp;4 PDF</a> &mdash; Advanced Workshop</li>
+                <li><a class="btn btn--secondary btn--sm" href="pdf/week-5-supervisor.pdf" download>Download Week&nbsp;5 PDF</a> &mdash; Supervisor Orientation</li>
+                <li><a class="btn btn--secondary btn--sm" href="pdf/week-6-fullstack.pdf" download>Download Week&nbsp;6 PDF</a> &mdash; Full-Stack Capstone</li>
+            </ul>
+            <details class="pack-pdf-regen">
+                <summary>Regenerating the PDFs</summary>
+                <p>
+                    The PDFs are produced by a headless-Chromium build script
+                    that loads each pack page from the local dev server and
+                    prints to PDF with the same margins the in-browser print
+                    preview targets. To rebuild after editing a pack:
+                </p>
+                <ol>
+                    <li>Make sure the dev server is running: <code>python3 serve.py</code> (the <em>Start application</em> workflow).</li>
+                    <li>From the project root: <code>npm run build:facilitator-pdfs</code>.</li>
+                    <li>The script discovers Chromium and the Noto Sans fallback automatically; commit the regenerated files in <code>docs/facilitator/pdf/</code>.</li>
+                </ol>
+                <p class="muted">
+                    Source: <code>scripts/build-facilitator-pdfs.js</code>. System
+                    deps: <code>chromium</code> and (recommended)
+                    <code>noto-fonts</code> via Nix; npm dep:
+                    <code>puppeteer-core</code>.
+                </p>
+            </details>
 
             <h2 class="mt-xl">What each pack contains</h2>
             <ul>
