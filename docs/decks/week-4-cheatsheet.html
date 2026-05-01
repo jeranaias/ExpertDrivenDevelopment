@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="One-page printable instructor cheat sheet for the Week 4 Advanced Workshop deck — module-by-module timing, the chat-paste blocks for Slides 10/28/35, the Debug Clinic script, anchor phrases, and recovery cues.">
+    <title>Week 4 Instructor Cheat Sheet — Advanced Workshop | EDD</title>
+    <link rel="stylesheet" href="../css/style.css">
+      <link rel="stylesheet" href="css/cheatsheet.css">
+      <style>
+          /* Week 4 deltas — 7-cell pacing strip */
+          .cs-pacing { grid-template-columns: repeat(7, 1fr); }
+      </style>
+</head>
+<body class="site-wrapper">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Weekly Decks</a></li>
+                    <li aria-current="page">Week 4 — Instructor Cheat Sheet</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Week 4 Instructor Cheat Sheet</h1>
+            <p class="page-header__desc">A two-page printable reference card for the Course&nbsp;4 Advanced Workshop deck &mdash; designed to sit next to the deck during the four-hour Teams session, so you never have to scrub back through 38 slides for a chat-paste block, the Debug Clinic script, or the next pair-rotation cue.</p>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+
+            <div class="cheat-intro">
+                <p><strong>Print:</strong> <kbd>Ctrl</kbd>+<kbd>P</kbd> &rarr; Layout <em>Portrait</em>, Margins <em>Default</em>, Background graphics <em>on</em>. Two US-Letter pages. Site chrome and this preview note are hidden in print.</p>
+                <p><strong>Use:</strong> page 1 is the live-delivery card &mdash; pacing strip, the Frontier silent timer, the Readiness Dashboard spec, the Debug Clinic three-student rotation, and the chat-paste cues for Slides&nbsp;10 / 28 / 35. Page 2 is the anchor phrases, the recovery cues, and the Capstone-gate homework you must issue before logoff.</p>
+                <div class="cheat-intro__pdf">
+                    <a class="btn btn--secondary btn--sm" href="pdf/week-4-cheatsheet.pdf" download>Download PDF</a>
+                    <span>Pre-rendered Letter-portrait two-pager &mdash; convenient for email or shared printers.</span>
+                </div>
+            </div>
+
+            <!-- ========================================================
+                 PAGE 1
+                 ======================================================== -->
+            <article class="cheat-page" aria-label="Week 4 cheat sheet, page 1">
+
+                <header class="cs-head">
+                    <div class="cs-head__week"><span class="num">4</span><span>Course 4 &middot; Advanced Workshop<br>Instructor cheat sheet</span></div>
+                    <div class="cs-head__title">
+                        <h1>Advanced Workshop</h1>
+                        <p class="sub">Frontier mapping, complex build (Readiness Dashboard), Debug Clinic, SOP QA drill, paired teach-back, workflow playbook. Coach the re-prompt &mdash; never type the fix.</p>
+                    </div>
+                    <div class="cs-head__meta">
+                        <div><strong>4 hr</strong> &middot; 6 modules</div>
+                        <div>38 slides &middot; 1 break &middot; 3 chat-paste blocks</div>
+                        <div>Companion to <strong>week-4-advanced.html</strong> + <strong>week-4-handouts.html</strong></div>
+                    </div>
+                </header>
+
+                <!-- Pacing strip -->
+                <section class="cs-pacing" aria-label="Session pacing strip">
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">0:00</span><span class="n">M1 Frontier</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">0:30</span><span class="n">M2 Readiness Build</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--break"><span class="t">1:30</span><span class="n">Break 10&prime;</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">1:40</span><span class="n">M3 Debug Clinic</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">2:20</span><span class="n">M4 SOP QA</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">2:50</span><span class="n">M5 Teach-Back</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">3:20</span><span class="n">M6 Playbook</span></div>
+                </section>
+
+                <!-- Module-by-module prompts and outcomes -->
+                <section class="cs-modules" aria-label="Per-module prompts and outcomes">
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">1</span><span class="dur">30 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Frontier Mapping</span>
+                            <span class="clock">0:00&ndash;0:30</span>
+                            <span class="kind">Silent + share</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Slide 10 chat-paste:</strong> drop the frontier-map starter from the <em>Week&nbsp;4 hand-out pack</em>. Set silent timer 15&nbsp;min.</li>
+                                <li><strong>Brief (read verbatim):</strong> &ldquo;Four columns: <em>Category</em>, <em>Inside the frontier</em>, <em>Outside the frontier</em>, <em>Moving</em>. Fifteen minutes silent. Use the starter from the hand-out pack. Then we share &mdash; one row per builder.&rdquo;</li>
+                                <li><strong>Share (15 min):</strong> one row per builder. Re-anchor when restrictions surface: &ldquo;Map the world as it is, not as you wish it. Restrictions go in <em>Outside</em>.&rdquo;</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Outcome &middot; map</span>
+                            <span class="arch">Unit Frontier Map seeded</span>
+                            <span class="desc">One row per builder logged; restriction list captured separately for the program lead.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">2</span><span class="dur">60 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Complex Build &mdash; Readiness Dashboard</span>
+                            <span class="clock">0:30&ndash;1:30</span>
+                            <span class="kind">Build &middot; decompose first</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Hand-off (0:30):</strong> Deck &rarr; Power Platform. Pin the Readiness Dashboard spec slide in a side tab.</li>
+                                <li><strong>Spec (read verbatim):</strong> &ldquo;A single Power Apps screen that pulls Training (Excel), Equipment (CSV), and Alpha Roster. Show readiness % per Marine, with a drill-down. Decompose first &mdash; on paper &mdash; for ten minutes before you touch AI.&rdquo;</li>
+                                <li><strong>10-min decompose</strong> on paper, no AI. Then 50 min build.</li>
+                                <li><em>Coach in chat.</em> If anyone tries to skip decomposition, stop them: &ldquo;Show me your fields and actions on paper. We will not unblock you until that exists.&rdquo;</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Deliverable &middot; complex build</span>
+                            <span class="arch">Readiness % rendered per Marine</span>
+                            <span class="desc">Three sources joined behind one screen; decomposition page on paper for every builder.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--break">
+                        <div class="cs-mod__no"><span class="n">BRK</span><span class="dur">10 min</span></div>
+                        <div class="cs-mod__line">
+                            <span><strong>Break.</strong> Be back at H+1:40. Pre-flight: pick the three Debug Clinic candidates from chat (or pull the bug-bank fall-back); have the first volunteer&rsquo;s screen-share authorized.</span>
+                            <span class="when">1:30&ndash;1:40</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">3</span><span class="dur">40 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Debug Clinic</span>
+                            <span class="clock">1:40&ndash;2:20</span>
+                            <span class="kind">Coach &middot; fishbowl</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Hand-off (1:40):</strong> switch from your screen to a <em>student&rsquo;s</em> screen-share. You coach, you do not type.</li>
+                                <li><strong>Brief (read verbatim):</strong> &ldquo;Three students, ten minutes each. Share your screen, show your bug, walk us through your prompt history. The room diagnoses. The original builder retypes the fix &mdash; nobody else touches the keyboard.&rdquo;</li>
+                                <li><em>Refuse the keyboard.</em> &ldquo;If I type it, you don&rsquo;t learn it. Re-prompt with these three changes.&rdquo; Walk away.</li>
+                                <li><em>Fall-back:</em> if no volunteers, project a real Week-3 chat error from the bug bank and run it as a fishbowl.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Outcome &middot; coaching habit</span>
+                            <span class="arch">Three live recoveries on the wall</span>
+                            <span class="desc">Each builder demonstrates re-prompt, not rescue. The room sees coaching modeled three times.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">4</span><span class="dur">30 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">SOP QA Drill (Verification)</span>
+                            <span class="clock">2:20&ndash;2:50</span>
+                            <span class="kind">Pairs &middot; 7-min rotations</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Slide 28 chat-paste:</strong> drop the SOP QA drill block from the hand-out pack. Pairs work in breakouts.</li>
+                                <li><strong>Brief (read verbatim):</strong> &ldquo;Take the AI-drafted SOP from the hand-out pack. Find the three confident hallucinations. Pairs, seven-minute rotations. We score as a room at the end.&rdquo;</li>
+                                <li><strong>Rotate every 7 min;</strong> reconvene at 2:47 for the room scoring.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Outcome &middot; verification</span>
+                            <span class="arch">3 hallucinations caught &amp; named</span>
+                            <span class="desc">Verification habit (Week 1 Red Pen Review) re-applied to a builder&rsquo;s real artefact, under time pressure.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">5</span><span class="dur">30 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Teach-Back</span>
+                            <span class="clock">2:50&ndash;3:20</span>
+                            <span class="kind">Pairs &middot; 8-min teach + retell</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Reveal pairs</strong> drafted before the session (mix experience levels).</li>
+                                <li><strong>Brief (read verbatim):</strong> &ldquo;In your assigned pair, you have eight minutes to teach the other person <em>one</em> technique you mastered this course. They will repeat it back. If they cannot, you have not taught it yet.&rdquo;</li>
+                                <li><strong>Force a deliverable</strong> if pairs go silent: &ldquo;In ten minutes I want one slide each &mdash; the technique, when to use it, when not to.&rdquo;</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Outcome &middot; transferred skill</span>
+                            <span class="arch">Each builder taught one technique</span>
+                            <span class="desc">Required deliverable: one technique re-told back. The teach-back is the test of mastery.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">6</span><span class="dur">30 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Workflow Playbook</span>
+                            <span class="clock">3:20&ndash;3:50</span>
+                            <span class="kind">Hand-off doc</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Slide 35 chat-paste:</strong> drop the Workflow Playbook blank template from the hand-out pack.</li>
+                                <li><strong>Brief (read verbatim):</strong> &ldquo;Pick one of your own tools. Fill the playbook template: <em>trigger</em>, <em>inputs</em>, <em>steps</em>, <em>verification</em>, <em>fallback</em>, <em>owner</em>. This becomes your unit&rsquo;s hand-off doc.&rdquo;</li>
+                                <li><strong>Issue the homework</strong> live (final 5 min): submit the playbook to the unit shared library by EOW. No exceptions.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Deliverable &middot; institutional</span>
+                            <span class="arch">One playbook per builder</span>
+                            <span class="desc">First entry in the unit&rsquo;s playbook library. Capstone-gate proposal also due in 7 days.</span>
+                        </div>
+                    </div>
+
+                </section>
+
+                <div class="cs-foot">
+                    <span class="lhs"><span class="mark" aria-hidden="true"></span><strong>EDD &middot; Week 4 cheat sheet</strong> &middot; page 1 of 2 &middot; pacing, prompts, deliverables</span>
+                    <span>Print landscape <em>off</em> &middot; portrait, default margins, background graphics on</span>
+                </div>
+            </article>
+
+            <!-- ========================================================
+                 PAGE 2
+                 ======================================================== -->
+            <article class="cheat-page" aria-label="Week 4 cheat sheet, page 2">
+
+                <header class="cs-head">
+                    <div class="cs-head__week"><span class="num">4</span><span>Course 4 &middot; Advanced Workshop<br>Cheat sheet &middot; page 2</span></div>
+                    <div class="cs-head__title">
+                        <h1>Anchors, recovery, homework</h1>
+                        <p class="sub">The phrases you repeat all afternoon, the failure modes to watch for at every chat-paste cue, and the homework that gates Week 6 (Capstone) attendance.</p>
+                    </div>
+                    <div class="cs-head__meta">
+                        <div><strong>Use during:</strong> M3 Debug Clinic</div>
+                        <div><strong>Use during:</strong> any frontier-map drift</div>
+                        <div>Companion to <strong>week-4-advanced.html</strong></div>
+                    </div>
+                </header>
+
+                <!-- Pre-flight + hand-off -->
+                <section class="cs-box" aria-label="Pre-flight and live hand-off cues">
+                    <h2>Pre-flight &amp; hand-off cues<span class="lede">Done 48 h before; verified at T-30 min &middot; chat-paste blocks staged for Slides 10, 28, 35</span></h2>
+                    <ul>
+                        <li><strong>Gate-check the roster.</strong> Every attendee has a deployed-tool URL on file (collected at Week 3). Pull anyone without one to a 1:1 catch-up &mdash; do not let them sit through M2.</li>
+                        <li><strong>Tabs &amp; portals.</strong> Deck (Week 4), this cheat sheet, the <em>Week&nbsp;4 hand-out pack</em> (frontier-map starter, SOP QA drill, playbook template), GenAI.mil, Power Apps + Power Automate.</li>
+                        <li><strong>Sample data for M2.</strong> An Excel <em>Training</em> file, a CSV <em>Equipment</em> export, and an Alpha Roster snippet pre-staged in a OneDrive folder linkable from chat.</li>
+                        <li><strong>Bug bank.</strong> Keep three real prompt-failures from Week-3 chat ready for M3 if no one volunteers.</li>
+                        <li><strong>Teach-back pairs</strong> drafted from the roster (mix experience levels). Reveal at the start of M5.</li>
+                        <li><strong>0:00 &middot; Slide 10.</strong> Drop the frontier-map starter from the hand-out pack into chat. Silent timer 15 min.</li>
+                        <li><strong>0:30.</strong> Deck &rarr; Power Platform. Pin the Readiness Dashboard spec slide in a side tab.</li>
+                        <li><strong>1:40 &middot; Debug Clinic.</strong> Switch from your screen to a <em>student&rsquo;s</em> screen-share.</li>
+                        <li><strong>2:50 &middot; Slide 28.</strong> Drop the SOP QA drill chat-paste block. Pairs in breakouts; rotate every 7 min.</li>
+                        <li><strong>3:20 &middot; Slide 35.</strong> Drop the Workflow Playbook blank template. Each builder fills one for one of <em>their</em> tools.</li>
+                    </ul>
+                </section>
+
+                <!-- Two-column: anchors + recovery -->
+                <div class="cs-cols">
+                    <section class="cs-box" aria-label="Anchor phrases">
+                        <h2>Anchor phrases<span class="lede">Plant in M1; cite by name when you need them</span></h2>
+                        <ul>
+                            <li><strong>1. &ldquo;Coach the re-prompt. Never type the fix.&rdquo;</strong> The Debug Clinic test &mdash; if you took the keyboard, you broke the rule.</li>
+                            <li><strong>2. Map the world as it is.</strong> Restrictions go in <em>Outside</em>. Captured separately for the program lead. Not vented.</li>
+                            <li><strong>3. Decompose before you prompt.</strong> M2 starts with 10 minutes on paper. No paper, no help.</li>
+                            <li><strong>4. Verification is non-negotiable.</strong> Same Red Pen Review from Week 1, run on a builder&rsquo;s artefact under time pressure.</li>
+                            <li><strong>5. The teach-back is the test.</strong> If your partner can&rsquo;t repeat it, you haven&rsquo;t taught it.</li>
+                            <li><strong>6. The playbook ships, not the prototype.</strong> Trigger, inputs, steps, verification, fallback, owner &mdash; that&rsquo;s the institutional artefact.</li>
+                            <li><strong>7. Which language is this surface?</strong> Power Fx vs WDL vs DAX errors stall the room &mdash; project the Slide-22 matrix before any re-prompt.</li>
+                        </ul>
+                    </section>
+
+                    <section class="cs-box" aria-label="Recovery and pacing cues">
+                        <h2>Recovery &amp; pacing cues<span class="lede">When the room slips, this is the order of operations</span></h2>
+                        <ul>
+                            <li><strong>No one volunteers for the Debug Clinic.</strong> Cold-call the bug bank: pick a real Week-3 chat error and project it. Run it as a fishbowl.</li>
+                            <li><strong>A builder demands you type their fix during M3.</strong> Refuse. &ldquo;If I type it, you don&rsquo;t learn it. Re-prompt with these three changes.&rdquo; Walk away from their keyboard.</li>
+                            <li><strong>Frontier map turns into venting about tool restrictions.</strong> Re-anchor: &ldquo;Map the world as it is, not as you wish it. Restrictions go in <em>Outside</em>.&rdquo; Capture the restriction list separately.</li>
+                            <li><strong>Power Fx vs WDL vs DAX errors stall the room.</strong> Project the language matrix from Slide&nbsp;22. Ask &ldquo;Which language is this surface?&rdquo; before any re-prompt.</li>
+                            <li><strong>Teach-back pairs are silent / awkward.</strong> Force a deliverable: &ldquo;In ten minutes I want one slide each &mdash; the technique, when to use it, when not to.&rdquo;</li>
+                            <li><strong>Pacing valve.</strong> Behind at the break? Cut M3 to two students (not three) and protect M6 &mdash; the playbook is the artefact that survives the week.</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <!-- Homework -->
+                <section class="cs-box" aria-label="Homework to issue before logoff">
+                    <h2>Homework to issue before logoff<span class="lede">Slide 38 &mdash; Week-6 (Capstone) gate hangs on the proposal</span></h2>
+                    <ul>
+                        <li><strong>Submit the playbook</strong> from M6 to the unit shared library by EOW. One per builder, no exceptions.</li>
+                        <li><strong>Run a teach-back at your section</strong> within 14 days. Five minutes, one technique, witnessed by your supervisor.</li>
+                        <li><strong>Update the unit Frontier Map.</strong> Merge each M1 entry into the shared map. Flag any &ldquo;Moving&rdquo; items to the program lead.</li>
+                        <li><strong>Capstone gate.</strong> To attend Week 6 (Full-Stack), submit a brief proposal: which problem they&rsquo;ll ship end-to-end. Due 7 days before Week 6.</li>
+                    </ul>
+                </section>
+
+                <div class="cs-foot">
+                    <span class="lhs"><span class="mark" aria-hidden="true"></span><strong>EDD &middot; Week 4 cheat sheet</strong> &middot; page 2 of 2 &middot; anchors, recovery, homework</span>
+                    <span>Pair with the Week 4 Facilitator Pack and the Week 4 hand-out pack</span>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../pdf/">Briefs Library</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                        <li><a href="../pdf/TRAINING_CURRICULA_v5.pdf">Curricula (PDF)</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

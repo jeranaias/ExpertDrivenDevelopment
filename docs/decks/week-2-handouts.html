@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Chat-paste-ready hand-out blocks for the Course 2 Builder Orientation session - the six live-build prompts, the debugging template, the peer review checklist, and the decomposition worksheet.">
+      <title>Week 2 Facilitator Hand-Outs | Expert-Driven Development</title>
+      <link rel="stylesheet" href="../css/style.css">
+      <style>
+          /* --- Hand-out specific styles ---
+             Built on top of the site stylesheet so the page reads as a
+             regular EDD doc, with one extra "copy-block" component. */
+
+          .handout-intro {
+              background: var(--color-bg-secondary);
+              border-left: 4px solid var(--color-scarlet);
+              padding: var(--space-lg) var(--space-xl);
+              margin-bottom: var(--space-xl);
+              border-radius: 0 var(--space-sm) var(--space-sm) 0;
+          }
+          .handout-intro p { margin: 0 0 var(--space-sm); }
+          .handout-intro p:last-child { margin-bottom: 0; }
+
+          .handout-toc {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+              gap: var(--space-md);
+              margin: var(--space-xl) 0 var(--space-2xl);
+          }
+          .handout-toc a {
+              display: block;
+              padding: var(--space-md);
+              background: var(--color-bg-secondary);
+              border: 1px solid var(--color-border);
+              border-radius: var(--space-sm);
+              text-decoration: none;
+              color: var(--color-text-primary);
+              transition: border-color 0.15s, transform 0.15s;
+          }
+          .handout-toc a:hover {
+              border-color: var(--color-scarlet);
+              transform: translateY(-1px);
+          }
+          .handout-toc .slide-tag {
+              display: inline-block;
+              font-size: var(--font-size-xs);
+              font-weight: var(--font-weight-bold);
+              letter-spacing: 0.08em;
+              text-transform: uppercase;
+              color: var(--color-scarlet);
+              margin-bottom: var(--space-xs);
+          }
+          .handout-toc .toc-title {
+              display: block;
+              font-weight: var(--font-weight-semibold);
+              font-size: var(--font-size-md);
+          }
+
+          .copy-block {
+              border: 1px solid var(--color-border);
+              border-radius: var(--space-sm);
+              margin: var(--space-lg) 0 var(--space-2xl);
+              overflow: hidden;
+              background: var(--color-bg-primary);
+          }
+          .copy-block__header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              gap: var(--space-md);
+              padding: var(--space-md) var(--space-lg);
+              background: var(--color-bg-dark);
+              color: var(--color-text-inverse);
+              flex-wrap: wrap;
+          }
+          .copy-block__label {
+              display: flex;
+              align-items: center;
+              gap: var(--space-md);
+              flex-wrap: wrap;
+          }
+          .slide-pill {
+              display: inline-block;
+              padding: 2px 10px;
+              background: var(--color-gold);
+              color: var(--color-text-primary);
+              font-size: var(--font-size-xs);
+              font-weight: var(--font-weight-bold);
+              letter-spacing: 0.08em;
+              text-transform: uppercase;
+              border-radius: 999px;
+          }
+          .copy-block__title {
+              font-weight: var(--font-weight-semibold);
+              font-size: var(--font-size-base);
+          }
+          .copy-btn {
+              display: inline-flex;
+              align-items: center;
+              gap: var(--space-xs);
+              padding: var(--space-sm) var(--space-md);
+              background: var(--color-scarlet);
+              color: var(--color-text-inverse);
+              border: 0;
+              border-radius: var(--space-sm);
+              font-family: var(--font-family-sans);
+              font-size: var(--font-size-sm);
+              font-weight: var(--font-weight-semibold);
+              cursor: pointer;
+              transition: background-color 0.15s;
+          }
+          .copy-btn:hover { background: var(--color-scarlet-dark); }
+          .copy-btn:focus-visible {
+              outline: 2px solid var(--color-gold);
+              outline-offset: 2px;
+          }
+          .copy-btn.is-copied { background: var(--color-success-border); }
+
+          .copy-block__cue {
+              padding: var(--space-md) var(--space-lg);
+              background: var(--color-warning-bg);
+              border-bottom: 1px solid var(--color-warning-border);
+              font-size: var(--font-size-sm);
+              color: var(--color-warning-text);
+          }
+          .copy-block__cue strong { color: var(--color-warning-text); }
+
+          .copy-block__body {
+              margin: 0;
+              padding: var(--space-lg);
+              white-space: pre-wrap;
+              font-family: var(--font-family-mono);
+              font-size: var(--font-size-sm);
+              line-height: var(--line-height-normal);
+              color: var(--color-text-primary);
+              background: var(--color-bg-code);
+              max-height: 520px;
+              overflow: auto;
+          }
+
+          .back-bar {
+              display: flex;
+              gap: var(--space-md);
+              flex-wrap: wrap;
+              margin-bottom: var(--space-md);
+              font-size: var(--font-size-sm);
+          }
+
+          /* Print rules for hand-out copy-blocks (multi-page flow,
+             ASCII-table column alignment, hidden copy buttons / TOC)
+             live in docs/css/style.css @media print. */
+      </style>
+  </head>
+  <body class="site-wrapper">
+
+      <a href="#main-content" class="skip-link">Skip to main content</a>
+
+      <!-- Site Header -->
+      <header class="site-header" role="banner">
+          <div class="container">
+              <a href="../" class="site-brand">
+                  <span class="site-brand__mark" aria-hidden="true"></span>
+                  Expert-Driven Development
+              </a>
+              <nav aria-label="Primary navigation">
+                  <ul class="nav-list">
+                      <li><a href="../">Home</a></li>
+                      <li><a href="../courses/" class="active">Courses</a></li>
+                      <li><a href="../sop/">SOP</a></li>
+                      <li><a href="../toolkit/">Toolkit</a></li>
+                      <li><a href="../tools/">Tools</a></li>
+                      <li><a href="../resources/">Resources</a></li>
+                      <li><a href="../about.html">About</a></li>
+                  </ul>
+              </nav>
+              <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                  <span class="nav-toggle__icon" aria-hidden="true"></span>
+              </button>
+          </div>
+      </header>
+
+      <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+          <ul class="nav-list">
+              <li><a href="../">Home</a></li>
+              <li><a href="../courses/" class="active">Courses</a></li>
+              <li><a href="../sop/">SOP</a></li>
+              <li><a href="../toolkit/">Toolkit</a></li>
+              <li><a href="../tools/">Tools</a></li>
+              <li><a href="../resources/">Resources</a></li>
+              <li><a href="../about.html">About</a></li>
+          </ul>
+      </div>
+
+      <!-- Page Header -->
+      <section class="page-header">
+          <div class="container">
+              <nav aria-label="Breadcrumb">
+                  <ol class="breadcrumb">
+                      <li><a href="../">Home</a></li>
+                      <li><a href="../courses/">Courses</a></li>
+                      <li><a href="../courses/orientation.html">Builder Orientation</a></li>
+                      <li aria-current="page">Facilitator Hand-Outs</li>
+                  </ol>
+              </nav>
+              <h1 class="page-header__title">Week 2 Facilitator Hand-Outs</h1>
+              <p class="page-header__desc">
+                  Nine chat-paste-ready blocks for the Course 2 Builder Orientation session. Open this tab in a second window before the session, then copy each block into Microsoft Teams chat at the slide it pairs with.
+              </p>
+              <div class="back-bar mt-md">
+                  <a href="week-2-builder-orientation.html">&larr; Back to Week 2 Slide Deck</a>
+                  <span aria-hidden="true">&middot;</span>
+                  <a href="../courses/orientation.html">Course 2 Instructor Page</a>
+              </div>
+          </div>
+      </section>
+
+      <main id="main-content" class="site-main">
+          <div class="container container--narrow">
+
+              <div class="handout-intro">
+                  <p><strong>How to use this page.</strong> Keep it open in a second browser tab. When the deck reaches the slide called out on each block&rsquo;s gold pill, click <em>Copy</em>, then paste into the Teams chat. Plain text is intentional &mdash; it survives the Teams paste cleanly and stays legible on a 13&Prime; laptop.</p>
+                  <p><strong>Print fallback.</strong> If you lose your second-screen, this page prints to one or two clean pages with the copy buttons hidden &mdash; use <kbd>Ctrl</kbd>+<kbd>P</kbd> / <kbd>&#8984;</kbd>+<kbd>P</kbd>.</p>
+                  <p><strong>Where these come from.</strong> Each block is lifted verbatim from the <a href="../courses/orientation.html">Builder Orientation instructor page</a> &mdash; the six narrated demo prompts in Module 2 (equipment-checkout build), the debugging template students use in Module 3, and the peer-review and decomposition worksheets for Modules 3 and 4.</p>
+              </div>
+  
+              <nav class="handout-toc" aria-label="Hand-out jump links">
+                  <a href="#handout-prompt-1">
+                      <span class="slide-tag">Module 2 &middot; Prompt 1</span>
+                      <span class="toc-title">Prompt 1 - Define the problem</span>
+                  </a>
+                <a href="#handout-prompt-2">
+                      <span class="slide-tag">Module 2 &middot; Prompt 2</span>
+                      <span class="toc-title">Prompt 2 - Data structure</span>
+                  </a>
+                <a href="#handout-prompt-3">
+                      <span class="slide-tag">Module 2 &middot; Prompt 3</span>
+                      <span class="toc-title">Prompt 3 - Refine the interface</span>
+                  </a>
+                <a href="#handout-prompt-4">
+                      <span class="slide-tag">Module 2 &middot; Prompt 4</span>
+                      <span class="toc-title">Prompt 4 - Iterate</span>
+                  </a>
+                <a href="#handout-prompt-5">
+                      <span class="slide-tag">Module 2 &middot; Prompt 5</span>
+                      <span class="toc-title">Prompt 5 - Debug an error</span>
+                  </a>
+                <a href="#handout-prompt-6">
+                      <span class="slide-tag">Module 2 &middot; Prompt 6</span>
+                      <span class="toc-title">Prompt 6 - Final polish</span>
+                  </a>
+                <a href="#handout-debug-template">
+                      <span class="slide-tag">Module 3 &middot; When it breaks</span>
+                      <span class="toc-title">Debugging prompt template</span>
+                  </a>
+                <a href="#handout-peer-review">
+                      <span class="slide-tag">Module 3 &middot; Peer review</span>
+                      <span class="toc-title">Peer review checklist</span>
+                  </a>
+                <a href="#handout-decomposition">
+                      <span class="slide-tag">Module 4 &middot; Decompose</span>
+                      <span class="toc-title">Decomposition worksheet</span>
+                  </a>
+              </nav>
+  
+              <!-- ===========================================================
+                   BLOCK 1 &mdash; Module 2 — Prompt 1
+                   =========================================================== -->
+              <article id="handout-prompt-1">
+                  <h2>Prompt 1: define the problem</h2>
+                  <p>
+                      First prompt of the live build. Drop it into chat as you narrate &ldquo;I start with WHO uses this and WHAT platform we have. I ask for a plan, not code.&rdquo; Students paste this into GenAI.mil at the same moment so they get the same plan back.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Module 2 Prompt 1 slide</span>
+                              <span class="copy-block__title">Prompt 1: define the problem (2 min)</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w2-p1" aria-label="Copy Prompt 1 to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Prompt 1 in chat. Paste it into GenAI.mil now. We are asking for a plan, not code.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w2-p1">I need an equipment checkout tracker for a Marine Corps rifle section (~30 people, ~50 items) in Microsoft Power Apps. It needs to: check out items (item name, serial, person, date out, date due), check in items, show all checked-out items, and highlight overdue ones. Give me a step-by-step plan before we build.</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 2 &mdash; Module 2 — Prompt 2
+                   =========================================================== -->
+              <article id="handout-prompt-2">
+                  <h2>Prompt 2: create the data structure</h2>
+                  <p>
+                      Second prompt. The plan is on screen; now ask for the exact SharePoint list configuration plus a CSV template that imports cleanly.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Module 2 Prompt 2 slide</span>
+                              <span class="copy-block__title">Prompt 2: create the data structure (3 min)</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w2-p2" aria-label="Copy Prompt 2 to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Prompt 2 in chat. Now we get the data structure - field names and types. We specify because we know the domain.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w2-p2">Give me the exact SharePoint list configuration: list name, all columns with data types, and any calculated columns for overdue status. Include a CSV template I can import into SharePoint and tell me which columns I need to add manually after import.</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 3 &mdash; Module 2 — Prompt 3
+                   =========================================================== -->
+              <article id="handout-prompt-3">
+                  <h2>Prompt 3: refine the interface</h2>
+                  <p>
+                      Third prompt. After Integrate &rarr; Power Apps generates the starter app, this prompt asks AI to filter the gallery, color overdue rows, and add a check-in button.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Module 2 Prompt 3 slide</span>
+                              <span class="copy-block__title">Prompt 3: refine the interface (5 min)</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w2-p3" aria-label="Copy Prompt 3 to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Prompt 3 in chat. Power Apps gave us a working app. Now we use AI to customize it - in plain English.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w2-p3">I used Integrate -> Power Apps -> Create an app from my EquipmentCheckout SharePoint list. The auto-generated app has BrowseGallery1 showing all items. I want to: filter the gallery to only show checked-out items, color overdue items in red, and add a check-in button next to each gallery row. Give me the formulas.</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 4 &mdash; Module 2 — Prompt 4
+                   =========================================================== -->
+              <article id="handout-prompt-4">
+                  <h2>Prompt 4: iterate</h2>
+                  <p>
+                      Fourth prompt. Adds a search box and warning icon to the gallery. The teaching point is incremental refinement &mdash; we do not rebuild from scratch.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Module 2 Prompt 4 slide</span>
+                              <span class="copy-block__title">Prompt 4: iterate (3 min)</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w2-p4" aria-label="Copy Prompt 4 to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Prompt 4 in chat. Add the SearchBox and the icnOverdue icon in Power Apps first, then paste this.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w2-p4">I added a Text Input control named SearchBox above BrowseGallery1. I also added a Warning icon named icnOverdue inside each gallery row. Now update the gallery to: search by item name or assigned person, sort overdue items to the top, and show the warning icon only for overdue items.</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 5 &mdash; Module 2 — Prompt 5
+                   =========================================================== -->
+              <article id="handout-prompt-5">
+                  <h2>Prompt 5: debug an error</h2>
+                  <p>
+                      Fifth prompt. The instructor introduces a deliberate error (Choice column without .Value, or a type mismatch) and demonstrates the debugging loop with the exact error message.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Module 2 Prompt 5 slide</span>
+                              <span class="copy-block__title">Prompt 5: debug an error (4 min)</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w2-p5" aria-label="Copy Prompt 5 to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Prompt 5 in chat. Errors are normal. Watch how AI diagnoses with exact error + exact code + intent.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w2-p5">I am getting this error: "Invalid argument type. Expecting a Text value instead." Here is my formula:
+
+  Filter(EquipmentCheckout, Status = "Checked Out" && SearchBox.Text in SerialNumber)
+
+  What is wrong?</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 6 &mdash; Module 2 — Prompt 6
+                   =========================================================== -->
+              <article id="handout-prompt-6">
+                  <h2>Prompt 6: final polish</h2>
+                  <p>
+                      Sixth and last prompt of the live demo. Optional but useful &mdash; AI suggests a Marine Corps color palette so the app stops looking like a generic Power Apps default.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Module 2 Prompt 6 slide</span>
+                              <span class="copy-block__title">Prompt 6: final polish (3 min)</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w2-p6" aria-label="Copy Prompt 6 to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Prompt 6 in chat. Last one. Even aesthetics can be AI-guided when you give it constraints.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w2-p6">Give me a professional color scheme for a Marine Corps app: background, buttons, header. Use red and gold accents on dark background.</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 7 &mdash; Module 3 — debugging template
+                   =========================================================== -->
+              <article id="handout-debug-template">
+                  <h2>Debugging prompt template</h2>
+                  <p>
+                      Drop this when you say &ldquo;every one of you will hit at least one error - here is the shape of the prompt that gets it diagnosed.&rdquo; Students fill in the bracketed parts with their own situation.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Module 3 debug slide</span>
+                              <span class="copy-block__title">Debugging prompt template</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w2-debug" aria-label="Copy debugging prompt template to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Debugging template in chat. Copy it, replace the brackets with your own error and formula, paste into your AI tool.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w2-debug">I am building a [WHAT YOU ARE BUILDING] in Power Apps. I added this formula to my [WHERE - gallery, button, label]:
+
+  [PASTE YOUR EXACT FORMULA]
+
+  But I am getting this error: "[PASTE THE EXACT ERROR MESSAGE FROM POWER APPS]"
+
+  The [RELEVANT COLUMN NAME] column is a [DATA TYPE: Date / Choice / Person / Number / Text] field in my SharePoint list. What is wrong and how do I fix it?
+
+  ----
+
+  Worked example:
+
+  I am building a leave request tracker in Power Apps. I added this formula to my gallery:
+
+  Filter(LeaveRequests, Status = "Pending" && RequestDate > Today())
+
+  But I am getting this error: "The function 'Filter' has some invalid arguments."
+
+  The RequestDate column is a Date field in my SharePoint list. What is wrong and how do I fix it?</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 8 &mdash; Module 3 — peer review
+                   =========================================================== -->
+              <article id="handout-peer-review">
+                  <h2>Peer review checklist</h2>
+                  <p>
+                      Paste this when you pair students up for peer review. Each reviewer reads the four criteria, watches their partner demo, and marks Yes / Partially / Not Yet.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Module 3 peer review slide</span>
+                              <span class="copy-block__title">Peer review checklist (4 criteria)</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w2-peer" aria-label="Copy peer review checklist to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Peer review checklist in chat. Reviewer reads it, watches the demo, marks each criterion. Builder defends each one.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w2-peer">Peer Review - Reviewer checks each item and provides feedback:
+
+  1. Clear Problem Statement. Can the builder explain in one sentence what problem this solves?
+  2. Core Function Works. Does the most basic version do what it needs to do? (Does not need to be pretty or complete.)
+  3. Evidence of Iteration. Did the builder refine at least once? (Example: added a feature, improved formatting, fixed a bug)
+  4. Can Explain Decisions. Can the builder explain why they made specific design choices? (Example: "I used a dropdown for status because there are only 3 options.")
+
+  Score each criterion as:
+    Yes        - meets the bar above
+    Partially  - on the way there but incomplete
+    Not Yet    - has not done this yet
+
+  Reviewer protocol:
+    0-2 min   instructor explains criteria, pairs assigned
+    2-8 min   Partner A demos, Partner B reviews using the four criteria
+    8-14 min  Partner B demos, Partner A reviews
+    14-15 min full-class debrief: "What did you learn from your partner's approach?"</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 9 &mdash; Module 4 — decomposition worksheet
+                   =========================================================== -->
+              <article id="handout-decomposition">
+                  <h2>Decomposition worksheet</h2>
+                  <p>
+                      Paste at the start of the individual decomposition exercise. Students fill it in for a real problem from their own section that they will build before Course 3.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Module 4 decomposition slide</span>
+                              <span class="copy-block__title">Decomposition worksheet (5 sections)</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w2-decomp" aria-label="Copy decomposition worksheet to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Worksheet in chat. Pick a real problem from your section. Fill in all five sections. Ten minutes.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w2-decomp">Decomposition Worksheet
+
+  1. Problem Statement (one sentence):
+     __________________________________________________________________
+
+  2. Core Requirements (what must this do?):
+     - 
+     - 
+     - 
+
+  3. Decompose into 4-6 subtasks:
+
+     | Subtask                          | Human Role               | AI Role             | Pattern   |
+     |----------------------------------|--------------------------|---------------------|-----------|
+     | Example: Define data structure   | Specify fields needed    | Suggest field types | Centaur   |
+     |                                  |                          |                     |           |
+     |                                  |                          |                     |           |
+     |                                  |                          |                     |           |
+     |                                  |                          |                     |           |
+
+  4. Potential Frontier Issues (what might AI struggle with?):
+     - Example: Integration with existing CAC-authenticated system
+     - 
+     - 
+
+  5. Simplest Useful Version (what is the MVP?):
+     __________________________________________________________________
+
+  Pair-review checks (8 min):
+     - Clarity:  Could someone outside your unit understand the problem statement?
+     - Scope:    Is any subtask too big? Should it be broken down further?
+     - Frontier: Is there an AI risk you missed (auth, data security, legacy integration)?
+     - MVP:      Could the simplest useful version actually be built in 1-2 hours?</pre>
+                  </div>
+              </article>
+  
+          </div>
+      </main>
+
+      <!-- Site Footer -->
+      <footer class="site-footer" role="contentinfo">
+          <div class="container">
+              <div class="footer-grid">
+                  <div class="footer-section">
+                      <h3 class="footer-section__title">Expert-Driven Development</h3>
+                      <p>
+                          Open-source AI-assisted development training for DoW personnel.
+                          Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                      </p>
+                  </div>
+                  <div class="footer-section">
+                      <h3 class="footer-section__title">Navigation</h3>
+                      <ul>
+                          <li><a href="../">Home</a></li>
+                          <li><a href="../courses/">Courses</a></li>
+                          <li><a href="../sop/">SOP</a></li>
+                          <li><a href="../toolkit/">Toolkit</a></li>
+                          <li><a href="../tools/">Tools</a></li>
+                          <li><a href="../resources/">Resources</a></li>
+                          <li><a href="../about.html">About</a></li>
+                      </ul>
+                  </div>
+                  <div class="footer-section">
+                      <h3 class="footer-section__title">Links</h3>
+                      <ul>
+                          <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                          <li><a href="../pdf/">Briefs Library</a></li>
+                          <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                          <li><a href="../pdf/TRAINING_CURRICULA_v5.pdf">Curricula (PDF)</a></li>
+                          <li>MIT License</li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="footer-bottom">
+                  <span>UNCLASSIFIED</span>
+                  <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+              </div>
+          </div>
+      </footer>
+
+      <script>
+          (function () {
+              // Mobile nav toggle (matches docs/courses/advanced.html behaviour)
+              var toggle = document.querySelector('.nav-toggle');
+              var mobileNav = document.getElementById('mobile-nav');
+              if (toggle && mobileNav) {
+                  toggle.addEventListener('click', function () {
+                      var expanded = this.getAttribute('aria-expanded') === 'true';
+                      this.setAttribute('aria-expanded', String(!expanded));
+                      mobileNav.classList.toggle('is-open');
+                  });
+              }
+
+              // Copy-block buttons
+              document.querySelectorAll('.copy-btn').forEach(function (btn) {
+                  btn.addEventListener('click', function () {
+                      var targetId = btn.getAttribute('data-copy-target');
+                      var target = document.getElementById(targetId);
+                      if (!target) return;
+                      var text = target.textContent;
+                      var label = btn.querySelector('.copy-btn__label');
+                      var originalLabel = label ? label.textContent : '';
+
+                      var done = function () {
+                          btn.classList.add('is-copied');
+                          if (label) label.textContent = 'Copied';
+                          setTimeout(function () {
+                              btn.classList.remove('is-copied');
+                              if (label) label.textContent = originalLabel;
+                          }, 1800);
+                      };
+                      var fail = function () {
+                          if (label) label.textContent = 'Copy failed \u2014 select & \u2318/Ctrl+C';
+                          setTimeout(function () {
+                              if (label) label.textContent = originalLabel;
+                          }, 2500);
+                      };
+
+                      if (navigator.clipboard && navigator.clipboard.writeText) {
+                          navigator.clipboard.writeText(text).then(done).catch(function () {
+                              // Fallback for older / restricted contexts
+                              try {
+                                  var range = document.createRange();
+                                  range.selectNodeContents(target);
+                                  var sel = window.getSelection();
+                                  sel.removeAllRanges();
+                                  sel.addRange(range);
+                                  document.execCommand('copy');
+                                  sel.removeAllRanges();
+                                  done();
+                              } catch (err) { fail(); }
+                          });
+                      } else {
+                          try {
+                              var range = document.createRange();
+                              range.selectNodeContents(target);
+                              var sel = window.getSelection();
+                              sel.removeAllRanges();
+                              sel.addRange(range);
+                              document.execCommand('copy');
+                              sel.removeAllRanges();
+                              done();
+                          } catch (err) { fail(); }
+                      }
+                  });
+              });
+          })();
+      </script>
+
+  </body>
+  </html>
+  

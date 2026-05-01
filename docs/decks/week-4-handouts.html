@@ -128,7 +128,11 @@
         .copy-block__body {
             margin: 0;
             padding: var(--space-lg);
-            white-space: pre-wrap;
+            /* white-space: pre (not pre-wrap) preserves the ASCII table
+               column alignment; horizontal scrolling kicks in on the
+               widest table (frontier-map, ~130 chars) instead of
+               wrapping mid-row. */
+            white-space: pre;
             font-family: var(--font-family-mono);
             font-size: var(--font-size-sm);
             line-height: var(--line-height-normal);
@@ -136,6 +140,7 @@
             background: var(--color-bg-code);
             max-height: 520px;
             overflow: auto;
+            tab-size: 4;
         }
 
         .back-bar {
@@ -146,17 +151,78 @@
             font-size: var(--font-size-sm);
         }
 
+        /* Custom collapsible for the QA-drill answer key. We build
+           our own toggle (rather than using <details>) because
+           Chromium's <details> hides children via shadow DOM, so
+           CSS @media print can't force-show them — and headless
+           --print-to-pdf doesn't reliably fire the beforeprint event
+           we'd need to flip `open` programmatically. */
+        .answer-key { margin: var(--space-lg) 0 var(--space-2xl); }
+        .answer-key__toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-md);
+            background: transparent;
+            color: var(--color-instructor-text);
+            border: 1px solid var(--color-instructor-border);
+            border-radius: var(--space-sm);
+            font-family: var(--font-family-sans);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+            transition: background-color 0.15s;
+        }
+        .answer-key__toggle:hover { background: var(--color-instructor-bg); }
+        .answer-key__toggle:focus-visible {
+            outline: 2px solid var(--color-instructor-border);
+            outline-offset: 2px;
+        }
+        .answer-key__toggle-icon {
+            display: inline-block;
+            transition: transform 0.15s;
+        }
+        .answer-key__toggle[aria-expanded="true"] .answer-key__toggle-icon {
+            transform: rotate(90deg);
+        }
+        .answer-key__panel { margin-top: var(--space-md); }
+        .answer-key__heading { margin-top: 0; color: var(--color-instructor-text); }
+
+        /* Print rules. The copy-block multi-page flow + ASCII-table
+           alignment + copy-btn/toc hiding are now globalised in
+           docs/css/style.css @media print. Only page-specific tweaks
+           remain here (page-header tightening so block 1 lands on
+           page 1; QA-drill answer key force-shown for facilitators). */
         @media print {
-            .site-header, .mobile-nav, .site-footer, .copy-btn,
-            .handout-toc, .back-bar { display: none !important; }
-            .copy-block { page-break-inside: avoid; border-color: #999; }
-            .copy-block__header { background: #1a1a1a !important; -webkit-print-color-adjust: exact; }
-            .copy-block__cue  { background: #fef7e0 !important; -webkit-print-color-adjust: exact; }
-            .copy-block__body { background: #f4f3f0 !important; -webkit-print-color-adjust: exact; max-height: none; overflow: visible; }
+            /* Reclaim ~100px on page 1 so the first copy-block lands
+               on the same page as the title. */
+            body.wk4-handouts .page-header {
+                padding: 0 0 var(--space-md) 0;
+                border-bottom: 1px solid #999;
+            }
+            body.wk4-handouts .breadcrumb { padding: 0 0 var(--space-xs); }
+            body.wk4-handouts .handout-intro { margin: var(--space-md) 0; padding: var(--space-md) var(--space-lg); }
+
+            /* QA-drill answer key: the toggle button is hidden in
+               print and the panel is force-shown so the facilitator
+               always gets the answer key on the printed copy. */
+            body.wk4-handouts .answer-key__toggle { display: none !important; }
+            body.wk4-handouts .answer-key__panel[hidden] { display: block !important; }
+            body.wk4-handouts .answer-key__panel {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            body.wk4-handouts .callout--instructor {
+                background: #fce8e8 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                border: 1px solid #999 !important;
+                border-left: 4px solid #CC0000 !important;
+            }
         }
     </style>
 </head>
-<body class="site-wrapper">
+<body class="site-wrapper wk4-handouts">
 
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
@@ -226,7 +292,7 @@
 
             <div class="handout-intro">
                 <p><strong>How to use this page.</strong> Keep it open in a second browser tab. When the deck reaches the slide called out on each block&rsquo;s gold pill, click <em>Copy</em>, then paste into the Teams chat. Plain text is intentional &mdash; it survives the Teams paste cleanly and stays legible on a 13&Prime; laptop.</p>
-                <p><strong>Print fallback.</strong> If you lose your second-screen, this page prints to one or two clean pages with the copy buttons hidden &mdash; use <kbd>Ctrl</kbd>+<kbd>P</kbd> / <kbd>&#8984;</kbd>+<kbd>P</kbd>.</p>
+                <p><strong>Print fallback.</strong> If you lose your second screen, this page prints clean &mdash; copy buttons and nav are hidden, the four copy-blocks each flow naturally across pages, and the QA-drill answer key auto-expands so it&rsquo;s on the printed copy. Use <kbd>Ctrl</kbd>+<kbd>P</kbd> / <kbd>&#8984;</kbd>+<kbd>P</kbd>.</p>
             </div>
 
             <nav class="handout-toc" aria-label="Hand-out jump links">
@@ -368,17 +434,31 @@ errors one at a time in the debrief.
 </pre>
                 </div>
 
-                <details class="callout callout--instructor" style="margin-top:-1rem;">
-                    <summary><strong>Facilitator-only answer key (do not paste into chat)</strong></summary>
-                    <ol>
-                        <li><strong>Fabricated reference #1.</strong> &ldquo;MCO 1000.6B&rdquo; does not exist &mdash; AI-generated regulation numbers must be verified against the Marine Corps Publications System. <em>Catches with: Source verification.</em></li>
-                        <li><strong>Fabricated reference #2.</strong> &ldquo;NAVMC 11800/4 (Rev 03-2025)&rdquo; is a fabricated form number. <em>Catches with: Source verification.</em></li>
-                        <li><strong>Contradictory timelines.</strong> Para 1 says check-in within 72 hours; Step 6 says 48 hours. <em>Catches with: Data accuracy.</em></li>
-                        <li><strong>Steps out of order.</strong> Marine receives the S-1 orientation brief (Step 3) <em>before</em> in-processing at S-1 (Step 5). <em>Catches with: Logic check.</em></li>
-                        <li><strong>Inconsistent numbering.</strong> &ldquo;Step 1:&rdquo; format flips to bare &ldquo;5.&rdquo; / &ldquo;6.&rdquo; mid-procedure. <em>Catches with: Format compliance.</em></li>
-                    </ol>
-                    <p>If most of the room finds only three, name it kindly: <em>&ldquo;Three is the average &mdash; that&rsquo;s why the drill exists. Source verification requires actually looking the references up. <strong>Looking things up is the protocol.</strong>&rdquo;</em></p>
-                </details>
+                <div class="answer-key" style="margin-top:-1rem;">
+                    <button type="button"
+                            class="answer-key__toggle"
+                            aria-expanded="false"
+                            aria-controls="handout-sop-answer-key">
+                        <span class="answer-key__toggle-icon" aria-hidden="true">&#9656;</span>
+                        <span class="answer-key__toggle-label">Show facilitator answer key</span>
+                    </button>
+                    <aside id="handout-sop-answer-key"
+                           class="callout callout--instructor answer-key__panel"
+                           aria-labelledby="answer-key-heading"
+                           hidden>
+                        <p id="answer-key-heading" class="answer-key__heading">
+                            <strong>Facilitator-only answer key &mdash; do not paste into chat</strong>
+                        </p>
+                        <ol>
+                            <li><strong>Fabricated reference #1.</strong> &ldquo;MCO 1000.6B&rdquo; does not exist &mdash; AI-generated regulation numbers must be verified against the Marine Corps Publications System. <em>Catches with: Source verification.</em></li>
+                            <li><strong>Fabricated reference #2.</strong> &ldquo;NAVMC 11800/4 (Rev 03-2025)&rdquo; is a fabricated form number. <em>Catches with: Source verification.</em></li>
+                            <li><strong>Contradictory timelines.</strong> Para 1 says check-in within 72 hours; Step 6 says 48 hours. <em>Catches with: Data accuracy.</em></li>
+                            <li><strong>Steps out of order.</strong> Marine receives the S-1 orientation brief (Step 3) <em>before</em> in-processing at S-1 (Step 5). <em>Catches with: Logic check.</em></li>
+                            <li><strong>Inconsistent numbering.</strong> &ldquo;Step 1:&rdquo; format flips to bare &ldquo;5.&rdquo; / &ldquo;6.&rdquo; mid-procedure. <em>Catches with: Format compliance.</em></li>
+                        </ol>
+                        <p>If most of the room finds only three, name it kindly: <em>&ldquo;Three is the average &mdash; that&rsquo;s why the drill exists. Source verification requires actually looking the references up. <strong>Looking things up is the protocol.</strong>&rdquo;</em></p>
+                    </aside>
+                </div>
             </article>
 
             <!-- ===========================================================
@@ -539,9 +619,12 @@ Submit your playbook in this chat at the 20-minute mark.
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h3 class="footer-section__title">Project</h3>
+                    <h3 class="footer-section__title">Links</h3>
                     <ul>
                         <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../pdf/">Briefs Library</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                        <li><a href="../pdf/TRAINING_CURRICULA_v5.pdf">Curricula (PDF)</a></li>
                         <li>MIT License</li>
                     </ul>
                 </div>
@@ -565,6 +648,25 @@ Submit your playbook in this chat at the 20-minute mark.
                     mobileNav.classList.toggle('is-open');
                 });
             }
+
+            // Answer-key toggle (custom collapsible — see CSS notes).
+            document.querySelectorAll('.answer-key__toggle').forEach(function (btn) {
+                var panelId = btn.getAttribute('aria-controls');
+                var panel = panelId ? document.getElementById(panelId) : null;
+                var label = btn.querySelector('.answer-key__toggle-label');
+                if (!panel) return;
+                btn.addEventListener('click', function () {
+                    var nowExpanded = btn.getAttribute('aria-expanded') !== 'true';
+                    btn.setAttribute('aria-expanded', String(nowExpanded));
+                    if (nowExpanded) {
+                        panel.removeAttribute('hidden');
+                        if (label) label.textContent = 'Hide facilitator answer key';
+                    } else {
+                        panel.setAttribute('hidden', '');
+                        if (label) label.textContent = 'Show facilitator answer key';
+                    }
+                });
+            });
 
             // Copy-block buttons
             document.querySelectorAll('.copy-btn').forEach(function (btn) {

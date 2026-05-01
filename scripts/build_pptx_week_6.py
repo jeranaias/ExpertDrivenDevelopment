@@ -33,7 +33,7 @@ from bs4 import BeautifulSoup, NavigableString, Tag
 from pptx import Presentation
 from pptx.dml.color import RGBColor
 from pptx.enum.shapes import MSO_SHAPE
-from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
+from pptx.enum.text import MSO_ANCHOR, MSO_AUTO_SIZE, PP_ALIGN
 from pptx.oxml.ns import qn
 from pptx.util import Emu, Inches, Pt
 from lxml import etree
@@ -409,6 +409,53 @@ def _extract_body_blocks(body_tag: Tag) -> List[dict]:
     """Walk the .slide__body subtree and return an ordered list of block specs."""
     blocks: List[dict] = []
 
+    def classify(child: Tag) -> Optional[dict]:
+        """Return a block dict for `child` if it matches a known component,
+        otherwise None (caller should recurse or treat as paragraph)."""
+        cls_list = child.get("class") or []
+        cls = " ".join(cls_list)
+        cn = child.name.lower()
+        if cn == "table" and "compare" in cls:
+            return {"type": "table", "spec": _extract_table(child)}
+        if "arch" in cls_list:
+            return {"type": "arch", "layers": _extract_arch(child)}
+        if "stats" in cls_list:
+            return {"type": "stats", "items": _extract_stats(child)}
+        if "agenda" in cls_list:
+            return {"type": "agenda", "items": _extract_agenda(child)}
+        if "card" in cls_list:
+            return _extract_card(child)
+        if "prompt" in cls_list:
+            return {
+                "type": "prompt",
+                "label": _plain_text(child.find("strong")),
+                "runs": _runs_from_tag_excluding(child, "strong"),
+            }
+        if "pillrow" in cls_list:
+            return {"type": "pillrow", "pills": _extract_pillrow(child)}
+        if "pullquote" in cls_list:
+            quote, attr = _extract_pullquote(child)
+            return {"type": "pullquote", "quote": quote, "attr": attr}
+        if "arch-callout" in cls_list:
+            return {"type": "arch_callout", "runs": _runs_from_tag(child)}
+        if cn == "ul" and "bullets-lg" in cls:
+            items = [_runs_from_tag(li) for li in child.find_all("li", recursive=False)]
+            return {"type": "bullets", "items": items}
+        if cn == "ul" and "checklist" in cls:
+            items = [_runs_from_tag(li) for li in child.find_all("li", recursive=False)]
+            return {"type": "checklist", "items": items}
+        if cn in ("ul", "ol"):
+            items = [_runs_from_tag(li) for li in child.find_all("li", recursive=False)]
+            return {"type": "list", "ordered": cn == "ol", "items": items}
+        if cn == "p":
+            runs = _runs_from_tag(child)
+            if runs:
+                return {"type": "para", "runs": runs, "cls": cls}
+            return None
+        if cn == "span" and "build-banner" in cls:
+            return {"type": "build_banner", "text": _plain_text(child)}
+        return None
+
     def walk(node: Tag):
         for child in node.children:
             if isinstance(child, NavigableString):
@@ -418,19 +465,12 @@ def _extract_body_blocks(body_tag: Tag) -> List[dict]:
                 continue
             if not isinstance(child, Tag):
                 continue
-            cls = " ".join(child.get("class") or [])
+            cls_list = child.get("class") or []
+            cls = " ".join(cls_list)
             cn = child.name.lower()
 
-            if cn == "table" and "compare" in cls:
-                blocks.append({"type": "table", "spec": _extract_table(child)})
-            elif "arch" in (child.get("class") or []):
-                blocks.append({"type": "arch", "layers": _extract_arch(child)})
-            elif "stats" in (child.get("class") or []):
-                blocks.append({"type": "stats", "items": _extract_stats(child)})
-            elif "agenda" in (child.get("class") or []):
-                blocks.append({"type": "agenda", "items": _extract_agenda(child)})
-            elif "cols-2" in (child.get("class") or []):
-                # Two-column layout — recurse into each child column
+            if "cols-2" in cls_list:
+                # Two-column layout — process each child column.
                 col_kind = "5050"
                 if "cols-2--6040" in cls:
                     col_kind = "6040"
@@ -440,44 +480,27 @@ def _extract_body_blocks(body_tag: Tag) -> List[dict]:
                 for col in child.find_all("div", recursive=False):
                     saved = blocks[:]
                     blocks.clear()
-                    walk(col)
+                    # Check the column itself first — many decks place a
+                    # single component (arch, card, prompt, pillrow, …)
+                    # directly as the column root rather than wrapping it
+                    # in a generic <div>.
+                    col_block = classify(col)
+                    if col_block is not None:
+                        blocks.append(col_block)
+                    else:
+                        walk(col)
                     cols.append(blocks[:])
                     blocks.clear()
                     blocks.extend(saved)
                 blocks.append({"type": "cols2", "kind": col_kind, "cols": cols})
-            elif "card" in (child.get("class") or []):
-                blocks.append(_extract_card(child))
-            elif "prompt" in (child.get("class") or []):
-                blocks.append({
-                    "type": "prompt",
-                    "label": _plain_text(child.find("strong")),
-                    "runs": _runs_from_tag_excluding(child, "strong"),
-                })
-            elif "pillrow" in (child.get("class") or []):
-                blocks.append({"type": "pillrow", "pills": _extract_pillrow(child)})
-            elif "pullquote" in (child.get("class") or []):
-                quote, attr = _extract_pullquote(child)
-                blocks.append({"type": "pullquote", "quote": quote, "attr": attr})
-            elif cn == "ul" and "bullets-lg" in cls:
-                items = [_runs_from_tag(li) for li in child.find_all("li", recursive=False)]
-                blocks.append({"type": "bullets", "items": items})
-            elif cn == "ul" and "checklist" in cls:
-                items = [_runs_from_tag(li) for li in child.find_all("li", recursive=False)]
-                blocks.append({"type": "checklist", "items": items})
-            elif cn in ("ul", "ol"):
-                items = [_runs_from_tag(li) for li in child.find_all("li", recursive=False)]
-                blocks.append({
-                    "type": "list", "ordered": cn == "ol", "items": items,
-                })
-            elif cn == "p":
-                runs = _runs_from_tag(child)
-                if runs:
-                    blocks.append({"type": "para", "runs": runs, "cls": cls})
-            elif cn == "span" and "build-banner" in cls:
-                blocks.append({"type": "build_banner", "text": _plain_text(child)})
-            elif "arch-callout" in (child.get("class") or []):
-                blocks.append({"type": "arch_callout", "runs": _runs_from_tag(child)})
-            elif cn == "div":
+                continue
+
+            block = classify(child)
+            if block is not None:
+                blocks.append(block)
+                continue
+
+            if cn == "div":
                 # Generic wrapper — recurse.
                 walk(child)
             else:
@@ -818,6 +841,69 @@ def _add_rounded(slide, x, y, w, h, fill: Optional[RGBColor] = None,
     return shape
 
 
+# --- Pill width auto-fit ----------------------------------------------------
+# Pill labels were historically sized by character count (e.g.
+# Inches(0.30 + 0.10 * len(text))), which left long labels with trailing
+# whitespace and made short labels look cramped. We now (a) measure the
+# label's actual rendered advance width using a real TrueType font and (b)
+# tag the pill's text frame with PowerPoint's spAutoFit so PowerPoint snaps
+# the shape exactly to its text content on render. The pre-computed width is
+# the best-guess starting size for renderers that ignore spAutoFit
+# (LibreOffice, Google Slides, Keynote thumbnails, etc.).
+
+# Calibri isn't installed on most build hosts (incl. this Linux container),
+# so we measure with DejaVu Sans Bold and apply a Calibri-vs-DejaVu width
+# correction factor. DejaVu Bold is consistently ~16% wider than Calibri
+# Bold across the ASCII range we use for pill labels.
+_PILL_FONT_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+_PILL_FONT_CORRECTION = 0.86
+
+_PILL_LEFT_MARGIN_IN = 0.12
+_PILL_RIGHT_MARGIN_IN = 0.12
+# Small safety buffer so the user's installed Calibri (which can vary
+# slightly from our measured metric) never clips the label by a hair.
+_PILL_TEXT_BUFFER_IN = 0.06
+
+try:  # Pillow is declared in pyproject.toml; the guard covers stripped envs.
+    from PIL import ImageFont as _ImageFont
+    _PILL_FONT_CACHE: dict = {}
+    _HAVE_PIL_FONT = True
+except Exception:
+    _HAVE_PIL_FONT = False
+    _PILL_FONT_CACHE = {}
+
+
+def _pill_text_width_inches(text: str, *, size: int) -> float:
+    """Return the rendered advance width of ``text`` in Calibri Bold at ``size`` pt.
+
+    Falls back to a per-pt-size character estimate when Pillow or the font
+    file is unavailable.
+    """
+    if _HAVE_PIL_FONT:
+        try:
+            font = _PILL_FONT_CACHE.get(size)
+            if font is None:
+                font = _ImageFont.truetype(_PILL_FONT_PATH, size)
+                _PILL_FONT_CACHE[size] = font
+            # PIL's truetype font returns advance width in pixels at 72 DPI,
+            # which means px == pt for our purposes (1 pt = 1/72 inch).
+            px = font.getlength(text)
+            return (px / 72.0) * _PILL_FONT_CORRECTION
+        except Exception:
+            pass
+    # Fallback: ~0.0078 inches per char per pt (rough Calibri Bold avg).
+    return size * 0.0078 * max(1, len(text))
+
+
+def _pill_width(text: str, *, size: int) -> Inches:
+    """Snug width for a pill containing ``text`` at the given font ``size``."""
+    text_in = _pill_text_width_inches(text, size=size)
+    return Inches(text_in
+                  + _PILL_LEFT_MARGIN_IN
+                  + _PILL_RIGHT_MARGIN_IN
+                  + _PILL_TEXT_BUFFER_IN)
+
+
 def _add_pill(slide, x, y, w, h, text: str, *, fill: Optional[RGBColor],
               text_color: RGBColor, border: Optional[RGBColor] = None,
               size: int = 9):
@@ -838,11 +924,19 @@ def _add_pill(slide, x, y, w, h, text: str, *, fill: Optional[RGBColor],
         shape.line.width = Pt(0.75)
     shape.shadow.inherit = False
     tf = shape.text_frame
-    tf.margin_left = Inches(0.12)
-    tf.margin_right = Inches(0.12)
+    tf.margin_left = Inches(_PILL_LEFT_MARGIN_IN)
+    tf.margin_right = Inches(_PILL_RIGHT_MARGIN_IN)
     tf.margin_top = Inches(0.02)
     tf.margin_bottom = Inches(0.02)
     tf.word_wrap = False
+    # Tell PowerPoint to snap the shape's width/height to the rendered text.
+    # Combined with word_wrap=False this resizes width tightly around the
+    # label, eliminating trailing whitespace and avoiding clipping when our
+    # pre-computed width differs from PowerPoint's actual Calibri metric.
+    try:
+        tf.auto_size = MSO_AUTO_SIZE.SHAPE_TO_FIT_TEXT
+    except Exception:
+        pass
     p = tf.paragraphs[0]
     p.alignment = PP_ALIGN.CENTER
     r = p.add_run()
@@ -1222,8 +1316,9 @@ def _render_pillrow(slide, x, y, w, h, pills: List[Tuple[str, str]]):
     gap_x = Inches(0.08)
     gap_y = Inches(0.10)
     for text, kind in pills:
-        # Approximate width by character count.
-        pill_w = Inches(0.20 + 0.08 * max(1, len(text)))
+        # Snug width that fits the actual rendered label (PowerPoint also
+        # snaps via spAutoFit on _add_pill's text frame).
+        pill_w = _pill_width(text, size=9)
         if cur_x + pill_w > x + w:
             cur_x = x
             cur_y += pill_h + gap_y
@@ -1489,7 +1584,7 @@ def _render_pullquote(slide, x, y, w, h, quote: str, attr: str):
 
 
 def _render_build_banner(slide, x, y, text: str):
-    pill_w = Inches(0.18 + 0.075 * len(text))
+    pill_w = _pill_width(text, size=9)
     _add_pill(slide, x, y, pill_w, Inches(0.28), text,
               fill=SCARLET, text_color=PAPER, border=SCARLET, size=9)
 
@@ -1563,10 +1658,97 @@ def _render_cols2(slide, x, y, w, h, block: dict):
     _render_col_blocks(slide, x + c1_w + gap, y, c2_w, h, cols[1] if len(cols) > 1 else [])
 
 
+def _est_text_lines(text: str, w_in: float, *, size_pt: int) -> int:
+    """Word-aware estimate of how many visual lines `text` wraps to at `w_in`.
+
+    Uses a fixed average character width tuned for Calibri Regular. Bold text
+    is ~10% wider; we err on the conservative side so we don't under-estimate.
+    """
+    if not text or w_in <= 0:
+        return 0
+    avg_char_in = size_pt * 0.0070  # ~0.084" per char at 12pt Calibri
+    chars_per_line = max(8, int(w_in / avg_char_in))
+    lines = 0
+    for paragraph in text.split("\n"):
+        words = paragraph.split()
+        if not words:
+            lines += 1
+            continue
+        cur = 0
+        line_count = 1
+        for word in words:
+            add = len(word) + (1 if cur > 0 else 0)
+            if cur + add > chars_per_line and cur > 0:
+                line_count += 1
+                cur = len(word)
+            else:
+                cur += add
+        lines += line_count
+    return lines
+
+
+def _natural_prompt_height_in(block: dict, w_in: float) -> float:
+    """Estimated natural rendered height (inches) of a prompt callout."""
+    pad = 0.22
+    label_h = 0.32 if block.get("label") else 0.0
+    inner_w = w_in - pad * 2 - 0.08
+    text = "".join(r.text for r in block.get("runs", []))
+    line_h = (12 / 72.0) * 1.35
+    lines = _est_text_lines(text, inner_w, size_pt=12)
+    text_h = lines * line_h
+    # Add a small safety buffer so descenders / wider glyphs don't clip.
+    return pad * 2 + label_h + text_h + 0.10
+
+
+def _natural_card_height_in(block: dict, w_in: float) -> float:
+    """Estimated natural rendered height (inches) of a card."""
+    pad = 0.22
+    has_stripe = block.get("variant") in ("accent", "gold")
+    inner_w = w_in - pad * 2 - (0.08 if has_stripe else 0.0)
+    h = pad * 2
+    if block.get("title"):
+        h += 0.42
+    p_line_h = (12 / 72.0) * 1.30
+    li_line_h = (12 / 72.0) * 1.25
+    for blk in block.get("content", []):
+        bt = blk.get("type")
+        if bt == "p":
+            text = "".join(r.text for r in blk.get("runs", []))
+            lines = max(1, _est_text_lines(text, inner_w, size_pt=12))
+            h += lines * p_line_h + (6 / 72.0)
+        elif bt == "list":
+            for items_runs in blk.get("items", []):
+                text = "".join(r.text for r in items_runs)
+                # Account for bullet indent of ~0.25"
+                lines = max(1, _est_text_lines(text, inner_w - 0.25, size_pt=12))
+                h += lines * li_line_h + (4 / 72.0)
+    return h + 0.08
+
+
+def _natural_block_height_in(block: dict, w_in: float) -> Optional[float]:
+    """Return natural content height in inches for blocks we know how to size."""
+    bt = block.get("type")
+    if bt == "prompt":
+        return _natural_prompt_height_in(block, w_in)
+    if bt == "card":
+        return _natural_card_height_in(block, w_in)
+    return None
+
+
 def _render_col_blocks(slide, x, y, w, h, blocks: List[dict]):
     """Render a vertical stack of blocks inside a column region."""
     if not blocks:
         return
+    # Cap single-block columns to their natural content height so a short
+    # prompt or card doesn't stretch to the whole column. This keeps the
+    # build-framing slides (e.g. "Five tools, then we go") from leaving
+    # several inches of empty space below a small callout.
+    if len(blocks) == 1:
+        natural = _natural_block_height_in(blocks[0], w / 914400)
+        if natural is not None:
+            natural_emu = Inches(natural)
+            if natural_emu < h:
+                h = natural_emu
     # Heuristic per-block height allocation, then fill the column.
     weights: List[float] = []
     for b in blocks:
@@ -1598,19 +1780,40 @@ def _render_col_blocks(slide, x, y, w, h, blocks: List[dict]):
             weights.append(3.0)
         elif bt == "arch":
             weights.append(3.0)
+        elif bt == "pillrow":
+            # Pillrows are visually short — give them a small weight so they
+            # don't gobble half a stacked column.
+            weights.append(0.5)
         else:
             weights.append(1.0)
-    total = sum(weights) or 1.0
+    # Reserve fixed heights for compact blocks first, then distribute the
+    # remaining height across the rest by weight.
     gap = Inches(0.18)
-    avail = h - gap * (len(blocks) - 1)
+    fixed_h: List[Optional[int]] = []
+    for b in blocks:
+        bt = b.get("type")
+        if bt == "build_banner":
+            fixed_h.append(Inches(0.4))
+        elif bt == "arch_callout":
+            fixed_h.append(Inches(0.65))
+        elif bt == "pillrow":
+            n_pills = len(b.get("pills", []))
+            rows = max(1, (n_pills + 3) // 4)
+            fixed_h.append(Inches(0.30 + (rows - 1) * 0.38 + 0.1))
+        else:
+            fixed_h.append(None)
+    flexible_weight = sum(
+        wt for wt, fh in zip(weights, fixed_h) if fh is None
+    ) or 1.0
+    flexible_h = h - gap * (len(blocks) - 1) - sum(fh for fh in fixed_h if fh is not None)
+    if flexible_h < 0:
+        flexible_h = 0
     cur_y = y
-    for b, weight in zip(blocks, weights):
-        bh = avail * (weight / total)
-        # Compact heights for fixed-size blocks
-        if b.get("type") == "build_banner":
-            bh = Inches(0.4)
-        elif b.get("type") == "arch_callout":
-            bh = Inches(0.65)
+    for b, weight, fh in zip(blocks, weights, fixed_h):
+        if fh is not None:
+            bh = fh
+        else:
+            bh = int(flexible_h * (weight / flexible_weight))
         _render_block(slide, x, cur_y, w, bh, b)
         cur_y += bh + gap
 
@@ -1644,13 +1847,42 @@ def build_cover_slide(prs, slide: Slide):
     r.font.bold = True
     r.font.color.rgb = INK
     if slide.cover_stamp:
-        _add_pill(s, SLIDE_W - Inches(2.3), Inches(0.50), Inches(1.6), Inches(0.36),
-                  slide.cover_stamp.upper(), fill=PAPER, text_color=SCARLET,
+        stamp_text = slide.cover_stamp.upper()
+        stamp_w = _pill_width(stamp_text, size=10)
+        # Right-align the stamp against the same right margin as before.
+        stamp_x = SLIDE_W - Inches(0.7) - stamp_w
+        _add_pill(s, stamp_x, Inches(0.50), stamp_w, Inches(0.36),
+                  stamp_text, fill=PAPER, text_color=SCARLET,
                   border=SCARLET, size=10)
-    # Mid: big H1
+    # Mid: big H1. Auto-shrink and stretch the box to fit longer titles
+    # so the gold rule never cuts through a third line. Each h1 entry may
+    # wrap to multiple visual lines, so estimate visible-line count from the
+    # text width relative to the box width.
     title_y = Inches(1.5)
+    box_w_in = (SLIDE_W - 2 * margin_x) / 914400  # inches available for text
+    h1_entries = slide.cover_h1_lines or []
+    # Choose font size: shrink if total text would clearly wrap to 3+ lines
+    # at 64pt. Approx avg char width = 0.45 * pt/72 inches for this sans face.
+    def _visual_lines(size_pt: int) -> int:
+        # Bold sans (Inter/Calibri-like) at this size renders ≈ 0.62 × pt/72"
+        # per average character. Be conservative so we never under-estimate.
+        char_w = 0.62 * size_pt / 72.0
+        chars_per_line = max(6, int(box_w_in / char_w))
+        total = 0
+        for text, _ in h1_entries:
+            n = max(1, len(text))
+            total += (n + chars_per_line - 1) // chars_per_line
+        return max(1, total)
+
+    h1_size = 64
+    while h1_size > 44 and _visual_lines(h1_size) > 2:
+        h1_size -= 4
+    visible_lines = _visual_lines(h1_size)
+    line_h = (h1_size / 72.0) * 1.25  # 1.25× leading approximation
+    title_h = Inches(max(1.6, line_h * visible_lines + 0.20))
+    rule_y = title_y + title_h + Inches(0.10)
     if slide.cover_h1_lines:
-        box, tf = _add_textbox(s, margin_x, title_y, SLIDE_W - 2 * margin_x, Inches(2.6))
+        box, tf = _add_textbox(s, margin_x, title_y, SLIDE_W - 2 * margin_x, title_h)
         tf.word_wrap = True
         first = True
         for text, accent in slide.cover_h1_lines:
@@ -1663,17 +1895,17 @@ def build_cover_slide(prs, slide: Slide):
             r = p.add_run()
             r.text = text
             r.font.name = FONT_SANS
-            r.font.size = Pt(64)
+            r.font.size = Pt(h1_size)
             r.font.bold = True
             r.font.color.rgb = SCARLET if accent else INK
     # Gradient rule (approximated as a 2-segment scarlet→gold rectangle).
-    rule_y = Inches(4.20)
     rule_w = Inches(2.6)
     _add_rect(s, margin_x, rule_y, rule_w * 0.6, Inches(0.10), fill=SCARLET)
     _add_rect(s, margin_x + rule_w * 0.6, rule_y, rule_w * 0.4, Inches(0.10), fill=GOLD)
 
+    lede_y = rule_y + Inches(0.30)
     if slide.cover_lede:
-        box, tf = _add_textbox(s, margin_x, Inches(4.50),
+        box, tf = _add_textbox(s, margin_x, lede_y,
                                SLIDE_W - 2 * margin_x - Inches(0.5), Inches(1.2))
         tf.word_wrap = True
         p = tf.paragraphs[0]
@@ -1803,7 +2035,7 @@ def build_section_slide(prs, slide: Slide):
     cur_x = right_x
     pill_h = Inches(0.36)
     for text, kind in slide.section_pills:
-        pw = Inches(0.30 + 0.10 * max(1, len(text)))
+        pw = _pill_width(text, size=10)
         if kind == "build":
             _add_pill(s, cur_x, pill_y, pw, pill_h, text,
                       fill=SCARLET, text_color=PAPER, border=SCARLET, size=10)
@@ -1886,9 +2118,10 @@ def build_close_slide(prs, slide: Slide):
     _add_rect(s, 0, 0, SLIDE_W, Inches(0.07), fill=GOLD)
     # Stamp
     if slide.close_stamp:
-        sw = Inches(3.6)
+        stamp_text = slide.close_stamp.upper()
+        sw = _pill_width(stamp_text, size=11)
         _add_pill(s, (SLIDE_W - sw) / 2, Inches(1.0), sw, Inches(0.45),
-                  slide.close_stamp.upper(), fill=None, text_color=GOLD,
+                  stamp_text, fill=None, text_color=GOLD,
                   border=GOLD, size=11)
     # H1 — multi-line with em→gold
     if slide.close_h1_runs:
@@ -1957,9 +2190,10 @@ def build_editor_slide(prs, slide: Slide):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     _set_solid_bg(s, INK)
     if slide.editor_badge:
-        bw = Inches(3.3)
+        badge_text = slide.editor_badge.upper()
+        bw = _pill_width(badge_text, size=11)
         _add_pill(s, (SLIDE_W - bw) / 2, Inches(1.5), bw, Inches(0.42),
-                  slide.editor_badge.upper(), fill=SCARLET, text_color=PAPER,
+                  badge_text, fill=SCARLET, text_color=PAPER,
                   border=SCARLET, size=11)
     # Arrow
     box, tf = _add_textbox(s, 0, Inches(2.05), SLIDE_W, Inches(1.0))
@@ -2085,8 +2319,8 @@ def main() -> int:
     html = HTML_SRC.read_text(encoding="utf-8")
     slides = parse_slides(html)
     print(f"Parsed {len(slides)} slides from {HTML_SRC.name}")
-    if len(slides) != 57:
-        print(f"WARNING: expected 57 slides, got {len(slides)}", file=sys.stderr)
+    if len(slides) != 58:
+        print(f"WARNING: expected 58 slides, got {len(slides)}", file=sys.stderr)
     prs = build_presentation(slides)
     PPTX_OUT.parent.mkdir(parents=True, exist_ok=True)
     prs.save(PPTX_OUT)
@@ -2107,12 +2341,12 @@ def main() -> int:
         f"{text_frames} text frames; size = "
         f"{verify.slide_width / 914400:.3f}\" x {verify.slide_height / 914400:.3f}\""
     )
-    if n != 57:
+    if n != 58:
         print("ERROR: slide count mismatch in output file", file=sys.stderr)
         return 2
     if notes_populated < 50:
         print(
-            f"WARNING: only {notes_populated}/57 slides have populated speaker notes",
+            f"WARNING: only {notes_populated}/58 slides have populated speaker notes",
             file=sys.stderr,
         )
     return 0

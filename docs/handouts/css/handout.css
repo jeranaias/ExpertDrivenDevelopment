@@ -185,6 +185,11 @@
   flex: 1 1 auto;
   min-height: 0;
 }
+/* Only weeks whose body contains an Answer-Key strip (currently Week 6)
+   get the 3-row layout; weeks 1-5 keep the original 2-row default. */
+.hd-body:has(.hd-answer) {
+  grid-template-rows: auto auto auto;
+}
 .hd-box {
   border: 1px solid var(--hd-rule);
   border-left: 4px solid var(--hd-scarlet);
@@ -204,6 +209,7 @@
 .hd-box--exercise { grid-column: 3; grid-row: 1 / span 2; }
 .hd-box--learn    { grid-column: 1; grid-row: 2; }
 .hd-box--homework { grid-column: 2; grid-row: 2; }
+.hd-answer        { grid-column: 1 / -1; grid-row: 3; }
 
 .hd-box h2 {
   margin: 0 0 1pt;
@@ -389,9 +395,38 @@
   .hd-terms li          { margin-bottom: 0.5pt !important; }
   .hd-anchor            { padding: 1pt 5pt !important; line-height: 1.18 !important; margin-top: 1pt !important; }
   .hd-box               { padding: 4pt 7pt 4pt !important; gap: 1pt !important; overflow: hidden !important; }
-  .hd-body              { gap: 0.07in !important; grid-template-rows: 1fr 1fr !important; }
+  .hd-body              { gap: 0.07in !important; }
+  /* Only weeks whose body contains an Answer-Key strip (currently Week 6)
+     get the 3-row layout; weeks 1-5 keep the original 2-row default so
+     adding the row 3 here can't perturb their print spacing. */
+  .hd-body:has(.hd-answer) { grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) auto !important; }
   .hd-head              { padding-bottom: 0.05in !important; }
   .hd-foot              { padding-top: 2pt !important; margin-top: 1pt !important; }
+
+  /* Answer-key strip (Week 6 only). Print and screen behave
+     differently here on purpose. On screen, the eight-row
+     per-module file map sits inside the strip so students
+     reading the page online get the full table. In print,
+     we hide the map (the strip would otherwise tip the
+     handout past one Letter-landscape page) and keep just
+     the discipline + the URL to STUDENT_GUIDE.md. The full
+     map lives one click away in the linked guide and on the
+     student course page, which is what "or links to" in
+     task #74 explicitly allows. */
+  .hd-answer            { padding: 3pt 7pt 3pt !important; gap: 0.5pt !important; overflow: hidden !important;
+                          border-color: #000 !important; border-left-color: #000 !important; }
+  .hd-answer h2         { font-size: 8.2pt !important; color: #000 !important; line-height: 1.08 !important; }
+  .hd-answer h2 .lede   { font-size: 7.0pt !important; line-height: 1.18 !important; margin-top: 1pt !important; }
+  .hd-answer h2 .lede a { color: #000 !important; text-decoration: underline; }
+  /* Suppress the site-wide print rule (docs/css/style.css ~L1529) that prints
+     "(href)" after every link. Our GitHub URLs are ~80 chars each and would
+     wrap the lede across 3+ lines, blowing the strip past one page. The link
+     text itself already names the file path, so the URL is redundant in print. */
+  .hd-answer h2 .lede a[href]::after { content: "" !important; }
+  .hd-answer h2 .lede code { background: transparent !important; padding: 0 !important; font-size: 0.95em !important; }
+  /* Per-module file map: hidden in print, kept on screen. Print-and-go
+     students follow the STUDENT_GUIDE.md URL in the lede above. */
+  .hd-answer__map       { display: none !important; }
 
   /* Force colour fidelity on key marks even in B&W printing */
   .hd-head { border-bottom-color: #000 !important; }
@@ -414,6 +449,95 @@
   a { color: #000 !important; text-decoration: none; }
 }
 
+/* ---------- Answer-key strip (Week 6 only) -----------------
+   Compact full-width strip sitting between .hd-body and the
+   footer that points students at the heywood-inventory/
+   reference repo and the per-module file map. Mirrors the
+   guidance on Week 6 deck slide 49 + the student course page
+   #answer-key section so the handout survives a print-and-go
+   workflow. Scoped to .hd-answer so the other five handouts
+   are unaffected. The block sits as a flex child after
+   .hd-body (which has flex:1 1 auto), so the body shrinks to
+   make room — the boxes already have overflow:hidden, and
+   the print tighten-pass below pares the strip down so the
+   one-page guarantee asserted by build-handout-pdfs.js holds. */
+.hd-answer {
+  border: 1px solid var(--hd-rule);
+  border-left: 4px solid var(--hd-gold-dark);
+  border-radius: 0 4px 4px 0;
+  padding: 6pt 9pt 7pt;
+  background: var(--hd-paper);
+  display: flex;
+  flex-direction: column;
+  gap: 3pt;
+  min-width: 0;
+}
+.hd-answer h2 {
+  margin: 0 0 1pt;
+  font-size: 9pt;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hd-gold-dark);
+}
+.hd-answer h2 .lede {
+  display: block;
+  margin-top: 1pt;
+  font-size: 7.6pt;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--hd-ink-2);
+  line-height: 1.3;
+}
+.hd-answer h2 .lede a {
+  color: var(--hd-scarlet);
+  text-decoration: none;
+  font-weight: 700;
+}
+.hd-answer h2 .lede a:hover { text-decoration: underline; }
+.hd-answer h2 .lede code {
+  font-family: "Cascadia Code", "Fira Code", Consolas, Monaco, monospace;
+  font-size: 0.92em;
+  background: var(--hd-paper-2);
+  padding: 0 3pt;
+  border-radius: 2px;
+}
+.hd-answer__map {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 0.22in;
+  row-gap: 2pt;
+  font-size: 7.8pt;
+  color: var(--hd-ink-2);
+  line-height: 1.3;
+}
+.hd-answer__map > div {
+  display: flex;
+  gap: 5pt;
+  align-items: baseline;
+  min-width: 0;
+}
+.hd-answer__map strong {
+  flex: 0 0 auto;
+  color: var(--hd-ink);
+  font-weight: 700;
+  white-space: nowrap;
+  font-size: 7.6pt;
+}
+.hd-answer__map > div > span {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.hd-answer__map code {
+  font-family: "Cascadia Code", "Fira Code", Consolas, Monaco, monospace;
+  font-size: 7.2pt;
+  color: var(--hd-ink);
+  background: var(--hd-paper-2);
+  padding: 0 3pt;
+  border-radius: 2px;
+}
+
 /* ---------- Landing page (index.html) cards --------------- */
 .handout-grid {
   display: grid;
@@ -427,7 +551,6 @@
   border-top: 4px solid var(--hd-scarlet);
   border-radius: 6px;
   padding: 1rem 1.1rem 1.1rem;
-  text-decoration: none;
   color: var(--hd-ink);
   display: flex;
   flex-direction: column;
@@ -451,6 +574,11 @@
   font-weight: 700;
   color: var(--hd-ink);
 }
+.handout-card h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+.handout-card h3 a:hover { text-decoration: underline; }
 .handout-card p {
   margin: 0;
   font-size: 0.9rem;
@@ -465,6 +593,19 @@
   letter-spacing: 0.04em;
   border-top: 1px solid var(--hd-rule-2);
 }
+.handout-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  padding-top: 0.55rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.handout-card__actions a {
+  color: var(--hd-scarlet);
+  text-decoration: none;
+}
+.handout-card__actions a:hover { text-decoration: underline; }
 
 /* ---------- Margin-setting tip (on-screen only) ------------
    Wrapped in @media screen so it never reaches the print
@@ -485,4 +626,52 @@
     color: var(--hd-ink);
   }
   .handout-intro__tip strong { color: var(--hd-ink); font-weight: 700; }
+
+  /* ---------- PDF download UI (on-screen only) ---------------
+     Used on each handout page for the "Download PDF" button next
+     to the print-tip block, and on the handouts index for the
+     consolidated "Download all six" callout list. Wrapped in
+     @media screen so we never alter the print output (the parent
+     `.handout-intro` is also display:none in print as a
+     belt-and-braces guard). Mirrors the facilitator pack styling. */
+  .handout-intro__pdf {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    font-size: 0.92rem;
+    color: var(--hd-ink-2);
+  }
+  .handout-pdf-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0.6rem 1rem;
+  }
+  .handout-pdf-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--hd-ink-2);
+    font-size: 0.92rem;
+  }
+  .handout-pdf-list .btn { white-space: nowrap; }
+  .handout-pdf-regen { margin-bottom: 1.5rem; color: var(--hd-ink-2); }
+  .handout-pdf-regen summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--hd-ink);
+    padding: 0.3rem 0;
+  }
+  .handout-pdf-regen .muted { color: var(--hd-ink-3); font-size: 0.85rem; }
+  .handout-pdf-regen code {
+    background: var(--hd-paper-2);
+    border: 1px solid var(--hd-rule-2);
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: 0.88em;
+  }
 }

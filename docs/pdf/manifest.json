@@ -1,0 +1,106 @@
+{
+  "_comment": "Source of truth for the Briefs Library page (docs/pdf/index.html). Edit this file when adding, replacing, or describing a PDF; do not hand-edit the cards in index.html. Run `npm run build:briefs-library` (or let the GitHub Actions workflow do it on push) to regenerate the page. File sizes are read from disk at build time and do not need to be tracked here.",
+  "groups": [
+    {
+      "id": "leadership-briefs",
+      "title": "Leadership Briefs",
+      "headingClass": null,
+      "intro": "Short, leadership-ready briefs designed to be emailed, screenshared, or printed for command staff. Each one stands on its own &mdash; no prior EDD context required.",
+      "introClass": "text-lg mb-xl",
+      "cardClass": "card card--featured",
+      "buttonClass": "btn btn--primary btn--sm",
+      "items": [
+        {
+          "id": "executive-brief",
+          "file": "EDD_Executive_Brief.pdf",
+          "tagPrefix": "Leadership",
+          "title": "EDD Executive Brief",
+          "description": "A 15-slide leadership briefing that explains what Expert-Driven Development is, why it matters now, and what command staff need to do to enable it. Built for a 10-minute Teams readout.",
+          "audience": "Commanders, SgtsMaj, OICs, and senior civilians deciding whether to sponsor an EDD pilot in their section."
+        },
+        {
+          "id": "rai-compliance-brief",
+          "file": "EDD_RAI_Compliance_Brief.pdf",
+          "tagPrefix": "Compliance",
+          "title": "EDD RAI Compliance Brief",
+          "description": "How the EDD SOP maps to DoD Responsible AI guidance and the guardrails published by the Department of War. Use this when legal, IG, or RAI reviewers ask &ldquo;does this program meet policy?&rdquo;",
+          "audience": "RAI officers, legal/IG reviewers, and supervisors who need to defend an AI-assisted build to higher headquarters."
+        },
+        {
+          "id": "week-5-supervisor",
+          "file": "EDD_Week5_Supervisor_Orientation.pdf",
+          "tagPrefix": "Course Deck",
+          "title": "Week 5 &mdash; Supervisor Orientation",
+          "description": "Print-ready PDF of the Week 5 supervisor deck. Covers the permission gap, the four evaluation questions, the apprentice problem, and the supervisor quick-reference card.",
+          "audience": "Supervisors, staff NCOs, and section leads attending or running the 30-minute supervisor briefing.",
+          "secondaryLink": { "href": "../courses/supervisor.html", "text": "Open Course Page" }
+        }
+      ]
+    },
+    {
+      "id": "reference-documents",
+      "title": "Reference Documents",
+      "headingClass": "mt-2xl",
+      "intro": "The full SOP and the complete training curricula. These are the authoritative references the rest of the site links back to.",
+      "introClass": "text-lg mb-xl",
+      "cardClass": "card card--featured",
+      "buttonClass": "btn btn--primary btn--sm",
+      "items": [
+        {
+          "id": "sop-v5",
+          "file": "SOP_Expert_Driven_Development_v5.pdf",
+          "tagPrefix": "SOP",
+          "title": "SOP: Expert-Driven Development (v5, current)",
+          "description": "The current Standard Operating Procedure for AI-assisted tool development. Defines roles, the four phases, the QA gates, and the documentation package every tool must ship with.",
+          "audience": "Builders, supervisors, and reviewers running an EDD project end-to-end.",
+          "secondaryLink": { "href": "../sop/", "text": "Read Online" }
+        },
+        {
+          "id": "curricula-v5",
+          "file": "TRAINING_CURRICULA_v5.pdf",
+          "tagPrefix": "Curricula",
+          "title": "Training Curricula (v5, current)",
+          "description": "All six weekly courses in a single printable document: AI fluency, builder orientation, platform training, advanced techniques, supervisor orientation, and the full-stack Week 6 capstone.",
+          "audience": "Instructors planning a cohort and learners who want the whole program in one PDF.",
+          "secondaryLink": { "href": "../courses/", "text": "Browse Courses" }
+        }
+      ]
+    },
+    {
+      "id": "archived",
+      "title": "Archived Versions",
+      "headingClass": "mt-2xl",
+      "intro": "Earlier releases kept for traceability. Use the v5 documents above for current work; reach for these only when you need to compare against a prior revision.",
+      "introClass": "mb-lg",
+      "cardClass": "card",
+      "buttonClass": "btn btn--secondary btn--sm",
+      "items": [
+        {
+          "id": "sop-v3",
+          "file": "SOP_Expert_Driven_Development_v3.pdf",
+          "tagPrefix": "Archived",
+          "title": "SOP v3 (superseded)",
+          "description": "Earlier release of the EDD SOP. Superseded by v5 above.",
+          "audience": "Reviewers and auditors comparing the current SOP against an earlier revision for traceability."
+        },
+        {
+          "id": "curricula-v3",
+          "file": "TRAINING_CURRICULA_v3.pdf",
+          "tagPrefix": "Archived",
+          "title": "Training Curricula v3 (superseded)",
+          "description": "Earlier release of the EDD Training Curricula. Superseded by v5 above.",
+          "audience": "Instructors and reviewers comparing the current curricula against an earlier revision for traceability."
+        }
+      ]
+    }
+  ],
+  "fallbackGroup": {
+    "id": "uncategorized",
+    "title": "Uncategorized PDFs (add to manifest)",
+    "headingClass": "mt-2xl",
+    "intro": "These PDFs were found in <code>docs/pdf/</code> but have no entry in <code>docs/pdf/manifest.json</code>. Add a manifest entry (group + description + audience) and rebuild this page so they show up in the right section.",
+    "introClass": "mb-lg",
+    "cardClass": "card",
+    "buttonClass": "btn btn--secondary btn--sm"
+  }
+}

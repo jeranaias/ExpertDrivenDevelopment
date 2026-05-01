@@ -9,12 +9,17 @@
 </head>
 <body class="w3-deck">
 
+<a class="deck-back" href="../courses/platform.html" title="Return to the Platform Training course page">
+  <span class="deck-back__arrow" aria-hidden="true">&larr;</span>
+  <span>Back to Platform Training</span>
+</a>
+
 <div class="deck" id="deck">
 
   <!-- ======================================================
        SLIDE 1 — COVER
        ====================================================== -->
-  <section class="slide layout-cover" data-title="Cover">
+  <section class="slide layout-cover" data-title="Cover" data-module="Cover">
     <div class="cover__top">Expert-Driven Development</div>
     <div>
       <div class="cover__week">Week 3 of 6 &middot; Course 3</div>
@@ -25,6 +30,8 @@
       <span><strong>4 hours</strong> &middot; Builders</span>
       <span><strong>Prerequisite:</strong> Builder Orientation &middot; M365 access</span>
     </div>
+    <p class="cover-classlinks"><a href="links/week-3-platform-training.html" target="_blank" rel="noopener">Class Links &middot; share-in-chat URLs for this deck &rarr;</a></p>
+    <p class="cover-classlinks"><a href="week-3-handouts.html" target="_blank" rel="noopener">Facilitator Hand-Outs &middot; chat-paste blocks for this deck &rarr;</a></p>
     <div class="speaker-notes">
       <p><span class="notes__cue">Open</span>Welcome the room. Confirm everyone has a laptop, M365 credentials, and is signed in to GenAI.mil or CamoGPT. Today is the longest session in the program — four hours, three live builds. Set expectations: low-text slides, lots of platform time, and break placement after the first build.</p>
       <p>Tone: this is the working session. Builder Orientation was the on-ramp. Today we ship.</p>
@@ -35,7 +42,7 @@
   <!-- ======================================================
        SLIDE 2 — RECAP WEEKS 1-2
        ====================================================== -->
-  <section class="slide layout-content" data-title="Recap: Weeks 1-2">
+  <section class="slide layout-content" data-title="Recap: Weeks 1-2" data-module="Recap">
     <div class="slide__header">
       <span class="slide__eyebrow">Where we are</span>
       <span class="chip chip--ghost">Weeks 1 &amp; 2</span>
@@ -74,7 +81,7 @@
   <!-- ======================================================
        SLIDE 3 — TODAY'S MISSION
        ====================================================== -->
-  <section class="slide layout-content" data-title="Today's mission">
+  <section class="slide layout-content" data-title="Today's mission" data-module="Framing">
     <div class="slide__header">
       <span class="slide__eyebrow">Today's mission</span>
       <span class="chip">By 4 hours from now</span>
@@ -99,7 +106,7 @@
   <!-- ======================================================
        SLIDE 4 — THE 4-HOUR MAP
        ====================================================== -->
-  <section class="slide layout-agenda" data-title="The 4-hour map">
+  <section class="slide layout-agenda" data-title="The 4-hour map" data-module="Agenda">
     <div class="slide__header">
       <span class="slide__eyebrow">The 4-hour map</span>
       <span class="chip">Pace yourself</span>
@@ -147,7 +154,7 @@
   <!-- ======================================================
        SLIDE 5 — SECTION: MODULE 1
        ====================================================== -->
-  <section class="slide layout-section" data-title="Section: Module 1">
+  <section class="slide layout-section" data-title="Section: Module 1" data-module="Module 1">
     <div class="section__eyebrow">Module 1 of 6</div>
     <h2 class="h-display">Setup &amp; Review.</h2>
     <div class="rule"></div>
@@ -155,6 +162,7 @@
       <span class="chip chip--gold">15 minutes</span>
       <span class="chip">Goal: zero access surprises in Build #1</span>
     </div>
+    <a class="section__notes-link" href="../courses/platform.html#setup-review" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
     <div class="speaker-notes">
       <p><span class="notes__cue">Section</span>Brief stop. The goal of this module is brutal: confirm everybody can reach SharePoint, Power Apps, Power Automate, and a CAC-enabled AI tool, and confirm Integrate works in their tenant. If we discover an access problem during Build #1, we lose 20 minutes recovering. We discover it now.</p>
     </div>
@@ -163,7 +171,7 @@
   <!-- ======================================================
        SLIDE 6 — PRE-FLIGHT ACCESS CHECK
        ====================================================== -->
-  <section class="slide layout-content" data-title="Pre-flight access check">
+  <section class="slide layout-content" data-title="Pre-flight access check" data-module="Module 1">
     <div class="slide__header">
       <span class="slide__eyebrow">Module 1 &middot; Pre-flight</span>
       <span class="chip chip--scarlet">Resolve before Build #1</span>
@@ -201,7 +209,7 @@
   <!-- ======================================================
        SLIDE 7 — CENTAUR VS CYBORG REFRESHER
        ====================================================== -->
-  <section class="slide layout-two" data-title="Centaur vs cyborg refresher">
+  <section class="slide layout-two" data-title="Centaur vs cyborg refresher" data-module="Module 1">
     <div class="slide__header">
       <span class="slide__eyebrow">Module 1 &middot; Refresher</span>
       <span class="chip">From Week 2</span>
@@ -238,7 +246,7 @@
   <!-- ======================================================
        SLIDE 8 — AI TOOL SELECTION
        ====================================================== -->
-  <section class="slide layout-content" data-title="AI tool selection">
+  <section class="slide layout-content" data-title="AI tool selection" data-module="Module 1">
     <div class="slide__header">
       <span class="slide__eyebrow">Module 1 &middot; Tooling</span>
       <span class="chip">Pick before you prompt</span>
@@ -273,7 +281,7 @@
   <!-- ======================================================
        SLIDE 9 — SECTION: BUILD #1 CENTAUR
        ====================================================== -->
-  <section class="slide layout-section" data-title="Section: Build #1 — Centaur">
+  <section class="slide layout-section" data-title="Section: Build #1 — Centaur" data-module="Module 2">
     <div class="section__eyebrow">Build #1 of 3 &middot; Module 2</div>
     <h2 class="h-display">Centaur Mode.<br>Request Routing.</h2>
     <div class="rule"></div>
@@ -281,6 +289,7 @@
       <span class="chip chip--gold">60 minutes</span>
       <span class="chip">Five phases. Four checkpoints.</span>
     </div>
+    <a class="section__notes-link" href="../courses/platform.html#build-1" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
     <div class="speaker-notes">
       <p><span class="notes__cue">Section</span>Hard pivot into the first build. Energy up. From here until 1:15, we're heads-down on a real workflow.</p>
       <p>Frame the centaur pattern out loud one more time: <em>"You design. AI builds. You verify. AI refines. You accept. At every boundary, you check before you cross."</em></p>
@@ -290,7 +299,7 @@
   <!-- ======================================================
        SLIDE 10 — BUILD #1 FRAMING
        ====================================================== -->
-  <section class="slide layout-frame" data-title="Build #1 framing">
+  <section class="slide layout-frame" data-title="Build #1 framing" data-module="Module 2">
     <div class="slide__header">
       <span class="slide__eyebrow">Build #1 &middot; Pre-build framing</span>
       <span class="chip chip--scarlet">Centaur</span>
@@ -326,7 +335,7 @@
   <!-- ======================================================
        SLIDE 11 — PHASE 1: WHITEBOARD FIRST
        ====================================================== -->
-  <section class="slide layout-content" data-title="Phase 1 — Whiteboard first">
+  <section class="slide layout-content" data-title="Phase 1 — Whiteboard first" data-module="Module 2">
     <div class="slide__header">
       <span class="slide__eyebrow">Build #1 &middot; Phase 1</span>
       <span class="chip">10 minutes &middot; No AI yet</span>
@@ -353,7 +362,7 @@
   <!-- ======================================================
        SLIDE 12 — SWITCH TO POWER PLATFORM (BUILD #1)
        ====================================================== -->
-  <section class="slide layout-switch" data-title="Switch to Power Platform — Build #1">
+  <section class="slide layout-switch" data-title="Switch to Power Platform — Build #1" data-module="Module 2">
     <span class="switch__badge">Switch to Power Platform &mdash; Now</span>
     <h2>Open SharePoint. Build the list. Then Integrate it.</h2>
     <p class="switch__caption">We leave the deck for the next ~40 minutes. I'll walk you through the canonical prompt sequence on the projector. Open your AI tool side-by-side with Power Apps.</p>
@@ -376,7 +385,7 @@
   <!-- ======================================================
        SLIDE 13 — RETURN: BUILD #1 DEBRIEF
        ====================================================== -->
-  <section class="slide layout-debrief" data-title="Return: Build #1 debrief">
+  <section class="slide layout-debrief" data-title="Return: Build #1 debrief" data-module="Module 2">
     <span class="return__badge">Back to deck &middot; Build #1 debrief</span>
     <div class="slide__header">
       <span class="slide__eyebrow">Build #1 &middot; Debrief</span>
@@ -414,7 +423,7 @@
   <!-- ======================================================
        SLIDE 14 — SECTION: BREAK + FAILURE SHARING
        ====================================================== -->
-  <section class="slide layout-section" data-title="Section: Break + Failure Sharing">
+  <section class="slide layout-section" data-title="Section: Break + Failure Sharing" data-module="Module 3">
     <div class="section__eyebrow">Module 3 &middot; During the break</div>
     <h2 class="h-display">Failure Sharing.</h2>
     <div class="rule"></div>
@@ -422,6 +431,7 @@
       <span class="chip chip--gold">15 minutes total</span>
       <span class="chip">Quiet, open, attributable</span>
     </div>
+    <a class="section__notes-link" href="../courses/platform.html#failure-sharing" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
     <div class="speaker-notes">
       <p><span class="notes__cue">Setup</span>Frame this carefully before the break. <em>"This is one of the most important fifteen minutes in the entire program. We're going to share what AI got wrong in Build #1, and how we caught it. No grades. No judgment. Every failure case you share saves someone else an hour of confusion."</em></p>
       <p>Lead by sharing your own AI failure first. Be specific: a wrong DAX function, a hallucinated SharePoint column name, a routing rule it inverted. Set the tone that experienced builders fail too.</p>
@@ -432,7 +442,7 @@
   <!-- ======================================================
        SLIDE 15 — FAILURE SHARING (QUIET)
        ====================================================== -->
-  <section class="slide layout-quiet" data-title="Failure sharing — open discussion">
+  <section class="slide layout-quiet" data-title="Failure sharing — open discussion" data-module="Module 3">
     <div class="quiet__eyebrow">Open discussion &middot; 10 minutes</div>
     <h2>What did AI get wrong? How did you catch it? What will you check next time?</h2>
     <p class="quiet__lead">Share one specific failure case. Skip the framing — we already know the build. Tell us what you saw and how you fixed it.</p>
@@ -453,7 +463,7 @@
   <!-- ======================================================
        SLIDE 16 — BREAK SPLASH
        ====================================================== -->
-  <section class="slide layout-break" data-title="Break — return at 1:30">
+  <section class="slide layout-break" data-title="Break — return at 1:30" data-module="Break">
     <div class="break__label">Break</div>
     <h2>5 minutes</h2>
     <div class="break__sub">Stretch, refill, then we open Build #2 at the cyborg pace.</div>
@@ -465,7 +475,7 @@
   <!-- ======================================================
        SLIDE 17 — SECTION: BUILD #2 CYBORG
        ====================================================== -->
-  <section class="slide layout-section" data-title="Section: Build #2 — Cyborg">
+  <section class="slide layout-section" data-title="Section: Build #2 — Cyborg" data-module="Module 4">
     <div class="section__eyebrow">Build #2 of 3 &middot; Module 4</div>
     <h2 class="h-display">Cyborg Mode.<br>Training Tracker.</h2>
     <div class="rule"></div>
@@ -473,6 +483,7 @@
       <span class="chip chip--gold">60 minutes</span>
       <span class="chip">No phases. Continuous conversation.</span>
     </div>
+    <a class="section__notes-link" href="../courses/platform.html#build-2" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
     <div class="speaker-notes">
       <p><span class="notes__cue">Section</span>Energy back up. We're shifting modes deliberately. Where Build #1 made you wait at every checkpoint, Build #2 wants you in continuous conversation. You'll feel the difference in the first ten minutes.</p>
     </div>
@@ -481,7 +492,7 @@
   <!-- ======================================================
        SLIDE 18 — BUILD #2 FRAMING
        ====================================================== -->
-  <section class="slide layout-frame" data-title="Build #2 framing">
+  <section class="slide layout-frame" data-title="Build #2 framing" data-module="Module 4">
     <div class="slide__header">
       <span class="slide__eyebrow">Build #2 &middot; Pre-build framing</span>
       <span class="chip chip--scarlet">Cyborg</span>
@@ -516,7 +527,7 @@
   <!-- ======================================================
        SLIDE 19 — SWITCH TO POWER PLATFORM (BUILD #2)
        ====================================================== -->
-  <section class="slide layout-switch" data-title="Switch to Power Platform — Build #2">
+  <section class="slide layout-switch" data-title="Switch to Power Platform — Build #2" data-module="Module 4">
     <span class="switch__badge">Switch to Power Platform &mdash; Now</span>
     <h2>Open a fresh AI conversation. Start typing.</h2>
     <p class="switch__caption">No whiteboard. No outline. Tell the AI the rough need, evaluate what comes back, and redirect. The boundary between you and the AI stays fluid for the next ~45 minutes.</p>
@@ -539,7 +550,7 @@
   <!-- ======================================================
        SLIDE 20 — RETURN: BUILD #2 DEBRIEF
        ====================================================== -->
-  <section class="slide layout-debrief" data-title="Return: Build #2 debrief">
+  <section class="slide layout-debrief" data-title="Return: Build #2 debrief" data-module="Module 4">
     <span class="return__badge">Back to deck &middot; Build #2 debrief</span>
     <div class="slide__header">
       <span class="slide__eyebrow">Build #2 &middot; Debrief</span>
@@ -578,7 +589,7 @@
   <!-- ======================================================
        SLIDE 21 — BREAK 2
        ====================================================== -->
-  <section class="slide layout-break" data-title="Break — return at 2:45">
+  <section class="slide layout-break" data-title="Break — return at 2:45" data-module="Break">
     <div class="break__label">Break</div>
     <h2>15 minutes</h2>
     <div class="break__sub">Bigger break this time. Eat. Walk. Come back ready to build your own thing.</div>
@@ -591,7 +602,7 @@
   <!-- ======================================================
        SLIDE 22 — SECTION: BUILD #3 YOUR PROBLEM
        ====================================================== -->
-  <section class="slide layout-section" data-title="Section: Build #3 — Your Problem">
+  <section class="slide layout-section" data-title="Section: Build #3 — Your Problem" data-module="Module 5">
     <div class="section__eyebrow">Build #3 of 3 &middot; Module 5</div>
     <h2 class="h-display">Your Problem.<br>Choose Your Mode.</h2>
     <div class="rule"></div>
@@ -599,6 +610,7 @@
       <span class="chip chip--gold">60 minutes</span>
       <span class="chip">Real data &middot; real workflow &middot; real users</span>
     </div>
+    <a class="section__notes-link" href="../courses/platform.html#build-3" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
     <div class="speaker-notes">
       <p><span class="notes__cue">Section</span>Tone shift. The first two builds were yours to run, but the rules were mine. This one is yours all the way down. Real problem. Real users. Your call on the mode.</p>
       <p>Reinforce the data-handling reminder: real unit data is OK on GenAI.mil and CamoGPT. PII gets anonymized. Commercial tools are off-limits for CUI.</p>
@@ -608,7 +620,7 @@
   <!-- ======================================================
        SLIDE 23 — BUILD #3 DECLARE
        ====================================================== -->
-  <section class="slide layout-frame" data-title="Build #3 — declare before you build">
+  <section class="slide layout-frame" data-title="Build #3 — declare before you build" data-module="Module 5">
     <div class="slide__header">
       <span class="slide__eyebrow">Build #3 &middot; Pre-build framing</span>
       <span class="chip chip--scarlet">Your call</span>
@@ -642,7 +654,7 @@
   <!-- ======================================================
        SLIDE 24 — SWITCH TO POWER PLATFORM (BUILD #3)
        ====================================================== -->
-  <section class="slide layout-switch" data-title="Switch to Power Platform — Build #3">
+  <section class="slide layout-switch" data-title="Switch to Power Platform — Build #3" data-module="Module 5">
     <span class="switch__badge">Switch to Power Platform &mdash; Now</span>
     <h2>Build the thing you came here to build.</h2>
     <p class="switch__caption">I'll circulate. When you hit a block, ask me what you'd tell the AI &mdash; not how to fix it. Teaching you to debug with AI is more valuable than fixing it for you.</p>
@@ -663,7 +675,7 @@
   <!-- ======================================================
        SLIDE 25 — RETURN: BUILD #3 DEBRIEF
        ====================================================== -->
-  <section class="slide layout-debrief" data-title="Return: Build #3 debrief">
+  <section class="slide layout-debrief" data-title="Return: Build #3 debrief" data-module="Module 5">
     <span class="return__badge">Back to deck &middot; Build #3 debrief</span>
     <div class="slide__header">
       <span class="slide__eyebrow">Build #3 &middot; Debrief</span>
@@ -698,7 +710,7 @@
   <!-- ======================================================
        SLIDE 26 — SECTION: FRONTIER MAP + WRAP
        ====================================================== -->
-  <section class="slide layout-section" data-title="Section: Frontier Map + Wrap">
+  <section class="slide layout-section" data-title="Section: Frontier Map + Wrap" data-module="Module 6">
     <div class="section__eyebrow">Module 6 &middot; Wrap</div>
     <h2 class="h-display">Frontier Map.<br>Then we close.</h2>
     <div class="rule"></div>
@@ -706,6 +718,7 @@
       <span class="chip chip--gold">15 minutes</span>
       <span class="chip">One real entry per person</span>
     </div>
+    <a class="section__notes-link" href="../courses/platform.html#frontier-map" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
     <div class="speaker-notes">
       <p><span class="notes__cue">Section</span>Final stretch. The frontier map is the thing today produced that survives past today. Three builds end up on the floor when you leave; the map goes back to your section.</p>
     </div>
@@ -714,7 +727,7 @@
   <!-- ======================================================
        SLIDE 27 — FRONTIER MAP REFERENCE
        ====================================================== -->
-  <section class="slide layout-content layout-map" data-title="Frontier map — reference layout">
+  <section class="slide layout-content layout-map" data-title="Frontier map — reference layout" data-module="Module 6">
     <div class="slide__header">
       <span class="slide__eyebrow">Module 6 &middot; Reference</span>
       <span class="chip">Use this shape for your own map</span>
@@ -761,7 +774,7 @@
   <!-- ======================================================
        SLIDE 28 — UPDATE YOUR MAP (WORKTIME)
        ====================================================== -->
-  <section class="slide layout-worktime" data-title="Update your map — worktime">
+  <section class="slide layout-worktime" data-title="Update your map — worktime" data-module="Module 6">
     <div class="slide__header">
       <span class="slide__eyebrow">Module 6 &middot; Worktime</span>
       <span class="chip chip--scarlet">Add at least one row</span>
@@ -782,7 +795,7 @@
   <!-- ======================================================
        SLIDE 29 — WHAT YOU CAN NOW DO
        ====================================================== -->
-  <section class="slide layout-content" data-title="What you can now do">
+  <section class="slide layout-content" data-title="What you can now do" data-module="Module 6">
     <div class="slide__header">
       <span class="slide__eyebrow">Wrap</span>
       <span class="chip">Four hours later</span>
@@ -807,7 +820,7 @@
   <!-- ======================================================
        SLIDE 30 — ASSIGNMENT BEFORE WEEK 4
        ====================================================== -->
-  <section class="slide layout-content" data-title="Assignment before Week 4">
+  <section class="slide layout-content" data-title="Assignment before Week 4" data-module="Module 6">
     <div class="slide__header">
       <span class="slide__eyebrow">Before Week 4</span>
       <span class="chip chip--scarlet">Required to attend Advanced Workshop</span>
@@ -831,7 +844,7 @@
   <!-- ======================================================
        SLIDE 31 — WEEK 4 PREVIEW
        ====================================================== -->
-  <section class="slide layout-preview" data-title="Next week — Week 4 preview">
+  <section class="slide layout-preview" data-title="Next week — Week 4 preview" data-module="Module 6">
     <div class="preview__badge">Week 4 of 6 &middot; Course 4</div>
     <h2 class="preview__title">Advanced Workshop.</h2>
     <p class="preview__sub">Four hours for experienced builders. You bring a deployed tool and the failure cases you collected this week. We map the frontier for your domain and build verification protocols you can hand to someone else.</p>
@@ -852,7 +865,7 @@
   <!-- ======================================================
        SLIDE 32 — CLOSING
        ====================================================== -->
-  <section class="slide layout-closing" data-title="Closing">
+  <section class="slide layout-closing" data-title="Closing" data-module="Closing">
     <h2>Ship the tool. Update the map.</h2>
     <div class="rule"></div>
     <div class="closing__sub">Questions before we close?</div>

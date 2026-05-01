@@ -243,6 +243,22 @@ html, body {
   display: inline-flex; align-items: center; justify-content: center;
   font-weight: 900;
 }
+/* Cover-strip — points instructors at the slide-by-slide prompt hand-out. */
+.cover-handout-strip {
+  margin-top: 2.2vh;
+  padding-top: 1.6vh;
+  border-top: 1px solid var(--line-2);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1.4vw;
+  font-size: 1vw; color: var(--ink-3);
+  letter-spacing: 0.04em;
+}
+.cover-handout-strip a {
+  color: var(--scarlet); font-weight: 800;
+  text-decoration: none; border-bottom: 1.5px solid var(--scarlet);
+  padding-bottom: 0.2vh;
+}
+.cover-handout-strip a:hover { color: var(--scarlet-dark); border-color: var(--scarlet-dark); }
 
 /* SECTION DIVIDER */
 .slide--section {
@@ -676,13 +692,18 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
 </head>
 <body class="w6-deck">
 
+<a class="deck-back" href="../courses/fullstack.html" title="Return to the Full-Stack AI-Assisted Development course page">
+  <span class="deck-back__arrow" aria-hidden="true">&larr;</span>
+  <span>Back to Full-Stack Development</span>
+</a>
+
 <div class="stage">
   <div class="deck" id="deck">
 
   <!-- ========================================================
        0.1 — COVER
        ======================================================== -->
-  <section class="slide slide--cover">
+  <section class="slide slide--cover" data-module="Cover" data-title="Cover">
     <div class="cover-inner">
       <div class="cover-top">
         <div class="brand"><span class="mark"></span> Expert-Driven Development</div>
@@ -707,6 +728,11 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
         </div>
         <div class="week-pip"><span class="six">6</span> Week Six of Six</div>
       </div>
+      <p class="cover-classlinks"><a href="links/week-6-fullstack.html" target="_blank" rel="noopener">Class Links &middot; share-in-chat URLs for this deck &rarr;</a></p>
+      <div class="cover-handout-strip">
+        <span>Open in a second tab before you start &mdash; one click per &ldquo;switch to editor&rdquo; cue.</span>
+        <a href="week-6-handouts.html" target="_blank" rel="noopener">▸ Slide-by-slide prompt hand-out</a>
+      </div>
     </div>
 
     <aside class="notes">
@@ -727,7 +753,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        0.2 — RECAP OF WEEKS 1–5
        ======================================================== -->
-  <section class="slide">
+  <section class="slide" data-module="Recap" data-title="How we got here">
     <div class="slide__head">
       <div class="slide__eyebrow">Recap <span class="dot"></span> Weeks 1 through 5</div>
       <div class="slide__minutes">~3 min</div>
@@ -775,7 +801,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        0.3 — HOW TODAY RUNS
        ======================================================== -->
-  <section class="slide">
+  <section class="slide" data-module="Framing" data-title="How today runs">
     <div class="slide__head">
       <div class="slide__eyebrow">Today <span class="dot"></span> Format</div>
       <div class="slide__minutes">~2 min</div>
@@ -826,7 +852,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        0.4 — SIX PRINCIPLES
        ======================================================== -->
-  <section class="slide">
+  <section class="slide" data-module="Framing" data-title="Six principles for the day">
     <div class="slide__head">
       <div class="slide__eyebrow">Operating Principles</div>
       <div class="slide__minutes">~3 min</div>
@@ -867,7 +893,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        0.5 — AGENDA
        ======================================================== -->
-  <section class="slide">
+  <section class="slide" data-module="Agenda" data-title="The day at a glance">
     <div class="slide__head">
       <div class="slide__eyebrow">Agenda</div>
       <div class="slide__minutes">~2 min</div>
@@ -907,7 +933,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        0.6 — TARGET (HEYWOOD DEMO HOOK)
        ======================================================== -->
-  <section class="slide">
+  <section class="slide" data-module="Framing" data-title="What you walk out with today">
     <div class="slide__head">
       <div class="slide__eyebrow">Target</div>
       <div class="slide__minutes">~3 min</div>
@@ -941,7 +967,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        MODULE 1 — DIVIDER
        ======================================================== -->
-  <section class="slide slide--section">
+  <section class="slide slide--section" data-module="Module 1" data-title="Module 1 — The Full-Stack Frontier">
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module</div>
@@ -954,6 +980,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
           <span class="pill">Framing · no code</span>
         </div>
         <p class="module-blurb">A short mental-model shift from "I build Power Apps" to "I direct AI to build whatever the problem needs." We anchor the architecture we'll grow all day.</p>
+        <a class="section__notes-link" href="../courses/fullstack.html#module-1" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
       </div>
     </div>
 
@@ -967,7 +994,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        1.1 — WHY FULL-STACK
        ======================================================== -->
-  <section class="slide">
+  <section class="slide" data-module="Module 1" data-title="Where Power Platform stops">
     <div class="slide__head">
       <div class="slide__eyebrow">Module 1 · Why Full-Stack</div>
       <div class="slide__minutes">~10 min</div>
@@ -1006,7 +1033,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        1.2 — ARCHITECTURE (FIRST APPEARANCE — empty)
        ======================================================== -->
-  <section class="slide slide--debrief">
+  <section class="slide slide--debrief" data-module="Module 1" data-title="The four layers — empty for now">
     <div class="slide__head">
       <div class="slide__eyebrow">Architecture <span class="dot"></span> Anchor diagram</div>
       <div class="slide__minutes">~7 min</div>
@@ -1042,7 +1069,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        1.3 — HOW AI CHANGES IT
        ======================================================== -->
-  <section class="slide">
+  <section class="slide" data-module="Module 1" data-title="You will not learn to code today">
     <div class="slide__head">
       <div class="slide__eyebrow">Module 1 · The Skill</div>
       <div class="slide__minutes">~8 min</div>
@@ -1091,7 +1118,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        MODULE 2 — DIVIDER
        ======================================================== -->
-  <section class="slide slide--section">
+  <section class="slide slide--section" data-module="Module 2" data-title="Module 2 — Environment Setup">
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module</div>
@@ -1104,6 +1131,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
           <span class="pill">AI-guided install</span>
         </div>
         <p class="module-blurb">The most boring module and the most critical. If the environment isn't right, nothing else works. Today, we let the AI walk every student through their own machine.</p>
+        <a class="section__notes-link" href="../courses/fullstack.html#module-2" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
       </div>
     </div>
 
@@ -1117,7 +1145,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        2.1 — REQUIRED TOOLS
        ======================================================== -->
-  <section class="slide slide--build">
+  <section class="slide slide--build" data-module="Module 2" data-title="Build framing — environment setup">
     <div class="slide__head">
       <div class="slide__eyebrow">Module 2 · Tools <span class="dot"></span> Build framing</div>
       <div class="slide__minutes">~5 min</div>
@@ -1161,7 +1189,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        2.2 — SWITCH TO EDITOR (install + scaffold)
        ======================================================== -->
-  <section class="slide slide--editor">
+  <section class="slide slide--editor" data-module="Module 2" data-title="Switch to editor — environment setup">
     <div class="editor-inner">
       <span class="badge">▶ Switch to the editor</span>
       <div class="arrow">→</div>
@@ -1191,7 +1219,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        2.3 — BACK TO DECK: ENV READY (architecture still empty)
        ======================================================== -->
-  <section class="slide slide--debrief">
+  <section class="slide slide--debrief" data-module="Module 2" data-title="Module 2 complete — runway built">
     <div class="slide__head">
       <div class="slide__eyebrow">Back to deck <span class="dot"></span> Environment ready</div>
       <div class="slide__minutes">~3 min</div>
@@ -1232,7 +1260,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        MODULE 3 — DIVIDER (BUILD)
        ======================================================== -->
-  <section class="slide slide--section">
+  <section class="slide slide--section" data-module="Module 3" data-title="Module 3 — Backend from Scratch">
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module · Build</div>
@@ -1245,6 +1273,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
           <span class="pill pill--gold">45 min</span>
         </div>
         <p class="module-blurb">First real server-side code — or rather, first time directing AI to write it. By the end, every student has a Go HTTP server returning JSON to a curl request.</p>
+        <a class="section__notes-link" href="../courses/fullstack.html#module-3" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
       </div>
     </div>
 
@@ -1258,7 +1287,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        3.1 — BUILD FRAMING
        ======================================================== -->
-  <section class="slide slide--build">
+  <section class="slide slide--build" data-module="Module 3" data-title="Your first HTTP server">
     <div class="slide__head">
       <div class="slide__eyebrow">Module 3 · Build framing</div>
       <div class="slide__minutes">~5 min</div>
@@ -1299,7 +1328,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        3.2 — SWITCH TO EDITOR
        ======================================================== -->
-  <section class="slide slide--editor">
+  <section class="slide slide--editor" data-module="Module 3" data-title="Switch to editor — first server">
     <div class="editor-inner">
       <span class="badge">▶ Switch to the editor</span>
       <div class="arrow">→</div>
@@ -1331,7 +1360,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        3.3 — DEBRIEF: FIRST VICTORY + ARCHITECTURE (BACKEND ✓)
        ======================================================== -->
-  <section class="slide slide--debrief">
+  <section class="slide slide--debrief" data-module="Module 3" data-title="L2 lit — your first web server">
     <div class="slide__head">
       <div class="slide__eyebrow">Back to deck <span class="dot"></span> First victory</div>
       <div class="slide__minutes">~5 min</div>
@@ -1373,7 +1402,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        MODULE 4 — DIVIDER (BUILD)
        ======================================================== -->
-  <section class="slide slide--section">
+  <section class="slide slide--section" data-module="Module 4" data-title="Module 4 — Data Layer">
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module · Build</div>
@@ -1386,6 +1415,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
           <span class="pill pill--gold">45 min</span>
         </div>
         <p class="module-blurb">The most important conceptual move of the day: interface-first design. Define <em>what</em> the data layer does before you decide <em>how</em> it stores anything.</p>
+        <a class="section__notes-link" href="../courses/fullstack.html#module-4" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
       </div>
     </div>
 
@@ -1399,7 +1429,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        4.1 — INTERFACE-FIRST FRAMING
        ======================================================== -->
-  <section class="slide slide--build">
+  <section class="slide slide--build" data-module="Module 4" data-title="Interface first. Implementation later.">
     <div class="slide__head">
       <div class="slide__eyebrow">Module 4 · Build framing</div>
       <div class="slide__minutes">~7 min</div>
@@ -1444,7 +1474,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        4.2 — SWITCH TO EDITOR
        ======================================================== -->
-  <section class="slide slide--editor">
+  <section class="slide slide--editor" data-module="Module 4" data-title="Define the DataStore interface">
     <div class="editor-inner">
       <span class="badge">▶ Switch to the editor</span>
       <div class="arrow">→</div>
@@ -1469,7 +1499,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        4.3 — DEBRIEF + ARCHITECTURE (DATA ✓)
        ======================================================== -->
-  <section class="slide slide--debrief">
+  <section class="slide slide--debrief" data-module="Module 4" data-title="L3 lit — real data, behind a contract">
     <div class="slide__head">
       <div class="slide__eyebrow">Back to deck <span class="dot"></span> Data layer live</div>
       <div class="slide__minutes">~3 min</div>
@@ -1509,7 +1539,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        BREAK 1
        ======================================================== -->
-  <section class="slide slide--break">
+  <section class="slide slide--break" data-module="Break" data-title="Break — Be back at H+3:00">
     <div class="break-inner">
       <div class="lab">Break · Be back at H+3:00</div>
       <div class="num">15<small>min</small></div>
@@ -1531,7 +1561,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        MODULE 5 — DIVIDER (BUILD)
        ======================================================== -->
-  <section class="slide slide--section">
+  <section class="slide slide--section" data-module="Module 5" data-title="Module 5 — Frontend from Scratch">
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module · Build</div>
@@ -1544,6 +1574,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
           <span class="pill pill--gold">45 min</span>
         </div>
         <p class="module-blurb">Stand up React + Vite + TypeScript, configure a proxy to the Go backend, and render the items table in a styled UI. The first end-to-end full-stack moment of the day.</p>
+        <a class="section__notes-link" href="../courses/fullstack.html#module-5" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
       </div>
     </div>
 
@@ -1557,7 +1588,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        5.1 — BUILD FRAMING
        ======================================================== -->
-  <section class="slide slide--build">
+  <section class="slide slide--build" data-module="Module 5" data-title="First end-to-end view">
     <div class="slide__head">
       <div class="slide__eyebrow">Module 5 · Build framing</div>
       <div class="slide__minutes">~5 min</div>
@@ -1596,7 +1627,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        5.2 — SWITCH TO EDITOR
        ======================================================== -->
-  <section class="slide slide--editor">
+  <section class="slide slide--editor" data-module="Module 5" data-title="Switch to editor — frontend">
     <div class="editor-inner">
       <span class="badge">▶ Switch to the editor</span>
       <div class="arrow">→</div>
@@ -1624,7 +1655,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        5.3 — DEBRIEF: SECOND VICTORY + ARCHITECTURE (FRONTEND ✓)
        ======================================================== -->
-  <section class="slide slide--debrief">
+  <section class="slide slide--debrief" data-module="Module 5" data-title="L1 lit — full stack, end to end">
     <div class="slide__head">
       <div class="slide__eyebrow">Back to deck <span class="dot"></span> Second victory</div>
       <div class="slide__minutes">~5 min</div>
@@ -1664,7 +1695,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        MODULE 6 — DIVIDER (BUILD)
        ======================================================== -->
-  <section class="slide slide--section">
+  <section class="slide slide--section" data-module="Module 6" data-title="Module 6 — Pages &amp; Navigation">
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module · Build</div>
@@ -1677,6 +1708,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
           <span class="pill pill--gold">45 min</span>
         </div>
         <p class="module-blurb">Sidebar layout, client-side routing, dashboard with stats, item detail page. Turn the prototype into something that looks and feels like an application.</p>
+        <a class="section__notes-link" href="../courses/fullstack.html#module-6" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
       </div>
     </div>
 
@@ -1690,7 +1722,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        6.1 — BUILD FRAMING
        ======================================================== -->
-  <section class="slide slide--build">
+  <section class="slide slide--build" data-module="Module 6" data-title="From one page to a real application">
     <div class="slide__head">
       <div class="slide__eyebrow">Module 6 · Build framing</div>
       <div class="slide__minutes">~5 min</div>
@@ -1729,7 +1761,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        6.2 — SWITCH TO EDITOR
        ======================================================== -->
-  <section class="slide slide--editor">
+  <section class="slide slide--editor" data-module="Module 6" data-title="Switch to editor — multi-page UI">
     <div class="editor-inner">
       <span class="badge">▶ Switch to the editor</span>
       <div class="arrow">→</div>
@@ -1756,7 +1788,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        6.3 — DEBRIEF + ARCHITECTURE (still 3/4)
        ======================================================== -->
-  <section class="slide slide--debrief">
+  <section class="slide slide--debrief" data-module="Module 6" data-title="L1 fleshed out — the prototype is gone">
     <div class="slide__head">
       <div class="slide__eyebrow">Back to deck <span class="dot"></span> Real application shape</div>
       <div class="slide__minutes">~3 min</div>
@@ -1796,7 +1828,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        MODULE 7 — DIVIDER (BUILD)
        ======================================================== -->
-  <section class="slide slide--section">
+  <section class="slide slide--section" data-module="Module 7" data-title="Module 7 — AI Chat Integration">
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module · Build</div>
@@ -1809,6 +1841,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
           <span class="pill pill--gold">45 min</span>
         </div>
         <p class="module-blurb">A chat backend that calls OpenAI, a tool the AI can call back into your data store, and a chat page on the frontend. The brain inside the app.</p>
+        <a class="section__notes-link" href="../courses/fullstack.html#module-7" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
       </div>
     </div>
 
@@ -1822,7 +1855,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        7.1 — TOOL USE EXPLAINER + FRAMING
        ======================================================== -->
-  <section class="slide slide--build">
+  <section class="slide slide--build" data-module="Module 7" data-title="Tool use — the AI calls your code">
     <div class="slide__head">
       <div class="slide__eyebrow">Module 7 · Build framing</div>
       <div class="slide__minutes">~7 min</div>
@@ -1863,7 +1896,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        7.2 — SWITCH TO EDITOR
        ======================================================== -->
-  <section class="slide slide--editor">
+  <section class="slide slide--editor" data-module="Module 7" data-title="Switch to editor — chat with tool use">
     <div class="editor-inner">
       <span class="badge">▶ Switch to the editor</span>
       <div class="arrow">→</div>
@@ -1890,7 +1923,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        7.3 — DEBRIEF + ARCHITECTURE (EXTERNAL ✓)
        ======================================================== -->
-  <section class="slide slide--debrief">
+  <section class="slide slide--debrief" data-module="Module 7" data-title="L4 lit — the brain comes online">
     <div class="slide__head">
       <div class="slide__eyebrow">Back to deck <span class="dot"></span> AI on board</div>
       <div class="slide__minutes">~5 min</div>
@@ -1932,7 +1965,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        BREAK 2
        ======================================================== -->
-  <section class="slide slide--break">
+  <section class="slide slide--break" data-module="Break" data-title="Break — Be back at H+5:30">
     <div class="break-inner">
       <div class="lab">Break · Be back at H+5:30</div>
       <div class="num">15<small>min</small></div>
@@ -1954,7 +1987,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        MODULE 8 — DIVIDER (BUILD)
        ======================================================== -->
-  <section class="slide slide--section">
+  <section class="slide slide--section" data-module="Module 8" data-title="Module 8 — Auth &amp; Middleware">
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module · Build</div>
@@ -1967,6 +2000,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
           <span class="pill pill--gold">45 min</span>
         </div>
         <p class="module-blurb">Different users see different data. Middleware is the gate guard that runs before every request reaches your handler. Today we build the role-aware version.</p>
+        <a class="section__notes-link" href="../courses/fullstack.html#module-8" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
       </div>
     </div>
 
@@ -1980,7 +2014,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        8.1 — BUILD FRAMING
        ======================================================== -->
-  <section class="slide slide--build">
+  <section class="slide slide--build" data-module="Module 8" data-title="Middleware = gate guard">
     <div class="slide__head">
       <div class="slide__eyebrow">Module 8 · Build framing</div>
       <div class="slide__minutes">~5 min</div>
@@ -2019,7 +2053,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        8.2 — SWITCH TO EDITOR
        ======================================================== -->
-  <section class="slide slide--editor">
+  <section class="slide slide--editor" data-module="Module 8" data-title="Switch to editor — auth, middleware, role switcher">
     <div class="editor-inner">
       <span class="badge">▶ Switch to the editor</span>
       <div class="arrow">→</div>
@@ -2048,7 +2082,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        8.3 — DEBRIEF + ARCHITECTURE (still 4/4 — hardened)
        ======================================================== -->
-  <section class="slide slide--debrief">
+  <section class="slide slide--debrief" data-module="Module 8" data-title="All four layers — now role-aware">
     <div class="slide__head">
       <div class="slide__eyebrow">Back to deck <span class="dot"></span> Auth in place</div>
       <div class="slide__minutes">~3 min</div>
@@ -2088,7 +2122,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        MODULE 9 — DIVIDER (BUILD)
        ======================================================== -->
-  <section class="slide slide--section">
+  <section class="slide slide--section" data-module="Module 9" data-title="Module 9 — External Integrations">
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module · Build</div>
@@ -2101,6 +2135,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
           <span class="pill pill--gold">45 min</span>
         </div>
         <p class="module-blurb">Choose your path. Path A — replace JSON with SQLite (no external accounts). Path B — connect to Outlook via Microsoft Graph (Azure AD required). Both prove the integration pattern.</p>
+        <a class="section__notes-link" href="../courses/fullstack.html#module-9" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
       </div>
     </div>
 
@@ -2114,7 +2149,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        9.1 — BUILD FRAMING (PATH A vs B)
        ======================================================== -->
-  <section class="slide slide--build">
+  <section class="slide slide--build" data-module="Module 9" data-title="Choose your path">
     <div class="slide__head">
       <div class="slide__eyebrow">Module 9 · Build framing</div>
       <div class="slide__minutes">~5 min</div>
@@ -2161,7 +2196,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        9.2 — SWITCH TO EDITOR
        ======================================================== -->
-  <section class="slide slide--editor">
+  <section class="slide slide--editor" data-module="Module 9" data-title="Switch to editor — chosen integration">
     <div class="editor-inner">
       <span class="badge">▶ Switch to the editor</span>
       <div class="arrow">→</div>
@@ -2189,7 +2224,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        9.3 — DEBRIEF + ARCHITECTURE
        ======================================================== -->
-  <section class="slide slide--debrief">
+  <section class="slide slide--debrief" data-module="Module 9" data-title="L3 or L4 deepened — interfaces paid off">
     <div class="slide__head">
       <div class="slide__eyebrow">Back to deck <span class="dot"></span> Integration live</div>
       <div class="slide__minutes">~3 min</div>
@@ -2228,7 +2263,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        MODULE 10 — DIVIDER (BUILD)
        ======================================================== -->
-  <section class="slide slide--section">
+  <section class="slide slide--section" data-module="Module 10" data-title="Module 10 — Docker &amp; Deployment">
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module · Build · Final</div>
@@ -2241,6 +2276,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
           <span class="pill pill--gold">45 min</span>
         </div>
         <p class="module-blurb">A multi-stage Dockerfile bundles backend, frontend, and data into one container. It runs identically on a laptop, a server, Azure, a ship, or a field TOC.</p>
+        <a class="section__notes-link" href="../courses/fullstack.html#module-10" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
       </div>
     </div>
 
@@ -2254,7 +2290,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        10.1 — BUILD FRAMING
        ======================================================== -->
-  <section class="slide slide--build">
+  <section class="slide slide--build" data-module="Module 10" data-title="One container. Runs anywhere.">
     <div class="slide__head">
       <div class="slide__eyebrow">Module 10 · Build framing</div>
       <div class="slide__minutes">~5 min</div>
@@ -2294,7 +2330,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        10.2 — SWITCH TO EDITOR
        ======================================================== -->
-  <section class="slide slide--editor">
+  <section class="slide slide--editor" data-module="Module 10" data-title="Switch to editor — build &amp; run the container">
     <div class="editor-inner">
       <span class="badge">▶ Switch to the editor</span>
       <div class="arrow">→</div>
@@ -2324,7 +2360,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        10.3 — DEBRIEF: THIRD VICTORY + ARCHITECTURE (DEPLOYED)
        ======================================================== -->
-  <section class="slide slide--debrief">
+  <section class="slide slide--debrief" data-module="Module 10" data-title="All four layers, packaged and shipped">
     <div class="slide__head">
       <div class="slide__eyebrow">Back to deck <span class="dot"></span> Third victory — the big one</div>
       <div class="slide__minutes">~5 min</div>
@@ -2362,9 +2398,57 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   </section>
 
   <!-- ========================================================
+       10.4 — ANSWER KEY: REFERENCE APP POINTER
+       ======================================================== -->
+  <section class="slide" data-module="Module 10" data-title="Stuck? Compare against the answer key">
+    <div class="slide__head">
+      <div class="slide__eyebrow">Answer key <span class="dot"></span> Reference app</div>
+      <div class="slide__minutes">~2 min</div>
+    </div>
+    <h2 class="slide__title">Stuck? Compare against the answer key</h2>
+    <p class="slide__subtitle">The finished reference for today's build lives in this repo at <code style="font-family:var(--mono); background:var(--paper-3); padding:1px 6px; border-radius:3px;">heywood-inventory/</code>. Use it <em>after</em> the 3-Minute Rule fires twice on the same prompt — never before.</p>
+
+    <div class="slide__body">
+      <div class="arch-callout" style="margin-top:0; margin-bottom:1.8vh;">
+        <strong>How to use it:</strong> open the file for the module you're stuck in, read it top to bottom, then re-prompt your AI with the gap. Don't copy &mdash; close the reference once you see the missing piece. Full guidance in <code style="font-family:var(--mono); color:var(--gold);">heywood-inventory/docs/STUDENT_GUIDE.md</code>.
+      </div>
+      <table class="compare">
+        <thead><tr><th style="width:18%;">Module</th><th style="width:30%;">What you built</th><th>Reference file(s)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>3 — Backend</strong></td><td>Server + router</td><td><code style="font-family:var(--mono); font-size:0.95vw;">cmd/server/main.go</code> &middot; <code style="font-family:var(--mono); font-size:0.95vw;">internal/api/router.go</code></td></tr>
+          <tr><td><strong>4 — Data Layer</strong></td><td>Interface + JSON store + seed</td><td><code style="font-family:var(--mono); font-size:0.95vw;">internal/data/store.go</code> &middot; <code style="font-family:var(--mono); font-size:0.95vw;">internal/data/json_store.go</code> &middot; <code style="font-family:var(--mono); font-size:0.95vw;">data/items.json</code></td></tr>
+          <tr><td><strong>5 — Frontend</strong></td><td>Vite proxy, API client, items table</td><td><code style="font-family:var(--mono); font-size:0.95vw;">web/vite.config.ts</code> &middot; <code style="font-family:var(--mono); font-size:0.95vw;">web/src/api/client.ts</code> &middot; <code style="font-family:var(--mono); font-size:0.95vw;">web/src/pages/Items.tsx</code></td></tr>
+          <tr><td><strong>6 — Pages &amp; Nav</strong></td><td>Sidebar, dashboard, detail</td><td><code style="font-family:var(--mono); font-size:0.95vw;">web/src/App.tsx</code> &middot; <code style="font-family:var(--mono); font-size:0.95vw;">web/src/layouts/Layout.tsx</code> &middot; <code style="font-family:var(--mono); font-size:0.95vw;">web/src/pages/Dashboard.tsx</code> &middot; <code style="font-family:var(--mono); font-size:0.95vw;">web/src/pages/ItemDetail.tsx</code></td></tr>
+          <tr><td><strong>7 — AI Chat</strong></td><td>Chat service + tool + chat page</td><td><code style="font-family:var(--mono); font-size:0.95vw;">internal/ai/chat.go</code> &middot; <code style="font-family:var(--mono); font-size:0.95vw;">web/src/pages/ChatPage.tsx</code></td></tr>
+          <tr><td><strong>8 — Auth &amp; Middleware</strong></td><td>Middleware, role picker, role filtering</td><td><code style="font-family:var(--mono); font-size:0.95vw;">internal/middleware/middleware.go</code> &middot; <code style="font-family:var(--mono); font-size:0.95vw;">web/src/components/RolePicker.tsx</code> &middot; <code style="font-family:var(--mono); font-size:0.95vw;">internal/api/handlers.go</code></td></tr>
+          <tr><td><strong>9 — Integrations</strong></td><td>SQLite (Path A) or Graph (Path B)</td><td><code style="font-family:var(--mono); font-size:0.95vw;">internal/data/sqlite_store.go</code> &middot; <code style="font-family:var(--mono); font-size:0.95vw;">internal/integrations/graph.go</code></td></tr>
+          <tr><td><strong>10 — Docker</strong></td><td>Multi-stage build + SPA fallback</td><td><code style="font-family:var(--mono); font-size:0.95vw;">Dockerfile</code> &middot; SPA section of <code style="font-family:var(--mono); font-size:0.95vw;">internal/api/router.go</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="slide__foot"><span><span class="brand-mark"></span>Module 10 · Docker &amp; Deployment</span><span>10.4 · Answer key</span></div>
+
+    <aside class="notes">
+      <h4>Why this slide exists</h4>
+      <p>Until today the reference was an instructor-only artifact and stuck students had to flag you down. Now they can self-unblock without dragging the room. Make sure every student knows the path: <code>heywood-inventory/</code> in the course repo, file table in <code>docs/STUDENT_GUIDE.md</code>.</p>
+      <h4>The discipline</h4>
+      <ul>
+        <li><strong>3-Minute Rule fires once</strong> &rarr; paste the error into the AI chat. <em>Don't</em> open the reference yet.</li>
+        <li><strong>3-Minute Rule fires twice on the same prompt</strong> &rarr; open the matching reference file, read it top to bottom, then re-prompt. Close the file once the gap is obvious.</li>
+        <li><strong>Module &ldquo;done&rdquo; but architecture diagram doesn't match</strong> &rarr; walk the corresponding reference file, spot the missing piece, prompt the AI to add it.</li>
+        <li><strong>Finished early</strong> &rarr; pick one feature from the reference (extra endpoint, role, polish) and add it to your build with prompts.</li>
+      </ul>
+      <h4>Reminder &mdash; targets, not the reference</h4>
+      <p>The reference has 13 endpoints, 5 pages, both Path A and Path B. Students are aiming for the seed target on slide T (~5 endpoints, 3&ndash;4 pages, one tool, one container). Don't let the reference become the target.</p>
+      <div class="cue"><strong>TRANSITION &rarr;</strong> "Last fifteen minutes &mdash; assessment, then we close the program."</div>
+    </aside>
+  </section>
+
+  <!-- ========================================================
        ASSESSMENT — DIVIDER
        ======================================================== -->
-  <section class="slide slide--section">
+  <section class="slide slide--section" data-module="Closing" data-title="Assessment &amp; Wrap-Up">
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Closing</div>
@@ -2377,6 +2461,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
           <span class="pill">Self-assessment + handoff</span>
         </div>
         <p class="module-blurb">Confirm what you shipped against the rubric. Update your frontier map. Submit for the certificate. Then we close the six-week program.</p>
+        <a class="section__notes-link" href="../courses/fullstack.html#assessment" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
       </div>
     </div>
 
@@ -2390,7 +2475,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        A.1 — ASSESSMENT RUBRIC
        ======================================================== -->
-  <section class="slide">
+  <section class="slide" data-module="Closing" data-title="What 'done' looks like">
     <div class="slide__head">
       <div class="slide__eyebrow">Assessment · Rubric</div>
       <div class="slide__minutes">~5 min</div>
@@ -2426,7 +2511,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        A.2 — SUBMIT + CERTIFICATE HANDOFF
        ======================================================== -->
-  <section class="slide">
+  <section class="slide" data-module="Closing" data-title="Submit &amp; certify">
     <div class="slide__head">
       <div class="slide__eyebrow">Assessment · Submit</div>
       <div class="slide__minutes">~3 min</div>
@@ -2470,7 +2555,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        A.3 — FRONTIER MAP UPDATE + WHAT'S NEXT
        ======================================================== -->
-  <section class="slide">
+  <section class="slide" data-module="Closing" data-title="Move your frontier">
     <div class="slide__head">
       <div class="slide__eyebrow">Assessment · Reflect</div>
       <div class="slide__minutes">~5 min</div>
@@ -2513,7 +2598,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        PROGRAM WRAP-UP — DIVIDER
        ======================================================== -->
-  <section class="slide slide--section">
+  <section class="slide slide--section" data-module="Closing" data-title="Closing the Six-Week Program">
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Program · Capstone Close</div>
@@ -2526,6 +2611,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
           <span class="pill">All hands</span>
         </div>
         <p class="module-blurb">A short, honest close. Where you started. What you built across the cohort. What you owe forward. Where to keep going.</p>
+        <a class="section__notes-link" href="../courses/fullstack.html#program-close" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
       </div>
     </div>
 
@@ -2539,7 +2625,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        C.1 — JOURNEY: WEEKS 1→6
        ======================================================== -->
-  <section class="slide">
+  <section class="slide" data-module="Closing" data-title="Where you started, where you stand">
     <div class="slide__head">
       <div class="slide__eyebrow">Six weeks <span class="dot"></span> Journey</div>
       <div class="slide__minutes">~2 min</div>
@@ -2572,7 +2658,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        C.2 — WHAT YOU OWE FORWARD
        ======================================================== -->
-  <section class="slide">
+  <section class="slide" data-module="Closing" data-title="What you owe forward">
     <div class="slide__head">
       <div class="slide__eyebrow">Closing thought <span class="dot"></span> The apprentice problem</div>
       <div class="slide__minutes">~3 min</div>
@@ -2619,7 +2705,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        C.3 — WHERE TO KEEP GOING
        ======================================================== -->
-  <section class="slide">
+  <section class="slide" data-module="Closing" data-title="Where to keep going">
     <div class="slide__head">
       <div class="slide__eyebrow">Continue <span class="dot"></span> Resources</div>
       <div class="slide__minutes">~1 min</div>
@@ -2662,7 +2748,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        C.4 — FINAL CAPSTONE CLOSE
        ======================================================== -->
-  <section class="slide slide--close">
+  <section class="slide slide--close" data-module="Closing" data-title="Course 6 — Capstone Complete">
     <div class="close-inner">
       <span class="stamp">Course 6 · Capstone Complete</span>
       <h1>You wrote the requirements.<br/><em>AI wrote the code.</em><br/>You shipped the container.</h1>

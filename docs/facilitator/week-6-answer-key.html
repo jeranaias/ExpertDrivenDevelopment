@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Week 6 answer key — module-by-module map from the Course 6 deck (M1–M10) to the matching reference files in heywood-inventory/, the validated prompt block in docs/PROMPTS.md, and a 5-minute recovery demo path.">
+    <title>Week 6 Answer Key — Deck &harr; Reference Repo | EDD</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/pack.css">
+</head>
+<body class="site-wrapper">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Facilitator Packs</a></li>
+                    <li aria-current="page">Week 6 &mdash; Answer Key</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Week 6 Answer Key</h1>
+            <p class="page-header__desc">Module-by-module map from the Course&nbsp;6 deck to the <code>heywood-inventory/</code> reference repo and the validated prompt blocks in <code>docs/PROMPTS.md</code>. Print and keep next to the facilitator pack &mdash; so a stuck instructor can recover in &lt;60&nbsp;seconds without leaving the screen.</p>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+
+            <div class="pack-intro">
+                <p>This is a print-safe one-pager. <kbd>Ctrl</kbd>+<kbd>P</kbd> &rarr; Layout <em>Portrait</em> &rarr; Margins <em>Default</em>. The site chrome above is hidden in print. Pair it with the <a href="week-6-fullstack.html">Week&nbsp;6 facilitator pack</a> &mdash; the pack runs the room, this sheet rescues a stuck student.</p>
+                <p class="pack-intro__tip"><strong>Read the columns left-to-right when stuck:</strong> open the <em>file(s) to project</em> on your second monitor, re-paste the <em>prompt block</em>, then if you only have a minute, walk the <em>5-min demo path</em> aloud.</p>
+            </div>
+
+            <article class="ak-page" aria-label="Week 6 answer key">
+
+                <header class="ak-head">
+                    <div class="ak-head__week"><span class="num">6</span> Course 6 &middot; Answer Key</div>
+                    <div class="ak-head__title">
+                        <h1>Deck &harr; <code>heywood-inventory/</code></h1>
+                        <p class="sub">M1&ndash;M10. Each row is a 60-second recovery: open the file, re-paste the prompt, walk the 5-min demo.</p>
+                    </div>
+                    <div class="ak-head__meta">
+                        <div><span>Repo</span><strong><code>heywood-inventory/</code></strong></div>
+                        <div><span>Prompts</span><strong><code>docs/PROMPTS.md</code></strong></div>
+                        <div><span>Guide</span><strong><code>docs/INSTRUCTOR_GUIDE.md</code></strong></div>
+                    </div>
+                </header>
+
+                <table class="ak-table" aria-label="Module-to-reference map">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ak-col-mod">Module</th>
+                            <th scope="col" class="ak-col-files">File(s) to open in <code>heywood-inventory/</code></th>
+                            <th scope="col" class="ak-col-prompt">Prompt block in <code>docs/PROMPTS.md</code></th>
+                            <th scope="col" class="ak-col-demo">If you only have 5 minutes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <th scope="row"><span class="ak-mod">M1</span><span class="ak-mod__name">Full-Stack Frontier</span><span class="ak-mod__tag">framing</span></th>
+                            <td>No code. Project deck slide&nbsp;0.6.</td>
+                            <td><em>(no prompt &mdash; talk track only)</em></td>
+                            <td>Open the running app and walk Dashboard &rarr; Chat (&ldquo;morning brief&rdquo;) &rarr; Settings &rarr; role picker. Two minutes, wide-angle, no editor.</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row"><span class="ak-mod">M2</span><span class="ak-mod__name">Environment Setup</span><span class="ak-mod__tag">setup</span></th>
+                            <td>Nothing in repo to demo &mdash; this is install-and-verify only.</td>
+                            <td><strong>&ldquo;Module&nbsp;2 &middot; Environment Setup&rdquo;</strong> &mdash; <em>Install + verify</em> + <em>Scaffold the project skeleton</em>.</td>
+                            <td>Run <code>go version</code>, <code>node -v</code>, <code>docker --version</code> on your laptop. Then <code>mkdir my-staff-app &amp;&amp; cd my-staff-app &amp;&amp; go mod init my-staff-app</code>. Show the empty skeleton.</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row"><span class="ak-mod">M3</span><span class="ak-mod__name">Backend from Scratch</span><span class="ak-mod__tag">arch&nbsp;1/4</span></th>
+                            <td><code>cmd/server/main.go</code><br><code>internal/api/router.go</code></td>
+                            <td><strong>&ldquo;Module&nbsp;3 &middot; Backend from Scratch&rdquo;</strong> &mdash; <em>Prompt&nbsp;1</em> health endpoint, <em>Prompt&nbsp;2</em> extract router + helpers, <em>Prompt&nbsp;3</em> hardcoded items.</td>
+                            <td><code>go run ./cmd/server -dev</code>, then <code>curl localhost:8080/api/v1/health</code>. Twenty-second silence. <code>curl localhost:8080/api/v1/items</code> returns five items.</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row"><span class="ak-mod">M4</span><span class="ak-mod__name">Data Layer</span><span class="ak-mod__tag">arch&nbsp;2/4</span></th>
+                            <td><code>internal/data/store.go</code> (interface)<br><code>internal/data/json_store.go</code><br><code>data/items.json</code><br><code>internal/api/handlers.go</code> (items)</td>
+                            <td><strong>&ldquo;Module&nbsp;4 &middot; Data Layer&rdquo;</strong> &mdash; <em>Prompt&nbsp;1</em> Store interface + JSONStore, <em>Prompt&nbsp;2</em> seed data, <em>Prompt&nbsp;3</em> rewire <code>/items</code> + add <code>/items/&#123;id&#125;</code>.</td>
+                            <td>Open <code>store.go</code> and read the interface aloud. Then <code>curl localhost:8080/api/v1/items/1</code>. The interface is the lever &mdash; everything M9 depends on this.</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row"><span class="ak-mod">M5</span><span class="ak-mod__name">Frontend from Scratch</span><span class="ak-mod__tag">arch&nbsp;3/4</span></th>
+                            <td><code>web/vite.config.ts</code><br><code>web/tailwind.config.ts</code><br><code>web/src/api/client.ts</code><br><code>web/src/pages/Items.tsx</code></td>
+                            <td><strong>&ldquo;Module&nbsp;5 &middot; Frontend from Scratch&rdquo;</strong> &mdash; single combined prompt: Tailwind + proxy + items table.</td>
+                            <td>Two terminals. <code>npm run dev</code> in <code>web/</code>. Load <code>localhost:5173</code> &mdash; the items table renders. If CORS errors hit, project <code>vite.config.ts</code> proxy block, do not patch the backend.</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row"><span class="ak-mod">M6</span><span class="ak-mod__name">Pages &amp; Navigation</span><span class="ak-mod__tag">build</span></th>
+                            <td><code>web/src/App.tsx</code><br><code>web/src/layouts/Layout.tsx</code><br><code>web/src/pages/Dashboard.tsx</code><br><code>web/src/pages/ItemDetail.tsx</code></td>
+                            <td><strong>&ldquo;Module&nbsp;6 &middot; Pages &amp; Navigation&rdquo;</strong> &mdash; <em>Prompt&nbsp;1</em> routing + sidebar layout, <em>Prompt&nbsp;2</em> item detail, <em>Prompt&nbsp;3</em> dashboard + <code>/stats</code>.</td>
+                            <td>From the running app: click an item title &rarr; detail page loads via <code>/items/:id</code>. Click Dashboard &rarr; four stat cards + recent activity. Same data, three views.</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row"><span class="ak-mod">M7</span><span class="ak-mod__name">AI Chat Integration</span><span class="ak-mod__tag">apex</span></th>
+                            <td><code>internal/ai/chat.go</code><br><code>web/src/pages/ChatPage.tsx</code><br><code>internal/api/handlers.go</code> (chat wire-up)</td>
+                            <td><strong>&ldquo;Module&nbsp;7 &middot; AI Chat Integration&rdquo;</strong> &mdash; <em>Prompt&nbsp;1</em> chat service, <em>Prompt&nbsp;2</em> <code>lookup_items</code> tool, <em>Prompt&nbsp;3</em> chat page + markdown.</td>
+                            <td>Open <code>/chat</code>. Ask &ldquo;what are my high-priority items?&rdquo; Watch the server log a tool call before the answer comes back. Applaud once.</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row"><span class="ak-mod">M8</span><span class="ak-mod__name">Auth &amp; Middleware</span><span class="ak-mod__tag">build</span></th>
+                            <td><code>internal/middleware/middleware.go</code><br><code>internal/api/handlers.go</code> (auth)<br><code>web/src/components/RolePicker.tsx</code></td>
+                            <td><strong>&ldquo;Module&nbsp;8 &middot; Auth &amp; Middleware&rdquo;</strong> &mdash; <em>Prompt&nbsp;1</em> middleware package, <em>Prompt&nbsp;2</em> auth endpoints + role picker, <em>Prompt&nbsp;3</em> RBAC across handlers.</td>
+                            <td>Open the role picker in the header. Switch User &rarr; fewer items, no Settings link. Switch Admin &rarr; everything. DevTools &rarr; Application &rarr; Cookies &rarr; show <code>heywood_role</code>.</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row"><span class="ak-mod">M9</span><span class="ak-mod__name">External Integrations</span><span class="ak-mod__tag">compress</span></th>
+                            <td>Path&nbsp;A: <code>internal/data/sqlite_store.go</code> (build tag <code>sqlite</code>) + <code>sqlite_stub.go</code>.<br>Path&nbsp;B: <code>internal/integrations/graph.go</code>.</td>
+                            <td><strong>&ldquo;Module&nbsp;9 &middot; External Integrations&rdquo;</strong> &mdash; <em>Path&nbsp;A &middot; SQLite</em> (default) or <em>Path&nbsp;B &middot; Microsoft Graph</em>.</td>
+                            <td>Path&nbsp;A: <code>go get modernc.org/sqlite &amp;&amp; go build -tags sqlite ./cmd/server &amp;&amp; ./server -db sqlite -dev</code>. POST a new item, restart, GET to confirm persistence. <em>Same Store interface &mdash; that&rsquo;s the receipt for M4.</em></td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row"><span class="ak-mod">M10</span><span class="ak-mod__name">Docker &amp; Deploy</span><span class="ak-mod__tag">arch&nbsp;4/4</span></th>
+                            <td><code>Dockerfile</code><br><code>internal/api/router.go</code> (SPA fallback, second half)<br><code>.dockerignore</code></td>
+                            <td><strong>&ldquo;Module&nbsp;10 &middot; Docker &amp; Deployment&rdquo;</strong> &mdash; single combined prompt: SPA fallback + multi-stage Dockerfile. Optional Azure block at end.</td>
+                            <td><code>docker build -t my-staff-app .</code> then <code>docker run -p 8080:8080 -e OPENAI_API_KEY=$OPENAI_API_KEY my-staff-app</code>. Stop local dev servers. Reload <code>localhost:8080</code> &mdash; whole app from one container.</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <section class="ak-rule">
+                    <h2>How to use this sheet during the live build</h2>
+                    <ol>
+                        <li><strong>3-Minute Rule fires twice on a student.</strong> Glance at this sheet. Read the row.</li>
+                        <li><strong>Open the file(s) on <em>your</em> second monitor</strong> &mdash; never the projector. Describe the diff aloud as a hint.</li>
+                        <li><strong>Re-paste the prompt block</strong> from <code>docs/PROMPTS.md</code> into the student&rsquo;s chat. Watch one more turn.</li>
+                        <li><strong>If still stuck and the room is waiting</strong>, walk the 5-minute demo path on the running reference app, then pair the student with a buddy and move on.</li>
+                    </ol>
+                    <p class="ak-rule__cue"><strong>Anchor.</strong> The reference exists to recover, not to lead. Never start a module by reading from <code>heywood-inventory/</code>. The whole point of the day is the prompt &rarr; AI &rarr; debug loop.</p>
+                </section>
+
+                <footer class="ak-foot">
+                    <div class="left"><strong>EDD &middot; Week 6 Answer Key</strong> &middot; UNCLASSIFIED &middot; deck &harr; <code>heywood-inventory/</code></div>
+                    <div class="right">
+                        <a href="week-6-fullstack.html">Week 6 Facilitator Pack</a> &middot;
+                        <a href="../decks/week-6-fullstack.html">Week 6 Deck</a> &middot;
+                        <a href="../courses/fullstack.html">Course 6 page</a> &middot;
+                        <a href="./">All packs</a>
+                    </div>
+                </footer>
+
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="../pdf/">Briefs Library</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

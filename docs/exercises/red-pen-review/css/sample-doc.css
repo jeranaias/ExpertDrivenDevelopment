@@ -1,0 +1,169 @@
+/* Sample-document styling for the three Red Pen Review training samples.
+   Keeps the documents reading like real Marine Corps work product so the
+   classroom mark-up feels authentic, while the page chrome above and the
+   training banner make their training-only status unmistakable. */
+
+.sample-doc {
+  background: #fff;
+  color: #1a1a1a;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: clamp(1.25rem, 2vw + 0.5rem, 2.5rem);
+  margin-bottom: var(--space-2xl);
+  font-family: "Times New Roman", Times, Cambria, Georgia, serif;
+  font-size: 1rem;
+  line-height: 1.55;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.sample-doc__banner {
+  border: 2px solid #b30000;
+  color: #b30000;
+  background: #fff5f5;
+  font-family: var(--font-family-base);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+.sample-doc__classification {
+  text-align: center;
+  font-family: var(--font-family-base);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  font-size: 0.85rem;
+  margin: 0 0 1rem;
+}
+
+.sample-doc__letterhead {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 1rem;
+}
+
+.sample-doc__letterhead h2 {
+  font-family: var(--font-family-base);
+  font-size: 1.05rem;
+  margin: 0;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.sample-doc__letterhead p {
+  margin: 0.15rem 0;
+  font-size: 0.9rem;
+}
+
+.sample-doc__memo-line {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 0.25rem 0.75rem;
+  margin: 0.25rem 0;
+}
+
+.sample-doc__memo-line dt {
+  font-weight: 700;
+}
+
+.sample-doc__memo-line dd {
+  margin: 0;
+}
+
+.sample-doc h3 {
+  font-family: var(--font-family-base);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 1.5rem 0 0.5rem;
+  color: #1a1a1a;
+  border: none;
+  padding: 0;
+}
+
+.sample-doc ol,
+.sample-doc ul {
+  margin: 0.5rem 0 0.75rem 1.5rem;
+  padding: 0;
+}
+
+.sample-doc ol > li,
+.sample-doc ul > li {
+  margin-bottom: 0.4rem;
+}
+
+.sample-doc p {
+  margin: 0.5rem 0;
+}
+
+.sample-doc__sig {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #ccc;
+  font-size: 0.95rem;
+}
+
+.sample-doc__sig-name {
+  margin-top: 2rem;
+  font-weight: 700;
+}
+
+/* Printing — let the document live on the page without site chrome. */
+@media print {
+  .site-header,
+  .page-header,
+  .sample-doc__return,
+  .site-footer,
+  .skip-link,
+  #mobile-nav,
+  .nav-toggle {
+    display: none !important;
+  }
+
+  .sample-doc {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  body {
+    background: #fff;
+  }
+}
+
+/* Answer-key page — table mapping each planted error to a slide. */
+.answer-key-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 1.5rem;
+  font-size: 0.95rem;
+}
+
+.answer-key-table th,
+.answer-key-table td {
+  border: 1px solid var(--color-border);
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.answer-key-table th {
+  background: var(--color-bg-secondary);
+  font-weight: 700;
+}
+
+.answer-key-table td:first-child {
+  font-family: var(--font-family-mono);
+  white-space: nowrap;
+  width: 9rem;
+}
+
+.answer-key-table td:nth-child(3) {
+  width: 11rem;
+}

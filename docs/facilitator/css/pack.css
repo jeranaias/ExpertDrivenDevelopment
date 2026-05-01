@@ -374,6 +374,7 @@
     width: 10.36in;
     height: 7.63in;
     gap: 0.07in;
+    overflow: hidden;
     page-break-after: avoid;
     page-break-inside: avoid;
     -webkit-print-color-adjust: exact;
@@ -419,6 +420,512 @@
   .pk-foot .right a { color: #000 !important; text-decoration: underline; }
 
   a { color: #000 !important; text-decoration: none; }
+}
+
+/* =========================================================
+   Answer-key page (week-6-answer-key.html)
+   A reference doc, not a one-page card. Reuses pack tokens
+   so it sits visually next to the pack on the desk.
+   ========================================================= */
+
+.ak-page {
+  background: var(--pk-paper);
+  color: var(--pk-ink);
+  border: 1px solid var(--pk-rule);
+  border-radius: 6px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  padding: 0.5in 0.6in;
+  margin: 0 auto 2rem;
+  max-width: 11in;
+  /* Named page so the @page rule below only applies to the answer-key
+     doc, not to the landscape one-page facilitator packs that share
+     this stylesheet. The body of the answer-key page sets `page: ak;`
+     to opt in. */
+  page: ak;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  font-size: 10pt;
+  line-height: 1.36;
+  display: flex;
+  flex-direction: column;
+  gap: 0.18in;
+}
+
+.ak-head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: end;
+  gap: 0.3in;
+  padding-bottom: 0.14in;
+  border-bottom: 3px solid var(--pk-scarlet);
+}
+.ak-head__week {
+  display: flex;
+  align-items: center;
+  gap: 0.12in;
+  font-size: 8.5pt;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pk-scarlet);
+}
+.ak-head__week .num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.32in;
+  height: 0.32in;
+  border-radius: 50%;
+  background: var(--pk-ink);
+  color: var(--pk-gold);
+  font-size: 13pt;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+.ak-head__title h1 {
+  margin: 0;
+  font-size: 18pt;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  font-weight: 800;
+  color: var(--pk-ink);
+}
+.ak-head__title h1 code {
+  font-family: "Cascadia Code", "Fira Code", Consolas, Monaco, monospace;
+  font-size: 14pt;
+  background: var(--pk-paper-2);
+  border: 1px solid var(--pk-rule);
+  border-radius: 4px;
+  padding: 0 6px;
+}
+.ak-head__title .sub {
+  margin: 3px 0 0;
+  font-size: 9.4pt;
+  color: var(--pk-ink-2);
+  font-weight: 500;
+}
+.ak-head__meta {
+  font-size: 8pt;
+  text-align: right;
+  color: var(--pk-ink-2);
+  letter-spacing: 0.04em;
+}
+.ak-head__meta div { margin-bottom: 2pt; }
+.ak-head__meta span {
+  display: inline-block;
+  margin-right: 0.08in;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--pk-ink-3);
+}
+.ak-head__meta strong {
+  color: var(--pk-ink);
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.ak-head__meta code,
+.ak-head code {
+  font-family: "Cascadia Code", "Fira Code", Consolas, Monaco, monospace;
+  font-size: 0.92em;
+}
+
+/* ---------- Module table -------------------------------- */
+.ak-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  border: 1px solid var(--pk-rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.ak-table thead th {
+  background: var(--pk-paper-2);
+  color: var(--pk-scarlet);
+  font-size: 8pt;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 6pt 8pt;
+  border-bottom: 1px solid var(--pk-rule);
+}
+.ak-table thead th code {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.9em;
+  color: var(--pk-ink-2);
+}
+.ak-table tbody tr {
+  border-bottom: 1px solid var(--pk-rule-2);
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+.ak-table tbody tr:last-child { border-bottom: 0; }
+.ak-table tbody tr:nth-child(even) { background: var(--pk-paper-2); }
+.ak-table th[scope="row"],
+.ak-table td {
+  padding: 7pt 8pt 8pt;
+  font-size: 8.8pt;
+  line-height: 1.34;
+  color: var(--pk-ink-2);
+  vertical-align: top;
+  text-align: left;
+}
+.ak-table th[scope="row"] {
+  border-left: 4px solid var(--pk-scarlet);
+  font-weight: 700;
+  color: var(--pk-ink);
+}
+
+.ak-col-mod    { width: 14%; }
+.ak-col-files  { width: 26%; }
+.ak-col-prompt { width: 30%; }
+.ak-col-demo   { width: 30%; }
+
+.ak-mod {
+  display: inline-block;
+  background: var(--pk-ink);
+  color: var(--pk-gold);
+  font-size: 9pt;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 1pt 6pt;
+  border-radius: 3px;
+  margin-right: 4pt;
+}
+.ak-mod__name {
+  display: block;
+  margin-top: 3pt;
+  font-size: 8.8pt;
+  font-weight: 700;
+  color: var(--pk-ink);
+  line-height: 1.2;
+}
+.ak-mod__tag {
+  display: inline-block;
+  margin-top: 2pt;
+  font-size: 7pt;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--pk-ink-3);
+  font-weight: 600;
+}
+
+.ak-table code {
+  font-family: "Cascadia Code", "Fira Code", Consolas, Monaco, monospace;
+  font-size: 0.88em;
+  background: rgba(0,0,0,0.04);
+  border-radius: 2px;
+  padding: 0 3px;
+  word-break: break-word;
+}
+.ak-table tbody tr:nth-child(even) code {
+  background: rgba(0,0,0,0.06);
+}
+.ak-table em { color: var(--pk-ink-3); font-style: italic; }
+.ak-table strong { color: var(--pk-ink); font-weight: 700; }
+
+/* ---------- Footer "how to use" rule + page foot ---------- */
+.ak-rule {
+  border-left: 4px solid var(--pk-gold-dark);
+  padding: 8pt 12pt 10pt;
+  background: var(--pk-warn-bg);
+  border-radius: 0 4px 4px 0;
+}
+.ak-rule h2 {
+  margin: 0 0 4pt;
+  font-size: 9pt;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pk-gold-dark);
+}
+.ak-rule ol {
+  margin: 0 0 6pt;
+  padding-left: 18pt;
+}
+.ak-rule li {
+  font-size: 9pt;
+  line-height: 1.36;
+  margin-bottom: 2pt;
+  color: var(--pk-ink-2);
+}
+.ak-rule li::marker { color: var(--pk-gold-dark); font-weight: 700; }
+.ak-rule li strong { color: var(--pk-ink); font-weight: 700; }
+.ak-rule__cue {
+  margin: 4pt 0 0;
+  padding-top: 5pt;
+  border-top: 1px solid var(--pk-rule);
+  font-size: 8.8pt;
+  color: var(--pk-ink);
+}
+.ak-rule__cue strong {
+  display: inline-block;
+  margin-right: 4pt;
+  font-size: 7.4pt;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pk-gold-dark);
+  font-weight: 800;
+}
+
+.ak-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 7pt;
+  border-top: 1px solid var(--pk-rule-2);
+  font-size: 7.6pt;
+  color: var(--pk-ink-3);
+  letter-spacing: 0.06em;
+  flex-wrap: wrap;
+  gap: 6pt;
+}
+.ak-foot strong {
+  color: var(--pk-ink);
+  letter-spacing: 0.04em;
+}
+.ak-foot .right a {
+  color: var(--pk-scarlet);
+  text-decoration: none;
+  font-weight: 700;
+}
+.ak-foot .right a:hover { text-decoration: underline; }
+
+/* ---------- Print: portrait, multi-page-safe -------------- */
+@media print {
+  .ak-page {
+    box-shadow: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* Scoped to the named page declared on .ak-page above so the
+     landscape @page rule used by every other facilitator pack
+     stays untouched. */
+  @page ak { size: portrait; margin: 0.45in; }
+
+  .ak-head { border-bottom-color: #000 !important; }
+  .ak-head__week { color: #000 !important; }
+  .ak-head__week .num { background: #000 !important; color: #fff !important; }
+  .ak-table { border-color: #000 !important; }
+  .ak-table thead th {
+    background: #ececec !important;
+    color: #000 !important;
+    border-bottom-color: #000 !important;
+  }
+  .ak-table tbody tr:nth-child(even) { background: #f5f5f5 !important; }
+  .ak-table th[scope="row"] { border-left-color: #000 !important; }
+  .ak-mod { background: #000 !important; color: #fff !important; }
+  .ak-rule {
+    background: #f0f0ee !important;
+    border-left-color: #000 !important;
+  }
+  .ak-rule h2, .ak-rule__cue strong { color: #000 !important; }
+  .ak-rule li::marker { color: #000 !important; }
+  .ak-foot { border-top-color: #000 !important; }
+  .ak-foot .right a { color: #000 !important; text-decoration: underline; }
+  .ak-table tbody tr { page-break-inside: avoid; break-inside: avoid; }
+  .ak-rule { page-break-inside: avoid; break-inside: avoid; }
+}
+
+/* ---------- Share-in-chat URL sheet appendix ---------------
+   Second printable page bound to the Facilitator Pack: mirrors
+   the on-site Class Links page so a facilitator working from a
+   printed pack can read the URL aloud or type it into Microsoft
+   Teams chat. No copy buttons (paper). Renders as its own page
+   in print via `page-break-before: always`. */
+.pack-urlsheet {
+  background: var(--pk-paper);
+  color: var(--pk-ink);
+  border: 1px solid var(--pk-rule);
+  border-radius: 6px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  padding: 0.45in 0.55in;
+  margin: 0 auto 2rem;
+  max-width: 11in;
+  min-height: 8.5in;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  font-size: 9.6pt;
+  line-height: 1.32;
+  display: flex;
+  flex-direction: column;
+  gap: 0.16in;
+}
+/* The list of section blocks flows into two columns so even the
+   13-URL Week 6 sheet fits comfortably on one Letter-landscape
+   page. Each .pack-urlsheet__section is kept whole inside its
+   column to avoid splitting a section across columns. */
+.pack-urlsheet__columns {
+  flex: 1 1 auto;
+  column-count: 2;
+  column-gap: 0.32in;
+  column-rule: 1px solid var(--pk-rule-2);
+}
+.pack-urlsheet__section {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  display: block;
+  margin-bottom: 0.18in;
+}
+.pack-urlsheet__head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: end;
+  gap: 0.3in;
+  padding-bottom: 0.12in;
+  border-bottom: 3px solid var(--pk-scarlet);
+}
+.pack-urlsheet__head .pk-head__week { /* reuse existing styles */ }
+.pack-urlsheet__head .title h1 {
+  margin: 0;
+  font-size: 17pt;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  font-weight: 800;
+  color: var(--pk-ink);
+}
+.pack-urlsheet__head .title .sub {
+  margin: 2px 0 0;
+  font-size: 8.6pt;
+  color: var(--pk-ink-2);
+  font-weight: 500;
+}
+
+.pack-urlsheet__section {
+  display: flex;
+  flex-direction: column;
+  gap: 4pt;
+}
+.pack-urlsheet__section h2 {
+  margin: 0;
+  font-size: 9pt;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pk-scarlet);
+  border-left: 4px solid var(--pk-scarlet);
+  padding: 1pt 0 1pt 8pt;
+}
+.pack-urlsheet__section .lede {
+  margin: 0 0 1pt 12pt;
+  font-size: 8pt;
+  color: var(--pk-ink-3);
+  font-weight: 500;
+}
+
+.pack-urlsheet__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+.pack-urlsheet__item {
+  padding: 5pt 0 6pt;
+  border-top: 1px solid var(--pk-rule-2);
+}
+.pack-urlsheet__item:first-child { border-top: 0; padding-top: 2pt; }
+.pack-urlsheet__item--pending .pack-urlsheet__url {
+  color: var(--pk-ink-3);
+  font-style: italic;
+}
+.pack-urlsheet__title {
+  font-size: 9.4pt;
+  font-weight: 700;
+  color: var(--pk-ink);
+  margin: 0 0 1pt;
+}
+.pack-urlsheet__pending-tag {
+  display: inline-block;
+  margin-left: 4pt;
+  padding: 0 4pt;
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pk-ink-3);
+  background: var(--pk-paper-2);
+  border: 1px solid var(--pk-rule);
+  border-radius: 3px;
+  vertical-align: 1px;
+}
+.pack-urlsheet__when {
+  margin: 0 0 2pt;
+  font-size: 8.4pt;
+  color: var(--pk-ink-2);
+  line-height: 1.28;
+}
+.pack-urlsheet__when strong { color: var(--pk-ink); font-weight: 700; }
+.pack-urlsheet__url {
+  margin: 0;
+  font-family: "Cascadia Code", "Fira Code", Consolas, Monaco, monospace;
+  font-size: 8.4pt;
+  color: var(--pk-scarlet);
+  word-break: break-all;
+}
+
+.pack-urlsheet__foot {
+  margin-top: auto;
+  padding-top: 5pt;
+  border-top: 1px solid var(--pk-rule-2);
+  font-size: 7.4pt;
+  color: var(--pk-ink-3);
+  letter-spacing: 0.06em;
+  display: flex;
+  justify-content: space-between;
+}
+.pack-urlsheet__foot strong { color: var(--pk-ink); letter-spacing: 0.04em; }
+
+@media print {
+  .pack-urlsheet {
+    page-break-before: always;
+    break-before: page;
+    box-shadow: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+    /* Same Letter ∩ A4 landscape envelope as the pack. Fixed height
+       + overflow: hidden guarantees the whole appendix fits on a
+       single landscape page; the per-element shrinks below are sized
+       so even the 13-URL Week 6 sheet renders without clipping. */
+    width: 10.36in;
+    height: 7.63in;
+    min-height: 0 !important;
+    gap: 0.07in;
+    overflow: hidden;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* Print-time tighten pass — same intent as the .pack-page block
+     above. Shrinks per-item line-heights / paddings so all six week
+     sheets fit in the one-page envelope. */
+  .pack-urlsheet__head { padding-bottom: 0.05in !important; border-bottom-color: #000 !important; }
+  .pack-urlsheet__head .title h1 { font-size: 14pt !important; }
+  .pack-urlsheet__head .title .sub { font-size: 7.6pt !important; }
+  .pack-urlsheet__head .pk-head__week { color: #000 !important; }
+  .pack-urlsheet__head .pk-head__week .num { background: #000 !important; color: #fff !important; }
+  .pack-urlsheet__columns { column-gap: 0.24in !important; }
+  .pack-urlsheet__section { margin-bottom: 0.10in !important; }
+  .pack-urlsheet__section h2 { font-size: 8.4pt !important; color: #000 !important; border-left-color: #000 !important; padding: 0 0 0 6pt !important; }
+  .pack-urlsheet__section .lede { margin: 0 0 1pt 8pt !important; font-size: 7.4pt !important; }
+  .pack-urlsheet__item { padding: 2.5pt 0 3pt !important; }
+  .pack-urlsheet__title { font-size: 8.2pt !important; line-height: 1.18 !important; margin: 0 0 0.5pt !important; }
+  .pack-urlsheet__when { font-size: 7.4pt !important; line-height: 1.18 !important; margin: 0 0 1pt !important; }
+  .pack-urlsheet__url { font-size: 7.4pt !important; line-height: 1.15 !important; color: #000 !important; }
+  .pack-urlsheet__pending-tag { font-size: 6.4pt !important; padding: 0 3pt !important; color: #000 !important; border-color: #000 !important; }
+  .pack-urlsheet__foot { padding-top: 2pt !important; border-top-color: #000 !important; font-size: 6.6pt !important; }
 }
 
 /* ---------- Landing page (index.html) cards --------------- */

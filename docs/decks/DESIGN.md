@@ -265,3 +265,84 @@ To export a deck:
 
 There is no separate PDF file in the repository — the print stylesheet
 generates the handout on demand from the live HTML.
+
+---
+
+## Handout view (multi-up thumbnails + notes)
+
+Every deck also supports a **printable handout mode** that reflows the
+slides into a single-document layout: scaled slide thumbnails on the
+left, the matching speaker notes on the right, paginated for letter-size
+paper. This is the format to share with people who weren't in the room
+or who want to study the material away from the screen. The behaviour
+is built into `js/deck.js` (the `buildHandout()` helper) and styled in
+`css/deck.css` under the `UNIVERSAL HANDOUT VIEW` section.
+
+### How to activate it
+
+Append a `handout` query parameter to any deck URL:
+
+| URL | Output |
+|---|---|
+| `week-1-ai-fluency.html?handout=2` | 2-up handout (default; bigger thumbnails). |
+| `week-1-ai-fluency.html?handout=1` | Same as `?handout=2`. |
+| `week-1-ai-fluency.html?handout=4` | 4-up handout (denser; smaller thumbnails). |
+| `…?handout=2&print=1` | Builds the handout and auto-opens the browser print dialog. |
+
+When handout mode is active, the regular presenter controller is
+bypassed: no chrome, no single-slide visibility, no fixed-frame
+auto-scaling. The page becomes one long flowing document so
+**File → Print → Save as PDF** produces a clean handout (the runtime
+injects an `@page { size: 8.5in 11in }` rule so handouts print on
+letter, overriding the standalone deck-print `@page { size: 20in
+16.458in }` rule that the regular slide-and-notes export uses).
+
+### What the output looks like
+
+Each slide becomes a `<article class="handout-row">` with two cells:
+
+- **Slide cell.** The original `<section class="slide">` is moved into
+  a `.handout-row__frame` and rendered at the canonical 1920×1080
+  reference size, then CSS-scaled down (`--handout-scale` = `0.215`
+  for 2-up, `0.150` for 4-up) so the entire 16:9 stage fits the
+  thumbnail. Both `.is-current` and `.is-active` are forced on so the
+  slide renders identically to its presenter view regardless of which
+  visibility contract the deck uses.
+- **Notes cell.** A header line (`NN / TT`, plus the optional
+  `data-title` and `data-module` attributes from the slide) followed
+  by the rendered speaker notes for that slide.
+
+### How notes are picked up
+
+`buildHandout()` resolves notes per slide using the same fallback chain
+as the live presenter (`readNotes()`), so every weekly deck works
+without modification:
+
+1. `<aside class="notes">` inside the slide — Weeks 1, 6.
+2. `<div class="speaker-notes">` (non-template) — Week 3.
+3. `<template class="speaker-notes">` or `<template class="notes">` —
+   Weeks 2, 5.
+4. External notes block: a single `<aside id="notes">` with one
+   `<div class="note-content">` per slide, in slide order — Week 4.
+
+If none of those match, the row prints `*No speaker notes for this
+slide.*` so the gap is obvious in the handout.
+
+### DOM contract a deck must honour
+
+For a deck to render correctly in the handout, every slide must:
+
+- Be a `<section class="slide …">` sized to the canonical 1920×1080
+  reference frame (this is already true for every layout in the system
+  — the handout's CSS scale is calibrated against 1920×1080).
+- Provide its speaker notes via one of the four sources above.
+
+Two **optional** per-slide attributes show up in the handout's notes
+header when present:
+
+- `data-title="…"` — slide title shown next to the slide number.
+- `data-module="…"` — module label shown after the title (useful for
+  re-establishing context every few slides).
+
+Neither is required; without them the handout still prints the slide
+number and notes, just without the extra header chips.

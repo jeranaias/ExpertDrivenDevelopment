@@ -74,6 +74,10 @@
             <p class="mt-lg">
                 <strong>Prerequisite:</strong> Advanced Workshop (Course 4), at least 1 deployed tool, computer with admin rights
             </p>
+            <div class="page-header__actions mt-lg" role="group" aria-label="Course 6 materials">
+                <a href="../../decks/week-6-fullstack.html" class="btn btn--primary" target="_blank" rel="noopener">Open the Slide Deck</a>
+                <a href="../../handouts/week-6-fullstack.html" class="btn btn--secondary" target="_blank" rel="noopener">Open the Student Handout</a>
+            </div>
             <p class="mt-sm">
                 <a href="../fullstack.html">Instructor Guide</a>
             </p>
@@ -102,6 +106,7 @@
                             <li><a href="#module-8">Module 8: Auth &amp; Middleware</a></li>
                             <li><a href="#module-9">Module 9: External Integrations</a></li>
                             <li><a href="#module-10">Module 10: Docker &amp; Deployment</a></li>
+                            <li><a href="#answer-key">Answer Key: Reference App</a></li>
                             <li><a href="#assessment">Assessment &amp; Wrap-Up</a></li>
                             <li><a href="#knowledge-check">Knowledge Check</a></li>
                             <li><a href="#completion-checklist">Completion Checklist</a></li>
@@ -1369,6 +1374,132 @@ docker run -p 8080:8080 -e OPENAI_API_KEY=sk-... my-staff-app
 </section>
 
 <!-- ============================================================ -->
+<!-- ANSWER KEY: REFERENCE APP                                     -->
+<!-- ============================================================ -->
+
+<section id="answer-key">
+    <h2>Answer Key: Reference App</h2>
+
+    <p>
+        The finished reference for today&rsquo;s build lives in this repo at
+        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/tree/main/heywood-inventory"><code>heywood-inventory/</code></a>.
+        Use it <em>after</em> the 3-Minute Rule fires twice on the same prompt &mdash; never before.
+        Full guidance lives in
+        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/docs/STUDENT_GUIDE.md"><code>heywood-inventory/docs/STUDENT_GUIDE.md</code></a>.
+    </p>
+
+    <div class="callout callout--warning">
+        <h3 class="callout__title">Build first. Reference second.</h3>
+        <p>
+            Half the value of the day is in <em>not</em> reading this repo before you build. The reference has more
+            endpoints, more roles, and more polish than your seed target &mdash; if you copy it, you&rsquo;ve skipped
+            the rep that proves you can drive an AI to a working app.
+        </p>
+        <ul>
+            <li><strong>3-Minute Rule fires once</strong> &rarr; paste the error into your AI chat. Don&rsquo;t open the reference yet.</li>
+            <li><strong>3-Minute Rule fires twice on the same prompt</strong> &rarr; open the matching reference file from the table below, read it top to bottom, then re-prompt. Close the file once the gap is obvious.</li>
+            <li><strong>Module &ldquo;done&rdquo; but architecture diagram doesn&rsquo;t match</strong> &rarr; walk the corresponding reference file, spot the missing piece, prompt the AI to add it.</li>
+            <li><strong>Finished early</strong> &rarr; pick one feature from the reference (extra endpoint, role, polish) and add it to your build with prompts.</li>
+        </ul>
+    </div>
+
+    <h3>Where each module lives in the reference repo</h3>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Module</th>
+                    <th scope="col">What you built</th>
+                    <th scope="col">Reference file(s)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>3 &mdash; Backend</strong></td>
+                    <td>Server + router</td>
+                    <td>
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/cmd/server/main.go"><code>cmd/server/main.go</code></a> &middot;
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/internal/api/router.go"><code>internal/api/router.go</code></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>4 &mdash; Data Layer</strong></td>
+                    <td>Interface + JSON store + seed</td>
+                    <td>
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/internal/data/store.go"><code>internal/data/store.go</code></a> &middot;
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/internal/data/json_store.go"><code>internal/data/json_store.go</code></a> &middot;
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/data/items.json"><code>data/items.json</code></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>5 &mdash; Frontend</strong></td>
+                    <td>Vite proxy, API client, items table</td>
+                    <td>
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/web/vite.config.ts"><code>web/vite.config.ts</code></a> &middot;
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/web/src/api/client.ts"><code>web/src/api/client.ts</code></a> &middot;
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/web/src/pages/Items.tsx"><code>web/src/pages/Items.tsx</code></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>6 &mdash; Pages &amp; Nav</strong></td>
+                    <td>Sidebar, dashboard, detail</td>
+                    <td>
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/web/src/App.tsx"><code>web/src/App.tsx</code></a> &middot;
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/web/src/layouts/Layout.tsx"><code>web/src/layouts/Layout.tsx</code></a> &middot;
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/web/src/pages/Dashboard.tsx"><code>web/src/pages/Dashboard.tsx</code></a> &middot;
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/web/src/pages/ItemDetail.tsx"><code>web/src/pages/ItemDetail.tsx</code></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>7 &mdash; AI Chat</strong></td>
+                    <td>Chat service + tool + chat page</td>
+                    <td>
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/internal/ai/chat.go"><code>internal/ai/chat.go</code></a> &middot;
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/web/src/pages/ChatPage.tsx"><code>web/src/pages/ChatPage.tsx</code></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>8 &mdash; Auth &amp; Middleware</strong></td>
+                    <td>Middleware, role picker, role filtering</td>
+                    <td>
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/internal/middleware/middleware.go"><code>internal/middleware/middleware.go</code></a> &middot;
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/web/src/components/RolePicker.tsx"><code>web/src/components/RolePicker.tsx</code></a> &middot;
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/internal/api/handlers.go"><code>internal/api/handlers.go</code></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>9 &mdash; Integrations</strong></td>
+                    <td>SQLite (Path A) or Graph (Path B)</td>
+                    <td>
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/internal/data/sqlite_store.go"><code>internal/data/sqlite_store.go</code></a> &middot;
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/internal/integrations/graph.go"><code>internal/integrations/graph.go</code></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>10 &mdash; Docker</strong></td>
+                    <td>Multi-stage build + SPA fallback</td>
+                    <td>
+                        <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/Dockerfile"><code>Dockerfile</code></a> &middot;
+                        SPA section of <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/internal/api/router.go"><code>internal/api/router.go</code></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout callout--info">
+        <h3 class="callout__title">Aim for the seed target, not the reference</h3>
+        <p>
+            The reference has 13 endpoints, 5 pages, and both Path A and Path B. Your target is much smaller:
+            ~5 endpoints (<code>/health</code>, <code>/items</code>, <code>/items/{id}</code>, <code>/chat</code>,
+            <code>/auth/me</code>), 3&ndash;4 pages, working chat with one tool, and a container that runs on
+            <code>localhost:8080</code>. Quality of the four-layer diagram beats volume of code.
+        </p>
+    </div>
+</section>
+
+<!-- ============================================================ -->
 <!-- ASSESSMENT & WRAP-UP                                          -->
 <!-- ============================================================ -->
 
@@ -1748,9 +1879,12 @@ docker run -p 8080:8080 -e OPENAI_API_KEY=sk-... my-staff-app
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h3 class="footer-section__title">Project</h3>
+                    <h3 class="footer-section__title">Links</h3>
                     <ul>
                         <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../../pdf/">Briefs Library</a></li>
+                        <li><a href="../../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                        <li><a href="../../pdf/TRAINING_CURRICULA_v5.pdf">Curricula (PDF)</a></li>
                         <li>MIT License</li>
                     </ul>
                 </div>

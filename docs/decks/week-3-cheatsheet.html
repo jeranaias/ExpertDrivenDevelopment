@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="One-page printable instructor cheat sheet for the Week 3 Platform Training deck — module-by-module timing, the build specs to drop in chat, the artefact each build leaves deployed, breaks, anchor phrases, and recovery cues.">
+    <title>Week 3 Instructor Cheat Sheet — Platform Training | EDD</title>
+    <link rel="stylesheet" href="../css/style.css">
+      <link rel="stylesheet" href="css/cheatsheet.css">
+      <style>
+          /* Week 3 deltas — 7-cell pacing strip */
+          .cs-pacing { grid-template-columns: repeat(7, 1fr); }
+      </style>
+</head>
+<body class="site-wrapper">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Weekly Decks</a></li>
+                    <li aria-current="page">Week 3 — Instructor Cheat Sheet</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Week 3 Instructor Cheat Sheet</h1>
+            <p class="page-header__desc">A two-page printable reference card for the Course&nbsp;3 Platform Training deck &mdash; designed to sit next to the deck during the four-hour Teams session, so you never have to scrub back through 32 slides for a build spec, a switch cue, or the next failure-share.</p>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+
+            <div class="cheat-intro">
+                <p><strong>Print:</strong> <kbd>Ctrl</kbd>+<kbd>P</kbd> &rarr; Layout <em>Portrait</em>, Margins <em>Default</em>, Background graphics <em>on</em>. Two US-Letter pages. Site chrome and this preview note are hidden in print.</p>
+                <p><strong>Use:</strong> page 1 is the live-delivery card &mdash; pacing strip, the three build specs to drop in chat, the failure-share script, the Centaur/Cyborg posture switch. Page 2 is the anchor phrases you repeat all afternoon, the recovery cues for when the platform misbehaves, and the homework you must issue before logoff.</p>
+                <div class="cheat-intro__pdf">
+                    <a class="btn btn--secondary btn--sm" href="pdf/week-3-cheatsheet.pdf" download>Download PDF</a>
+                    <span>Pre-rendered Letter-portrait two-pager &mdash; convenient for email or shared printers.</span>
+                </div>
+            </div>
+
+            <!-- ========================================================
+                 PAGE 1
+                 ======================================================== -->
+            <article class="cheat-page" aria-label="Week 3 cheat sheet, page 1">
+
+                <header class="cs-head">
+                    <div class="cs-head__week"><span class="num">3</span><span>Course 3 &middot; Platform Training<br>Instructor cheat sheet</span></div>
+                    <div class="cs-head__title">
+                        <h1>Platform Training</h1>
+                        <p class="sub">Three deployed tools in four hours. Build #1 Centaur (Request Routing), Build #2 Cyborg (Training Tracker), Build #3 your own. Pick your posture on purpose.</p>
+                    </div>
+                    <div class="cs-head__meta">
+                        <div><strong>4 hr</strong> &middot; 5 modules + frontier wrap</div>
+                        <div>32 slides &middot; 2 breaks &middot; 3 platform switches</div>
+                        <div>Companion to <strong>week-3-platform-training.html</strong></div>
+                    </div>
+                </header>
+
+                <!-- Pacing strip -->
+                <section class="cs-pacing" aria-label="Session pacing strip">
+                    <div class="cs-pacing__cell"><span class="t">0:00</span><span class="n">M1 Setup</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">0:15</span><span class="n">Build #1 Centaur</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--break"><span class="t">1:15</span><span class="n">Brk + Share 15&prime;</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">1:30</span><span class="n">Build #2 Cyborg</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--break"><span class="t">2:30</span><span class="n">Break 15&prime;</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">2:45</span><span class="n">Build #3 Your Own</span></div>
+                    <div class="cs-pacing__cell"><span class="t">3:45</span><span class="n">Frontier &amp; Wrap</span></div>
+                </section>
+
+                <!-- Module-by-module prompts and outcomes -->
+                <section class="cs-modules" aria-label="Per-module specs and outcomes">
+
+                    <div class="cs-mod cs-mod--framing">
+                        <div class="cs-mod__no"><span class="n">1</span><span class="dur">15 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Setup &amp; Review</span>
+                            <span class="clock">0:00&ndash;0:15</span>
+                            <span class="kind">Framing &middot; Course-2 carry-in</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Slide 2 hand-raise:</strong> &ldquo;Who didn&rsquo;t deploy a tool last week?&rdquo; Pair them now &mdash; do not let them sit through Build #1 alone.</li>
+                                <li><strong>Plant the anchor:</strong> &ldquo;Centaur when you know the answer. Cyborg when you don&rsquo;t. Pick on purpose.&rdquo;</li>
+                                <li><strong>Tabs check (audible):</strong> deck, Power Apps, Power Automate, your test SharePoint site, GenAI.mil. Confirm Approvals connector lit.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Outcome &middot; calibration</span>
+                            <span class="arch">Roster ready &middot; pairings set</span>
+                            <span class="desc">Unprovisioned students paired; the room knows today is three deploys, not three demos.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">B1</span><span class="dur">60 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Build #1 &mdash; Request Routing</span>
+                            <span class="clock">0:15&ndash;1:15</span>
+                            <span class="kind">Centaur &middot; you know the answer</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Hand-off (0:15):</strong> Deck &rarr; Power Apps + Power Automate side-by-side. Drop the spec into chat <em>now</em>.</li>
+                                <li><strong>Spec (paste verbatim):</strong> &ldquo;Build a request-routing flow. Spec: any request &lt; <code>$500</code> auto-approves; <code>$500&ndash;$2000</code> routes to the section chief; &gt; <code>$2000</code> routes to the OIC. SharePoint list named <em>Requests</em>; Power Automate flow on item-create.&rdquo;</li>
+                                <li><strong>Posture brief (read aloud):</strong> &ldquo;<em>Centaur mode</em> means you design the logic; AI writes the steps. No exploration &mdash; you know the answer before you prompt.&rdquo;</li>
+                                <li><em>Coach in chat.</em> Push the stuck to re-prompt with the language name in the first sentence (&ldquo;in Power Fx&rdquo;, &ldquo;in WDL&rdquo;).</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Deliverable &middot; build #1</span>
+                            <span class="arch">Routing flow deployed</span>
+                            <span class="desc">Each student has a flow firing on item-create; thresholds verified with a test row.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--break">
+                        <div class="cs-mod__no"><span class="n">BRK</span><span class="dur">15 min</span></div>
+                        <div class="cs-mod__line">
+                            <span><strong>Break + failure share.</strong> Be back at H+1:30. Run the &ldquo;failure share&rdquo; slide on return: surface 2&ndash;3 students&rsquo; Build #1 errors. <em>Do not solve</em> &mdash; pattern-match into prompt / connector / logic / platform.</span>
+                            <span class="when">1:15&ndash;1:30</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">B2</span><span class="dur">60 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Build #2 &mdash; Training Tracker</span>
+                            <span class="clock">1:30&ndash;2:30</span>
+                            <span class="kind">Cyborg &middot; you don&rsquo;t know the answer</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Hand-off (1:30):</strong> Deck &rarr; Power Apps. Switch posture audibly: &ldquo;Now it&rsquo;s exploratory. You drive, AI rides shotgun.&rdquo;</li>
+                                <li><strong>Spec (paste verbatim):</strong> &ldquo;Build a Training Tracker that reads a roster, lets a section leader mark someone qualified / lapsed, and emails a weekly summary.&rdquo;</li>
+                                <li><strong>Posture brief:</strong> &ldquo;<em>Cyborg mode</em> means continuous loop &mdash; you and the AI explore options together. Try at least one path you discard.&rdquo;</li>
+                                <li><em>Roam in chat.</em> When students lock in too early, push back: &ldquo;What&rsquo;s the path you didn&rsquo;t try?&rdquo;</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Deliverable &middot; build #2</span>
+                            <span class="arch">Tracker + weekly summary email</span>
+                            <span class="desc">Plus one discarded path documented in chat &mdash; that&rsquo;s the cyborg artefact, not just the tool.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--break">
+                        <div class="cs-mod__no"><span class="n">BRK</span><span class="dur">15 min</span></div>
+                        <div class="cs-mod__line">
+                            <span><strong>Break.</strong> Be back at H+2:45. Pre-flight: confirm everyone&rsquo;s test SharePoint site is reachable; have the Build #3 hand-off slide queued.</span>
+                            <span class="when">2:30&ndash;2:45</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">B3</span><span class="dur">60 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Build #3 &mdash; Your Problem</span>
+                            <span class="clock">2:45&ndash;3:45</span>
+                            <span class="kind">Choose mode &middot; deploy</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Hand-off (2:45):</strong> Deck &rarr; each student&rsquo;s own portal. Each picks Centaur or Cyborg <em>before</em> they start &mdash; record the choice in chat.</li>
+                                <li><strong>Brief (read verbatim):</strong> &ldquo;Pick one tool from your unit&rsquo;s real backlog. State in chat: <em>which mode</em> you&rsquo;re in and <em>why</em>. If you finish, deploy to your test site and post the URL.&rdquo;</li>
+                                <li><em>Stretch for the fast finishers:</em> add a comments column, a managers-only view, or pair with a stuck student as navigator.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Deliverable &middot; build #3</span>
+                            <span class="arch">Deployed URL in chat</span>
+                            <span class="desc">If anyone didn&rsquo;t finish, they owe the URL by EOW &mdash; the Week 4 gate hangs on it.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--framing">
+                        <div class="cs-mod__no"><span class="n">F</span><span class="dur">15 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Frontier Update &amp; Wrap</span>
+                            <span class="clock">3:45&ndash;4:00</span>
+                            <span class="kind">Map + assignment</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Frontier sync (read verbatim):</strong> &ldquo;Looking at all three builds today &mdash; where did AI <em>land inside</em> the frontier? Where did it <em>fall outside</em>? Add three entries to your map. We feed these into the unit-wide map in Week 4.&rdquo;</li>
+                                <li><strong>Capture on Slide 31</strong> (all laptops up; share-screen or camera).</li>
+                                <li><strong>Issue the Week-4 gate:</strong> at least one deployed tool URL or screenshot 72 h before Week 4. No URL, no seat.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Outcome &middot; commitments</span>
+                            <span class="arch">Frontier updated &middot; gate set</span>
+                            <span class="desc">Each student logs three frontier entries; gate evidence due 72 h before Week 4.</span>
+                        </div>
+                    </div>
+
+                </section>
+
+                <div class="cs-foot">
+                    <span class="lhs"><span class="mark" aria-hidden="true"></span><strong>EDD &middot; Week 3 cheat sheet</strong> &middot; page 1 of 2 &middot; pacing, build specs, deliverables</span>
+                    <span>Print landscape <em>off</em> &middot; portrait, default margins, background graphics on</span>
+                </div>
+            </article>
+
+            <!-- ========================================================
+                 PAGE 2
+                 ======================================================== -->
+            <article class="cheat-page" aria-label="Week 3 cheat sheet, page 2">
+
+                <header class="cs-head">
+                    <div class="cs-head__week"><span class="num">3</span><span>Course 3 &middot; Platform Training<br>Cheat sheet &middot; page 2</span></div>
+                    <div class="cs-head__title">
+                        <h1>Anchors, recovery, homework</h1>
+                        <p class="sub">The phrases you repeat all afternoon, the failure modes to watch for at the platform switches, and the homework that gates Week 4 attendance.</p>
+                    </div>
+                    <div class="cs-head__meta">
+                        <div><strong>Use during:</strong> 1:15 failure share</div>
+                        <div><strong>Use during:</strong> any platform glitch</div>
+                        <div>Companion to <strong>week-3-platform-training.html</strong></div>
+                    </div>
+                </header>
+
+                <!-- Pre-flight + hand-off cues -->
+                <section class="cs-box" aria-label="Pre-flight and live hand-off cues">
+                    <h2>Pre-flight &amp; hand-off cues<span class="lede">Done 48 h before; verified at T-30 min &middot; three platform switches today</span></h2>
+                    <ul>
+                        <li><strong>Provisioning sweep.</strong> Every roster student has Power Apps, Power Automate, and Approvals connectors enabled. Fix at least 24 h out &mdash; tickets take time.</li>
+                        <li><strong>Tabs &amp; portals.</strong> Deck (Week 3), this cheat sheet, GenAI.mil, <code>make.powerapps.com</code>, <code>make.powerautomate.com</code>, a clean SharePoint site for the day&rsquo;s lists.</li>
+                        <li><strong>Sample data.</strong> Stage a <em>Requests</em> SharePoint list (5 sample rows spanning the <code>$500</code> / <code>$2000</code> thresholds) for Build #1; stage an Excel <em>TrainingRoster</em> for Build #2.</li>
+                        <li><strong>Approvers.</strong> Roster of supervisors for the routing approval test; have a stand-in account ready in case real approvers are unreachable.</li>
+                        <li><strong>Course 2 failures.</strong> Pull homework failure cases from the Week 2 chat into a one-screen list for the 1:15 failure share.</li>
+                        <li><strong>0:15.</strong> Deck &rarr; Power Apps + Power Automate side-by-side. Drop Build #1 spec into chat.</li>
+                        <li><strong>1:15.</strong> Return to deck. Failure share &mdash; pattern-match, do not solve.</li>
+                        <li><strong>1:30.</strong> Deck &rarr; Power Apps for Build #2. Switch posture audibly.</li>
+                        <li><strong>2:45.</strong> Deck &rarr; student&rsquo;s own portal. Each student records mode choice in chat.</li>
+                        <li><strong>3:45.</strong> All laptops up to camera or share-screen for the Frontier Map update; capture on Slide 31.</li>
+                    </ul>
+                </section>
+
+                <!-- Two-column: anchors + recovery -->
+                <div class="cs-cols">
+                    <section class="cs-box" aria-label="Anchor phrases">
+                        <h2>Anchor phrases<span class="lede">Plant in M1; cite by name when you need them</span></h2>
+                        <ul>
+                            <li><strong>1. &ldquo;Centaur when you know the answer. Cyborg when you don&rsquo;t. Pick on purpose.&rdquo;</strong> Open with it; cite at the Build #1 / Build #2 / Build #3 hand-offs.</li>
+                            <li><strong>2. We pattern-match, we don&rsquo;t solve.</strong> The failure share is diagnosis &mdash; prompt / connector / logic / platform &mdash; not group debugging.</li>
+                            <li><strong>3. Name the language in the first sentence.</strong> &ldquo;In Power Fx &hellip;&rdquo; &ldquo;In WDL &hellip;&rdquo; &ldquo;In DAX &hellip;&rdquo; The wrong-language emit is the #1 fix.</li>
+                            <li><strong>4. Try one path you discard.</strong> Cyborg without exploration is just slow centaur. The discarded path is the artefact.</li>
+                            <li><strong>5. Map the world as it is.</strong> Connector denials, tenant gaps &mdash; that&rsquo;s &ldquo;Outside the frontier,&rdquo; not a complaint. Capture, don&rsquo;t vent.</li>
+                            <li><strong>6. Deployed beats demoed.</strong> A URL in chat is the only acceptable Build #3 artefact. Anything else is owed by EOW.</li>
+                        </ul>
+                    </section>
+
+                    <section class="cs-box" aria-label="Recovery and pacing cues">
+                        <h2>Recovery &amp; pacing cues<span class="lede">When the platform misbehaves, this is the order of operations</span></h2>
+                        <ul>
+                            <li><strong>SharePoint &ldquo;Integrate&rdquo; / Power Apps button missing.</strong> Build a blank Canvas app and connect to the list manually. Lose 5 min, gain a useful skill.</li>
+                            <li><strong>Approvals connector unavailable in tenant.</strong> Skip the approval step in Build #1 &mdash; email-on-create instead. Note the gap for the program lead.</li>
+                            <li><strong>AI returns JavaScript / DAX instead of Power Fx or WDL.</strong> Re-prompt with the language name in the first sentence. Coach &mdash; do not paste the fix.</li>
+                            <li><strong>Student finishes Build #1 in 20 min and is bored.</strong> Issue the stretch: comments column, managers-only view, or pair as navigator with a stuck student.</li>
+                            <li><strong>Whole room is behind at 2:30.</strong> Compress Build #3 to 30 min &mdash; spec only, no deploy. Protect the Frontier wrap; that&rsquo;s the Week-4 hand-off.</li>
+                            <li><strong>Pacing valve.</strong> If you&rsquo;re behind at 1:15, cut the failure-share to one student and the Build #2 brief to two sentences. Never cut the Frontier update.</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <!-- Homework -->
+                <section class="cs-box" aria-label="Homework to issue before logoff">
+                    <h2>Homework to issue before logoff<span class="lede">Slide 31 &mdash; Week-4 attendance gate hangs on these</span></h2>
+                    <ul>
+                        <li><strong>Deploy Build #3.</strong> If they didn&rsquo;t finish, ship the smallest version they can defend by EOW. Post the URL in the Week 3 chat thread.</li>
+                        <li><strong>Take one tool to a real user.</strong> Watch them use it once without coaching. Record what broke. Bring that to Week 4&rsquo;s Debug Clinic.</li>
+                        <li><strong>Frontier Map update.</strong> Sync each personal map with the unit&rsquo;s shared map. Consolidated on Week 4 &middot; M1.</li>
+                        <li><strong>Advanced track gate.</strong> To attend Week 4, every student must have <em>at least one deployed tool</em>. Post evidence (URL or screenshot) by 72 h before Week 4. No evidence, no seat.</li>
+                    </ul>
+                </section>
+
+                <div class="cs-foot">
+                    <span class="lhs"><span class="mark" aria-hidden="true"></span><strong>EDD &middot; Week 3 cheat sheet</strong> &middot; page 2 of 2 &middot; anchors, recovery, homework</span>
+                    <span>Pair with the Week 3 Facilitator Pack for prep / hand-off / homework detail</span>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../pdf/">Briefs Library</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                        <li><a href="../pdf/TRAINING_CURRICULA_v5.pdf">Curricula (PDF)</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

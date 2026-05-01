@@ -55,6 +55,14 @@
   var current = 0;
 
   // ----- Build chrome (skip if deck already provides one) -----
+  // Build handout-mode URLs from the current page so the in-deck links
+  // open the same deck in 2-up / 4-up handout view in a new tab. Strips
+  // any existing query string and hash so the handout query is the only
+  // thing in the URL.
+  var handoutBase = window.location.pathname;
+  var handout2Url = handoutBase + "?handout=2";
+  var handout4Url = handoutBase + "?handout=4";
+
   var chrome = document.getElementById("deck-chrome");
   if (!chrome) {
     chrome = document.createElement("div");
@@ -66,7 +74,11 @@
       '<button data-action="next" aria-label="Next slide">Next &rarr;</button>' +
       '<button data-action="notes" aria-label="Toggle speaker notes">Notes</button>' +
       '<button data-action="full" aria-label="Toggle fullscreen">Full</button>' +
-      '<button data-action="print" aria-label="Print as PDF">Print</button>';
+      '<button data-action="print" aria-label="Print as PDF">Print</button>' +
+      '<a class="deck-chrome__handout" href="' + handout2Url + '" target="_blank" rel="noopener" ' +
+        'aria-label="Open 2-up handout view in a new tab" title="Open 2-up handout view in a new tab">2-up</a>' +
+      '<a class="deck-chrome__handout" href="' + handout4Url + '" target="_blank" rel="noopener" ' +
+        'aria-label="Open 4-up handout view in a new tab" title="Open 4-up handout view in a new tab">4-up</a>';
     document.body.appendChild(chrome);
   }
 

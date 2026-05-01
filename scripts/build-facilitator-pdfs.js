@@ -26,6 +26,11 @@ const puppeteer = require("puppeteer-core");
 
 const SITE_URL = process.env.SITE_URL || "http://localhost:5000";
 const OUT_DIR = path.resolve(__dirname, "..", "docs", "facilitator", "pdf");
+// Deck-side prompt hand-out PDFs (multi-page Letter-portrait renders of the
+// `docs/decks/week-N-handouts.html` pages). Currently only Week 6 ships a
+// prompt hand-out; sibling weeks have a follow-up task to add their own,
+// at which point new entries can be appended below.
+const DECK_HANDOUTS_OUT_DIR = path.resolve(__dirname, "..", "docs", "decks", "pdf");
 
 // On Linux, headless Chromium falls back to DejaVu Sans for the pack's
 // Helvetica / Arial / Segoe UI font stack. DejaVu's wider metrics cause
@@ -44,12 +49,17 @@ const OUT_DIR = path.resolve(__dirname, "..", "docs", "facilitator", "pdf");
 // We do this at script runtime so the project doesn't have to commit any
 // per-machine font paths.
 function setupFontFallback() {
-  const nixStore = "/nix/store";
-  if (!fs.existsSync(nixStore)) return null;
-
-  // Pick the highest-version directory matching `<hash>-<name>-<ver>` so
-  // we deterministically prefer e.g. liberation-fonts-2.1.5 over 2.1.0.
-  const findFontDir = (namePat, subdir, sentinelPat) => {
+  // Probe order:
+  //   1. Nix store  — local Replit / Nix shells (preferred when available).
+  //   2. Standard Linux font dirs — covers vanilla Ubuntu, including the
+  //      `ubuntu-latest` GitHub Actions runner that powers the auto-rebuild
+  //      workflow. Without this branch CI would fall back to DejaVu Sans
+  //      and the packs would overflow the one-page frame.
+  const findNixFontDir = (namePat, subdir, sentinelPat) => {
+    const nixStore = "/nix/store";
+    if (!fs.existsSync(nixStore)) return null;
+    // Pick the highest-version directory matching `<hash>-<name>-<ver>` so
+    // we deterministically prefer e.g. liberation-fonts-2.1.5 over 2.1.0.
     const candidates = fs
       .readdirSync(nixStore)
       .filter((d) => namePat.test(d))
@@ -60,18 +70,41 @@ function setupFontFallback() {
     return candidates[0] || null;
   };
 
-  const liberationDir = findFontDir(
-    /^[a-z0-9]+-liberation-fonts-\d/,
-    "truetype",
-    /^LiberationSans-Regular\.ttf$/
-  );
+  const findStandardFontDir = (paths, sentinelPat) => {
+    for (const p of paths) {
+      if (fs.existsSync(p) && fs.readdirSync(p).some((f) => sentinelPat.test(f))) {
+        return p;
+      }
+    }
+    return null;
+  };
+
+  const liberationDir =
+    findNixFontDir(
+      /^[a-z0-9]+-liberation-fonts-\d/,
+      "truetype",
+      /^LiberationSans-Regular\.ttf$/
+    ) ||
+    findStandardFontDir(
+      [
+        "/usr/share/fonts/truetype/liberation",
+        "/usr/share/fonts/truetype/liberation2",
+        "/usr/share/fonts/liberation",
+      ],
+      /^LiberationSans-Regular\.ttf$/
+    );
   // Match only the main `noto-fonts-<version>` package, not side packages
   // like noto-fonts-emoji / -cjk / -extra (no Latin face we can alias).
-  const notoDir = findFontDir(
-    /^[a-z0-9]+-noto-fonts-\d/,
-    "noto",
-    /^NotoSans\[/
-  );
+  const notoDir =
+    findNixFontDir(
+      /^[a-z0-9]+-noto-fonts-\d/,
+      "noto",
+      /^NotoSans\[/
+    ) ||
+    findStandardFontDir(
+      ["/usr/share/fonts/truetype/noto", "/usr/share/fonts/noto"],
+      /^NotoSans-Regular\.ttf$/
+    );
 
   let dir = null;
   let family = null;
@@ -113,6 +146,21 @@ const PACKS = [
   { week: 4, slug: "advanced",              file: "week-4-advanced.html" },
   { week: 5, slug: "supervisor",            file: "week-5-supervisor.html" },
   { week: 6, slug: "fullstack",             file: "week-6-fullstack.html" },
+];
+
+// Deck-side prompt hand-out pages. These differ from the Facilitator Packs
+// above in two ways: (1) they live under `docs/decks/` and target a normal
+// portrait reading flow rather than a fixed Letter-landscape one-pager, and
+// (2) they're allowed to span multiple pages — the source HTML can have a
+// dozen copy blocks. The shipped print stylesheet inside each page already
+// hides the on-screen chrome (site header, copy buttons, jump links, etc.)
+// and preserves the slide-number pills, cue lines, and `<pre>` formatting,
+// so as with the packs above we deliberately don't inject any extra CSS
+// here — we just point Chrome at the URL and ask for a Letter-portrait
+// print. Output filenames mirror the source basename so deck pages can
+// link to `pdf/<basename>.pdf` next to themselves.
+const DECK_HANDOUTS = [
+  { week: 6, file: "week-6-handouts.html" },
 ];
 
 function findChromium() {
@@ -188,10 +236,39 @@ async function renderPack(browser, pack) {
   console.log(`  ✓ week-${pack.week}-${pack.slug}.pdf (${sizeKb} KB)`);
 }
 
+// Render a deck-side prompt hand-out page to a Letter-portrait,
+// multi-page PDF under `docs/decks/pdf/`. Same Chromium and font
+// fallback as the packs above; differs only in viewport (portrait
+// width) and the lack of a `landscape: true` flag on `page.pdf()`.
+async function renderDeckHandout(browser, handout) {
+  const url = `${SITE_URL}/decks/${handout.file}`;
+  const outPath = path.join(DECK_HANDOUTS_OUT_DIR, handout.file.replace(/\.html$/, ".pdf"));
+  const page = await browser.newPage();
+  try {
+    // Letter-portrait minus 0.5in margins (7.5in × 10in at 96 DPI) so the
+    // page renders at its print width before we ask for the PDF.
+    await page.setViewport({ width: 720, height: 960, deviceScaleFactor: 1 });
+    await page.emulateMediaType("print");
+    await page.goto(url, { waitUntil: "networkidle0", timeout: 60000 });
+    await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
+    await page.pdf({
+      path: outPath,
+      format: "Letter",
+      printBackground: true,
+      margin: { top: "0.5in", right: "0.5in", bottom: "0.5in", left: "0.5in" },
+    });
+  } finally {
+    await page.close();
+  }
+  const sizeKb = (fs.statSync(outPath).size / 1024).toFixed(1);
+  console.log(`  ✓ ${path.basename(outPath)} (${sizeKb} KB)`);
+}
+
 (async () => {
   const usedFont = setupFontFallback();
   if (usedFont) console.log(`Font fallback:  ${usedFont}`);
   fs.mkdirSync(OUT_DIR, { recursive: true });
+  fs.mkdirSync(DECK_HANDOUTS_OUT_DIR, { recursive: true });
   await ensureServerUp();
   const executablePath = findChromium();
   console.log(`Using Chromium: ${executablePath}`);
@@ -211,10 +288,18 @@ async function renderPack(browser, pack) {
     for (const pack of PACKS) {
       await renderPack(browser, pack);
     }
+    if (DECK_HANDOUTS.length > 0) {
+      console.log(`Source URL:    ${SITE_URL}/decks/`);
+      console.log(`Output dir:    ${path.relative(process.cwd(), DECK_HANDOUTS_OUT_DIR)}/`);
+      for (const handout of DECK_HANDOUTS) {
+        await renderDeckHandout(browser, handout);
+      }
+    }
   } finally {
     await browser.close();
   }
-  console.log(`Done. ${PACKS.length} PDFs written to ${OUT_DIR}/`);
+  const total = PACKS.length + DECK_HANDOUTS.length;
+  console.log(`Done. ${total} PDFs written (${PACKS.length} packs + ${DECK_HANDOUTS.length} deck hand-outs).`);
 })().catch((err) => {
   console.error(`\nERROR: ${err.message}\n`);
   process.exit(1);

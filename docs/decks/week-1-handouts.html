@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Chat-paste-ready hand-out blocks for the Course 1 AI Fluency session — three Red-Pen review documents, the AI document review checklist, and the frontier-map seed table.">
+      <title>Week 1 Facilitator Hand-Outs | Expert-Driven Development</title>
+      <link rel="stylesheet" href="../css/style.css">
+      <style>
+          /* --- Hand-out specific styles ---
+             Built on top of the site stylesheet so the page reads as a
+             regular EDD doc, with one extra "copy-block" component. */
+
+          .handout-intro {
+              background: var(--color-bg-secondary);
+              border-left: 4px solid var(--color-scarlet);
+              padding: var(--space-lg) var(--space-xl);
+              margin-bottom: var(--space-xl);
+              border-radius: 0 var(--space-sm) var(--space-sm) 0;
+          }
+          .handout-intro p { margin: 0 0 var(--space-sm); }
+          .handout-intro p:last-child { margin-bottom: 0; }
+
+          .handout-toc {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+              gap: var(--space-md);
+              margin: var(--space-xl) 0 var(--space-2xl);
+          }
+          .handout-toc a {
+              display: block;
+              padding: var(--space-md);
+              background: var(--color-bg-secondary);
+              border: 1px solid var(--color-border);
+              border-radius: var(--space-sm);
+              text-decoration: none;
+              color: var(--color-text-primary);
+              transition: border-color 0.15s, transform 0.15s;
+          }
+          .handout-toc a:hover {
+              border-color: var(--color-scarlet);
+              transform: translateY(-1px);
+          }
+          .handout-toc .slide-tag {
+              display: inline-block;
+              font-size: var(--font-size-xs);
+              font-weight: var(--font-weight-bold);
+              letter-spacing: 0.08em;
+              text-transform: uppercase;
+              color: var(--color-scarlet);
+              margin-bottom: var(--space-xs);
+          }
+          .handout-toc .toc-title {
+              display: block;
+              font-weight: var(--font-weight-semibold);
+              font-size: var(--font-size-md);
+          }
+
+          .copy-block {
+              border: 1px solid var(--color-border);
+              border-radius: var(--space-sm);
+              margin: var(--space-lg) 0 var(--space-2xl);
+              overflow: hidden;
+              background: var(--color-bg-primary);
+          }
+          .copy-block__header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              gap: var(--space-md);
+              padding: var(--space-md) var(--space-lg);
+              background: var(--color-bg-dark);
+              color: var(--color-text-inverse);
+              flex-wrap: wrap;
+          }
+          .copy-block__label {
+              display: flex;
+              align-items: center;
+              gap: var(--space-md);
+              flex-wrap: wrap;
+          }
+          .slide-pill {
+              display: inline-block;
+              padding: 2px 10px;
+              background: var(--color-gold);
+              color: var(--color-text-primary);
+              font-size: var(--font-size-xs);
+              font-weight: var(--font-weight-bold);
+              letter-spacing: 0.08em;
+              text-transform: uppercase;
+              border-radius: 999px;
+          }
+          .copy-block__title {
+              font-weight: var(--font-weight-semibold);
+              font-size: var(--font-size-base);
+          }
+          .copy-btn {
+              display: inline-flex;
+              align-items: center;
+              gap: var(--space-xs);
+              padding: var(--space-sm) var(--space-md);
+              background: var(--color-scarlet);
+              color: var(--color-text-inverse);
+              border: 0;
+              border-radius: var(--space-sm);
+              font-family: var(--font-family-sans);
+              font-size: var(--font-size-sm);
+              font-weight: var(--font-weight-semibold);
+              cursor: pointer;
+              transition: background-color 0.15s;
+          }
+          .copy-btn:hover { background: var(--color-scarlet-dark); }
+          .copy-btn:focus-visible {
+              outline: 2px solid var(--color-gold);
+              outline-offset: 2px;
+          }
+          .copy-btn.is-copied { background: var(--color-success-border); }
+
+          .copy-block__cue {
+              padding: var(--space-md) var(--space-lg);
+              background: var(--color-warning-bg);
+              border-bottom: 1px solid var(--color-warning-border);
+              font-size: var(--font-size-sm);
+              color: var(--color-warning-text);
+          }
+          .copy-block__cue strong { color: var(--color-warning-text); }
+
+          .copy-block__body {
+              margin: 0;
+              padding: var(--space-lg);
+              white-space: pre-wrap;
+              font-family: var(--font-family-mono);
+              font-size: var(--font-size-sm);
+              line-height: var(--line-height-normal);
+              color: var(--color-text-primary);
+              background: var(--color-bg-code);
+              max-height: 520px;
+              overflow: auto;
+          }
+
+          .back-bar {
+              display: flex;
+              gap: var(--space-md);
+              flex-wrap: wrap;
+              margin-bottom: var(--space-md);
+              font-size: var(--font-size-sm);
+          }
+
+          /* Print rules for hand-out copy-blocks (multi-page flow,
+             ASCII-table column alignment, hidden copy buttons / TOC)
+             live in docs/css/style.css @media print. */
+      </style>
+  </head>
+  <body class="site-wrapper">
+
+      <a href="#main-content" class="skip-link">Skip to main content</a>
+
+      <!-- Site Header -->
+      <header class="site-header" role="banner">
+          <div class="container">
+              <a href="../" class="site-brand">
+                  <span class="site-brand__mark" aria-hidden="true"></span>
+                  Expert-Driven Development
+              </a>
+              <nav aria-label="Primary navigation">
+                  <ul class="nav-list">
+                      <li><a href="../">Home</a></li>
+                      <li><a href="../courses/" class="active">Courses</a></li>
+                      <li><a href="../sop/">SOP</a></li>
+                      <li><a href="../toolkit/">Toolkit</a></li>
+                      <li><a href="../tools/">Tools</a></li>
+                      <li><a href="../resources/">Resources</a></li>
+                      <li><a href="../about.html">About</a></li>
+                  </ul>
+              </nav>
+              <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                  <span class="nav-toggle__icon" aria-hidden="true"></span>
+              </button>
+          </div>
+      </header>
+
+      <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+          <ul class="nav-list">
+              <li><a href="../">Home</a></li>
+              <li><a href="../courses/" class="active">Courses</a></li>
+              <li><a href="../sop/">SOP</a></li>
+              <li><a href="../toolkit/">Toolkit</a></li>
+              <li><a href="../tools/">Tools</a></li>
+              <li><a href="../resources/">Resources</a></li>
+              <li><a href="../about.html">About</a></li>
+          </ul>
+      </div>
+
+      <!-- Page Header -->
+      <section class="page-header">
+          <div class="container">
+              <nav aria-label="Breadcrumb">
+                  <ol class="breadcrumb">
+                      <li><a href="../">Home</a></li>
+                      <li><a href="../courses/">Courses</a></li>
+                      <li><a href="../courses/ai-fluency.html">AI Fluency Fundamentals</a></li>
+                      <li aria-current="page">Facilitator Hand-Outs</li>
+                  </ol>
+              </nav>
+              <h1 class="page-header__title">Week 1 Facilitator Hand-Outs</h1>
+              <p class="page-header__desc">
+                  Five chat-paste-ready blocks for the Course 1 AI Fluency Fundamentals session. Open this tab in a second window before the session, then copy each block into Microsoft Teams chat at the slide it pairs with.
+              </p>
+              <div class="back-bar mt-md">
+                  <a href="week-1-ai-fluency.html">&larr; Back to Week 1 Slide Deck</a>
+                  <span aria-hidden="true">&middot;</span>
+                  <a href="../courses/ai-fluency.html">Course 1 Instructor Page</a>
+              </div>
+          </div>
+      </section>
+
+      <main id="main-content" class="site-main">
+          <div class="container container--narrow">
+
+              <div class="handout-intro">
+                  <p><strong>How to use this page.</strong> Keep it open in a second browser tab. When the deck reaches the slide called out on each block&rsquo;s gold pill, click <em>Copy</em>, then paste into the Teams chat. Plain text is intentional &mdash; it survives the Teams paste cleanly and stays legible on a 13&Prime; laptop.</p>
+                  <p><strong>Print fallback.</strong> If you lose your second-screen, this page prints to one or two clean pages with the copy buttons hidden &mdash; use <kbd>Ctrl</kbd>+<kbd>P</kbd> / <kbd>&#8984;</kbd>+<kbd>P</kbd>.</p>
+                  <p><strong>Where these come from.</strong> Each block is lifted verbatim from the <a href="../courses/ai-fluency.html">AI Fluency Fundamentals instructor page</a> &mdash; the three Red-Pen documents in Module 4, the Review Checklist students apply to them, and the Frontier-map starter for Module 6 wrap.</p>
+              </div>
+  
+              <nav class="handout-toc" aria-label="Hand-out jump links">
+                  <a href="#handout-review-checklist">
+                      <span class="slide-tag">Module 4 &middot; Red-Pen</span>
+                      <span class="toc-title">AI document review checklist</span>
+                  </a>
+                <a href="#handout-redpen-doc-1">
+                      <span class="slide-tag">Module 4 &middot; Doc 1</span>
+                      <span class="toc-title">Red-Pen Doc 1 - NAM Award</span>
+                  </a>
+                <a href="#handout-redpen-doc-2">
+                      <span class="slide-tag">Module 4 &middot; Doc 2</span>
+                      <span class="toc-title">Red-Pen Doc 2 - Unit SOP</span>
+                  </a>
+                <a href="#handout-redpen-doc-3">
+                      <span class="slide-tag">Module 4 &middot; Doc 3</span>
+                      <span class="toc-title">Red-Pen Doc 3 - Information Paper</span>
+                  </a>
+                <a href="#handout-frontier-seed">
+                      <span class="slide-tag">Module 6 &middot; Wrap</span>
+                      <span class="toc-title">Frontier-map starter row</span>
+                  </a>
+              </nav>
+  
+              <!-- ===========================================================
+                   BLOCK 1 &mdash; Module 4 — review checklist
+                   =========================================================== -->
+              <article id="handout-review-checklist">
+                  <h2>AI document review checklist</h2>
+                  <p>
+                      Drop this in chat right before you hand out the three Red-Pen documents. Students hold the six checklist items beside the docs as they mark them up. Plain text so anyone can paste it into a OneNote page or print it for the table.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use at start of Module 4</span>
+                              <span class="copy-block__title">AI document review checklist (6 items)</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w1-checklist" aria-label="Copy AI document review checklist to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Before you red-pen anything, here is the six-step checklist you are working from. Pin it.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w1-checklist">AI Document Review Checklist
+
+  1. References & Citations. Does every order number, publication, regulation, or directive actually exist? Can you look it up?
+
+  2. Facts & Statistics. Are the numbers, dates, percentages, and claims verifiable? Do they match reality, or do they just sound good?
+
+  3. Internal Consistency. Do all parts of the document agree with each other? Does the timeline work? Do names, units, and details stay consistent?
+
+  4. Procedural Accuracy. Does the described process match how things actually work in your experience? Are critical steps missing?
+
+  5. Substance vs. Style. Strip away the professional formatting and confident tone. Is there real, specific content underneath, or just polished filler?
+
+  6. Would You Sign It? If your name goes on this document, are you confident in every claim it makes?</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 2 &mdash; Module 4 — Document 1
+                   =========================================================== -->
+              <article id="handout-redpen-doc-1">
+                  <h2>Red-Pen Document 1: NAM award narrative</h2>
+                  <p>
+                      Paste this when the deck reaches the first Red-Pen document. Students need the full text in chat so they can mark it up alongside the slide. The document contains organic AI errors (fabricated MARADMIN, suspect statistics, inflated language) for them to catch with the checklist.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Module 4 Doc 1 slide</span>
+                              <span class="copy-block__title">Red-Pen Document 1: NAM award narrative</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w1-doc1" aria-label="Copy Red-Pen Document 1 to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Document 1 is in chat. Use the checklist. Mark every line you would change, question, or verify.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w1-doc1">NAVY AND MARINE CORPS ACHIEVEMENT MEDAL
+  RECOMMENDATION NARRATIVE
+
+  Corporal David R. Hernandez, USMC
+  Weapons Company, 1st Battalion, 99th Marines
+  Period of Service: March 2025 to January 2026
+
+  Corporal Hernandez demonstrated exceptional initiative and unwavering dedication to duty while serving as the Readiness Clerk for Weapons Company, 1st Battalion, 99th Marines. Through his unparalleled commitment to organizational excellence, he single-handedly transformed the company's readiness reporting process, resulting in a 47% reduction in reporting errors and saving the command an estimated 156 man-hours per quarter.
+
+  Upon identifying critical inefficiencies in the company's legacy readiness tracking system, Corporal Hernandez took it upon himself to design and implement a comprehensive digital solution utilizing the Microsoft Power Platform. His innovative tool streamlined the consolidation of training data from four subordinate sections, automating what had previously been a tedious manual process requiring extensive cross-referencing of multiple spreadsheets and paper records.
+
+  Corporal Hernandez's tool was directly responsible for Weapons Company achieving a 98.7% readiness reporting accuracy rate during the Battalion's Annual Training Assessment, the highest mark in the regiment. His system was subsequently adopted by two additional companies within the battalion, demonstrating the scalability and robustness of his solution. The Regimental Commander personally recognized his contribution during the quarterly awards ceremony, per MARADMIN 045/26.
+
+  Corporal Hernandez's exceptional performance, tireless work ethic, and selfless dedication to mission accomplishment reflect great credit upon himself, Weapons Company, 1st Battalion, 99th Marines, and the United States Marine Corps.</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 3 &mdash; Module 4 — Document 2
+                   =========================================================== -->
+              <article id="handout-redpen-doc-2">
+                  <h2>Red-Pen Document 2: unit SOP excerpt</h2>
+                  <p>
+                      Paste at the second Red-Pen document. This is the highest-value piece of the exercise for anyone who writes procedures &mdash; the AI fabricated MCO numbers and a form number, and omitted medical/dental check-in entirely.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Module 4 Doc 2 slide</span>
+                              <span class="copy-block__title">Red-Pen Document 2: unit SOP excerpt</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w1-doc2" aria-label="Copy Red-Pen Document 2 to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Document 2 is in chat. Same drill. Pay attention to references and to anything that is missing.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w1-doc2">WEAPONS COMPANY, 1ST BATTALION, 99TH MARINES
+  STANDARD OPERATING PROCEDURES (EXTRACT)
+
+  Chapter 4, Section 3: Personnel Check-in / Check-out Procedures
+  Effective Date: 01 January 2026
+  References: (a) MCO 1000.6A Personnel Assignment Policy
+              (b) MCO 1320.11H Permanent Change of Station
+              (c) BnO 1000.1 Personnel Administration Procedures
+
+  1. PURPOSE. To establish standardized procedures for the check-in and check-out of all personnel assigned to or departing from Weapons Company.
+
+  2. CHECK-IN PROCEDURES. All newly reporting personnel shall complete the following within 72 hours of reporting:
+
+    a. Report to the Company Office (Bldg 1284) with original orders, service record book, and three copies of PCS orders.
+    b. Complete Company Check-in Sheet (Appendix 4-3A).
+    c. Receive section assignment from the Company First Sergeant.
+    d. Report to assigned Section Leader within 24 hours of company check-in.
+    e. Complete gear inventory with Section Leader using CMC Form 4790/142.
+    f. Attend Company Indoctrination Brief, held every Monday at 0800 in the Company Classroom (Bldg 1284, Rm 203).
+    g. Complete initial counseling with Section Leader within 14 calendar days.
+
+  3. CHECK-OUT PROCEDURES. Personnel departing the company shall initiate checkout NLT 10 working days prior to departure date:
+
+    a. Obtain Company Check-out Sheet from the Company Office.
+    b. Clear all issued gear through the Section Leader and Company Armory.
+    c. Return all company-specific access badges and keys to the Company Gunnery Sergeant.
+    d. Complete a transfer of duties brief with the identified relief, if applicable.
+    e. Obtain Company Commander's signature on checkout sheet.
+    f. Forward completed checkout sheet to Battalion S-1 NLT 5 working days prior to departure.
+
+  4. EXCEPTIONS. Personnel departing on emergency leave are exempt from the 10-working-day requirement but must complete telephonic checkout with the Company First Sergeant within 48 hours of departure. Checkout sheet will be completed by the Marine's Section Leader in their absence and forwarded to Battalion S-1 per reference (b).
+
+  5. RESPONSIBILITIES. The Company First Sergeant is responsible for maintaining the check-in/check-out tracker and providing a monthly report to the Company Commander. Section Leaders will report any check-in discrepancies to the First Sergeant within 24 hours per reference (a).</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 4 &mdash; Module 4 — Document 3
+                   =========================================================== -->
+              <article id="handout-redpen-doc-3">
+                  <h2>Red-Pen Document 3: information paper to the CO</h2>
+                  <p>
+                      Paste at the third document. This one would do the most damage if signed: it puts a fabricated TECOM study and a fictional MARADMIN in front of a CO making a real resourcing decision.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Module 4 Doc 3 slide</span>
+                              <span class="copy-block__title">Red-Pen Document 3: information paper to the CO</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w1-doc3" aria-label="Copy Red-Pen Document 3 to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Document 3. Imagine your name is going on this for the CO. Find every claim you cannot back up.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w1-doc3">INFORMATION PAPER
+
+  Subject: Feasibility of Implementing Digital Training Tracker for 1st Battalion, 99th Marines
+
+  1. PURPOSE. To provide the Commanding Officer with an assessment of implementing a digital training tracker using the Microsoft Power Platform to replace the current spreadsheet-based system.
+
+  2. BACKGROUND. 1st Battalion currently tracks individual and collective training completion using a combination of Excel spreadsheets maintained at the company level and manual reports consolidated by the S-3. This process requires approximately 12 hours per week of staff time across the battalion. According to a 2024 Marine Corps Training and Education Command (TECOM) study, units using digital tracking systems reported a 34% improvement in training visibility and a 28% reduction in lapsed individual training requirements.
+
+  3. CURRENT SITUATION.
+    a. The S-3 section consolidates training data from four companies weekly. Average turnaround time from company submission to battalion roll-up is 3.2 working days.
+    b. Common errors include duplicate entries, outdated completion dates, and missing course identifiers. An internal audit in November 2025 found a 23% error rate in the consolidated tracker.
+    c. Three Marines in the S-3 shop hold Power Platform development experience. MSgt K. R. Odom completed the Microsoft PL-900 certification in October 2025.
+
+  4. ANALYSIS.
+    a. A Power Apps-based tracker would provide real-time visibility at all echelons, eliminating the weekly consolidation cycle.
+    b. Estimated development time: 60-80 hours using AI-assisted development methods per MARADMIN 612/24, which authorizes the use of AI tools for administrative process improvement across the Marine Corps.
+    c. Recurring cost: $0. Power Apps is included in the battalion's existing M365 E3 licensing. No additional licenses or procurement actions required.
+    d. Risk: Low. The Power Platform operates within the DoD M365 security boundary and has been granted an Authority to Operate (ATO) at the DoD enterprise level.
+
+  5. RECOMMENDATION. Approve development of a Power Apps training tracker as a 90-day pilot program within Headquarters Company. Success criteria: reduction in consolidation time to same-day, error rate below 5%, and positive user feedback from a minimum of 10 users.
+
+  Prepared by: Capt M. J. Sullivan, S-3A
+  Date: 03 February 2026</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 5 &mdash; Module 6 — frontier map seed
+                   =========================================================== -->
+              <article id="handout-frontier-seed">
+                  <h2>Frontier-map starter row</h2>
+                  <p>
+                      Paste during the closing minutes of the session as students start their personal frontier map. Gives them a working example row plus the four-column frame, then they fill in two or three rows from the documents they just red-penned.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Module 6 wrap slide</span>
+                              <span class="copy-block__title">Frontier-map starter (one example row)</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w1-frontier" aria-label="Copy frontier map starter to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Open a fresh doc. Here is the four-column frame and one example row to start from. Add two more rows from the documents we just reviewed.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w1-frontier">Frontier Map - starter
+
+  | Task Type                | AI Handles Well                              | AI Handles Poorly                                | Verification Needed                              |
+  |--------------------------|----------------------------------------------|--------------------------------------------------|--------------------------------------------------|
+  | Award narrative drafting | Standard structure, transitions, formal tone | Specific accomplishments, verifiable statistics  | Strip every number and claim back to source data |
+  | (your row 1)             |                                              |                                                  |                                                  |
+  | (your row 2)             |                                              |                                                  |                                                  |
+
+  Add at least two rows from today's red-pen exercise. A useful row names a specific
+  task type (not "writing"), gives a concrete example of what AI did right, names a
+  specific failure mode you could recognize again, and states a verification step
+  you would actually do (not just "check it").</pre>
+                  </div>
+              </article>
+  
+          </div>
+      </main>
+
+      <!-- Site Footer -->
+      <footer class="site-footer" role="contentinfo">
+          <div class="container">
+              <div class="footer-grid">
+                  <div class="footer-section">
+                      <h3 class="footer-section__title">Expert-Driven Development</h3>
+                      <p>
+                          Open-source AI-assisted development training for DoW personnel.
+                          Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                      </p>
+                  </div>
+                  <div class="footer-section">
+                      <h3 class="footer-section__title">Navigation</h3>
+                      <ul>
+                          <li><a href="../">Home</a></li>
+                          <li><a href="../courses/">Courses</a></li>
+                          <li><a href="../sop/">SOP</a></li>
+                          <li><a href="../toolkit/">Toolkit</a></li>
+                          <li><a href="../tools/">Tools</a></li>
+                          <li><a href="../resources/">Resources</a></li>
+                          <li><a href="../about.html">About</a></li>
+                      </ul>
+                  </div>
+                  <div class="footer-section">
+                      <h3 class="footer-section__title">Links</h3>
+                      <ul>
+                          <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                          <li><a href="../pdf/">Briefs Library</a></li>
+                          <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                          <li><a href="../pdf/TRAINING_CURRICULA_v5.pdf">Curricula (PDF)</a></li>
+                          <li>MIT License</li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="footer-bottom">
+                  <span>UNCLASSIFIED</span>
+                  <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+              </div>
+          </div>
+      </footer>
+
+      <script>
+          (function () {
+              // Mobile nav toggle (matches docs/courses/advanced.html behaviour)
+              var toggle = document.querySelector('.nav-toggle');
+              var mobileNav = document.getElementById('mobile-nav');
+              if (toggle && mobileNav) {
+                  toggle.addEventListener('click', function () {
+                      var expanded = this.getAttribute('aria-expanded') === 'true';
+                      this.setAttribute('aria-expanded', String(!expanded));
+                      mobileNav.classList.toggle('is-open');
+                  });
+              }
+
+              // Copy-block buttons
+              document.querySelectorAll('.copy-btn').forEach(function (btn) {
+                  btn.addEventListener('click', function () {
+                      var targetId = btn.getAttribute('data-copy-target');
+                      var target = document.getElementById(targetId);
+                      if (!target) return;
+                      var text = target.textContent;
+                      var label = btn.querySelector('.copy-btn__label');
+                      var originalLabel = label ? label.textContent : '';
+
+                      var done = function () {
+                          btn.classList.add('is-copied');
+                          if (label) label.textContent = 'Copied';
+                          setTimeout(function () {
+                              btn.classList.remove('is-copied');
+                              if (label) label.textContent = originalLabel;
+                          }, 1800);
+                      };
+                      var fail = function () {
+                          if (label) label.textContent = 'Copy failed \u2014 select & \u2318/Ctrl+C';
+                          setTimeout(function () {
+                              if (label) label.textContent = originalLabel;
+                          }, 2500);
+                      };
+
+                      if (navigator.clipboard && navigator.clipboard.writeText) {
+                          navigator.clipboard.writeText(text).then(done).catch(function () {
+                              // Fallback for older / restricted contexts
+                              try {
+                                  var range = document.createRange();
+                                  range.selectNodeContents(target);
+                                  var sel = window.getSelection();
+                                  sel.removeAllRanges();
+                                  sel.addRange(range);
+                                  document.execCommand('copy');
+                                  sel.removeAllRanges();
+                                  done();
+                              } catch (err) { fail(); }
+                          });
+                      } else {
+                          try {
+                              var range = document.createRange();
+                              range.selectNodeContents(target);
+                              var sel = window.getSelection();
+                              sel.removeAllRanges();
+                              sel.addRange(range);
+                              document.execCommand('copy');
+                              sel.removeAllRanges();
+                              done();
+                          } catch (err) { fail(); }
+                      }
+                  });
+              });
+          })();
+      </script>
+
+  </body>
+  </html>
+  

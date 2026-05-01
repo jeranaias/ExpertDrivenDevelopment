@@ -50,6 +50,10 @@
             <div class="handout-intro">
                 <p>Print this page in <strong>landscape</strong> from Chrome or Edge: <kbd>Ctrl</kbd>+<kbd>P</kbd> &rarr; Layout <em>Landscape</em> &rarr; Margins <em>None</em> or <em>Default</em> &rarr; Background graphics <em>on</em>. The site chrome above is hidden in print.</p>
                 <p class="handout-intro__tip">In the print dialog, leave <strong>Margins</strong> at <em>Default</em> (or pick <em>None</em>). Picking <em>Custom</em> or <em>Minimum</em> shrinks the printable area below what this layout assumes and the handout tips onto a second page.</p>
+                <div class="handout-intro__pdf">
+                    <a class="btn btn--secondary btn--sm" href="pdf/week-6-fullstack.pdf" download>Download PDF</a>
+                    <span>Pre-rendered Letter-landscape one-pager &mdash; for shared / kiosk laptops where the print dialog is locked down.</span>
+                </div>
             </div>
 
             <article class="handout-page" aria-label="Week 6 student handout">
@@ -160,6 +164,25 @@
                         </ul>
                     </section>
 
+
+                    <!-- Answer key — reference app pointer (mirrors deck slide 49 + student page).
+                         Lives inside .hd-body as a third row spanning all three columns so the
+                         grid arbitrates space between this strip and the existing five boxes,
+                         and the print tighten-pass keeps the page on a single Letter sheet. -->
+                    <section class="hd-answer" aria-label="Answer key reference app">
+                        <h2>Stuck? Compare against the answer key<span class="lede">Open <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/tree/main/heywood-inventory"><code>heywood-inventory/</code></a> only <em>after</em> the 3-Minute Rule fires twice on the same prompt &mdash; never before. Full guide: <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/docs/STUDENT_GUIDE.md"><code>heywood-inventory/docs/STUDENT_GUIDE.md</code></a>.</span></h2>
+                        <div class="hd-answer__map">
+                            <div><strong>M3 &middot; Backend</strong><span><code>cmd/server/main.go</code> &middot; <code>internal/api/router.go</code></span></div>
+                            <div><strong>M4 &middot; Data Layer</strong><span><code>internal/data/store.go</code> &middot; <code>internal/data/json_store.go</code> &middot; <code>data/items.json</code></span></div>
+                            <div><strong>M5 &middot; Frontend</strong><span><code>web/vite.config.ts</code> &middot; <code>web/src/api/client.ts</code> &middot; <code>web/src/pages/Items.tsx</code></span></div>
+                            <div><strong>M6 &middot; Pages &amp; Nav</strong><span><code>web/src/App.tsx</code> &middot; <code>web/src/layouts/Layout.tsx</code> &middot; <code>web/src/pages/Dashboard.tsx</code> &middot; <code>web/src/pages/ItemDetail.tsx</code></span></div>
+                            <div><strong>M7 &middot; AI Chat</strong><span><code>internal/ai/chat.go</code> &middot; <code>web/src/pages/ChatPage.tsx</code></span></div>
+                            <div><strong>M8 &middot; Auth</strong><span><code>internal/middleware/middleware.go</code> &middot; <code>web/src/components/RolePicker.tsx</code> &middot; <code>internal/api/handlers.go</code></span></div>
+                            <div><strong>M9 &middot; Integrations</strong><span><code>internal/data/sqlite_store.go</code> &middot; <code>internal/integrations/graph.go</code></span></div>
+                            <div><strong>M10 &middot; Docker</strong><span><code>Dockerfile</code> &middot; SPA section of <code>internal/api/router.go</code></span></div>
+                        </div>
+                    </section>
+
                 </div>
 
                 <!-- Footer -->
@@ -178,6 +201,18 @@
 
     <footer class="site-footer" role="contentinfo">
         <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../pdf/">Briefs Library</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                        <li><a href="../pdf/TRAINING_CURRICULA_v5.pdf">Curricula (PDF)</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
             <div class="footer-bottom">
                 <span>UNCLASSIFIED</span>
                 <span>SSgt Jesse C. Morgan, MCD-Monterey</span>

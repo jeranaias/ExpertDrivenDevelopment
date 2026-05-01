@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="One-page printable instructor cheat sheet for the Week 5 Supervisor Orientation deck — covers both the 30-min briefing and the extended joint session: timing, the AI Review Drill script, the 'Yes' criteria workshop, anchor phrases, recovery cues.">
+    <title>Week 5 Instructor Cheat Sheet — Supervisor Orientation | EDD</title>
+    <link rel="stylesheet" href="../css/style.css">
+      <link rel="stylesheet" href="css/cheatsheet.css">
+      <style>
+          /* Week 5 deltas — 7-cell pacing strip (4 briefing + 3 joint),
+             briefing / joint variants, and the joint-session divider.
+             No --break / --build cells in this deck. */
+          .cs-pacing { grid-template-columns: repeat(7, 1fr); }
+          .cs-pacing__cell { font-size: 7.4pt; }
+          .cs-pacing__cell .t { font-size: 7.6pt; }
+          .cs-pacing__cell .n { font-size: 7.2pt; }
+
+          .cs-pacing__cell--joint { background: #f3f0ff; border-top: 2px solid #6f5cd1; }
+          .cs-pacing__cell--joint .t { color: #4a3aa8; }
+          .cs-pacing__cell--joint .t::before { content: "[J] "; color: #6f5cd1; font-weight: 800; }
+          .cs-pacing__cell--brief .t::before { content: "[B] "; color: var(--cs-scarlet); font-weight: 800; }
+
+          .cs-mod--brief .cs-mod__no { background: #fbecec; }
+          .cs-mod--brief .cs-mod__no .n { color: var(--cs-scarlet); }
+          .cs-mod--joint .cs-mod__no { background: #ece8ff; border-right: 1px solid #d2c8ff; }
+          .cs-mod--joint .cs-mod__no .n { color: #4a3aa8; }
+          .cs-mod--joint .cs-mod__name .kind { color: #4a3aa8; }
+
+          .cs-mode-divider {
+              display: flex;
+              align-items: center;
+              gap: 0.1in;
+              padding: 0.04in 0.1in;
+              background: #ece8ff;
+              color: #4a3aa8;
+              font-size: 7.6pt;
+              font-weight: 700;
+              text-transform: uppercase;
+              letter-spacing: 0.12em;
+              border-top: 1px solid #d2c8ff;
+              border-bottom: 1px solid #d2c8ff;
+          }
+          .cs-mode-divider .rule { flex: 1; height: 1px; background: #d2c8ff; }
+      </style>
+</head>
+<body class="site-wrapper">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Weekly Decks</a></li>
+                    <li aria-current="page">Week 5 — Instructor Cheat Sheet</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Week 5 Instructor Cheat Sheet</h1>
+            <p class="page-header__desc">A two-page printable reference card for the Course&nbsp;5 Supervisor Orientation deck. Covers <strong>both</strong> delivery modes: the 30-min briefing and the extended 2-hr joint session with builders. Designed to sit next to the deck so you never have to scrub back through 28 slides for the AI Review Drill or the &ldquo;Yes&rdquo; workshop brief.</p>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+
+            <div class="cheat-intro">
+                <p><strong>Print:</strong> <kbd>Ctrl</kbd>+<kbd>P</kbd> &rarr; Layout <em>Portrait</em>, Margins <em>Default</em>, Background graphics <em>on</em>. Two US-Letter pages. Site chrome and this preview note are hidden in print.</p>
+                <p><strong>Use:</strong> page 1 covers <em>both</em> modes &mdash; the 30-min briefing block <span style="color:#a30000;font-weight:700;">[B]</span> first, then the extended joint session block <span style="color:#4a3aa8;font-weight:700;">[J]</span>. Skip the [J] rows when you&rsquo;re running the briefing only. Page 2 is the anchor phrases, the recovery cues for senior-leader hijacks and policy drift, and the commitments you must walk out with from either mode.</p>
+                <div class="cheat-intro__pdf">
+                    <a class="btn btn--secondary btn--sm" href="pdf/week-5-cheatsheet.pdf" download>Download PDF</a>
+                    <span>Pre-rendered Letter-portrait two-pager &mdash; convenient for email or shared printers.</span>
+                </div>
+            </div>
+
+            <!-- ========================================================
+                 PAGE 1
+                 ======================================================== -->
+            <article class="cheat-page" aria-label="Week 5 cheat sheet, page 1">
+
+                <header class="cs-head">
+                    <div class="cs-head__week"><span class="num">5</span><span>Course 5 &middot; Supervisor Orientation<br>Instructor cheat sheet</span></div>
+                    <div class="cs-head__title">
+                        <h1>Supervisor Orientation</h1>
+                        <p class="sub">Permission culture, the apprentice problem, the delegation equation for leaders. One deck, two delivery modes &mdash; 30-min briefing or extended 2-hr joint session with builders.</p>
+                    </div>
+                    <div class="cs-head__meta">
+                        <div><strong>30 min</strong> briefing &middot; <strong>2 hr</strong> joint extension</div>
+                        <div>28 slides &middot; 0 platform switches</div>
+                        <div>Companion to <strong>week-5-supervisor.html</strong></div>
+                    </div>
+                </header>
+
+                <!-- Pacing strip — both modes -->
+                <section class="cs-pacing" aria-label="Session pacing strip — briefing then joint">
+                    <div class="cs-pacing__cell cs-pacing__cell--brief"><span class="t">0:00</span><span class="n">Why we&rsquo;re here</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--brief"><span class="t">0:05</span><span class="n">Permission culture</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--brief"><span class="t">0:15</span><span class="n">Apprentice + drill</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--brief"><span class="t">0:25</span><span class="n">3&times;3 &amp; close</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--joint"><span class="t">+0:30</span><span class="n">Live tool review</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--joint"><span class="t">+1:15</span><span class="n">&ldquo;Yes&rdquo; workshop</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--joint"><span class="t">+1:45</span><span class="n">Wrap &amp; commitments</span></div>
+                </section>
+
+                <!-- Module-by-module prompts and outcomes -->
+                <section class="cs-modules" aria-label="Per-segment prompts and outcomes">
+
+                    <div class="cs-mod cs-mod--brief">
+                        <div class="cs-mod__no"><span class="n">B1</span><span class="dur">5 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Why We&rsquo;re Here</span>
+                            <span class="clock">0:00&ndash;0:05</span>
+                            <span class="kind">[Briefing] opener &middot; no demo</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Eye contact, no tools.</strong> Anchor the &ldquo;5&ndash;10-year apprentice problem&rdquo; on the centerpiece slide.</li>
+                                <li><strong>Anchor (plant now, repeat at close):</strong> &ldquo;Permission culture &mdash; or you will lose the next generation to the units that grant it.&rdquo;</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Outcome &middot; framing</span>
+                            <span class="arch">Stakes named</span>
+                            <span class="desc">Supervisors hear this is a leadership problem, not a tool problem.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--brief">
+                        <div class="cs-mod__no"><span class="n">B2</span><span class="dur">10 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Permission Culture</span>
+                            <span class="clock">0:05&ndash;0:15</span>
+                            <span class="kind">[Briefing] core message</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>The Permission Question (3 min, read verbatim):</strong> &ldquo;Show of hands &mdash; in the last month, how many of you have <em>told a Marine no</em> when they wanted to use AI for a routine task? How many <em>did not know they were doing it</em>? Both are normal. Today is about making the call deliberately.&rdquo;</li>
+                                <li><strong>Walk the Delegation Equation</strong> for leaders: audience &middot; done &middot; risk &middot; verification rule.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Outcome &middot; vocabulary</span>
+                            <span class="arch">Permission decision named</span>
+                            <span class="desc">The Yes / No becomes a decision they own &mdash; not a default they drift into.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--brief">
+                        <div class="cs-mod__no"><span class="n">B3</span><span class="dur">10 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Apprentice Problem + AI Review Drill</span>
+                            <span class="clock">0:15&ndash;0:25</span>
+                            <span class="kind">[Briefing] decision exercise</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Drop the AI-drafted memo in chat</strong> at the M3 cue (3 hidden hallucinations pre-staged).</li>
+                                <li><strong>Brief (read verbatim):</strong> &ldquo;You have an AI-drafted memo from one of your Marines. It looks polished. Three of the facts in it are wrong &mdash; confidently, fluently wrong. You have three minutes. Find them.&rdquo;</li>
+                                <li><strong>Two minutes show-of-hands</strong> on what they caught.</li>
+                                <li><strong>Reveal the planted three:</strong> a fabricated date, a fabricated name, a re-stated regulation that does not exist.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Outcome &middot; verification habit</span>
+                            <span class="arch">Drill experienced first-hand</span>
+                            <span class="desc">Supervisors feel the verification rule from inside &mdash; the drill is the tool they hand to their Marines.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--brief">
+                        <div class="cs-mod__no"><span class="n">B4</span><span class="dur">5 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">3&times;3 Quick-Ref &amp; Close</span>
+                            <span class="clock">0:25&ndash;0:30</span>
+                            <span class="kind">[Briefing] commitment</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Hand each supervisor</strong> a printed copy of this cheat sheet and the 3&times;3 quick-ref slide.</li>
+                                <li><strong>Commitment close (read verbatim):</strong> &ldquo;Before you leave: one experiment you will run with one Marine in the next 14 days. Verbalise it now. We will follow up.&rdquo;</li>
+                                <li><strong>Force a written deliverable:</strong> if the room nods politely without committing, each supervisor types their experiment in chat before logging off. <em>No type, no exit.</em></li>
+                                <li><em>Repeat the anchor:</em> &ldquo;Permission culture &mdash; or you will lose the next generation to the units that grant it.&rdquo;</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Outcome &middot; commitments</span>
+                            <span class="arch">One experiment per supervisor</span>
+                            <span class="desc">Each supervisor leaves with a named Marine, a named task, and a 14-day clock running.</span>
+                        </div>
+                    </div>
+
+                    <!-- Joint extension divider -->
+                    <div class="cs-mode-divider"><span class="rule"></span><span>Joint session extension &middot; +90 min</span><span class="rule"></span></div>
+
+                    <div class="cs-mod cs-mod--joint">
+                        <div class="cs-mod__no"><span class="n">J1</span><span class="dur">45 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Live Tool Review w/ Builders</span>
+                            <span class="clock">+0:30&ndash;1:15</span>
+                            <span class="kind">[Joint] you moderate, builder drives</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Brief (read verbatim):</strong> &ldquo;Each builder &mdash; five minutes. Show your tool. Tell me one thing AI did well, one thing it got wrong. Supervisor: ask one hard question. We are not approving tools today; we are calibrating taste.&rdquo;</li>
+                                <li><strong>Builders drive their own screens.</strong> Supervisor sits beside them. You moderate &mdash; do <em>not</em> narrate the tool.</li>
+                                <li><em>Five-minute timer per builder;</em> rotate cleanly.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Outcome &middot; calibration</span>
+                            <span class="arch">Taste shared between builder &amp; supervisor</span>
+                            <span class="desc">Supervisor sees what their Marine actually shipped; the &ldquo;Yes&rdquo; criteria become specific.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--joint">
+                        <div class="cs-mod__no"><span class="n">J2</span><span class="dur">30 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">&ldquo;Yes&rdquo; Criteria Workshop</span>
+                            <span class="clock">+1:15&ndash;1:45</span>
+                            <span class="kind">[Joint] paired</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Brief (read verbatim):</strong> &ldquo;Pairs &mdash; supervisor and builder. Write three rules that earn a <em>Yes</em> from this supervisor for AI use, and two that earn a <em>No</em>. Specific. No platitudes. Bring back to the room.&rdquo;</li>
+                                <li><strong>Pairs work in breakouts</strong> (or side-by-side). Each pair returns with a written rule the supervisor will apply this quarter.</li>
+                                <li><em>Read three rules aloud</em> at the room return; tag any platitudes for re-write.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Deliverable &middot; written</span>
+                            <span class="arch">Yes / No rules per supervisor</span>
+                            <span class="desc">Three Yes + two No rules &mdash; published to the supervisor&rsquo;s section library by EOW.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--joint">
+                        <div class="cs-mod__no"><span class="n">J3</span><span class="dur">15 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Wrap &amp; Commitments</span>
+                            <span class="clock">+1:45&ndash;2:00</span>
+                            <span class="kind">[Joint] sign-off</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Each pair states</strong> their experiment and their Yes / No rules to the room.</li>
+                                <li><strong>Apprentice pipeline ask:</strong> &ldquo;Name one junior on your team who should attend Course&nbsp;2 (Builder Orientation) next cycle.&rdquo; Capture in chat.</li>
+                                <li><em>Repeat the anchor.</em></li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Outcome &middot; pipeline</span>
+                            <span class="arch">Names captured for next cycle</span>
+                            <span class="desc">One Course-2 candidate per supervisor; the apprentice pipeline visibly populated.</span>
+                        </div>
+                    </div>
+
+                </section>
+
+                <div class="cs-foot">
+                    <span class="lhs"><span class="mark" aria-hidden="true"></span><strong>EDD &middot; Week 5 cheat sheet</strong> &middot; page 1 of 2 &middot; pacing, prompts, deliverables &middot; <span style="color:#a30000;">[B]</span> briefing &middot; <span style="color:#4a3aa8;">[J]</span> joint</span>
+                    <span>Print landscape <em>off</em> &middot; portrait, default margins, background graphics on</span>
+                </div>
+            </article>
+
+            <!-- ========================================================
+                 PAGE 2
+                 ======================================================== -->
+            <article class="cheat-page" aria-label="Week 5 cheat sheet, page 2">
+
+                <header class="cs-head">
+                    <div class="cs-head__week"><span class="num">5</span><span>Course 5 &middot; Supervisor Orientation<br>Cheat sheet &middot; page 2</span></div>
+                    <div class="cs-head__title">
+                        <h1>Anchors, recovery, homework</h1>
+                        <p class="sub">The phrases you repeat in both modes, the recovery cues for senior-leader hijacks and policy drift, and the commitments you must walk out with from either mode.</p>
+                    </div>
+                    <div class="cs-head__meta">
+                        <div><strong>Use during:</strong> the AI Review Drill</div>
+                        <div><strong>Use during:</strong> any commitment wobble</div>
+                        <div>Companion to <strong>week-5-supervisor.html</strong></div>
+                    </div>
+                </header>
+
+                <!-- Pre-flight + hand-off -->
+                <section class="cs-box" aria-label="Pre-flight and live hand-off cues">
+                    <h2>Pre-flight &amp; hand-off cues<span class="lede">Done 24 h before; verified at T-15 min &middot; deck-led, minimal switching</span></h2>
+                    <ul>
+                        <li><strong>Pick the mode.</strong> Confirm with the senior leader: 30-min briefing only, or extended 2-hr joint with their builders? Adjust calendar invites accordingly.</li>
+                        <li><strong>Tabs &amp; PDFs.</strong> Deck (Week 5), this cheat sheet, the <em>Executive Brief PDF</em>, the <em>RAI Compliance Brief</em>, the Tools page.</li>
+                        <li><strong>If joint session:</strong> coordinate that each supervisor&rsquo;s builders bring <em>one</em> deployed tool to demo (5 min each). Pre-share the URL list.</li>
+                        <li><strong>Drill artefact.</strong> Have the AI-drafted memo (3 hidden hallucinations) loaded and ready to drop in chat at the [B3] cue.</li>
+                        <li><strong>Speaker notes.</strong> Press <kbd>N</kbd> to enable. Notes are tagged <em>[BRIEFING]</em> and <em>[JOINT]</em> &mdash; follow the right track for the chosen mode.</li>
+                        <li><strong>Briefing &middot; opener.</strong> No tool demos. Eye contact, anchor the &ldquo;5&ndash;10-year apprentice problem&rdquo; on the centerpiece slide.</li>
+                        <li><strong>Briefing &middot; close.</strong> Hand each supervisor a printed copy of this cheat sheet and the 3&times;3 quick-ref slide. Get verbal commitment to one experiment.</li>
+                        <li><strong>Joint &middot; tool review.</strong> Builders drive their own screens. Supervisor sits beside them. You moderate &mdash; do not narrate the tool.</li>
+                        <li><strong>Joint &middot; &ldquo;Yes&rdquo; workshop.</strong> Pairs work in breakouts (or side-by-side). Each pair returns with a written rule the supervisor will apply this quarter.</li>
+                    </ul>
+                </section>
+
+                <!-- Two-column: anchors + recovery -->
+                <div class="cs-cols">
+                    <section class="cs-box" aria-label="Anchor phrases">
+                        <h2>Anchor phrases<span class="lede">Plant in the opener; cite when you need them</span></h2>
+                        <ul>
+                            <li><strong>1. &ldquo;Permission culture &mdash; or you will lose the next generation to the units that grant it.&rdquo;</strong> Open with it; repeat at the close in both modes.</li>
+                            <li><strong>2. The supervision rule.</strong> A capable assistant whose work you check is not cheating &mdash; it is supervision. The cheating is shipping unverified output.</li>
+                            <li><strong>3. The Delegation Equation, for leaders.</strong> Audience &middot; done &middot; risk &middot; verification rule. If you can name them, you can grant the Yes.</li>
+                            <li><strong>4. The drill <em>is</em> the verification habit.</strong> RAI compliance is the rule; the AI Review Drill is the muscle.</li>
+                            <li><strong>5. Calibrate taste, don&rsquo;t approve tools.</strong> Joint mode is about taste, not tool sign-off. The artefact is the &ldquo;Yes&rdquo; criteria, not an approved list.</li>
+                            <li><strong>6. Specific, no platitudes.</strong> Yes/No rules must name what gets a Yes. &ldquo;Use it responsibly&rdquo; doesn&rsquo;t count.</li>
+                            <li><strong>7. Protect the apprentice pipeline.</strong> Name one junior for next-cycle Course&nbsp;2 before you leave the room.</li>
+                        </ul>
+                    </section>
+
+                    <section class="cs-box" aria-label="Recovery and pacing cues">
+                        <h2>Recovery &amp; pacing cues<span class="lede">When the room slips, this is the order of operations</span></h2>
+                        <ul>
+                            <li><strong>Supervisor objects: &ldquo;This is just cheating.&rdquo;</strong> Re-anchor on the Delegation Equation. &ldquo;A capable assistant whose work you check is not cheating &mdash; it is supervision. The cheating is shipping unverified output. Today is about the verification rule.&rdquo;</li>
+                            <li><strong>Senior leader hijacks the room with policy questions.</strong> Park them: &ldquo;Great question &mdash; logging it for the program lead.&rdquo; Stand up the parking lot in chat. Protect the drill and the commitment close.</li>
+                            <li><strong>Builders arrive without tools to demo (joint mode).</strong> Pivot to the Frontier Map &mdash; supervisor and builder fill it together. The Yes-criteria workshop still works without a live tool.</li>
+                            <li><strong>Room nods politely; no commitments at the close.</strong> Force a written deliverable: each supervisor types their one experiment in chat before they leave the call. <em>No type, no exit.</em></li>
+                            <li><strong>Compliance worry derails the drill.</strong> Hand them the RAI Compliance Brief PDF. Tell them this drill <em>is</em> compliance &mdash; it is the verification habit RAI requires.</li>
+                            <li><strong>Pacing valve (briefing).</strong> If you fall behind, compress the Permission Question to a single hand-raise. Never cut the drill or the commitment close.</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <!-- Homework -->
+                <section class="cs-box" aria-label="Homework / commitments">
+                    <h2>Commitments to issue before logoff<span class="lede">Both modes &mdash; do not let the room exit without these</span></h2>
+                    <ul>
+                        <li><strong>One experiment in 14 days</strong> with one Marine. Defined verification rule. Report back to the program lead with what they learned.</li>
+                        <li><strong>Read the Executive Brief PDF</strong> before the next staff meeting; bring one slide to share.</li>
+                        <li><strong>Joint mode only:</strong> publish the &ldquo;Yes&rdquo; criteria written with the builder to the section&rsquo;s shared library by EOW.</li>
+                        <li><strong>Protect the apprentice pipeline.</strong> Name one junior on the team who should attend Course&nbsp;2 (Builder Orientation) next cycle. Name them to the program lead.</li>
+                    </ul>
+                </section>
+
+                <div class="cs-foot">
+                    <span class="lhs"><span class="mark" aria-hidden="true"></span><strong>EDD &middot; Week 5 cheat sheet</strong> &middot; page 2 of 2 &middot; anchors, recovery, commitments</span>
+                    <span>Pair with the Week 5 Facilitator Pack for prep / hand-off / homework detail</span>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../pdf/">Briefs Library</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                        <li><a href="../pdf/TRAINING_CURRICULA_v5.pdf">Curricula (PDF)</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

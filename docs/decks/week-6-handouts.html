@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Week 6 Full-Stack Workshop facilitator hand-outs. Validated, paste-ready prompt blocks for every &quot;switch to editor&quot; moment in the Course 6 deck — Modules 2 through 10.">
+    <title>Week 6 Facilitator Hand-Outs | Full-Stack AI-Assisted Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* --- Hand-out specific styles ---
+           Inherits the EDD site stylesheet, then layers a "copy-block"
+           component identical in shape to the Week 4 hand-out page so
+           instructors get the same muscle memory. */
+
+        .handout-intro {
+            background: var(--color-bg-secondary);
+            border-left: 4px solid var(--color-scarlet);
+            padding: var(--space-lg) var(--space-xl);
+            margin-bottom: var(--space-xl);
+            border-radius: 0 var(--space-sm) var(--space-sm) 0;
+        }
+        .handout-intro p { margin: 0 0 var(--space-sm); }
+        .handout-intro p:last-child { margin-bottom: 0; }
+
+        .handout-toc {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-md);
+            margin: var(--space-xl) 0 var(--space-2xl);
+        }
+        .handout-toc a {
+            display: block;
+            padding: var(--space-md);
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--space-sm);
+            text-decoration: none;
+            color: var(--color-text-primary);
+            transition: border-color 0.15s, transform 0.15s;
+        }
+        .handout-toc a:hover {
+            border-color: var(--color-scarlet);
+            transform: translateY(-1px);
+        }
+        .handout-toc .slide-tag {
+            display: inline-block;
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-bold);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-scarlet);
+            margin-bottom: var(--space-xs);
+        }
+        .handout-toc .toc-title {
+            display: block;
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-md);
+        }
+        .handout-toc .toc-meta {
+            display: block;
+            margin-top: var(--space-xs);
+            font-size: var(--font-size-xs);
+            color: var(--color-text-secondary);
+        }
+
+        .copy-block {
+            border: 1px solid var(--color-border);
+            border-radius: var(--space-sm);
+            margin: var(--space-lg) 0 var(--space-2xl);
+            overflow: hidden;
+            background: var(--color-bg-primary);
+        }
+        .copy-block__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--color-bg-dark);
+            color: var(--color-text-inverse);
+            flex-wrap: wrap;
+        }
+        .copy-block__label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+        .slide-pill {
+            display: inline-block;
+            padding: 2px 10px;
+            background: var(--color-gold);
+            color: var(--color-text-primary);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-bold);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-radius: 999px;
+        }
+        .copy-block__title {
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-base);
+        }
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--color-scarlet);
+            color: var(--color-text-inverse);
+            border: 0;
+            border-radius: var(--space-sm);
+            font-family: var(--font-family-sans);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+            transition: background-color 0.15s;
+        }
+        .copy-btn:hover { background: var(--color-scarlet-dark); }
+        .copy-btn:focus-visible {
+            outline: 2px solid var(--color-gold);
+            outline-offset: 2px;
+        }
+        .copy-btn.is-copied { background: var(--color-success-border); }
+
+        .copy-block__cue {
+            padding: var(--space-md) var(--space-lg);
+            background: var(--color-warning-bg);
+            border-bottom: 1px solid var(--color-warning-border);
+            font-size: var(--font-size-sm);
+            color: var(--color-warning-text);
+        }
+        .copy-block__cue strong { color: var(--color-warning-text); }
+
+        .copy-block__body {
+            margin: 0;
+            padding: var(--space-lg);
+            white-space: pre-wrap;
+            font-family: var(--font-family-mono);
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-normal);
+            color: var(--color-text-primary);
+            background: var(--color-bg-code);
+            max-height: 520px;
+            overflow: auto;
+        }
+
+        .back-bar {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-md);
+            font-size: var(--font-size-sm);
+        }
+
+        .module-block { margin: var(--space-2xl) 0; }
+        .module-block > h2 {
+            border-bottom: 2px solid var(--color-scarlet);
+            padding-bottom: var(--space-xs);
+            margin-bottom: var(--space-sm);
+        }
+        .module-block > h2 .slide-pill {
+            margin-left: var(--space-sm);
+            vertical-align: middle;
+        }
+
+        /* ---------- PDF download UI (on-screen only) ---------------
+           Mirrors the student-handout `.handout-intro__pdf` pattern so
+           instructors get the same one-click download affordance on the
+           facilitator-side prompt hand-out. The PDF is pre-rendered by
+           `scripts/build-facilitator-pdfs.js` and lives at
+           `docs/decks/pdf/week-6-handouts.pdf`. Hidden in print so the
+           printed page never carries the download chrome. */
+        .handout-intro__pdf {
+            margin-top: var(--space-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+
+        /* The shared hand-out print rules (multi-page flow, ASCII-table
+           column alignment, hidden copy buttons / TOC) live in
+           docs/css/style.css @media print. The one-liner below hides
+           the PDF download chrome that's local to this page. */
+        @media print {
+            .handout-intro__pdf { display: none !important; }
+        }
+    </style>
+</head>
+<body class="site-wrapper">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Site Header -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/" class="active">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/" class="active">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="../resources/">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../courses/fullstack.html">Full-Stack AI-Assisted Development</a></li>
+                    <li aria-current="page">Facilitator Hand-Outs</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Week 6 Facilitator Hand-Outs</h1>
+            <p class="page-header__desc">
+                Validated, paste-ready prompts for every &ldquo;switch to editor&rdquo; moment in
+                the Course 6 deck. Each block has been run end-to-end against the
+                <a href="https://github.com/jeranaias/heywood-tbs"><code>heywood-inventory</code></a>
+                reference repository &mdash; pasting it into a fresh chat with
+                <code>my-staff-app/</code> as the working directory produces code shaped
+                like the matching reference file.
+            </p>
+            <div class="back-bar mt-md">
+                <a href="week-6-fullstack.html">&larr; Back to Week 6 Slide Deck</a>
+                <span aria-hidden="true">&middot;</span>
+                <a href="../courses/fullstack.html">Course 6 Instructor Page</a>
+                <span aria-hidden="true">&middot;</span>
+                <a href="../facilitator/week-6-fullstack.html">Week 6 Facilitator Pack</a>
+                <span aria-hidden="true">&middot;</span>
+                <a href="week-6-cheatsheet.html">Week 6 Cheat Sheet</a>
+            </div>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container container--narrow">
+
+            <div class="handout-intro">
+                <p><strong>How to use this page.</strong> Keep it open in a second browser tab the entire workshop. Each &ldquo;switch to editor&rdquo; slide in the Week 6 deck has a matching block (or three) below &mdash; click <em>Copy</em>, then paste into the AI chat that&rsquo;s sharing the screen. The slide-number pill on each block tells you exactly which deck slide it pairs with.</p>
+                <p><strong>The 3-minute rule.</strong> Run a prompt. If the output doesn&rsquo;t work in 3 minutes, paste the error back into the same chat. Don&rsquo;t manually debug AI code &mdash; that&rsquo;s the discipline you&rsquo;re modelling all day.</p>
+                <p><strong>Print fallback.</strong> If you lose your second screen, this page prints to clean pages with the copy buttons hidden &mdash; use <kbd>Ctrl</kbd>+<kbd>P</kbd> / <kbd>&#8984;</kbd>+<kbd>P</kbd>.</p>
+                <div class="handout-intro__pdf">
+                    <a class="btn btn--secondary btn--sm" href="pdf/week-6-handouts.pdf" download>Download PDF</a>
+                    <span>Pre-rendered Letter-portrait copy of every prompt block &mdash; drop into Teams or print before the workshop without opening the page first. Slide-number pills, cue lines, and code formatting are preserved so it stays paste-friendly.</span>
+                </div>
+            </div>
+
+            <nav class="handout-toc" aria-label="Hand-out jump links">
+                <a href="#module-2">
+                    <span class="slide-tag">Slide 13 &middot; Module 2</span>
+                    <span class="toc-title">Environment setup</span>
+                    <span class="toc-meta">Install + verify &middot; Scaffold</span>
+                </a>
+                <a href="#module-3">
+                    <span class="slide-tag">Slide 17 &middot; Module 3</span>
+                    <span class="toc-title">Backend from scratch</span>
+                    <span class="toc-meta">3 prompts</span>
+                </a>
+                <a href="#module-4">
+                    <span class="slide-tag">Slide 21 &middot; Module 4</span>
+                    <span class="toc-title">Data layer</span>
+                    <span class="toc-meta">3 prompts</span>
+                </a>
+                <a href="#module-5">
+                    <span class="slide-tag">Slide 26 &middot; Module 5</span>
+                    <span class="toc-title">Frontend from scratch</span>
+                    <span class="toc-meta">1 prompt</span>
+                </a>
+                <a href="#module-6">
+                    <span class="slide-tag">Slide 30 &middot; Module 6</span>
+                    <span class="toc-title">Pages &amp; navigation</span>
+                    <span class="toc-meta">3 prompts</span>
+                </a>
+                <a href="#module-7">
+                    <span class="slide-tag">Slide 34 &middot; Module 7</span>
+                    <span class="toc-title">AI chat integration</span>
+                    <span class="toc-meta">3 prompts</span>
+                </a>
+                <a href="#module-8">
+                    <span class="slide-tag">Slide 39 &middot; Module 8</span>
+                    <span class="toc-title">Auth &amp; middleware</span>
+                    <span class="toc-meta">3 prompts</span>
+                </a>
+                <a href="#module-9">
+                    <span class="slide-tag">Slide 43 &middot; Module 9</span>
+                    <span class="toc-title">External integrations</span>
+                    <span class="toc-meta">SQLite &middot; Microsoft Graph</span>
+                </a>
+                <a href="#module-10">
+                    <span class="slide-tag">Slide 47 &middot; Module 10</span>
+                    <span class="toc-title">Docker &amp; deployment</span>
+                    <span class="toc-meta">Dockerfile &middot; Azure (optional)</span>
+                </a>
+            </nav>
+
+            <!-- ===========================================================
+                 MODULE 2 — Slide 13 — Environment setup
+                 =========================================================== -->
+            <section id="module-2" class="module-block">
+                <h2>Module 2 &middot; Environment setup <span class="slide-pill">Slide 13 cue</span></h2>
+                <p>
+                    Two blocks. Paste the install prompt first &mdash; the AI walks each student
+                    through Go, Node.js, Git, and VS Code one at a time and pauses for the version
+                    output. Then, once the four versions print, paste the scaffold commands so the
+                    project skeleton lands in a single shell paste.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 13 &middot; Module 2 install</span>
+                            <span class="copy-block__title">Install + verify (paste into the AI in the terminal)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m2-install" aria-label="Copy install + verify prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;Prompt is in chat. Paste it as-is, but replace the OS placeholder with your actual OS. The AI will pause after each install &mdash; don&rsquo;t skip the version checks.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m2-install">I'm on &lt;Windows / macOS / Ubuntu&gt;. Walk me through installing the latest stable
+versions of Go, Node.js (LTS), Git, and VS Code, in that order. After each
+install, give me the one-liner that prints the version. Stop after each step
+and wait for me to paste the version output back before moving on.
+</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 13 &middot; Module 2 scaffold</span>
+                            <span class="copy-block__title">Scaffold the project skeleton (run in a fresh shell)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m2-scaffold" aria-label="Copy scaffold commands to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;Once all four versions print, run these five commands. This is shell, not chat. The directory is the runway &mdash; we light it up in Module 3.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m2-scaffold">mkdir my-staff-app &amp;&amp; cd my-staff-app
+go mod init my-staff-app
+mkdir -p cmd/server internal data
+npm create vite@latest web -- --template react-ts
+cd web &amp;&amp; npm install &amp;&amp; cd ..
+</pre>
+                </div>
+            </section>
+
+            <!-- ===========================================================
+                 MODULE 3 — Slide 17 — Backend from scratch
+                 =========================================================== -->
+            <section id="module-3" class="module-block">
+                <h2>Module 3 &middot; Backend from scratch <span class="slide-pill">Slide 17 cue</span></h2>
+                <p>
+                    Three prompts in sequence. After each one: run the server, hit it with curl,
+                    paste any error back to the AI before debugging. Don&rsquo;t paste prompt 2
+                    until prompt 1&rsquo;s output is printing on <code>localhost:8080</code>.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 17 &middot; Module 3 prompt 1</span>
+                            <span class="copy-block__title">Single-file server with health endpoint</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m3-p1" aria-label="Copy backend prompt 1 to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;Paste this. Save the file the AI gives you to <code>cmd/server/main.go</code>. Then run the <code>go run</code> command and the curl &mdash; both should succeed before you touch prompt 2.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m3-p1">I'm building a Go HTTP server in `cmd/server/main.go`. Use only the standard
+library (net/http, flag, log, time). Add:
+
+  - A `-port` string flag (default "8080") and a `-dev` bool flag (default false).
+  - A `GET /api/v1/health` handler that returns JSON `{"status":"ok","timestamp":"..."}`.
+  - Start the server with reasonable read/write timeouts.
+  - Log the listen address and dev flag at startup.
+
+Give me the entire file as one block I can paste, then the exact `go run`
+command to start it and the curl to verify.
+</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 17 &middot; Module 3 prompt 2</span>
+                            <span class="copy-block__title">Extract the router and add helpers</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m3-p2" aria-label="Copy backend prompt 2 to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;Same chat. Paste this. The AI should give you both files in full &mdash; replace what you have. Re-run, re-curl, then we go to prompt 3.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m3-p2">Refactor `cmd/server/main.go` so route registration lives in a new file
+`internal/api/router.go`. The new file should:
+
+  - Export a `SetupRouter() *http.ServeMux` function that takes any deps it
+    needs in a `Deps` struct.
+  - Export `writeJSON(w http.ResponseWriter, status int, body any)` and
+    `writeError(w http.ResponseWriter, status int, msg string)` helpers.
+  - Move the health handler to use `writeJSON`.
+
+In `cmd/server/main.go`, import the new package, build a `Deps`, call
+`SetupRouter`, and pass the result to `http.Server`. Show me both files
+in full.
+</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 17 &middot; Module 3 prompt 3</span>
+                            <span class="copy-block__title">Hardcoded items endpoint</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m3-p3" aria-label="Copy backend prompt 3 to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;Last backend prompt. Five items, military-flavoured. The point is to feel the loop &mdash; in Module 4 we&rsquo;ll replace this hardcoded array with a real store.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m3-p3">Add a `GET /api/v1/items` endpoint to `internal/api/router.go` that returns a
+hardcoded array of five military-flavored inventory items. Each item has:
+id (int), title, status ("open"/"in_progress"/"blocked"/"done"),
+priority ("low"/"medium"/"high"/"critical"), assigneeId, notes,
+createdAt, updatedAt.
+
+Use `writeJSON`. Hit it with curl after starting the server.
+</pre>
+                </div>
+            </section>
+
+            <!-- ===========================================================
+                 MODULE 4 — Slide 21 — Data layer
+                 =========================================================== -->
+            <section id="module-4" class="module-block">
+                <h2>Module 4 &middot; Data layer <span class="slide-pill">Slide 21 cue</span></h2>
+                <p>
+                    Three prompts. The first defines the contract (interface + JSON-backed
+                    implementation), the second seeds 20 realistic items, the third rewires
+                    the router to read from the store and adds <code>/items/{id}</code>.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 21 &middot; Module 4 prompt 1</span>
+                            <span class="copy-block__title">DataStore interface + JSONStore</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m4-p1" aria-label="Copy data layer prompt 1 to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;Two files in one prompt. The interface in <code>store.go</code>, the JSON implementation in <code>json_store.go</code>. Atomic-rename writes &mdash; that&rsquo;s the durability move.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m4-p1">Create `internal/data/store.go` defining:
+  - An `Item` struct with id, title, status, priority, assigneeId, notes,
+    createdAt, updatedAt (camelCase JSON tags, time.Time for timestamps).
+  - A `ListFilter` struct with Status, Priority, AssigneeID, Query.
+  - A `Store` interface with List, Get, Create, Update, Delete, Stats, Close.
+  - A `Stats` struct with Total, ByStatus, ByPriority, Recent (last 5 items).
+  - Const Status* and Priority* values; an exported `ErrNotFound`.
+
+Then create `internal/data/json_store.go` implementing `Store` against a JSON
+file. Read the file on `NewJSONStore(path)`, write the file on every mutation,
+guard with sync.RWMutex. Use atomic rename (write to .tmp then rename) for
+durability.
+
+Give me both files in full.
+</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 21 &middot; Module 4 prompt 2</span>
+                            <span class="copy-block__title">Seed data &mdash; 20 realistic items</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m4-p2" aria-label="Copy seed data prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;Save the AI&rsquo;s output to <code>data/items.json</code>. Open the file in VS Code &mdash; eyeball the variety. If every item is &lsquo;open / high&rsquo;, ask the AI for more spread.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m4-p2">Generate `data/items.json` containing 20 realistic military-flavored
+inventory items as a JSON array using the schema in store.go. Mix all four
+statuses and all four priorities. Distribute assigneeId across "admin",
+"staff", and "user". Use timestamps in April 2026.
+</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 21 &middot; Module 4 prompt 3</span>
+                            <span class="copy-block__title">Rewire the items endpoint and add <code>/items/{id}</code></span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m4-p3" aria-label="Copy router rewire prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;Same chat. The AI should hand back both files in full. After this paste, <code>curl /api/v1/items/3</code> must return one item; <code>curl /api/v1/items/999</code> must 404.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m4-p3">Update `internal/api/router.go`:
+  - Add `Store data.Store` to the `Deps` struct.
+  - Replace the hardcoded `/api/v1/items` handler with one that calls
+    `Store.List({})` and returns the result.
+  - Add `GET /api/v1/items/{id}` (use Go 1.22 path values + strconv.Atoi)
+    that calls `Store.Get(id)` and 404s on `data.ErrNotFound`.
+
+Update `cmd/server/main.go` to construct a `data.NewJSONStore("data/items.json")`
+and pass it via Deps. `defer store.Close()`.
+
+Show me both files in full.
+</pre>
+                </div>
+            </section>
+
+            <!-- ===========================================================
+                 MODULE 5 — Slide 26 — Frontend from scratch
+                 =========================================================== -->
+            <section id="module-5" class="module-block">
+                <h2>Module 5 &middot; Frontend from scratch <span class="slide-pill">Slide 26 cue</span></h2>
+                <p>
+                    One big prompt. Tailwind config + Vite proxy + typed API client + a Tailwind
+                    table that calls the backend on mount. This is the moment the data becomes
+                    visible to a human &mdash; have one student share their screen at the debrief.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 26 &middot; Module 5 single prompt</span>
+                            <span class="copy-block__title">Tailwind + proxy + items table</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m5" aria-label="Copy frontend prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;One prompt does the whole thing &mdash; config, client, table. Most failures here are PostCSS / Tailwind config or a missing proxy block. Both are 30-second AI fixes once you paste the error.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m5">In `web/`, set up Tailwind CSS (init config, content globs, autoprefixer,
+postcss.config.cjs). Add a `server.proxy` block to `vite.config.ts` that
+proxies `/api` to `http://localhost:8080` with `changeOrigin: true`.
+
+Create `web/src/api/client.ts` with a typed `Item` interface matching the Go
+struct, and an `api.listItems()` function using fetch.
+
+Replace `web/src/App.tsx` with a component that calls `api.listItems()` on
+mount and renders the items as a Tailwind-styled table with columns: ID,
+Title, Status, Priority, Assignee. Color-code status and priority chips.
+Use fetch with `credentials: "include"`.
+
+Run both servers and show me the page at localhost:5173.
+</pre>
+                </div>
+            </section>
+
+            <!-- ===========================================================
+                 MODULE 6 — Slide 30 — Pages & navigation
+                 =========================================================== -->
+            <section id="module-6" class="module-block">
+                <h2>Module 6 &middot; Pages &amp; navigation <span class="slide-pill">Slide 30 cue</span></h2>
+                <p>
+                    Three prompts. Routing + sidebar layout, then the item detail page, then
+                    the dashboard with stat cards. By the end of this module the React app
+                    looks like a product, not a demo.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 30 &middot; Module 6 prompt 1</span>
+                            <span class="copy-block__title">Routing + sidebar layout</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m6-p1" aria-label="Copy routing prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;Tailwind defaults only. Don&rsquo;t let the AI pick fonts or icons &mdash; that&rsquo;s a 20-minute rabbit hole. We want the structure first.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m6-p1">Install `react-router-dom`. Wrap `&lt;App /&gt;` in `&lt;BrowserRouter&gt;` in
+`main.tsx`. Create `web/src/layouts/Layout.tsx` with:
+
+  - A 240px dark sidebar (`bg-[#1a1f36]`) on the left.
+  - Sidebar links via `NavLink`: Dashboard, Items, Chat (Settings will come
+    later, conditionally).
+  - Active-link styling using NavLink's className-as-function.
+  - A header bar across the right column.
+  - `&lt;Outlet /&gt;` for nested routes.
+
+Then update `App.tsx` to declare routes: index → /dashboard, /dashboard,
+/items, /items/:id, /chat, /settings. Use Tailwind defaults; do not pick
+fonts or icons.
+</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 30 &middot; Module 6 prompt 2</span>
+                            <span class="copy-block__title">Item detail page</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m6-p2" aria-label="Copy item detail prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;Click any title in the table &mdash; you should land on the detail page. Back link should return you to the list. If it doesn&rsquo;t, paste the error.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m6-p2">Create `web/src/pages/ItemDetail.tsx` rendered at `/items/:id`. It should:
+
+  - useParams to read the id.
+  - Fetch via `api.getItem(id)` (add this method to client.ts).
+  - Show the title, ID, status chip, priority chip, assignee, dates, and notes.
+  - Have a "← Back to items" link to `/items`.
+
+In the items table, make every title cell a `&lt;Link to={`/items/${id}`}&gt;`.
+</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 30 &middot; Module 6 prompt 3</span>
+                            <span class="copy-block__title">Dashboard with stats + recent activity</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m6-p3" aria-label="Copy dashboard prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;Adds a backend stats endpoint, then a frontend dashboard. Four cards plus a recent-activity list. The Total card should match the count in the items table &mdash; if not, look at the filter.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m6-p3">Add a `GET /api/v1/stats` endpoint on the backend that calls Store.Stats().
+Add `api.stats()` to client.ts.
+
+Create `web/src/pages/Dashboard.tsx` with four stat cards (Total, Open,
+In progress, Blocked) and a "Recent activity" section listing the 5 recent
+items with status and priority chips, each linking to its detail page.
+Use Tailwind defaults.
+</pre>
+                </div>
+            </section>
+
+            <!-- ===========================================================
+                 MODULE 7 — Slide 34 — AI chat integration
+                 =========================================================== -->
+            <section id="module-7" class="module-block">
+                <h2>Module 7 &middot; AI chat integration <span class="slide-pill">Slide 34 cue</span></h2>
+                <p>
+                    Three prompts. Chat service against OpenAI, the <code>lookup_items</code>
+                    tool definition, then the React chat page with markdown. End by asking
+                    &ldquo;what are my high-priority items?&rdquo; &mdash; the answer should cite
+                    real items from the store and the server log should show a tool call.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 34 &middot; Module 7 prompt 1</span>
+                            <span class="copy-block__title">Chat service against OpenAI</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m7-p1" aria-label="Copy chat service prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;Confirm everyone has <code>OPENAI_API_KEY</code> exported in their shell before pasting this. The 4-iteration loop is what lets multi-step tool calls finish.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m7-p1">Create `internal/ai/chat.go` exposing:
+
+  type ChatService struct { ... }
+  func NewChatService(apiKey string, store data.Store) *ChatService
+  func (c *ChatService) Reply(ctx context.Context, userMessage, role string) (string, error)
+
+Use net/http to POST to `https://api.openai.com/v1/chat/completions` with
+model "gpt-4o". The system prompt instructs the AI to call tools rather than
+guess. Loop up to 4 times so multi-step tool calls terminate. Return the
+final assistant message content as markdown-ready text.
+
+Wire it into the router as `POST /api/v1/chat` taking `{"message":"..."}`
+and returning `{"reply":"..."}`. Init the service in main.go from
+`os.Getenv("OPENAI_API_KEY")`.
+</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 34 &middot; Module 7 prompt 2</span>
+                            <span class="copy-block__title"><code>lookup_items</code> tool definition</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m7-p2" aria-label="Copy tool definition prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;Same file. The role-based filter inside <code>runTool</code> is what makes RBAC actually reach the chat &mdash; we&rsquo;ll prove it works in Module 8.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m7-p2">In `internal/ai/chat.go`, define the OpenAI tools array with one tool:
+
+  Name: "lookup_items"
+  Description: "Query the inventory items database. Use this any time the
+    user asks about counts, statuses, priorities, or specific items.
+    Returns matching items and the total count."
+  Parameters: object with optional `status` (enum: open/in_progress/blocked/done),
+    `priority` (enum: low/medium/high/critical), `query` (string substring).
+
+Implement `runTool(call, role)` that parses the function arguments, builds a
+`data.ListFilter` (apply role-based filtering: if role == "user", set
+AssigneeID to "user"), calls `store.List(filter)`, and returns a JSON string
+of `{ count, items: [...] }` to send back to OpenAI.
+</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 34 &middot; Module 7 prompt 3</span>
+                            <span class="copy-block__title">Chat page with markdown rendering</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m7-p3" aria-label="Copy chat page prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;End the module by asking <em>&lsquo;what are my high-priority items?&rsquo;</em> &mdash; you should see real item titles in the answer and a tool call in the server log. That&rsquo;s the architecture diagram going from solid to lit.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m7-p3">Install react-markdown. Create `web/src/pages/ChatPage.tsx` with:
+
+  - A scrollable transcript area; assistant turns rendered through
+    &lt;ReactMarkdown&gt;, user turns plain.
+  - An input + Send button at the bottom.
+  - "Thinking…" placeholder while waiting on the response.
+  - An error banner above the input on failure.
+
+Add `api.chat(message)` to client.ts. End by asking "what are my
+high-priority items?" — confirm the answer cites real items from the
+database, and watch the server log a tool call.
+</pre>
+                </div>
+            </section>
+
+            <!-- ===========================================================
+                 MODULE 8 — Slide 39 — Auth & middleware
+                 =========================================================== -->
+            <section id="module-8" class="module-block">
+                <h2>Module 8 &middot; Auth &amp; middleware <span class="slide-pill">Slide 39 cue</span></h2>
+                <p>
+                    Three prompts. The middleware package, the auth endpoints + role picker,
+                    then role-based filtering across every items handler and the chat tool.
+                    The verification is visible: switch to User and the items list, dashboard
+                    counts, and chat answers all narrow together.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 39 &middot; Module 8 prompt 1</span>
+                            <span class="copy-block__title">Middleware package</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m8-p1" aria-label="Copy middleware prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;The Chain function order matters. Auth needs to run after CORS so the cookie is read on the actual request, not the preflight.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m8-p1">Create `internal/middleware/middleware.go` exporting:
+
+  - `Middleware = func(http.Handler) http.Handler`
+  - `Chain(h http.Handler, mws ...Middleware) http.Handler`
+  - `RequestLogger(dev bool)`, `SecurityHeaders()`, `CORS(dev bool)` (allow
+    http://localhost:5173 with credentials when dev=true), `Auth()` (reads a
+    "heywood_role" cookie, defaults to "user", stamps the role into request
+    context).
+  - A `RoleFrom(*http.Request) string` helper.
+  - Const RoleAdmin/RoleStaff/RoleUser and CookieRole.
+
+In main.go, wrap the mux with `middleware.Chain(mux, RequestLogger, SecurityHeaders,
+CORS, Auth)`.
+</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 39 &middot; Module 8 prompt 2</span>
+                            <span class="copy-block__title">Auth endpoints + frontend role picker</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m8-p2" aria-label="Copy auth endpoints prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;After this lands, the role picker appears in the header. Switch roles &mdash; the page reloads and the Settings link appears for Admin only.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m8-p2">Add two routes:
+  - `GET /api/v1/auth/me` returns `{ role, canAdmin, canCreate }`.
+  - `POST /api/v1/auth/switch` takes `{"role":"admin|staff|user"}`, validates,
+    sets the heywood_role cookie (Path=/, SameSite=Lax, MaxAge=7d).
+
+On the frontend, add `api.me()` and `api.switchRole(role)` to client.ts.
+Create `web/src/components/RolePicker.tsx` — a select bound to the current
+role; on change, call switchRole then `window.location.reload()`. Render it
+in the Layout header. Conditionally render the Settings sidebar link when
+`me.canAdmin` is true.
+</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 39 &middot; Module 8 prompt 3</span>
+                            <span class="copy-block__title">Role-based filtering across every endpoint</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m8-p3" aria-label="Copy RBAC prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;The verification is the demo. Switch to User &mdash; items list, dashboard counts, and chat answers should all narrow to the User&rsquo;s items together. If one of them doesn&rsquo;t, you have a leak.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m8-p3">In every items handler, call `middleware.RoleFrom(r)`:
+  - List: if role == "user", force ListFilter.AssigneeID = "user".
+  - Get: if role == "user" and item.AssigneeID != "user", return 404 (don't
+    leak existence).
+  - Create: forbid User entirely (403).
+  - Update: User can only update items where assigneeId == "user".
+  - Delete: Admin only.
+  - Stats: if role == "user", build the dashboard payload from
+    `Store.List({AssigneeID: "user"})` so the four stat cards and the
+    "Recent activity" feed match the table the User actually sees. Admins
+    keep the existing `Store.Stats()` fast path.
+
+In ai/chat.go's runTool, apply the same filter so the chat respects RBAC.
+Verify by switching to User in the role picker and watching the items list,
+the dashboard counts, and the chat answers all narrow together.
+</pre>
+                </div>
+            </section>
+
+            <!-- ===========================================================
+                 MODULE 9 — Slide 43 — External integrations
+                 =========================================================== -->
+            <section id="module-9" class="module-block">
+                <h2>Module 9 &middot; External integrations <span class="slide-pill">Slide 43 cue</span></h2>
+                <p>
+                    Two paths &mdash; pick one for the room. <strong>Path A (SQLite)</strong> is
+                    the default; it proves the <code>Store</code> interface earns its keep.
+                    <strong>Path B (Microsoft Graph)</strong> is for rooms that have the
+                    tenant-side env vars ready and want to wire calendar / mail. If the room
+                    is split, run Path A live and post Path B to chat for self-study.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 43 &middot; Module 9 path A</span>
+                            <span class="copy-block__title">SQLite store (default for the room)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m9-sqlite" aria-label="Copy SQLite store prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;Same <code>Store</code> interface, new implementation behind a build tag. Build with <code>-tags sqlite</code>, restart, POST a new item, restart again, GET to confirm it persisted. That&rsquo;s the Liskov win.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m9-sqlite">Create `internal/data/sqlite_store.go` (build tag `sqlite`) implementing the
+same Store interface against `database/sql` + the pure-Go `modernc.org/sqlite`
+driver. Auto-create the `items` table on startup with indexes on status,
+priority, assignee_id. Use parameterized queries.
+
+Add a stub `sqlite_stub.go` (build tag `!sqlite`) so the default build still
+compiles when modernc.org/sqlite is absent. Stub returns "sqlite store not
+compiled in" from NewSQLiteStore.
+
+Add a `-db` flag to main.go (default "json", accepts "sqlite"). Build with
+`go get modernc.org/sqlite &amp;&amp; go build -tags sqlite ./cmd/server`. Run with
+`./server -db sqlite -dev`. POST a new item, restart, GET to confirm
+persistence.
+</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 43 &middot; Module 9 path B</span>
+                            <span class="copy-block__title">Microsoft Graph (calendar + mail)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m9-graph" aria-label="Copy Microsoft Graph prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;This only fires if the four <code>GRAPH_*</code> env vars are set. The graceful nil-from-<code>New()</code> pattern is what keeps the dev-laptop build working when the integration isn&rsquo;t available.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m9-graph">Create `internal/integrations/graph.go`:
+  - Read GRAPH_TENANT_ID, GRAPH_CLIENT_ID, GRAPH_CLIENT_SECRET, GRAPH_USER
+    from env. Return nil from `New()` when env vars are absent.
+  - Support GRAPH_CLOUD = "commercial" (default) | "gcchigh" with the right
+    login + graph base URLs for each.
+  - OAuth2 client-credentials flow with token caching (refresh 1 minute
+    before expiry).
+  - Methods: `CalendarToday(ctx) ([]CalendarEvent, error)` and
+    `MailSummary(ctx) (MailSummary, error)`.
+
+In main.go, call integrations.New(); if non-nil, pass to Deps.Graph. In the
+router, register `/calendar/today` and `/mail/summary` only when Graph != nil.
+</pre>
+                </div>
+            </section>
+
+            <!-- ===========================================================
+                 MODULE 10 — Slide 47 — Docker & deployment
+                 =========================================================== -->
+            <section id="module-10" class="module-block">
+                <h2>Module 10 &middot; Docker &amp; deployment <span class="slide-pill">Slide 47 cue</span></h2>
+                <p>
+                    The capstone paste. One prompt produces the SPA fallback, the
+                    multi-stage Dockerfile, and the <code>.dockerignore</code>. The optional
+                    Azure block ships it to Azure Container Apps in four commands &mdash; only
+                    paste it if the room has a subscription wired up.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 47 &middot; Module 10 single prompt</span>
+                            <span class="copy-block__title">Multi-stage Dockerfile + SPA fallback</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m10" aria-label="Copy Dockerfile prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;After the build succeeds, kill your local dev servers, then reload <code>localhost:8080</code>. The whole app should still work &mdash; that proves the container is self-contained.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m10">Add a SPA fallback to `internal/api/router.go`: when `Deps.WebDir` is set,
+register a "/" handler that serves files from WebDir if they exist on disk,
+otherwise serves WebDir/index.html. Refuse to serve anything under /api/.
+
+Add a `-web` flag to main.go (default "web/dist") wired into Deps.WebDir.
+
+Create a multi-stage `Dockerfile` and `.dockerignore`:
+  - Stage 1 `node:20-alpine`: COPY web/, npm install, npm run build.
+  - Stage 2 `golang:1.22-alpine`: COPY ., go build with CGO_ENABLED=0.
+  - Stage 3 `alpine:3.20`: ca-certificates, non-root user, COPY the binary,
+    the dist/ from stage 1, and data/ from stage 2. EXPOSE 8080.
+    ENTRYPOINT ["/app/server", "-port=8080", "-web=/app/web/dist", "-data=/app/data/items.json"].
+
+Show me both files. Then:
+
+  docker build -t my-staff-app .
+  docker run -p 8080:8080 -e OPENAI_API_KEY=$OPENAI_API_KEY my-staff-app
+
+Open localhost:8080 — the whole app should work from one container. Stop
+your local dev servers and reload to prove it.
+</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Slide 47 &middot; Module 10 optional</span>
+                            <span class="copy-block__title">Azure Container Apps (optional, paste only if the room has a subscription)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-m10-azure" aria-label="Copy Azure Container Apps commands to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> &ldquo;Replace the four placeholders before pasting. <code>az login</code> first, in a real terminal, not the AI chat. The container apps URL it spits back is the live, public app.&rdquo;
+                    </div>
+<pre class="copy-block__body" id="copy-m10-azure">az login
+az acr build -r &lt;your-acr&gt; -t my-staff-app:latest .
+az containerapp create \
+  --name my-staff-app \
+  --resource-group &lt;rg&gt; \
+  --environment &lt;env&gt; \
+  --image &lt;your-acr&gt;.azurecr.io/my-staff-app:latest \
+  --target-port 8080 \
+  --ingress external \
+  --secrets openai-key=$OPENAI_API_KEY \
+  --env-vars OPENAI_API_KEY=secretref:openai-key
+</pre>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>
+                        Open-source AI-assisted development training for DoW personnel.
+                        Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../courses/">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="../toolkit/">Toolkit</a></li>
+                        <li><a href="../tools/">Tools</a></li>
+                        <li><a href="../resources/">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../pdf/">Briefs Library</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                        <li><a href="../pdf/TRAINING_CURRICULA_v5.pdf">Curricula (PDF)</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            // Mobile nav toggle (matches docs/courses/fullstack.html behaviour)
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function () {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+
+            // Copy-block buttons (identical to week-4-handouts.html)
+            document.querySelectorAll('.copy-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var targetId = btn.getAttribute('data-copy-target');
+                    var target = document.getElementById(targetId);
+                    if (!target) return;
+                    var text = target.textContent;
+                    var label = btn.querySelector('.copy-btn__label');
+                    var originalLabel = label ? label.textContent : '';
+
+                    var done = function () {
+                        btn.classList.add('is-copied');
+                        if (label) label.textContent = 'Copied';
+                        setTimeout(function () {
+                            btn.classList.remove('is-copied');
+                            if (label) label.textContent = originalLabel;
+                        }, 1800);
+                    };
+                    var fail = function () {
+                        if (label) label.textContent = 'Copy failed — select & ⌘/Ctrl+C';
+                        setTimeout(function () {
+                            if (label) label.textContent = originalLabel;
+                        }, 2500);
+                    };
+
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(text).then(done).catch(function () {
+                            try {
+                                var range = document.createRange();
+                                range.selectNodeContents(target);
+                                var sel = window.getSelection();
+                                sel.removeAllRanges();
+                                sel.addRange(range);
+                                document.execCommand('copy');
+                                sel.removeAllRanges();
+                                done();
+                            } catch (err) { fail(); }
+                        });
+                    } else {
+                        try {
+                            var range = document.createRange();
+                            range.selectNodeContents(target);
+                            var sel = window.getSelection();
+                            sel.removeAllRanges();
+                            sel.addRange(range);
+                            document.execCommand('copy');
+                            sel.removeAllRanges();
+                            done();
+                        } catch (err) { fail(); }
+                    }
+                });
+            });
+        })();
+    </script>
+
+</body>
+</html>

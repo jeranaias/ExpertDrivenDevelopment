@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Chat-paste-ready hand-out blocks for the Course 3 Platform Training session - Build #1 (centaur) Steps 1-4, Build #2 (cyborg) Iterations 1-5, and Build #3 declaration / decomposition / frontier-map seed.">
+      <title>Week 3 Facilitator Hand-Outs | Expert-Driven Development</title>
+      <link rel="stylesheet" href="../css/style.css">
+      <style>
+          /* --- Hand-out specific styles ---
+             Built on top of the site stylesheet so the page reads as a
+             regular EDD doc, with one extra "copy-block" component. */
+
+          .handout-intro {
+              background: var(--color-bg-secondary);
+              border-left: 4px solid var(--color-scarlet);
+              padding: var(--space-lg) var(--space-xl);
+              margin-bottom: var(--space-xl);
+              border-radius: 0 var(--space-sm) var(--space-sm) 0;
+          }
+          .handout-intro p { margin: 0 0 var(--space-sm); }
+          .handout-intro p:last-child { margin-bottom: 0; }
+
+          .handout-toc {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+              gap: var(--space-md);
+              margin: var(--space-xl) 0 var(--space-2xl);
+          }
+          .handout-toc a {
+              display: block;
+              padding: var(--space-md);
+              background: var(--color-bg-secondary);
+              border: 1px solid var(--color-border);
+              border-radius: var(--space-sm);
+              text-decoration: none;
+              color: var(--color-text-primary);
+              transition: border-color 0.15s, transform 0.15s;
+          }
+          .handout-toc a:hover {
+              border-color: var(--color-scarlet);
+              transform: translateY(-1px);
+          }
+          .handout-toc .slide-tag {
+              display: inline-block;
+              font-size: var(--font-size-xs);
+              font-weight: var(--font-weight-bold);
+              letter-spacing: 0.08em;
+              text-transform: uppercase;
+              color: var(--color-scarlet);
+              margin-bottom: var(--space-xs);
+          }
+          .handout-toc .toc-title {
+              display: block;
+              font-weight: var(--font-weight-semibold);
+              font-size: var(--font-size-md);
+          }
+
+          .copy-block {
+              border: 1px solid var(--color-border);
+              border-radius: var(--space-sm);
+              margin: var(--space-lg) 0 var(--space-2xl);
+              overflow: hidden;
+              background: var(--color-bg-primary);
+          }
+          .copy-block__header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              gap: var(--space-md);
+              padding: var(--space-md) var(--space-lg);
+              background: var(--color-bg-dark);
+              color: var(--color-text-inverse);
+              flex-wrap: wrap;
+          }
+          .copy-block__label {
+              display: flex;
+              align-items: center;
+              gap: var(--space-md);
+              flex-wrap: wrap;
+          }
+          .slide-pill {
+              display: inline-block;
+              padding: 2px 10px;
+              background: var(--color-gold);
+              color: var(--color-text-primary);
+              font-size: var(--font-size-xs);
+              font-weight: var(--font-weight-bold);
+              letter-spacing: 0.08em;
+              text-transform: uppercase;
+              border-radius: 999px;
+          }
+          .copy-block__title {
+              font-weight: var(--font-weight-semibold);
+              font-size: var(--font-size-base);
+          }
+          .copy-btn {
+              display: inline-flex;
+              align-items: center;
+              gap: var(--space-xs);
+              padding: var(--space-sm) var(--space-md);
+              background: var(--color-scarlet);
+              color: var(--color-text-inverse);
+              border: 0;
+              border-radius: var(--space-sm);
+              font-family: var(--font-family-sans);
+              font-size: var(--font-size-sm);
+              font-weight: var(--font-weight-semibold);
+              cursor: pointer;
+              transition: background-color 0.15s;
+          }
+          .copy-btn:hover { background: var(--color-scarlet-dark); }
+          .copy-btn:focus-visible {
+              outline: 2px solid var(--color-gold);
+              outline-offset: 2px;
+          }
+          .copy-btn.is-copied { background: var(--color-success-border); }
+
+          .copy-block__cue {
+              padding: var(--space-md) var(--space-lg);
+              background: var(--color-warning-bg);
+              border-bottom: 1px solid var(--color-warning-border);
+              font-size: var(--font-size-sm);
+              color: var(--color-warning-text);
+          }
+          .copy-block__cue strong { color: var(--color-warning-text); }
+
+          .copy-block__body {
+              margin: 0;
+              padding: var(--space-lg);
+              white-space: pre-wrap;
+              font-family: var(--font-family-mono);
+              font-size: var(--font-size-sm);
+              line-height: var(--line-height-normal);
+              color: var(--color-text-primary);
+              background: var(--color-bg-code);
+              max-height: 520px;
+              overflow: auto;
+          }
+
+          .back-bar {
+              display: flex;
+              gap: var(--space-md);
+              flex-wrap: wrap;
+              margin-bottom: var(--space-md);
+              font-size: var(--font-size-sm);
+          }
+
+          /* Print rules for hand-out copy-blocks (multi-page flow,
+             ASCII-table column alignment, hidden copy buttons / TOC)
+             live in docs/css/style.css @media print. */
+      </style>
+  </head>
+  <body class="site-wrapper">
+
+      <a href="#main-content" class="skip-link">Skip to main content</a>
+
+      <!-- Site Header -->
+      <header class="site-header" role="banner">
+          <div class="container">
+              <a href="../" class="site-brand">
+                  <span class="site-brand__mark" aria-hidden="true"></span>
+                  Expert-Driven Development
+              </a>
+              <nav aria-label="Primary navigation">
+                  <ul class="nav-list">
+                      <li><a href="../">Home</a></li>
+                      <li><a href="../courses/" class="active">Courses</a></li>
+                      <li><a href="../sop/">SOP</a></li>
+                      <li><a href="../toolkit/">Toolkit</a></li>
+                      <li><a href="../tools/">Tools</a></li>
+                      <li><a href="../resources/">Resources</a></li>
+                      <li><a href="../about.html">About</a></li>
+                  </ul>
+              </nav>
+              <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                  <span class="nav-toggle__icon" aria-hidden="true"></span>
+              </button>
+          </div>
+      </header>
+
+      <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+          <ul class="nav-list">
+              <li><a href="../">Home</a></li>
+              <li><a href="../courses/" class="active">Courses</a></li>
+              <li><a href="../sop/">SOP</a></li>
+              <li><a href="../toolkit/">Toolkit</a></li>
+              <li><a href="../tools/">Tools</a></li>
+              <li><a href="../resources/">Resources</a></li>
+              <li><a href="../about.html">About</a></li>
+          </ul>
+      </div>
+
+      <!-- Page Header -->
+      <section class="page-header">
+          <div class="container">
+              <nav aria-label="Breadcrumb">
+                  <ol class="breadcrumb">
+                      <li><a href="../">Home</a></li>
+                      <li><a href="../courses/">Courses</a></li>
+                      <li><a href="../courses/platform.html">Platform Training</a></li>
+                      <li aria-current="page">Facilitator Hand-Outs</li>
+                  </ol>
+              </nav>
+              <h1 class="page-header__title">Week 3 Facilitator Hand-Outs</h1>
+              <p class="page-header__desc">
+                  Twelve chat-paste-ready blocks for the Course 3 Platform Training session. Open this tab in a second window before the session, then copy each block into Microsoft Teams chat at the slide it pairs with.
+              </p>
+              <div class="back-bar mt-md">
+                  <a href="week-3-platform-training.html">&larr; Back to Week 3 Slide Deck</a>
+                  <span aria-hidden="true">&middot;</span>
+                  <a href="../courses/platform.html">Course 3 Instructor Page</a>
+              </div>
+          </div>
+      </section>
+
+      <main id="main-content" class="site-main">
+          <div class="container container--narrow">
+
+              <div class="handout-intro">
+                  <p><strong>How to use this page.</strong> Keep it open in a second browser tab. When the deck reaches the slide called out on each block&rsquo;s gold pill, click <em>Copy</em>, then paste into the Teams chat. Plain text is intentional &mdash; it survives the Teams paste cleanly and stays legible on a 13&Prime; laptop.</p>
+                  <p><strong>Print fallback.</strong> If you lose your second-screen, this page prints to one or two clean pages with the copy buttons hidden &mdash; use <kbd>Ctrl</kbd>+<kbd>P</kbd> / <kbd>&#8984;</kbd>+<kbd>P</kbd>.</p>
+                  <p><strong>Where these come from.</strong> Each block is lifted verbatim from the <a href="../courses/platform.html">Platform Training instructor page</a> &mdash; Build #1 leave-request workflow (Steps 1-4, centaur), Build #2 training tracker dashboard (Iterations 1-5, cyborg), and the Build #3 declaration / decomposition template / frontier-map starter table.</p>
+              </div>
+  
+              <nav class="handout-toc" aria-label="Hand-out jump links">
+                  <a href="#handout-b1-step1">
+                      <span class="slide-tag">Module 2 &middot; Build #1 Step 1</span>
+                      <span class="toc-title">Build #1 Step 1 - SharePoint list</span>
+                  </a>
+                <a href="#handout-b1-step2">
+                      <span class="slide-tag">Module 2 &middot; Build #1 Step 2</span>
+                      <span class="toc-title">Build #1 Step 2 - Customize the app</span>
+                  </a>
+                <a href="#handout-b1-step3">
+                      <span class="slide-tag">Module 2 &middot; Build #1 Step 3</span>
+                      <span class="toc-title">Build #1 Step 3 - Routing flow</span>
+                  </a>
+                <a href="#handout-b1-step4">
+                      <span class="slide-tag">Module 2 &middot; Build #1 Step 4</span>
+                      <span class="toc-title">Build #1 Step 4 - Approval action</span>
+                  </a>
+                <a href="#handout-b2-iter1">
+                      <span class="slide-tag">Module 4 &middot; Build #2 Iter 1</span>
+                      <span class="toc-title">Build #2 Iter 1 - Get something visible</span>
+                  </a>
+                <a href="#handout-b2-iter2">
+                      <span class="slide-tag">Module 4 &middot; Build #2 Iter 2</span>
+                      <span class="toc-title">Build #2 Iter 2 - Realize and pivot</span>
+                  </a>
+                <a href="#handout-b2-iter3">
+                      <span class="slide-tag">Module 4 &middot; Build #2 Iter 3</span>
+                      <span class="toc-title">Build #2 Iter 3 - Power BI dashboard</span>
+                  </a>
+                <a href="#handout-b2-iter4">
+                      <span class="slide-tag">Module 4 &middot; Build #2 Iter 4</span>
+                      <span class="toc-title">Build #2 Iter 4 - Fix conditional formatting</span>
+                  </a>
+                <a href="#handout-b2-iter5">
+                      <span class="slide-tag">Module 4 &middot; Build #2 Iter 5</span>
+                      <span class="toc-title">Build #2 Iter 5 - Days until due</span>
+                  </a>
+                <a href="#handout-b3-declaration">
+                      <span class="slide-tag">Module 5 &middot; Build #3 declaration</span>
+                      <span class="toc-title">Build #3 declaration template</span>
+                  </a>
+                <a href="#handout-b3-decomposition">
+                      <span class="slide-tag">Module 5 &middot; Decomposition</span>
+                      <span class="toc-title">Build #3 decomposition template</span>
+                  </a>
+                <a href="#handout-frontier-seed">
+                      <span class="slide-tag">Module 6 &middot; Frontier Map</span>
+                      <span class="toc-title">Frontier-map starter table</span>
+                  </a>
+              </nav>
+  
+              <!-- ===========================================================
+                   BLOCK 1 &mdash; Build #1 — Step 1
+                   =========================================================== -->
+              <article id="handout-b1-step1">
+                  <h2>Build #1 Step 1: SharePoint list setup</h2>
+                  <p>
+                      First prompt of the centaur build. Drop in chat at the start of Step 1. Students paste it into GenAI.mil to get the SharePoint list structure plus the CSV template.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Build #1 Step 1 slide</span>
+                              <span class="copy-block__title">Build #1 Step 1: SharePoint list setup</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w3-b1s1" aria-label="Copy Build #1 Step 1 to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Build #1 Step 1 in chat. Paste into GenAI.mil. We get the data model first - then build.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w3-b1s1">I need to create a SharePoint list called "Leave Requests" to track leave requests for 1st Battalion, 99th Marines. The list needs the following columns:
+
+  - Requester Name (person field)
+  - Leave Type (choice: Annual, Convalescent, Emergency, Special Liberty)
+  - Start Date (date)
+  - End Date (date)
+  - Days Requested (calculated: End Date minus Start Date)
+  - Justification (multiple lines of text)
+  - Status (choice: Pending, Approved, Denied, Cancelled)
+  - Approver (person field)
+  - Date Submitted (date and time, default to today)
+  - Date Actioned (date and time)
+
+  Give me a CSV template I can import into SharePoint to create this list, plus tell me which columns I need to add manually after import.</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 2 &mdash; Build #1 — Step 2
+                   =========================================================== -->
+              <article id="handout-b1-step2">
+                  <h2>Build #1 Step 2: customize the auto-generated app</h2>
+                  <p>
+                      Second prompt. After Integrate &rarr; Power Apps generates the app, use this prompt to add validation, auto-populate the requester, and a success notification.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Build #1 Step 2 slide</span>
+                              <span class="copy-block__title">Build #1 Step 2: customize the auto-generated app</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w3-b1s2" aria-label="Copy Build #1 Step 2 to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Step 2 in chat. Power Apps generated the app. Now we customize the EditForm with AI.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w3-b1s2">I used Integrate -> Power Apps -> Create an app from my "Leave Requests" SharePoint list. Power Apps auto-generated a browse screen, detail screen, and edit form. I need to customize the edit form:
+
+  - Auto-populate the Requester Name field with the current user (read-only)
+  - Validation: End Date must be after Start Date
+  - Validation: Justification must be at least 20 characters
+  - Show a success message after saving
+
+  The auto-generated form uses an EditForm control. Give me the formulas I need to add these customizations.</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 3 &mdash; Build #1 — Step 3
+                   =========================================================== -->
+              <article id="handout-b1-step3">
+                  <h2>Build #1 Step 3: routing logic in Power Automate</h2>
+                  <p>
+                      Third prompt. Adds the day-count routing logic (1-3 days, 4-10 days, more than 10 days) on top of the SharePoint trigger created via Integrate -> Power Automate.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Build #1 Step 3 slide</span>
+                              <span class="copy-block__title">Build #1 Step 3: routing logic in Power Automate</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w3-b1s3" aria-label="Copy Build #1 Step 3 to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Step 3 in chat. Trigger is wired. Add the conditional routing on top.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w3-b1s3">I created a Power Automate flow from my "Leave Requests" SharePoint list using Integrate -> Power Automate. The trigger "When an item is created" is already connected to the list. Now I need to add routing logic:
+
+  - 1-3 days: Route to Section Leader (sectionlead@1bn99marines.mil)
+  - 4-10 days: Route to Company Commander (co@1bn99marines.mil)
+  - More than 10 days: Route to Battalion Commander (bn-co@1bn99marines.mil)
+
+  The flow should update the Approver field in the SharePoint list with the appropriate person and send them an email notification with the request details. Give me the actions to add after the trigger.</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 4 &mdash; Build #1 — Step 4
+                   =========================================================== -->
+              <article id="handout-b1-step4">
+                  <h2>Build #1 Step 4: approval workflow</h2>
+                  <p>
+                      Fourth prompt. Replaces the placeholder email with a real Approve/Reject action that updates Status and Date Actioned based on the response.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Build #1 Step 4 slide</span>
+                              <span class="copy-block__title">Build #1 Step 4: approval workflow</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w3-b1s4" aria-label="Copy Build #1 Step 4 to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Step 4 in chat. Now the approver can act from email - and the list updates itself.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w3-b1s4">I need to add approval functionality to the Power Automate flow. After the approver is notified, they should receive an approval action (Approve/Reject) directly in their email or Teams. When they take action:
+
+  - If Approved: Update Status to "Approved", set Date Actioned to now
+  - If Rejected: Update Status to "Denied", set Date Actioned to now
+  - Include an optional comments field for the approver
+
+  Show me how to modify the flow to add this approval action.</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 5 &mdash; Build #2 — Iteration 1
+                   =========================================================== -->
+              <article id="handout-b2-iter1">
+                  <h2>Build #2 Iteration 1: get something visible</h2>
+                  <p>
+                      First cyborg prompt. Deliberately rough on purpose &mdash; the structure it produces will be wrong and that is the teaching moment.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Build #2 Iteration 1 slide</span>
+                              <span class="copy-block__title">Build #2 Iteration 1: get something visible</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w3-b2i1" aria-label="Copy Build #2 Iteration 1 to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Iteration 1 in chat. We start rough. Build first, evaluate, then iterate. That is the cyborg pattern.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w3-b2i1">I need a training tracker for 1st Battalion, 99th Marines. We need to track which Marines have completed which training events. Start with a SharePoint list that can store: Marine name, training event name, completion date, and status (Complete, Overdue, Scheduled). Give me the SharePoint list structure and a CSV I can import.</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 6 &mdash; Build #2 — Iteration 2
+                   =========================================================== -->
+              <article id="handout-b2-iter2">
+                  <h2>Build #2 Iteration 2: realize the problem and pivot</h2>
+                  <p>
+                      Second cyborg prompt. The student realises the row-per-event structure does not work for a dashboard view and asks to restructure to one row per Marine. Demonstrates the cyborg pivot.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Build #2 Iteration 2 slide</span>
+                              <span class="copy-block__title">Build #2 Iteration 2: realize the problem and pivot</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w3-b2i2" aria-label="Copy Build #2 Iteration 2 to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Iteration 2 in chat. Notice what just happened - we built, evaluated, pivoted. That is cyborg.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w3-b2i2">Wait, this structure will create a new row for every training event for every Marine. That's going to be a very long list. I need a dashboard where I can see all five training events for each Marine in one row. How should I restructure this?</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 7 &mdash; Build #2 — Iteration 3 (deliberate AI mistake)
+                   =========================================================== -->
+              <article id="handout-b2-iter3">
+                  <h2>Build #2 Iteration 3: build Power BI dashboard</h2>
+                  <p>
+                      Third cyborg prompt. The AI response will contain a deliberate failure mode (incomplete conditional formatting + meaningless pie chart). Do not warn the room &mdash; let students discover it and use Iteration 4 to fix it.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Build #2 Iteration 3 slide</span>
+                              <span class="copy-block__title">Build #2 Iteration 3: build Power BI dashboard (first draft)</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w3-b2i3" aria-label="Copy Build #2 Iteration 3 to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Iteration 3 in chat. Try the AI&rsquo;s instructions. If something feels wrong, that&rsquo;s the point.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w3-b2i3">Now I need a Power BI dashboard that connects to this SharePoint list and shows: A table with all Marines and their training status for each event, color-coded (green for Complete, red for Overdue, yellow for Scheduled). Give me the steps to create this in Power BI.</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 8 &mdash; Build #2 — Iteration 4
+                   =========================================================== -->
+              <article id="handout-b2-iter4">
+                  <h2>Build #2 Iteration 4: fix the conditional formatting</h2>
+                  <p>
+                      Fourth cyborg prompt. Students paste this AFTER discovering Iteration 3 did not work. This is the EDD reset prompt &mdash; specific about what failed, asks for the corrected steps.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Build #2 Iteration 4 slide</span>
+                              <span class="copy-block__title">Build #2 Iteration 4: fix the conditional formatting (after discovering the error)</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w3-b2i4" aria-label="Copy Build #2 Iteration 4 to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Iteration 4 in chat. Tell the AI exactly what failed. Watch how the next answer is sharper.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w3-b2i4">The conditional formatting isn't working. When I select Background Color and try to set rules, I don't see an option to set color based on the field value. I see options for "Rules" or "Field value" but neither seems to work the way you described. Give me the exact steps for Power BI Desktop to color-code cells based on their text value.</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 9 &mdash; Build #2 — Iteration 5
+                   =========================================================== -->
+              <article id="handout-b2-iter5">
+                  <h2>Build #2 Iteration 5: days until due</h2>
+                  <p>
+                      Fifth cyborg prompt. Adds DAX calculated columns to show "Due in X days" / "Overdue by X days" per training event. The annual recurrence rule lives in the prompt &mdash; the AI cannot invent it.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Build #2 Iteration 5 slide</span>
+                              <span class="copy-block__title">Build #2 Iteration 5: add days-until-due calculation</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w3-b2i5" aria-label="Copy Build #2 Iteration 5 to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Iteration 5 in chat. Annual recurrence is a domain rule - that is why it goes in the prompt.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w3-b2i5">I need to add a column that shows how many days until each training event is due. Each training event has an annual recurrence. For example, if a Marine completed Annual Rifle Qual on 15 Jan 2025, it's due again on 15 Jan 2026. I want the dashboard to show "Due in X days" or "Overdue by X days" for each event. How do I add this to the Power BI report?</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 10 &mdash; Build #3 — declaration
+                   =========================================================== -->
+              <article id="handout-b3-declaration">
+                  <h2>Build #3 declaration template</h2>
+                  <p>
+                      Drop this when each student is about to state their build aloud. Three short answers - what they are building, which mode and why, and where they expect frontier issues. Vague answers get sent back for revision.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Build #3 declaration slide</span>
+                              <span class="copy-block__title">Build #3 declaration (3 lines)</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w3-b3decl" aria-label="Copy Build #3 declaration template to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Build declaration in chat. Three lines. Speak yours aloud before you start typing prompts.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w3-b3decl">Before you write your first prompt, paste these three lines into your build doc and answer them.
+
+  1) What I am building (one sentence - tool type + user):
+     Example: "A vehicle dispatch tracker for the motor pool chief."
+     Bad: "Something to help with vehicles."
+     ____________________________________________________________________
+
+  2) Mode (centaur or cyborg) and why - tie the reason to the task:
+     Example: "Centaur, because the approval chain has strict business
+              rules that need upfront design."
+     Example: "Cyborg, because I do not yet know what the dashboard
+              should show - I need to see it to react to it."
+     ____________________________________________________________________
+
+  3) Frontier issues I expect (at least two concrete risks):
+     Example: "AI may not know our unit's leave approval thresholds."
+     Example: "SharePoint Person fields have caused errors before."
+     - 
+     - </pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 11 &mdash; Build #3 — decomposition
+                   =========================================================== -->
+              <article id="handout-b3-decomposition">
+                  <h2>Build #3 decomposition template</h2>
+                  <p>
+                      Paste right after declarations. Five-minute fill-in. This prevents the most common Build #3 failure: typing prompts before knowing what is being built.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Build #3 decomposition slide</span>
+                              <span class="copy-block__title">Build #3 decomposition template (5 questions)</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w3-b3decomp" aria-label="Copy Build #3 decomposition template to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Decomposition in chat. Five minutes. Answer all five before your first prompt.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w3-b3decomp">Decomposition Template - fill out before writing your first prompt.
+
+  1) Data:       What are you tracking? What columns does the list need?
+  2) Users:      Who creates the data? Who reads it? Who updates it?
+                 Who approves it?
+  3) Workflow:   What happens when a new item is created?
+                 Does it need routing or approval?
+  4) Output:     What does leadership need to see?
+                 Dashboard, report, email summary?
+  5) Tech stack: SharePoint list -> Power App (Integrate)
+                 -> Power Automate flow? Or simpler?
+
+  This takes 5 minutes and prevents the most common Build #3 failure:
+  starting to code before knowing what you are building.</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 12 &mdash; Module 6 — frontier map seed
+                   =========================================================== -->
+              <article id="handout-frontier-seed">
+                  <h2>Frontier-map starter table</h2>
+                  <p>
+                      Drop this at the start of the frontier-map wrap. The six starter rows are the patterns this group keeps hitting. Each student adds 2-3 rows from today specific to their own builds.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Module 6 frontier-map slide</span>
+                              <span class="copy-block__title">Frontier-map starter table (six rows)</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w3-frontier" aria-label="Copy frontier map starter to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Frontier table in chat. Add at least two rows from your own build today. Make them specific.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w3-frontier">Frontier Map - starter (6 example rows)
+
+  | Task Type                | AI Handles Well                                          | AI Handles Poorly                                  | Verification Needed                                  |
+  |--------------------------|----------------------------------------------------------|----------------------------------------------------|------------------------------------------------------|
+  | SharePoint list schema   | Column types, relationships, basic validation rules      | Complex calculated columns with nested IF logic    | Always verify column data types match actual data    |
+  | Power App form layout    | Basic screens, navigation, standard input controls       | Conditional visibility with 3+ dependencies        | Test every show/hide rule with real data             |
+  | Power Automate flows     | Simple approval flows, email notifications, conditions   | Error handling for nested conditions, retry logic  | Test all error paths, not just the happy path        |
+  | Data validation formulas | Required fields, format checks, simple lookups           | Cross-table validation, date range conflicts       | Check edge cases: empty fields, special characters   |
+  | Dashboard / reporting    | Basic charts, card layouts, simple filters               | Complex DAX measures, row-level security           | Verify numbers against source data manually          |
+  | UI text and labels       | Button labels, headers, help text                        | Context-sensitive errors, domain jargon            | Have an actual user read every message               |
+  | (your row 1)             |                                                          |                                                    |                                                      |
+  | (your row 2)             |                                                          |                                                    |                                                      |
+
+  A useful row names a specific task type (not a generic category), gives a concrete
+  example of what AI produced correctly, describes a specific failure with enough detail
+  to recognize it next time, and states a testable verification action ("verify the
+  calculated column return type is Number") - not just "check it."</pre>
+                  </div>
+              </article>
+  
+          </div>
+      </main>
+
+      <!-- Site Footer -->
+      <footer class="site-footer" role="contentinfo">
+          <div class="container">
+              <div class="footer-grid">
+                  <div class="footer-section">
+                      <h3 class="footer-section__title">Expert-Driven Development</h3>
+                      <p>
+                          Open-source AI-assisted development training for DoW personnel.
+                          Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                      </p>
+                  </div>
+                  <div class="footer-section">
+                      <h3 class="footer-section__title">Navigation</h3>
+                      <ul>
+                          <li><a href="../">Home</a></li>
+                          <li><a href="../courses/">Courses</a></li>
+                          <li><a href="../sop/">SOP</a></li>
+                          <li><a href="../toolkit/">Toolkit</a></li>
+                          <li><a href="../tools/">Tools</a></li>
+                          <li><a href="../resources/">Resources</a></li>
+                          <li><a href="../about.html">About</a></li>
+                      </ul>
+                  </div>
+                  <div class="footer-section">
+                      <h3 class="footer-section__title">Links</h3>
+                      <ul>
+                          <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                          <li><a href="../pdf/">Briefs Library</a></li>
+                          <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                          <li><a href="../pdf/TRAINING_CURRICULA_v5.pdf">Curricula (PDF)</a></li>
+                          <li>MIT License</li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="footer-bottom">
+                  <span>UNCLASSIFIED</span>
+                  <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+              </div>
+          </div>
+      </footer>
+
+      <script>
+          (function () {
+              // Mobile nav toggle (matches docs/courses/advanced.html behaviour)
+              var toggle = document.querySelector('.nav-toggle');
+              var mobileNav = document.getElementById('mobile-nav');
+              if (toggle && mobileNav) {
+                  toggle.addEventListener('click', function () {
+                      var expanded = this.getAttribute('aria-expanded') === 'true';
+                      this.setAttribute('aria-expanded', String(!expanded));
+                      mobileNav.classList.toggle('is-open');
+                  });
+              }
+
+              // Copy-block buttons
+              document.querySelectorAll('.copy-btn').forEach(function (btn) {
+                  btn.addEventListener('click', function () {
+                      var targetId = btn.getAttribute('data-copy-target');
+                      var target = document.getElementById(targetId);
+                      if (!target) return;
+                      var text = target.textContent;
+                      var label = btn.querySelector('.copy-btn__label');
+                      var originalLabel = label ? label.textContent : '';
+
+                      var done = function () {
+                          btn.classList.add('is-copied');
+                          if (label) label.textContent = 'Copied';
+                          setTimeout(function () {
+                              btn.classList.remove('is-copied');
+                              if (label) label.textContent = originalLabel;
+                          }, 1800);
+                      };
+                      var fail = function () {
+                          if (label) label.textContent = 'Copy failed \u2014 select & \u2318/Ctrl+C';
+                          setTimeout(function () {
+                              if (label) label.textContent = originalLabel;
+                          }, 2500);
+                      };
+
+                      if (navigator.clipboard && navigator.clipboard.writeText) {
+                          navigator.clipboard.writeText(text).then(done).catch(function () {
+                              // Fallback for older / restricted contexts
+                              try {
+                                  var range = document.createRange();
+                                  range.selectNodeContents(target);
+                                  var sel = window.getSelection();
+                                  sel.removeAllRanges();
+                                  sel.addRange(range);
+                                  document.execCommand('copy');
+                                  sel.removeAllRanges();
+                                  done();
+                              } catch (err) { fail(); }
+                          });
+                      } else {
+                          try {
+                              var range = document.createRange();
+                              range.selectNodeContents(target);
+                              var sel = window.getSelection();
+                              sel.removeAllRanges();
+                              sel.addRange(range);
+                              document.execCommand('copy');
+                              sel.removeAllRanges();
+                              done();
+                          } catch (err) { fail(); }
+                      }
+                  });
+              });
+          })();
+      </script>
+
+  </body>
+  </html>
+  

@@ -1,0 +1,191 @@
+/* =========================================================
+   EDD Class Links pages — shared stylesheet.
+   Six per-week pages list every shareable URL the matching
+   weekly deck cues the instructor to drop in Teams chat.
+   Each row: title, "when to use" context, the on-site URL,
+   an Open button, and a Copy-link button that copies the
+   absolute https://jeranaias.github.io/... URL.
+   Built on top of the site stylesheet (docs/css/style.css).
+   Mobile-friendly (single-column collapse below 720px).
+   ========================================================= */
+
+.links-tip {
+  background: var(--color-bg-secondary);
+  border-left: 4px solid var(--color-scarlet);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: 0 var(--space-sm) var(--space-sm) 0;
+  margin: var(--space-lg) 0 var(--space-xl);
+  font-size: var(--font-size-sm);
+}
+.links-tip code {
+  font-size: 0.95em;
+  background: var(--color-bg-code);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.links-section { margin: var(--space-xl) 0 var(--space-2xl); }
+.links-section > h2 {
+  margin: 0 0 var(--space-md);
+  padding-bottom: var(--space-xs);
+  border-bottom: 2px solid var(--color-border);
+}
+.links-section > p.links-section__lede {
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--space-md);
+}
+
+.links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-md);
+}
+
+.link-row {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--space-sm);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.link-row:hover {
+  border-color: var(--color-scarlet);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.link-row__main {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.link-row__title {
+  margin: 0 0 4px;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+.link-row__title a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.link-row__title a:hover {
+  color: var(--color-scarlet);
+  border-bottom-color: var(--color-scarlet);
+}
+.link-row__when {
+  margin: 0 0 6px;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+.link-row__when strong { color: var(--color-text-primary); }
+.link-row__url {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}
+.link-row__url code {
+  background: var(--color-bg-code);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 0.95em;
+}
+
+.link-row__actions {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  align-items: stretch;
+  justify-content: center;
+  min-width: 8.5rem;
+}
+.link-row__actions .btn { white-space: nowrap; text-align: center; }
+
+.copy-btn {
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid var(--color-scarlet);
+  background: var(--color-scarlet);
+  color: var(--color-text-inverse);
+  padding: 6px 14px;
+  border-radius: var(--space-xs);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.copy-btn:hover { background: var(--color-scarlet-dark); border-color: var(--color-scarlet-dark); }
+.copy-btn:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 2px; }
+.copy-btn.is-copied {
+  background: var(--color-success-bg);
+  color: var(--color-success-text);
+  border-color: var(--color-success-border);
+}
+.copy-btn.is-failed {
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  border-color: var(--color-warning-border);
+}
+
+/* Pending / not-on-site rows: lighter, no copy button. */
+.link-row--pending {
+  background: var(--color-bg-secondary);
+  border-style: dashed;
+}
+.link-row--pending:hover { border-color: var(--color-border); box-shadow: none; }
+.link-row--pending .link-row__title { color: var(--color-text-secondary); }
+.link-row--pending .link-row__when { color: var(--color-text-secondary); }
+.link-row__pending-tag {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-left: 6px;
+  vertical-align: 2px;
+}
+
+/* Mobile: stack the actions under the row content. */
+@media (max-width: 720px) {
+  .link-row {
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+  }
+  .link-row__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+  .link-row__actions .btn,
+  .link-row__actions .copy-btn { flex: 1 1 auto; }
+}
+
+/* "Quick chat-paste bundle" callout at the top of each page. */
+.links-bundle {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  margin: 0 0 var(--space-xl);
+}
+.links-bundle h3 {
+  margin: 0 0 6px;
+  font-size: var(--font-size-md);
+}
+.links-bundle p {
+  margin: 0 0 var(--space-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+.links-bundle p:last-child { margin-bottom: 0; }
+.links-bundle .copy-btn { margin-top: 4px; }

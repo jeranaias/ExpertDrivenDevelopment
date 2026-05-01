@@ -275,6 +275,22 @@ def add_title(slide, x, y, w, h, runs, *, color=COL_INK, size=36,
     return box
 
 
+def estimate_visible_lines(text: str, box_w_in: float, font_size_pt: float) -> int:
+    """Conservative visible-line count for bold sans display text.
+    Mirrors the helper used in scripts/build_pptx_week_6.py so that
+    downstream layout (rules, columns, body offsets) can be sized from the
+    actual line count instead of a fixed assumption."""
+    if not text:
+        return 1
+    char_w = 0.62 * float(font_size_pt) / 72.0
+    chars_per_line = max(6, int(float(box_w_in) / char_w))
+    total = 0
+    for chunk in str(text).split("\n"):
+        n = max(1, len(chunk))
+        total += (n + chars_per_line - 1) // chars_per_line
+    return max(1, total)
+
+
 # ============================================================
 # Bullet / paragraph rendering
 # ============================================================
@@ -364,9 +380,19 @@ def build_cover(slide, num, total, data):
                        font_size=12, bold=True, color=COL_GOLD)
         y += Inches(0.55)
     title_runs = data.get("title_runs") or [(data.get("title", ""), True, False)]
-    add_title(slide, x, y, Inches(12), Inches(2.6), title_runs,
-              color=COL_WHITE, size=80, line_spacing=1.0)
-    y += Inches(2.4)
+    title_text = runs_to_string(title_runs)
+    # Auto-shrink the cover H1 if it would wrap to 3+ visual lines, then size
+    # the title box and scarlet rule from the resulting line count so the rule
+    # never cuts through a descender.
+    title_size = 80
+    while title_size > 56 and estimate_visible_lines(title_text, 12.0, title_size) > 2:
+        title_size -= 8
+    title_lines = estimate_visible_lines(title_text, 12.0, title_size)
+    line_h = (title_size / 72.0) * 1.0  # line_spacing 1.0 below
+    title_h_in = max(1.4, line_h * title_lines + 0.25)
+    add_title(slide, x, y, Inches(12), Inches(title_h_in), title_runs,
+              color=COL_WHITE, size=title_size, line_spacing=1.0)
+    y += Inches(title_h_in + 0.10)
     # Scarlet rule
     add_rect(slide, x, y, Inches(1.6), Inches(0.06), COL_SCARLET)
     y += Inches(0.3)
@@ -432,12 +458,12 @@ def build_content(slide, num, total, data):
     if data.get("eyebrow"):
         add_eyebrow(slide, x, y, Inches(11), data["eyebrow"])
         y += Inches(0.40)
-    add_title(slide, x, y, Inches(11.4), Inches(1.6),
-              data.get("title_runs", []), size=34, line_spacing=1.05)
-    # Estimate title height based on character count
     title_text = runs_to_string(data.get("title_runs", []))
-    title_lines = max(1, (len(title_text) // 55) + 1)
-    y += Inches(0.60 * title_lines + 0.30)
+    title_lines = estimate_visible_lines(title_text, 11.4, 34)
+    title_h_in = max(0.85, (34 / 72.0) * 1.05 * title_lines + 0.20)
+    add_title(slide, x, y, Inches(11.4), Inches(title_h_in),
+              data.get("title_runs", []), size=34, line_spacing=1.05)
+    y += Inches(title_h_in + 0.20)
 
     body_top = y
     body_h = SLIDE_H - body_top - Inches(0.7)
@@ -556,11 +582,12 @@ def build_two(slide, num, total, data):
     if data.get("eyebrow"):
         add_eyebrow(slide, x, y, Inches(11), data["eyebrow"])
         y += Inches(0.4)
-    add_title(slide, x, y, Inches(11.4), Inches(1.5),
-              data.get("title_runs", []), size=30, line_spacing=1.1)
     title_text = runs_to_string(data.get("title_runs", []))
-    title_lines = max(1, (len(title_text) // 70) + 1)
-    y += Inches(0.55 * title_lines + 0.35)
+    title_lines = estimate_visible_lines(title_text, 11.4, 30)
+    title_h_in = max(0.80, (30 / 72.0) * 1.1 * title_lines + 0.20)
+    add_title(slide, x, y, Inches(11.4), Inches(title_h_in),
+              data.get("title_runs", []), size=30, line_spacing=1.1)
+    y += Inches(title_h_in + 0.25)
 
     col_w = Inches(5.4)
     gap = Inches(0.4)

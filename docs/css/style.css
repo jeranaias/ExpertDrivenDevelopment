@@ -1564,6 +1564,59 @@ legend {
     word-wrap: break-word;
   }
 
+  /* ----------------------------------------------------------
+     Hand-out copy-blocks: long ASCII-table / template pre's
+     used on every weekly hand-out page. Globalised here so all
+     hand-outs print consistently and tall blocks flow across
+     pages instead of leaving orphan blank pages.
+     ---------------------------------------------------------- */
+  .copy-btn,
+  .handout-toc,
+  .back-bar { display: none !important; }
+
+  .copy-block {
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+    border: 1px solid #999 !important;
+  }
+  .copy-block__header {
+    background: #1a1a1a !important;
+    color: #ffffff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  .copy-block__header,
+  .copy-block__header * { color: #ffffff !important; }
+  .copy-block__cue {
+    background: #fef7e0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  .copy-block__body {
+    background: #f4f3f0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    max-height: none !important;
+    overflow: visible !important;
+    /* pre-wrap + word-wrap: normal keeps ASCII-table rows on one
+       line when they fit; the 6.5pt font is sized so 130-char
+       rows (the widest table in the deck) fit a letter-portrait
+       page with 1.2cm margins. Prose templates still wrap at
+       word boundaries. */
+    white-space: pre-wrap !important;
+    word-wrap: normal !important;
+    overflow-wrap: normal !important;
+    font-size: 6.5pt !important;
+    line-height: 1.45 !important;
+    padding: 0.5em 0.6em !important;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+  }
+
   /* Tables */
   table {
     border-collapse: collapse;
@@ -1591,7 +1644,7 @@ legend {
 
   /* Page margins */
   @page {
-    margin: 2cm;
+    margin: 1.2cm;
   }
 }
 

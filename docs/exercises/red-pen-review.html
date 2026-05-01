@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Red Pen Review walkthrough — the EDD Course 1 / Week 1 Module 4 exercise. The six-question checklist, the three sample documents instructors stage, the verification hierarchy, and a downloadable Markdown reviewer worksheet.">
+    <title>Red Pen Review — Walkthrough &amp; Template | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="site-wrapper">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation">
+                <span class="nav-toggle__icon"></span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-nav" class="mobile-nav">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="../resources/">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <div class="page-header">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="../">Home</a></li>
+                <li><a href="./">Exercises</a></li>
+                <li>Red Pen Review</li>
+            </ul>
+            <h1 class="page-header__title">Red Pen Review</h1>
+            <p class="page-header__desc">The Course 1 / Week 1 Module 4 exercise — the most important 25 minutes of the AI Fluency Fundamentals course. Read three AI-generated documents, mark every claim you would <em>not</em> sign, and learn to match verification depth to the cost of being wrong.</p>
+        </div>
+    </div>
+
+    <main id="main-content" class="site-main">
+        <div class="section">
+            <div class="container">
+
+                <div class="callout callout--info mb-xl">
+                    <h2 class="callout__title">When this is cued in the deck</h2>
+                    <p>Slide 28 (the halfway-point break) and Slide 31 (Exercise: Red Pen Review) both cue the instructor to drop three AI-generated documents into the Microsoft Teams chat so students can mark them up. This page is the walkthrough for that exercise: the checklist, the staging guidance, the debrief patterns from Slides 32&ndash;36, and a printable Markdown reviewer worksheet you can download and re-use every cohort.</p>
+                </div>
+
+                <!-- Reviewer worksheet download -->
+                <div class="card mb-xl" id="worksheet">
+                    <span class="card__tag">Downloadable template &mdash; one per document under review</span>
+                    <h2 class="card__title mt-sm">Reviewer Worksheet (Markdown)</h2>
+                    <p>The printable companion. One copy per document under review. Captures the six-question checklist, a flagged-claims log, the &ldquo;what's right&rdquo; column so you don't throw the baby out, and a sign-off block. Open in any text editor or render in your favourite Markdown previewer.</p>
+
+                    <div class="template-display mt-lg">
+                        <div class="template-display__header">
+                            <h3 class="template-display__title">What's in the worksheet</h3>
+                        </div>
+                        <div class="template-display__content">
+<strong>Document under review</strong>
+  Title | Type | Reviewer | Date | AI tool used | Stakes (High / Med / Low)
+
+<strong>The six-question checklist</strong>
+  1.1 References &amp; citations exist
+  1.2 Facts &amp; statistics verifiable
+  1.3 Internal consistency (names / dates / units)
+  1.4 Procedural accuracy
+  1.5 Substance vs. style (filler vocabulary)
+  1.6 The signature test &mdash; would you sign it?
+
+<strong>Flagged claims log</strong>
+  Quoted claim | Category | Action (verify / strike / rewrite)
+
+<strong>What's right</strong>
+  Structure, format, boilerplate, verified passages
+
+<strong>Verification Hierarchy</strong>
+  High-stakes: Centaur. Medium: mixed. Low: Cyborg.
+
+<strong>Reviewer decision</strong>
+  Sign as-is | Sign after corrections | Send back for rework</div>
+                    </div>
+
+                    <div class="card__footer">
+                        <a href="../templates/red-pen-review-template.md" class="btn btn--primary btn--sm" download>Download Worksheet (Markdown)</a>
+                        <a href="../templates/red-pen-review-template.md" class="btn btn--secondary btn--sm" target="_blank" rel="noopener">View raw</a>
+                    </div>
+                </div>
+
+                <!-- The six-question checklist -->
+                <div class="card mb-xl" id="checklist">
+                    <span class="card__tag">In-class checklist &mdash; Slide 31</span>
+                    <h2 class="card__title mt-sm">The six-question checklist</h2>
+                    <p>This is the on-slide checklist students apply during the 10-minute individual mark-up. Project it on Slide 31 while they read.</p>
+                    <ol class="bullet-list">
+                        <li><strong>References &amp; citations.</strong> Every cited order, MARADMIN, form number, study, URL, or page reference &mdash; does it actually exist? Cited MARADMINs are a common AI fabrication.</li>
+                        <li><strong>Facts &amp; statistics.</strong> Every number, percentage, dollar figure, headcount, or date &mdash; can you verify it in a source you control? AI loves false precision: <em>98.7&percnt;</em> sounds verifiable; it usually isn't.</li>
+                        <li><strong>Internal consistency.</strong> Do names, ranks, dates, units, and units of measure agree everywhere they appear? Inconsistent attribution is a classic AI tell.</li>
+                        <li><strong>Procedural accuracy.</strong> Do the steps, sequence, and approval chain match how the process actually works in your unit? <em>Procedural gaps are the most dangerous category</em> &mdash; they require you to know how the process really works.</li>
+                        <li><strong>Substance vs. style.</strong> Strip out filler vocabulary &mdash; <em>tireless, unparalleled, selfless, robust</em>. Is there real content underneath, or only polished filler?</li>
+                        <li><strong>The signature test.</strong> Would you sign it and put it in front of your supervisor / commander / the awards board? If not, mark it.</li>
+                    </ol>
+                    <p class="mt-md"><strong>Rule of thumb:</strong> finding 3&ndash;4 issues per document is doing well. Finding 1 or 0 is the lesson &mdash; go back over the references and the numbers a second time.</p>
+                </div>
+
+                <!-- The three sample documents -->
+                <div class="card mb-xl" id="sample-docs">
+                    <span class="card__tag">Sample data &mdash; ready to drop in chat</span>
+                    <h2 class="card__title mt-sm">The three sample documents</h2>
+                    <p>A vetted, UNCLASSIFIED set of three sample documents lives on the site so you don't have to draft them from scratch the first time you run Module 4. Drop them in the Microsoft Teams chat at Slide 28 (break) and again at Slide 31 (exercise). The briefs below describe each document's shape and the planted errors &mdash; the answer key maps every error back to its debrief card on Slides 33&ndash;35.</p>
+
+                    <div class="card__footer">
+                        <a href="red-pen-review/doc-1-award-narrative.html" class="btn btn--primary btn--sm" target="_blank" rel="noopener">Doc 1 &middot; Award narrative</a>
+                        <a href="red-pen-review/doc-2-sop-excerpt.html" class="btn btn--primary btn--sm" target="_blank" rel="noopener">Doc 2 &middot; SOP excerpt</a>
+                        <a href="red-pen-review/doc-3-after-action.html" class="btn btn--primary btn--sm" target="_blank" rel="noopener">Doc 3 &middot; Training event after-action</a>
+                        <a href="red-pen-review/answer-key.html" class="btn btn--secondary btn--sm" target="_blank" rel="noopener">Instructor answer key</a>
+                    </div>
+
+                    <p class="mt-md"><strong>Why we ship them.</strong> Module 4 is the highest-stakes 25 minutes of Course 1. New instructors used to draft three documents from scratch the first time they ran it; the shipped set gives every cohort a known-good starting point and lets students who missed the live session re-run the exercise on their own.</p>
+
+                    <h3 class="mt-xl">What's in each document &mdash; the briefs</h3>
+                    <p>The briefs below are the recipe behind each shipped sample. They're useful when you want to swap in a unit-specific variant per cohort &mdash; the answer key tells you which planted errors each new variant still needs to contain.</p>
+
+                    <div class="template-display mt-lg">
+                        <div class="template-display__header">
+                            <h3 class="template-display__title">Doc 1 &middot; Award narrative &middot; brief</h3>
+                        </div>
+                        <div class="template-display__content">
+A NAM (or unit-appropriate award) recommendation for a junior Marine.
+Should READ polished and look reasonable on first pass.
+
+Plant naturally, don't force:
+  &middot; A confident percentage with no source ("47% reduction")
+  &middot; A specific man-hours claim ("156 man-hours per quarter")
+  &middot; A cited MARADMIN that does not exist
+  &middot; A bold superlative with no source ("highest mark in the regiment")
+  &middot; Filler adjectives: unparalleled, tireless, selfless
+
+Should be RIGHT:
+  &middot; NAM narrative format and conventions
+  &middot; Period of service and unit placement
+  &middot; "Reflects credit upon" closing boilerplate</div>
+                    </div>
+
+                    <div class="template-display mt-lg">
+                        <div class="template-display__header">
+                            <h3 class="template-display__title">Doc 2 &middot; SOP excerpt &middot; brief</h3>
+                        </div>
+                        <div class="template-display__content">
+A check-in / check-out SOP excerpt with reference numbers and step lists.
+Should look operational and complete.
+
+Plant naturally:
+  &middot; A reference order with a wrong revision letter ("MCO 1000.6A")
+  &middot; A plausible but invented form number ("CMC Form 4790/142")
+  &middot; Specific times and locations ("Bldg 1284, Rm 203", "Mondays at 0800")
+    that look real but were never grounded in source you provided
+  &middot; A procedural gap: omit the medical / dental / finance check-in stops
+    most units actually require
+
+Should be RIGHT:
+  &middot; SOP structure and numbering
+  &middot; Effective date and references section
+  &middot; A defensible 72-hour reporting window</div>
+                    </div>
+
+                    <div class="template-display mt-lg">
+                        <div class="template-display__header">
+                            <h3 class="template-display__title">Doc 3 &middot; Training event after-action &middot; brief</h3>
+                        </div>
+                        <div class="template-display__content">
+A five-paragraph after-action style summary with statistics and dates.
+Should look thorough.
+
+Plant naturally:
+  &middot; Statistics to one decimal place ("98.7%") &mdash; false precision
+  &middot; Inconsistent attribution &mdash; credit one billet for another's work
+  &middot; Positive but unverifiable claims: "highest in the regiment",
+    "first time in five years"
+  &middot; A recommendations section that just parrots the observations
+
+Should be RIGHT:
+  &middot; Five-paragraph after-action structure
+  &middot; Tone &mdash; descriptive, not adversarial
+  &middot; Useful as a starting structure once invented specifics are replaced</div>
+                    </div>
+
+                    <p class="mt-md"><strong>How to use the shipped samples:</strong> drop the three URLs above in the Microsoft Teams chat at Slide 28 (break) and again at Slide 31 (exercise) so latecomers have them, then run the debrief from Slides 33&ndash;35. The instructor answer key tells you which planted error each card on each slide is revealing.</p>
+                    <p><strong>If you'd rather stage your own:</strong> draft each document with M365 Copilot, Azure OpenAI, or any approved tool, using the briefs above as the recipe. Give the model thin context on purpose &mdash; that's how it produces the kind of organic errors students need to learn to spot. Save the three documents as PDFs or shared-doc links and drop them in chat alongside (or instead of) the shipped samples.</p>
+                </div>
+
+                <!-- Verification hierarchy -->
+                <div class="card mb-xl" id="hierarchy">
+                    <span class="card__tag">Slide 36 &mdash; the lesson under the exercise</span>
+                    <h2 class="card__title mt-sm">The Verification Hierarchy</h2>
+                    <p>Not every document deserves the Red Pen Review. Match review depth to the cost of being wrong.</p>
+                    <ul class="bullet-list">
+                        <li><strong>High-stakes documents</strong> (legal, personnel, financial) &mdash; line-by-line verification of every fact, reference, and number. <strong>Centaur mode.</strong> Human verifies everything. A personnel package is <em>always</em> here.</li>
+                        <li><strong>Medium-stakes documents</strong> (correspondence, reports, briefings) &mdash; spot-check key claims, verify references, check tone. <strong>Mixed mode.</strong></li>
+                        <li><strong>Low-stakes documents</strong> (first drafts, brainstorming, formatting) &mdash; quick review for obvious errors. <strong>Cyborg mode.</strong></li>
+                    </ul>
+                </div>
+
+                <!-- Debrief patterns -->
+                <div class="card mb-xl" id="debrief">
+                    <span class="card__tag">Slides 33&ndash;35 &mdash; debrief patterns</span>
+                    <h2 class="card__title mt-sm">What to surface in the debrief</h2>
+                    <p>Walk the room one document at a time. Take a count <em>before</em> revealing the cards on each debrief slide.</p>
+                    <ul class="bullet-list">
+                        <li><strong>Doc 1.</strong> Ask: &ldquo;Who flagged the percentage? Who flagged the cited MARADMIN?&rdquo; The made-up reference is the dangerous one &mdash; AI invents reference numbers in confident, plausible formats. Sign one and you've signed a fabrication.</li>
+                        <li><strong>Doc 2.</strong> Ask: &ldquo;Who looked up the form number? Who flagged the procedural gaps?&rdquo; Most rooms catch one but not both. Procedural gaps are the most dangerous category &mdash; there is no substitute for domain knowledge.</li>
+                        <li><strong>Doc 3.</strong> Ask: &ldquo;Who caught the wrong attribution? Who flagged the false precision?&rdquo; AI defaults to <em>98.7&percnt;</em> over <em>about 99&percnt;</em> because it sounds more authoritative &mdash; even when there is no data behind it.</li>
+                    </ul>
+                </div>
+
+                <!-- Where this fits -->
+                <div class="callout callout--warning">
+                    <h2 class="callout__title">Where this fits in the curriculum</h2>
+                    <p>The Red Pen Review is the <strong>Quality Judgment</strong> exercise in the Course 1 six-skill model. Its companion is the <a href="frontier-map.html">Frontier Map seed worksheet</a>, the Module 6 exercise that captures <em>where</em> AI fails for your unit so the failures compound into a shared map across Weeks 2&ndash;6. Together they turn a one-time exercise into a recurring habit.</p>
+                    <p class="mt-md">Open the live exercise in the deck: <a href="../decks/week-1-ai-fluency.html#slide-31">Week 1 deck &middot; Slide 31</a>. Promote in Teams chat using the <a href="../decks/links/week-1-ai-fluency.html">Week 1 Class Links</a> page.</p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>An open-source training methodology for AI-assisted tool development, created at the Marine Corps Detachment, Presidio of Monterey.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../courses/">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="../toolkit/">Toolkit</a></li>
+                        <li><a href="../tools/">Tools</a></li>
+                        <li><a href="../resources/">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../pdf/">Briefs Library</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                        <li><a href="../pdf/TRAINING_CURRICULA_v5.pdf">Curricula (PDF)</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function () {
+                    var expanded = toggle.getAttribute('aria-expanded') === 'true';
+                    toggle.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+                var navLinks = mobileNav.querySelectorAll('a');
+                for (var i = 0; i < navLinks.length; i++) {
+                    navLinks[i].addEventListener('click', function() {
+                        toggle.setAttribute('aria-expanded', 'false');
+                        mobileNav.classList.remove('is-open');
+                    });
+                }
+            }
+        })();
+    </script>
+
+</body>
+</html>

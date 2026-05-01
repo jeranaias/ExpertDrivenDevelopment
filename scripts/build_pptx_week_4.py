@@ -97,6 +97,21 @@ def _add_rect(slide, x, y, w, h, fill: RGBColor | None, line: RGBColor | None = 
     return shp
 
 
+def _estimate_visible_lines(text: str, box_w_in: float, font_size_pt: float) -> int:
+    """Conservative visible-line count for bold sans display text.
+    Mirrors the helper in scripts/build_pptx_week_6.py so downstream layout
+    (subheads, columns, timeboxes) can be sized from the actual line count."""
+    if not text:
+        return 1
+    char_w = 0.62 * float(font_size_pt) / 72.0
+    chars_per_line = max(6, int(float(box_w_in) / char_w))
+    total = 0
+    for chunk in str(text).split("\n"):
+        n = max(1, len(chunk))
+        total += (n + chars_per_line - 1) // chars_per_line
+    return max(1, total)
+
+
 def _add_text(slide, x, y, w, h, *,
               text: str = "",
               font: str = FONT_BODY,
@@ -391,16 +406,21 @@ def build_content_two_col(prs, *, title, subhead, left_h, left_items,
                           right_h, right_items, footer_left, page_no, notes,
                           tail: str | None = None):
     slide = _blank_slide(prs, fill=PAPER)
-    # Title
-    _add_text(slide, Inches(0.6), Inches(0.45), Inches(12.2), Inches(0.95),
+    # Title — size box and downstream subhead/body from actual line count.
+    title_lines = _estimate_visible_lines(title, 12.2, 34)
+    title_h_in = max(0.85, (34 / 72.0) * 1.05 * title_lines + 0.20)
+    _add_text(slide, Inches(0.6), Inches(0.45), Inches(12.2), Inches(title_h_in),
               text=title, font=FONT_DISPLAY, size=34, bold=True, color=INK,
               line_spacing=1.05)
+    sub_y = Inches(0.45 + title_h_in + 0.05)
     if subhead:
-        _add_text(slide, Inches(0.6), Inches(1.4), Inches(12.2), Inches(0.4),
+        _add_text(slide, Inches(0.6), sub_y, Inches(12.2), Inches(0.4),
                   text=subhead, font=FONT_LIGHT, size=16, italic=True, color=INK_MUTED)
-    body_top = Inches(2.0)
+        body_top = sub_y + Inches(0.55)
+    else:
+        body_top = sub_y + Inches(0.15)
+    body_h = Inches(7.0) - body_top - Inches(0.5)
     col_w = Inches(6.0)
-    body_h = Inches(4.6)
     # Left column header
     _add_text(slide, Inches(0.6), body_top, col_w, Inches(0.45),
               text=left_h, font=FONT_DISPLAY, size=18, bold=True, color=SCARLET)
@@ -423,13 +443,20 @@ def build_content_two_col(prs, *, title, subhead, left_h, left_items,
 def build_content_bullets(prs, *, title, subhead, items, footer_left, page_no,
                           notes, tail: str | None = None):
     slide = _blank_slide(prs, fill=PAPER)
-    _add_text(slide, Inches(0.6), Inches(0.45), Inches(12.2), Inches(0.95),
+    title_lines = _estimate_visible_lines(title, 12.2, 34)
+    title_h_in = max(0.85, (34 / 72.0) * 1.05 * title_lines + 0.20)
+    _add_text(slide, Inches(0.6), Inches(0.45), Inches(12.2), Inches(title_h_in),
               text=title, font=FONT_DISPLAY, size=34, bold=True, color=INK,
               line_spacing=1.05)
+    sub_y = Inches(0.45 + title_h_in + 0.05)
     if subhead:
-        _add_text(slide, Inches(0.6), Inches(1.4), Inches(12.2), Inches(0.4),
+        _add_text(slide, Inches(0.6), sub_y, Inches(12.2), Inches(0.4),
                   text=subhead, font=FONT_LIGHT, size=16, italic=True, color=INK_MUTED)
-    _add_bulleted_list(slide, Inches(0.6), Inches(1.95), Inches(12.2), Inches(4.4),
+        body_top = sub_y + Inches(0.55)
+    else:
+        body_top = sub_y + Inches(0.10)
+    _add_bulleted_list(slide, Inches(0.6), body_top, Inches(12.2),
+                       Inches(6.35) - body_top,
                        items=items, size=18, color=INK, line_spacing=1.3,
                        space_after=8)
     if tail:
@@ -563,15 +590,18 @@ def build_workshop(prs, *, tag, title, timebox, prompt, what_good,
     r = p.add_run(); r.text = tag.upper()
     r.font.name = FONT_DISPLAY; r.font.size = Pt(13); r.font.bold = True
     r.font.color.rgb = GOLD
-    # Title
-    _add_text(slide, Inches(0.6), Inches(1.05), Inches(12.0), Inches(1.3),
+    # Title — size box and downstream timebox/prompt from actual line count.
+    title_lines = _estimate_visible_lines(title, 12.0, 44)
+    title_h_in = max(1.0, (44 / 72.0) * 1.05 * title_lines + 0.20)
+    _add_text(slide, Inches(0.6), Inches(1.05), Inches(12.0), Inches(title_h_in),
               text=title, font=FONT_DISPLAY, size=44, bold=True, color=INK,
               line_spacing=1.05)
     # Timebox
-    _add_text(slide, Inches(0.6), Inches(2.4), Inches(12.0), Inches(0.5),
+    timebox_y = Inches(1.05 + title_h_in + 0.05)
+    _add_text(slide, Inches(0.6), timebox_y, Inches(12.0), Inches(0.4),
               text=timebox, font=FONT_DISPLAY, size=18, bold=True, color=SCARLET)
     # Prompt box
-    pb_top = Inches(3.1); pb_h = Inches(2.1)
+    pb_top = timebox_y + Inches(0.6); pb_h = Inches(2.1)
     _add_rect(slide, Inches(0.6), pb_top, Inches(12.2), pb_h, PAPER, line=INK)
     _add_text(slide, Inches(0.85), pb_top + Inches(0.1), Inches(11.6), Inches(0.35),
               text="PROMPT", font=FONT_DISPLAY, size=11, bold=True, color=SCARLET)
@@ -1093,13 +1123,22 @@ def assemble(prs: Presentation, slides: list[dict]) -> None:
     cols = _cols(sec)
     # Build a custom split: left big stat + source; right h3 + bullets
     stat_big = cols[0].find("div", class_="stat-big")
-    num = _normalize(stat_big.find("div", class_="num").get_text(" ", strip=True))
+    num_div = stat_big.find("div", class_="num")
+    # Pull off any inline-styled suffix span (e.g. "<span style='font-size:120px'>pp</span>")
+    # and render it at a reduced size so it doesn't read as part of the giant number.
+    suffix_span = num_div.find("span")
+    stat_suffix = ""
+    if suffix_span is not None:
+        stat_suffix = _normalize(suffix_span.get_text(" ", strip=True))
+        suffix_span.extract()
+    num = _normalize(num_div.get_text(" ", strip=True))
     label = _normalize(stat_big.find("div", class_="label").get_text(" ", strip=True))
     source = _normalize(stat_big.find("div", class_="source").get_text(" ", strip=True))
     right_h = _h(cols[1], "h3")
     right_items = _li_texts(cols[1])
     _build_stat_split(prs, title=_h(sec, "h2"),
-                      stat_num=num, stat_label=label, stat_source=source,
+                      stat_num=num, stat_suffix=stat_suffix,
+                      stat_label=label, stat_source=source,
                       right_h=right_h, right_items=right_items,
                       footer_left="Module 1 · Why It Matters", page_no=7,
                       notes=s["notes"])
@@ -1500,16 +1539,40 @@ def assemble(prs: Presentation, slides: list[dict]) -> None:
 # Custom layout helpers used by assemble()
 # ─────────────────────────────────────────────────────────────────────────────
 def _build_stat_split(prs, *, title, stat_num, stat_label, stat_source,
-                      right_h, right_items, footer_left, page_no, notes):
+                      right_h, right_items, footer_left, page_no, notes,
+                      stat_suffix: str = ""):
     slide = _blank_slide(prs, fill=PAPER)
-    _add_text(slide, Inches(0.6), Inches(0.45), Inches(12.2), Inches(1.1),
+    title_lines = _estimate_visible_lines(title, 12.2, 32)
+    title_h_in = max(0.85, (32 / 72.0) * 1.05 * title_lines + 0.20)
+    _add_text(slide, Inches(0.6), Inches(0.45), Inches(12.2), Inches(title_h_in),
               text=title, font=FONT_DISPLAY, size=32, bold=True, color=INK,
               line_spacing=1.05)
-    # Left: big stat
+    # Left: big stat. If a suffix span was present in the source HTML
+    # (e.g. "<span style='font-size:120px'>pp</span>"), render the number
+    # and suffix as two runs in the same line at distinct sizes so the
+    # suffix reads as a unit, not as an extra digit pair.
     _add_rect(slide, Inches(0.6), Inches(1.85), Inches(6.0), Inches(4.8), PAPER_WARM)
-    _add_text(slide, Inches(0.85), Inches(2.0), Inches(5.5), Inches(2.2),
-              text=stat_num, font=FONT_DISPLAY, size=120, bold=True, color=SCARLET,
-              line_spacing=0.95)
+    if stat_suffix:
+        box = slide.shapes.add_textbox(Inches(0.85), Inches(2.0),
+                                       Inches(5.5), Inches(2.2))
+        box.fill.background(); box.line.fill.background()
+        tf = box.text_frame
+        tf.word_wrap = True
+        tf.margin_left = Inches(0.05); tf.margin_right = Inches(0.05)
+        tf.margin_top = Inches(0.02); tf.margin_bottom = Inches(0.02)
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.LEFT
+        p.line_spacing = 0.95
+        r1 = p.add_run(); r1.text = stat_num
+        r1.font.name = FONT_DISPLAY; r1.font.size = Pt(120)
+        r1.font.bold = True; r1.font.color.rgb = SCARLET
+        r2 = p.add_run(); r2.text = stat_suffix
+        r2.font.name = FONT_DISPLAY; r2.font.size = Pt(56)
+        r2.font.bold = True; r2.font.color.rgb = SCARLET
+    else:
+        _add_text(slide, Inches(0.85), Inches(2.0), Inches(5.5), Inches(2.2),
+                  text=stat_num, font=FONT_DISPLAY, size=120, bold=True,
+                  color=SCARLET, line_spacing=0.95)
     _add_text(slide, Inches(0.85), Inches(4.4), Inches(5.5), Inches(1.6),
               text=stat_label, font=FONT_BODY, size=14, color=INK, line_spacing=1.35)
     _add_text(slide, Inches(0.85), Inches(6.05), Inches(5.5), Inches(0.4),
@@ -1528,12 +1591,19 @@ def _build_quad(prs, *, title, subhead, quads, footer_left, page_no, notes,
                 small: bool = False):
     """2×2 grid; each cell has h3 + bullets/text."""
     slide = _blank_slide(prs, fill=PAPER)
-    _add_text(slide, Inches(0.6), Inches(0.45), Inches(12.2), Inches(0.7),
-              text=title, font=FONT_DISPLAY, size=30, bold=True, color=INK)
+    title_lines = _estimate_visible_lines(title, 12.2, 30)
+    title_h_in = max(0.7, (30 / 72.0) * 1.05 * title_lines + 0.18)
+    _add_text(slide, Inches(0.6), Inches(0.45), Inches(12.2), Inches(title_h_in),
+              text=title, font=FONT_DISPLAY, size=30, bold=True, color=INK,
+              line_spacing=1.05)
+    sub_y = Inches(0.45 + title_h_in + 0.02)
     if subhead:
-        _add_text(slide, Inches(0.6), Inches(1.15), Inches(12.2), Inches(0.4),
+        _add_text(slide, Inches(0.6), sub_y, Inches(12.2), Inches(0.4),
                   text=subhead, font=FONT_LIGHT, size=14, italic=True, color=INK_MUTED)
-    grid_top = Inches(1.65); grid_h = Inches(5.2)
+        grid_top = sub_y + Inches(0.50)
+    else:
+        grid_top = sub_y + Inches(0.10)
+    grid_h = Inches(7.0) - grid_top - Inches(0.65)
     gap = Inches(0.2)
     cell_w = (Inches(12.2) - gap) / 2
     n = len(quads)
@@ -1567,12 +1637,19 @@ def _build_quad(prs, *, title, subhead, quads, footer_left, page_no, notes,
 def _build_quote_bullets(prs, *, title, subhead, quote, items, footer_left,
                           page_no, notes):
     slide = _blank_slide(prs, fill=PAPER)
-    _add_text(slide, Inches(0.6), Inches(0.45), Inches(12.2), Inches(0.85),
-              text=title, font=FONT_DISPLAY, size=32, bold=True, color=INK)
+    title_lines = _estimate_visible_lines(title, 12.2, 32)
+    title_h_in = max(0.85, (32 / 72.0) * 1.05 * title_lines + 0.18)
+    _add_text(slide, Inches(0.6), Inches(0.45), Inches(12.2), Inches(title_h_in),
+              text=title, font=FONT_DISPLAY, size=32, bold=True, color=INK,
+              line_spacing=1.05)
+    sub_y = Inches(0.45 + title_h_in + 0.02)
     if subhead:
-        _add_text(slide, Inches(0.6), Inches(1.3), Inches(12.2), Inches(0.4),
+        _add_text(slide, Inches(0.6), sub_y, Inches(12.2), Inches(0.4),
                   text=subhead, font=FONT_LIGHT, size=14, italic=True, color=INK_MUTED)
-    qy = Inches(1.85); qh = Inches(2.0)
+        qy = sub_y + Inches(0.55)
+    else:
+        qy = sub_y + Inches(0.10)
+    qh = Inches(2.0)
     _add_rect(slide, Inches(0.6), qy, Inches(12.2), qh, PAPER_WARM)
     _add_rect(slide, Inches(0.6), qy, Inches(0.12), qh, SCARLET)
     _add_text(slide, Inches(1.0), qy + Inches(0.25), Inches(11.6), qh - Inches(0.5),
@@ -1588,12 +1665,20 @@ def _build_quote_bullets(prs, *, title, subhead, quote, items, footer_left,
 def _build_bullets_quote(prs, *, title, subhead, items, quote, footer_left,
                           page_no, notes):
     slide = _blank_slide(prs, fill=PAPER)
-    _add_text(slide, Inches(0.6), Inches(0.45), Inches(12.2), Inches(0.85),
-              text=title, font=FONT_DISPLAY, size=32, bold=True, color=INK)
+    title_lines = _estimate_visible_lines(title, 12.2, 32)
+    title_h_in = max(0.85, (32 / 72.0) * 1.05 * title_lines + 0.18)
+    _add_text(slide, Inches(0.6), Inches(0.45), Inches(12.2), Inches(title_h_in),
+              text=title, font=FONT_DISPLAY, size=32, bold=True, color=INK,
+              line_spacing=1.05)
+    sub_y = Inches(0.45 + title_h_in + 0.02)
     if subhead:
-        _add_text(slide, Inches(0.6), Inches(1.3), Inches(12.2), Inches(0.4),
+        _add_text(slide, Inches(0.6), sub_y, Inches(12.2), Inches(0.4),
                   text=subhead, font=FONT_LIGHT, size=14, italic=True, color=INK_MUTED)
-    _add_bulleted_list(slide, Inches(0.6), Inches(1.85), Inches(12.2), Inches(2.6),
+        bullets_y = sub_y + Inches(0.55)
+    else:
+        bullets_y = sub_y + Inches(0.10)
+    _add_bulleted_list(slide, Inches(0.6), bullets_y, Inches(12.2),
+                       Inches(4.55) - bullets_y,
                        items=items, size=16, color=INK, line_spacing=1.3,
                        space_after=6)
     qy = Inches(4.65); qh = Inches(2.1)

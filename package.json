@@ -4,7 +4,12 @@
   "private": true,
   "description": "Build tooling for the Expert-Driven Development static site (PDF generation, etc).",
   "scripts": {
-    "build:facilitator-pdfs": "node scripts/build-facilitator-pdfs.js"
+    "build:facilitator-pdfs": "node scripts/build-facilitator-pdfs.js",
+    "build:handout-pdfs": "node scripts/build-handout-pdfs.js",
+    "build:cheatsheet-pdfs": "node scripts/build-cheatsheet-pdfs.js",
+    "build:briefs-library": "node scripts/build-briefs-library.js",
+    "build:week-6-handouts": "node scripts/build-week-6-handouts.js",
+    "verify:facilitator-a4": "node scripts/verify-facilitator-a4.js"
   },
   "dependencies": {
     "@replit/connectors-sdk": "^0.4.0",

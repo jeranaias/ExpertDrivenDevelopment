@@ -399,6 +399,27 @@ def add_foot(slide, course_label: str, slide_num: int, total: int,
     )
 
 
+def _estimate_visible_lines(text: str, box_w_in: float, font_size_pt: float) -> int:
+    """Conservative visible-line count for bold sans display text.
+    Mirrors the helper in scripts/build_pptx_week_6.py so head layout (badge
+    pill, rule, body_top) can be sized from the actual title line count."""
+    if not text:
+        return 1
+    char_w = 0.62 * float(font_size_pt) / 72.0
+    chars_per_in = max(6, int(float(box_w_in) / char_w))
+    total = 0
+    for chunk in str(text).split("\n"):
+        n = max(1, len(chunk))
+        total += (n + chars_per_in - 1) // chars_per_in
+    return max(1, total)
+
+
+def _title_plain_text(title) -> str:
+    if isinstance(title, str):
+        return title
+    return "".join(text for text, _ in title)
+
+
 def add_slide_head(slide, badge_text: str, badge_kind: str, title: str | list):
     """Render a content-slide head: pill badge + title row + thin rule."""
     # Badge
@@ -434,14 +455,21 @@ def add_slide_head(slide, badge_text: str, badge_kind: str, title: str | list):
     brun.font.bold = True
     brun.font.color.rgb = fg
 
-    # Title to the right of badge
+    # Title to the right of badge — size box and downstream rule/body_top
+    # from actual visible-line count so a 2-line title doesn't punch through
+    # the rule or the body region.
     title_left = pad + badge_w + Inches(0.30)
     title_w = SLIDE_W - title_left - PAD_X
+    title_w_in = title_w / 914400
+    title_plain = _title_plain_text(title)
+    title_lines = _estimate_visible_lines(title_plain, title_w_in, 28)
+    title_h_in = max(0.50, (28 / 72.0) * 1.10 * title_lines + 0.18)
     title_top = head_top - Inches(0.06)
     title_box, ttf = add_textbox(
-        slide, title_left, title_top, title_w, Inches(0.7),
+        slide, title_left, title_top, title_w, Inches(title_h_in),
         font_size=28, bold=True, color=INK,
-        font_name=FONT_HEAD, anchor=MSO_ANCHOR.MIDDLE,
+        font_name=FONT_HEAD,
+        anchor=MSO_ANCHOR.MIDDLE if title_lines == 1 else MSO_ANCHOR.TOP,
     )
     if isinstance(title, str):
         run = ttf.paragraphs[0].add_run() if not ttf.paragraphs[0].runs else ttf.paragraphs[0].runs[0]
@@ -465,8 +493,9 @@ def add_slide_head(slide, badge_text: str, badge_kind: str, title: str | list):
                 font_name=style.get("font", FONT_HEAD),
             )
 
-    # Rule under head
-    rule_top = head_top + badge_h + Inches(0.18)
+    # Rule under head — position below whichever is taller (badge or title).
+    head_bottom = max(head_top + badge_h, title_top + Inches(title_h_in))
+    rule_top = head_bottom + Inches(0.12)
     add_rect(slide, pad, rule_top, CONTENT_W, Emu(12700), RULE_LIGHT)
 
     # Return the y-coordinate where body content can begin

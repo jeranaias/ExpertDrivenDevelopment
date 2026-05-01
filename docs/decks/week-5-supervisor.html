@@ -157,6 +157,30 @@
   .callout--good { border-color: var(--good-edge); background: var(--good-bg); color: var(--good-text); }
   .callout--scarlet { border-color: var(--scarlet); background: #fff; }
 
+  /* ---- PDF / file links ------------------------------------- */
+  .pdf-link {
+    color: var(--scarlet);
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 2px;
+    border-radius: 3px;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  .pdf-link code {
+    font-family: var(--font-mono);
+    color: inherit;
+    background: transparent;
+  }
+  .pdf-link:hover,
+  .pdf-link:focus-visible {
+    color: var(--scarlet-dark);
+    background: rgba(204, 0, 0, 0.08);
+    outline: none;
+  }
+  .pdf-link:focus-visible {
+    box-shadow: 0 0 0 2px var(--scarlet);
+  }
+
   /* ---- Two-column ------------------------------------------- */
   .cols {
     display: grid;
@@ -468,6 +492,26 @@
   .notes .note-block li { color: #e0e0e0; font-size: 13.5px; margin-bottom: 3px; }
   .notes .close-hint { color: #999; font-size: 12px; }
 
+  /* ---- Back-to-course link ---------------------------------- */
+  /* Persistent escape hatch back to the Supervisor Orientation course
+     page. Sits in the top-left chrome area, dim by default so it does
+     not distract during delivery; brightens on hover/focus. Hidden in
+     print so PDF exports stay clean. */
+  .deck-back {
+    position: fixed; left: 14px; top: 14px;
+    display: inline-flex; align-items: center; gap: 6px;
+    z-index: 30; opacity: 0.35;
+    transition: opacity 200ms ease, background 120ms ease, border-color 120ms ease;
+    background: rgba(20,20,20,0.85); color: #f0f0f0; border: 1px solid #444;
+    padding: 5px 9px; border-radius: 5px;
+    font: 600 11px var(--font-sans);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+  .deck-back:hover,
+  .deck-back:focus-visible { opacity: 1; background: var(--scarlet); border-color: var(--scarlet); color: #fff; }
+  .deck-back .deck-back__arrow { font-size: 13px; line-height: 1; }
+
   /* ---- HUD -------------------------------------------------- */
   .hud {
     position: fixed; right: 14px; top: 14px;
@@ -527,7 +571,7 @@
       break-after: page;
     }
     .frame { font-size: 12pt; aspect-ratio: auto; }
-    .hud, .counter, .notes, .help { display: none !important; }
+    .hud, .counter, .notes, .help, .deck-back { display: none !important; }
     /* Speaker notes live in <template> elements; the shared deck.css
        universal print rules force `.speaker-notes { display: block }`
        which makes the empty template tag render as a blank "Speaker
@@ -543,12 +587,17 @@
 </head>
 <body class="w5-deck">
 
+<a class="deck-back" href="../courses/supervisor.html" title="Return to the Supervisor Orientation course page">
+  <span class="deck-back__arrow" aria-hidden="true">&larr;</span>
+  <span>Back to Supervisor Orientation</span>
+</a>
+
 <div class="stage">
   <div class="frame">
     <div class="deck" id="deck">
 
       <!-- ============ 1. COVER ============ -->
-      <section class="slide cover" data-title="Cover" data-section="Cover">
+      <section class="slide cover" data-title="Cover" data-module="Cover">
         <div class="corner"><strong>Course 5</strong> · Week 5 of 6</div>
         <div class="eyebrow">Expert-Driven Development · Supervisor Orientation</div>
         <h1>Your people are waiting for you to say&nbsp;yes.</h1>
@@ -558,6 +607,8 @@
           <span class="badge">Leadership briefing</span>
           <span class="badge">30 min · or extended joint session</span>
         </div>
+        <p class="cover-classlinks"><a href="links/week-5-supervisor.html" target="_blank" rel="noopener">Class Links &middot; share-in-chat URLs for this deck &rarr;</a></p>
+        <p class="cover-classlinks"><a href="week-5-handouts.html" target="_blank" rel="noopener">Facilitator Hand-Outs &middot; chat-paste blocks for this deck &rarr;</a></p>
         <div class="gold-bar"></div>
         <div class="scarlet-bar"></div>
 
@@ -576,7 +627,7 @@
       </section>
 
       <!-- ============ 2. WHO THIS WEEK IS FOR ============ -->
-      <section class="slide" data-title="Who this week is for" data-section="Framing">
+      <section class="slide" data-title="Who this week is for" data-module="Framing">
         <div class="slide__head">
           <span class="badge badge--scarlet">Audience shift</span>
           <h2 class="slide__title">Who this week is for</h2>
@@ -624,7 +675,7 @@
       </section>
 
       <!-- ============ 3. TWO DELIVERY MODES ============ -->
-      <section class="slide" data-title="Two delivery modes" data-section="Framing">
+      <section class="slide" data-title="Two delivery modes" data-module="Framing">
         <div class="slide__head">
           <span class="badge">Same deck · two modes</span>
           <h2 class="slide__title">Pick the mode that fits today</h2>
@@ -668,6 +719,7 @@
           <div class="note-block joint"><span class="tag">Joint Session — extended</span>
             <p>"We're running the joint version. Same slides, but at three points I'm going to stop and ask you to talk to the supervisor or builder next to you for 3–5 minutes, then we'll surface what you heard."</p>
             <p>Set expectations on participation. "If you're a supervisor, your job is to ask; if you're a builder, your job is to answer like you'd answer your boss."</p>
+            <p>Facilitator: the published joint-session agenda — extended timing, Exercise C, room setup, optional live tool review and "Yes" criteria workshop — lives on the Course 5 page at <em>courses/supervisor.html#joint-session-agenda</em>. Open it in a tab before the session.</p>
           </div>
           <div class="note-block transition"><span class="tag">Transition</span>
             <p>"Here's the route."</p>
@@ -676,7 +728,7 @@
       </section>
 
       <!-- ============ 4. AGENDA ============ -->
-      <section class="slide" data-title="Agenda" data-section="Framing">
+      <section class="slide" data-title="Agenda" data-module="Framing">
         <div class="slide__head">
           <span class="badge">Agenda</span>
           <h2 class="slide__title">Five modules · 30 minutes (or 60–90 in joint mode)</h2>
@@ -715,7 +767,7 @@
       </section>
 
       <!-- ============ 5. CORE MESSAGE CENTERPIECE ============ -->
-      <section class="slide" data-title="Core message" data-section="Framing">
+      <section class="slide" data-title="Core message" data-module="Framing">
         <div class="slide__head">
           <span class="badge badge--scarlet">If you remember nothing else</span>
           <h2 class="slide__title">The one sentence</h2>
@@ -748,10 +800,11 @@
       </section>
 
       <!-- ============ 6. MODULE 1 DIVIDER ============ -->
-      <section class="slide divider" data-title="Module 1" data-section="Module 1">
+      <section class="slide divider" data-title="Module 1" data-module="Module 1">
         <div class="module-num">Module 1 · 5 minutes</div>
         <h1>Why this matters now</h1>
         <div class="module-meta">The data, the directive, and what it means for your section.</div>
+        <a class="section__notes-link" href="../courses/supervisor.html#why-this-matters" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
         <div class="scarlet-bar"></div>
 
         <template class="speaker-notes">
@@ -768,7 +821,7 @@
       </section>
 
       <!-- ============ 7. THE DATA WALL ============ -->
-      <section class="slide" data-title="The data wall" data-section="Module 1">
+      <section class="slide" data-title="The data wall" data-module="Module 1">
         <div class="slide__head">
           <span class="badge">Module 1 · the data</span>
           <h2 class="slide__title">Five reasons "later" is no longer an option</h2>
@@ -806,7 +859,7 @@
       </section>
 
       <!-- ============ 8. AI IS A SITREP ITEM ============ -->
-      <section class="slide" data-title="AI is a SITREP item" data-section="Module 1">
+      <section class="slide" data-title="AI is a SITREP item" data-module="Module 1">
         <div class="slide__head">
           <span class="badge badge--scarlet">Operational framing</span>
           <h2 class="slide__title">AI is a SITREP item</h2>
@@ -836,10 +889,11 @@
       </section>
 
       <!-- ============ 9. MODULE 2 DIVIDER ============ -->
-      <section class="slide divider" data-title="Module 2" data-section="Module 2">
+      <section class="slide divider" data-title="Module 2" data-module="Module 2">
         <div class="module-num">Module 2 · 5 minutes</div>
         <h1>Permission culture</h1>
         <div class="module-meta">What "yes" sounds like · what kills adoption · guard rails, not roadblocks.</div>
+        <a class="section__notes-link" href="../courses/supervisor.html#creating-permission" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
         <div class="scarlet-bar"></div>
 
         <template class="speaker-notes">
@@ -853,7 +907,7 @@
       </section>
 
       <!-- ============ 10. WHAT YES vs WHAT KILLS ============ -->
-      <section class="slide" data-title="What yes / what kills" data-section="Module 2">
+      <section class="slide" data-title="What yes / what kills" data-module="Module 2">
         <div class="slide__head">
           <span class="badge">Module 2 · culture</span>
           <h2 class="slide__title">The language your section is listening for</h2>
@@ -903,7 +957,7 @@
       </section>
 
       <!-- ============ 11. WHAT NOT TO DO ============ -->
-      <section class="slide" data-title="What NOT to do" data-section="Module 2">
+      <section class="slide" data-title="What NOT to do" data-module="Module 2">
         <div class="slide__head">
           <span class="badge badge--scarlet">Anti-patterns</span>
           <h2 class="slide__title">What supervisors should <em>not</em> do</h2>
@@ -958,7 +1012,7 @@
       </section>
 
       <!-- ============ 12. GUARD RAILS NOT ROADBLOCKS ============ -->
-      <section class="slide" data-title="Guard rails not roadblocks" data-section="Module 2">
+      <section class="slide" data-title="Guard rails not roadblocks" data-module="Module 2">
         <div class="slide__head">
           <span class="badge">Module 2 · boundaries</span>
           <h2 class="slide__title">Guard rails, not roadblocks</h2>
@@ -1003,10 +1057,11 @@
       </section>
 
       <!-- ============ 13. MODULE 3 DIVIDER ============ -->
-      <section class="slide divider" data-title="Module 3" data-section="Module 3">
+      <section class="slide divider" data-title="Module 3" data-module="Module 3">
         <div class="module-num">Module 3 · 10 minutes</div>
         <h1>Evaluating AI-assisted output</h1>
         <div class="module-meta">Four questions · two practice scenarios · the standard you already use.</div>
+        <a class="section__notes-link" href="../courses/supervisor.html#evaluating-proposals" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
         <div class="scarlet-bar"></div>
 
         <template class="speaker-notes">
@@ -1020,7 +1075,7 @@
       </section>
 
       <!-- ============ 14. FOUR QUESTIONS ============ -->
-      <section class="slide" data-title="Four questions" data-section="Module 3">
+      <section class="slide" data-title="Four questions" data-module="Module 3">
         <div class="slide__head">
           <span class="badge">Module 3 · the framework</span>
           <h2 class="slide__title">Four questions — every time</h2>
@@ -1075,7 +1130,7 @@
       </section>
 
       <!-- ============ 15. EXERCISE A — SCENARIO ============ -->
-      <section class="slide" data-title="Exercise A — scenario" data-section="Module 3">
+      <section class="slide" data-title="Exercise A — scenario" data-module="Module 3">
         <div class="slide__head">
           <span class="badge badge--gold">Exercise A · scenario</span>
           <h2 class="slide__title">AI-generated leave policy summary</h2>
@@ -1110,7 +1165,7 @@
       </section>
 
       <!-- ============ 16. EXERCISE A — DEBRIEF ============ -->
-      <section class="slide" data-title="Exercise A — debrief" data-section="Module 3">
+      <section class="slide" data-title="Exercise A — debrief" data-module="Module 3">
         <div class="slide__head">
           <span class="badge">Exercise A · debrief</span>
           <h2 class="slide__title">What a strong supervisor asks</h2>
@@ -1152,7 +1207,7 @@
       </section>
 
       <!-- ============ 17. EXERCISE B — SCENARIO ============ -->
-      <section class="slide" data-title="Exercise B — scenario" data-section="Module 3">
+      <section class="slide" data-title="Exercise B — scenario" data-module="Module 3">
         <div class="slide__head">
           <span class="badge badge--gold">Exercise B · scenario</span>
           <h2 class="slide__title">Automated reporting tool</h2>
@@ -1188,7 +1243,7 @@
       </section>
 
       <!-- ============ 18. EXERCISE B — DEBRIEF ============ -->
-      <section class="slide" data-title="Exercise B — debrief" data-section="Module 3">
+      <section class="slide" data-title="Exercise B — debrief" data-module="Module 3">
         <div class="slide__head">
           <span class="badge">Exercise B · debrief</span>
           <h2 class="slide__title">What a strong supervisor asks</h2>
@@ -1230,10 +1285,11 @@
       </section>
 
       <!-- ============ 19. MODULE 4 DIVIDER ============ -->
-      <section class="slide divider" data-title="Module 4" data-section="Module 4">
+      <section class="slide divider" data-title="Module 4" data-module="Module 4">
         <div class="module-num">Module 4 · 5 minutes</div>
         <h1>The apprentice problem</h1>
         <div class="module-meta">The risk you can't see this year — and that no one else will catch.</div>
+        <a class="section__notes-link" href="../courses/supervisor.html#apprentice-problem" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
         <div class="scarlet-bar"></div>
 
         <template class="speaker-notes">
@@ -1247,7 +1303,7 @@
       </section>
 
       <!-- ============ 20. APPRENTICE PROBLEM CENTERPIECE ============ -->
-      <section class="slide" data-title="Apprentice problem — centerpiece" data-section="Module 4">
+      <section class="slide" data-title="Apprentice problem — centerpiece" data-module="Module 4">
         <div class="slide__head">
           <span class="badge badge--scarlet">Centerpiece</span>
           <h2 class="slide__title">Architects who never laid a brick</h2>
@@ -1294,7 +1350,7 @@
       </section>
 
       <!-- ============ 21. THREE SUPERVISION CHECKS ============ -->
-      <section class="slide" data-title="Three supervision checks" data-section="Module 4">
+      <section class="slide" data-title="Three supervision checks" data-module="Module 4">
         <div class="slide__head">
           <span class="badge">Module 4 · the protocol</span>
           <h2 class="slide__title">Three supervision checks for junior development</h2>
@@ -1343,7 +1399,7 @@
       </section>
 
       <!-- ============ 22. EXERCISE C — SPOT THE RISK ============ -->
-      <section class="slide" data-title="Exercise C — spot the apprentice risk" data-section="Module 4">
+      <section class="slide" data-title="Exercise C — spot the apprentice risk" data-module="Module 4">
         <div class="slide__head">
           <span class="badge badge--gold">Exercise C · apprentice risk</span>
           <h2 class="slide__title">Spot the apprentice risk</h2>
@@ -1392,10 +1448,11 @@
       </section>
 
       <!-- ============ 23. MODULE 5 DIVIDER ============ -->
-      <section class="slide divider" data-title="Module 5" data-section="Module 5">
+      <section class="slide divider" data-title="Module 5" data-module="Module 5">
         <div class="module-num">Module 5 · 5 minutes</div>
         <h1>Quick reference &amp; commit</h1>
         <div class="module-meta">A card for your screen · the tools · further reading · Week 6 preview · the ask.</div>
+        <a class="section__notes-link" href="../courses/supervisor.html#quick-reference" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
         <div class="scarlet-bar"></div>
 
         <template class="speaker-notes">
@@ -1409,7 +1466,7 @@
       </section>
 
       <!-- ============ 24. SUPERVISOR QUICK REFERENCE ============ -->
-      <section class="slide" data-title="Supervisor quick reference" data-section="Module 5">
+      <section class="slide" data-title="Supervisor quick reference" data-module="Module 5">
         <div class="slide__head">
           <span class="badge badge--gold">Take a screenshot of this slide</span>
           <h2 class="slide__title">Supervisor quick reference: AI-assisted work</h2>
@@ -1464,7 +1521,7 @@
       </section>
 
       <!-- ============ 25. TOOLS YOUR MARINES WILL USE ============ -->
-      <section class="slide" data-title="Approved tools" data-section="Module 5">
+      <section class="slide" data-title="Approved tools" data-module="Module 5">
         <div class="slide__head">
           <span class="badge">Module 5 · approved tools</span>
           <h2 class="slide__title">Tools your Marines will use</h2>
@@ -1516,7 +1573,7 @@
       </section>
 
       <!-- ============ 26. FURTHER READING ============ -->
-      <section class="slide" data-title="Further reading" data-section="Module 5">
+      <section class="slide" data-title="Further reading" data-module="Module 5">
         <div class="slide__head">
           <span class="badge">Module 5 · further reading</span>
           <h2 class="slide__title">Two briefs to hand your CO</h2>
@@ -1527,14 +1584,14 @@
             <div class="callout callout--scarlet" style="height: 100%;">
               <h4>EDD Executive Brief</h4>
               <p>15-slide Teams briefing. The "what is EDD, why now, what we're asking from leadership" deck — designed for an O-5/O-6 audience.</p>
-              <p class="small"><code>docs/pdf/EDD_Executive_Brief.pdf</code></p>
+              <p class="small"><a class="pdf-link" href="../pdf/EDD_Executive_Brief.pdf" target="_blank" rel="noopener"><code>docs/pdf/EDD_Executive_Brief.pdf</code></a></p>
             </div>
           </div>
           <div class="col">
             <div class="callout callout--info" style="height: 100%;">
               <h4>EDD RAI Compliance Brief</h4>
               <p>One-page compliance map: how the EDD program aligns with DoD AI guidelines and Responsible AI guardrails. The document for your staff judge advocate or compliance officer.</p>
-              <p class="small"><code>docs/pdf/EDD_RAI_Compliance_Brief.pdf</code></p>
+              <p class="small"><a class="pdf-link" href="../pdf/EDD_RAI_Compliance_Brief.pdf" target="_blank" rel="noopener"><code>docs/pdf/EDD_RAI_Compliance_Brief.pdf</code></a></p>
             </div>
           </div>
         </div>
@@ -1560,7 +1617,7 @@
       </section>
 
       <!-- ============ 27. WEEK 6 PREVIEW ============ -->
-      <section class="slide" data-title="Week 6 preview" data-section="Module 5">
+      <section class="slide" data-title="Week 6 preview" data-module="Module 5">
         <div class="slide__head">
           <span class="badge">Up next</span>
           <h2 class="slide__title">Week 6 · Full-Stack AI-Assisted Development</h2>
@@ -1606,13 +1663,14 @@
       </section>
 
       <!-- ============ 28. LEADERSHIP COMMITMENT / CLOSING ============ -->
-      <section class="slide closing" data-title="Leadership commitment" data-section="Closing">
+      <section class="slide closing" data-title="Leadership commitment" data-module="Closing">
         <div class="eyebrow">Leadership Commitment</div>
         <h1>The structure exists. Your people have the motivation. Your job is to give the&nbsp;permission.</h1>
         <div class="ask">
           <span class="label">Within the next week</span>
           <p>Ask one person in your section what they'd build if they had permission. Listen to the answer. Then say <em>yes, with appropriate review</em>.</p>
         </div>
+        <a class="section__notes-link" href="../courses/supervisor.html#closing" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
         <div class="scarlet-bar"></div>
 
         <template class="speaker-notes">

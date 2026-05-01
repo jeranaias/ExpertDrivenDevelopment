@@ -76,7 +76,10 @@
             <div class="page-header__actions mt-lg" role="group" aria-label="Course 6 materials">
                 <a href="../decks/week-6-fullstack.html" class="btn btn--primary" target="_blank" rel="noopener">Open the Slide Deck</a>
                 <a href="../facilitator/week-6-fullstack.html" class="btn btn--secondary" target="_blank" rel="noopener">Open the Facilitator Pack</a>
+                <a href="../decks/week-6-cheatsheet.html" class="btn btn--secondary" target="_blank" rel="noopener">Open the Instructor Cheat Sheet</a>
+                <a href="../decks/week-6-handouts.html" class="btn btn--secondary" target="_blank" rel="noopener">Open the Prompt Hand-Out</a>
                 <a href="../handouts/week-6-fullstack.html" class="btn btn--secondary" target="_blank" rel="noopener">Open the Student Handout</a>
+                <a href="../handouts/pdf/week-6-fullstack.pdf" class="btn btn--secondary btn--sm" download>Download Handout PDF</a>
             </div>
             <p class="mt-md"><a href="student/fullstack.html">View the Student Version</a></p>
         </div>
@@ -228,75 +231,75 @@
             <tbody>
                 <tr>
                     <td>0:00&ndash;0:30</td>
-                    <td>1. The Full-Stack Frontier</td>
+                    <td><a href="../decks/week-6-fullstack.html#slide-7">1. The Full-Stack Frontier</a></td>
                     <td>Mental model shift</td>
                     <td>Understanding scope</td>
                 </tr>
                 <tr>
                     <td>0:30&ndash;1:15</td>
-                    <td>2. Environment Setup</td>
+                    <td><a href="../decks/week-6-fullstack.html#slide-11">2. Environment Setup</a></td>
                     <td>Go, Node, Git, VS Code, Docker installed</td>
                     <td>AI-guided installation</td>
                 </tr>
                 <tr>
                     <td>1:15&ndash;2:00</td>
-                    <td>3. Backend from Scratch</td>
+                    <td><a href="../decks/week-6-fullstack.html#slide-15">3. Backend from Scratch</a></td>
                     <td>Go HTTP server, router, first endpoint</td>
                     <td>AI-generated server code</td>
                 </tr>
                 <tr>
                     <td>2:00&ndash;2:45</td>
-                    <td>4. Data Layer</td>
+                    <td><a href="../decks/week-6-fullstack.html#slide-19">4. Data Layer</a></td>
                     <td>DataStore interface, JSON store, seed data</td>
                     <td>Interface-first design</td>
                 </tr>
                 <tr>
                     <td>2:45&ndash;3:00</td>
-                    <td colspan="3"><em>Break (15 minutes)</em></td>
+                    <td colspan="3"><a href="../decks/week-6-fullstack.html#slide-23"><em>Break (15 minutes)</em></a></td>
                 </tr>
                 <tr>
                     <td>3:00&ndash;3:45</td>
-                    <td>5. Frontend from Scratch</td>
+                    <td><a href="../decks/week-6-fullstack.html#slide-24">5. Frontend from Scratch</a></td>
                     <td>React + Vite + TypeScript, first page</td>
                     <td>AI-assisted frontend</td>
                 </tr>
                 <tr>
                     <td>3:45&ndash;4:30</td>
-                    <td>6. Pages &amp; Navigation</td>
+                    <td><a href="../decks/week-6-fullstack.html#slide-28">6. Pages &amp; Navigation</a></td>
                     <td>Dashboard, detail page, sidebar, routing</td>
                     <td>Iterative UI building</td>
                 </tr>
                 <tr>
                     <td>4:30&ndash;5:15</td>
-                    <td>7. AI Chat Integration</td>
+                    <td><a href="../decks/week-6-fullstack.html#slide-32">7. AI Chat Integration</a></td>
                     <td>Chat page, OpenAI API, tool use</td>
                     <td>Building AI into your app</td>
                 </tr>
                 <tr>
                     <td>5:15&ndash;5:30</td>
-                    <td colspan="3"><em>Break (15 minutes)</em></td>
+                    <td colspan="3"><a href="../decks/week-6-fullstack.html#slide-36"><em>Break (15 minutes)</em></a></td>
                 </tr>
                 <tr>
                     <td>5:30&ndash;6:15</td>
-                    <td>8. Auth &amp; Middleware</td>
+                    <td><a href="../decks/week-6-fullstack.html#slide-37">8. Auth &amp; Middleware</a></td>
                     <td>Role-based auth, protected routes</td>
                     <td>Security patterns</td>
                 </tr>
                 <tr>
                     <td>6:15&ndash;7:00</td>
-                    <td>9. External Integrations</td>
+                    <td><a href="../decks/week-6-fullstack.html#slide-41">9. External Integrations</a></td>
                     <td>Database or Microsoft Graph API</td>
                     <td>Connecting real services</td>
                 </tr>
                 <tr>
                     <td>7:00&ndash;7:45</td>
-                    <td>10. Docker &amp; Deployment</td>
+                    <td><a href="../decks/week-6-fullstack.html#slide-45">10. Docker &amp; Deployment</a></td>
                     <td>Containerized app on Azure</td>
                     <td>Local to production</td>
                 </tr>
                 <tr>
                     <td>7:45&ndash;8:00</td>
-                    <td>Wrap-Up &amp; Assessment</td>
+                    <td><a href="../decks/week-6-fullstack.html#slide-50">Wrap-Up &amp; Assessment</a></td>
                     <td>Deployed app + frontier map</td>
                     <td>Self-assessment</td>
                 </tr>
@@ -1494,6 +1497,21 @@ docker run -p 8080:8080 -e OPENAI_API_KEY=sk-... my-staff-app
             <li>(Bonus) Application deployed to Azure with a public URL</li>
         </ul>
     </div>
+
+    <div class="callout callout--info">
+        <h3 class="callout__title">Answer-key reference app (slide 49)</h3>
+        <p>
+            The finished reference for today&rsquo;s build lives at
+            <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/tree/main/heywood-inventory"><code>heywood-inventory/</code></a>
+            with full guidance in
+            <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/blob/main/heywood-inventory/docs/STUDENT_GUIDE.md"><code>heywood-inventory/docs/STUDENT_GUIDE.md</code></a>.
+            The same per-module file map and discipline (&ldquo;use it <em>after</em> the 3-Minute Rule fires twice
+            on the same prompt &mdash; never before&rdquo;) is now mirrored on the
+            <a href="student/fullstack.html#answer-key">student version of this page</a>, so students who lose
+            track of the slide can self-unblock without flagging you down. Reinforce the discipline when you
+            point them at it.
+        </p>
+    </div>
 </section>
 
 <!-- ============================================================ -->
@@ -1591,7 +1609,7 @@ docker run -p 8080:8080 -e OPENAI_API_KEY=sk-... my-staff-app
         </p>
     </div>
 
-    <div class="callout callout--success">
+    <div class="callout callout--success" id="program-close">
         <h3 class="callout__title">Course 6 Complete</h3>
         <p>
             You just built and deployed a full-stack web application. You wrote the requirements.
@@ -1634,9 +1652,12 @@ docker run -p 8080:8080 -e OPENAI_API_KEY=sk-... my-staff-app
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h3 class="footer-section__title">Project</h3>
+                    <h3 class="footer-section__title">Links</h3>
                     <ul>
                         <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../pdf/">Briefs Library</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                        <li><a href="../pdf/TRAINING_CURRICULA_v5.pdf">Curricula (PDF)</a></li>
                         <li>MIT License</li>
                     </ul>
                 </div>

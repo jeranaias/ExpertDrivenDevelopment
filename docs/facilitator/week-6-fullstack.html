@@ -48,7 +48,7 @@
     <main id="main-content" class="site-main">
         <div class="container">
             <div class="pack-intro">
-                <p>Print this page in <strong>landscape</strong> from Chrome or Edge: <kbd>Ctrl</kbd>+<kbd>P</kbd> &rarr; Layout <em>Landscape</em> &rarr; Margins <em>None</em> or <em>Default</em> &rarr; Background graphics <em>on</em>. The site chrome above is hidden in print. This is the 8-hour capstone &mdash; eight build cycles around one architecture diagram.</p>
+                <p>Print this page in <strong>landscape</strong> from Chrome or Edge: <kbd>Ctrl</kbd>+<kbd>P</kbd> &rarr; Layout <em>Landscape</em> &rarr; Margins <em>None</em> or <em>Default</em> &rarr; Background graphics <em>on</em>. The site chrome above is hidden in print. This is the 8-hour capstone &mdash; eight build cycles around one architecture diagram. Slide-by-slide prompt chat-paste blocks live in the <a href="../decks/week-6-handouts.html">Week&nbsp;6 hand-out pack</a>.</p>
                 <p class="pack-intro__tip">In the print dialog, leave <strong>Margins</strong> at <em>Default</em> (or pick <em>None</em>). Picking <em>Custom</em> or <em>Minimum</em> shrinks the printable area below what this layout assumes and the pack tips onto a second page.</p>
                 <div class="pack-intro__pdf">
                     <a class="btn btn--secondary btn--sm" href="pdf/week-6-fullstack.pdf" download>Download PDF</a>
@@ -94,18 +94,17 @@
                         <ul>
                             <li><strong>Capstone gate.</strong> Every attendee submitted a proposal &gt;= 7 days out. Reject anyone without an approved proposal &mdash; 8 hours is no place to discover scope drift.</li>
                             <li><strong>Machines.</strong> Each laptop runs Node 20+, Go 1.22+, Docker Desktop (admin), VS Code or equivalent, GenAI.mil access, GitHub or local repo. Smoke-test 24 h before.</li>
-                            <li><strong>Architecture diagram</strong> printed and posted in the room (and on a side monitor). It is the one slide you return to nine times today.</li>
-                            <li><strong>Catering / break logistics.</strong> Coffee at 0815, snacks at 1045 and 1530, lunch decision at 1230 (M7 break often becomes lunch). Hangry rooms break things.</li>
-                            <li><strong>Stretch goals doc.</strong> Per-student: a 3-bullet stretch list to deploy on top of the base stack if they finish early.</li>
+                            <li><strong>Reference repo as your safety net.</strong> Pull <code>heywood-inventory/</code> and smoke-test the backend + frontend the night before. Keep <code>docs/PROMPTS.md</code> (validated prompts) and <code>docs/INSTRUCTOR_GUIDE.md</code> (module&nbsp;&rarr;&nbsp;file map) on a side monitor &mdash; yours, not the students&rsquo;.</li>
+                            <li><strong>Architecture diagram + breaks.</strong> Architecture printed and posted (the one slide you return to nine times). Coffee 0815, snacks 1045 &amp; 1530, lunch call at 1230 &mdash; M7 break often becomes lunch.</li>
                         </ul>
                     </section>
 
                     <section class="pk-box pk-box--handoff pk-box--gold">
                         <h2>Live hand-off cues<span class="lede">Constant deck &harr; IDE switching &mdash; the architecture is the anchor</span></h2>
                         <ul>
-                            <li><strong>End of M2.</strong> Return to the architecture slide. <em>Stop.</em> Point at it. &ldquo;You will see this exact picture eight more times today.&rdquo;</li>
-                            <li><strong>Module-complete cadence.</strong> Each build module ends with a 60-second &ldquo;arch lights up&rdquo; slide. Deck &rarr; diagram &rarr; back to IDE for the next build.</li>
+                            <li><strong>Architecture anchor (every module).</strong> End M2 by stopping on the architecture slide &mdash; &ldquo;you&rsquo;ll see this exact picture eight more times today.&rdquo; Each build module then ends with a 60-second &ldquo;arch lights up&rdquo; beat: deck &rarr; diagram &rarr; back to IDE.</li>
                             <li><strong>End of M3 (1st curl response).</strong> Twenty seconds of silence. This is the emotional checkpoint of the day &mdash; let it land.</li>
+                            <li><strong>M4 Path A vs Path B.</strong> Default Path&nbsp;A (JSON store now, SQLite as a stretch &mdash; both build-tagged in the reference repo). Path&nbsp;B (Microsoft Graph) only for students whose proposal already requires M365. Announce the room default at M4 kickoff.</li>
                             <li><strong>M9 compression rule.</strong> If you&rsquo;re behind by 15 min entering M9, cut external integrations to a stub. Everyone ships a container by 1700 &mdash; no exceptions.</li>
                             <li><strong>1700 wrap.</strong> Each student demos their running container in 60 sec. You moderate; you do not debug.</li>
                         </ul>
@@ -136,27 +135,23 @@
                     </section>
 
                     <section class="pk-box pk-box--sideways">
-                        <h2>When this goes sideways<span class="lede">Top failure modes &amp; recovery</span></h2>
+                        <h2>When this goes sideways<span class="lede">Stuck-student triage &amp; top failure modes</span></h2>
                         <ul class="pk-fail">
                             <li>
-                                <span class="sym">Docker won&rsquo;t install (admin denied) on a student machine.</span>
-                                <span class="fix">Defer Docker to M10; pair the student with a Docker-enabled buddy for the deploy. They still ship.</span>
+                                <span class="sym">Stuck-student triage (~3 min).</span>
+                                <span class="fix">3-Minute Rule &rarr; re-run the module&rsquo;s prompt from <code>PROMPTS.md</code> &rarr; open the matching file via <code>INSTRUCTOR_GUIDE.md</code> on <em>your</em> screen, describe the diff &rarr; pair &amp; move on.</span>
                             </li>
                             <li>
-                                <span class="sym">External API in M9 returns 401s the entire module.</span>
-                                <span class="fix">Stub it. Hard-code a sample response. M9 is the compressible one for a reason.</span>
+                                <span class="sym">Docker won&rsquo;t install (admin denied).</span>
+                                <span class="fix">Defer Docker to M10; pair with a Docker-enabled buddy for the deploy. They still ship.</span>
                             </li>
                             <li>
-                                <span class="sym">A student wants to make the M5 table beautiful.</span>
-                                <span class="fix">Stop them. &ldquo;Polish is for after 1700. Get data on the page.&rdquo; Bookmark their idea for the stretch list.</span>
+                                <span class="sym">CORS / proxy errors stall the room at M5.</span>
+                                <span class="fix">Project <code>web/vite.config.ts</code> from the reference repo and walk the proxy block once; do not re-explain individually.</span>
                             </li>
                             <li>
-                                <span class="sym">CORS / proxy errors stall multiple students at M5.</span>
-                                <span class="fix">Project the Vite proxy config slide. Walk through it once for the room. Do not re-explain individually &mdash; pair them up.</span>
-                            </li>
-                            <li>
-                                <span class="sym">Behind 30+ minutes entering M8.</span>
-                                <span class="fix">Cut M9 entirely (announce it explicitly). Re-allocate to M10 so the container ships. Capture the missed module as Day-2 homework.</span>
+                                <span class="sym">Behind 30+ min at M8, or M9 API throws 401s.</span>
+                                <span class="fix">Stub M9 or cut it &mdash; announce it. M10 must ship; capture as Day-2 homework.</span>
                             </li>
                         </ul>
                     </section>
@@ -166,28 +161,145 @@
                         <ul>
                             <li><strong>Push the container</strong> to your unit&rsquo;s registry within 72 h. URL goes in the program shared library.</li>
                             <li><strong>Write the Unit Playbook</strong> for hand-off to the next rotation: architecture diagram, run instructions, two known issues, one stretch goal. Use the Week 4 playbook template.</li>
-                            <li><strong>Run a 30-min teach-back</strong> with two non-attendees in the next 30 days. Show the container. Show the architecture diagram. Take their first three questions to the program lead.</li>
-                            <li><strong>Capstone certificate</strong> issued after playbook submission &amp; teach-back evidence are received.</li>
+                            <li><strong>Run a 30-min teach-back</strong> with two non-attendees in the next 30 days &mdash; show the container, walk the architecture, surface their first three questions to the program lead. Capstone certificate issues once playbook + teach-back evidence land.</li>
                         </ul>
                     </section>
 
                 </div>
 
                 <footer class="pk-foot">
-                    <div class="left"><strong>EDD &middot; Week 6 Facilitator Pack</strong> &middot; UNCLASSIFIED &middot; print one-sided, landscape &middot; M9 is the compressible module</div>
+                    <div class="left"><strong>EDD &middot; Week 6 Facilitator Pack</strong> &middot; UNCLASSIFIED &middot; M9 compressible &middot; answer key: <a href="week-6-answer-key.html"><code>heywood-inventory/</code> module map</a></div>
                     <div class="right">
+                        <a href="week-6-answer-key.html">Answer Key</a> &middot;
                         <a href="../decks/week-6-fullstack.html">Week 6 Deck</a> &middot;
+                        <a href="../decks/week-6-handouts.html">Hand-out pack</a> &middot;
                         <a href="../courses/fullstack.html">Course 6 page</a> &middot;
                         <a href="./">All packs</a>
                     </div>
                 </footer>
 
             </article>
+            <!-- BEGIN: share-in-chat URL sheet appendix (auto-generated from docs/decks/links/) -->
+              <article class="pack-urlsheet" aria-label="Week 6 share-in-chat URL sheet">
+
+                  <header class="pack-urlsheet__head">
+                      <div class="pk-head__week"><span class="num">6</span> Share-in-chat URL sheet</div>
+                      <div class="title">
+                          <h1>Full-Stack AI-Assisted Development &mdash; class links</h1>
+                          <p class="sub">Every URL the Week 6 deck cues you to drop into Microsoft Teams chat. Read aloud or type into the chat &mdash; no copy buttons since this is the printed pack.</p>
+                      </div>
+                  </header>
+
+                  <div class="pack-urlsheet__columns">
+                      <section class="pack-urlsheet__section" aria-labelledby="urlsheet-w6-sec-deck">
+                          <h2 id="urlsheet-w6-sec-deck">Deck materials</h2>
+                          <p class="lede">The four files instructors typically share at the start of the eight-hour capstone.</p>
+                          <ul class="pack-urlsheet__list">
+                              <li class="pack-urlsheet__item">
+                                  <p class="pack-urlsheet__title">Week 6 Student Handout</p>
+                                  <p class="pack-urlsheet__when"><strong>When:</strong> Drop in chat at session start so students have the day&rsquo;s prompts and homework on one page.</p>
+                                  <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/handouts/week-6-fullstack.html</p>
+                              </li>
+                            <li class="pack-urlsheet__item">
+                                  <p class="pack-urlsheet__title">Week 6 Facilitator Pack (HTML)</p>
+                                  <p class="pack-urlsheet__when"><strong>When:</strong> Send to a co-facilitator running the live debugging segments alongside you.</p>
+                                  <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/facilitator/week-6-fullstack.html</p>
+                              </li>
+                            <li class="pack-urlsheet__item">
+                                  <p class="pack-urlsheet__title">Week 6 Facilitator Pack (PDF)</p>
+                                  <p class="pack-urlsheet__when"><strong>When:</strong> Email-friendly one-pager.</p>
+                                  <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/facilitator/pdf/week-6-fullstack.pdf</p>
+                              </li>
+                            <li class="pack-urlsheet__item">
+                                  <p class="pack-urlsheet__title">Week 6 PowerPoint deck</p>
+                                  <p class="pack-urlsheet__when"><strong>When:</strong> For instructors who present from PowerPoint or want to edit the slides locally.</p>
+                                  <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/pptx/week-6-fullstack.pptx</p>
+                              </li>
+                            <li class="pack-urlsheet__item">
+                                  <p class="pack-urlsheet__title">Week 6 slide deck (HTML)</p>
+                                  <p class="pack-urlsheet__when"><strong>When:</strong> For students who missed the live capstone.</p>
+                                  <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/decks/week-6-fullstack.html</p>
+                              </li>
+                            <li class="pack-urlsheet__item">
+                                  <p class="pack-urlsheet__title">Week 6 Instructor Cheat Sheet</p>
+                                  <p class="pack-urlsheet__when"><strong>When:</strong> Single-page cheat sheet with the key prompts, common failure modes, and recovery scripts you&rsquo;ll reach for during the capstone.</p>
+                                  <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/decks/week-6-cheatsheet.html</p>
+                              </li>
+                          </ul>
+                      </section>
+                    <section class="pack-urlsheet__section" aria-labelledby="urlsheet-w6-sec-references">
+                          <h2 id="urlsheet-w6-sec-references">EDD reference docs (capstone)</h2>
+                          <p class="lede">The Week 6 capstone calls back to the SOP, the prompt library, and the templates &mdash; share these on demand as students hit the relevant module.</p>
+                          <ul class="pack-urlsheet__list">
+                              <li class="pack-urlsheet__item">
+                                  <p class="pack-urlsheet__title">Prompt Library</p>
+                                  <p class="pack-urlsheet__when"><strong>When:</strong> Reach-for-this when students get stuck on a prompt during the live builds.</p>
+                                  <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/resources/prompt-library.html</p>
+                              </li>
+                            <li class="pack-urlsheet__item">
+                                  <p class="pack-urlsheet__title">Agent Setup guide</p>
+                                  <p class="pack-urlsheet__when"><strong>When:</strong> Useful when students hit auth/integration questions during the chat / auth / integrations modules.</p>
+                                  <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/resources/agent-setup.html</p>
+                              </li>
+                            <li class="pack-urlsheet__item">
+                                  <p class="pack-urlsheet__title">EDD Templates index</p>
+                                  <p class="pack-urlsheet__when"><strong>When:</strong> The full template set &mdash; problem definition, dev journal, QA checklist, doc package, tool registry &mdash; for the homework / hand-off.</p>
+                                  <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/resources/templates.html</p>
+                              </li>
+                            <li class="pack-urlsheet__item">
+                                  <p class="pack-urlsheet__title">EDD SOP (PDF)</p>
+                                  <p class="pack-urlsheet__when"><strong>When:</strong> The canonical SOP &mdash; the &ldquo;what does good look like&rdquo; document for the capstone&rsquo;s QA passes.</p>
+                                  <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/pdf/SOP_Expert_Driven_Development_v5.pdf</p>
+                              </li>
+                            <li class="pack-urlsheet__item">
+                                  <p class="pack-urlsheet__title">Training Curricula (PDF)</p>
+                                  <p class="pack-urlsheet__when"><strong>When:</strong> For students who want the full program-level reference document going home.</p>
+                                  <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/pdf/TRAINING_CURRICULA_v5.pdf</p>
+                              </li>
+                          </ul>
+                      </section>
+                    <section class="pack-urlsheet__section" aria-labelledby="urlsheet-w6-sec-closeout">
+                          <h2 id="urlsheet-w6-sec-closeout">Close-out</h2>
+                          <p class="lede">The final &ldquo;What to do after class&rdquo; slide cues you to drop the certificate page link and the cohort progress page in chat.</p>
+                          <ul class="pack-urlsheet__list">
+                              <li class="pack-urlsheet__item">
+                                  <p class="pack-urlsheet__title">Course completion certificate</p>
+                                  <p class="pack-urlsheet__when"><strong>When:</strong> Slide cues: &ldquo;Drop the certificate page link in the channel.&rdquo; Students fill it in to generate their EDD completion certificate.</p>
+                                  <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/courses/certificate.html</p>
+                              </li>
+                            <li class="pack-urlsheet__item">
+                                  <p class="pack-urlsheet__title">Cohort progress tracker</p>
+                                  <p class="pack-urlsheet__when"><strong>When:</strong> For supervisors and the cohort lead &mdash; share so the room can see where their section stands.</p>
+                                  <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/courses/progress.html</p>
+                              </li>
+                          </ul>
+                      </section>
+                  </div>
+
+                  <footer class="pack-urlsheet__foot">
+                      <div><strong>EDD &middot; Week 6 Share-in-chat URL sheet</strong> &middot; UNCLASSIFIED &middot; mirror of the on-site Class Links page</div>
+                      <div>jeranaias.github.io/ExpertDrivenDevelopment/decks/links/week-6-fullstack.html</div>
+                  </footer>
+
+              </article>
+              <!-- END: share-in-chat URL sheet appendix -->
         </div>
     </main>
 
     <footer class="site-footer" role="contentinfo">
         <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../pdf/">Briefs Library</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                        <li><a href="../pdf/TRAINING_CURRICULA_v5.pdf">Curricula (PDF)</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
             <div class="footer-bottom">
                 <span>UNCLASSIFIED</span>
                 <span>SSgt Jesse C. Morgan, MCD-Monterey</span>

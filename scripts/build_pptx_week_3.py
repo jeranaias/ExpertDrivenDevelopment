@@ -713,19 +713,37 @@ def render_section(slide, s: Slide, num: int) -> None:
     add_foot(slide, COURSE_LABEL, num, 32, on_dark=True)
 
 
+def estimate_visible_lines(text: str, box_w_in: float, font_size_pt: float) -> int:
+    """Conservative visible-line count for bold sans display text.
+    Mirrors the helper used in scripts/build_pptx_week_6.py so layout (rules,
+    columns, body offsets) can be sized from the actual line count."""
+    if not text:
+        return 1
+    char_w = 0.62 * float(font_size_pt) / 72.0
+    chars_per_line = max(6, int(float(box_w_in) / char_w))
+    total = 0
+    for chunk in str(text).split("\n"):
+        n = max(1, len(chunk))
+        total += (n + chars_per_line - 1) // chars_per_line
+    return max(1, total)
+
+
 def render_content(slide, s: Slide, num: int) -> None:
     add_background(slide, C_BG)
     add_brand_bar(slide)
     next_y = add_eyebrow_chip_row(slide, s.eyebrow, s.chip, s.chip_kind,
                                   y=Inches(0.55))
 
-    # Headline
+    # Headline — size box and downstream rule from actual visible-line count.
     if s.headline:
+        head_w_in = (SLIDE_W - 2 * PAD_X) / 914400
+        head_lines = estimate_visible_lines(s.headline, head_w_in, 36)
+        head_h_in = max(0.85, (36 / 72.0) * 1.05 * head_lines + 0.20)
         tb = add_textbox(slide, PAD_X, next_y, SLIDE_W - 2 * PAD_X,
-                         Inches(1.2))
+                         Inches(head_h_in))
         write_text(tb.text_frame, s.headline, font=FONT_DISPLAY, size=36,
                    bold=True, color=C_INK, line_spacing=1.05)
-        next_y += Inches(1.05)
+        next_y += Inches(head_h_in + 0.10)
 
     add_rule(slide, PAD_X, next_y, w=Inches(1.4))
     next_y += Inches(0.35)

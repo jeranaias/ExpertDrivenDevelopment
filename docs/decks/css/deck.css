@@ -27,9 +27,13 @@
     "Segoe UI", Roboto, Arial, sans-serif;
   --font-mono: "Cascadia Code", "Consolas", "Monaco", "Courier New", monospace;
 
-  /* Slide stage: scaled to viewport. The deck container sets a 16:9 box. */
+  /* Slide stage: scaled to viewport. The deck container sets a 16:9 box.
+     --stage-pad-bottom is intentionally larger than --stage-pad-y so flex
+     content never crowds the absolute .slide__foot chrome line (which sits
+     ~4.2vh tall from the slide bottom — see the .slide__foot rule). */
   --stage-pad-x: 7vw;
   --stage-pad-y: 6vh;
+  --stage-pad-bottom: 7.5vh;
 }
 
 
@@ -69,7 +73,7 @@ body.deck-body .slide {
   background: var(--c-paper);
   color: var(--c-text);
   overflow: hidden;
-  padding: var(--stage-pad-y) var(--stage-pad-x);
+  padding: var(--stage-pad-y) var(--stage-pad-x) var(--stage-pad-bottom);
   font-size: clamp(16px, 1.6vw, 28px);
   line-height: 1.45;
 }
@@ -338,7 +342,16 @@ body.deck-body .slide--section .slide__foot .foot__course { color: rgba(255,255,
 /* ===== Layout: CONTENT (title + body) ===== */
 body.deck-body .slide--content { background: var(--c-paper); }
 
-body.deck-body .slide--content .content__head { display: grid; gap: 1.2vh; max-width: 32ch; }
+body.deck-body .slide--content .content__head {
+  display: grid;
+  gap: 1.2vh;
+  /* Match title-lg's font-size so max-width's ch unit measures title characters,
+     not the smaller inherited slide-body font. Children (.eyebrow at rem,
+     .title-lg at its own clamp) set their own sizes, so this only changes
+     the sizing context for max-width. */
+  font-size: clamp(28px, 3.8vw, 68px);
+  max-width: 18ch;
+}
 
 body.deck-body .slide--content .content__body {
   margin-top: 2.4vh;
@@ -471,7 +484,7 @@ body.deck-body .slide--image .image__art::after {
 }
 
 body.deck-body .slide--image .image__copy {
-  padding: var(--stage-pad-y) var(--stage-pad-x);
+  padding: var(--stage-pad-y) var(--stage-pad-x) var(--stage-pad-bottom);
   display: grid;
   align-content: center;
   gap: 2vh;
@@ -950,7 +963,8 @@ body.deck-body .u-pct-small { font-size: 0.5em; font-weight: 700; }
   font-family: var(--font-body);
 }
 
-.deck-chrome button {
+.deck-chrome button,
+.deck-chrome a.deck-chrome__handout {
   appearance: none;
   border: none;
   background: rgba(0,0,0,0.55);
@@ -966,7 +980,16 @@ body.deck-body .u-pct-small { font-size: 0.5em; font-weight: 700; }
   transition: background 120ms ease;
 }
 
-.deck-chrome button:hover { background: var(--c-scarlet); }
+.deck-chrome a.deck-chrome__handout {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.deck-chrome button:hover,
+.deck-chrome a.deck-chrome__handout:hover,
+.deck-chrome a.deck-chrome__handout:focus-visible { background: var(--c-scarlet); }
 
 .deck-chrome .deck-counter {
   background: rgba(0,0,0,0.55);
@@ -977,6 +1000,52 @@ body.deck-body .u-pct-small { font-size: 0.5em; font-weight: 700; }
   font-variant-numeric: tabular-nums;
   border-radius: 3px;
 }
+
+
+/* ===== Back-to-course link =====
+   Persistent escape hatch from inside a deck back to the matching
+   /docs/courses/<slug>.html lesson page. Sits in the top-left, dim
+   by default so it does not distract during delivery; brightens on
+   hover/focus. Hidden in fullscreen and print so a live presentation
+   or PDF export stays clean. Week 5 declares its own scoped copy
+   inside the deck's <style> block; these rules cascade after it
+   without changing its appearance. */
+.deck-back {
+  position: fixed;
+  left: 14px;
+  top: 14px;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 9px;
+  background: rgba(20,20,20,0.85);
+  color: #f0f0f0;
+  border: 1px solid #444;
+  border-radius: 5px;
+  font: 600 11px var(--font-body);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  opacity: 0.35;
+  transition: opacity 200ms ease, background 120ms ease, border-color 120ms ease;
+}
+
+.deck-back:hover,
+.deck-back:focus-visible {
+  opacity: 1;
+  background: var(--c-scarlet);
+  border-color: var(--c-scarlet);
+  color: #fff;
+}
+
+.deck-back .deck-back__arrow { font-size: 13px; line-height: 1; }
+
+/* Hide the back-link while the browser is in fullscreen presentation mode.
+   The whole document goes fullscreen (deck.js requests it on
+   document.documentElement), so .deck-back is always a descendant of the
+   fullscreen element. */
+:fullscreen .deck-back,
+:-webkit-full-screen .deck-back { display: none !important; }
 
 
 /* ===== Hide per-slide page counter on screen (the fixed chrome shows it).
@@ -1025,7 +1094,7 @@ body.deck-body .slide {
     box-shadow: none;
   }
 
-.deck-chrome, .deck-notes { display: none !important; }
+.deck-chrome, .deck-notes, .deck-back { display: none !important; }
 
 .notes {
     display: block;
@@ -2555,6 +2624,74 @@ body.w3-deck .layout-section .chip--gold { background: var(--c-gold); color: var
 
 body.w3-deck .layout-section .rule { background: var(--c-gold); }
 
+body.w3-deck .layout-section .section__notes-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: calc(2.4 * var(--u));
+  padding: calc(0.5 * var(--u)) calc(1.0 * var(--u));
+  font-size: calc(1.05 * var(--u));
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--c-gold);
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 3px;
+  background: rgba(255,255,255,0.04);
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+body.w3-deck .layout-section .section__notes-link:hover,
+body.w3-deck .layout-section .section__notes-link:focus {
+  background: var(--c-scarlet);
+  border-color: var(--c-scarlet);
+  color: #fff;
+  outline: none;
+}
+
+/* Shared back-link styling for the other week decks' section dividers.
+   Section dividers in every deck use a dark background, so we use the same
+   gold-on-dark / scarlet-hover treatment introduced for the Week 3 deck. */
+body.deck-body .slide--section .section__notes-link,
+body.w2-deck .slide--section .section__notes-link,
+body.w4-deck .slide--section .section__notes-link,
+body.w5-deck .divider .section__notes-link,
+body.w5-deck .closing .section__notes-link,
+body.w6-deck .slide--section .section__notes-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 2.4vh;
+  padding: 0.7vh 1.2vw;
+  font-size: 1.05vw;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #F5D130;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 3px;
+  background: rgba(255,255,255,0.04);
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  width: max-content;
+  align-self: flex-start;
+}
+
+body.deck-body .slide--section .section__notes-link:hover,
+body.deck-body .slide--section .section__notes-link:focus,
+body.w2-deck .slide--section .section__notes-link:hover,
+body.w2-deck .slide--section .section__notes-link:focus,
+body.w4-deck .slide--section .section__notes-link:hover,
+body.w4-deck .slide--section .section__notes-link:focus,
+body.w5-deck .divider .section__notes-link:hover,
+body.w5-deck .divider .section__notes-link:focus,
+body.w5-deck .closing .section__notes-link:hover,
+body.w5-deck .closing .section__notes-link:focus,
+body.w6-deck .slide--section .section__notes-link:hover,
+body.w6-deck .slide--section .section__notes-link:focus {
+  background: #CC0000;
+  border-color: #CC0000;
+  color: #fff;
+  outline: none;
+}
+
 
 /* CONTENT */
 body.w3-deck .layout-content { background: var(--c-bg); }
@@ -2945,6 +3082,14 @@ body.w3-deck, body.w3-deck { background: #fff; height: auto; overflow: visible; 
 
 body.w3-deck .deck__chrome, body.w3-deck .deck__hint { display: none; }
 
+body.w3-deck .layout-section .section__notes-link,
+body.deck-body .slide--section .section__notes-link,
+body.w2-deck .slide--section .section__notes-link,
+body.w4-deck .slide--section .section__notes-link,
+body.w5-deck .divider .section__notes-link,
+body.w5-deck .closing .section__notes-link,
+body.w6-deck .slide--section .section__notes-link { display: none !important; }
+
 body.w3-deck .deck { width: auto; height: auto; }
 
 body.w3-deck .slide {
@@ -3255,6 +3400,17 @@ body.w4-deck .cols-2 .col h3 {
 }
 
 body.w4-deck .cols-2 .col p, body.w4-deck .cols-2 .col li { font-size: 28px; line-height: 1.45; }
+
+/* Slide 24 — backup scenarios: 4-cell layout overflows row 1 at 1280×720
+   because both .cols-2 grids have flex:1; min-height:0 and the natural
+   content of Scenario B exceeds half the available height. Scope a denser
+   layout to this slide only. */
+body.w4-deck .slide[data-id="24"] .slide__body { gap: 18px; padding-top: 64px; padding-bottom: 56px; }
+body.w4-deck .slide[data-id="24"] .cols-2 { flex: 0 0 auto; gap: 48px; }
+body.w4-deck .slide[data-id="24"] .cols-2 + .cols-2 { margin-top: 0; }
+body.w4-deck .slide[data-id="24"] .cols-2 .col { gap: 8px; }
+body.w4-deck .slide[data-id="24"] .cols-2 .col h3 { font-size: 28px; padding-bottom: 6px; margin-bottom: 4px; }
+body.w4-deck .slide[data-id="24"] .cols-2 .col p { font-size: 22px !important; line-height: 1.35; }
 
 
 /* Big stat */
@@ -4058,28 +4214,59 @@ body.w5-deck .slide.is-active, body.w6-deck .slide.is-active { display: flex; fl
 
   /* The runtime-injected printable notes block, one per slide.
      Sits in the bottom 500px of the 1920×1580 page; hard page break
-     after each so the next slide starts on its own page. */
+     after each so the next slide starts on its own page.
+
+     Hard-capped at 500px tall with overflow: hidden so longer notes
+     can never spill onto a continuation page (Chromium would otherwise
+     break the block across pages, producing a "notes-only" extra page
+     that interrupts the slide-per-page flow when printing — most
+     visible on Week 5, also Weeks 2 and 3). To preserve as much of
+     the notes content as possible inside the 500px slot, content is
+     reflowed into two CSS columns; this roughly doubles the visible
+     line capacity without shrinking type below readable size. The
+     bottom-edge fade is a visual cue that the rare extra-long note
+     was clipped — the full notes always remain available in the deck
+     itself (press N) and in the handout view (?handout=2). */
   .slide-print-notes {
     display: block !important;
     visibility: visible !important;
     position: relative !important;
     inset: auto !important;
     width: 1920px !important;
-    min-height: 460px;
+    height: 500px;
+    max-height: 500px;
     max-width: none !important;
     background: #fff !important;
     color: #1a1a1a !important;
     border-top: 4px solid #cc0000;
-    padding: 32px 56px !important;
+    padding: 28px 56px 32px !important;
     margin: 0 !important;
     page-break-after: always;
     break-after: page;
     page-break-inside: avoid;
     break-inside: avoid;
     font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
-    font-size: 18px;
-    line-height: 1.5;
+    font-size: 16px;
+    line-height: 1.45;
     box-sizing: border-box;
+    overflow: hidden;
+    column-count: 2;
+    column-gap: 48px;
+    column-fill: auto;
+  }
+
+  /* Subtle bottom fade — visual marker that a small amount of notes
+     content was clipped (rare with the 2-column reflow, but possible
+     on the very longest Week 5 mode-split notes). */
+  .slide-print-notes::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 32px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 85%);
+    pointer-events: none;
   }
 
   .slide-print-notes::before {
@@ -4091,21 +4278,23 @@ body.w5-deck .slide.is-active, body.w6-deck .slide.is-active { display: flex; fl
     color: #cc0000;
     margin-bottom: 10px;
     font-weight: 700;
+    column-span: all;
   }
 
   .slide-print-notes h3, .slide-print-notes h4 {
     color: #cc0000;
-    font-size: 14px;
+    font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    margin: 14px 0 8px;
+    margin: 10px 0 6px;
     font-weight: 700;
+    break-after: avoid;
   }
   .slide-print-notes h3:first-child, .slide-print-notes h4:first-child { margin-top: 0; }
 
-  .slide-print-notes p { margin: 0 0 10px 0; color: #1a1a1a; }
-  .slide-print-notes ul, .slide-print-notes ol { margin: 0 0 10px 24px; }
-  .slide-print-notes li { margin-bottom: 4px; color: #1a1a1a; }
+  .slide-print-notes p { margin: 0 0 8px 0; color: #1a1a1a; }
+  .slide-print-notes ul, .slide-print-notes ol { margin: 0 0 8px 22px; }
+  .slide-print-notes li { margin-bottom: 3px; color: #1a1a1a; }
   .slide-print-notes strong { color: #000; }
   .slide-print-notes em { color: #cc0000; font-style: normal; font-weight: 600; }
   .slide-print-notes code {
@@ -4113,7 +4302,7 @@ body.w5-deck .slide.is-active, body.w6-deck .slide.is-active { display: flex; fl
     padding: 1px 5px;
     border-radius: 3px;
     font-family: "Cascadia Code", "Fira Code", Consolas, Monaco, monospace;
-    font-size: 16px;
+    font-size: 14px;
     color: #5c0000;
   }
 
@@ -4135,16 +4324,18 @@ body.w5-deck .slide.is-active, body.w6-deck .slide.is-active { display: flex; fl
   /* Week 5 dual-mode notes (Briefing / Joint / Transition blocks).
      Source markup: <div class="note-block briefing|joint|transition">
                       <span class="tag">…</span> <p>…</p>
-                    </div>  */
+                    </div>
+     Tightened margins/padding so the 3 mode blocks fit inside the
+     500px notes slot once reflowed across two columns. */
   .slide-print-notes .note-block {
-    margin-top: 14px;
-    padding: 12px 16px;
-    border-left: 4px solid #cc0000;
+    margin-top: 8px;
+    padding: 8px 12px;
+    border-left: 3px solid #cc0000;
     background: #fafafa;
     page-break-inside: avoid;
     break-inside: avoid;
   }
-  .slide-print-notes .note-block:first-of-type { margin-top: 8px; }
+  .slide-print-notes .note-block:first-of-type { margin-top: 4px; }
   .slide-print-notes .note-block.briefing { border-left-color: #cc0000; background: #fff5f5; }
   .slide-print-notes .note-block.joint { border-left-color: #d4b11a; background: #fffbe6; }
   .slide-print-notes .note-block.transition { border-left-color: #4a4a4a; background: #f4f4f4; }
@@ -4463,3 +4654,37 @@ body.w5-deck .slide.is-active, body.w6-deck .slide.is-active { display: flex; fl
   }
 
 
+
+/* ============================================================
+   Class Links cover footer link (universal, all six decks).
+   Renders a small text link on each cover slide pointing to
+   docs/decks/links/week-N-<slug>.html — the per-deck list of
+   shareable URLs the deck cues you to drop into Teams chat.
+   Scoped narrowly so it inherits each deck's cover palette.
+   ============================================================ */
+.cover-classlinks {
+  margin-top: 1.2em;
+  font-size: 0.55em;
+  letter-spacing: 0.04em;
+  opacity: 0.85;
+}
+.cover-classlinks a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+.cover-classlinks a:hover { opacity: 1; text-decoration-thickness: 2px; }
+
+/* Weeks 2/3/5/6 base their cover layout on absolute / grid / scaled units;
+   their covers expect a slightly different anchor — keep size proportional
+   so the link is legible from the back of the room. */
+.w2-deck .cover-classlinks { font-size: 18px; margin-top: 18px; opacity: 0.85; }
+.w3-deck .cover-classlinks { font-size: 1em; opacity: 0.9; }
+.w5-deck .cover-classlinks { font-size: 0.85em; margin-top: 1.6vh; opacity: 0.9; }
+.w6-deck .cover-classlinks { font-size: 0.85em; margin-top: 1.6vh; opacity: 0.9; }
+
+/* In print/handout exports, the cover link is presentational chrome — hide it. */
+@media print {
+  .cover-classlinks { display: none !important; }
+}

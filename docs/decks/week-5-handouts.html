@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Chat-paste-ready hand-out blocks for the Course 5 Supervisor Orientation session - Exercise A scenario, Exercise B scenario, Exercise C apprentice-risk scenario, and the supervisor quick-reference card.">
+      <title>Week 5 Facilitator Hand-Outs | Expert-Driven Development</title>
+      <link rel="stylesheet" href="../css/style.css">
+      <style>
+          /* --- Hand-out specific styles ---
+             Built on top of the site stylesheet so the page reads as a
+             regular EDD doc, with one extra "copy-block" component. */
+
+          .handout-intro {
+              background: var(--color-bg-secondary);
+              border-left: 4px solid var(--color-scarlet);
+              padding: var(--space-lg) var(--space-xl);
+              margin-bottom: var(--space-xl);
+              border-radius: 0 var(--space-sm) var(--space-sm) 0;
+          }
+          .handout-intro p { margin: 0 0 var(--space-sm); }
+          .handout-intro p:last-child { margin-bottom: 0; }
+
+          .handout-toc {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+              gap: var(--space-md);
+              margin: var(--space-xl) 0 var(--space-2xl);
+          }
+          .handout-toc a {
+              display: block;
+              padding: var(--space-md);
+              background: var(--color-bg-secondary);
+              border: 1px solid var(--color-border);
+              border-radius: var(--space-sm);
+              text-decoration: none;
+              color: var(--color-text-primary);
+              transition: border-color 0.15s, transform 0.15s;
+          }
+          .handout-toc a:hover {
+              border-color: var(--color-scarlet);
+              transform: translateY(-1px);
+          }
+          .handout-toc .slide-tag {
+              display: inline-block;
+              font-size: var(--font-size-xs);
+              font-weight: var(--font-weight-bold);
+              letter-spacing: 0.08em;
+              text-transform: uppercase;
+              color: var(--color-scarlet);
+              margin-bottom: var(--space-xs);
+          }
+          .handout-toc .toc-title {
+              display: block;
+              font-weight: var(--font-weight-semibold);
+              font-size: var(--font-size-md);
+          }
+
+          .copy-block {
+              border: 1px solid var(--color-border);
+              border-radius: var(--space-sm);
+              margin: var(--space-lg) 0 var(--space-2xl);
+              overflow: hidden;
+              background: var(--color-bg-primary);
+          }
+          .copy-block__header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              gap: var(--space-md);
+              padding: var(--space-md) var(--space-lg);
+              background: var(--color-bg-dark);
+              color: var(--color-text-inverse);
+              flex-wrap: wrap;
+          }
+          .copy-block__label {
+              display: flex;
+              align-items: center;
+              gap: var(--space-md);
+              flex-wrap: wrap;
+          }
+          .slide-pill {
+              display: inline-block;
+              padding: 2px 10px;
+              background: var(--color-gold);
+              color: var(--color-text-primary);
+              font-size: var(--font-size-xs);
+              font-weight: var(--font-weight-bold);
+              letter-spacing: 0.08em;
+              text-transform: uppercase;
+              border-radius: 999px;
+          }
+          .copy-block__title {
+              font-weight: var(--font-weight-semibold);
+              font-size: var(--font-size-base);
+          }
+          .copy-btn {
+              display: inline-flex;
+              align-items: center;
+              gap: var(--space-xs);
+              padding: var(--space-sm) var(--space-md);
+              background: var(--color-scarlet);
+              color: var(--color-text-inverse);
+              border: 0;
+              border-radius: var(--space-sm);
+              font-family: var(--font-family-sans);
+              font-size: var(--font-size-sm);
+              font-weight: var(--font-weight-semibold);
+              cursor: pointer;
+              transition: background-color 0.15s;
+          }
+          .copy-btn:hover { background: var(--color-scarlet-dark); }
+          .copy-btn:focus-visible {
+              outline: 2px solid var(--color-gold);
+              outline-offset: 2px;
+          }
+          .copy-btn.is-copied { background: var(--color-success-border); }
+
+          .copy-block__cue {
+              padding: var(--space-md) var(--space-lg);
+              background: var(--color-warning-bg);
+              border-bottom: 1px solid var(--color-warning-border);
+              font-size: var(--font-size-sm);
+              color: var(--color-warning-text);
+          }
+          .copy-block__cue strong { color: var(--color-warning-text); }
+
+          .copy-block__body {
+              margin: 0;
+              padding: var(--space-lg);
+              white-space: pre-wrap;
+              font-family: var(--font-family-mono);
+              font-size: var(--font-size-sm);
+              line-height: var(--line-height-normal);
+              color: var(--color-text-primary);
+              background: var(--color-bg-code);
+              max-height: 520px;
+              overflow: auto;
+          }
+
+          .back-bar {
+              display: flex;
+              gap: var(--space-md);
+              flex-wrap: wrap;
+              margin-bottom: var(--space-md);
+              font-size: var(--font-size-sm);
+          }
+
+          /* Print rules for hand-out copy-blocks (multi-page flow,
+             ASCII-table column alignment, hidden copy buttons / TOC)
+             live in docs/css/style.css @media print. */
+      </style>
+  </head>
+  <body class="site-wrapper">
+
+      <a href="#main-content" class="skip-link">Skip to main content</a>
+
+      <!-- Site Header -->
+      <header class="site-header" role="banner">
+          <div class="container">
+              <a href="../" class="site-brand">
+                  <span class="site-brand__mark" aria-hidden="true"></span>
+                  Expert-Driven Development
+              </a>
+              <nav aria-label="Primary navigation">
+                  <ul class="nav-list">
+                      <li><a href="../">Home</a></li>
+                      <li><a href="../courses/" class="active">Courses</a></li>
+                      <li><a href="../sop/">SOP</a></li>
+                      <li><a href="../toolkit/">Toolkit</a></li>
+                      <li><a href="../tools/">Tools</a></li>
+                      <li><a href="../resources/">Resources</a></li>
+                      <li><a href="../about.html">About</a></li>
+                  </ul>
+              </nav>
+              <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                  <span class="nav-toggle__icon" aria-hidden="true"></span>
+              </button>
+          </div>
+      </header>
+
+      <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+          <ul class="nav-list">
+              <li><a href="../">Home</a></li>
+              <li><a href="../courses/" class="active">Courses</a></li>
+              <li><a href="../sop/">SOP</a></li>
+              <li><a href="../toolkit/">Toolkit</a></li>
+              <li><a href="../tools/">Tools</a></li>
+              <li><a href="../resources/">Resources</a></li>
+              <li><a href="../about.html">About</a></li>
+          </ul>
+      </div>
+
+      <!-- Page Header -->
+      <section class="page-header">
+          <div class="container">
+              <nav aria-label="Breadcrumb">
+                  <ol class="breadcrumb">
+                      <li><a href="../">Home</a></li>
+                      <li><a href="../courses/">Courses</a></li>
+                      <li><a href="../courses/supervisor.html">Course 5: Supervisor Orientation</a></li>
+                      <li aria-current="page">Facilitator Hand-Outs</li>
+                  </ol>
+              </nav>
+              <h1 class="page-header__title">Week 5 Facilitator Hand-Outs</h1>
+              <p class="page-header__desc">
+                  Four chat-paste-ready blocks for the Course 5 Supervisor Orientation session. Open this tab in a second window before the session, then copy each block into Microsoft Teams chat at the slide it pairs with.
+              </p>
+              <div class="back-bar mt-md">
+                  <a href="week-5-supervisor.html">&larr; Back to Week 5 Slide Deck</a>
+                  <span aria-hidden="true">&middot;</span>
+                  <a href="../courses/supervisor.html">Course 5 Instructor Page</a>
+              </div>
+          </div>
+      </section>
+
+      <main id="main-content" class="site-main">
+          <div class="container container--narrow">
+
+              <div class="handout-intro">
+                  <p><strong>How to use this page.</strong> Keep it open in a second browser tab. When the deck reaches the slide called out on each block&rsquo;s gold pill, click <em>Copy</em>, then paste into the Teams chat. Plain text is intentional &mdash; it survives the Teams paste cleanly and stays legible on a 13&Prime; laptop.</p>
+                  <p><strong>Print fallback.</strong> If you lose your second-screen, this page prints to one or two clean pages with the copy buttons hidden &mdash; use <kbd>Ctrl</kbd>+<kbd>P</kbd> / <kbd>&#8984;</kbd>+<kbd>P</kbd>.</p>
+                  <p><strong>Where these come from.</strong> Each block is lifted verbatim from the <a href="../courses/supervisor.html">Supervisor Orientation instructor page</a> and the <a href="week-5-supervisor.html">Supervisor Orientation deck</a> &mdash; the two Module 3 evaluation scenarios, the Module 4 apprentice-risk exercise (Exercise C), and the Module 5 quick-reference card.</p>
+              </div>
+  
+              <nav class="handout-toc" aria-label="Hand-out jump links">
+                  <a href="#handout-exercise-a">
+                      <span class="slide-tag">Module 3 &middot; Exercise A</span>
+                      <span class="toc-title">Exercise A scenario - leave policy summary</span>
+                  </a>
+                <a href="#handout-exercise-b">
+                      <span class="slide-tag">Module 3 &middot; Exercise B</span>
+                      <span class="toc-title">Exercise B scenario - automated reporting tool</span>
+                  </a>
+                <a href="#handout-exercise-c">
+                      <span class="slide-tag">Module 4 &middot; Exercise C</span>
+                      <span class="toc-title">Exercise C - spot the apprentice risk</span>
+                  </a>
+                <a href="#handout-quick-reference">
+                      <span class="slide-tag">Module 5 &middot; Quick reference</span>
+                      <span class="toc-title">Supervisor quick reference card</span>
+                  </a>
+              </nav>
+  
+              <!-- ===========================================================
+                   BLOCK 1 &mdash; Module 3 — Exercise A
+                   =========================================================== -->
+              <article id="handout-exercise-a">
+                  <h2>Exercise A scenario</h2>
+                  <p>
+                      Drop this in chat as you read the scenario aloud. Supervisors need the text in front of them so they can apply the four questions and write down what they would ask first.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Exercise A scenario slide</span>
+                              <span class="copy-block__title">Exercise A: AI-generated leave policy summary</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w5-exA" aria-label="Copy Exercise A scenario to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Scenario A in chat. Read it. Thirty seconds of silence. Then one answer: what do you ask first?&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w5-exA">Scenario A - AI-generated leave policy summary
+
+  A Marine presents you with a one-page summary of leave policy for Emergency
+  Leave Authorization. The summary is clear, well-formatted, and cites
+  MCO P1050.3K. The Marine tells you it was generated using ChatGPT and
+  reviewed for accuracy. They want to distribute it to the section.
+
+  Your move:
+  What do you ask first?
+  What gets the green light?
+  What earns a "not yet"?
+
+  ----
+
+  The four questions to evaluate AI-assisted output:
+    1. Can you demonstrate it? (Live walkthrough, real inputs.)
+    2. Can you verify accuracy? (Specific checks - not general trust.)
+    3. Who reviewed it? (Peer / SME / security per the SOP.)
+    4. What is the update path? (Who refreshes when policy changes?)</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 2 &mdash; Module 3 — Exercise B
+                   =========================================================== -->
+              <article id="handout-exercise-b">
+                  <h2>Exercise B scenario</h2>
+                  <p>
+                      Drop this when the deck advances to Scenario B. This one is harder: the time savings are seductive, the failure modes subtle. Hold the room from rushing to "approved."
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Exercise B scenario slide</span>
+                              <span class="copy-block__title">Exercise B: automated reporting tool</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w5-exB" aria-label="Copy Exercise B scenario to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Scenario B in chat. The savings are real. So is the risk. Which question goes first?&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w5-exB">Scenario B - Automated reporting tool
+
+  A Marine built a Python script that pulls data from a shared spreadsheet
+  and auto-generates the weekly operations summary. It runs in 30 seconds.
+  The manual process took 90 minutes. The Marine wants approval to use it
+  for official reporting.
+
+  Your move:
+  The time savings are real. The risk is also real. Which questions go first?
+
+  ----
+
+  The trap: "It saves 89 minutes" is not a Yes. It is a reason to take the
+  four questions MORE seriously, not fewer. The most dangerous AI-assisted
+  work is the kind that is obviously valuable.</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 3 &mdash; Module 4 — Exercise C
+                   =========================================================== -->
+              <article id="handout-exercise-c">
+                  <h2>Exercise C: spot the apprentice risk</h2>
+                  <p>
+                      Drop this when the deck reaches the apprentice-problem exercise. Long-form scenario about counseling statements - it plants the pattern that developmental tasks deserve a different default than routine ones.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Exercise C slide</span>
+                              <span class="copy-block__title">Exercise C: spot the apprentice risk</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w5-exC" aria-label="Copy Exercise C scenario to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Scenario C in chat. Read it. What was lost? What does a permission-culture supervisor do?&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w5-exC">Scenario C - Spot the apprentice risk (joint discussion)
+
+  A new SgtSec NCO is assigned to draft initial counseling statements for
+  three junior Marines. They use ChatGPT to produce all three drafts in
+  under five minutes. The drafts are technically correct. They sign and
+  submit them. Their supervisor approves them without comment.
+
+  What was lost
+    - The new NCO never wrestled with how to characterize a Marine's
+      performance.
+    - They didn't develop the language a counseling statement actually
+      requires.
+    - They learned that AI handles people work - and that the supervisor
+      doesn't notice.
+
+  What a permission-culture supervisor does
+    - Approves AI for the format and structure, not the judgment.
+    - Requires the NCO to write the assessment paragraphs from scratch.
+    - Reviews together: "What did the AI miss about this Marine?"
+
+  Counseling statements are a developmental task. Name another
+  developmental task in your section that AI is currently doing instead
+  of being a teaching tool.</pre>
+                  </div>
+              </article>
+  
+
+              <!-- ===========================================================
+                   BLOCK 4 &mdash; Module 5 — quick reference
+                   =========================================================== -->
+              <article id="handout-quick-reference">
+                  <h2>Supervisor quick reference card</h2>
+                  <p>
+                      Drop this in the closing minutes so supervisors can paste the card into a OneNote page or pin it in Teams. It is the screenshot they take from the slide, but in copy-paste form.
+                  </p>
+
+                  <div class="copy-block">
+                      <div class="copy-block__header">
+                          <div class="copy-block__label">
+                              <span class="slide-pill">Use on Module 5 quick-reference slide</span>
+                              <span class="copy-block__title">Supervisor quick reference: AI-assisted work</span>
+                          </div>
+                          <button class="copy-btn" type="button" data-copy-target="copy-w5-qref" aria-label="Copy supervisor quick reference card to clipboard">
+                              <span class="copy-btn__label">Copy to clipboard</span>
+                          </button>
+                      </div>
+                      <div class="copy-block__cue">
+                          <strong>Cue line for the room:</strong> &ldquo;Quick reference in chat. Pin it, paste it into your notebook, screenshot the slide - whichever sticks.&rdquo;
+                      </div>
+  <pre class="copy-block__body" id="copy-w5-qref">Supervisor quick reference: AI-assisted work
+
+  3 questions before you approve
+    - Demonstrate it.    Live demo with real inputs.
+    - Verify accuracy.   Specific checks, not general trust.
+    - Who reviewed it?   Peer + SME + security per the SOP.
+
+  3 supervision checks for junior development
+    - Explain without AI.   Can the Marine walk through the logic on their own?
+    - Periodic without AI.  Preserve baseline competency. Tool may disappear.
+    - AI as teaching tool.  "How would you verify this? What if it were wrong?"
+
+  What earns a yes
+    - Format and structure (drafts, summaries, formatting).
+    - Brainstorming, options analysis, second-set-of-eyes review.
+    - Boilerplate generation that the Marine still owns and edits.
+
+  What earns a "not yet"
+    - Final policy, counseling, evaluation, or recommendation language
+      the Marine cannot defend without the tool.
+    - Anything with PII or CUI on a non-approved tool.
+    - "AI did it, I haven't read it" - send it back, do not approve.
+
+  Goal: AI-augmented Marines, NOT AI-dependent ones.</pre>
+                  </div>
+              </article>
+  
+          </div>
+      </main>
+
+      <!-- Site Footer -->
+      <footer class="site-footer" role="contentinfo">
+          <div class="container">
+              <div class="footer-grid">
+                  <div class="footer-section">
+                      <h3 class="footer-section__title">Expert-Driven Development</h3>
+                      <p>
+                          Open-source AI-assisted development training for DoW personnel.
+                          Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                      </p>
+                  </div>
+                  <div class="footer-section">
+                      <h3 class="footer-section__title">Navigation</h3>
+                      <ul>
+                          <li><a href="../">Home</a></li>
+                          <li><a href="../courses/">Courses</a></li>
+                          <li><a href="../sop/">SOP</a></li>
+                          <li><a href="../toolkit/">Toolkit</a></li>
+                          <li><a href="../tools/">Tools</a></li>
+                          <li><a href="../resources/">Resources</a></li>
+                          <li><a href="../about.html">About</a></li>
+                      </ul>
+                  </div>
+                  <div class="footer-section">
+                      <h3 class="footer-section__title">Links</h3>
+                      <ul>
+                          <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                          <li><a href="../pdf/">Briefs Library</a></li>
+                          <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                          <li><a href="../pdf/TRAINING_CURRICULA_v5.pdf">Curricula (PDF)</a></li>
+                          <li>MIT License</li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="footer-bottom">
+                  <span>UNCLASSIFIED</span>
+                  <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+              </div>
+          </div>
+      </footer>
+
+      <script>
+          (function () {
+              // Mobile nav toggle (matches docs/courses/advanced.html behaviour)
+              var toggle = document.querySelector('.nav-toggle');
+              var mobileNav = document.getElementById('mobile-nav');
+              if (toggle && mobileNav) {
+                  toggle.addEventListener('click', function () {
+                      var expanded = this.getAttribute('aria-expanded') === 'true';
+                      this.setAttribute('aria-expanded', String(!expanded));
+                      mobileNav.classList.toggle('is-open');
+                  });
+              }
+
+              // Copy-block buttons
+              document.querySelectorAll('.copy-btn').forEach(function (btn) {
+                  btn.addEventListener('click', function () {
+                      var targetId = btn.getAttribute('data-copy-target');
+                      var target = document.getElementById(targetId);
+                      if (!target) return;
+                      var text = target.textContent;
+                      var label = btn.querySelector('.copy-btn__label');
+                      var originalLabel = label ? label.textContent : '';
+
+                      var done = function () {
+                          btn.classList.add('is-copied');
+                          if (label) label.textContent = 'Copied';
+                          setTimeout(function () {
+                              btn.classList.remove('is-copied');
+                              if (label) label.textContent = originalLabel;
+                          }, 1800);
+                      };
+                      var fail = function () {
+                          if (label) label.textContent = 'Copy failed \u2014 select & \u2318/Ctrl+C';
+                          setTimeout(function () {
+                              if (label) label.textContent = originalLabel;
+                          }, 2500);
+                      };
+
+                      if (navigator.clipboard && navigator.clipboard.writeText) {
+                          navigator.clipboard.writeText(text).then(done).catch(function () {
+                              // Fallback for older / restricted contexts
+                              try {
+                                  var range = document.createRange();
+                                  range.selectNodeContents(target);
+                                  var sel = window.getSelection();
+                                  sel.removeAllRanges();
+                                  sel.addRange(range);
+                                  document.execCommand('copy');
+                                  sel.removeAllRanges();
+                                  done();
+                              } catch (err) { fail(); }
+                          });
+                      } else {
+                          try {
+                              var range = document.createRange();
+                              range.selectNodeContents(target);
+                              var sel = window.getSelection();
+                              sel.removeAllRanges();
+                              sel.addRange(range);
+                              document.execCommand('copy');
+                              sel.removeAllRanges();
+                              done();
+                          } catch (err) { fail(); }
+                      }
+                  });
+              });
+          })();
+      </script>
+
+  </body>
+  </html>
+  
