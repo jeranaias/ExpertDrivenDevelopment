@@ -3527,6 +3527,22 @@ body.w4-deck .slide--facilitation .facil-panel li {
 
 
 /* Share-out grid slide */
+body.w4-deck .slide--shareout h2 {
+  font-size: 76px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+body.w4-deck .slide--shareout .subhead {
+  font-size: 32px;
+  color: var(--scarlet);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
 body.w4-deck .slide--shareout .panel {
   background: var(--bg-warm);
   border-radius: 8px;
