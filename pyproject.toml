@@ -3,4 +3,8 @@ name = "repl-nix-workspace"
 version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "beautifulsoup4>=4.14.3",
+    "lxml>=6.1.0",
+    "python-pptx>=1.0.2",
+]
