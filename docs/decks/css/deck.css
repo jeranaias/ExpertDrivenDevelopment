@@ -2413,6 +2413,7 @@ body.w3-deck .slide__header {
   justify-content: space-between;
   margin-bottom: calc(2.2 * var(--u));
   flex-shrink: 0;
+  width: 100%;
 }
 
 body.w3-deck .slide__eyebrow {
@@ -2585,9 +2586,9 @@ body.w3-deck .timeline__what { font-size: calc(1.5 * var(--u)); font-weight: 600
 
 body.w3-deck .timeline__meta { font-size: calc(1.05 * var(--u)); color: var(--c-ink-muted); text-align: right; }
 
-body.w3-deck .timeline__row--break .timeline__time { color: var(--c-gold-dk); }
+body.w3-deck .timeline__time.timeline__row--break { color: var(--c-gold-dk); }
 
-body.w3-deck .timeline__row--break .timeline__what { color: var(--c-ink-soft); font-style: italic; font-weight: 500; }
+body.w3-deck .timeline__what.timeline__row--break { color: var(--c-ink-soft); font-style: italic; font-weight: 500; }
 
 
 /* BUILD FRAMING */
