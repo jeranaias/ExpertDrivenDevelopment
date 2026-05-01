@@ -73,7 +73,11 @@
     inset: 0;
     display: none;
     flex-direction: column;
-    padding: 4.5vh 5vw 5vh;
+    /* Bottom padding leaves room for .slide__foot (absolute, ~5vh tall when
+       chrome-line + text + padding-top are summed at 16:9). 5vh was tangent;
+       7vh keeps a small but visible gap on every slide where flex content
+       extends to fill (slides 14, 20, 21, 24, 25, 26). */
+    padding: 4.5vh 5vw 7vh;
     background: var(--bg);
     color: var(--ink);
   }
