@@ -373,11 +373,32 @@
        Use the safe intersection so the pack never clips. */
     width: 10.36in;
     height: 7.63in;
+    gap: 0.07in;
     page-break-after: avoid;
     page-break-inside: avoid;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
+
+  /* ---------- Tighten-pass for browser print -----------------
+     Without this, the dense weeks (5 + 6 especially) tip a
+     final bullet or footer line onto a second page when users
+     hit Ctrl+P. These clamps are the same overrides the
+     headless-Chromium PDF builder used to inject at render
+     time; baked into the shipped CSS so the in-browser print
+     preview behaves identically. The two-row 1fr/1fr clamp on
+     .pk-body plus overflow:hidden on .pk-box guarantees the
+     content envelope is never exceeded; per-element shrinks
+     are tuned so nothing actually gets clipped in practice. */
+  .pk-box li, .pk-box p { line-height: 1.12 !important; margin-bottom: 0.3pt !important; }
+  .pk-fail .sym         { font-size: 7.6pt !important; line-height: 1.08 !important; }
+  .pk-fail .fix         { font-size: 7.4pt !important; line-height: 1.10 !important; }
+  .pk-fail li           { margin-bottom: 0.5pt !important; }
+  .pk-cue               { padding: 1pt 5pt !important; line-height: 1.18 !important; margin-top: 1pt !important; }
+  .pk-box               { padding: 4pt 7pt 4pt !important; gap: 1pt !important; overflow: hidden !important; }
+  .pk-body              { gap: 0.07in !important; grid-template-rows: 1fr 1fr !important; }
+  .pk-head              { padding-bottom: 0.05in !important; }
+  .pk-foot              { padding-top: 2pt !important; margin-top: 1pt !important; }
 
   /* Force colour fidelity on key marks even in B&W printing */
   .pk-head { border-bottom-color: #000 !important; }
@@ -497,4 +518,20 @@
     font-size: 0.92rem;
     color: var(--pk-ink-2);
   }
+  /* One-line nudge that the print layout assumes the browser's
+     "Margins" setting stays at "Default" (or "None"). Many users
+     pick "Custom" or "Minimum" — both shrink the printable area
+     below what `.pack-page`'s 7.63in × 10.36in envelope fits in,
+     and the pack tips onto a second page. Screen-only; the
+     parent `.pack-intro` is already display:none in print. */
+  .pack-intro__tip {
+    margin: 0.6rem 0 0;
+    padding: 0.45rem 0.7rem;
+    background: var(--pk-warn-bg);
+    border-left: 3px solid var(--pk-gold-dark);
+    border-radius: 0 4px 4px 0;
+    font-size: 0.92rem;
+    color: var(--pk-ink);
+  }
+  .pack-intro__tip strong { color: var(--pk-ink); font-weight: 700; }
 }

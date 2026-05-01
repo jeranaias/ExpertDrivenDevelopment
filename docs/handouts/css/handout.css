@@ -368,11 +368,30 @@
        Use the safe intersection so the handout never clips. */
     width: 10.36in;
     height: 7.63in;
+    gap: 0.07in;
     page-break-after: avoid;
     page-break-inside: avoid;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
+
+  /* ---------- Tighten-pass for browser print -----------------
+     Mirrors the facilitator-pack tighten-pass. Without this,
+     Weeks 5 + 6 tip a final bullet or footer line onto a
+     second page when users hit Ctrl+P. The two-row 1fr/1fr
+     clamp on .hd-body plus overflow:hidden on .hd-box
+     guarantees the content envelope is never exceeded;
+     per-element shrinks are tuned so nothing actually gets
+     clipped in practice. */
+  .hd-box li, .hd-box p { line-height: 1.12 !important; margin-bottom: 0.3pt !important; }
+  .hd-terms .term       { font-size: 7.6pt !important; line-height: 1.08 !important; }
+  .hd-terms .def        { font-size: 7.4pt !important; line-height: 1.10 !important; }
+  .hd-terms li          { margin-bottom: 0.5pt !important; }
+  .hd-anchor            { padding: 1pt 5pt !important; line-height: 1.18 !important; margin-top: 1pt !important; }
+  .hd-box               { padding: 4pt 7pt 4pt !important; gap: 1pt !important; overflow: hidden !important; }
+  .hd-body              { gap: 0.07in !important; grid-template-rows: 1fr 1fr !important; }
+  .hd-head              { padding-bottom: 0.05in !important; }
+  .hd-foot              { padding-top: 2pt !important; margin-top: 1pt !important; }
 
   /* Force colour fidelity on key marks even in B&W printing */
   .hd-head { border-bottom-color: #000 !important; }
@@ -445,4 +464,25 @@
   color: var(--hd-ink-3);
   letter-spacing: 0.04em;
   border-top: 1px solid var(--hd-rule-2);
+}
+
+/* ---------- Margin-setting tip (on-screen only) ------------
+   Wrapped in @media screen so it never reaches the print
+   stylesheet. Belt-and-braces — the parent `.handout-intro`
+   is also display:none in print. The hint exists because
+   many users pick "Custom" or "Minimum" margins in their
+   browser print dialog, which shrinks the printable area
+   below what `.handout-page`'s 7.63in × 10.36in envelope
+   fits in, tipping the handout onto a second page. */
+@media screen {
+  .handout-intro__tip {
+    margin: 0.6rem 0 0;
+    padding: 0.45rem 0.7rem;
+    background: var(--hd-tip-bg);
+    border-left: 3px solid var(--hd-tip-edge);
+    border-radius: 0 4px 4px 0;
+    font-size: 0.92rem;
+    color: var(--hd-ink);
+  }
+  .handout-intro__tip strong { color: var(--hd-ink); font-weight: 700; }
 }

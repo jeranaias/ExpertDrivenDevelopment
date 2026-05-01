@@ -145,45 +145,12 @@ async function ensureServerUp() {
   }
 }
 
-// Tight-up overrides we inject only for headless PDF rendering. Chrome on
-// macOS / Windows resolves the pack's font stack to Helvetica / Segoe UI /
-// Arial, which are tighter than the headless Linux fallback even with
-// Liberation Sans aliased in. Without this the bullets in the dense weeks
-// (5 + 6 especially) overflow past the bottom of the fixed-height pack
-// frame and visually collide with the footer. These tweaks are scoped to
-// `@media print` and added only at PDF time — they never reach the live
-// `pack.css`, so the in-browser print preview the authors target is
-// unaffected.
-//
-// We also bump `.pack-page` height to 7.86in (Letter usable area minus
-// 0.32in margins). The shipped stylesheet uses 7.63in (the safe
-// intersection of Letter + A4) so the pack never clips on either paper
-// size; here we know we're rendering at Letter, so we can claim the
-// extra 0.23in.
-const PRINT_TIGHTEN_CSS = `
-@media print {
-  .pk-box li, .pk-box p { line-height: 1.12 !important; margin-bottom: 0.3pt !important; }
-  .pk-fail .sym         { font-size: 7.6pt !important; line-height: 1.08 !important; }
-  .pk-fail .fix         { font-size: 7.4pt !important; line-height: 1.10 !important; }
-  .pk-fail li           { margin-bottom: 0.5pt !important; }
-  .pk-cue               { padding: 1pt 5pt !important; line-height: 1.18 !important; margin-top: 1pt !important; }
-  .pk-box               { padding: 4pt 7pt 4pt !important; gap: 1pt !important; overflow: hidden !important; }
-  /* Force the two rows to share pk-body height equally regardless of
-     intrinsic content height. With the shipped auto/auto template,
-     pk-box--sideways (the longest box on the densest weeks) grows past
-     its allocated cell, and Chrome paginates, sending the last bullet
-     to a second page. With 1fr/1fr the rows are clamped to the box,
-     and combined with overflow:hidden on .pk-box any final overflow
-     is clipped silently. The per-element shrinks above are tuned so
-     that the budget is honoured on every pack and nothing actually
-     gets clipped in the visible output. */
-  .pk-body              { gap: 0.07in !important; grid-template-rows: 1fr 1fr !important; }
-  .pack-page            { gap: 0.07in !important; height: 7.86in !important; }
-  .pk-head              { padding-bottom: 0.05in !important; }
-  .pk-foot              { padding-top: 2pt !important; margin-top: 1pt !important; }
-}
-`;
-
+// The tighten-pass that used to be injected here at PDF time now lives
+// in the shipped `docs/facilitator/css/pack.css` `@media print` block
+// (so the in-browser print preview behaves identically to this PDF
+// output, which is the whole point of task #60). Nothing extra is
+// injected here any more — we just point Chrome at the URL and ask
+// for a Letter-landscape print.
 async function renderPack(browser, pack) {
   const url = `${SITE_URL}/facilitator/${pack.file}`;
   const outPath = path.join(OUT_DIR, `week-${pack.week}-${pack.slug}.pdf`);
@@ -197,16 +164,14 @@ async function renderPack(browser, pack) {
     await page.setViewport({ width: 1056, height: 816, deviceScaleFactor: 1 });
     await page.emulateMediaType("print");
     await page.goto(url, { waitUntil: "networkidle0", timeout: 30000 });
-    await page.addStyleTag({ content: PRINT_TIGHTEN_CSS });
-    // Give layout a tick to settle after the style injection so the
+    // Give layout a tick to settle after media-type emulation so the
     // measurements puppeteer hands to the PDF renderer reflect the
-    // tightened metrics (otherwise the very last bullet of the densest
-    // weeks renders with stale heights and bleeds past the box).
+    // print-mode metrics.
     await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
     // Render the pack onto a Letter-landscape page with the same 0.32in
     // margins the in-browser print preview targets. We deliberately do
-    // NOT pass `scale` — the tighten CSS above already sizes
-    // `.pack-page` to fit the Letter usable area exactly, and any
+    // NOT pass `scale` — the shipped `@media print` CSS already sizes
+    // `.pack-page` to fit safely on both Letter and A4, and any
     // additional puppeteer-side scaling would inflate the layout
     // viewport and re-introduce the overflow we just engineered out.
     await page.pdf({
