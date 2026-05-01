@@ -341,9 +341,9 @@ body.deck-body .slide--content { background: var(--c-paper); }
 body.deck-body .slide--content .content__head { display: grid; gap: 1.2vh; max-width: 32ch; }
 
 body.deck-body .slide--content .content__body {
-  margin-top: 4vh;
+  margin-top: 2.4vh;
   display: grid;
-  gap: 2.4vh;
+  gap: 1.8vh;
   max-width: 60ch;
 }
 
@@ -3980,7 +3980,14 @@ body.w5-deck .slide.is-active, body.w6-deck .slide.is-active { display: flex; fl
    per-week @media print rules.
    ============================================================ */
 @media print {
-  @page { size: 1920px 1580px; margin: 0; }
+  /* 1920px / 96 dpi = 20in   ·   1580px / 96 dpi = 16.458in
+     Inches (not px) are used here because Chromium's PDF rasteriser
+     silently rejects pixel sizes in @page and falls back to letter,
+     which makes the 1920×1080 px slide overflow the page and forces
+     each slide+notes pair onto two pages with a blank between them
+     (51 slides → 102 pages). The dimensions are mathematically
+     identical to the original `1920px 1580px`. */
+  @page { size: 20in 16.458in; margin: 0; }
 
   html, body {
     background: #fff !important;
@@ -4376,13 +4383,14 @@ body.w5-deck .slide.is-active, body.w6-deck .slide.is-active { display: flex; fl
 
   /* ----- Print rules for the handout view -----
      These must override the universal one-slide-per-page print sheet
-     above; rely on body.is-handout specificity + !important where needed. */
+     above; rely on body.is-handout specificity + !important where needed.
+     Note: the handout's letter-size @page rule is injected at runtime by
+     deck.js when handout mode activates (see "handout @page injection" in
+     deck.js). It can't live here as a static rule because @page cannot be
+     selector-scoped, and a static rule here would override the universal
+     handout block's slide-print @page (20in × 16.458in) for *all* print
+     contexts, not just handout mode. */
   @media print {
-    @page {
-      size: 8.5in 11in;
-      margin: 0.4in;
-    }
-
     body.is-handout {
       background: #fff !important;
     }
@@ -4453,3 +4461,5 @@ body.w5-deck .slide.is-active, body.w6-deck .slide.is-active { display: flex; fl
       content: none !important;
     }
   }
+
+

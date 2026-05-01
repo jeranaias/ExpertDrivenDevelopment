@@ -360,6 +360,17 @@
     document.body.classList.add("is-handout");
     document.body.classList.add("handout-" + perPage + "up");
 
+    // Handout @page injection. The static print stylesheet declares
+    // @page { size: 20in 16.458in } for one-slide-per-page output.
+    // For handout mode we want letter-size pages instead; @page can't
+    // be selector-scoped, so inject the override at runtime so it
+    // cascades after the static rule only when handout is active.
+    var handoutPageStyle = document.createElement("style");
+    handoutPageStyle.setAttribute("data-injected-by", "deck.js:handout");
+    handoutPageStyle.textContent =
+      "@media print { @page { size: 8.5in 11in; margin: 0.4in; } }";
+    document.head.appendChild(handoutPageStyle);
+
     var total = allSlides.length;
     var container = document.createElement("div");
     container.className = "handout";
