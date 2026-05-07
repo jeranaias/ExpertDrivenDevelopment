@@ -101,6 +101,11 @@
                 <!-- Page Content -->
                 <div class="page-content">
 
+                    <div class="callout callout--info mb-xl">
+                        <h2 class="callout__title">How to Use This Course</h2>
+                        <p>This page works two ways: as a <strong>self-paced course</strong> you complete on your own, or as <strong>companion materials</strong> to follow during a live training session. Each section includes all exercises, prompts, and assignments inline.</p>
+                    </div>
+
                     <!-- Overview & Learning Objectives -->
                     <section id="overview">
                         <h2>Overview &amp; Learning Objectives</h2>
@@ -119,7 +124,7 @@
                             <p>
                                 This page assumes you have completed <strong>AI Fluency Fundamentals</strong> and can
                                 apply all six 201 skills: Task Decomposition, Context Assembly, Iterative Refinement,
-                                Quality Judgment, Frontier Recognition, and Failure Recovery. If you cannot recall
+                                Quality Judgment, Frontier Recognition, and Workflow Integration. If you cannot recall
                                 at least four of these from memory, go back and review before continuing.
                             </p>
                         </div>
@@ -147,7 +152,7 @@
                                     <tr>
                                         <td>When Something Breaks</td>
                                         <td>25 min hands-on</td>
-                                        <td>Iterative Refinement, Quality Judgment, Failure Recovery</td>
+                                        <td>Iterative Refinement, Quality Judgment, Workflow Integration</td>
                                     </tr>
                                     <tr>
                                         <td>Your Problem &mdash; Decomposition Exercise</td>
@@ -220,6 +225,11 @@
                     <section id="module-2">
                         <h2>Module 2: Guided Build &mdash; Equipment Tracker</h2>
                         <p><strong>Estimated time:</strong> 45 min hands-on</p>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">A note on platform choice</h3>
+                            <p>Live class uses Microsoft Power Apps + SharePoint as the platform (the production target for DoD M365 environments). This self-paced version uses vanilla HTML/CSS/JavaScript instead, so you can run it on any laptop without a tenant. Both teach the same builder skills &mdash; task decomposition, iterative refinement, debugging. Once you have access to a Power Apps environment, ask the AI to convert your tracker as a follow-on exercise.</p>
+                        </div>
 
                         <p>
                             In this module you will build a working equipment checkout tracker for 1st Bn, 99th Marines
@@ -297,13 +307,14 @@ CSS, and JavaScript. Start with just the data entry form.</div>
 
                         <div class="callout callout--info">
                             <h3 class="callout__title">What to Expect</h3>
-                            <p>
-                                Your output should include a SharePoint list structure with columns for:
-                                Equipment Name (text), Serial Number (text), Status (choice: Available/Checked
-                                Out/Maintenance), Assigned To (text), Date Checked Out (date), and Expected
-                                Return (date). If your output is missing columns or has different data types,
-                                that is normal &mdash; use the refinement prompts in the next step to fix it.
-                            </p>
+                            <p>Your AI should respond with a single self-contained HTML file (or a small set: index.html + style.css + script.js). Expect:</p>
+                            <ul>
+                                <li>A <code>&lt;form&gt;</code> with labeled <code>&lt;input&gt;</code> fields for: Equipment Name, Serial Number, Status (Available / Checked Out / Maintenance), Assigned To, Date Out, Notes.</li>
+                                <li>A button that adds the entry to a list rendered below the form.</li>
+                                <li>JavaScript that stores the list in the browser (localStorage) so it survives a page reload.</li>
+                                <li>Basic styling &mdash; no external CSS framework needed.</li>
+                            </ul>
+                            <p>If your AI returns Power Apps formulas or asks about SharePoint connections, your prompt didn't specify the platform clearly enough. Re-prompt with: &ldquo;Use only vanilla HTML, CSS, and JavaScript &mdash; no frameworks, no external services.&rdquo;</p>
                         </div>
 
                         <!-- Step 3 -->
@@ -446,8 +457,12 @@ CSS, and JavaScript. Start with just the data entry form.</div>
                             failures instead of quitting.
                         </p>
 
+                        <p>
+                            These are common error patterns to recognize. Read the symptom, examine the prompt template, and trace the diagnosis &mdash; you're learning to read errors before you encounter them in your own builds.
+                        </p>
+
                         <!-- Failure Case 1 -->
-                        <h3>Failure Case 1: The Crash</h3>
+                        <h3>Worked Example: Failure Case 1 &mdash; The Crash</h3>
                         <p>
                             Imagine you click the &ldquo;Check Out&rdquo; button on your equipment tracker and nothing
                             happens. You open your browser&rsquo;s developer console (<kbd>F12</kbd> &rarr; Console tab)
@@ -519,7 +534,7 @@ CSS, and JavaScript. Start with just the data entry form.</div>
                         </div>
 
                         <!-- Failure Case 2 -->
-                        <h3>Failure Case 2: The Logic Error</h3>
+                        <h3>Worked Example: Failure Case 2 &mdash; The Logic Error</h3>
                         <p>
                             Not all failures produce error messages. Sometimes the code runs fine but produces the
                             wrong result. This is harder to catch and more important to practice.
@@ -665,9 +680,7 @@ Frontier Risks:
                         <details>
                             <summary>Self-Check: Review your decomposition</summary>
                             <p>
-                                Look at each subtask. Could any one of them be broken down further? A subtask is too big if it would take more than 3 AI prompts to complete, or if you cannot describe the expected output in one sentence. If a subtask
-                                feels like it would take more than two or three prompts to complete, it is too big.
-                                Split it. Also check: did you identify at least one frontier risk? Every problem
+                                Look at each subtask. Could any one of them be broken down further? A subtask is too big if it would take more than 3 AI prompts to complete, or if you cannot describe the expected output in one sentence. Split it. Also check: did you identify at least one frontier risk? Every problem
                                 has at least one area where AI&rsquo;s training data will not perfectly match your
                                 real-world context.
                             </p>
@@ -678,6 +691,11 @@ Frontier Risks:
                     <section id="module-5">
                         <h2>Module 5: Assignment &amp; Path Forward</h2>
                         <p><strong>Estimated time:</strong> 10 min read</p>
+
+                        <div class="callout callout--info">
+                            <h3>What's next: Course 3 &mdash; Platform Training</h3>
+                            <p>You've built your first tool. <a href="platform.html">Platform Training</a> takes you through three complete builds on Power Platform with deeper centaur/cyborg practice.</p>
+                        </div>
 
                         <h3>Your Assignment</h3>
 
@@ -742,12 +760,9 @@ Frontier Risks:
                     <section id="capstone">
                         <h2>Capstone Deliverable</h2>
                         <div class="callout callout--success">
-                            <h3 class="callout__title">Problem Definition Document</h3>
+                            <h3 class="callout__title">Decomposition Template</h3>
                             <p>
-                                Using the Problem Definition Worksheet template, write a complete problem
-                                definition for a real workflow problem in your unit. Include: problem statement,
-                                target users, at least 3 success criteria, required functions with priorities,
-                                and data considerations.
+                                Submit your completed Decomposition Template from Module 4. Include all subtasks, pattern classifications (Centaur/Cyborg/Neither), and at least one frontier risk per subtask.
                             </p>
                         </div>
                     </section>
@@ -756,6 +771,8 @@ Frontier Risks:
                     <section id="knowledge-check">
                         <h2>Knowledge Check</h2>
                         <div class="knowledge-check" data-course="orientation-student" data-module="all">
+                        <details class="knowledge-check__module-wrapper" data-module="1">
+                        <summary><strong>Module 1 Questions (3 questions)</strong></summary>
                         <div class="knowledge-check__module">
                             <h3 class="knowledge-check__title">Module 1: From User to Builder</h3>
 
@@ -834,7 +851,10 @@ Frontier Risks:
                                 </div>
                             </div>
                         </div>
+                        </details>
 
+                        <details class="knowledge-check__module-wrapper" data-module="2">
+                        <summary><strong>Module 2 Questions (3 questions)</strong></summary>
                         <div class="knowledge-check__module">
                             <h3 class="knowledge-check__title">Module 2: Equipment Tracker Guided Build</h3>
 
@@ -913,7 +933,10 @@ Frontier Risks:
                                 </div>
                             </div>
                         </div>
+                        </details>
 
+                        <details class="knowledge-check__module-wrapper" data-module="3">
+                        <summary><strong>Module 3 Questions (3 questions)</strong></summary>
                         <div class="knowledge-check__module">
                             <h3 class="knowledge-check__title">Module 3: When Something Breaks</h3>
 
@@ -992,7 +1015,10 @@ Frontier Risks:
                                 </div>
                             </div>
                         </div>
+                        </details>
 
+                        <details class="knowledge-check__module-wrapper" data-module="4">
+                        <summary><strong>Module 4 Questions (3 questions)</strong></summary>
                         <div class="knowledge-check__module">
                             <h3 class="knowledge-check__title">Module 4: Decomposition Framework</h3>
 
@@ -1071,7 +1097,10 @@ Frontier Risks:
                                 </div>
                             </div>
                         </div>
+                        </details>
 
+                        <details class="knowledge-check__module-wrapper" data-module="5">
+                        <summary><strong>Module 5 Questions (3 questions)</strong></summary>
                         <div class="knowledge-check__module">
                             <h3 class="knowledge-check__title">Module 5: Assignment and Path Forward</h3>
 
@@ -1150,6 +1179,7 @@ Frontier Risks:
                                 </div>
                             </div>
                         </div>
+                        </details>
 
                         <button class="knowledge-check__submit btn btn--primary">Check Answers</button>
                         <div class="knowledge-check__result" hidden></div>
@@ -1204,7 +1234,7 @@ Frontier Risks:
                                 <li class="course-checklist__item">
                                     <label>
                                         <input type="checkbox" data-item="capstone">
-                                        <span>Capstone: Problem Definition Document completed</span>
+                                        <span>Capstone: Decomposition Template submitted</span>
                                     </label>
                                 </li>
                             </ul>
@@ -1229,7 +1259,7 @@ Frontier Risks:
                 <div class="footer-section">
                     <h3 class="footer-section__title">Expert-Driven Development</h3>
                     <p>
-                        Open-source AI-assisted development training for DoW personnel.
+                        Open-source AI-assisted development training for DoD personnel.
                         Built by SSgt Jesse C. Morgan at MCD-Monterey.
                     </p>
                 </div>

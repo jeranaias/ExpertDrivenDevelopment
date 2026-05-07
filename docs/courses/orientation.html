@@ -111,67 +111,6 @@
                         </p>
                     </div>
 
-                    <!-- Timing Breakdown -->
-                    <h3>Session Timing Breakdown</h3>
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th scope="col">Module</th>
-                                    <th scope="col">Activity</th>
-                                    <th scope="col">Duration</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Module 1</td>
-                                    <td>Introduction &amp; Context: From User to Builder</td>
-                                    <td>15 min</td>
-                                </tr>
-                                <tr>
-                                    <td>Module 2</td>
-                                    <td>Live Build Demo: Equipment Tracker</td>
-                                    <td>25 min</td>
-                                </tr>
-                                <tr>
-                                    <td>Module 3</td>
-                                    <td>Student Build + Peer Review: When Something Breaks</td>
-                                    <td>40 min</td>
-                                </tr>
-                                <tr>
-                                    <td>Module 4</td>
-                                    <td>Decomposition Framework: Your Problem</td>
-                                    <td>20 min</td>
-                                </tr>
-                                <tr>
-                                    <td>Module 5</td>
-                                    <td>Wrap-Up &amp; Assignment</td>
-                                    <td>10 min</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><strong>Buffer Time</strong></td>
-                                    <td>10 min</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><strong>Total</strong></td>
-                                    <td><strong>120 min</strong></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Contingency Plan -->
-                    <div class="callout callout--warning">
-                        <h3 class="callout__title">Contingency: Technical Failures</h3>
-                        <p><strong>If Power Platform, AI chat, or internet access is unavailable:</strong></p>
-                        <ul>
-                            <li><strong>Option 1 (Preferred):</strong> If AI tools are unavailable during the live build, use the step-by-step walkthrough below as a guided demonstration. The instructor reads each prompt aloud, describes the expected output, and leads discussion on what the AI produced.</li>
-                            <li><strong>Option 2:</strong> Conduct paper-based decomposition exercise using whiteboard scenarios. Provide 3 sample problems (equipment tracker, leave request form, inventory dashboard) and have students work through full decomposition in pairs.</li>
-                            <li><strong>Option 3:</strong> Use offline debugging exercise (see Module 2 fallback below). Review pre-built broken code on paper, identify errors as a group, discuss how to frame debugging prompts.</li>
-                            <li><strong>Do NOT cancel the course.</strong> The decomposition skills are platform-independent and can be taught without live tools.</li>
-                        </ul>
-                    </div>
-
                     <!-- Agenda -->
                     <section id="agenda">
                         <h2>Agenda</h2>
@@ -220,6 +159,18 @@
                         </div>
                     </section>
 
+                    <!-- Contingency Plan -->
+                    <div class="callout callout--warning">
+                        <h3 class="callout__title">Contingency: Technical Failures</h3>
+                        <p><strong>If Power Platform, AI chat, or internet access is unavailable:</strong></p>
+                        <ul>
+                            <li><strong>Option 1 (Preferred):</strong> If AI tools are unavailable during the live build, use the step-by-step walkthrough below as a guided demonstration. The instructor reads each prompt aloud, describes the expected output, and leads discussion on what the AI produced.</li>
+                            <li><strong>Option 2:</strong> Conduct paper-based decomposition exercise using whiteboard scenarios. Provide 3 sample problems (equipment tracker, leave request form, inventory dashboard) and have students work through full decomposition in pairs.</li>
+                            <li><strong>Option 3:</strong> Use offline debugging exercise (see Module 2 fallback below). Review pre-built broken code on paper, identify errors as a group, discuss how to frame debugging prompts.</li>
+                            <li><strong>Do NOT cancel the course.</strong> The decomposition skills are platform-independent and can be taught without live tools.</li>
+                        </ul>
+                    </div>
+
                     <!-- Module 1: From User to Builder -->
                     <section id="module-1">
                         <h2>Module 1: From User to Builder</h2>
@@ -246,6 +197,11 @@
                                 six 201 skills?&rdquo; If students cannot recall at least four, do a 2-minute
                                 refresher.
                             </p>
+                        </div>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Opening Check-In &amp; Builder Mindset Framing</h3>
+                            <p>Open with a 2-minute check-in: &ldquo;Who tried something with AI between Course 1 and today? What worked, what surprised you?&rdquo; This surfaces real student usage and seeds the Builder Mindset framing. Common misconception: students think &ldquo;builder&rdquo; means &ldquo;coder&rdquo; &mdash; push back. Builder = anyone who turns recurring work into a tool, regardless of code complexity.</p>
                         </div>
                     </section>
 
@@ -316,6 +272,8 @@
                         </p>
                         <p>Narrate each prompt before typing it. Follow this sequence:</p>
 
+                        <p><em>Click each prompt step to expand. Open them in order during live build.</em></p>
+
                         <div class="callout callout--info">
                             <h3 class="callout__title">When AI Output Doesn't Match</h3>
                             <p>
@@ -329,7 +287,7 @@
                             <p>If those three are right, the output is usable even if it doesn't match word-for-word. If the AI produces JavaScript syntax (<code>forEach</code>, <code>=></code>), re-prompt: <em>"Use Power Fx only, not JavaScript."</em></p>
                         </div>
 
-                        <details open>
+                        <details>
                             <summary><strong>Prompt 1: Define the Problem (2 min)</strong></summary>
 
                             <div class="callout callout--instructor">
@@ -347,7 +305,7 @@
                             </div>
                         </details>
 
-                        <details open>
+                        <details>
                             <summary><strong>Prompt 2: Create the Data Structure (3 min)</strong></summary>
 
                             <div class="callout callout--instructor">
@@ -399,7 +357,7 @@ Import steps:
                             <p>This is your starting point. From here, use AI to <em>refine</em> the auto-generated app to match your needs. The remaining prompts show how.</p>
                         </div>
 
-                        <details open>
+                        <details>
                             <summary><strong>Prompt 3: Refine the Interface (5 min)</strong></summary>
 
                             <div class="callout callout--instructor">
@@ -430,7 +388,7 @@ Patch(EquipmentCheckout, ThisItem, {Status: {Value: "Checked In"}, CheckedInDate
                             </div>
                         </details>
 
-                        <details open>
+                        <details>
                             <summary><strong>Prompt 4: Iterate (3 min)</strong></summary>
 
                             <div class="callout callout--instructor">
@@ -470,7 +428,7 @@ RGBA(204, 0, 0, 1)</pre>
                             </div>
                         </details>
 
-                        <details open>
+                        <details>
                             <summary><strong>Prompt 5: Debug an Error (4 min)</strong></summary>
 
                             <div class="callout callout--instructor">
@@ -496,7 +454,7 @@ RGBA(204, 0, 0, 1)</pre>
                             </div>
                         </details>
 
-                        <details open>
+                        <details>
                             <summary><strong>Prompt 6: Final Polish (3 min)</strong></summary>
 
                             <div class="callout callout--instructor">
@@ -758,48 +716,31 @@ If(DateDue &lt; Today(), Red, Black)</pre>
                         <div class="template-display">
                             <h4>Decomposition Worksheet</h4>
                             <p><strong>1. Problem Statement (one sentence):</strong></p>
-                            <p style="border: 1px solid #ccc; padding: 0.5rem; min-height: 2rem; background: #f9f9f9;"></p>
+<pre>Problem: ___________________________________</pre>
 
                             <p><strong>2. Core Requirements (what must this do?):</strong></p>
-                            <ul style="border: 1px solid #ccc; padding: 0.5rem; min-height: 3rem; background: #f9f9f9;">
-                                <li></li>
-                            </ul>
+<pre>- ___________________________________
+- ___________________________________
+- ___________________________________</pre>
 
                             <p><strong>3. Decompose into 4-6 subtasks:</strong></p>
-                            <div class="table-wrapper">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Subtask</th>
-                                            <th>Human Role</th>
-                                            <th>AI Role</th>
-                                            <th>Pattern</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Example: Define data structure</td>
-                                            <td>Specify fields needed</td>
-                                            <td>Suggest field types</td>
-                                            <td>Centaur</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+<pre>Subtask 1: ___________________________________
+  Pattern: [Centaur / Cyborg / Neither]
+  Frontier risk: ___________________________________
+
+Subtask 2: ___________________________________
+  Pattern: [Centaur / Cyborg / Neither]
+  Frontier risk: ___________________________________
+
+(repeat for as many subtasks as the project requires)</pre>
 
                             <p><strong>4. Potential Frontier Issues (what might AI struggle with?):</strong></p>
-                            <ul style="border: 1px solid #ccc; padding: 0.5rem; min-height: 3rem; background: #f9f9f9;">
-                                <li>Example: Integration with existing CAC-authenticated system</li>
-                            </ul>
+<pre>- ___________________________________
+- ___________________________________
+(Example: Integration with existing CAC-authenticated system)</pre>
 
                             <p><strong>5. Simplest Useful Version (what is the MVP?):</strong></p>
-                            <p style="border: 1px solid #ccc; padding: 0.5rem; min-height: 2rem; background: #f9f9f9;"></p>
+<pre>MVP: ___________________________________</pre>
                         </div>
 
                         <div class="callout callout--instructor">
@@ -948,6 +889,11 @@ If(DateDue &lt; Today(), Red, Black)</pre>
                             </ul>
                             <p><strong>Logistics reminder:</strong> Confirm date/time of Platform Training. Remind students to bring their prototype (on laptop, thumb drive, or screenshots if system access is limited).</p>
                         </div>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Round-the-Room Close</h3>
+                            <p>Round-the-room close: 30 seconds per person on one specific thing they'll attempt before next session. Two-week deadline mentioned in the Assignment box. This drives accountability and surfaces planning gaps before students leave the room.</p>
+                        </div>
                     </section>
 
                 </div>
@@ -962,7 +908,7 @@ If(DateDue &lt; Today(), Red, Black)</pre>
                 <div class="footer-section">
                     <h3 class="footer-section__title">Expert-Driven Development</h3>
                     <p>
-                        Open-source AI-assisted development training for DoW personnel.
+                        Open-source AI-assisted development training for DoD personnel.
                         Built by SSgt Jesse C. Morgan at MCD-Monterey.
                     </p>
                 </div>
