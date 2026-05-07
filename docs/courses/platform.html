@@ -163,67 +163,6 @@
                             </table>
                         </div>
 
-                        <h3>Detailed Timing Breakdown</h3>
-                        <div class="table-wrapper">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Module</th>
-                                        <th scope="col">Duration</th>
-                                        <th scope="col">Key Activities</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Module 1: Review &amp; Setup</td>
-                                        <td>15 min</td>
-                                        <td>M365 access verification, centaur/cyborg review, failure story sharing</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Module 2: Whiteboard Exercise</td>
-                                        <td>20 min</td>
-                                        <td>Leave router business rules, data flow, edge cases &mdash; human design phase</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Module 3: Build #1 &mdash; Leave Router</td>
-                                        <td>45 min</td>
-                                        <td>AI build, human verify, AI refine, human accept &mdash; full centaur cycle</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Break / Failure Sharing</td>
-                                        <td>10 min</td>
-                                        <td>Document what AI got wrong, how students caught it, frontier map start</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Module 4: Build #2 &mdash; Training Tracker</td>
-                                        <td>45 min</td>
-                                        <td>Cyborg mode: continuous iteration, discover requirements as you build</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Module 5: Build #3 &mdash; Your Problem</td>
-                                        <td>35 min</td>
-                                        <td>Student chooses mode, applies to real problem, independent work</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Module 6: Frontier Map &amp; Wrap-Up</td>
-                                        <td>20 min</td>
-                                        <td>Compile failures into frontier map, assignment briefing</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Buffer</strong></td>
-                                        <td><strong>10 min</strong></td>
-                                        <td><strong>Absorb overruns, handle access issues, extra questions</strong></td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="2"><strong>Total Course Time</strong></td>
-                                        <td><strong>3 hours 20 minutes (200 min instruction + 10 min buffer). Schedule a 4-hour block to absorb overruns.</strong></td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-
                         <div class="callout callout--warning">
                             <h3 class="callout__title">Contingency Plan: If Power Platform Is Unavailable</h3>
                             <p>
@@ -418,7 +357,9 @@
                             <p>If those three are right, the output is usable even if it doesn't match word-for-word. If the AI produces JavaScript syntax (<code>forEach</code>, <code>=></code>) or non-existent functions, re-prompt: <em>"Use Power Fx only, not JavaScript."</em></p>
                         </div>
 
-                        <details open>
+                        <p><em>Click each step to expand. Open in sequence during live build.</em></p>
+
+                        <details>
                             <summary><strong>Step 1: SharePoint List Setup</strong></summary>
 
                             <div class="prompt-block">
@@ -507,7 +448,7 @@ Post-import steps:
                             <p>This is your starting point. From here, use AI to <em>customize</em> the auto-generated app. The prompt below shows how.</p>
                         </div>
 
-                        <details open>
+                        <details>
                             <summary><strong>Step 2: Customize the Auto-Generated App</strong></summary>
 
                             <div class="prompt-block">
@@ -595,7 +536,7 @@ Today()
                             </div>
                         </details>
 
-                        <details open>
+                        <details>
                             <summary><strong>Step 3: Routing Logic (Power Automate Flow Setup)</strong></summary>
 
                             <div class="callout callout--tip" style="border-left: 4px solid #228B22; background: #f0fff0; padding: 1rem; margin: 1rem 0;">
@@ -684,7 +625,7 @@ Step 5: Send an email (V2) (Office 365 Outlook)
                             </div>
                         </details>
 
-                        <details open>
+                        <details>
                             <summary><strong>Step 4: Approval Workflow (Approver Actions)</strong></summary>
 
                             <div class="prompt-block">
@@ -768,7 +709,7 @@ Add to both Update item actions:
                             <p><strong>Steps 5-6 are extensions.</strong> The core build (Steps 1-4) is complete. Complete Steps 5-6 if time permits in class, or assign as post-class practice.</p>
                         </div>
 
-                        <details open>
+                        <details>
                             <summary><strong>Step 5 (Extension): Requester Notification</strong></summary>
 
                             <div class="prompt-block">
@@ -852,7 +793,7 @@ Step 7b: Send an email (V2) (Office 365 Outlook)
                             </div>
                         </details>
 
-                        <details open>
+                        <details>
                             <summary><strong>Step 6 (Extension): Error Handling</strong></summary>
 
                             <div class="prompt-block">
@@ -989,26 +930,11 @@ Three additions to the flow:
                             </ul>
                         </div>
 
-                        <h4>Phase 3 &mdash; Human Verifies</h4>
                         <p>
-                            Test every path. Is the right person notified? What about edge cases? Submit
-                            test requests through every branch of your approval chain and verify the
-                            results against your whiteboard design.
-                        </p>
-
-                        <h4>Phase 4 &mdash; AI Refines</h4>
-                        <p>
-                            Back in GenAI.mil, paste your test results: &ldquo;The flow works for the first
-                            approver but skips the second. Here&rsquo;s the flow logic: [paste]. The business
-                            rule is [explain]. Fix the routing logic.&rdquo; Describe exactly what failed,
-                            what you expected, and what happened instead. Copy the corrected code back into
-                            Power Platform.
-                        </p>
-
-                        <h4>Phase 5 &mdash; Human Accepts</h4>
-                        <p>
-                            Final review. Walk through the complete workflow one more time. Does it match
-                            the original design? Is it ready for users?
+                            Phases 3-5 of the Centaur pattern (Verify, Refine, Approve) are embedded in
+                            the instructor checkpoints above &mdash; Test Form Submission and Test Routing
+                            exercise verification; the iteration prompts exercise refinement; the final
+                            "Test End-to-End Flow" is the approval gate.
                         </p>
 
                         <div class="callout">
@@ -1023,7 +949,7 @@ Three additions to the flow:
 
                     <!-- Failure Sharing -->
                     <section id="failure-sharing">
-                        <h2>Module 3: Failure Sharing</h2>
+                        <h2>Break Activity: Failure Sharing</h2>
                         <p><strong>Duration:</strong> 15 minutes (during break) &nbsp;&middot;&nbsp; <a href="../decks/week-3-platform-training.html#slide-14">Open this section in the deck &rarr;</a></p>
 
                         <p>
@@ -1697,7 +1623,7 @@ Step 9: Send an email (V2) (Office 365 Outlook)
                     <!-- Build #3: Your Problem -->
                     <section id="build-3">
                         <h2>Module 5: Build #3 &mdash; Your Problem, Choose Your Mode</h2>
-                        <p><strong>Duration:</strong> 60 minutes &nbsp;&middot;&nbsp; <a href="../decks/week-3-platform-training.html#slide-22">Open this section in the deck &rarr;</a></p>
+                        <p><strong>Duration:</strong> 35 minutes &nbsp;&middot;&nbsp; <a href="../decks/week-3-platform-training.html#slide-22">Open this section in the deck &rarr;</a></p>
 
                         <p>
                             Each participant builds the solution they identified during Builder Orientation.
@@ -1950,10 +1876,12 @@ Step 9: Send an email (V2) (Office 365 Outlook)
                             </table>
                         </div>
 
-                        <div class="callout callout--info">
-                            <h3 class="callout__title">Completing Your Frontier Map</h3>
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Facilitator Framing</h3>
                             <p>
-                                The table above is a starter example. Each student should add at least 2-3 rows specific to the task types they encountered during today's builds. A useful frontier map row names a specific task type (not a generic category), gives concrete examples of what AI produced correctly in the "Handles Well" column, describes a specific failure with enough detail to recognize it next time in the "Handles Poorly" column, and states a testable verification action (not just "check it"). If your rows read like the example above, make them more specific to your actual experience.
+                                Use the table to drive group debrief &mdash; capture 2-3 unit-specific rows on
+                                the whiteboard during this module. Students add their own rows on the student
+                                page after class.
                             </p>
                         </div>
 
@@ -1964,6 +1892,22 @@ Step 9: Send an email (V2) (Office 365 Outlook)
                             <li>Document three failure cases with specifics: what failed, how you caught it, how you fixed it</li>
                             <li>Identify one area where AI capability surprised you &mdash; something it did better than you expected</li>
                         </ol>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Facilitator Scaffolding</h3>
+                            <p>
+                                <strong>Frontier-map debrief (10 min):</strong> each student adds 2-3
+                                unit-specific rows to the table. Whiteboard the most-novel rows. Watch for:
+                                students conflating "AI struggled" with "AI cannot do this" &mdash; those are
+                                different. Many tasks just need better decomposition.
+                            </p>
+                            <p>
+                                <strong>Assignment briefing (5 min):</strong> explicitly call out the deadline
+                                and what the deliverable looks like. Common pushback: "I won't get to deploy
+                                because I lack tenant access" &mdash; answer: "Build it in the simulator,
+                                document the deployment plan, and submit both."
+                            </p>
+                        </div>
                     </section>
 
                 </div>
@@ -1978,7 +1922,7 @@ Step 9: Send an email (V2) (Office 365 Outlook)
                 <div class="footer-section">
                     <h3 class="footer-section__title">Expert-Driven Development</h3>
                     <p>
-                        Open-source AI-assisted development training for DoW personnel.
+                        Open-source AI-assisted development training for DoD personnel.
                         Built by SSgt Jesse C. Morgan at MCD-Monterey.
                     </p>
                 </div>

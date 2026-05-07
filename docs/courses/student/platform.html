@@ -140,20 +140,21 @@
 
                         <h3>Step 1: Verify Your Access</h3>
                         <p>
-                            Before building anything, confirm you can reach all three platforms you will
+                            Before building anything, confirm you can reach all four platforms you will
                             use today. Open each link and verify you can log in:
                         </p>
                         <ol>
-                            <li><strong>SharePoint:</strong> Navigate to your unit SharePoint site and confirm you can create a new list</li>
-                            <li><strong>Power Apps:</strong> Go to <code>make.powerapps.com</code> and verify you see the Home screen</li>
-                            <li><strong>Power Automate:</strong> Go to <code>make.powerautomate.com</code> and verify you can create a new flow</li>
+                            <li><strong>SharePoint:</strong> Navigate to your unit SharePoint site (<code>*.sharepoint.us</code>) and confirm you can create a new list</li>
+                            <li><strong>Power Apps:</strong> Go to <code>make.gov.powerapps.us</code> and verify you see the Home screen</li>
+                            <li><strong>Power Automate:</strong> Go to <code>high.flow.microsoft.us</code> and verify you can create a new flow</li>
+                            <li><strong>GenAI.mil:</strong> Confirm you can open Agent Designer or start a conversation</li>
                         </ol>
 
                         <div class="callout callout--warning">
                             <h3 class="callout__title">Access Problems?</h3>
                             <p>
                                 If you cannot log in to any of these platforms, contact your IT support
-                                before proceeding. You will need all three for every build in this course.
+                                before proceeding. You will need all four for every build in this course.
                                 Do not skip this step &mdash; resolving access issues during a build wastes
                                 significant time.
                             </p>
@@ -385,9 +386,7 @@ Fix each one and explain what you changed.</div>
                         <p>
                             Before moving on to your next build, take 15 minutes to reflect on what
                             happened during Build #1. Every builder encounters AI failures &mdash; the
-                            skill is in recognizing them quickly and knowing how to recover. This
-                            structured reflection replaces what would be a group failure-sharing session
-                            during live instruction.
+                            skill is in recognizing them quickly and knowing how to recover.
                         </p>
 
                         <div class="callout callout--warning mt-sm">
@@ -395,27 +394,17 @@ Fix each one and explain what you changed.</div>
                         </div>
 
                         <div class="template-display">
-                            <h4>Build #1 Reflection Template</h4>
-
-                            <h5>What did the AI get wrong during Build #1?</h5>
-                            <p><em>(Be specific. Which component? What was the exact error?)</em></p>
-                            <p>_______________________________________________________________</p>
-                            <p>_______________________________________________________________</p>
-
-                            <h5>How did you catch it?</h5>
-                            <p><em>(During which phase? What test or review revealed the problem?)</em></p>
-                            <p>_______________________________________________________________</p>
-                            <p>_______________________________________________________________</p>
-
-                            <h5>How did you fix it?</h5>
-                            <p><em>(What did you tell the AI? Did it fix the issue on the first try?)</em></p>
-                            <p>_______________________________________________________________</p>
-                            <p>_______________________________________________________________</p>
-
-                            <h5>What would you check for next time?</h5>
-                            <p><em>(What will you add to your personal verification checklist?)</em></p>
-                            <p>_______________________________________________________________</p>
-                            <p>_______________________________________________________________</p>
+                            <h4>Build #1 Reflection Prompts</h4>
+                            <p>Work through each prompt in writing before moving on. Honest, specific answers will pay back later when you build your frontier map.</p>
+                            <ul>
+                                <li>What surprised you about Build #1 &mdash; where did the AI deliver more (or less) than you expected?</li>
+                                <li>What did the AI get wrong? Be specific: which component, what was the exact error?</li>
+                                <li>How did you catch it? During which phase? What test or review revealed the problem?</li>
+                                <li>How did you fix it? What did you tell the AI? Did it work on the first try, or did you have to iterate?</li>
+                                <li>What pattern (centaur or cyborg) did you use most? Why did that fit this build?</li>
+                                <li>What would you do differently if you started Build #1 over right now?</li>
+                                <li>What will you add to your personal verification checklist before Build #2?</li>
+                            </ul>
                         </div>
 
                         <p>
@@ -563,31 +552,101 @@ Fix each one and explain what you changed.</div>
                             <p><strong>Notice the difference:</strong> Unlike Build #1, you are not planning everything up front. You are discovering requirements as you iterate. This is deliberate &mdash; cyborg mode trades planning time for iteration speed. Stay engaged with every output.</p>
                         </div>
 
+                        <h4>Iteration 1 &mdash; Get Something Visible</h4>
                         <div class="prompt-block">
                             <div class="prompt-block__header">Prompt 1 &mdash; Initial Structure</div>
-I need a training tracker for my Marine Corps section in 1st Bn, 99th Marines.
-It should track 6 Marines across 5 required training events. I need to see at
-a glance who is current, who is overdue, and who has events scheduled. Build
-this as a SharePoint list with a Power App gallery view.</div>
+I need a training tracker for 1st Battalion, 99th Marines. We need to track
+which Marines have completed which training events. Start with a SharePoint
+list that can store: Marine name, training event name, completion date, and
+status (Complete, Overdue, Scheduled). Give me the SharePoint list structure
+and a CSV I can import.</div>
+
+                        <div class="code-block">
+                            <strong>Expected output (one row per training event per Marine):</strong>
+                            <pre>
+Training Tracker — Structure:
+
+| Display Name    | Type              | Notes                       |
+|-----------------|-------------------|-----------------------------|
+| Marine Name     | Person            | Add manually after import   |
+| Training Event  | Choice            | Annual Rifle Qual, CBRN,    |
+|                 |                   | Cyber, PFT/CFT, SAPR        |
+| Completion Date | Date              | Date only                   |
+| Status          | Choice            | Complete, Overdue, Scheduled|
+| Due Date        | Date              | Date only                   |
+| Days Until Due  | Calculated        | =[Due Date]-TODAY()         |
+                            </pre>
+                        </div>
 
                         <p>
-                            Review the output. Does the data model make sense? Are the right columns
-                            included? Adjust and continue:
+                            Build this list. Notice you have not pre-planned the dashboard yet &mdash;
+                            in cyborg mode, you build something visible first, then evaluate.
+                        </p>
+
+                        <h4>Iteration 2 &mdash; The Data-Model Pivot</h4>
+                        <p>
+                            After you create the list, look at it. With 6 Marines and 5 events, this
+                            structure produces 30 rows &mdash; one per Marine per event. That is fine
+                            for storage but bad for a dashboard where leadership wants one row per
+                            Marine. Time to pivot.
                         </p>
 
                         <div class="prompt-block">
-                            <div class="prompt-block__header">Prompt 2 &mdash; Visual Formatting</div>
+                            <div class="prompt-block__header">Prompt 2 &mdash; Pivot the Data Model</div>
+Wait, this structure will create a new row for every training event for every
+Marine. That's going to be a very long list. I need a dashboard where I can
+see all five training events for each Marine in one row. How should I
+restructure this?</div>
+
+                        <div class="code-block">
+                            <strong>Expected output (one row per Marine, columns per event):</strong>
+                            <pre>
+| Display Name           | Type    | Notes                                |
+|------------------------|---------|--------------------------------------|
+| Marine Name            | Person  | Add manually after import            |
+| Rank                   | Choice  | PFC, LCpl, Cpl, Sgt, SSgt           |
+| Annual Rifle Qual      | Choice  | Complete/Overdue/Scheduled/Not Started |
+| Annual Rifle Qual Date | Date    |                                      |
+| CBRN Awareness         | Choice  | Same values                          |
+| CBRN Awareness Date    | Date    |                                      |
+| Cyber Awareness        | Choice  | Same values                          |
+| Cyber Awareness Date   | Date    |                                      |
+| PFT/CFT                | Choice  | Same values                          |
+| PFT/CFT Date           | Date    |                                      |
+| SAPR Training          | Choice  | Same values                          |
+| SAPR Training Date     | Date    |                                      |
+
+Trade-off: less flexible if you add new training events later (you'd add two
+new columns each time). Wins: dashboard reads cleanly, one row per Marine.
+                            </pre>
+                        </div>
+
+                        <p>
+                            Delete the first list and create the new structure. <strong>This rework is
+                            the lesson.</strong> In centaur mode you would have planned this in advance.
+                            In cyborg mode you discover the right shape by building, evaluating, and
+                            pivoting. The cost is rework; the benefit is requirements you would not have
+                            seen on a whiteboard.
+                        </p>
+
+                        <h4>Iteration 3 &mdash; Visual Formatting</h4>
+                        <div class="prompt-block">
+                            <div class="prompt-block__header">Prompt 3 &mdash; Conditional Formatting</div>
 Add conditional formatting: green for Complete, red for Overdue, yellow for
 Scheduled. Add a summary bar at the top showing percentages for each status
 across all Marines and all events.</div>
 
                         <p>
-                            Check the formatting. Does it match the target dashboard above? Now add
-                            the reporting layer:
+                            Check the formatting. Does it match the target dashboard above?
+                            Common gotcha: AI may write rules that check for an exact string match
+                            (Status = "Scheduled") when your data contains "Scheduled 15 Mar". Test
+                            with real values; if it falls through to default color, switch the
+                            condition to "starts with" or "contains."
                         </p>
 
+                        <h4>Iteration 4 &mdash; Report Generation</h4>
                         <div class="prompt-block">
-                            <div class="prompt-block__header">Prompt 3 &mdash; Report Generation</div>
+                            <div class="prompt-block__header">Prompt 4 &mdash; S-3 Brief Format</div>
 Generate a report view that summarizes the data in paragraph form suitable for
 an S-3 brief. Include: overall percentage current, critical overdue items with
 names and how many days overdue, and upcoming scheduled events in the next 30
@@ -623,6 +682,12 @@ days. Format it as a professional military brief.</div>
                                     <li>Can you generate the S-3 brief format report?</li>
                                 </ul>
                                 <p class="mt-sm">If any are missing, revisit the prompts in this module and iterate.</p>
+                                <p class="mt-sm"><strong>Common failure modes:</strong></p>
+                                <ol>
+                                    <li>Statuses are not color-coded &mdash; apply conditional formatting per Iteration 3 (use "starts with" or "contains" if exact-match fails on values like "Scheduled 15 Mar").</li>
+                                    <li>Form does not validate empty Serial Number &mdash; add an <code>IsBlank</code> check on submit.</li>
+                                    <li>List filter does not refresh on edit &mdash; call <code>Refresh(Equipment)</code> in <code>OnSelect</code>.</li>
+                                </ol>
                             </div>
                         </details>
                     </section>
@@ -630,7 +695,7 @@ days. Format it as a professional military brief.</div>
                     <!-- Module 5: Build #3 — Your Problem -->
                     <section id="build-3">
                         <h2>Module 5: Build #3 &mdash; Your Problem</h2>
-                        <p><strong>Duration:</strong> 60 minutes &nbsp;&middot;&nbsp; <a href="../../decks/week-3-platform-training.html#slide-22">Open this section in the deck &rarr;</a></p>
+                        <p><strong>Duration:</strong> 35 minutes &nbsp;&middot;&nbsp; <a href="../../decks/week-3-platform-training.html#slide-22">Open this section in the deck &rarr;</a></p>
 
                         <p>
                             Now build a solution to a real problem you face in your unit. This is the
@@ -648,40 +713,33 @@ days. Format it as a professional military brief.</div>
 
                         <div class="template-display">
                             <h4>Build #3 Decomposition Template</h4>
+                            <p>Work through these in order before writing your first prompt. If you cannot fill an item, that is the item you need to think harder about, not skip.</p>
 
-                            <h5>Problem Statement</h5>
-                            <p><em>(One sentence: who has the problem, what is the problem, what does a solution look like?)</em></p>
-                            <p>_______________________________________________________________</p>
+                            <h5>Data: What are you tracking? What columns does the list need?</h5>
 
-                            <h5>Mode Selection</h5>
-                            <p><em>(Centaur or Cyborg? Why?)</em></p>
-                            <p>_______________________________________________________________</p>
+                            <h5>Users: Who creates the data? Who reads it? Who updates it? Who approves it?</h5>
 
-                            <h5>Components to Build</h5>
-                            <p><em>(Break your solution into 3-5 pieces. What platform tools will you use for each?)</em></p>
+                            <h5>Workflow: What happens when a new item is created? Does it need routing or approval?</h5>
+
+                            <h5>Output: What does leadership need to see? Dashboard, report, email summary?</h5>
+
+                            <h5>Tech stack: SharePoint list &rarr; Power App (Integrate) &rarr; Power Automate flow? Or simpler?</h5>
+
+                            <h5>Decompose into subtasks (write 3-6, in order)</h5>
                             <ol>
-                                <li>_______________________________________________________________</li>
-                                <li>_______________________________________________________________</li>
-                                <li>_______________________________________________________________</li>
-                                <li>_______________________________________________________________</li>
-                                <li>_______________________________________________________________</li>
+                                <li>Identify the smallest standalone subtask. Write it in one sentence.</li>
+                                <li>Decide pattern: Centaur (you drive, AI assists) or Cyborg (AI proposes, you verify).</li>
+                                <li>Note the platform tool you will use for this subtask (SharePoint, Power Apps, Power Automate, GenAI.mil).</li>
+                                <li>State one concrete verification check you will run after the AI produces output.</li>
+                                <li>Repeat for each subtask &mdash; keep adding rows until your full solution is covered.</li>
+                                <li>Flag any subtask where you expect AI to struggle (frontier risk) so you can plan extra verification time.</li>
                             </ol>
 
-                            <h5>Expected Frontier Issues</h5>
-                            <p><em>(Where will AI likely struggle? What will you need to verify most carefully?)</em></p>
-                            <ul>
-                                <li>_______________________________________________________________</li>
-                                <li>_______________________________________________________________</li>
-                                <li>_______________________________________________________________</li>
-                            </ul>
+                            <h5>Expected Frontier Issues (list at least 2)</h5>
+                            <p>Where will AI likely struggle? What will you need to verify most carefully?</p>
 
                             <h5>Verification Plan</h5>
-                            <p><em>(How will you know it works? What tests will you run?)</em></p>
-                            <ul>
-                                <li>_______________________________________________________________</li>
-                                <li>_______________________________________________________________</li>
-                                <li>_______________________________________________________________</li>
-                            </ul>
+                            <p>How will you know it works? What three tests will you run before declaring the build complete?</p>
                         </div>
 
                         <div class="callout callout--info mt-sm">
@@ -722,6 +780,15 @@ days. Format it as a professional military brief.</div>
                             build.
                         </p>
 
+                        <p>The columns below capture five things for each task type:</p>
+                        <ul>
+                            <li><strong>Task Type</strong> &mdash; the specific kind of work you tried with AI.</li>
+                            <li><strong>AI Handles Well</strong> &mdash; concrete examples of what AI produced correctly.</li>
+                            <li><strong>AI Handles Poorly</strong> &mdash; specific failures, detailed enough to recognize next time.</li>
+                            <li><strong>Verification Needed</strong> &mdash; the testable check you ran (not just "review it").</li>
+                            <li><strong>Moving Frontier</strong> &mdash; whether this is weak today but improving (revisit later) or stable.</li>
+                        </ul>
+
                         <div class="table-wrapper">
                             <table>
                                 <thead>
@@ -730,6 +797,7 @@ days. Format it as a professional military brief.</div>
                                         <th scope="col">AI Handles Well</th>
                                         <th scope="col">AI Handles Poorly</th>
                                         <th scope="col">Verification Needed</th>
+                                        <th scope="col">Moving Frontier</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -738,36 +806,42 @@ days. Format it as a professional military brief.</div>
                                         <td>Column types, relationships, basic validation rules</td>
                                         <td>Complex calculated columns with nested IF logic</td>
                                         <td>Always verify column data types match actual data</td>
+                                        <td>Stable &mdash; schema syntax rarely shifts</td>
                                     </tr>
                                     <tr>
                                         <td>Power App form layout</td>
                                         <td>Basic screens, navigation, standard input controls</td>
                                         <td>Conditional visibility with 3+ dependencies</td>
                                         <td>Test every show/hide rule with real data</td>
+                                        <td>Improving &mdash; revisit in 6 months</td>
                                     </tr>
                                     <tr>
                                         <td>Power Automate flows</td>
                                         <td>Simple approval flows, email notifications, basic conditions</td>
                                         <td>Error handling for nested conditions, retry logic</td>
                                         <td>Test all error paths, not just the happy path</td>
+                                        <td>Improving &mdash; agent tooling is moving fast</td>
                                     </tr>
                                     <tr>
                                         <td>Data validation formulas</td>
                                         <td>Required fields, format checks, simple lookups</td>
                                         <td>Cross-table validation, date range conflicts</td>
                                         <td>Check edge cases: empty fields, special characters</td>
+                                        <td>Stable &mdash; verify on every build</td>
                                     </tr>
                                     <tr>
                                         <td>Dashboard/reporting</td>
                                         <td>Basic charts, card layouts, simple filters</td>
                                         <td>Complex DAX measures, row-level security</td>
                                         <td>Verify numbers against source data manually</td>
+                                        <td>Improving &mdash; DAX coverage is widening</td>
                                     </tr>
                                     <tr>
                                         <td>User interface text/labels</td>
                                         <td>Button labels, headers, help text</td>
                                         <td>Context-sensitive error messages, domain-specific jargon</td>
                                         <td>Have an actual user read every message</td>
+                                        <td>Stable &mdash; domain jargon still needs human review</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -783,8 +857,13 @@ days. Format it as a professional military brief.</div>
                                 Your frontier map should have at least 5 task types relevant to your role.
                                 Each cell should contain a specific example, not just &ldquo;yes&rdquo; or
                                 &ldquo;no.&rdquo; For example, instead of writing &ldquo;handles well&rdquo;
-                                under AI Handles Well, write &ldquo;Generates draft SOPs from bullet points
-                                with correct formatting.&rdquo;
+                                under <em>AI Handles Well</em>, write &ldquo;Generates draft SOPs from
+                                bullet points with correct formatting.&rdquo;
+                            </p>
+                            <p>
+                                Use the <em>Moving Frontier</em> column to mark tasks that are weak today
+                                but improving (revisit in 3-6 months) versus tasks that are stable
+                                (verification approach is unlikely to change soon).
                             </p>
                         </div>
 
@@ -810,16 +889,11 @@ days. Format it as a professional military brief.</div>
                         </div>
                     </section>
 
-                    <!-- Capstone Deliverable -->
-                    <section id="capstone">
-                        <h2>Capstone Deliverable</h2>
-                        <div class="callout callout--success">
-                            <h3 class="callout__title">Working Tool Prototype</h3>
-                            <p>
-                                Build one functional Power Platform tool that solves a real problem identified
-                                in your Problem Definition. Document the build process in your Development
-                                Journal with at least 3 session entries.
-                            </p>
+                    <!-- What's Next CTA -->
+                    <section id="whats-next">
+                        <div class="callout callout--info">
+                            <h3>What's next: Course 4 &mdash; Advanced Workshop</h3>
+                            <p>You've built three tools across two patterns. <a href="advanced.html">Advanced Workshop</a> takes you from individual builder to organizational capability &mdash; frontier mapping for your domain, complex multi-component builds, group debugging, and teaching others.</p>
                         </div>
                     </section>
 
@@ -828,6 +902,9 @@ days. Format it as a professional military brief.</div>
                         <h2>Knowledge Check</h2>
                         <div class="knowledge-check" data-course="platform-student" data-module="1">
                             <h3 class="knowledge-check__title">Knowledge Check</h3>
+
+                            <details data-module="1">
+                                <summary><strong>Module 1: Setup and Review (3 questions)</strong></summary>
 
                             <!-- Module 1, Question 1 -->
                             <div class="knowledge-check__question" data-correct="2">
@@ -907,6 +984,11 @@ days. Format it as a professional military brief.</div>
                                 </div>
                             </div>
 
+                            </details>
+
+                            <details data-module="2">
+                                <summary><strong>Module 2: Build #1 &mdash; Centaur (3 questions)</strong></summary>
+
                             <!-- Module 2, Question 1 -->
                             <div class="knowledge-check__question" data-correct="3">
                                 <p class="knowledge-check__prompt">In the centaur pattern for Build #1, why is it critical that the human completes the whiteboard planning phase before involving AI?</p>
@@ -984,6 +1066,11 @@ days. Format it as a professional military brief.</div>
                                     <p>Breaking the build into sequential prompts maintains the centaur principle of verification at each boundary. Each component (data layer, input form, automation flow) can be verified against the design before the next component is built on top of it. This prevents errors from cascading through the entire system.</p>
                                 </div>
                             </div>
+
+                            </details>
+
+                            <details data-module="3">
+                                <summary><strong>Module 3: Reflection (3 questions)</strong></summary>
 
                             <!-- Module 3, Question 1 -->
                             <div class="knowledge-check__question" data-correct="0">
@@ -1063,6 +1150,11 @@ days. Format it as a professional military brief.</div>
                                 </div>
                             </div>
 
+                            </details>
+
+                            <details data-module="4">
+                                <summary><strong>Module 4: Build #2 &mdash; Cyborg (3 questions)</strong></summary>
+
                             <!-- Module 4, Question 1 -->
                             <div class="knowledge-check__question" data-correct="1">
                                 <p class="knowledge-check__prompt">Build #2 (Training Tracker) uses cyborg mode instead of centaur mode. What is the fundamental difference in how you discover requirements?</p>
@@ -1140,6 +1232,11 @@ days. Format it as a professional military brief.</div>
                                     <p>AI frequently writes conditional formatting that checks for exact string matches (e.g., Status = "Scheduled") when the actual data contains additional text (e.g., "Scheduled 15 Mar"). The condition fails to match, so the item falls through to the default color. The fix is to use a "starts with" or "contains" check instead of an exact match. This is a common pattern where AI handles the happy path but misses real-world data variations.</p>
                                 </div>
                             </div>
+
+                            </details>
+
+                            <details data-module="5">
+                                <summary><strong>Module 5: Build #3 &mdash; Your Problem (3 questions)</strong></summary>
 
                             <!-- Module 5, Question 1 -->
                             <div class="knowledge-check__question" data-correct="2">
@@ -1219,6 +1316,11 @@ days. Format it as a professional military brief.</div>
                                 </div>
                             </div>
 
+                            </details>
+
+                            <details data-module="6">
+                                <summary><strong>Module 6: Frontier Map (3 questions)</strong></summary>
+
                             <!-- Module 6, Question 1 -->
                             <div class="knowledge-check__question" data-correct="3">
                                 <p class="knowledge-check__prompt">A frontier map documents what AI can and cannot do for your use cases. Why is specificity important when filling in the "AI Handles Poorly" column?</p>
@@ -1296,6 +1398,8 @@ days. Format it as a professional military brief.</div>
                                     <p>The frontier is not static. AI capabilities improve over time, so tasks that were outside the frontier (like complex conditional workflows) may move inside as models get better. Your own experience also deepens, revealing new patterns about what AI handles well or poorly. The "Moving Frontier" column exists specifically to capture tasks that should be re-evaluated periodically.</p>
                                 </div>
                             </div>
+
+                            </details>
 
                             <button class="knowledge-check__submit btn btn--primary">Check Answers</button>
                             <div class="knowledge-check__result" hidden></div>
@@ -1382,7 +1486,7 @@ days. Format it as a professional military brief.</div>
                 <div class="footer-section">
                     <h3 class="footer-section__title">Expert-Driven Development</h3>
                     <p>
-                        Open-source AI-assisted development training for DoW personnel.
+                        Open-source AI-assisted development training for DoD personnel.
                         Built by SSgt Jesse C. Morgan at MCD-Monterey.
                     </p>
                 </div>
