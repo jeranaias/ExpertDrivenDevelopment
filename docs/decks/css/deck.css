@@ -33,6 +33,33 @@
 }
 
 
+/* ===== Accessibility: reduced motion =====
+   Honor user preference; collapse animations / transitions to a tick. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===== Accessibility: screen-reader-only utility =====
+   Standard clip + position-absolute pattern so live-region updates and
+   off-screen labels are read by AT but invisible visually. */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+
 /* ===== Reset / base ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -90,7 +117,7 @@ body.deck-body .slide.is-current.slide--debrief { display: grid !important; grid
 
 
 /* ===== Top brand bar present on every slide ===== */
-body.deck-body .slide__bar {
+.slide__bar {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 8px;
@@ -106,10 +133,10 @@ body.deck-body .slide__bar {
 
 
 /* ===== Slide foot: course tag + slide number on every slide ===== */
-body.deck-body .slide__foot {
+.slide__foot {
   position: absolute;
-  left: var(--stage-pad-x);
-  right: var(--stage-pad-x);
+  left: var(--stage-pad-x, 5vw);
+  right: var(--stage-pad-x, 5vw);
   bottom: 2.4vh;
   display: flex;
   justify-content: space-between;
@@ -123,9 +150,9 @@ body.deck-body .slide__foot {
   pointer-events: none;
 }
 
-body.deck-body .slide__foot .foot__course { color: var(--c-text-mute); }
+.slide__foot .foot__course { color: var(--c-text-mute); }
 
-body.deck-body .slide__foot .foot__num { font-variant-numeric: tabular-nums; }
+.slide__foot .foot__num { font-variant-numeric: tabular-nums; }
 
 
 /* ===== Typography primitives ===== */
@@ -256,7 +283,7 @@ body.deck-body .slide--cover {
   color: #fff;
 }
 
-body.deck-body .slide--cover .slide__bar { height: 14px; }
+.slide--cover .slide__bar { height: 14px; }
 
 body.deck-body .slide--cover .cover__content {
   margin-top: auto;
@@ -274,9 +301,9 @@ body.deck-body .slide--cover .subtitle { color: rgba(255,255,255,0.78); max-widt
 
 body.deck-body .slide--cover .byline { color: rgba(255,255,255,0.55); }
 
-body.deck-body .slide--cover .slide__foot { color: rgba(255,255,255,0.55); }
+.slide--cover .slide__foot { color: rgba(255,255,255,0.55); }
 
-body.deck-body .slide--cover .slide__foot .foot__course { color: rgba(255,255,255,0.7); }
+.slide--cover .slide__foot .foot__course { color: rgba(255,255,255,0.7); }
 
 body.deck-body .slide--cover .cover__rule {
   width: 12vw;
@@ -330,9 +357,9 @@ body.deck-body .slide--section .meta-pill--gold {
   font-weight: 700;
 }
 
-body.deck-body .slide--section .slide__foot { color: rgba(255,255,255,0.5); }
+.slide--section .slide__foot { color: rgba(255,255,255,0.5); }
 
-body.deck-body .slide--section .slide__foot .foot__course { color: rgba(255,255,255,0.65); }
+.slide--section .slide__foot .foot__course { color: rgba(255,255,255,0.65); }
 
 
 /* ===== Layout: CONTENT (title + body) ===== */
@@ -489,7 +516,7 @@ body.deck-body .slide--exercise {
   color: var(--c-ink);
 }
 
-body.deck-body .slide--exercise .slide__bar {
+.slide--exercise .slide__bar {
   background: var(--c-ink);
 }
 
@@ -580,9 +607,9 @@ body.deck-body .slide--exercise .ex__col ul li::before {
   background: var(--c-ink);
 }
 
-body.deck-body .slide--exercise .slide__foot { color: rgba(0,0,0,0.55); }
+.slide--exercise .slide__foot { color: rgba(0,0,0,0.55); }
 
-body.deck-body .slide--exercise .slide__foot .foot__course { color: rgba(0,0,0,0.7); }
+.slide--exercise .slide__foot .foot__course { color: rgba(0,0,0,0.7); }
 
 
 /* ===== Layout: KNOWLEDGE-CHECK ===== */
@@ -592,7 +619,7 @@ body.deck-body .slide--check {
   padding-top: calc(var(--stage-pad-y) + 6px);
 }
 
-body.deck-body .slide--check .slide__bar { display: none; }
+.slide--check .slide__bar { display: none; }
 
 body.deck-body .slide--check .check__badge {
   display: inline-block;
@@ -645,7 +672,7 @@ body.deck-body .slide--debrief .debrief__grid {
 }
 
 body.deck-body .slide--debrief .debrief__card {
-  background: #fff;
+  background: var(--c-paper);
   border: 1px solid var(--c-rule);
   padding: 2.2vh 1.8vw;
   border-top: 4px solid var(--c-scarlet);
@@ -819,7 +846,7 @@ body.deck-body .compare {
 }
 
 body.deck-body .compare__cell {
-  background: #fff;
+  background: var(--c-paper);
   border: 1px solid var(--c-rule);
   padding: 2.2vh 1.6vw;
 }
@@ -870,9 +897,9 @@ body.deck-body .slide--closing .subtitle { color: rgba(255,255,255,0.78); }
 
 body.deck-body .slide--closing .byline { color: rgba(255,255,255,0.55); }
 
-body.deck-body .slide--closing .slide__foot { color: rgba(255,255,255,0.55); }
+.slide--closing .slide__foot { color: rgba(255,255,255,0.55); }
 
-body.deck-body .slide--closing .slide__foot .foot__course { color: rgba(255,255,255,0.7); }
+.slide--closing .slide__foot .foot__course { color: rgba(255,255,255,0.7); }
 
 
 /* ===== Speaker notes (hidden by default) ===== */
@@ -925,18 +952,75 @@ body.deck-body .slide--closing .slide__foot .foot__course { color: rgba(255,255,
 /* ===== Spacing & text utilities (kept small on purpose) =====
    Use these from slide HTML to fine-tune the rhythm of stacked
    text blocks. Anything beyond these utilities should be promoted
-   to a layout class in DESIGN.md, not added inline. */
-body.deck-body .u-mt-1 { margin-top: 1.4vh; }
+   to a layout class in DESIGN.md, not added inline.
 
-body.deck-body .u-mt-2 { margin-top: 2vh; }
+   Unscoped so they apply across every weekly deck (W1–W6). */
+.u-mt-1 { margin-top: 1.4vh; }
 
-body.deck-body .u-mt-3 { margin-top: 2.4vh; }
+.u-mt-2 { margin-top: 2vh; }
 
-body.deck-body .u-mt-4 { margin-top: 4vh; }
+.u-mt-3 { margin-top: 2.4vh; }
 
-body.deck-body .u-text-mute { color: var(--c-text-mute); }
+.u-mt-4 { margin-top: 4vh; }
 
-body.deck-body .u-pct-small { font-size: 0.5em; font-weight: 700; }
+.u-text-mute { color: var(--c-text-mute); }
+
+.u-pct-small { font-size: 0.5em; font-weight: 700; }
+
+
+/* ===== Helper classes — promoted from inline styles =====
+   Replace per-deck inline `style="…"` patterns. Unscoped so any
+   weekly deck can use them. */
+
+/* Inline code chip used in W6 (and any deck that mentions tool names
+   in body copy). Replaces the `<code style="font-family:var(--mono);
+   background:var(--paper-3);padding:1px 4px;border-radius:3px">` pattern. */
+.code-chip {
+  font-family: var(--font-mono, "Cascadia Code", Consolas, Monaco, monospace);
+  background: var(--c-rule, #e5e3dd);
+  color: inherit;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 0.92em;
+}
+
+/* Gold-on-dark variant — used inside W6 .editor-inner .what / build cue
+   where the body sits on an ink ground. */
+.code-chip--gold {
+  background: transparent;
+  color: #f5d130;
+}
+
+/* Agenda timing pill — used on W2 agenda slide for "15 min · talking" markers.
+   Compact uppercase chip, muted by default; --hot variant for live-build callouts. */
+.agenda-pill {
+  color: var(--c-text-mute);
+  font-size: 0.8em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.agenda-pill--hot {
+  color: var(--c-scarlet);
+  font-weight: 700;
+}
+
+/* Scarlet eyebrow used in W2 column headers. Use `<h3 class="eyebrow eyebrow--scarlet">`
+   in place of the long inline style block. */
+.eyebrow--scarlet {
+  font-size: 0.75em;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-scarlet);
+  margin-bottom: 0.6em;
+  font-weight: 700;
+}
+
+/* Gold-dark eyebrow modifier — paired companion column on W2 / W3. */
+.eyebrow--gold-dark {
+  color: var(--c-gold-dark);
+}
 
 
 /* ===== Navigation chrome ===== */
@@ -968,6 +1052,14 @@ body.deck-body .u-pct-small { font-size: 0.5em; font-weight: 700; }
 
 .deck-chrome button:hover { background: var(--c-scarlet); }
 
+/* Visible focus ring for keyboard users on every interactive element
+   inside the deck chrome. */
+.deck-chrome button:focus-visible,
+.deck-chrome a:focus-visible {
+  outline: 3px solid var(--c-gold);
+  outline-offset: 2px;
+}
+
 .deck-chrome .deck-counter {
   background: rgba(0,0,0,0.55);
   color: rgba(255,255,255,0.85);
@@ -981,65 +1073,21 @@ body.deck-body .u-pct-small { font-size: 0.5em; font-weight: 700; }
 
 /* ===== Hide per-slide page counter on screen (the fixed chrome shows it).
    The per-slide counter remains visible in print, where chrome is hidden.
-   Body-scoped per deck to avoid global collisions with other site pages.
-     - Week 1 (body.deck-body)   .slide__foot .foot__num
-     - Weeks 2,3,5 (body.w{2,3,5}-deck)   .page-num
-     - Week 4 (body.w4-deck)   .slide__footer .right
-     - Week 6 (body.w6-deck)   .slide__foot > span:last-child (unclassed)
    visibility:hidden (not display:none) preserves footer flex spacing
    so brand/context text on the left does not reflow. ===== */
-body.deck-body .slide__foot .foot__num,
-body.w2-deck .slide .page-num,
-body.w3-deck .slide .page-num,
-body.w5-deck .slide .page-num,
-body.w4-deck .slide__footer .right,
-body.w6-deck .slide__foot > span:last-child {
+.slide__foot .foot__num {
   visibility: hidden;
 }
 @media print {
-  body.deck-body .slide__foot .foot__num,
-  body.w2-deck .slide .page-num,
-  body.w3-deck .slide .page-num,
-  body.w5-deck .slide .page-num,
-  body.w4-deck .slide__footer .right,
-  body.w6-deck .slide__foot > span:last-child {
+  .slide__foot .foot__num {
     visibility: visible;
   }
 }
 
 
-/* ===== Print: prepare for printable handouts ===== */
-@media print {
-
-body.deck-body { background: #fff; overflow: visible; }
-
-body.deck-body .deck { display: block; height: auto; width: auto; }
-
-body.deck-body .slide {
-    display: flex !important;
-    position: relative;
-    inset: auto;
-    width: 100%;
-    height: 100vh;
-    page-break-after: always;
-    box-shadow: none;
-  }
-
-.deck-chrome, .deck-notes { display: none !important; }
-
-.notes {
-    display: block;
-    position: relative;
-    margin-top: 4vh;
-    padding-top: 2vh;
-    border-top: 1px dashed #999;
-    font-size: 11pt;
-    color: #333;
-    max-width: 80ch;
-  }
-
-
-}
+/* (Per-week W1 print block removed; universal print stylesheet at the
+   bottom of this file handles all six decks uniformly via the
+   runtime-injected <aside class="slide-print-notes"> in deck.js.) */
 
 
 
@@ -1176,36 +1224,9 @@ body.w2-deck .slide__edge {
   background: var(--c-scarlet);
 }
 
-body.w2-deck .slide__footer {
-  position: absolute;
-  left: 96px; right: 96px; bottom: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 18px;
-  color: var(--c-muted);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-body.w2-deck .slide__brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-weight: 600;
-  color: var(--c-ink);
-}
-
-body.w2-deck .slide__brand::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 22px;
-  background: var(--c-scarlet);
-  border-radius: 2px;
-}
-
-body.w2-deck .slide__counter { font-variant-numeric: tabular-nums; }
+/* (W2 .slide__footer/.slide__brand rules removed — markup uses canonical
+   .slide__foot/.foot__course/.foot__num which inherits the unscoped chrome
+   styling near the top of this file.) */
 
 
 /* ===========================================================
@@ -2277,30 +2298,27 @@ body.w2-deck .help {
 body.w2-deck .deck:hover .help { opacity: 0.7; }
 
 
-/* Print / export view --------------------------------------- */
-@media print {
-
-body.w2-deck, body.w2-deck { background: white; overflow: visible; }
-
-body.w2-deck .deck { width: auto; height: auto; }
-
-body.w2-deck .stage { position: static; }
-
-body.w2-deck .slide {
-    display: block !important;
-    position: relative !important;
-    width: 1920px;
-    height: 1080px;
-    transform: none !important;
-    page-break-after: always;
-    break-after: page;
-    box-shadow: none;
-  }
-
-body.w2-deck .hud, body.w2-deck .help, body.w2-deck .notes { display: none !important; }
-
-
+/* ----- W2 grid helpers (replaced inline `display:grid` markup) ----- */
+body.w2-deck .w2-grid {
+  display: grid;
+  gap: 32px;
+  margin-top: 16px;
 }
+body.w2-deck .w2-grid--2 { grid-template-columns: 1fr 1fr; gap: 48px; }
+body.w2-deck .w2-grid--3 { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+body.w2-deck .w2-grid--4 { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+body.w2-deck .w2-grid--5 { grid-template-columns: repeat(5, 1fr); gap: 20px; }
+
+/* W2 two-column legacy grid used on slide 2 */
+body.w2-deck .w2-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-top: 12px;
+}
+
+
+/* (W2 print block removed; universal print stylesheet handles it.) */
 
 
 
@@ -2935,58 +2953,9 @@ body.w3-deck .deck__hint kbd {
 }
 
 
-/* --------- Print: notes pages --------- */
-@media print {
-
-@page { size: 13.333in 7.5in; margin: 0; }
-
-body.w3-deck, body.w3-deck { background: #fff; height: auto; overflow: visible; }
-
-body.w3-deck .deck__chrome, body.w3-deck .deck__hint { display: none; }
-
-body.w3-deck .deck { width: auto; height: auto; }
-
-body.w3-deck .slide {
-    display: flex !important;
-    position: relative;
-    width: 13.333in;
-    height: 7.5in;
-    page-break-after: always;
-    box-shadow: none;
-    inset: auto;
-  }
-
-  /* Hide the live overlay panel during print and let each slide's
-     embedded .speaker-notes block follow it on its own page instead. */
-body.w3-deck .notes { display: none !important; }
-
-body.w3-deck .speaker-notes {
-    display: block;
-    position: relative;
-    width: 13.333in;
-    background: #fff;
-    color: #1a1a1a;
-    border-top: 2px solid var(--c-scarlet);
-    page-break-after: always;
-    padding: 0.5in;
-    font-size: 11pt;
-    line-height: 1.5;
-  }
-
-body.w3-deck .speaker-notes p + p { margin-top: 0.4em; }
-
-body.w3-deck .speaker-notes .notes__cue {
-    display: inline-block;
-    background: var(--c-gold);
-    color: var(--c-bg-dark);
-    padding: 1px 6px;
-    border-radius: 2px;
-    font-weight: 700;
-    margin-right: 6px;
-  }
-
-
-}
+/* (W3 print block removed; universal print stylesheet at the bottom
+   of this file handles printing for all decks. The .notes__cue marker
+   styling lives there too, alongside .cue.) */
 
 
 
@@ -3068,29 +3037,8 @@ body.w4-deck .slide__body {
 }
 
 
-/* Footer: course + module + slide # */
-body.w4-deck .slide__footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 24px 64px;
-  border-top: 4px solid var(--scarlet);
-  background: var(--bg-warm);
-  font-size: 22px;
-  color: var(--ink-soft);
-  font-weight: 500;
-}
-
-body.w4-deck .slide__footer .left { display: flex; align-items: center; gap: 18px; }
-
-body.w4-deck .slide__footer .brand-mark {
-  display: inline-block;
-  width: 8px; height: 30px;
-  background: var(--scarlet);
-  border-radius: 2px;
-}
-
-body.w4-deck .slide__footer .right { font-variant-numeric: tabular-nums; }
+/* (W4 .slide__footer rules removed — markup uses canonical .slide__foot
+   which inherits the unscoped chrome styling near the top of this file.) */
 
 
 /* ---------- Slide kinds ---------- */
@@ -3814,140 +3762,1113 @@ body.w4-deck .help-overlay td:first-child { color: var(--gold); font-family: var
 body.w4-deck .help-overlay .close { margin-top: 20px; font-size: 13px; color: #aaa; }
 
 
-/* Print fallback (just in case) */
-@media print {
+/* (W4 print block removed; universal print stylesheet handles it.
+   The .help-overlay hide rule is folded into the universal sheet's
+   chrome-hide selector list.) */
 
-body.w4-deck { background: #fff; }
 
-body.w4-deck .stage { position: static; display: block; }
+/* ----- W4 helper classes (replaced inline-style patterns) ----- */
+body.w4-deck .w4-pattern { font-size: 26px; color: var(--scarlet-dark); line-height: 1.4; }
+body.w4-deck .w4-pattern--bold { font-weight: 700; }
 
-body.w4-deck .slide {
-    display: flex !important;
-    page-break-after: always;
-    box-shadow: none;
-    transform: none !important;
-  }
+body.w4-deck .w4-small { font-size: 26px; line-height: 1.4; }
 
-body.w4-deck .hud, body.w4-deck .notes, body.w4-deck .help-overlay { display: none !important; }
-
-}
+body.w4-deck .w4-list { font-size: 28px; line-height: 1.4; padding-left: 30px; }
+body.w4-deck .w4-list--lg { font-size: 34px; }
 
 
 /* ----- Compat: support is-active visibility for Weeks 5/6 ----- */
 body.w5-deck .slide.is-active, body.w6-deck .slide.is-active { display: flex; flex-direction: column; }
 
 
-  /* ============================================================
-     UNIVERSAL PRINT STYLESHEET
-     Applies to ALL decks regardless of body class. Renders one
-     slide per page followed by its speaker notes on the next page.
-     Activated by:
-       - Press P in the deck (calls printDeck() in deck.js)
-       - File → Print / Ctrl+P / Cmd+P
-     ============================================================ */
-  @media print {
-    /* Page setup: landscape 16:9-ish handout */
-    @page {
-      size: 13.333in 7.5in;
-      margin: 0;
-    }
+/* ============================================================
+   ----- Week 5: Supervisor Orientation (extracted from inline) -----
+   Self-scaling 16:9 frame; component CSS for cards, callouts, and
+   dual-mode speaker-notes blocks.
 
-    html, body {
-      background: #fff !important;
-      overflow: visible !important;
-      height: auto !important;
-      width: auto !important;
-    }
+   Note on palette: Week 5 introduces additional Material-tinted
+   tokens (--info-edge #4285f4, --warn-edge #f9ab00, --good-edge
+   #34a853, --instr-edge) that are NOT part of the canonical USMC
+   palette. They are intentionally retained so call-out semantics
+   (info / warn / good / instructor-only) read at a glance during
+   live delivery. Treat them as W5/W6-specific extensions; do not
+   propagate them into Weeks 1–4 without a deliberate design call.
+   ============================================================ */
+body.w5-deck {
+  --scarlet: #CC0000;
+  --scarlet-dark: #a30000;
+  --scarlet-deep: #5c0000;
+  --gold: #F5D130;
+  --gold-dark: #d4b11a;
+  --gold-light: #f9e06b;
 
-    /* Hide all on-screen chrome */
-    .deck-chrome, .deck-notes,
-    .hud, .help, .help-overlay, .counter,
-    .notes-panel, #notesPanel, #hud,
-    .deck__chrome, .deck__hint {
-      display: none !important;
-    }
+  --bg: #f8f7f5;
+  --surface: #ffffff;
+  --ink: #1a1a1a;
+  --ink-2: #4a4a4a;
+  --ink-3: #6e6e6e;
+  --rule: #d9d8d4;
+  --rule-light: #e8e7e3;
 
-    /* Stage / deck containers become flow blocks */
-    .stage, .deck, .frame {
-      position: static !important;
-      display: block !important;
-      width: auto !important;
-      height: auto !important;
-      max-width: none !important;
-      max-height: none !important;
-      transform: none !important;
-      box-shadow: none !important;
-      inset: auto !important;
-      background: #fff !important;
-    }
+  --info-bg:    #e8f0fe;
+  --info-edge:  #4285f4;
+  --warn-bg:    #fef7e0;
+  --warn-edge:  #f9ab00;
+  --warn-text:  #5f4b08;
+  --good-bg:    #e6f4ea;
+  --good-edge:  #34a853;
+  --good-text:  #0d652d;
+  --instr-bg:   #fce8e8;
+  --instr-edge: #CC0000;
+  --instr-text: #5c0000;
 
-    /* Each slide: full page, with a hard page break after */
-    .slide {
-      display: flex !important;
-      flex-direction: column;
-      position: relative !important;
-      inset: auto !important;
-      width: 13.333in !important;
-      height: 7.5in !important;
-      max-width: 13.333in !important;
-      max-height: 7.5in !important;
-      page-break-after: always;
-      page-break-inside: avoid;
-      break-after: page;
-      break-inside: avoid;
-      box-shadow: none !important;
-      transform: none !important;
-      margin: 0 !important;
-      overflow: hidden;
-    }
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Cascadia Code", "Fira Code", Consolas, Monaco, monospace;
 
-    /* Speaker notes follow each slide on their own page */
-    .notes, .speaker-notes {
-      display: block !important;
-      position: relative !important;
-      inset: auto !important;
-      width: 13.333in !important;
-      min-height: 7.5in;
-      max-width: none !important;
-      background: #fff !important;
-      color: #1a1a1a !important;
-      border-top: 4px solid #cc0000;
-      padding: 0.6in 0.75in !important;
-      page-break-before: always;
-      page-break-after: always;
-      break-before: page;
-      break-after: page;
-      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
-      font-size: 11pt;
-      line-height: 1.55;
-    }
+  background: #111;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  overflow: hidden;
+}
+body.w5-deck * { box-sizing: border-box; margin: 0; padding: 0; }
+body.w5-deck html, body.w5-deck { height: 100%; }
 
-    .notes h3, .speaker-notes h3 {
-      font-size: 10pt;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #cc0000;
-      margin: 0 0 0.25in 0;
-      font-weight: 700;
-    }
+/* ---- Stage / 16:9 frame ----------------------------------- */
+body.w5-deck .stage {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+body.w5-deck .frame {
+  width: min(100vw, calc(100vh * 16 / 9));
+  aspect-ratio: 16 / 9;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+}
+body.w5-deck .deck { width: 100%; height: 100%; position: relative; }
+body.w5-deck .slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  padding: 4.5vh 5vw 5vh;
+  background: var(--bg);
+  color: var(--ink);
+}
+body.w5-deck .slide.is-active { display: flex; }
 
-    .notes p, .speaker-notes p { margin: 0 0 0.18in 0; color: #1a1a1a; }
-    .notes strong, .speaker-notes strong { color: #000; }
-    .notes em, .speaker-notes em { color: #cc0000; font-style: normal; font-weight: 600; }
+/* Type scale — vw based so it scales with the 16:9 frame */
+body.w5-deck .frame { font-size: 1.2vw; }
+body.w5-deck h1, body.w5-deck h2, body.w5-deck h3, body.w5-deck h4 { font-weight: 700; line-height: 1.18; letter-spacing: -0.01em; }
+body.w5-deck h1 { font-size: 4.4vw; }
+body.w5-deck h2 { font-size: 3.2vw; }
+body.w5-deck h3 { font-size: 2.0vw; margin-bottom: 1vh; }
+body.w5-deck h4 { font-size: 1.4vw; margin-bottom: 0.6vh; }
+body.w5-deck p, body.w5-deck li { font-size: 1.4vw; line-height: 1.45; }
+body.w5-deck .lead { font-size: 1.7vw; line-height: 1.45; color: var(--ink-2); }
+body.w5-deck .small { font-size: 1.1vw; color: var(--ink-3); }
+body.w5-deck .micro { font-size: 0.95vw; color: var(--ink-3); letter-spacing: 0.04em; text-transform: uppercase; font-weight: 600; }
 
-    /* The .notes label that prints before each slide's notes block */
-    .notes::before, .speaker-notes::before {
-      content: "Speaker notes";
-      display: block;
-      font-size: 9pt;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: #cc0000;
-      margin-bottom: 0.2in;
-      font-weight: 700;
-    }
-  }
-  
+body.w5-deck ul, body.w5-deck ol { padding-left: 2.4vw; }
+body.w5-deck li { margin-bottom: 0.7vh; }
+body.w5-deck li::marker { color: var(--scarlet); }
+
+/* ---- Slide chrome ----------------------------------------- */
+body.w5-deck .slide__head {
+  display: flex;
+  align-items: center;
+  gap: 1.2vw;
+  margin-bottom: 2.2vh;
+  padding-bottom: 1.2vh;
+  border-bottom: 2px solid var(--rule-light);
+}
+body.w5-deck .slide__head .badge { white-space: nowrap; }
+body.w5-deck .slide__head h2 { flex: 1; }
+body.w5-deck .slide__title { font-size: 2.6vw; }
+
+body.w5-deck .slide__foot {
+  position: absolute;
+  left: 5vw; right: 5vw; bottom: 2vh;
+  display: flex; justify-content: space-between; align-items: center;
+  color: var(--ink-3); font-size: 0.95vw;
+  border-top: 1px solid var(--rule-light);
+  padding-top: 1vh;
+}
+/* (W5 .scarlet-mark rule removed — no markup uses .scarlet-mark.) */
+
+/* ---- Badges ----------------------------------------------- */
+body.w5-deck .badge {
+  display: inline-block;
+  padding: 0.4vh 0.9vw;
+  background: var(--rule-light);
+  color: var(--ink-2);
+  font-size: 0.95vw;
+  font-weight: 600;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+body.w5-deck .badge--scarlet { background: var(--scarlet); color: var(--c-paper); }
+body.w5-deck .badge--gold { background: var(--gold); color: var(--ink); }
+body.w5-deck .badge--ghost { background: transparent; border: 1.5px solid var(--rule); color: var(--ink-2); }
+body.w5-deck .badge--instr { background: var(--instr-bg); color: var(--instr-text); border: 1px solid var(--instr-edge); }
+
+/* ---- Callouts --------------------------------------------- */
+body.w5-deck .callout {
+  border-left: 6px solid var(--rule);
+  background: var(--surface);
+  padding: 2vh 1.6vw;
+  border-radius: 0 8px 8px 0;
+  margin-top: 1.4vh;
+}
+body.w5-deck .callout h4 { color: var(--ink); margin-bottom: 0.6vh; }
+body.w5-deck .callout--info { border-color: var(--info-edge); background: var(--info-bg); }
+body.w5-deck .callout--warn { border-color: var(--warn-edge); background: var(--warn-bg); color: var(--warn-text); }
+body.w5-deck .callout--good { border-color: var(--good-edge); background: var(--good-bg); color: var(--good-text); }
+body.w5-deck .callout--scarlet { border-color: var(--scarlet); background: var(--c-paper); }
+
+/* ---- Two-column ------------------------------------------- */
+body.w5-deck .cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.4vw;
+  flex: 1;
+  min-height: 0;
+}
+body.w5-deck .cols--3 { grid-template-columns: 1fr 1fr 1fr; }
+body.w5-deck .col { display: flex; flex-direction: column; }
+body.w5-deck .col__head {
+  font-size: 1.2vw;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 1vh;
+  padding-bottom: 0.6vh;
+  border-bottom: 2px solid var(--rule-light);
+}
+body.w5-deck .col__head--good { color: var(--good-text); border-color: var(--good-edge); }
+body.w5-deck .col__head--bad  { color: var(--scarlet-deep); border-color: var(--scarlet); }
+body.w5-deck .col__head--neutral { color: var(--ink-2); }
+
+/* ---- Cover slide ------------------------------------------ */
+body.w5-deck .cover {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a0606 60%, var(--scarlet-deep) 100%);
+  color: var(--c-paper);
+  padding: 6vh 5vw;
+}
+body.w5-deck .cover .eyebrow { color: var(--gold); font-size: 1.2vw; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; }
+body.w5-deck .cover h1 { color: var(--c-paper); font-size: 5.4vw; line-height: 1.05; max-width: 80%; margin-top: 1.2vh; }
+body.w5-deck .cover .deck-sub { color: rgba(255,255,255,0.8); font-size: 1.6vw; margin-top: 2vh; max-width: 70%; line-height: 1.4; }
+body.w5-deck .cover .cover-meta { display: flex; gap: 1vw; margin-top: 4vh; }
+body.w5-deck .cover .cover-meta .badge { background: rgba(255,255,255,0.12); color: var(--c-paper); border: 1px solid rgba(255,255,255,0.25); }
+body.w5-deck .cover .cover-meta .badge--gold { background: var(--gold); color: var(--ink); border: none; }
+body.w5-deck .cover .scarlet-bar {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1vh; background: var(--scarlet);
+}
+body.w5-deck .cover .gold-bar {
+  position: absolute; left: 0; right: 0; bottom: 1vh;
+  height: 0.4vh; background: var(--gold);
+}
+body.w5-deck .cover .corner {
+  position: absolute; top: 4vh; right: 5vw; color: rgba(255,255,255,0.6);
+  font-size: 0.95vw; letter-spacing: 0.12em; text-transform: uppercase;
+}
+body.w5-deck .cover .corner strong { color: var(--gold); }
+
+/* ---- Section divider -------------------------------------- */
+body.w5-deck .divider {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a0606 100%);
+  color: var(--c-paper);
+  padding: 6vh 6vw;
+  justify-content: center;
+}
+body.w5-deck .divider .module-num { color: var(--gold); font-size: 1.4vw; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; }
+body.w5-deck .divider h1 { color: var(--c-paper); font-size: 5vw; max-width: 85%; margin-top: 1.4vh; line-height: 1.05; }
+body.w5-deck .divider .module-meta { color: rgba(255,255,255,0.75); font-size: 1.4vw; margin-top: 2.4vh; }
+body.w5-deck .divider .scarlet-bar {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 1vh; background: var(--scarlet);
+}
+
+/* ---- Centerpieces ----------------------------------------- */
+body.w5-deck .centerpiece {
+  background: var(--c-paper);
+  border: 1px solid var(--rule-light);
+  border-top: 8px solid var(--scarlet);
+  border-radius: 8px;
+  padding: 5vh 4vw;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+}
+body.w5-deck .centerpiece .pull {
+  font-size: 4.6vw;
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  max-width: 90%;
+  color: var(--ink);
+}
+body.w5-deck .centerpiece .pull em { color: var(--scarlet); font-style: normal; }
+body.w5-deck .centerpiece .attribution {
+  margin-top: 3vh; color: var(--ink-3); font-size: 1.2vw; letter-spacing: 0.06em; text-transform: uppercase;
+}
+
+/* Apprentice problem visual */
+body.w5-deck .apprentice {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2.4vw;
+  align-items: stretch;
+}
+body.w5-deck .apprentice .quote {
+  background: #1a1a1a;
+  color: var(--c-paper);
+  border-radius: 8px;
+  padding: 4vh 2.4vw;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+body.w5-deck .apprentice .quote::before {
+  content: "“";
+  position: absolute; top: -3vh; left: 1vw;
+  font-family: Georgia, serif;
+  font-size: 12vw; color: var(--scarlet); opacity: 0.5; line-height: 1;
+}
+body.w5-deck .apprentice .quote .q {
+  position: relative; z-index: 1;
+  font-size: 2.6vw; font-weight: 700; line-height: 1.15; max-width: 95%;
+}
+body.w5-deck .apprentice .quote .by { color: var(--gold); margin-top: 2vh; font-size: 1vw; letter-spacing: 0.12em; text-transform: uppercase; }
+body.w5-deck .apprentice .stats { display: grid; grid-template-rows: 1fr 1fr 1fr; gap: 1.2vh; min-height: 0; }
+body.w5-deck .apprentice .stat {
+  background: var(--c-paper); border: 1px solid var(--rule-light); border-radius: 8px;
+  padding: 1.2vh 1.2vw; display: flex; flex-direction: column; justify-content: center;
+  border-left: 6px solid var(--scarlet);
+  min-height: 0;
+}
+body.w5-deck .apprentice .stat .num { font-size: 2.6vw; font-weight: 800; color: var(--scarlet); line-height: 1; }
+body.w5-deck .apprentice .stat .lbl { font-size: 1.0vw; color: var(--ink-2); margin-top: 0.4vh; line-height: 1.3; }
+
+/* Stat row used on data slide */
+body.w5-deck .stat-row {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 1vw; margin: 2vh 0;
+}
+body.w5-deck .stat-row .stat {
+  background: var(--c-paper); border: 1px solid var(--rule-light); border-radius: 8px;
+  padding: 1.8vh 0.8vw; text-align: center; border-top: 4px solid var(--scarlet);
+}
+body.w5-deck .stat-row .stat .num { font-size: 2.4vw; font-weight: 800; color: var(--scarlet); line-height: 1; }
+body.w5-deck .stat-row .stat .lbl { font-size: 0.95vw; color: var(--ink-2); margin-top: 0.6vh; }
+
+/* ---- Tables ----------------------------------------------- */
+body.w5-deck table.deck-tbl {
+  width: 100%; border-collapse: collapse; background: var(--c-paper);
+  border-radius: 8px; overflow: hidden;
+  border: 1px solid var(--rule-light);
+}
+body.w5-deck table.deck-tbl th, body.w5-deck table.deck-tbl td {
+  padding: 1.2vh 1vw; text-align: left; font-size: 1.1vw; vertical-align: top;
+  border-bottom: 1px solid var(--rule-light);
+}
+body.w5-deck table.deck-tbl th { background: #1a1a1a; color: var(--c-paper); font-weight: 700; letter-spacing: 0.04em; }
+body.w5-deck table.deck-tbl tr:last-child td { border-bottom: none; }
+body.w5-deck table.deck-tbl tr:nth-child(even) td { background: #fafaf8; }
+
+/* ---- Numbered list big ------------------------------------ */
+body.w5-deck .big-list { counter-reset: bigli; padding-left: 0; list-style: none; }
+body.w5-deck .big-list li {
+  counter-increment: bigli;
+  display: grid; grid-template-columns: auto 1fr; gap: 1.2vw; align-items: start;
+  margin-bottom: 1.6vh;
+}
+body.w5-deck .big-list li::before {
+  content: counter(bigli);
+  background: var(--scarlet); color: var(--c-paper); font-weight: 800;
+  width: 3vw; height: 3vw; border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 1.6vw;
+}
+body.w5-deck .big-list li > div { padding-top: 0.4vh; }
+body.w5-deck .big-list li strong { font-size: 1.4vw; color: var(--ink); }
+body.w5-deck .big-list li p { font-size: 1.15vw; color: var(--ink-2); margin-top: 0.3vh; }
+
+/* Exercise / scenario card */
+body.w5-deck .scenario {
+  background: var(--c-paper);
+  border: 1px solid var(--rule-light);
+  border-left: 6px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 2.2vh 1.8vw;
+  margin-top: 1vh;
+}
+body.w5-deck .scenario .scenario__label {
+  font-size: 0.95vw; color: var(--gold-dark); font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.6vh;
+}
+body.w5-deck .scenario p { font-size: 1.3vw; line-height: 1.5; }
+
+body.w5-deck .prompt-box {
+  margin-top: 1.4vh;
+  background: #1a1a1a; color: var(--c-paper);
+  border-radius: 6px; padding: 1.4vh 1.4vw;
+  font-size: 1.15vw;
+}
+body.w5-deck .prompt-box .label { color: var(--gold); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.9vw; display: block; margin-bottom: 0.4vh; }
+
+/* Quick reference grid */
+body.w5-deck .qref {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.4vw;
+  flex: 1; min-height: 0;
+}
+body.w5-deck .qref .card {
+  background: var(--c-paper); border: 1px solid var(--rule-light); border-radius: 8px;
+  padding: 2vh 1.4vw; display: flex; flex-direction: column;
+  border-top: 5px solid var(--scarlet);
+}
+body.w5-deck .qref .card h4 { font-size: 1.2vw; text-transform: uppercase; letter-spacing: 0.06em; }
+body.w5-deck .qref .card ul { padding-left: 1.4vw; }
+body.w5-deck .qref .card li { font-size: 1.05vw; line-height: 1.4; margin-bottom: 0.7vh; }
+body.w5-deck .qref .card.good { border-top-color: var(--good-edge); }
+body.w5-deck .qref .card.warn { border-top-color: var(--warn-edge); }
+body.w5-deck .qref .card.warn h4 { color: var(--warn-text); }
+body.w5-deck .qref .card.good h4 { color: var(--good-text); }
+body.w5-deck .qref .card.scarlet h4 { color: var(--scarlet-deep); }
+
+/* Closing slide */
+body.w5-deck .closing {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a0606 100%);
+  color: var(--c-paper);
+  justify-content: center;
+  padding: 6vh 6vw;
+}
+body.w5-deck .closing .eyebrow { color: var(--gold); font-size: 1.2vw; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; }
+body.w5-deck .closing h1 { color: var(--c-paper); font-size: 4.6vw; max-width: 90%; margin-top: 1.6vh; }
+body.w5-deck .closing .ask { margin-top: 3vh; padding: 2vh 1.8vw; background: rgba(245,209,48,0.12); border-left: 4px solid var(--gold); border-radius: 0 8px 8px 0; max-width: 80%; }
+body.w5-deck .closing .ask .label { color: var(--gold); font-size: 0.95vw; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
+body.w5-deck .closing .ask p { color: var(--c-paper); font-size: 1.6vw; margin-top: 0.6vh; line-height: 1.4; }
+body.w5-deck .closing .scarlet-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 1vh; background: var(--scarlet); }
+
+/* Audience-shift framing slide */
+body.w5-deck .audience-shift {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.4vw;
+  align-items: stretch;
+}
+body.w5-deck .audience-shift .panel {
+  background: var(--c-paper); border: 1px solid var(--rule-light); border-radius: 8px;
+  padding: 3vh 2vw;
+  display: flex; flex-direction: column;
+}
+body.w5-deck .audience-shift .panel h3 { font-size: 1.7vw; color: var(--ink); }
+body.w5-deck .audience-shift .panel .who {
+  font-size: 1.05vw; color: var(--ink-3); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700;
+  margin-bottom: 0.8vh;
+}
+body.w5-deck .audience-shift .panel.this-week { border-top: 6px solid var(--scarlet); }
+body.w5-deck .audience-shift .panel.prior { border-top: 6px solid var(--rule); opacity: 0.92; }
+body.w5-deck .audience-shift .panel li { font-size: 1.15vw; }
+
+/* Delivery modes slide */
+body.w5-deck .modes {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.4vw;
+}
+body.w5-deck .modes .mode {
+  background: var(--c-paper); border: 1px solid var(--rule-light); border-radius: 8px;
+  padding: 3vh 2vw; display: flex; flex-direction: column;
+  border-top: 6px solid var(--gold);
+}
+body.w5-deck .modes .mode.long { border-top-color: var(--scarlet); }
+body.w5-deck .modes .mode .mode__time { font-size: 1.0vw; color: var(--ink-3); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
+body.w5-deck .modes .mode h3 { font-size: 1.9vw; margin-top: 0.4vh; }
+body.w5-deck .modes .mode p { font-size: 1.15vw; color: var(--ink-2); }
+body.w5-deck .modes .mode ul { margin-top: 1vh; }
+body.w5-deck .modes .mode li { font-size: 1.1vw; }
+
+/* Source/footer line under content */
+body.w5-deck .source { margin-top: 1.6vh; color: var(--ink-3); font-size: 0.95vw; font-style: italic; }
+
+/* ---- Multi-mode speaker notes (W5 pattern) ---------------- */
+/* Briefing/joint/transition three-block structure shown in
+   the floating notes panel. Print rendering is handled by the
+   .slide-print-notes .note-block rules in the universal print
+   block; these styles are for screen view only. */
+body.w5-deck .notes-mode {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-left: 4px solid var(--scarlet);
+  background: rgba(255,255,255,0.04);
+  border-radius: 0 4px 4px 0;
+}
+body.w5-deck .notes-mode--joint { border-left-color: var(--gold); }
+body.w5-deck .notes-mode--transition { border-left-color: #4a4a4a; }
+body.w5-deck .notes-mode .tag {
+  display: inline-block;
+  padding: 2px 8px;
+  background: var(--scarlet);
+  color: var(--c-paper);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+body.w5-deck .notes-mode--joint .tag { background: var(--gold); color: #1a1a1a; }
+body.w5-deck .notes-mode--transition .tag { background: #4a4a4a; }
+
+/* ---- HUD -------------------------------------------------- */
+body.w5-deck .hud {
+  position: fixed; right: 14px; top: 14px;
+  display: flex; gap: 6px; z-index: 30; opacity: 0.35;
+  transition: opacity 200ms ease;
+}
+body.w5-deck .hud:hover { opacity: 1; }
+body.w5-deck .hud button {
+  background: rgba(20,20,20,0.85); color: #f0f0f0; border: 1px solid #444;
+  padding: 5px 9px; border-radius: 5px; cursor: pointer; font: 600 11px var(--font-sans);
+  letter-spacing: 0.04em;
+}
+body.w5-deck .hud button:hover { background: var(--scarlet); border-color: var(--scarlet); }
+body.w5-deck .counter {
+  position: fixed; left: 14px; top: 14px;
+  color: rgba(255,255,255,0.55);
+  font: 600 11px var(--font-mono);
+  z-index: 30;
+  background: rgba(20,20,20,0.6); padding: 3px 9px; border-radius: 4px;
+  opacity: 0.5;
+}
+body.w5-deck .counter:hover { opacity: 1; }
+
+/* Help overlay */
+body.w5-deck .help {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+  display: none; place-items: center; z-index: 60; padding: 5vh;
+}
+body.w5-deck .help.is-open { display: grid; }
+body.w5-deck .help .panel {
+  background: #1a1a1a; color: var(--c-paper); border: 1px solid #333;
+  border-top: 4px solid var(--scarlet);
+  padding: 28px 32px; max-width: 520px; border-radius: 8px;
+  font-size: 14px;
+}
+body.w5-deck .help h3 { color: var(--gold); font-size: 16px; margin-bottom: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+body.w5-deck .help kbd {
+  background: #333; border: 1px solid #555; border-radius: 4px;
+  padding: 1px 7px; font: 600 12px var(--font-mono); color: var(--c-paper);
+}
+body.w5-deck .help table { width: 100%; border-collapse: collapse; margin-top: 4px; }
+body.w5-deck .help td { padding: 4px 6px; }
+body.w5-deck .help td:first-child { width: 130px; }
+body.w5-deck .help .dismiss { margin-top: 16px; color: #aaa; font-size: 12px; text-align: right; }
+
+/* ----- W5 helper classes (replaced inline-style patterns) ----- */
+body.w5-deck .col--center { justify-content: center; }
+body.w5-deck .h--good { color: var(--good-text); }
+body.w5-deck .h--bad { color: var(--scarlet-deep); }
+body.w5-deck .callout--fill { height: 100%; }
+body.w5-deck .w5-quote { font-size: 1.6vw; font-weight: 700; line-height: 1.3; }
+body.w5-deck .w5-quote--good { color: var(--good-text); }
+
+
+/* ============================================================
+   ----- Week 6: Full-Stack AI-Assisted Development (extracted) -----
+   Capstone deck. Self-scaling 16:9 frame; component CSS for
+   architecture diagrams, agenda timelines, code blocks, and
+   build/editor/debrief slide cycles.
+
+   Note on palette: W6 uses local --paper / --paper-2 / --paper-3
+   tokens AND adds --code-bg, --code-fg, --info, --warn, --success
+   semantic tokens that are NOT canonical USMC palette. Treat them
+   as W6-specific extensions; do not propagate to Weeks 1–4.
+   ============================================================ */
+body.w6-deck {
+  --scarlet: #CC0000;
+  --scarlet-dark: #a30000;
+  --gold: #F5D130;
+  --gold-dark: #d4b11a;
+  --ink: #1a1a1a;
+  --ink-2: #4a4a4a;
+  --ink-3: #6e6e6e;
+  --paper: #ffffff;
+  --paper-2: #f8f7f5;
+  --paper-3: #efeee9;
+  --line: #d9d8d4;
+  --line-2: #e8e7e3;
+  --code-bg: #1a1a1a;
+  --code-fg: #e8e7e3;
+  --info: #1a3a6b;
+  --info-bg: #e8f0fe;
+  --warn: #5f4b08;
+  --warn-bg: #fef7e0;
+  --success: #0d652d;
+  --success-bg: #e6f4ea;
+
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: "Cascadia Code", "Fira Code", Consolas, Monaco, "Courier New", monospace;
+
+  --stage-w: 1920;
+  --stage-h: 1080;
+
+  height: 100%;
+  font-family: var(--sans);
+  background: #0c0c0c;
+  color: var(--ink);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+body.w6-deck * { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Stage — centers a 16:9 slide in the viewport */
+body.w6-deck .stage {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0c0c0c;
+}
+body.w6-deck .deck {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  max-width: calc(100vh * 16 / 9);
+  max-height: calc(100vw * 9 / 16);
+  background: var(--paper);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+body.w6-deck .slide {
+  position: absolute;
+  inset: 0;
+  display: none !important;
+  flex-direction: column;
+  padding: 4.5vh 5vw;
+  background: var(--paper);
+  color: var(--ink);
+}
+body.w6-deck .slide.is-active { display: flex !important; }
+body.w6-deck .notes { display: none; }
+
+/* Common slide chrome */
+body.w6-deck .slide__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2vw;
+  padding-bottom: 1.4vh;
+  margin-bottom: 2.2vh;
+  border-bottom: 2px solid var(--line-2);
+}
+body.w6-deck .slide__eyebrow {
+  font-size: 1.1vw;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--scarlet);
+}
+body.w6-deck .slide__eyebrow .dot {
+  display: inline-block; width: 0.5vw; height: 0.5vw; border-radius: 50%;
+  background: var(--gold); margin: 0 0.6em; vertical-align: middle;
+}
+body.w6-deck .slide__minutes {
+  font-size: 1vw;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 600;
+}
+body.w6-deck .slide__title {
+  font-size: 3.6vw;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 0.4vh;
+}
+body.w6-deck .slide__subtitle {
+  font-size: 1.6vw;
+  color: var(--ink-2);
+  font-weight: 500;
+  max-width: 80ch;
+}
+body.w6-deck .slide__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.2vh;
+  font-size: 1.7vw;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+body.w6-deck .slide__foot {
+  margin-top: 2vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.95vw;
+  color: var(--ink-3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-top: 1px solid var(--line-2);
+  padding-top: 1.2vh;
+}
+/* (W6 .brand-mark rule removed — no markup uses .brand-mark.) */
+
+/* Cover, section, break, closing */
+body.w6-deck .slide--cover, body.w6-deck .slide--section,
+body.w6-deck .slide--break, body.w6-deck .slide--close,
+body.w6-deck .slide--closing {
+  padding: 0;
+  overflow: hidden;
+}
+
+body.w6-deck .slide--cover {
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(245,209,48,0.18), transparent 55%),
+    radial-gradient(ellipse at 10% 90%, rgba(204,0,0,0.18), transparent 55%),
+    var(--paper);
+  display: flex; align-items: stretch; justify-content: stretch;
+}
+body.w6-deck .cover-inner {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-content: space-between;
+  padding: 6vh 6vw;
+}
+body.w6-deck .cover-top {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 1.05vw; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--ink-3); font-weight: 700;
+}
+body.w6-deck .cover-top .brand {
+  display: inline-flex; align-items: center; gap: 0.7vw; color: var(--ink);
+}
+body.w6-deck .cover-top .brand .mark {
+  width: 0.5vw; height: 2.4vh; background: var(--scarlet); border-radius: 2px;
+}
+body.w6-deck .cover-top .stamp {
+  padding: 0.6vh 1vw; border: 2px solid var(--scarlet); color: var(--scarlet);
+  border-radius: 999px; font-weight: 800;
+}
+body.w6-deck .cover-mid h1 {
+  font-size: 6vw; line-height: 0.98; letter-spacing: -0.025em;
+  font-weight: 900; color: var(--ink);
+}
+body.w6-deck .cover-mid .h1-accent { display: block; color: var(--scarlet); }
+body.w6-deck .cover-mid .lede {
+  margin-top: 3vh;
+  font-size: 1.7vw; color: var(--ink-2); max-width: 70ch; line-height: 1.4;
+}
+body.w6-deck .cover-mid .rule {
+  width: 14vw; height: 0.7vh;
+  background: linear-gradient(90deg, var(--scarlet), var(--gold));
+  margin: 4vh 0 2vh;
+  border-radius: 2px;
+}
+body.w6-deck .cover-bottom {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  font-size: 1.1vw; color: var(--ink-3);
+}
+body.w6-deck .cover-bottom .meta { display: flex; gap: 2.2vw; }
+body.w6-deck .cover-bottom .meta div strong {
+  display: block; color: var(--ink); font-size: 1.4vw; letter-spacing: -0.01em;
+}
+body.w6-deck .cover-bottom .week-pip {
+  display: inline-flex; align-items: center; gap: 0.6vw;
+  background: var(--ink); color: var(--paper);
+  padding: 0.9vh 1.4vw; border-radius: 999px;
+  font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: 1vw;
+}
+body.w6-deck .cover-bottom .week-pip .six {
+  background: var(--gold); color: var(--ink);
+  width: 2.6vh; height: 2.6vh; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 900;
+}
+
+body.w6-deck .slide--section {
+  background: var(--ink); color: var(--paper);
+}
+body.w6-deck .section-inner {
+  flex: 1; display: grid; grid-template-columns: 1fr 1fr;
+  width: 100%; height: 100%;
+}
+body.w6-deck .section-left {
+  padding: 6vh 5vw; display: flex; flex-direction: column; justify-content: center;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0c0c0c 100%);
+  position: relative;
+}
+body.w6-deck .section-left::after {
+  content: ""; position: absolute; right: 0; top: 12vh; bottom: 12vh;
+  width: 0.4vw; background: var(--scarlet);
+}
+body.w6-deck .section-left .module-eyebrow {
+  font-size: 1.2vw; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); font-weight: 800; margin-bottom: 2vh;
+}
+body.w6-deck .section-left .module-no {
+  font-size: 11vw; line-height: 0.9; font-weight: 900; color: var(--paper);
+  letter-spacing: -0.04em;
+}
+body.w6-deck .section-left .module-no .of {
+  font-size: 2.2vw; color: var(--ink-3); font-weight: 600; margin-left: 1vw;
+}
+body.w6-deck .section-right {
+  padding: 6vh 5vw; display: flex; flex-direction: column; justify-content: center;
+}
+body.w6-deck .section-right .module-name {
+  font-size: 4.4vw; font-weight: 800; line-height: 1.02; color: var(--paper);
+  letter-spacing: -0.02em; margin-bottom: 3vh;
+}
+body.w6-deck .section-right .module-meta {
+  display: flex; gap: 2vw; margin-bottom: 3vh;
+}
+body.w6-deck .section-right .module-meta .pill {
+  display: inline-flex; align-items: center; gap: 0.5vw;
+  padding: 0.8vh 1.2vw; border: 1.5px solid #444; border-radius: 999px;
+  color: var(--paper); font-size: 1vw; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+body.w6-deck .section-right .module-meta .pill--build {
+  border-color: var(--scarlet); color: var(--paper); background: var(--scarlet);
+}
+body.w6-deck .section-right .module-meta .pill--gold {
+  border-color: var(--gold); color: var(--ink); background: var(--gold);
+}
+body.w6-deck .section-right .module-blurb {
+  font-size: 1.5vw; line-height: 1.45; color: #c8c8c8; max-width: 56ch;
+}
+
+body.w6-deck .slide--break {
+  background: var(--paper-2);
+  display: flex; align-items: center; justify-content: center; text-align: center;
+}
+body.w6-deck .break-inner {
+  display: flex; flex-direction: column; align-items: center; gap: 2.4vh;
+}
+body.w6-deck .break-inner .lab { font-size: 1.4vw; letter-spacing: 0.4em; text-transform: uppercase; color: var(--scarlet); font-weight: 800; }
+body.w6-deck .break-inner .num { font-size: 18vw; font-weight: 900; line-height: 0.9; color: var(--ink); letter-spacing: -0.05em; }
+body.w6-deck .break-inner .num small { font-size: 3vw; color: var(--ink-3); font-weight: 700; margin-left: 0.4vw; }
+body.w6-deck .break-inner .sub { font-size: 1.6vw; color: var(--ink-2); max-width: 60ch; }
+
+/* Closing slide — accept either .slide--close or .slide--closing */
+body.w6-deck .slide--close, body.w6-deck .slide--closing {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(245,209,48,0.25), transparent 50%),
+    radial-gradient(ellipse at 50% 110%, rgba(204,0,0,0.4), transparent 60%),
+    #0c0c0c;
+  color: var(--paper);
+  display: flex; align-items: center; justify-content: center; text-align: center;
+}
+body.w6-deck .close-inner { display: flex; flex-direction: column; align-items: center; gap: 3vh; padding: 0 6vw; }
+body.w6-deck .close-inner .stamp {
+  display: inline-flex; align-items: center; gap: 0.8vw;
+  padding: 0.8vh 1.6vw; border: 2px solid var(--gold); color: var(--gold);
+  border-radius: 999px; font-size: 1.1vw; letter-spacing: 0.25em;
+  text-transform: uppercase; font-weight: 800;
+}
+body.w6-deck .close-inner h1 {
+  font-size: 6.5vw; line-height: 0.98; letter-spacing: -0.025em; font-weight: 900;
+}
+body.w6-deck .close-inner h1 em { color: var(--gold); font-style: normal; }
+body.w6-deck .close-inner .lede { font-size: 1.6vw; color: #d8d8d8; max-width: 70ch; line-height: 1.4; }
+body.w6-deck .close-inner .rule {
+  width: 18vw; height: 0.5vh; background: linear-gradient(90deg, var(--scarlet), var(--gold));
+  border-radius: 2px;
+}
+body.w6-deck .close-inner .sig { font-size: 1vw; letter-spacing: 0.3em; text-transform: uppercase; color: #999; font-weight: 700; }
+
+/* Content patterns */
+body.w6-deck .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3vw; align-items: stretch; }
+body.w6-deck .cols-2--6040 { grid-template-columns: 6fr 4fr; }
+body.w6-deck .cols-2--4060 { grid-template-columns: 4fr 6fr; }
+
+body.w6-deck .card {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 2.6vh 1.8vw;
+}
+body.w6-deck .card--accent { background: var(--paper); border-left: 6px solid var(--scarlet); }
+body.w6-deck .card--gold { border-left-color: var(--gold); }
+body.w6-deck .card--ink { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+body.w6-deck .card--ink h3 { color: var(--gold); }
+body.w6-deck .card h3 {
+  font-size: 1.6vw; margin-bottom: 1vh; color: var(--ink);
+  letter-spacing: -0.005em;
+}
+body.w6-deck .card p, body.w6-deck .card li { font-size: 1.35vw; color: var(--ink-2); line-height: 1.4; }
+body.w6-deck .card--ink p, body.w6-deck .card--ink li { color: #d8d8d8; }
+body.w6-deck .card ul, body.w6-deck .card ol { padding-left: 1.4vw; }
+body.w6-deck .card li + li { margin-top: 0.6vh; }
+
+body.w6-deck .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2vw; }
+body.w6-deck .stat {
+  background: var(--paper-2); border: 1px solid var(--line); border-radius: 12px;
+  padding: 2.4vh 1.4vw; display: flex; flex-direction: column; gap: 0.8vh;
+}
+body.w6-deck .stat .num {
+  font-size: 3.6vw; font-weight: 900; color: var(--scarlet); line-height: 1;
+  letter-spacing: -0.02em;
+}
+body.w6-deck .stat .lab { font-size: 1vw; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); font-weight: 700; }
+body.w6-deck .stat .desc { font-size: 1.1vw; color: var(--ink-2); }
+
+body.w6-deck .pillrow { display: flex; flex-wrap: wrap; gap: 0.7vw; }
+body.w6-deck .pill {
+  display: inline-flex; align-items: center; gap: 0.4vw;
+  padding: 0.6vh 1vw; border-radius: 999px;
+  background: var(--paper-2); border: 1px solid var(--line);
+  font-size: 1.1vw; color: var(--ink-2); font-weight: 600;
+}
+body.w6-deck .pill--scarlet { background: var(--scarlet); color: var(--paper); border-color: var(--scarlet); }
+body.w6-deck .pill--gold { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+body.w6-deck .pill--ink { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+body.w6-deck .pill--out { background: transparent; }
+
+body.w6-deck .bullets-lg { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1.4vh; }
+body.w6-deck .bullets-lg li {
+  display: grid; grid-template-columns: 2.2vw 1fr; align-items: baseline;
+  font-size: 1.6vw; color: var(--ink); line-height: 1.4;
+}
+body.w6-deck .bullets-lg li::before {
+  content: ""; display: block; width: 0.8vw; height: 0.8vw;
+  background: var(--scarlet); border-radius: 50%; margin-top: 0.6vh;
+}
+body.w6-deck .bullets-lg li strong { color: var(--ink); }
+
+body.w6-deck .checklist { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1.4vh; }
+body.w6-deck .checklist li {
+  display: grid; grid-template-columns: 3vw 1fr; align-items: start;
+  font-size: 1.5vw; color: var(--ink); line-height: 1.4;
+}
+body.w6-deck .checklist li::before {
+  content: "✓"; display: inline-flex; align-items: center; justify-content: center;
+  width: 2.2vw; height: 2.2vw; border-radius: 6px;
+  background: var(--success-bg); color: var(--success);
+  font-weight: 900; font-size: 1.4vw;
+}
+
+body.w6-deck .code {
+  background: var(--code-bg); color: var(--code-fg); border-radius: 10px;
+  padding: 2vh 1.6vw; font-family: var(--mono); font-size: 1.05vw; line-height: 1.55;
+  overflow: hidden; white-space: pre; tab-size: 2;
+  border: 1px solid #2a2a2a;
+}
+body.w6-deck .code__label {
+  font-family: var(--sans); font-size: 0.85vw; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold); font-weight: 700;
+  margin-bottom: 1vh; display: block;
+}
+body.w6-deck .code .c { color: #8a8a8a; }
+body.w6-deck .code .k { color: #f5d130; }
+body.w6-deck .code .s { color: #a3d99c; }
+body.w6-deck .code .n { color: #ffb86b; }
+
+body.w6-deck .prompt {
+  background: var(--info-bg);
+  border-left: 6px solid var(--info);
+  border-radius: 0 10px 10px 0;
+  padding: 2vh 1.6vw;
+  font-size: 1.35vw;
+  color: var(--info);
+  line-height: 1.45;
+}
+body.w6-deck .prompt strong { display: block; font-size: 0.9vw; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--info); margin-bottom: 0.6vh; }
+
+body.w6-deck .slide--editor { background: linear-gradient(180deg, #1a1a1a 0%, #050505 100%); color: var(--paper); padding: 0; }
+body.w6-deck .editor-inner { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6vh 6vw; text-align: center; gap: 3vh; }
+body.w6-deck .editor-inner .badge {
+  display: inline-flex; align-items: center; gap: 0.6vw;
+  padding: 0.8vh 1.4vw; border-radius: 999px;
+  background: var(--scarlet); color: var(--paper);
+  font-size: 1.1vw; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 800;
+}
+body.w6-deck .editor-inner .arrow { font-size: 6vw; line-height: 1; color: var(--gold); }
+body.w6-deck .editor-inner h2 { font-size: 5.4vw; line-height: 1; letter-spacing: -0.02em; font-weight: 900; }
+body.w6-deck .editor-inner h2 em { color: var(--gold); font-style: normal; }
+body.w6-deck .editor-inner .what { font-size: 1.5vw; color: #c0c0c0; max-width: 70ch; line-height: 1.4; }
+body.w6-deck .editor-inner .timer { font-family: var(--mono); font-size: 1.3vw; color: var(--gold); letter-spacing: 0.12em; }
+
+body.w6-deck .slide--debrief .slide__head { border-bottom-color: var(--gold); }
+body.w6-deck .slide--debrief .slide__eyebrow { color: var(--gold-dark); }
+
+body.w6-deck .slide--build .slide__eyebrow { color: var(--scarlet); }
+body.w6-deck .build-banner {
+  display: inline-flex; align-items: center; gap: 0.6vw;
+  background: var(--scarlet); color: var(--paper);
+  padding: 0.7vh 1.2vw; border-radius: 6px;
+  font-size: 1vw; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 800;
+}
+
+/* Architecture diagram */
+body.w6-deck .arch {
+  display: grid; grid-template-rows: repeat(4, 1fr); gap: 1.2vh;
+  height: 100%; min-height: 0;
+}
+body.w6-deck .arch__layer {
+  display: grid; grid-template-columns: 9vw 1fr 1fr; align-items: center; gap: 1vw;
+  padding: 1.6vh 1.4vw;
+  background: var(--paper-2);
+  border: 2px dashed var(--line);
+  border-radius: 12px;
+  opacity: 0.55;
+  transition: all 200ms ease;
+}
+body.w6-deck .arch__layer.is-built {
+  background: var(--paper);
+  border: 2px solid var(--scarlet);
+  opacity: 1;
+  box-shadow: 0 4px 14px rgba(204,0,0,0.08);
+}
+body.w6-deck .arch__layer.is-current {
+  background: linear-gradient(90deg, rgba(245,209,48,0.18), rgba(245,209,48,0.04));
+  border-color: var(--gold);
+  border-style: solid;
+  opacity: 1;
+}
+body.w6-deck .arch__no {
+  font-family: var(--mono); font-size: 1vw; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--ink-3); font-weight: 800;
+}
+body.w6-deck .arch__name { font-size: 1.6vw; font-weight: 800; color: var(--ink); }
+body.w6-deck .arch__desc { font-size: 1.1vw; color: var(--ink-2); }
+body.w6-deck .arch__layer.is-built .arch__no { color: var(--scarlet); }
+body.w6-deck .arch__check {
+  display: inline-block; width: 1.6vw; height: 1.6vw; border-radius: 50%;
+  background: var(--success-bg); color: var(--success); text-align: center;
+  line-height: 1.6vw; font-weight: 900; margin-left: 0.6vw; font-size: 1vw;
+  visibility: hidden;
+}
+body.w6-deck .arch__layer.is-built .arch__check { visibility: visible; }
+
+body.w6-deck .arch-callout {
+  margin-top: 2vh; padding: 1.4vh 1.4vw; border-radius: 10px;
+  background: var(--ink); color: var(--paper);
+  font-size: 1.15vw; line-height: 1.4;
+}
+body.w6-deck .arch-callout strong { color: var(--gold); }
+
+/* Agenda timeline */
+body.w6-deck .agenda {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2vw 1.6vw;
+}
+body.w6-deck .agenda__item {
+  display: grid; grid-template-columns: 5.5vw 1fr; gap: 0.8vw;
+  align-items: baseline; padding: 1vh 0;
+  border-top: 1px solid var(--line-2);
+}
+body.w6-deck .agenda__time {
+  font-family: var(--mono); font-size: 1vw; color: var(--scarlet); font-weight: 700;
+}
+body.w6-deck .agenda__name { font-size: 1.2vw; color: var(--ink); font-weight: 600; line-height: 1.25; }
+body.w6-deck .agenda__name span { display: block; font-size: 0.85vw; color: var(--ink-3); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.2vh; }
+
+/* Comparison table */
+body.w6-deck .compare {
+  width: 100%; border-collapse: collapse; font-size: 1.2vw;
+}
+body.w6-deck .compare th, body.w6-deck .compare td {
+  padding: 1.2vh 1vw; text-align: left;
+  border-bottom: 1px solid var(--line-2);
+  vertical-align: top;
+}
+body.w6-deck .compare thead th {
+  font-size: 0.95vw; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-3); font-weight: 700;
+  border-bottom: 2px solid var(--ink);
+}
+body.w6-deck .compare tbody tr:nth-child(odd) { background: var(--paper-2); }
+body.w6-deck .compare td.dim { color: var(--ink-3); }
+body.w6-deck .compare td.win { color: var(--scarlet); font-weight: 700; }
+
+/* Pull quote */
+body.w6-deck .pullquote {
+  font-size: 3vw; line-height: 1.2; font-weight: 700;
+  color: var(--ink); letter-spacing: -0.01em;
+  border-left: 6px solid var(--gold); padding-left: 1.6vw;
+  max-width: 75ch;
+}
+body.w6-deck .pullquote .attr { display: block; margin-top: 2vh; font-size: 1.2vw; color: var(--ink-3); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
+
+/* HUD */
+body.w6-deck .hud {
+  position: fixed; right: 1vw; bottom: 1vh; z-index: 50;
+  display: flex; gap: 0.5vw; align-items: center;
+  background: rgba(20,20,20,0.85); color: #ddd;
+  padding: 0.5vh 0.8vw; border-radius: 999px;
+  font: 600 12px var(--sans); letter-spacing: 0.05em;
+  backdrop-filter: blur(6px);
+}
+body.w6-deck .hud button {
+  background: transparent; border: none; color: #ddd;
+  font: inherit; cursor: pointer; padding: 0.3vh 0.5vw;
+  border-radius: 4px;
+}
+body.w6-deck .hud button:hover { background: rgba(255,255,255,0.1); }
+body.w6-deck .hud .sep { width: 1px; height: 14px; background: #444; }
+body.w6-deck .hud .counter { color: var(--gold); font-variant-numeric: tabular-nums; }
+body.w6-deck .hud .hint { color: #999; font-weight: 500; }
+
+/* Speaker notes panel (W6 uses .notes-panel side-drawer) */
+body.w6-deck .notes-panel {
+  position: fixed; right: 0; bottom: 0; top: 0; width: 32vw; max-width: 520px;
+  background: #111; color: #eee; z-index: 40;
+  display: none; flex-direction: column;
+  border-left: 1px solid #222;
+  font: 14px/1.55 var(--sans);
+  transform: translateX(100%); transition: transform 220ms ease;
+}
+body.w6-deck .notes-panel.is-open { display: flex; transform: translateX(0); }
+body.w6-deck .notes-panel header {
+  padding: 12px 16px; background: #1a1a1a; border-bottom: 1px solid #2a2a2a;
+  display: flex; justify-content: space-between; align-items: center;
+}
+body.w6-deck .notes-panel header strong { color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; font-size: 11px; }
+body.w6-deck .notes-panel header span { color: #aaa; font-size: 12px; }
+body.w6-deck .notes-panel .body {
+  padding: 16px 18px; overflow-y: auto; flex: 1;
+}
+body.w6-deck .notes-panel .body h4 { color: var(--gold); margin: 14px 0 6px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; }
+body.w6-deck .notes-panel .body h4:first-child { margin-top: 0; }
+body.w6-deck .notes-panel .body p { margin-bottom: 10px; color: #d8d8d8; }
+body.w6-deck .notes-panel .body ul { margin: 6px 0 12px 18px; }
+body.w6-deck .notes-panel .body li { margin-bottom: 4px; color: #cfcfcf; }
+body.w6-deck .notes-panel .body em { color: var(--gold); font-style: normal; font-weight: 600; }
+body.w6-deck .notes-panel .body code { background: #222; padding: 1px 5px; border-radius: 3px; font-family: var(--mono); font-size: 12.5px; color: #f5d130; }
+body.w6-deck .notes-panel .cue {
+  margin: 12px 0; padding: 10px 12px; background: #2a1a00;
+  border-left: 3px solid var(--gold); border-radius: 0 4px 4px 0; color: #fce7a8;
+}
+body.w6-deck .notes-panel .cue strong { color: var(--gold); }
+
+
+  /* (Earlier 13.333in × 7.5in universal print block removed —
+     superseded by the 1920×1580px UNIVERSAL HANDOUT PRINT STYLESHEET
+     below, which works with the runtime-injected
+     <aside class="slide-print-notes"> blocks emitted by deck.js.) */
+
 
 /* ============================================================
    UNIVERSAL HANDOUT PRINT STYLESHEET

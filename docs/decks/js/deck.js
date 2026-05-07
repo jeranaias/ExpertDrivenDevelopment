@@ -80,6 +80,19 @@
     document.body.appendChild(notesPanel);
   }
 
+  // ----- Accessibility: aria-live region inside the deck chrome.
+  // Slide-change events write a "Slide N of T, <title>" string here so
+  // screen-reader users get a spoken announcement on every navigation.
+  var announce = document.getElementById("deck-announce");
+  if (!announce) {
+    announce = document.createElement("div");
+    announce.id = "deck-announce";
+    announce.className = "sr-only";
+    announce.setAttribute("aria-live", "polite");
+    announce.setAttribute("aria-atomic", "true");
+    chrome.appendChild(announce);
+  }
+
   var notesBody = notesPanel.querySelector("#deck-notes-body") || notesPanel;
   var counterEl = chrome.querySelector("#deck-cur");
 
@@ -140,6 +153,18 @@
     }
   });
 
+  function getSlideTitle(slide) {
+    if (!slide) return "";
+    var attrTitle = slide.getAttribute("data-title");
+    if (attrTitle) return attrTitle;
+    var heading = slide.querySelector(
+      "h1, h2, .title-xxl, .title-xl, .title-lg, .title-md, " +
+      ".slide__title, .h-display, .h-title, .section-right .module-name, " +
+      ".cover-title"
+    );
+    return heading ? (heading.textContent || "").trim().replace(/\s+/g, " ") : "";
+  }
+
   function show(i) {
     if (i < 0) i = 0;
     if (i >= total) i = total - 1;
@@ -151,6 +176,12 @@
     if (counterEl) counterEl.textContent = String(current + 1);
 
     notesBody.innerHTML = readNotes(slides[current], current);
+
+    if (announce) {
+      var slideTitle = getSlideTitle(slides[current]);
+      announce.textContent = "Slide " + (current + 1) + " of " + total +
+        (slideTitle ? ", " + slideTitle : "");
+    }
 
     var newHash = "#" + slides[current].id;
     if (window.location.hash !== newHash) {

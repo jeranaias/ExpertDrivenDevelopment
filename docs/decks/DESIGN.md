@@ -105,8 +105,47 @@ should reuse these layouts verbatim.
 | `slide--closing` | Ink ground, big "where next" | Last slide. |
 
 The layout taxonomy is the contract for the rest of the program. Weeks 2–6
-must use these classes only — no new layouts unless the system is updated
-and this note is updated with it.
+should use these classes by preference; the per-week extensions below are
+recognised forks where genuinely different content earned a new layout.
+
+### Per-week layout extensions (W2-W6 forks)
+
+These layouts were created in the original per-week decks before the
+canonical taxonomy stabilised. They live in `deck.css` under their week's
+`body.wN-deck` scope. New decks should not add to this list — promote a
+genuinely new layout to the canonical table above instead.
+
+| Week | Class | Purpose |
+|---|---|---|
+| W2 | `slide--live-build` | Pre-live-build framing slide (rules + tooling, before presenter switches to GenAI.mil). |
+| W2 | `slide--live-park` | "Parking" screen visible while presenter is in the build window. |
+| W2 | `slide--breaks` | "When something breaks" three-slide debug-loop sequence. |
+| W2 | `slide--checkpoint` | Return-from-build debrief framing. |
+| W2 | `slide--knowledge` | Module-end knowledge check (W2 variant of `slide--check`). |
+| W2 | `slide--break` | Hard 10-minute break screen. |
+| W4 | `slide--workshop` | Hard timeboxed workshop activity (15-min build, etc.). Gold ground. |
+| W4 | `slide--shareout` | Post-workshop share-out / synthesis slide. |
+| W4 | `slide--cue` | "Switch to your tool now" hand-off slide, sister to W2 `slide--live-park`. |
+| W4 | `slide--reference` | Reference-card slide (large data table or matrix). |
+| W4 | `slide--facilitation` | Instructor-facing facilitation block. |
+| W4 | `slide--break` | Hard break screen (W4 variant). |
+| W5 | `cover` (no `slide--` prefix) | W5 cover; predates the canonical naming. |
+| W5 | `divider` | W5 module divider. |
+| W5 | `closing` | W5 closing slide. |
+| W6 | `slide--build` | Build-module framing (10 modules in W6 cycle). |
+| W6 | `slide--editor` | "Switch to editor" hand-off (W6 variant of W2 `slide--live-park`). |
+| W6 | `slide--break` | Lunch / mid-day break (W6). |
+
+### Week 3 alternative naming
+
+Week 3 uses an `layout-*` prefix instead of `slide--*` for every layout
+class (`layout-cover`, `layout-content`, `layout-two`, `layout-section`,
+`layout-frame`, `layout-switch`, `layout-debrief`, `layout-quiet`,
+`layout-break`, `layout-agenda`, `layout-worktime`, `layout-preview`,
+`layout-closing`). This was the historical naming when W3 was first
+authored. **The class names are retained for legacy reasons; future decks
+should use the canonical `slide--*` prefix.** The CSS for each
+`layout-*` class lives under `body.w3-deck` in `deck.css`.
 
 ### Allowed utilities
 
@@ -122,9 +161,23 @@ that way.
 | `u-mt-4` | `margin-top: 4vh` | Section-level gap (e.g. before a recap grid). |
 | `u-text-mute` | `color: var(--c-text-mute)` | Single text element that should read as secondary. |
 | `u-pct-small` | `font-size: 0.5em; font-weight: 700` | The `%` glyph next to a giant number. |
+| `code-chip` | Inline `<code>` chip on light grounds | Tool / file / command names in body copy (replaces W6 inline `<code style>` pattern). |
+| `code-chip--gold` | Gold-on-dark variant of `code-chip` | Inline code on the W6 editor cue / build banner (ink ground). |
+| `agenda-pill` | Compact uppercase muted timing pill | Agenda-slide timing markers (e.g. "15 min · talking"). |
+| `agenda-pill--hot` | Scarlet bold variant of `agenda-pill` | Live-build / hands-on agenda rows. |
+| `eyebrow--scarlet` | Scarlet-tinted `.eyebrow` modifier | Column headers and small-caps section labels in W2/W3. |
+| `sr-only` | Screen-reader-only utility (clip + abs-position) | Live-region announcement targets and off-screen labels. |
 
-**Rule:** if you reach for a sixth utility, add a layout class to
-`deck.css` and document it here instead. No `style="…"` in slide HTML.
+The canonical utility classes (`u-mt-*`, `u-text-mute`, `u-pct-small`)
+are now unscoped so every weekly deck can use them. Helper classes
+introduced for specific decks (`code-chip`, `agenda-pill`,
+`eyebrow--scarlet`) are also unscoped — promote any pattern that hits
+≥3 occurrences across decks to a class here instead of inlining it.
+
+**Rule:** if you reach for a sixth utility for a one-off, add a layout
+class to `deck.css` and document it here instead. No `style="…"` in
+slide HTML beyond the absolute one-off (target: <10 inline `style=""`
+attributes per deck).
 
 ---
 
@@ -167,6 +220,41 @@ slide. Every set of notes covers four things:
 
 Keep them under ~80 words. The presenter is reading peripherally while
 talking; long blocks fail.
+
+### Multi-mode speaker notes (W5 pattern)
+
+Week 5 ships in two delivery modes — a 30-minute leadership briefing or
+an extended joint session — from the same deck. To support both without
+forcing the presenter to switch decks, each W5 slide's `<aside class="notes">`
+contains three labelled blocks:
+
+```html
+<aside class="notes">
+  <div class="notes-mode notes-mode--briefing">
+    <span class="tag">Briefing — 30 min</span>
+    <p>What to say in the short briefing.</p>
+  </div>
+  <div class="notes-mode notes-mode--joint">
+    <span class="tag">Joint Session — extended</span>
+    <p>What to say if builders are in the room.</p>
+  </div>
+  <div class="notes-mode notes-mode--transition">
+    <span class="tag">Transition</span>
+    <p>One sentence into the next slide.</p>
+  </div>
+</aside>
+```
+
+The `.notes-mode--briefing | --joint | --transition` modifier classes
+control the colour-coded left border (scarlet / gold / grey) so the
+presenter can scan and pick the right block live. Print rendering is
+handled by the universal print stylesheet — each block becomes a
+colour-tinted boxed paragraph below its slide thumbnail in the PDF
+handout.
+
+Other weekly decks should not adopt this pattern unless they ship in
+multiple delivery modes; the canonical four-bullet hook/emphasis/
+engagement/bridge prose is the default.
 
 ---
 
@@ -265,3 +353,28 @@ To export a deck:
 
 There is no separate PDF file in the repository — the print stylesheet
 generates the handout on demand from the live HTML.
+
+---
+
+## Accessibility
+
+The deck system is built for sighted, mouse/keyboard, screen-reader,
+and reduced-motion users alike. The contract:
+
+- **Visible focus rings.** Every interactive element in the deck chrome
+  (`.deck-chrome button, .deck-chrome a`) gets a 3px gold focus ring on
+  `:focus-visible`. Don't override this in per-week styles.
+- **Reduced motion.** A global `@media (prefers-reduced-motion: reduce)`
+  block in `deck.css` collapses every `animation-duration` and
+  `transition-duration` to ~0ms. New animations should respect this
+  automatically; if a transition is decorative, no extra work is needed.
+- **Live region for slide changes.** `deck.js` injects a hidden
+  `<div id="deck-announce" class="sr-only" aria-live="polite">` inside
+  the deck chrome on init. Every call to `show(i)` writes
+  `Slide N of T, <slide title>` into it so screen-reader users hear a
+  spoken announcement on every navigation.
+- **`.sr-only` utility.** Standard clip + position-absolute pattern,
+  available globally in `deck.css`. Use it for off-screen labels and
+  live-region targets; don't reach for `display:none` (which AT skip).
+- **Slide titles.** Every slide should have a heading or a `data-title`
+  attribute so the live region has something useful to announce.

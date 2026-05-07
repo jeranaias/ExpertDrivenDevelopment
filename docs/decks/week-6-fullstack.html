@@ -5,666 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Week 6 (Course 6) instructor deck — Full-Stack AI-Assisted Development. The capstone of the six-week Expert-Driven Development program.">
 <title>Week 6 Deck — Full-Stack AI-Assisted Development | EDD</title>
-<style>
-/* ============================================================
-   EDD Deck — Week 6: Full-Stack AI-Assisted Development
-   Capstone visual identity, inheriting Week 1 palette/layouts.
-   - 16:9 single-slide presentation view
-   - Press ← / → or Space to navigate
-   - Press S to toggle speaker notes panel
-   - Press F to toggle fullscreen
-   - Press P to enter print/handout view (each slide on its own page)
-   - Press Esc to exit print view
-   ============================================================ */
-
-:root {
-  --scarlet: #CC0000;
-  --scarlet-dark: #a30000;
-  --gold: #F5D130;
-  --gold-dark: #d4b11a;
-  --ink: #1a1a1a;
-  --ink-2: #4a4a4a;
-  --ink-3: #6e6e6e;
-  --paper: #ffffff;
-  --paper-2: #f8f7f5;
-  --paper-3: #efeee9;
-  --line: #d9d8d4;
-  --line-2: #e8e7e3;
-  --code-bg: #1a1a1a;
-  --code-fg: #e8e7e3;
-  --info: #1a3a6b;
-  --info-bg: #e8f0fe;
-  --warn: #5f4b08;
-  --warn-bg: #fef7e0;
-  --success: #0d652d;
-  --success-bg: #e6f4ea;
-
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --mono: "Cascadia Code", "Fira Code", Consolas, Monaco, "Courier New", monospace;
-
-  /* Stage = 16:9 reference. We size in vw/vh inside the slide so layouts scale. */
-  --stage-w: 1920;
-  --stage-h: 1080;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-html, body {
-  height: 100%;
-  font-family: var(--sans);
-  background: #0c0c0c;
-  color: var(--ink);
-  overflow: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* ============================================================
-   Stage — centers a 16:9 slide in the viewport (presentation mode)
-   ============================================================ */
-.stage {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #0c0c0c;
-}
-
-.deck {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  max-width: calc(100vh * 16 / 9);
-  max-height: calc(100vw * 9 / 16);
-  background: var(--paper);
-  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
-  overflow: hidden;
-}
-
-/* All slides stack inside .deck; only the active one is shown. */
-.slide {
-  position: absolute;
-  inset: 0;
-  display: none !important;
-  flex-direction: column;
-  padding: 4.5vh 5vw;
-  background: var(--paper);
-  color: var(--ink);
-}
-.slide.is-active { display: flex !important; }
-
-/* Speaker notes are hidden in presentation view; revealed via panel. */
-.notes { display: none; }
-
-/* ============================================================
-   Common slide chrome
-   ============================================================ */
-.slide__head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 2vw;
-  padding-bottom: 1.4vh;
-  margin-bottom: 2.2vh;
-  border-bottom: 2px solid var(--line-2);
-}
-.slide__eyebrow {
-  font-size: 1.1vw;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--scarlet);
-}
-.slide__eyebrow .dot {
-  display: inline-block; width: 0.5vw; height: 0.5vw; border-radius: 50%;
-  background: var(--gold); margin: 0 0.6em; vertical-align: middle;
-}
-.slide__minutes {
-  font-size: 1vw;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  font-weight: 600;
-}
-.slide__title {
-  font-size: 3.6vw;
-  line-height: 1.05;
-  letter-spacing: -0.015em;
-  font-weight: 800;
-  color: var(--ink);
-  margin-bottom: 0.4vh;
-}
-.slide__subtitle {
-  font-size: 1.6vw;
-  color: var(--ink-2);
-  font-weight: 500;
-  max-width: 80ch;
-}
-.slide__body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 2.2vh;
-  font-size: 1.7vw;
-  line-height: 1.45;
-  color: var(--ink-2);
-}
-.slide__foot {
-  margin-top: 2vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0.95vw;
-  color: var(--ink-3);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border-top: 1px solid var(--line-2);
-  padding-top: 1.2vh;
-}
-.slide__foot .brand-mark {
-  display: inline-block; width: 0.4vw; height: 1.6vh; background: var(--scarlet);
-  border-radius: 1px; margin-right: 0.5vw; vertical-align: middle;
-}
-
-/* ============================================================
-   Cover & section dividers
-   ============================================================ */
-.slide--cover, .slide--section, .slide--break, .slide--close {
-  padding: 0;
-  overflow: hidden;
-}
-
-/* COVER */
-.slide--cover {
-  background:
-    radial-gradient(ellipse at 80% 20%, rgba(245,209,48,0.18), transparent 55%),
-    radial-gradient(ellipse at 10% 90%, rgba(204,0,0,0.18), transparent 55%),
-    var(--paper);
-  display: flex; align-items: stretch; justify-content: stretch;
-}
-.cover-inner {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr;
-  align-content: space-between;
-  padding: 6vh 6vw;
-}
-.cover-top {
-  display: flex; align-items: center; justify-content: space-between;
-  font-size: 1.05vw; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--ink-3); font-weight: 700;
-}
-.cover-top .brand {
-  display: inline-flex; align-items: center; gap: 0.7vw; color: var(--ink);
-}
-.cover-top .brand .mark {
-  width: 0.5vw; height: 2.4vh; background: var(--scarlet); border-radius: 2px;
-}
-.cover-top .stamp {
-  padding: 0.6vh 1vw; border: 2px solid var(--scarlet); color: var(--scarlet);
-  border-radius: 999px; font-weight: 800;
-}
-.cover-mid h1 {
-  font-size: 6vw; line-height: 0.98; letter-spacing: -0.025em;
-  font-weight: 900; color: var(--ink);
-}
-.cover-mid .h1-accent {
-  display: block; color: var(--scarlet);
-}
-.cover-mid .lede {
-  margin-top: 3vh;
-  font-size: 1.7vw; color: var(--ink-2); max-width: 70ch; line-height: 1.4;
-}
-.cover-mid .rule {
-  width: 14vw; height: 0.7vh;
-  background: linear-gradient(90deg, var(--scarlet), var(--gold));
-  margin: 4vh 0 2vh;
-  border-radius: 2px;
-}
-.cover-bottom {
-  display: flex; align-items: flex-end; justify-content: space-between;
-  font-size: 1.1vw; color: var(--ink-3);
-}
-.cover-bottom .meta { display: flex; gap: 2.2vw; }
-.cover-bottom .meta div strong {
-  display: block; color: var(--ink); font-size: 1.4vw; letter-spacing: -0.01em;
-}
-.cover-bottom .week-pip {
-  display: inline-flex; align-items: center; gap: 0.6vw;
-  background: var(--ink); color: var(--paper);
-  padding: 0.9vh 1.4vw; border-radius: 999px;
-  font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
-  font-size: 1vw;
-}
-.cover-bottom .week-pip .six {
-  background: var(--gold); color: var(--ink);
-  width: 2.6vh; height: 2.6vh; border-radius: 50%;
-  display: inline-flex; align-items: center; justify-content: center;
-  font-weight: 900;
-}
-
-/* SECTION DIVIDER */
-.slide--section {
-  background: var(--ink); color: var(--paper);
-}
-.section-inner {
-  flex: 1; display: grid; grid-template-columns: 1fr 1fr;
-  width: 100%; height: 100%;
-}
-.section-left {
-  padding: 6vh 5vw; display: flex; flex-direction: column; justify-content: center;
-  background: linear-gradient(135deg, #1a1a1a 0%, #0c0c0c 100%);
-  position: relative;
-}
-.section-left::after {
-  content: ""; position: absolute; right: 0; top: 12vh; bottom: 12vh;
-  width: 0.4vw; background: var(--scarlet);
-}
-.section-left .module-eyebrow {
-  font-size: 1.2vw; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--gold); font-weight: 800; margin-bottom: 2vh;
-}
-.section-left .module-no {
-  font-size: 11vw; line-height: 0.9; font-weight: 900; color: var(--paper);
-  letter-spacing: -0.04em;
-}
-.section-left .module-no .of {
-  font-size: 2.2vw; color: var(--ink-3); font-weight: 600; margin-left: 1vw;
-}
-.section-right {
-  padding: 6vh 5vw; display: flex; flex-direction: column; justify-content: center;
-}
-.section-right .module-name {
-  font-size: 4.4vw; font-weight: 800; line-height: 1.02; color: var(--paper);
-  letter-spacing: -0.02em; margin-bottom: 3vh;
-}
-.section-right .module-meta {
-  display: flex; gap: 2vw; margin-bottom: 3vh;
-}
-.section-right .module-meta .pill {
-  display: inline-flex; align-items: center; gap: 0.5vw;
-  padding: 0.8vh 1.2vw; border: 1.5px solid #444; border-radius: 999px;
-  color: var(--paper); font-size: 1vw; font-weight: 600;
-  letter-spacing: 0.08em; text-transform: uppercase;
-}
-.section-right .module-meta .pill--build {
-  border-color: var(--scarlet); color: var(--paper);
-  background: var(--scarlet);
-}
-.section-right .module-meta .pill--gold {
-  border-color: var(--gold); color: var(--ink);
-  background: var(--gold);
-}
-.section-right .module-blurb {
-  font-size: 1.5vw; line-height: 1.45; color: #c8c8c8; max-width: 56ch;
-}
-
-/* BREAK */
-.slide--break {
-  background: var(--paper-2);
-  display: flex; align-items: center; justify-content: center; text-align: center;
-}
-.break-inner {
-  display: flex; flex-direction: column; align-items: center; gap: 2.4vh;
-}
-.break-inner .lab { font-size: 1.4vw; letter-spacing: 0.4em; text-transform: uppercase; color: var(--scarlet); font-weight: 800; }
-.break-inner .num { font-size: 18vw; font-weight: 900; line-height: 0.9; color: var(--ink); letter-spacing: -0.05em; }
-.break-inner .num small { font-size: 3vw; color: var(--ink-3); font-weight: 700; margin-left: 0.4vw; }
-.break-inner .sub { font-size: 1.6vw; color: var(--ink-2); max-width: 60ch; }
-
-/* CLOSE / Capstone closing */
-.slide--close {
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(245,209,48,0.25), transparent 50%),
-    radial-gradient(ellipse at 50% 110%, rgba(204,0,0,0.4), transparent 60%),
-    #0c0c0c;
-  color: var(--paper);
-  display: flex; align-items: center; justify-content: center; text-align: center;
-}
-.close-inner { display: flex; flex-direction: column; align-items: center; gap: 3vh; padding: 0 6vw; }
-.close-inner .stamp {
-  display: inline-flex; align-items: center; gap: 0.8vw;
-  padding: 0.8vh 1.6vw; border: 2px solid var(--gold); color: var(--gold);
-  border-radius: 999px; font-size: 1.1vw; letter-spacing: 0.25em;
-  text-transform: uppercase; font-weight: 800;
-}
-.close-inner h1 {
-  font-size: 6.5vw; line-height: 0.98; letter-spacing: -0.025em; font-weight: 900;
-}
-.close-inner h1 em { color: var(--gold); font-style: normal; }
-.close-inner .lede { font-size: 1.6vw; color: #d8d8d8; max-width: 70ch; line-height: 1.4; }
-.close-inner .rule {
-  width: 18vw; height: 0.5vh; background: linear-gradient(90deg, var(--scarlet), var(--gold));
-  border-radius: 2px;
-}
-.close-inner .sig { font-size: 1vw; letter-spacing: 0.3em; text-transform: uppercase; color: #999; font-weight: 700; }
-
-/* ============================================================
-   Content patterns
-   ============================================================ */
-
-/* Two-column layout */
-.cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3vw; align-items: stretch; }
-.cols-2--6040 { grid-template-columns: 6fr 4fr; }
-.cols-2--4060 { grid-template-columns: 4fr 6fr; }
-
-/* Cards */
-.card {
-  background: var(--paper-2);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 2.6vh 1.8vw;
-}
-.card--accent {
-  background: var(--paper);
-  border-left: 6px solid var(--scarlet);
-}
-.card--gold { border-left-color: var(--gold); }
-.card--ink { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.card--ink h3 { color: var(--gold); }
-.card h3 {
-  font-size: 1.6vw; margin-bottom: 1vh; color: var(--ink);
-  letter-spacing: -0.005em;
-}
-.card p, .card li { font-size: 1.35vw; color: var(--ink-2); line-height: 1.4; }
-.card--ink p, .card--ink li { color: #d8d8d8; }
-.card ul, .card ol { padding-left: 1.4vw; }
-.card li + li { margin-top: 0.6vh; }
-
-/* Stat row */
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2vw; }
-.stat {
-  background: var(--paper-2); border: 1px solid var(--line); border-radius: 12px;
-  padding: 2.4vh 1.4vw; display: flex; flex-direction: column; gap: 0.8vh;
-}
-.stat .num {
-  font-size: 3.6vw; font-weight: 900; color: var(--scarlet); line-height: 1;
-  letter-spacing: -0.02em;
-}
-.stat .lab { font-size: 1vw; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); font-weight: 700; }
-.stat .desc { font-size: 1.1vw; color: var(--ink-2); }
-
-/* Pills */
-.pillrow { display: flex; flex-wrap: wrap; gap: 0.7vw; }
-.pill {
-  display: inline-flex; align-items: center; gap: 0.4vw;
-  padding: 0.6vh 1vw; border-radius: 999px;
-  background: var(--paper-2); border: 1px solid var(--line);
-  font-size: 1.1vw; color: var(--ink-2); font-weight: 600;
-}
-.pill--scarlet { background: var(--scarlet); color: var(--paper); border-color: var(--scarlet); }
-.pill--gold { background: var(--gold); color: var(--ink); border-color: var(--gold); }
-.pill--ink { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.pill--out { background: transparent; }
-
-/* Bullets — large */
-.bullets-lg { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1.4vh; }
-.bullets-lg li {
-  display: grid; grid-template-columns: 2.2vw 1fr; align-items: baseline;
-  font-size: 1.6vw; color: var(--ink); line-height: 1.4;
-}
-.bullets-lg li::before {
-  content: ""; display: block; width: 0.8vw; height: 0.8vw;
-  background: var(--scarlet); border-radius: 50%; margin-top: 0.6vh;
-}
-.bullets-lg li strong { color: var(--ink); }
-
-/* Numbered checklist (Module Complete When) */
-.checklist { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1.4vh; }
-.checklist li {
-  display: grid; grid-template-columns: 3vw 1fr; align-items: start;
-  font-size: 1.5vw; color: var(--ink); line-height: 1.4;
-}
-.checklist li::before {
-  content: "✓"; display: inline-flex; align-items: center; justify-content: center;
-  width: 2.2vw; height: 2.2vw; border-radius: 6px;
-  background: var(--success-bg); color: var(--success);
-  font-weight: 900; font-size: 1.4vw;
-}
-
-/* Code blocks */
-.code {
-  background: var(--code-bg); color: var(--code-fg); border-radius: 10px;
-  padding: 2vh 1.6vw; font-family: var(--mono); font-size: 1.05vw; line-height: 1.55;
-  overflow: hidden; white-space: pre; tab-size: 2;
-  border: 1px solid #2a2a2a;
-}
-.code__label {
-  font-family: var(--sans); font-size: 0.85vw; letter-spacing: 0.18em;
-  text-transform: uppercase; color: var(--gold); font-weight: 700;
-  margin-bottom: 1vh; display: block;
-}
-.code .c { color: #8a8a8a; }
-.code .k { color: #f5d130; }
-.code .s { color: #a3d99c; }
-.code .n { color: #ffb86b; }
-
-/* Prompt block — for the "this is what you say to the AI" pattern */
-.prompt {
-  background: var(--info-bg);
-  border-left: 6px solid var(--info);
-  border-radius: 0 10px 10px 0;
-  padding: 2vh 1.6vw;
-  font-size: 1.35vw;
-  color: var(--info);
-  line-height: 1.45;
-}
-.prompt strong { display: block; font-size: 0.9vw; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--info); margin-bottom: 0.6vh; }
-
-/* Switch-to-editor cue slide */
-.slide--editor { background: linear-gradient(180deg, #1a1a1a 0%, #050505 100%); color: var(--paper); padding: 0; }
-.editor-inner { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6vh 6vw; text-align: center; gap: 3vh; }
-.editor-inner .badge {
-  display: inline-flex; align-items: center; gap: 0.6vw;
-  padding: 0.8vh 1.4vw; border-radius: 999px;
-  background: var(--scarlet); color: var(--paper);
-  font-size: 1.1vw; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 800;
-}
-.editor-inner .arrow { font-size: 6vw; line-height: 1; color: var(--gold); }
-.editor-inner h2 { font-size: 5.4vw; line-height: 1; letter-spacing: -0.02em; font-weight: 900; }
-.editor-inner h2 em { color: var(--gold); font-style: normal; }
-.editor-inner .what { font-size: 1.5vw; color: #c0c0c0; max-width: 70ch; line-height: 1.4; }
-.editor-inner .timer { font-family: var(--mono); font-size: 1.3vw; color: var(--gold); letter-spacing: 0.12em; }
-
-/* Back-to-deck debrief */
-.slide--debrief .slide__head { border-bottom-color: var(--gold); }
-.slide--debrief .slide__eyebrow { color: var(--gold-dark); }
-
-/* Build framing */
-.slide--build .slide__eyebrow { color: var(--scarlet); }
-.build-banner {
-  display: inline-flex; align-items: center; gap: 0.6vw;
-  background: var(--scarlet); color: var(--paper);
-  padding: 0.7vh 1.2vw; border-radius: 6px;
-  font-size: 1vw; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 800;
-}
-
-/* ============================================================
-   Architecture Diagram (persistent, growing)
-   ============================================================ */
-.arch {
-  display: grid; grid-template-rows: repeat(4, 1fr); gap: 1.2vh;
-  height: 100%; min-height: 0;
-}
-.arch__layer {
-  display: grid; grid-template-columns: 9vw 1fr 1fr; align-items: center; gap: 1vw;
-  padding: 1.6vh 1.4vw;
-  background: var(--paper-2);
-  border: 2px dashed var(--line);
-  border-radius: 12px;
-  opacity: 0.55;
-  transition: all 200ms ease;
-}
-.arch__layer.is-built {
-  background: var(--paper);
-  border: 2px solid var(--scarlet);
-  opacity: 1;
-  box-shadow: 0 4px 14px rgba(204,0,0,0.08);
-}
-.arch__layer.is-current {
-  background: linear-gradient(90deg, rgba(245,209,48,0.18), rgba(245,209,48,0.04));
-  border-color: var(--gold);
-  border-style: solid;
-  opacity: 1;
-}
-.arch__no {
-  font-family: var(--mono); font-size: 1vw; letter-spacing: 0.15em;
-  text-transform: uppercase; color: var(--ink-3); font-weight: 800;
-}
-.arch__name { font-size: 1.6vw; font-weight: 800; color: var(--ink); }
-.arch__desc { font-size: 1.1vw; color: var(--ink-2); }
-.arch__layer.is-built .arch__no { color: var(--scarlet); }
-.arch__check {
-  display: inline-block; width: 1.6vw; height: 1.6vw; border-radius: 50%;
-  background: var(--success-bg); color: var(--success); text-align: center;
-  line-height: 1.6vw; font-weight: 900; margin-left: 0.6vw; font-size: 1vw;
-  visibility: hidden;
-}
-.arch__layer.is-built .arch__check { visibility: visible; }
-
-.arch-callout {
-  margin-top: 2vh; padding: 1.4vh 1.4vw; border-radius: 10px;
-  background: var(--ink); color: var(--paper);
-  font-size: 1.15vw; line-height: 1.4;
-}
-.arch-callout strong { color: var(--gold); }
-
-/* ============================================================
-   Agenda timeline
-   ============================================================ */
-.agenda {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2vw 1.6vw;
-}
-.agenda__item {
-  display: grid; grid-template-columns: 5.5vw 1fr; gap: 0.8vw;
-  align-items: baseline; padding: 1vh 0;
-  border-top: 1px solid var(--line-2);
-}
-.agenda__time {
-  font-family: var(--mono); font-size: 1vw; color: var(--scarlet); font-weight: 700;
-}
-.agenda__name { font-size: 1.2vw; color: var(--ink); font-weight: 600; line-height: 1.25; }
-.agenda__name span { display: block; font-size: 0.85vw; color: var(--ink-3); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.2vh; }
-
-/* Comparison table (lightweight) */
-.compare {
-  width: 100%; border-collapse: collapse; font-size: 1.2vw;
-}
-.compare th, .compare td {
-  padding: 1.2vh 1vw; text-align: left;
-  border-bottom: 1px solid var(--line-2);
-  vertical-align: top;
-}
-.compare thead th {
-  font-size: 0.95vw; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--ink-3); font-weight: 700;
-  border-bottom: 2px solid var(--ink);
-}
-.compare tbody tr:nth-child(odd) { background: var(--paper-2); }
-.compare td.dim { color: var(--ink-3); }
-.compare td.win { color: var(--scarlet); font-weight: 700; }
-
-/* Quote */
-.pullquote {
-  font-size: 3vw; line-height: 1.2; font-weight: 700;
-  color: var(--ink); letter-spacing: -0.01em;
-  border-left: 6px solid var(--gold); padding-left: 1.6vw;
-  max-width: 75ch;
-}
-.pullquote .attr { display: block; margin-top: 2vh; font-size: 1.2vw; color: var(--ink-3); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
-
-/* ============================================================
-   HUD — speaker controls (off-stage)
-   ============================================================ */
-.hud {
-  position: fixed; right: 1vw; bottom: 1vh; z-index: 50;
-  display: flex; gap: 0.5vw; align-items: center;
-  background: rgba(20,20,20,0.85); color: #ddd;
-  padding: 0.5vh 0.8vw; border-radius: 999px;
-  font: 600 12px var(--sans); letter-spacing: 0.05em;
-  backdrop-filter: blur(6px);
-}
-.hud button {
-  background: transparent; border: none; color: #ddd;
-  font: inherit; cursor: pointer; padding: 0.3vh 0.5vw;
-  border-radius: 4px;
-}
-.hud button:hover { background: rgba(255,255,255,0.1); }
-.hud .sep { width: 1px; height: 14px; background: #444; }
-.hud .counter { color: var(--gold); font-variant-numeric: tabular-nums; }
-.hud .hint { color: #999; font-weight: 500; }
-
-/* Speaker notes panel */
-.notes-panel {
-  position: fixed; right: 0; bottom: 0; top: 0; width: 32vw; max-width: 520px;
-  background: #111; color: #eee; z-index: 40;
-  display: none; flex-direction: column;
-  border-left: 1px solid #222;
-  font: 14px/1.55 var(--sans);
-  transform: translateX(100%); transition: transform 220ms ease;
-}
-.notes-panel.is-open { display: flex; transform: translateX(0); }
-.notes-panel header {
-  padding: 12px 16px; background: #1a1a1a; border-bottom: 1px solid #2a2a2a;
-  display: flex; justify-content: space-between; align-items: center;
-}
-.notes-panel header strong { color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; font-size: 11px; }
-.notes-panel header span { color: #aaa; font-size: 12px; }
-.notes-panel .body {
-  padding: 16px 18px; overflow-y: auto; flex: 1;
-}
-.notes-panel .body h4 { color: var(--gold); margin: 14px 0 6px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; }
-.notes-panel .body h4:first-child { margin-top: 0; }
-.notes-panel .body p { margin-bottom: 10px; color: #d8d8d8; }
-.notes-panel .body ul { margin: 6px 0 12px 18px; }
-.notes-panel .body li { margin-bottom: 4px; color: #cfcfcf; }
-.notes-panel .body em { color: var(--gold); font-style: normal; font-weight: 600; }
-.notes-panel .body code { background: #222; padding: 1px 5px; border-radius: 3px; font-family: var(--mono); font-size: 12.5px; color: #f5d130; }
-.notes-panel .cue {
-  margin: 12px 0; padding: 10px 12px; background: #2a1a00;
-  border-left: 3px solid var(--gold); border-radius: 0 4px 4px 0; color: #fce7a8;
-}
-.notes-panel .cue strong { color: var(--gold); }
-
-/* ============================================================
-   Print / handout view
-   ============================================================ */
-body.print-mode { overflow: auto; background: var(--paper-2); }
-body.print-mode .stage { position: static; padding: 24px; background: var(--paper-2); }
-body.print-mode .deck {
-  position: static; max-width: none; max-height: none;
-  width: 100%; height: auto; box-shadow: none; background: transparent;
-}
-body.print-mode .slide {
-  position: relative; display: flex !important;
-  width: 1280px; height: 720px; margin: 0 auto 28px;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.12); background: var(--paper);
-  page-break-after: always;
-}
-body.print-mode .notes {
-  display: block; width: 1280px; margin: 0 auto 40px;
-  padding: 18px 24px; background: var(--paper);
-  border: 1px solid var(--line); border-top: 4px solid var(--gold);
-  border-radius: 6px;
-  font: 13px/1.55 var(--sans); color: var(--ink-2);
-  page-break-after: always;
-}
-body.print-mode .notes h4 { color: var(--scarlet); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; margin: 10px 0 5px; }
-body.print-mode .notes h4:first-child { margin-top: 0; }
-body.print-mode .notes ul { margin: 4px 0 10px 18px; }
-body.print-mode .notes .cue { background: #fff8df; border-left: 3px solid var(--scarlet); padding: 8px 10px; margin: 8px 0; border-radius: 0 4px 4px 0; }
-body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
-
-@media print {
-  body { background: white; }
-  body.print-mode .stage { padding: 0; }
-  body.print-mode .slide { box-shadow: none; margin-bottom: 0; }
-  body.print-mode .notes { box-shadow: none; }
-  @page { size: landscape; margin: 0.4in; }
-}
-</style>
 <link rel="stylesheet" href="css/deck.css">
 <script src="js/deck.js" defer></script>
 </head>
@@ -677,6 +17,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        0.1 — COVER
        ======================================================== -->
   <section class="slide slide--cover">
+    <div class="slide__bar"></div>
     <div class="cover-inner">
       <div class="cover-top">
         <div class="brand"><span class="mark"></span> Expert-Driven Development</div>
@@ -703,6 +44,8 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
+
     <aside class="notes">
       <h4>Open</h4>
       <p>Welcome to Week 6 — the capstone. Six weeks ago you took AI Fluency. Today you finish the program by directing AI to build a complete full-stack application from zero. Take a beat. This is not theory.</p>
@@ -722,6 +65,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        0.2 — RECAP OF WEEKS 1–5
        ======================================================== -->
   <section class="slide">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Recap <span class="dot"></span> Weeks 1 through 5</div>
       <div class="slide__minutes">~3 min</div>
@@ -748,7 +92,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>EDD · Week 6 · Course 6</span><span>Recap</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>What to say</h4>
@@ -770,6 +114,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        0.3 — HOW TODAY RUNS
        ======================================================== -->
   <section class="slide">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Today <span class="dot"></span> Format</div>
       <div class="slide__minutes">~2 min</div>
@@ -804,7 +149,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>EDD · Week 6 · Course 6</span><span>Format</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Set expectations</h4>
@@ -821,6 +166,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        0.4 — SIX PRINCIPLES
        ======================================================== -->
   <section class="slide">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Operating Principles</div>
       <div class="slide__minutes">~3 min</div>
@@ -847,7 +193,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>EDD · Week 6 · Course 6</span><span>Principles</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Treat as a creed</h4>
@@ -862,6 +208,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        0.5 — AGENDA
        ======================================================== -->
   <section class="slide">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Agenda</div>
       <div class="slide__minutes">~2 min</div>
@@ -887,7 +234,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>EDD · Week 6 · Course 6</span><span>Agenda</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Pacing</h4>
@@ -902,6 +249,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        0.6 — TARGET (HEYWOOD DEMO HOOK)
        ======================================================== -->
   <section class="slide">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Target</div>
       <div class="slide__minutes">~3 min</div>
@@ -919,7 +267,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       <p class="slide__subtitle">Reference: Heywood TBS — built in days, by one person, working with AI. No team, no six-month timeline, no $2M budget.</p>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>EDD · Week 6 · Course 6</span><span>Target</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Demo cue</h4>
@@ -936,6 +284,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        MODULE 1 — DIVIDER
        ======================================================== -->
   <section class="slide slide--section">
+    <div class="slide__bar"></div>
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module</div>
@@ -951,6 +300,8 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
+
     <aside class="notes">
       <h4>Pace</h4>
       <p>Total 30 minutes. Three slides plus the architecture anchor — keep it tight.</p>
@@ -962,6 +313,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        1.1 — WHY FULL-STACK
        ======================================================== -->
   <section class="slide">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Module 1 · Why Full-Stack</div>
       <div class="slide__minutes">~10 min</div>
@@ -983,7 +335,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </table>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 1 · The Full-Stack Frontier</span><span>1.1</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Be honest about Power Platform</h4>
@@ -1001,6 +353,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        1.2 — ARCHITECTURE (FIRST APPEARANCE — empty)
        ======================================================== -->
   <section class="slide slide--debrief">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Architecture <span class="dot"></span> Anchor diagram</div>
       <div class="slide__minutes">~7 min</div>
@@ -1017,7 +370,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 1 · The Full-Stack Frontier</span><span>Architecture · 0/4</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Why this slide matters</h4>
@@ -1037,6 +390,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        1.3 — HOW AI CHANGES IT
        ======================================================== -->
   <section class="slide">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Module 1 · The Skill</div>
       <div class="slide__minutes">~8 min</div>
@@ -1067,7 +421,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 1 · The Full-Stack Frontier</span><span>1.3 · Module Complete</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Reassurance</h4>
@@ -1086,6 +440,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        MODULE 2 — DIVIDER
        ======================================================== -->
   <section class="slide slide--section">
+    <div class="slide__bar"></div>
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module</div>
@@ -1101,6 +456,8 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
+
     <aside class="notes">
       <h4>Plan</h4>
       <p>Two slides: required tools and the "ask the AI to install them" prompt. Then we go to the editor and you actually do it. Expect 30–50% of the room to need help.</p>
@@ -1112,6 +469,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        2.1 — REQUIRED TOOLS
        ======================================================== -->
   <section class="slide slide--build">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Module 2 · Tools <span class="dot"></span> Build framing</div>
       <div class="slide__minutes">~5 min</div>
@@ -1123,11 +481,11 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       <div class="cols-2">
         <div>
           <ul class="bullets-lg">
-            <li><strong>Go 1.22+</strong> — backend language. <span style="color:var(--ink-3);">go.dev/dl</span></li>
-            <li><strong>Node.js 20+</strong> — frontend build. <span style="color:var(--ink-3);">nodejs.org</span></li>
-            <li><strong>Git</strong> — version control. <span style="color:var(--ink-3);">git-scm.com</span></li>
-            <li><strong>VS Code</strong> — editor. <span style="color:var(--ink-3);">code.visualstudio.com</span></li>
-            <li><strong>Docker Desktop</strong> — container runtime (Module 10). <span style="color:var(--ink-3);">docker.com</span></li>
+            <li><strong>Go 1.22+</strong> — backend language. <span class="u-text-mute">go.dev/dl</span></li>
+            <li><strong>Node.js 20+</strong> — frontend build. <span class="u-text-mute">nodejs.org</span></li>
+            <li><strong>Git</strong> — version control. <span class="u-text-mute">git-scm.com</span></li>
+            <li><strong>VS Code</strong> — editor. <span class="u-text-mute">code.visualstudio.com</span></li>
+            <li><strong>Docker Desktop</strong> — container runtime (Module 10). <span class="u-text-mute">docker.com</span></li>
           </ul>
         </div>
         <div class="prompt">
@@ -1137,7 +495,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 2 · Environment Setup</span><span>2.1 · build framing</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>The teaching moment</h4>
@@ -1156,16 +514,19 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        2.2 — SWITCH TO EDITOR (install + scaffold)
        ======================================================== -->
   <section class="slide slide--editor">
+    <div class="slide__bar"></div>
     <div class="editor-inner">
       <span class="badge">▶ Switch to the editor</span>
       <div class="arrow">→</div>
       <h2>Install &amp; <em>scaffold the project</em></h2>
       <p class="what">
         Walk through: paste the install prompt, verify the four versions, then create the project skeleton:
-        <code style="color:#f5d130; font-family:var(--mono);">my-staff-app</code> with <code style="color:#f5d130; font-family:var(--mono);">cmd/server/</code>, <code style="color:#f5d130; font-family:var(--mono);">internal/</code>, <code style="color:#f5d130; font-family:var(--mono);">web/</code> (Vite + React + TypeScript), and <code style="color:#f5d130; font-family:var(--mono);">data/</code>.
+        <code class="code-chip code-chip--gold">my-staff-app</code> with <code class="code-chip code-chip--gold">cmd/server/</code>, <code class="code-chip code-chip--gold">internal/</code>, <code class="code-chip code-chip--gold">web/</code> (Vite + React + TypeScript), and <code class="code-chip code-chip--gold">data/</code>.
       </p>
       <div class="timer">~30 min in editor — circulate while students install</div>
     </div>
+
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Live work</h4>
@@ -1186,6 +547,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        2.3 — BACK TO DECK: ENV READY (architecture still empty)
        ======================================================== -->
   <section class="slide slide--debrief">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Back to deck <span class="dot"></span> Environment ready</div>
       <div class="slide__minutes">~3 min</div>
@@ -1196,15 +558,15 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
     <div class="slide__body">
       <div class="cols-2 cols-2--6040">
         <div class="arch">
-          <div class="arch__layer"><div class="arch__no">L1 · Frontend</div><div class="arch__name">React Frontend<span class="arch__check">✓</span></div><div class="arch__desc">Vite + React + TypeScript scaffolded in <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">web/</code>.</div></div>
-          <div class="arch__layer"><div class="arch__no">L2 · Backend</div><div class="arch__name">Go HTTP Server<span class="arch__check">✓</span></div><div class="arch__desc">Module initialised. Empty <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">cmd/server/</code> waiting for code.</div></div>
-          <div class="arch__layer"><div class="arch__no">L3 · Data</div><div class="arch__name">Data Layer<span class="arch__check">✓</span></div><div class="arch__desc">Empty <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">data/</code> directory. No store yet.</div></div>
+          <div class="arch__layer"><div class="arch__no">L1 · Frontend</div><div class="arch__name">React Frontend<span class="arch__check">✓</span></div><div class="arch__desc">Vite + React + TypeScript scaffolded in <code class="code-chip">web/</code>.</div></div>
+          <div class="arch__layer"><div class="arch__no">L2 · Backend</div><div class="arch__name">Go HTTP Server<span class="arch__check">✓</span></div><div class="arch__desc">Module initialised. Empty <code class="code-chip">cmd/server/</code> waiting for code.</div></div>
+          <div class="arch__layer"><div class="arch__no">L3 · Data</div><div class="arch__name">Data Layer<span class="arch__check">✓</span></div><div class="arch__desc">Empty <code class="code-chip">data/</code> directory. No store yet.</div></div>
           <div class="arch__layer"><div class="arch__no">L4 · External</div><div class="arch__name">External Services<span class="arch__check">✓</span></div><div class="arch__desc">No external services wired up.</div></div>
         </div>
         <div>
           <ul class="checklist">
             <li>Go, Node, Git, VS Code installed and verified.</li>
-            <li>Project directory exists with <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">go.mod</code> and <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">web/package.json</code>.</li>
+            <li>Project directory exists with <code class="code-chip">go.mod</code> and <code class="code-chip">web/package.json</code>.</li>
             <li>Students used AI to install — not the docs.</li>
           </ul>
           <div class="arch-callout">Diagram status: <strong>0 of 4 layers built.</strong> Empty runway. We light the first lamp in Module 3.</div>
@@ -1212,7 +574,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 2 · Environment Setup</span><span>Module 2 complete · Architecture 0/4</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Anchor the rhythm</h4>
@@ -1227,6 +589,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        MODULE 3 — DIVIDER (BUILD)
        ======================================================== -->
   <section class="slide slide--section">
+    <div class="slide__bar"></div>
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module · Build</div>
@@ -1242,6 +605,8 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
+
     <aside class="notes">
       <h4>Pace</h4>
       <p>~45 min. Five slides plus heavy editor time. Plan: framing → editor → debrief → architecture → checkpoint.</p>
@@ -1253,6 +618,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        3.1 — BUILD FRAMING
        ======================================================== -->
   <section class="slide slide--build">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Module 3 · Build framing</div>
       <div class="slide__minutes">~5 min</div>
@@ -1264,22 +630,22 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       <div class="cols-2">
         <div>
           <span class="build-banner">▶ What we're adding</span>
-          <ul class="bullets-lg" style="margin-top:1.6vh;">
+          <ul class="bullets-lg u-mt-2">
             <li>A Go HTTP server on port 8080.</li>
-            <li>A <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/api/v1/health</code> endpoint that returns <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">{"status":"ok"}</code>.</li>
-            <li>A separate <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">internal/api/router.go</code> with helpers.</li>
-            <li>A <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/api/v1/items</code> endpoint with hardcoded JSON.</li>
+            <li>A <code class="code-chip">/api/v1/health</code> endpoint that returns <code class="code-chip">{"status":"ok"}</code>.</li>
+            <li>A separate <code class="code-chip">internal/api/router.go</code> with helpers.</li>
+            <li>A <code class="code-chip">/api/v1/items</code> endpoint with hardcoded JSON.</li>
           </ul>
         </div>
         <div class="card card--gold">
           <h3>Why this fits the architecture</h3>
           <p>This is layer L2 — the Go HTTP Server. Today it serves a hardcoded array; in Module 4 we'll wire it to a real data store; in Module 5 the React frontend will call it.</p>
-          <p style="margin-top:1.4vh;"><strong>Principle in play:</strong> Scaffold → flesh out → integrate. We start with a server that does almost nothing. We make sure it works. <em>Then</em> we add features.</p>
+          <p class="u-mt-1"><strong>Principle in play:</strong> Scaffold → flesh out → integrate. We start with a server that does almost nothing. We make sure it works. <em>Then</em> we add features.</p>
         </div>
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 3 · Backend from Scratch</span><span>3.1 · framing</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Posture</h4>
@@ -1294,6 +660,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        3.2 — SWITCH TO EDITOR
        ======================================================== -->
   <section class="slide slide--editor">
+    <div class="slide__bar"></div>
     <div class="editor-inner">
       <span class="badge">▶ Switch to the editor</span>
       <div class="arrow">→</div>
@@ -1301,6 +668,8 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       <p class="what">Three prompts in sequence: stand up the server, extract a router, add the items endpoint. Run each, hit it with curl or the browser, paste any error back to the AI before debugging.</p>
       <div class="timer">~30 min in editor</div>
     </div>
+
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Demo flow</h4>
@@ -1326,6 +695,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        3.3 — DEBRIEF: FIRST VICTORY + ARCHITECTURE (BACKEND ✓)
        ======================================================== -->
   <section class="slide slide--debrief">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Back to deck <span class="dot"></span> First victory</div>
       <div class="slide__minutes">~5 min</div>
@@ -1343,9 +713,9 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
         </div>
         <div>
           <ul class="checklist">
-            <li><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">go run ./cmd/server -dev</code> runs cleanly.</li>
+            <li><code class="code-chip">go run ./cmd/server -dev</code> runs cleanly.</li>
             <li>Browser hits return real JSON on both endpoints.</li>
-            <li>Code is split: <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">cmd/server/main.go</code> + <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">internal/api/router.go</code>.</li>
+            <li>Code is split: <code class="code-chip">cmd/server/main.go</code> + <code class="code-chip">internal/api/router.go</code>.</li>
             <li>Each student ran the prompt → verify → iterate cycle at least twice.</li>
           </ul>
           <div class="arch-callout">Architecture status: <strong>1 of 4 layers built (L2).</strong> The first lamp is on.</div>
@@ -1353,7 +723,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 3 · Backend from Scratch</span><span>Module 3 complete · Architecture 1/4</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Mark the moment</h4>
@@ -1368,6 +738,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        MODULE 4 — DIVIDER (BUILD)
        ======================================================== -->
   <section class="slide slide--section">
+    <div class="slide__bar"></div>
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module · Build</div>
@@ -1383,6 +754,8 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
+
     <aside class="notes">
       <h4>The point of this module</h4>
       <p>If they take one architecture lesson out of today, it's this one. Interfaces are the lever that lets a domain expert direct an AI without becoming a software engineer.</p>
@@ -1394,6 +767,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        4.1 — INTERFACE-FIRST FRAMING
        ======================================================== -->
   <section class="slide slide--build">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Module 4 · Build framing</div>
       <div class="slide__minutes">~7 min</div>
@@ -1405,10 +779,10 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       <div class="cols-2">
         <div>
           <span class="build-banner">▶ What we're adding</span>
-          <ul class="bullets-lg" style="margin-top:1.6vh;">
-            <li>A <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">DataStore</code> Go interface in <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">internal/data/store.go</code>.</li>
-            <li>An <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">Item</code> struct with proper JSON tags.</li>
-            <li>A <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">JSONStore</code> implementation reading <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">data/items.json</code>.</li>
+          <ul class="bullets-lg u-mt-2">
+            <li>A <code class="code-chip">DataStore</code> Go interface in <code class="code-chip">internal/data/store.go</code>.</li>
+            <li>An <code class="code-chip">Item</code> struct with proper JSON tags.</li>
+            <li>A <code class="code-chip">JSONStore</code> implementation reading <code class="code-chip">data/items.json</code>.</li>
             <li>The items endpoint rewired to read from the store.</li>
           </ul>
         </div>
@@ -1424,7 +798,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 4 · Data Layer</span><span>4.1 · framing</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Lean on principle 5</h4>
@@ -1439,13 +813,16 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        4.2 — SWITCH TO EDITOR
        ======================================================== -->
   <section class="slide slide--editor">
+    <div class="slide__bar"></div>
     <div class="editor-inner">
       <span class="badge">▶ Switch to the editor</span>
       <div class="arrow">→</div>
       <h2>Define the <em>DataStore interface</em></h2>
-      <p class="what">Three prompts: define <code style="color:#f5d130; font-family:var(--mono);">DataStore</code> + <code style="color:#f5d130; font-family:var(--mono);">Item</code> + <code style="color:#f5d130; font-family:var(--mono);">JSONStore</code>; generate 20 realistic seed items in <code style="color:#f5d130; font-family:var(--mono);">data/items.json</code>; rewire <code style="color:#f5d130; font-family:var(--mono);">main.go</code> to load the store and serve from it. Add <code style="color:#f5d130; font-family:var(--mono);">/api/v1/items/{id}</code>.</p>
+      <p class="what">Three prompts: define <code class="code-chip code-chip--gold">DataStore</code> + <code class="code-chip code-chip--gold">Item</code> + <code class="code-chip code-chip--gold">JSONStore</code>; generate 20 realistic seed items in <code class="code-chip code-chip--gold">data/items.json</code>; rewire <code class="code-chip code-chip--gold">main.go</code> to load the store and serve from it. Add <code class="code-chip code-chip--gold">/api/v1/items/{id}</code>.</p>
       <div class="timer">~30 min in editor</div>
     </div>
+
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Live work</h4>
@@ -1464,6 +841,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        4.3 — DEBRIEF + ARCHITECTURE (DATA ✓)
        ======================================================== -->
   <section class="slide slide--debrief">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Back to deck <span class="dot"></span> Data layer live</div>
       <div class="slide__minutes">~3 min</div>
@@ -1476,14 +854,14 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
         <div class="arch">
           <div class="arch__layer"><div class="arch__no">L1 · Frontend</div><div class="arch__name">React Frontend<span class="arch__check">✓</span></div><div class="arch__desc">Scaffolded. Wires up in Module 5.</div></div>
           <div class="arch__layer is-built"><div class="arch__no">L2 · Backend</div><div class="arch__name">Go HTTP Server<span class="arch__check">✓</span></div><div class="arch__desc">Reads from the store now, not hardcoded data.</div></div>
-          <div class="arch__layer is-built is-current"><div class="arch__no">L3 · Data</div><div class="arch__name">Data Layer<span class="arch__check">✓</span></div><div class="arch__desc"><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">DataStore</code> interface + <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">JSONStore</code> + 20 seed items.</div></div>
+          <div class="arch__layer is-built is-current"><div class="arch__no">L3 · Data</div><div class="arch__name">Data Layer<span class="arch__check">✓</span></div><div class="arch__desc"><code class="code-chip">DataStore</code> interface + <code class="code-chip">JSONStore</code> + 20 seed items.</div></div>
           <div class="arch__layer"><div class="arch__no">L4 · External</div><div class="arch__name">External Services<span class="arch__check">✓</span></div><div class="arch__desc">Nothing external yet.</div></div>
         </div>
         <div>
           <ul class="checklist">
             <li>Interface defined with 4+ methods.</li>
-            <li><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">JSONStore</code> reads from <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">data/items.json</code>.</li>
-            <li>API serves real data; <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/items</code> and <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/items/{id}</code> both work.</li>
+            <li><code class="code-chip">JSONStore</code> reads from <code class="code-chip">data/items.json</code>.</li>
+            <li>API serves real data; <code class="code-chip">/items</code> and <code class="code-chip">/items/{id}</code> both work.</li>
             <li>Each student can define "interface" in one sentence.</li>
           </ul>
           <div class="arch-callout">Architecture status: <strong>2 of 4 layers built (L2 + L3).</strong></div>
@@ -1491,7 +869,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 4 · Data Layer</span><span>Module 4 complete · Architecture 2/4</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Quick recap</h4>
@@ -1504,11 +882,14 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        BREAK 1
        ======================================================== -->
   <section class="slide slide--break">
+    <div class="slide__bar"></div>
     <div class="break-inner">
       <div class="lab">Break · Be back at H+3:00</div>
       <div class="num">15<small>min</small></div>
       <div class="sub">Stretch. Drink water. Don't open Slack. The next stretch is the longest of the day.</div>
     </div>
+
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Hold the break</h4>
@@ -1526,6 +907,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        MODULE 5 — DIVIDER (BUILD)
        ======================================================== -->
   <section class="slide slide--section">
+    <div class="slide__bar"></div>
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module · Build</div>
@@ -1541,6 +923,8 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
+
     <aside class="notes">
       <h4>Energy check</h4>
       <p>Coming back from break — re-anchor briefly. Two sentences: "Backend is live, data is real. Now we make humans able to see it."</p>
@@ -1552,6 +936,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        5.1 — BUILD FRAMING
        ======================================================== -->
   <section class="slide slide--build">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Module 5 · Build framing</div>
       <div class="slide__minutes">~5 min</div>
@@ -1563,22 +948,22 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       <div class="cols-2">
         <div>
           <span class="build-banner">▶ What we're adding</span>
-          <ul class="bullets-lg" style="margin-top:1.6vh;">
-            <li>Tailwind CSS configured in <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">web/</code>.</li>
-            <li>Vite proxy: <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/api</code> → <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">localhost:8080</code>.</li>
-            <li>API client at <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">web/src/lib/api.ts</code>.</li>
-            <li><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">ItemsPage.tsx</code> — table with status / priority color-coding, loading + error states.</li>
+          <ul class="bullets-lg u-mt-2">
+            <li>Tailwind CSS configured in <code class="code-chip">web/</code>.</li>
+            <li>Vite proxy: <code class="code-chip">/api</code> → <code class="code-chip">localhost:8080</code>.</li>
+            <li>API client at <code class="code-chip">web/src/lib/api.ts</code>.</li>
+            <li><code class="code-chip">ItemsPage.tsx</code> — table with status / priority color-coding, loading + error states.</li>
           </ul>
         </div>
         <div class="card card--gold">
           <h3>Why this fits the architecture</h3>
           <p>This module connects L1 to L2 — the frontend pulls data from your server through the proxy. Two terminals running side by side. From the user's point of view, this is the first time the application "exists."</p>
-          <p style="margin-top:1.4vh;"><strong>Principle in play:</strong> Scaffold first. We are not styling. We are not adding features. We are getting <em>any</em> data on screen.</p>
+          <p class="u-mt-1"><strong>Principle in play:</strong> Scaffold first. We are not styling. We are not adding features. We are getting <em>any</em> data on screen.</p>
         </div>
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 5 · Frontend from Scratch</span><span>5.1 · framing</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Watch the temptation</h4>
@@ -1591,16 +976,19 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        5.2 — SWITCH TO EDITOR
        ======================================================== -->
   <section class="slide slide--editor">
+    <div class="slide__bar"></div>
     <div class="editor-inner">
       <span class="badge">▶ Switch to the editor</span>
       <div class="arrow">→</div>
       <h2>Wire the <em>frontend to the backend</em></h2>
       <p class="what">
-        Two terminals: backend in one, <code style="color:#f5d130; font-family:var(--mono);">npm run dev</code> in the other.
-        Configure Tailwind, set up the Vite proxy, build the API client, and render the items table at <code style="color:#f5d130; font-family:var(--mono);">localhost:5173</code>.
+        Two terminals: backend in one, <code class="code-chip code-chip--gold">npm run dev</code> in the other.
+        Configure Tailwind, set up the Vite proxy, build the API client, and render the items table at <code class="code-chip code-chip--gold">localhost:5173</code>.
       </p>
       <div class="timer">~30 min in editor</div>
     </div>
+
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Demo flow</h4>
@@ -1619,6 +1007,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        5.3 — DEBRIEF: SECOND VICTORY + ARCHITECTURE (FRONTEND ✓)
        ======================================================== -->
   <section class="slide slide--debrief">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Back to deck <span class="dot"></span> Second victory</div>
       <div class="slide__minutes">~5 min</div>
@@ -1629,14 +1018,14 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
     <div class="slide__body">
       <div class="cols-2 cols-2--6040">
         <div class="arch">
-          <div class="arch__layer is-built is-current"><div class="arch__no">L1 · Frontend</div><div class="arch__name">React Frontend<span class="arch__check">✓</span></div><div class="arch__desc">Items table at <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">localhost:5173</code>, color-coded.</div></div>
+          <div class="arch__layer is-built is-current"><div class="arch__no">L1 · Frontend</div><div class="arch__name">React Frontend<span class="arch__check">✓</span></div><div class="arch__desc">Items table at <code class="code-chip">localhost:5173</code>, color-coded.</div></div>
           <div class="arch__layer is-built"><div class="arch__no">L2 · Backend</div><div class="arch__name">Go HTTP Server<span class="arch__check">✓</span></div><div class="arch__desc">Serving JSON to the proxied frontend.</div></div>
           <div class="arch__layer is-built"><div class="arch__no">L3 · Data</div><div class="arch__name">Data Layer<span class="arch__check">✓</span></div><div class="arch__desc">JSON store backing the items endpoint.</div></div>
           <div class="arch__layer"><div class="arch__no">L4 · External</div><div class="arch__name">External Services<span class="arch__check">✓</span></div><div class="arch__desc">Coming online in Module 7 (OpenAI).</div></div>
         </div>
         <div>
           <ul class="checklist">
-            <li>React app loads at <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">localhost:5173</code>.</li>
+            <li>React app loads at <code class="code-chip">localhost:5173</code>.</li>
             <li>Items table fetches and renders Go data.</li>
             <li>Status + priority columns color-coded.</li>
             <li>No console errors in dev tools.</li>
@@ -1646,7 +1035,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 5 · Frontend from Scratch</span><span>Module 5 complete · Architecture 3/4</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Mark the moment — second victory</h4>
@@ -1659,6 +1048,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        MODULE 6 — DIVIDER (BUILD)
        ======================================================== -->
   <section class="slide slide--section">
+    <div class="slide__bar"></div>
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module · Build</div>
@@ -1674,6 +1064,8 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
+
     <aside class="notes">
       <h4>Pace</h4>
       <p>This is a UI module. Visible progress is fast and motivating, but easy to over-style. Keep students focused on structure, not pixels.</p>
@@ -1685,6 +1077,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        6.1 — BUILD FRAMING
        ======================================================== -->
   <section class="slide slide--build">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Module 6 · Build framing</div>
       <div class="slide__minutes">~5 min</div>
@@ -1696,22 +1089,22 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       <div class="cols-2">
         <div>
           <span class="build-banner">▶ What we're adding</span>
-          <ul class="bullets-lg" style="margin-top:1.6vh;">
-            <li><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">react-router-dom</code> with Layout, Dashboard, Items, Settings.</li>
-            <li>Dark sidebar (navy <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">#1a1f36</code>) with nav highlighting.</li>
-            <li>Item detail page at <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/items/:id</code>.</li>
+          <ul class="bullets-lg u-mt-2">
+            <li><code class="code-chip">react-router-dom</code> with Layout, Dashboard, Items, Settings.</li>
+            <li>Dark sidebar (navy <code class="code-chip">#1a1f36</code>) with nav highlighting.</li>
+            <li>Item detail page at <code class="code-chip">/items/:id</code>.</li>
             <li>Dashboard stat cards, recent items, quick actions.</li>
           </ul>
         </div>
         <div class="card card--gold">
           <h3>Why this fits the architecture</h3>
           <p>L1 is now a real frontend, not a single page. We're not adding new layers — we're filling out the one we just lit.</p>
-          <p style="margin-top:1.4vh;"><strong>Principle in play:</strong> Iterative refinement. The first prompt gets you 70% there; the next two prompts get you to 95%.</p>
+          <p class="u-mt-1"><strong>Principle in play:</strong> Iterative refinement. The first prompt gets you 70% there; the next two prompts get you to 95%.</p>
         </div>
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 6 · Pages &amp; Navigation</span><span>6.1 · framing</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Set the constraint</h4>
@@ -1724,6 +1117,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        6.2 — SWITCH TO EDITOR
        ======================================================== -->
   <section class="slide slide--editor">
+    <div class="slide__bar"></div>
     <div class="editor-inner">
       <span class="badge">▶ Switch to the editor</span>
       <div class="arrow">→</div>
@@ -1734,6 +1128,8 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </p>
       <div class="timer">~30 min in editor</div>
     </div>
+
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Live work</h4>
@@ -1751,6 +1147,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        6.3 — DEBRIEF + ARCHITECTURE (still 3/4)
        ======================================================== -->
   <section class="slide slide--debrief">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Back to deck <span class="dot"></span> Real application shape</div>
       <div class="slide__minutes">~3 min</div>
@@ -1778,7 +1175,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 6 · Pages &amp; Navigation</span><span>Module 6 complete · Architecture 3/4</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Set up Module 7</h4>
@@ -1791,6 +1188,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        MODULE 7 — DIVIDER (BUILD)
        ======================================================== -->
   <section class="slide slide--section">
+    <div class="slide__bar"></div>
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module · Build</div>
@@ -1806,6 +1204,8 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
+
     <aside class="notes">
       <h4>Why this is the high point of the day</h4>
       <p>This is the module that makes the whole curriculum worth it. The AI calls <em>your</em> code and answers questions about <em>your</em> data — no hallucination, real lookups.</p>
@@ -1817,22 +1217,23 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        7.1 — TOOL USE EXPLAINER + FRAMING
        ======================================================== -->
   <section class="slide slide--build">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Module 7 · Build framing</div>
       <div class="slide__minutes">~7 min</div>
     </div>
     <h2 class="slide__title">Tool use — the AI calls your code</h2>
-    <p class="slide__subtitle">When a user asks "how many high-priority items do I have?", the AI doesn't guess. It calls your <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">lookup_items</code> tool and reports the real count.</p>
+    <p class="slide__subtitle">When a user asks "how many high-priority items do I have?", the AI doesn't guess. It calls your <code class="code-chip">lookup_items</code> tool and reports the real count.</p>
 
     <div class="slide__body">
       <div class="cols-2">
         <div>
           <span class="build-banner">▶ What we're adding</span>
-          <ul class="bullets-lg" style="margin-top:1.6vh;">
-            <li>Chat service in <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">internal/ai/chat.go</code> calling <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">gpt-4o</code>.</li>
-            <li>A <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">lookup_items</code> tool with status / priority / query params.</li>
-            <li><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">POST /api/v1/chat</code> endpoint.</li>
-            <li><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">ChatPage.tsx</code> with markdown rendering and loading states.</li>
+          <ul class="bullets-lg u-mt-2">
+            <li>Chat service in <code class="code-chip">internal/ai/chat.go</code> calling <code class="code-chip">gpt-4o</code>.</li>
+            <li>A <code class="code-chip">lookup_items</code> tool with status / priority / query params.</li>
+            <li><code class="code-chip">POST /api/v1/chat</code> endpoint.</li>
+            <li><code class="code-chip">ChatPage.tsx</code> with markdown rendering and loading states.</li>
           </ul>
         </div>
         <div class="card card--ink">
@@ -1843,7 +1244,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 7 · AI Chat Integration</span><span>7.1 · framing</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Make it concrete</h4>
@@ -1858,15 +1259,18 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        7.2 — SWITCH TO EDITOR
        ======================================================== -->
   <section class="slide slide--editor">
+    <div class="slide__bar"></div>
     <div class="editor-inner">
       <span class="badge">▶ Switch to the editor</span>
       <div class="arrow">→</div>
       <h2>Build the <em>chat with tool use</em></h2>
       <p class="what">
-        Three prompts: chat service against OpenAI; <code style="color:#f5d130; font-family:var(--mono);">lookup_items</code> tool definition; chat page with markdown rendering. End: ask "what are my high-priority items?" and watch the AI call your code.
+        Three prompts: chat service against OpenAI; <code class="code-chip code-chip--gold">lookup_items</code> tool definition; chat page with markdown rendering. End: ask "what are my high-priority items?" and watch the AI call your code.
       </p>
       <div class="timer">~30 min in editor</div>
     </div>
+
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>The moment to land</h4>
@@ -1885,6 +1289,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        7.3 — DEBRIEF + ARCHITECTURE (EXTERNAL ✓)
        ======================================================== -->
   <section class="slide slide--debrief">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Back to deck <span class="dot"></span> AI on board</div>
       <div class="slide__minutes">~5 min</div>
@@ -1896,9 +1301,9 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       <div class="cols-2 cols-2--6040">
         <div class="arch">
           <div class="arch__layer is-built"><div class="arch__no">L1 · Frontend</div><div class="arch__name">React Frontend<span class="arch__check">✓</span></div><div class="arch__desc">+ ChatPage with markdown rendering.</div></div>
-          <div class="arch__layer is-built"><div class="arch__no">L2 · Backend</div><div class="arch__name">Go HTTP Server<span class="arch__check">✓</span></div><div class="arch__desc">+ <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/chat</code> endpoint and chat service.</div></div>
+          <div class="arch__layer is-built"><div class="arch__no">L2 · Backend</div><div class="arch__name">Go HTTP Server<span class="arch__check">✓</span></div><div class="arch__desc">+ <code class="code-chip">/chat</code> endpoint and chat service.</div></div>
           <div class="arch__layer is-built"><div class="arch__no">L3 · Data</div><div class="arch__name">Data Layer<span class="arch__check">✓</span></div><div class="arch__desc">Now consumed by humans <em>and</em> the AI tool.</div></div>
-          <div class="arch__layer is-built is-current"><div class="arch__no">L4 · External</div><div class="arch__name">External Services<span class="arch__check">✓</span></div><div class="arch__desc">OpenAI <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">gpt-4o</code> with tool use.</div></div>
+          <div class="arch__layer is-built is-current"><div class="arch__no">L4 · External</div><div class="arch__name">External Services<span class="arch__check">✓</span></div><div class="arch__desc">OpenAI <code class="code-chip">gpt-4o</code> with tool use.</div></div>
         </div>
         <div>
           <ul class="checklist">
@@ -1912,7 +1317,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 7 · AI Chat Integration</span><span>Module 7 complete · Architecture 4/4</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>This is the apex</h4>
@@ -1927,11 +1332,14 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        BREAK 2
        ======================================================== -->
   <section class="slide slide--break">
+    <div class="slide__bar"></div>
     <div class="break-inner">
       <div class="lab">Break · Be back at H+5:30</div>
       <div class="num">15<small>min</small></div>
       <div class="sub">Halfway through the back half. Stretch, water, kill any zombie servers in your terminal.</div>
     </div>
+
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Tell them</h4>
@@ -1949,6 +1357,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        MODULE 8 — DIVIDER (BUILD)
        ======================================================== -->
   <section class="slide slide--section">
+    <div class="slide__bar"></div>
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module · Build</div>
@@ -1964,6 +1373,8 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
+
     <aside class="notes">
       <h4>Frame the metaphor</h4>
       <p>Use the gate guard image early. It's the easiest way for a Marine audience to internalize middleware.</p>
@@ -1975,6 +1386,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        8.1 — BUILD FRAMING
        ======================================================== -->
   <section class="slide slide--build">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Module 8 · Build framing</div>
       <div class="slide__minutes">~5 min</div>
@@ -1986,9 +1398,9 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       <div class="cols-2">
         <div>
           <span class="build-banner">▶ What we're adding</span>
-          <ul class="bullets-lg" style="margin-top:1.6vh;">
+          <ul class="bullets-lg u-mt-2">
             <li>Middleware package: CORS, security headers, auth, chain.</li>
-            <li><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/auth/me</code> + <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/auth/switch</code> endpoints.</li>
+            <li><code class="code-chip">/auth/me</code> + <code class="code-chip">/auth/switch</code> endpoints.</li>
             <li>Role picker dropdown in the header (Admin / Staff / User).</li>
             <li>Role-based filtering — Admin sees all, User sees only their items.</li>
           </ul>
@@ -1996,12 +1408,12 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
         <div class="card card--gold">
           <h3>Why this fits the architecture</h3>
           <p>No new layers. We're hardening L2 (the backend) and L1 (the frontend). The same data store now serves different users different views.</p>
-          <p style="margin-top:1.4vh;"><strong>Principle in play:</strong> Scaffold, then layer. Today we use a cookie. In a real deployment this becomes CAC, OIDC, or whatever the unit standard is.</p>
+          <p class="u-mt-1"><strong>Principle in play:</strong> Scaffold, then layer. Today we use a cookie. In a real deployment this becomes CAC, OIDC, or whatever the unit standard is.</p>
         </div>
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 8 · Auth &amp; Middleware</span><span>8.1 · framing</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Set the realism dial</h4>
@@ -2014,6 +1426,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        8.2 — SWITCH TO EDITOR
        ======================================================== -->
   <section class="slide slide--editor">
+    <div class="slide__bar"></div>
     <div class="editor-inner">
       <span class="badge">▶ Switch to the editor</span>
       <div class="arrow">→</div>
@@ -2021,6 +1434,8 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       <p class="what">Three prompts: middleware package; auth endpoints + frontend role picker; role-based data filtering across the existing endpoints.</p>
       <div class="timer">~30 min in editor</div>
     </div>
+
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Demo flow</h4>
@@ -2043,6 +1458,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        8.3 — DEBRIEF + ARCHITECTURE (still 4/4 — hardened)
        ======================================================== -->
   <section class="slide slide--debrief">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Back to deck <span class="dot"></span> Auth in place</div>
       <div class="slide__minutes">~3 min</div>
@@ -2070,7 +1486,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 8 · Auth &amp; Middleware</span><span>Module 8 complete · Architecture 4/4 (hardened)</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Quick check</h4>
@@ -2083,6 +1499,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        MODULE 9 — DIVIDER (BUILD)
        ======================================================== -->
   <section class="slide slide--section">
+    <div class="slide__bar"></div>
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module · Build</div>
@@ -2098,6 +1515,8 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
+
     <aside class="notes">
       <h4>Pacing valve</h4>
       <p>This is the module to compress if you're behind schedule. Tell the room up front: "Path A is the default. Path B is for Marines who already have Azure AD access. Either path counts."</p>
@@ -2109,6 +1528,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        9.1 — BUILD FRAMING (PATH A vs B)
        ======================================================== -->
   <section class="slide slide--build">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Module 9 · Build framing</div>
       <div class="slide__minutes">~5 min</div>
@@ -2122,10 +1542,10 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
           <h3>Path A — SQLite backend</h3>
           <p><strong>Default for most students.</strong> No external account needed.</p>
           <ul>
-            <li>New <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">DataStore</code> implementation using <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">modernc.org/sqlite</code> (pure Go).</li>
+            <li>New <code class="code-chip">DataStore</code> implementation using <code class="code-chip">modernc.org/sqlite</code> (pure Go).</li>
             <li>Auto-create tables on startup.</li>
             <li>Parameterized queries.</li>
-            <li><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">-db</code> flag toggles JSON vs SQLite.</li>
+            <li><code class="code-chip">-db</code> flag toggles JSON vs SQLite.</li>
           </ul>
         </div>
         <div class="card card--gold">
@@ -2135,13 +1555,13 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
             <li>OAuth2 client credentials flow.</li>
             <li>Token caching.</li>
             <li>Commercial &amp; GCC High endpoints.</li>
-            <li>New endpoints: <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/calendar/today</code> and <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">/mail/summary</code>.</li>
+            <li>New endpoints: <code class="code-chip">/calendar/today</code> and <code class="code-chip">/mail/summary</code>.</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 9 · External Integrations</span><span>9.1 · framing</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Be opinionated</h4>
@@ -2156,13 +1576,16 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        9.2 — SWITCH TO EDITOR
        ======================================================== -->
   <section class="slide slide--editor">
+    <div class="slide__bar"></div>
     <div class="editor-inner">
       <span class="badge">▶ Switch to the editor</span>
       <div class="arrow">→</div>
       <h2>Wire your <em>chosen integration</em></h2>
-      <p class="what">Path A: build the SQLite store, run with <code style="color:#f5d130; font-family:var(--mono);">-db sqlite</code>, restart, confirm data persists. Path B: build the Graph client, fetch today's calendar.</p>
+      <p class="what">Path A: build the SQLite store, run with <code class="code-chip code-chip--gold">-db sqlite</code>, restart, confirm data persists. Path B: build the Graph client, fetch today's calendar.</p>
       <div class="timer">~30 min in editor</div>
     </div>
+
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Live work — Path A</h4>
@@ -2184,6 +1607,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        9.3 — DEBRIEF + ARCHITECTURE
        ======================================================== -->
   <section class="slide slide--debrief">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Back to deck <span class="dot"></span> Integration live</div>
       <div class="slide__minutes">~3 min</div>
@@ -2210,7 +1634,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 9 · External Integrations</span><span>Module 9 complete · Architecture 4/4 (deepened)</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Connect the dots</h4>
@@ -2223,6 +1647,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        MODULE 10 — DIVIDER (BUILD)
        ======================================================== -->
   <section class="slide slide--section">
+    <div class="slide__bar"></div>
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Module · Build · Final</div>
@@ -2238,6 +1663,8 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
+
     <aside class="notes">
       <h4>Frame the stakes</h4>
       <p>"This is the third victory of the day. Right now your app exists on your laptop. After this module, it exists everywhere — same bytes, any machine."</p>
@@ -2249,6 +1676,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        10.1 — BUILD FRAMING
        ======================================================== -->
   <section class="slide slide--build">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Module 10 · Build framing</div>
       <div class="slide__minutes">~5 min</div>
@@ -2260,23 +1688,23 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       <div class="cols-2">
         <div>
           <span class="build-banner">▶ What we're adding</span>
-          <ul class="bullets-lg" style="margin-top:1.6vh;">
-            <li>Multi-stage <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">Dockerfile</code>: web-builder, go-builder, runtime.</li>
+          <ul class="bullets-lg u-mt-2">
+            <li>Multi-stage <code class="code-chip">Dockerfile</code>: web-builder, go-builder, runtime.</li>
             <li>Go server serves the React build in production mode.</li>
             <li>SPA fallback for non-API routes.</li>
-            <li><code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">docker build</code> + <code style="font-family:var(--mono);background:var(--paper-3);padding:1px 4px;border-radius:3px;">docker run</code> locally on port 8080.</li>
+            <li><code class="code-chip">docker build</code> + <code class="code-chip">docker run</code> locally on port 8080.</li>
             <li><em>Optional:</em> push to ACR and deploy to Azure Container Apps.</li>
           </ul>
         </div>
         <div class="card card--gold">
           <h3>Why this fits the architecture</h3>
           <p>The container collapses L1, L2, and L3 into a single artifact. L4 (OpenAI, Graph) stays external — you pass keys via environment variables.</p>
-          <p style="margin-top:1.4vh;"><strong>Principle in play:</strong> Incremental deployment. We are not waiting until "the end" to ship. The container <em>is</em> the end.</p>
+          <p class="u-mt-1"><strong>Principle in play:</strong> Incremental deployment. We are not waiting until "the end" to ship. The container <em>is</em> the end.</p>
         </div>
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 10 · Docker &amp; Deployment</span><span>10.1 · framing</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Whiteboard the three stages</h4>
@@ -2289,15 +1717,18 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        10.2 — SWITCH TO EDITOR
        ======================================================== -->
   <section class="slide slide--editor">
+    <div class="slide__bar"></div>
     <div class="editor-inner">
       <span class="badge">▶ Switch to the editor</span>
       <div class="arrow">→</div>
       <h2>Build &amp; <em>run the container</em></h2>
       <p class="what">
-        Generate the multi-stage Dockerfile. <code style="color:#f5d130; font-family:var(--mono);">docker build -t my-staff-app .</code>. <code style="color:#f5d130; font-family:var(--mono);">docker run -p 8080:8080 -e OPENAI_API_KEY=…</code>. Open <code style="color:#f5d130; font-family:var(--mono);">localhost:8080</code> — full app from a single container. Optional: deploy to Azure.
+        Generate the multi-stage Dockerfile. <code class="code-chip code-chip--gold">docker build -t my-staff-app .</code>. <code class="code-chip code-chip--gold">docker run -p 8080:8080 -e OPENAI_API_KEY=…</code>. Open <code class="code-chip code-chip--gold">localhost:8080</code> — full app from a single container. Optional: deploy to Azure.
       </p>
       <div class="timer">~30 min in editor</div>
     </div>
+
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Demo discipline</h4>
@@ -2319,6 +1750,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        10.3 — DEBRIEF: THIRD VICTORY + ARCHITECTURE (DEPLOYED)
        ======================================================== -->
   <section class="slide slide--debrief">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Back to deck <span class="dot"></span> Third victory — the big one</div>
       <div class="slide__minutes">~5 min</div>
@@ -2346,7 +1778,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Module 10 · Docker &amp; Deployment</span><span>Module 10 complete · Architecture 4/4 (shipped)</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Land the moment</h4>
@@ -2359,6 +1791,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        ASSESSMENT — DIVIDER
        ======================================================== -->
   <section class="slide slide--section">
+    <div class="slide__bar"></div>
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Closing</div>
@@ -2374,6 +1807,8 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
+
     <aside class="notes">
       <h4>Rhythm</h4>
       <p>Three slides for assessment, then we move into the program close. Keep this brisk so the close has time to land.</p>
@@ -2385,6 +1820,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        A.1 — ASSESSMENT RUBRIC
        ======================================================== -->
   <section class="slide">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Assessment · Rubric</div>
       <div class="slide__minutes">~5 min</div>
@@ -2406,7 +1842,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </table>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Assessment &amp; Wrap-Up</span><span>A.1 · Rubric</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>How to use this slide</h4>
@@ -2421,6 +1857,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        A.2 — SUBMIT + CERTIFICATE HANDOFF
        ======================================================== -->
   <section class="slide">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Assessment · Submit</div>
       <div class="slide__minutes">~3 min</div>
@@ -2450,7 +1887,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Assessment &amp; Wrap-Up</span><span>A.2 · Submit</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Handoff to the certificate flow</h4>
@@ -2465,6 +1902,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        A.3 — FRONTIER MAP UPDATE + WHAT'S NEXT
        ======================================================== -->
   <section class="slide">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Assessment · Reflect</div>
       <div class="slide__minutes">~5 min</div>
@@ -2495,7 +1933,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       <p style="font-size:1.2vw; color:var(--ink-3); text-align:center;">For comparison: a contractor would quote 6–12 months and $500K+ for the same application.</p>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Assessment &amp; Wrap-Up</span><span>A.3 · Reflect &amp; plan</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Time expectations</h4>
@@ -2508,6 +1946,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        PROGRAM WRAP-UP — DIVIDER
        ======================================================== -->
   <section class="slide slide--section">
+    <div class="slide__bar"></div>
     <div class="section-inner">
       <div class="section-left">
         <div class="module-eyebrow">Program · Capstone Close</div>
@@ -2523,6 +1962,8 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
+
     <aside class="notes">
       <h4>Posture shift</h4>
       <p>Slow down here. The next four slides are the program close. Speak more deliberately. Make eye contact (or its Teams equivalent — pause and watch reactions).</p>
@@ -2534,6 +1975,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        C.1 — JOURNEY: WEEKS 1→6
        ======================================================== -->
   <section class="slide">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Six weeks <span class="dot"></span> Journey</div>
       <div class="slide__minutes">~2 min</div>
@@ -2552,7 +1994,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Program Close</span><span>C.1 · Journey</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Read it slow</h4>
@@ -2567,6 +2009,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        C.2 — WHAT YOU OWE FORWARD
        ======================================================== -->
   <section class="slide">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Closing thought <span class="dot"></span> The apprentice problem</div>
       <div class="slide__minutes">~3 min</div>
@@ -2599,7 +2042,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Program Close</span><span>C.2 · Owe forward</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Posture</h4>
@@ -2614,6 +2057,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
        C.3 — WHERE TO KEEP GOING
        ======================================================== -->
   <section class="slide">
+    <div class="slide__bar"></div>
     <div class="slide__head">
       <div class="slide__eyebrow">Continue <span class="dot"></span> Resources</div>
       <div class="slide__minutes">~1 min</div>
@@ -2644,7 +2088,7 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       </div>
     </div>
 
-    <div class="slide__foot"><span><span class="brand-mark"></span>Program Close</span><span>C.3 · Continue</span></div>
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Tactical close</h4>
@@ -2656,7 +2100,8 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
   <!-- ========================================================
        C.4 — FINAL CAPSTONE CLOSE
        ======================================================== -->
-  <section class="slide slide--close">
+  <section class="slide slide--closing">
+    <div class="slide__bar"></div>
     <div class="close-inner">
       <span class="stamp">Course 6 · Capstone Complete</span>
       <h1>You wrote the requirements.<br/><em>AI wrote the code.</em><br/>You shipped the container.</h1>
@@ -2664,6 +2109,8 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
       <p class="lede">That is not &ldquo;learning to code.&rdquo; That is Expert-Driven Development at the highest level — domain experts building exactly what they need, at the speed of conversation. Now go build something your unit actually needs.</p>
       <div class="sig">Expert-Driven Development · Week 6 of 6 · MCD-Monterey</div>
     </div>
+
+    <div class="slide__foot"><span class="foot__course">Course 6 · Week 6 · Full-Stack AI-Assisted Development</span><span class="foot__num"></span></div>
 
     <aside class="notes">
       <h4>Land it</h4>
@@ -2681,7 +2128,6 @@ body.print-mode .hud, body.print-mode .notes-panel { display: none !important; }
 
   </div>
 </div>
-</aside>
 
 </body>
 </html>
