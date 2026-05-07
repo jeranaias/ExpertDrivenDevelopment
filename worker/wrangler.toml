@@ -1,0 +1,11 @@
+name = "ask-edd"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+# Deploy:
+#   cd worker
+#   npx wrangler secret put RIGRUN_KEY     (paste the bearer token when prompted)
+#   npx wrangler deploy
+#
+# After deploy, note the workers.dev URL (e.g. https://ask-edd.<you>.workers.dev)
+# and set it on the widget <script> tag via data-api.
