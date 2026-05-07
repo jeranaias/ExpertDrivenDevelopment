@@ -90,31 +90,22 @@
                     <nav class="toc">
                         <h2 class="toc__title">On This Page</h2>
                         <ul class="toc__list">
-                            <li><a href="#instructor-qualification">Instructor Qualification</a></li>
                             <li><a href="#timing">Timing Breakdown</a></li>
                             <li><a href="#agenda">Agenda</a></li>
-                            <li><a href="#frontier-mapping">Frontier Mapping for Your Domain</a></li>
-                            <li><a href="#complex-build">Complex Build: Multi-Component System</a></li>
-                            <li><a href="#group-debugging">Group Debugging: Real Problems</a></li>
-                            <li><a href="#verification">Verification Protocols and QA</a></li>
-                            <li><a href="#teaching-others">Teaching Others: The 201 Multiplier</a></li>
+                            <li><a href="#frontier-mapping">Module 1: Frontier Mapping for Your Domain</a></li>
+                            <li><a href="#complex-build">Module 2: Complex Build: Multi-Component System</a></li>
+                            <li><a href="#group-debugging">Module 3: Group Debugging: Real Problems</a></li>
+                            <li><a href="#verification">Module 4: Verification Protocols and QA</a></li>
+                            <li><a href="#teaching-others">Module 5: Teaching Others: The 201 Multiplier</a></li>
+                            <li><a href="#workflow-playbook">Module 6: Workflow Playbook</a></li>
                             <li><a href="#assessment">Assessment Rubric</a></li>
+                            <li><a href="#next-steps">Next Steps</a></li>
                         </ul>
                     </nav>
                 </aside>
 
                 <!-- Page Content -->
                 <div class="page-content">
-
-                    <!-- Instructor Qualification -->
-                    <section id="instructor-qualification">
-                        <div class="callout callout--warning">
-                            <h3 class="callout__title">Instructor Qualification Note</h3>
-                            <p>
-                                This course requires an instructor who has personally built and deployed at least 3 tools using AI assistance. The complex build in Module 2 requires real-time troubleshooting ability. You cannot effectively teach this course from a script alone. Students will encounter unexpected errors, frontier limitations, and integration failures. The instructor must be able to diagnose problems on the fly, guide students through iterative refinement, and recognize when a problem is a frontier issue versus a context/prompting issue.
-                            </p>
-                        </div>
-                    </section>
 
                     <!-- Timing Breakdown -->
                     <section id="timing">
@@ -173,7 +164,7 @@
                             </table>
                         </div>
                         <p class="mt-md">
-                            <strong>Total:</strong> 230 minutes (3 hours 50 minutes). The 10-minute buffer accounts for technical issues, extended Q&amp;A, or students who need additional troubleshooting time during the complex build.
+                            <strong>Total:</strong> 4 hours (230 min content + 10-min break + 20-min buffer). The buffer accounts for technical issues, extended Q&amp;A, or students who need additional troubleshooting time during the complex build.
                         </p>
                     </section>
 
@@ -233,9 +224,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        <p class="mt-md">
-                            <strong>Total:</strong> 4 hours (includes 10-minute break and 10-minute buffer built into timing)
-                        </p>
                     </section>
 
                     <!-- Module 1: Frontier Mapping for Your Domain -->
@@ -540,7 +528,8 @@
                             </p>
                         </div>
 
-                        <h3>Debrief Questions (10 minutes)</h3>
+                        <h4>Debrief (10 minutes)</h4>
+                        <h3>Debrief Questions</h3>
                         <ul>
                             <li>Where did you switch modes? Why?</li>
                             <li>Where did the AI fail? Was it a frontier issue or a context issue?</li>
@@ -631,8 +620,8 @@
                                     <li>What is the DisplayMode property of the submit button? (This is where the actual problem usually is)</li>
                                     <li>Does the text input show a red error indicator when you type an invalid number? (If yes, validation works but button logic is wrong; if no, validation formula is wrong)</li>
                                 </ul>
-                                <p><strong>Solution Approach:</strong> Set the submit button's DisplayMode to: If(TextInput_Phone.Valid, DisplayMode.Edit, DisplayMode.Disabled). This checks the Valid property of the input field, which reflects the validation formula result. The validation formula itself should be: IsMatch(TextInput_Phone.Text, "^\d{3}-\d{3}-\d{4}$")</p>
-                                <p><strong>Frontier Classification:</strong> This is a context issue. AI generated a validation formula, but the student didn't specify that the button's DisplayMode must respect the validation state. This is a common prompting gap: students ask for "validation" but don't specify all the integration points where validation must be enforced.</p>
+                                <p><strong>Solution Approach:</strong> Standalone Power Apps text input controls do not expose a <code>.Valid</code> property (that property only exists on data card controls inside a Form). Apply the validation pattern directly to the submit button's DisplayMode using regex pattern matching on the text: <code>If(IsMatch(TextInput_Phone.Text, "^\d{3}-\d{3}-\d{4}$"), DisplayMode.Edit, DisplayMode.Disabled)</code>. This evaluates the regex on each keystroke and disables the submit button until the phone number matches the required XXX-XXX-XXXX format.</p>
+                                <p><strong>Frontier Classification:</strong> This is a context issue. AI generated a validation pattern but referenced a <code>.Valid</code> property that does not exist on standalone text inputs. The student didn't specify that the button's DisplayMode must enforce the validation directly. This is a common prompting gap: students ask for "validation" but don't specify all the integration points where validation must be enforced, and AI fills in plausible-but-wrong property references.</p>
                             </details>
                         </div>
 
@@ -908,7 +897,12 @@
                             <li>Who in your unit could benefit from learning these concepts?</li>
                         </ul>
 
-                        <h3>Module 6: Workflow Playbook (20 minutes)</h3>
+                    </section>
+
+                    <!-- Module 6: Workflow Playbook -->
+                    <section id="workflow-playbook">
+                        <h2>Module 6: Workflow Playbook <span class="badge">30 min</span></h2>
+                        <p><strong>Duration:</strong> 30 minutes</p>
                         <p>
                             Each participant produces a one-page playbook for one AI-integrated workflow
                             from their actual job. This is the final deliverable of the Advanced Workshop.
@@ -1035,6 +1029,11 @@
                                 A completed playbook entry should have: a clear task name, realistic frequency, the correct mode (Centaur or Cyborg), 4-8 concrete steps with Human/AI labels, a verification checklist with 3-5 items, at least one known frontier issue, and a specific time savings estimate. If your playbook has fewer than 4 steps or no verification checklist, it is not detailed enough.
                             </p>
                         </div>
+
+                        <h3>Wrap-Up</h3>
+                        <p>
+                            Close the workshop by reviewing the deliverables: each participant should leave with (1) a domain-specific frontier map, (2) a completed Unit Readiness Dashboard or equivalent multi-component build, (3) a 60-second teach-back rehearsed in front of peers, and (4) a one-page workflow playbook. Confirm that participants know how to submit their playbooks and frontier maps to the EDD GitHub Discussions for the broader community to learn from. Reinforce that they are now equipped to teach Platform Training and to mentor junior personnel using the protocols from Module 5.
+                        </p>
                     </section>
 
                     <!-- Assessment Rubric -->
@@ -1118,6 +1117,19 @@
                         </p>
                     </section>
 
+                    <!-- Next Steps -->
+                    <section id="next-steps">
+                        <h2>Next Steps</h2>
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">After This Course</h3>
+                            <ul>
+                                <li>Submit your frontier map and workflow playbook to the EDD GitHub Discussions: <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/discussions">Discussions</a></li>
+                                <li>Take the next course: <a href="fullstack.html">Course 6 &mdash; Full-Stack AI-Assisted Development</a> (the capstone)</li>
+                                <li>Become an instructor: contact MCD-Monterey via the contact info in <a href="../sop/">the SOP</a>.</li>
+                            </ul>
+                        </div>
+                    </section>
+
                 </div>
             </div>
         </div>
@@ -1130,7 +1142,7 @@
                 <div class="footer-section">
                     <h3 class="footer-section__title">Expert-Driven Development</h3>
                     <p>
-                        Open-source AI-assisted development training for DoW personnel.
+                        Open-source AI-assisted development training for DoD personnel.
                         Built by SSgt Jesse C. Morgan at MCD-Monterey.
                     </p>
                 </div>

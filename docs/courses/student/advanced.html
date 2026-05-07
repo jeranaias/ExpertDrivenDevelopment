@@ -72,6 +72,9 @@
                 <span class="badge badge--gold">Experienced Builders</span>
             </div>
             <p class="mt-lg"><strong>Prerequisite:</strong> At least one deployed tool</p>
+            <div class="page-header__actions mt-lg" role="group" aria-label="Course 4 student materials">
+                <a href="../../decks/week-4-advanced.html" class="btn btn--secondary btn--sm" target="_blank" rel="noopener">Open the Slide Deck</a>
+            </div>
             <p class="mt-sm"><a href="../advanced.html">Instructor Guide</a></p>
         </div>
     </section>
@@ -89,9 +92,10 @@
                             <li><a href="#overview">Overview &amp; Learning Objectives</a></li>
                             <li><a href="#frontier-mapping">Module 1: Frontier Mapping for Your Domain</a></li>
                             <li><a href="#complex-build">Module 2: Complex Build &mdash; Multi-Component System</a></li>
-                            <li><a href="#verification">Module 3: Verification Protocols and QA</a></li>
-                            <li><a href="#debugging">Module 4: Debugging Practice</a></li>
+                            <li><a href="#debugging">Module 3: Group Debugging &mdash; Real Problems</a></li>
+                            <li><a href="#verification">Module 4: Verification Protocols and QA</a></li>
                             <li><a href="#teaching-others">Module 5: Teaching Others &mdash; The 201 Multiplier</a></li>
+                            <li><a href="#workflow-playbook">Module 6: Workflow Playbook</a></li>
                         </ul>
                     </nav>
                 </aside>
@@ -127,7 +131,7 @@
                             </p>
                         </div>
 
-                        <details class="mt-lg">
+                        <details class="mt-lg" open>
                             <summary><strong>Prerequisite Check: Are you ready for this course?</strong></summary>
                             <div class="callout callout--warning mt-sm">
                                 <p>This course assumes you have:</p>
@@ -361,10 +365,10 @@ Define the relationships between tables and required columns.</pre>
                         <details>
                             <summary><strong>Self-Check: Phase 1</strong></summary>
                             <p>
-                                Before moving to the next phase, verify: Does the output match your design?
-                                Are the data types correct? Do the relationships make sense? If you proceed
-                                with a flawed schema, you will have to redo the input interface and dashboard
-                                as well.
+                                If your data backend is a single &ldquo;sessions&rdquo; table without separate
+                                Students or Tutors tables, what reporting query would you find slow or
+                                impossible? (Hint: &ldquo;Total hours per tutor across all students&rdquo; would
+                                require denormalizing every session row.)
                             </p>
                         </details>
 
@@ -451,9 +455,176 @@ language.</pre>
                         </details>
                     </section>
 
-                    <!-- Module 3: Verification Protocols and QA -->
+                    <!-- Module 3: Group Debugging — Real Problems -->
+                    <section id="debugging">
+                        <h2>Module 3: Group Debugging &mdash; Real Problems</h2>
+                        <p><strong>Duration:</strong> 40 minutes</p>
+
+                        <p>
+                            Debugging is a core skill for anyone building with AI. In this module you will
+                            work through three scenarios individually, diagnosing root causes and identifying
+                            fixes. Each scenario represents a common failure pattern in AI-assisted builds.
+                            These are the same scenarios used in the live debrief &mdash; review your
+                            diagnosis against the answer key before you present.
+                        </p>
+
+                        <!-- Scenario 1: Power Automate Flow Triggers But Sends Wrong Data -->
+                        <h3>Scenario 1: Power Automate Flow Triggers But Sends Wrong Data</h3>
+                        <p>
+                            <strong>Situation:</strong> A Power Automate flow is supposed to trigger when a
+                            SharePoint list item is updated, then send an email notification to the item
+                            creator with the updated information. The flow triggers correctly, but the email
+                            always contains the OLD data, not the updated data.
+                        </p>
+                        <p>
+                            <strong>What you have already tried:</strong> &ldquo;I rebuilt the email body
+                            three times. I checked the SharePoint permissions. I re-authenticated the
+                            connection. Nothing works.&rdquo;
+                        </p>
+
+                        <details class="mt-md">
+                            <summary><strong>Show diagnosis: Root Cause &amp; Solution</strong></summary>
+                            <p>
+                                <strong>Root cause:</strong> This is a classic Power Automate timing issue. The
+                                trigger &ldquo;When an item is created or modified&rdquo; fires immediately when
+                                the update is detected, but it captures the item data at the moment of detection,
+                                which may be before all fields have finished saving. This is especially common
+                                with calculated columns or cascading updates.
+                            </p>
+                            <p><strong>Diagnosis questions to ask yourself:</strong></p>
+                            <ul>
+                                <li>Does the email contain the old data or blank data? (Old data suggests timing issue; blank suggests permissions issue.)</li>
+                                <li>Are any of the fields calculated or lookup columns? (Calculated columns update asynchronously.)</li>
+                                <li>Does the flow work correctly if you manually trigger it 30 seconds after updating? (Confirms timing issue.)</li>
+                            </ul>
+                            <p>
+                                <strong>Solution:</strong> Add a &ldquo;Delay&rdquo; action of 5&ndash;10 seconds
+                                immediately after the trigger, then use &ldquo;Get item&rdquo; to retrieve the
+                                updated data explicitly rather than relying on the trigger output. The corrected
+                                flow structure: Trigger &rarr; Delay (5 seconds) &rarr; Get item (by ID) &rarr;
+                                Send email (using Get item output).
+                            </p>
+                            <p>
+                                <strong>Frontier classification:</strong> This is NOT a frontier issue. This is a
+                                platform limitation (Power Automate's trigger timing) that requires domain
+                                knowledge to diagnose. AI can generate the flow, but it won't know about this
+                                timing quirk unless you tell it.
+                            </p>
+                        </details>
+
+                        <!-- Scenario 2: Power App Form Saves But Doesn't Validate -->
+                        <h3>Scenario 2: Power App Form Saves But Doesn&rsquo;t Validate</h3>
+                        <p>
+                            <strong>Situation:</strong> A Power Apps form is supposed to validate that a phone
+                            number is in the format XXX-XXX-XXXX before saving to a SharePoint list. The form
+                            has a text input field with a validation formula, and the submit button should be
+                            disabled if the phone number is invalid. The form saves successfully, but it
+                            accepts phone numbers in any format, even completely invalid entries like
+                            &ldquo;abc123&rdquo;.
+                        </p>
+                        <p>
+                            <strong>What you have already tried:</strong> &ldquo;I asked the AI to write a
+                            validation formula three times. I tested different regex patterns. The formula
+                            shows no errors in Power Apps, but it doesn't actually prevent invalid data from
+                            being submitted.&rdquo;
+                        </p>
+
+                        <details class="mt-md">
+                            <summary><strong>Show diagnosis: Root Cause &amp; Solution</strong></summary>
+                            <p>
+                                <strong>Root cause:</strong> The submit button's DisplayMode property isn't
+                                checking the validation state correctly. A common AI-generated mistake is to
+                                reference a <code>.Valid</code> property on a standalone text input, which does
+                                not exist (only data card controls inside a Form expose <code>.Valid</code>).
+                                The form allows submission because the button logic doesn't actually evaluate
+                                the validation pattern.
+                            </p>
+                            <p><strong>Diagnosis questions to ask yourself:</strong></p>
+                            <ul>
+                                <li>What is the exact formula in the text input's validation? Is it referencing a property the control actually has?</li>
+                                <li>What is the DisplayMode property of the submit button? (This is where the actual problem usually is.)</li>
+                                <li>Does the text input show a red error indicator when you type an invalid number? (If yes, validation works but button logic is wrong; if no, validation formula is wrong.)</li>
+                            </ul>
+                            <p>
+                                <strong>Solution:</strong> Apply the regex check directly on the button's
+                                DisplayMode using <code>IsMatch()</code> against the input's text:
+                                <code>If(IsMatch(TextInput_Phone.Text, "^\d{3}-\d{3}-\d{4}$"), DisplayMode.Edit, DisplayMode.Disabled)</code>.
+                                This evaluates on each keystroke and disables the submit button until the phone
+                                number matches the required XXX-XXX-XXXX format.
+                            </p>
+                            <p>
+                                <strong>Frontier classification:</strong> This is a context issue. AI generated
+                                a validation pattern but referenced a property that doesn't exist on the
+                                control. The student didn't specify all the integration points where validation
+                                must be enforced, and AI filled in plausible-but-wrong property references.
+                            </p>
+                        </details>
+
+                        <!-- Scenario 3: Dashboard Shows Stale Data -->
+                        <h3>Scenario 3: Dashboard Shows Stale Data</h3>
+                        <p>
+                            <strong>Situation:</strong> A Power BI dashboard pulls from an Excel file stored in
+                            SharePoint. When the Excel file is updated, the dashboard doesn't show the new
+                            data until you manually click &ldquo;Refresh&rdquo; in Power BI Desktop and
+                            republish the report. You want the dashboard to automatically update when the
+                            source file changes.
+                        </p>
+                        <p>
+                            <strong>What you have already tried:</strong> &ldquo;I set up a scheduled refresh
+                            in the Power BI service. I checked the data source credentials. I even rebuilt
+                            the data connection. The refresh runs successfully according to the logs, but
+                            the dashboard still shows old data unless I manually republish from Power BI
+                            Desktop.&rdquo;
+                        </p>
+
+                        <details class="mt-md">
+                            <summary><strong>Show diagnosis: Root Cause &amp; Solution</strong></summary>
+                            <p>
+                                <strong>Root cause:</strong> This is a data connection configuration issue.
+                                When the Power BI report was created, the data source was set to the local file
+                                path (e.g., <code>C:\Users\...\file.xlsx</code>) instead of the SharePoint URL.
+                                The scheduled refresh in Power BI Service is trying to refresh from the local
+                                path, which doesn't exist in the cloud. The refresh &ldquo;succeeds&rdquo; but
+                                retrieves no new data because it's looking in the wrong place.
+                            </p>
+                            <p><strong>Diagnosis questions to ask yourself:</strong></p>
+                            <ul>
+                                <li>When you created the data connection, did you use &ldquo;Get Data &rarr; SharePoint Folder&rdquo; or did you download the Excel file and use &ldquo;Get Data &rarr; Excel&rdquo;? (If the latter, this is the problem.)</li>
+                                <li>In Power BI Desktop, go to Transform Data &rarr; Data source settings. What does the file path show? (If it shows a <code>C:\</code> path instead of a SharePoint URL, this confirms the diagnosis.)</li>
+                                <li>In the Power BI Service refresh history, does it show any warnings or errors, or does it show &ldquo;Completed successfully&rdquo;? (This scenario usually shows &ldquo;Completed successfully&rdquo; with zero rows refreshed.)</li>
+                            </ul>
+                            <p>
+                                <strong>Solution:</strong> Rebuild the data connection using the SharePoint
+                                connector. In Power BI Desktop: Get Data &rarr; SharePoint Folder &rarr; Enter
+                                the SharePoint site URL &rarr; Navigate to the folder containing the Excel file
+                                &rarr; Filter to your specific file &rarr; Load. Then configure scheduled
+                                refresh in Power BI Service using the SharePoint Online credentials. This
+                                establishes a cloud-to-cloud connection that can refresh automatically.
+                            </p>
+                            <p>
+                                <strong>Frontier classification:</strong> This is a domain knowledge issue, not
+                                a frontier issue. AI can generate the dashboard, but it can't know whether you
+                                connected to a local file or a SharePoint URL unless you explicitly describe
+                                your connection method. The AI assumes the &ldquo;standard&rdquo; approach but
+                                doesn't know the nuances of your environment.
+                            </p>
+                        </details>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Key Insight</h3>
+                            <p>
+                                Every debugging session teaches you something about the frontier. When you find
+                                a bug, ask: &ldquo;Is this a frontier issue (AI cannot do this reliably) or a
+                                context issue (I did not give AI enough information)?&rdquo; Document the answer.
+                                Over time, your frontier map becomes more precise and your prompts become more
+                                effective.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Module 4: Verification Protocols and QA -->
                     <section id="verification">
-                        <h2>Module 3: Verification Protocols and QA</h2>
+                        <h2>Module 4: Verification Protocols and QA</h2>
                         <p><strong>Duration:</strong> 45 minutes</p>
 
                         <p>
@@ -599,179 +770,6 @@ language.</pre>
                         </div>
                     </section>
 
-                    <!-- Module 4: Debugging Practice -->
-                    <section id="debugging">
-                        <h2>Module 4: Debugging Practice</h2>
-                        <p><strong>Duration:</strong> 45 minutes</p>
-
-                        <p>
-                            Debugging is a core skill for anyone building with AI. In this module you will
-                            work through three scenarios individually, diagnosing root causes and identifying
-                            fixes. Each scenario represents a common failure pattern in AI-assisted builds.
-                        </p>
-
-                        <!-- Scenario 1 -->
-                        <h3>Scenario 1: Approval Flow Sends to the Wrong Person</h3>
-                        <p>
-                            A Power Automate flow is supposed to route purchase requests based on dollar
-                            amount. Requests under $2,500 go to the Department Head for approval. Requests
-                            $2,500 and above go to the Commanding Officer.
-                        </p>
-
-                        <div class="code-block">
-                            <p class="code-block__label">Symptom</p>
-                            <pre>Request for $1,500 office supplies submitted by Cpl Torres.
-Expected: Routed to Department Head (Maj Williams).
-Actual: Routed to CO (Col Richardson).
-
-Request for $2,500 equipment purchase submitted by SSgt Park.
-Expected: Routed to CO (Col Richardson).
-Actual: Routed to CO (Col Richardson). [Correct]
-
-All requests at $2,500 exactly are handled correctly. Only requests BELOW
-$2,500 are being sent to the wrong approver.</pre>
-                        </div>
-
-                        <details class="mt-md">
-                            <summary><strong>Try to diagnose this yourself first</strong></summary>
-                            <p>Think about what could cause this symptom. What would you check? Write down your hypothesis before reading the diagnosis guide below.</p>
-                        </details>
-
-                        <p><strong>Diagnosis guide:</strong></p>
-                        <ol>
-                            <li>What is the condition that controls routing?</li>
-                            <li>If requests at exactly $2,500 go to the CO correctly, but requests below $2,500 also go to the CO, what comparison operator would cause this?</li>
-                            <li>What should the condition be instead?</li>
-                        </ol>
-
-                        <details>
-                            <summary><strong>Self-Check: Root Cause and Fix</strong></summary>
-                            <p>
-                                <strong>Root cause:</strong> The condition logic uses <code>&gt;</code> (greater than)
-                                instead of <code>&gt;=</code> (greater than or equal to) for the CO threshold, or
-                                equivalently, the Department Head condition uses <code>&lt;</code> instead of
-                                <code>&lt;=</code>. Because the threshold check for &ldquo;send to Department Head&rdquo;
-                                is <code>amount &lt; 2500</code> but was written as <code>amount &gt; 2500</code> routing
-                                to CO, every amount that is not <code>&gt; 2500</code> falls through &mdash; except the
-                                logic is inverted: the condition likely reads &ldquo;if amount &gt;= 0, send to CO&rdquo;
-                                as a catch-all because the <code>&lt; 2500</code> branch was written as
-                                <code>&gt; 2500</code>.
-                            </p>
-                            <p>
-                                <strong>Fix:</strong> Change the condition to: &ldquo;If amount is greater than or equal
-                                to 2500, route to CO. Otherwise, route to Department Head.&rdquo; Verify by testing with
-                                values at $2,499, $2,500, and $2,501.
-                            </p>
-                        </details>
-
-                        <!-- Scenario 2 -->
-                        <h3>Scenario 2: Gallery View Shows All Items Instead of Filtered</h3>
-                        <p>
-                            A Power App has a gallery that should display only overdue items &mdash;
-                            items whose due date has passed and whose status is not &ldquo;Complete.&rdquo;
-                        </p>
-
-                        <div class="code-block">
-                            <p class="code-block__label">Symptom</p>
-                            <pre>The "Overdue Items" gallery shows ALL items from the task list,
-including items that are marked "Complete" and items whose due date
-is in the future.
-
-Total items in list: 47
-Items actually overdue: 12
-Items displayed in gallery: 47</pre>
-                        </div>
-
-                        <details class="mt-md">
-                            <summary><strong>Try to diagnose this yourself first</strong></summary>
-                            <p>Think about what could cause this symptom. What would you check? Write down your hypothesis before reading the diagnosis guide below.</p>
-                        </details>
-
-                        <p><strong>Diagnosis guide:</strong></p>
-                        <ol>
-                            <li>What filter formula is the gallery using? Check the <code>Items</code> property of the gallery.</li>
-                            <li>Is the filter comparing dates correctly? (Common issue: comparing a date value to a text string.)</li>
-                            <li>Is the status check using the correct column name and value? (Common issue: column display name vs. internal name.)</li>
-                        </ol>
-
-                        <details>
-                            <summary><strong>Self-Check: Root Cause and Fix</strong></summary>
-                            <p>
-                                <strong>Root cause:</strong> The filter formula is likely malformed or not applied at all.
-                                Common causes include: (1) the gallery <code>Items</code> property points to the raw data
-                                source without a <code>Filter()</code> function, (2) the date comparison uses a text
-                                string like <code>"Today"</code> instead of the <code>Today()</code> function, or (3) the
-                                status column is referenced by its display name (e.g., &ldquo;Status&rdquo;) when Power
-                                Apps requires the internal name (e.g., &ldquo;OData_Status&rdquo;).
-                            </p>
-                            <p>
-                                <strong>Fix:</strong> Set the gallery Items property to:
-                                <code>Filter(TaskList, DueDate &lt; Today() &amp;&amp; Status.Value &lt;&gt; "Complete")</code>.
-                                Verify by checking the displayed count against a manual count of overdue, incomplete items.
-                            </p>
-                        </details>
-
-                        <!-- Scenario 3 -->
-                        <h3>Scenario 3: Dashboard Numbers Don&rsquo;t Match Source Data</h3>
-                        <p>
-                            A Power BI dashboard reports completion percentage for a training tracker.
-                            Leadership questions the numbers because they do not match a manual count.
-                        </p>
-
-                        <div class="code-block">
-                            <p class="code-block__label">Symptom</p>
-                            <pre>Dashboard shows: 85% training completion rate.
-Manual count shows: 67% training completion rate.
-
-Source data: 47 Marines, 12 training events each = 564 total slots.
-Dashboard appears to be counting something differently than
-"completed slots / total slots."</pre>
-                        </div>
-
-                        <details class="mt-md">
-                            <summary><strong>Try to diagnose this yourself first</strong></summary>
-                            <p>Think about what could cause this symptom. What would you check? Write down your hypothesis before reading the diagnosis guide below.</p>
-                        </details>
-
-                        <p><strong>Diagnosis guide:</strong></p>
-                        <ol>
-                            <li>How is the dashboard calculating &ldquo;completion rate&rdquo;? Is it counting rows vs. distinct values?</li>
-                            <li>If a Marine completed 10 of 12 events, does the dashboard count that Marine as &ldquo;85% complete&rdquo; or as &ldquo;1 complete Marine&rdquo;?</li>
-                            <li>Are there duplicate rows in the source data inflating the count?</li>
-                        </ol>
-
-                        <details>
-                            <summary><strong>Self-Check: Root Cause and Fix</strong></summary>
-                            <p>
-                                <strong>Root cause:</strong> The counting methodology differs between the dashboard and
-                                the manual count. The most likely cause is that the dashboard is counting
-                                <strong>rows</strong> (each training completion record) rather than
-                                <strong>distinct values</strong> (unique Marine-event combinations). If some Marines have
-                                duplicate completion records (e.g., re-certifications, data entry errors), the row count
-                                is inflated. Alternatively, the dashboard may be calculating the average completion rate
-                                per Marine (averaging individual percentages) rather than the overall rate (total completed
-                                slots divided by total slots), which produces a different number.
-                            </p>
-                            <p>
-                                <strong>Fix:</strong> Align the calculation method. Use
-                                <code>DISTINCTCOUNT</code> instead of <code>COUNT</code> to avoid duplicates. Ensure the
-                                formula is: total completed distinct slots / total expected slots. Verify by manually
-                                calculating the rate for a small subset (e.g., one platoon) and comparing.
-                            </p>
-                        </details>
-
-                        <div class="callout callout--info">
-                            <h3 class="callout__title">Key Insight</h3>
-                            <p>
-                                Every debugging session teaches you something about the frontier. When you find
-                                a bug, ask: &ldquo;Is this a frontier issue (AI cannot do this reliably) or a
-                                context issue (I did not give AI enough information)?&rdquo; Document the answer.
-                                Over time, your frontier map becomes more precise and your prompts become more
-                                effective.
-                            </p>
-                        </div>
-                    </section>
-
                     <!-- Module 5: Teaching Others — The 201 Multiplier -->
                     <section id="teaching-others">
                         <h2>Module 5: Teaching Others &mdash; The 201 Multiplier</h2>
@@ -883,7 +881,12 @@ Dashboard appears to be counting something differently than
                             </div>
                         </div>
 
-                        <h3>Deliverable: Workflow Playbook</h3>
+                    </section>
+
+                    <!-- Module 6: Workflow Playbook -->
+                    <section id="workflow-playbook">
+                        <h2>Module 6: Workflow Playbook <span class="badge">30 min</span></h2>
+                        <p><strong>Duration:</strong> 30 minutes</p>
                         <p>
                             Your final deliverable is a one-page playbook for one AI-integrated workflow
                             from your actual job. Study the completed example below, then create your own
@@ -894,7 +897,7 @@ Dashboard appears to be counting something differently than
                             <p><strong>Start simple.</strong> Your first playbook does not need to be this detailed. Begin with: Task, Mode, 3&ndash;5 steps with Human/AI labels, and one known frontier issue. Add detail as you use the playbook over time and discover what matters.</p>
                         </div>
 
-                        <h4>Completed Example: Weekly Training Schedule Publication</h4>
+                        <h3>Completed Example: Weekly Training Schedule Publication</h3>
                         <div class="table-wrapper">
                             <table>
                                 <thead>
@@ -970,7 +973,7 @@ Dashboard appears to be counting something differently than
                             </p>
                         </div>
 
-                        <h4>Blank Workflow Playbook Template</h4>
+                        <h3>Blank Workflow Playbook Template</h3>
                         <div class="template-display">
                             <h4>Your Workflow Playbook</h4>
                             <div class="table-wrapper">
@@ -1034,13 +1037,20 @@ Dashboard appears to be counting something differently than
                     <section id="capstone">
                         <h2>Capstone Deliverable</h2>
                         <div class="callout callout--success">
-                            <h3 class="callout__title">Documentation Package</h3>
+                            <h3 class="callout__title">Submission</h3>
                             <p>
-                                Complete the full documentation package (User Guide, Replication Guide,
-                                Adaptation Guide, Maintenance Guide) for your tool. The package must be
-                                thorough enough that another developer could rebuild your tool from the
-                                Replication Guide alone.
+                                Submit your completed Workflow Playbook (Module 6 deliverable) along with at
+                                least one frontier-map row that captures a real lesson from your build. Post
+                                both to <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/discussions">EDD Discussions</a>.
                             </p>
+                        </div>
+                    </section>
+
+                    <!-- Next Course CTA -->
+                    <section id="next-course">
+                        <div class="callout callout--info">
+                            <h3>What's next: Course 6 &mdash; Full-Stack AI-Assisted Development</h3>
+                            <p>You've moved from individual builder to teaching others. <a href="fullstack.html">Full-Stack AI-Assisted Development</a> is the capstone &mdash; build and deploy a complete web app from scratch using AI as your development partner.</p>
                         </div>
                     </section>
 
@@ -1049,6 +1059,9 @@ Dashboard appears to be counting something differently than
                         <h2>Knowledge Check</h2>
                         <div class="knowledge-check" data-course="advanced-student" data-module="1">
                             <h3 class="knowledge-check__title">Knowledge Check</h3>
+
+                            <details class="knowledge-check__module" data-module="1">
+                                <summary><strong>Module 1: Frontier Mapping &mdash; Questions</strong></summary>
 
                             <!-- Module 1, Question 1 -->
                             <div class="knowledge-check__question" data-correct="2">
@@ -1128,6 +1141,11 @@ Dashboard appears to be counting something differently than
                                 </div>
                             </div>
 
+                            </details>
+
+                            <details class="knowledge-check__module" data-module="2">
+                                <summary><strong>Module 2: Complex Build &mdash; Questions</strong></summary>
+
                             <!-- Module 2, Question 1 -->
                             <div class="knowledge-check__question" data-correct="1">
                                 <p class="knowledge-check__prompt">In the Tutoring Management System example, the data backend uses centaur mode while the input interface uses cyborg mode. What principle drives this mode selection?</p>
@@ -1206,7 +1224,95 @@ Dashboard appears to be counting something differently than
                                 </div>
                             </div>
 
+                            </details>
+
+                            <details class="knowledge-check__module" data-module="3">
+                                <summary><strong>Module 3: Group Debugging &mdash; Questions</strong></summary>
+
                             <!-- Module 3, Question 1 -->
+                            <div class="knowledge-check__question" data-correct="2">
+                                <p class="knowledge-check__prompt">In Scenario 1 (Power Automate Flow Triggers But Sends Wrong Data), the flow fires on item creation but the email body sometimes contains stale or empty fields. What is the root cause?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q1" value="0">
+                                        <span>The SharePoint list is corrupted and needs to be rebuilt</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q1" value="1">
+                                        <span>The email connector is rate-limited and dropping fields</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q1" value="2">
+                                        <span>The trigger fires on the partial-write state — fields populated by a separate flow or workflow have not yet been written when the trigger captures the item</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q1" value="3">
+                                        <span>The flow is using a deleted version of the SharePoint list</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>This is a classic Power Automate timing issue. The trigger captures the item the moment a row is created, but downstream fields populated by other flows or by SharePoint defaults have not yet been written. The fix is either to add a delay action before reading the fields, switch to a "When an item is modified" trigger with a "Status = Ready" guard, or fetch the item fresh with a Get item action immediately before the email step. This is platform timing, not a logic bug — recognizing it saves hours.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 3, Question 2 -->
+                            <div class="knowledge-check__question" data-correct="2">
+                                <p class="knowledge-check__prompt">In Scenario 2 (Power App Form Saves But Doesn't Validate), the AI suggested <code>If(TextInput_Phone.Valid, DisplayMode.Edit, DisplayMode.Disabled)</code>. Why won't this work?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q2" value="0">
+                                        <span>The DisplayMode property only accepts boolean values, not enum values</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q2" value="1">
+                                        <span>The phone input field needs to be inside a different screen than the submit button</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q2" value="2">
+                                        <span>Standalone text input controls don't have a <code>.Valid</code> property — only data card controls inside a Form expose it</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q2" value="3">
+                                        <span>The IsMatch() function is required for any phone-number validation in Power Apps</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The AI confidently invoked a <code>.Valid</code> property that does not exist on standalone text inputs. The working fix uses regex pattern matching directly on the text: <code>If(IsMatch(TextInput_Phone.Text, "^\d{3}-\d{3}-\d{4}$"), DisplayMode.Edit, DisplayMode.Disabled)</code>. This is a frontier issue, not a context issue — the AI has been trained on enough Power Apps code to invent plausible-looking properties that do not exist. Verify any unfamiliar property reference by searching Microsoft Learn before trusting it.</p>
+                                </div>
+                            </div>
+
+                            <!-- Module 3, Question 3 -->
+                            <div class="knowledge-check__question" data-correct="1">
+                                <p class="knowledge-check__prompt">After resolving a debugging scenario, the course suggests asking: "Is this a frontier issue or a context issue?" What is the practical difference between the two?</p>
+                                <div class="knowledge-check__options">
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q3" value="0">
+                                        <span>Frontier issues are bugs in the AI model itself, while context issues are bugs in the platform</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q3" value="1">
+                                        <span>A frontier issue means AI cannot do this reliably regardless of your prompt, while a context issue means you did not give AI enough information to do it correctly</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q3" value="2">
+                                        <span>Frontier issues require switching to a different AI tool, while context issues require switching to a different work mode</span>
+                                    </label>
+                                    <label class="knowledge-check__option">
+                                        <input type="radio" name="kc_advanced-student_4_q3" value="3">
+                                        <span>There is no practical difference; both terms describe the same type of error</span>
+                                    </label>
+                                </div>
+                                <div class="knowledge-check__feedback" hidden>
+                                    <p>The distinction is critical for how you respond. A context issue means you can fix the problem by providing better information in your prompt -- the AI is capable, it just lacked the right input. A frontier issue means AI cannot reliably handle this task regardless of how you prompt it, so you need to plan for manual work or extra verification. Documenting which category each bug falls into makes your frontier map more precise and your future prompts more effective.</p>
+                                </div>
+                            </div>
+
+                            </details>
+
+                            <details class="knowledge-check__module" data-module="4">
+                                <summary><strong>Module 4: Verification &amp; QA &mdash; Questions</strong></summary>
+
+                            <!-- Module 4, Question 1 -->
                             <div class="knowledge-check__question" data-correct="2">
                                 <p class="knowledge-check__prompt">The QA checklist lists "Source verification" as item #1. According to the timed QA exercise, why is this the most important step?</p>
                                 <div class="knowledge-check__options">
@@ -1232,7 +1338,7 @@ Dashboard appears to be counting something differently than
                                 </div>
                             </div>
 
-                            <!-- Module 3, Question 2 -->
+                            <!-- Module 4, Question 2 -->
                             <div class="knowledge-check__question" data-correct="1">
                                 <p class="knowledge-check__prompt">In the timed QA exercise, the AI-generated SOP contains steps that are out of logical order (receiving an S-1 orientation brief before in-processing at S-1). What type of QA check catches this error?</p>
                                 <div class="knowledge-check__options">
@@ -1258,7 +1364,7 @@ Dashboard appears to be counting something differently than
                                 </div>
                             </div>
 
-                            <!-- Module 3, Question 3 -->
+                            <!-- Module 4, Question 3 -->
                             <div class="knowledge-check__question" data-correct="0">
                                 <p class="knowledge-check__prompt">The timed QA exercise demonstrates that AI can generate a draft SOP in seconds, but finding the five errors takes several minutes of careful review. What does this teach about the value proposition of AI-assisted work?</p>
                                 <div class="knowledge-check__options">
@@ -1284,83 +1390,10 @@ Dashboard appears to be counting something differently than
                                 </div>
                             </div>
 
-                            <!-- Module 4, Question 1 -->
-                            <div class="knowledge-check__question" data-correct="3">
-                                <p class="knowledge-check__prompt">In Debugging Scenario 1, a $1,500 request routes to the CO instead of the Department Head. The key diagnostic question is: "If requests at exactly $2,500 go to the CO correctly, but requests below $2,500 also go to the CO, what comparison operator would cause this?" What is the root cause?</p>
-                                <div class="knowledge-check__options">
-                                    <label class="knowledge-check__option">
-                                        <input type="radio" name="kc_advanced-student_4_q1" value="0">
-                                        <span>The flow has a typo in the dollar amount threshold</span>
-                                    </label>
-                                    <label class="knowledge-check__option">
-                                        <input type="radio" name="kc_advanced-student_4_q1" value="1">
-                                        <span>The approver lookup table has the wrong person assigned to the Department Head role</span>
-                                    </label>
-                                    <label class="knowledge-check__option">
-                                        <input type="radio" name="kc_advanced-student_4_q1" value="2">
-                                        <span>The amount field is stored as text instead of a number, causing string comparison instead of numeric comparison</span>
-                                    </label>
-                                    <label class="knowledge-check__option">
-                                        <input type="radio" name="kc_advanced-student_4_q1" value="3">
-                                        <span>The condition logic uses the wrong comparison operator, so the "route to Department Head" branch never evaluates to true for values below the threshold</span>
-                                    </label>
-                                </div>
-                                <div class="knowledge-check__feedback" hidden>
-                                    <p>The root cause is inverted or incorrect comparison operators in the condition logic. For example, if the condition reads "if amount >= 0, send to CO" as a catch-all because the Department Head branch was incorrectly written, every request falls through to the CO. The fix is to ensure the condition properly routes amounts below $2,500 to the Department Head and amounts at or above $2,500 to the CO, then verify with test values at $2,499, $2,500, and $2,501.</p>
-                                </div>
-                            </div>
+                            </details>
 
-                            <!-- Module 4, Question 2 -->
-                            <div class="knowledge-check__question" data-correct="2">
-                                <p class="knowledge-check__prompt">In Debugging Scenario 2, a gallery view that should show only overdue items displays all 47 items instead of the expected 12. Which of the following is the most systematic first step in diagnosing this issue?</p>
-                                <div class="knowledge-check__options">
-                                    <label class="knowledge-check__option">
-                                        <input type="radio" name="kc_advanced-student_4_q2" value="0">
-                                        <span>Delete the gallery and recreate it from scratch with a new AI prompt</span>
-                                    </label>
-                                    <label class="knowledge-check__option">
-                                        <input type="radio" name="kc_advanced-student_4_q2" value="1">
-                                        <span>Check whether the SharePoint list has the correct number of items</span>
-                                    </label>
-                                    <label class="knowledge-check__option">
-                                        <input type="radio" name="kc_advanced-student_4_q2" value="2">
-                                        <span>Inspect the gallery's Items property to see whether a Filter() function is applied and whether it references the correct column names and data types</span>
-                                    </label>
-                                    <label class="knowledge-check__option">
-                                        <input type="radio" name="kc_advanced-student_4_q2" value="3">
-                                        <span>Refresh the browser and check if the gallery updates</span>
-                                    </label>
-                                </div>
-                                <div class="knowledge-check__feedback" hidden>
-                                    <p>The systematic first step is to inspect the gallery's Items property. If the gallery shows all items, the most likely cause is that the filter is missing, malformed, or referencing incorrect column names. Common AI errors include: pointing to the raw data source without a Filter() function, using a text string "Today" instead of the Today() function, or using a column's display name when Power Apps requires the internal name.</p>
-                                </div>
-                            </div>
-
-                            <!-- Module 4, Question 3 -->
-                            <div class="knowledge-check__question" data-correct="1">
-                                <p class="knowledge-check__prompt">After resolving a debugging scenario, the course suggests asking: "Is this a frontier issue or a context issue?" What is the practical difference between the two?</p>
-                                <div class="knowledge-check__options">
-                                    <label class="knowledge-check__option">
-                                        <input type="radio" name="kc_advanced-student_4_q3" value="0">
-                                        <span>Frontier issues are bugs in the AI model itself, while context issues are bugs in the platform</span>
-                                    </label>
-                                    <label class="knowledge-check__option">
-                                        <input type="radio" name="kc_advanced-student_4_q3" value="1">
-                                        <span>A frontier issue means AI cannot do this reliably regardless of your prompt, while a context issue means you did not give AI enough information to do it correctly</span>
-                                    </label>
-                                    <label class="knowledge-check__option">
-                                        <input type="radio" name="kc_advanced-student_4_q3" value="2">
-                                        <span>Frontier issues require switching to a different AI tool, while context issues require switching to a different work mode</span>
-                                    </label>
-                                    <label class="knowledge-check__option">
-                                        <input type="radio" name="kc_advanced-student_4_q3" value="3">
-                                        <span>There is no practical difference; both terms describe the same type of error</span>
-                                    </label>
-                                </div>
-                                <div class="knowledge-check__feedback" hidden>
-                                    <p>The distinction is critical for how you respond. A context issue means you can fix the problem by providing better information in your prompt -- the AI is capable, it just lacked the right input. A frontier issue means AI cannot reliably handle this task regardless of how you prompt it, so you need to plan for manual work or extra verification. Documenting which category each bug falls into makes your frontier map more precise and your future prompts more effective.</p>
-                                </div>
-                            </div>
+                            <details class="knowledge-check__module" data-module="5">
+                                <summary><strong>Module 5: Teaching Others &mdash; Questions</strong></summary>
 
                             <!-- Module 5, Question 1 -->
                             <div class="knowledge-check__question" data-correct="2">
@@ -1440,6 +1473,8 @@ Dashboard appears to be counting something differently than
                                 </div>
                             </div>
 
+                            </details>
+
                             <button class="knowledge-check__submit btn btn--primary">Check Answers</button>
                             <div class="knowledge-check__result" hidden></div>
                         </div>
@@ -1469,20 +1504,26 @@ Dashboard appears to be counting something differently than
                                 </li>
                                 <li class="course-checklist__item">
                                     <label>
-                                        <input type="checkbox" data-item="module-3-qa-exercise">
-                                        <span>Module 3: QA Exercise completed</span>
+                                        <input type="checkbox" data-item="module-3-debugging">
+                                        <span>Module 3: Group Debugging completed</span>
                                     </label>
                                 </li>
                                 <li class="course-checklist__item">
                                     <label>
-                                        <input type="checkbox" data-item="module-4-debugging">
-                                        <span>Module 4: Debugging Practice completed</span>
+                                        <input type="checkbox" data-item="module-4-qa-exercise">
+                                        <span>Module 4: Verification &amp; QA completed</span>
                                     </label>
                                 </li>
                                 <li class="course-checklist__item">
                                     <label>
-                                        <input type="checkbox" data-item="module-5-playbook">
-                                        <span>Module 5: Workflow Playbook completed</span>
+                                        <input type="checkbox" data-item="module-5-teaching">
+                                        <span>Module 5: Teaching Others completed</span>
+                                    </label>
+                                </li>
+                                <li class="course-checklist__item">
+                                    <label>
+                                        <input type="checkbox" data-item="module-6-playbook">
+                                        <span>Module 6: Workflow Playbook completed</span>
                                     </label>
                                 </li>
                                 <li class="course-checklist__item">
@@ -1519,7 +1560,7 @@ Dashboard appears to be counting something differently than
                 <div class="footer-section">
                     <h3 class="footer-section__title">Expert-Driven Development</h3>
                     <p>
-                        Open-source AI-assisted development training for DoW personnel.
+                        Open-source AI-assisted development training for DoD personnel.
                         Built by SSgt Jesse C. Morgan at MCD-Monterey.
                     </p>
                 </div>
