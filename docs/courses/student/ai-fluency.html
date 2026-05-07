@@ -439,16 +439,18 @@ Enjoy the weekend. Come back ready to work.</code></pre>
                             &ldquo;make it better&rdquo; but exact instructions on what to fix.
                         </p>
 
-                        <h4>Pass 2 &mdash; Add POC, Liberty Radius, Remove Redundancy</h4>
-                        <div class="code-block">
-                            <span class="code-block__label">Refinement Prompt</span>
-                            <pre><code>Add the duty officer contact info: Capt Rodriguez, (831) 555-0147.
+                        <details class="mt-md">
+                            <summary><strong>See Pass 2 (intermediate iteration)</strong></summary>
+                            <h4>Pass 2 &mdash; Add POC, Liberty Radius, Remove Redundancy</h4>
+                            <div class="code-block">
+                                <span class="code-block__label">Refinement Prompt</span>
+                                <pre><code>Add the duty officer contact info: Capt Rodriguez, (831) 555-0147.
 Add the liberty radius: 250 miles. Remove the third paragraph, it
 repeats the first.</code></pre>
-                        </div>
-                        <div class="code-block mt-sm">
-                            <span class="code-block__label">AI Output &mdash; Pass 2</span>
-                            <pre><code>Weekend Safety Brief
+                            </div>
+                            <div class="code-block mt-sm">
+                                <span class="code-block__label">AI Output &mdash; Pass 2</span>
+                                <pre><code>Weekend Safety Brief
 
 Listen up. We made it through another week. Before I cut you
 loose, here's what you need to know.
@@ -473,12 +475,13 @@ Rodriguez: (831) 555-0147. Save that number in your phone right
 now. We can deal with almost anything if we know about it early.
 
 Enjoy the weekend. Come back ready to work.</code></pre>
-                        </div>
+                            </div>
 
-                        <p class="mt-sm">
-                            Getting close. Two passes in, the brief has the right tone, real weather, POC info,
-                            and a liberty boundary. One more pass to tighten it and add local hazards.
-                        </p>
+                            <p class="mt-sm">
+                                Getting close. Two passes in, the brief has the right tone, real weather, POC info,
+                                and a liberty boundary. One more pass to tighten it and add local hazards.
+                            </p>
+                        </details>
 
                         <h4>Pass 3 &mdash; Tighten and Add Local Hazards</h4>
                         <div class="code-block">
@@ -1008,6 +1011,7 @@ Date: 03 February 2026
                             </li>
                             <li><strong>Identify the pattern.</strong> Is this a centaur workflow (clear handoffs) or a cyborg workflow (continuous collaboration)?</li>
                             <li><strong>Estimate time savings</strong> per iteration if you used AI for the marked subtasks.</li>
+                            <li><strong>Identify one frontier risk for your task</strong> &mdash; what could go wrong if you delegate this to AI?</li>
                         </ol>
 
                         <p class="mt-lg">Use this template to map your workflow:</p>
@@ -1123,7 +1127,12 @@ Date: 03 February 2026
 
                         <h3>Your Assignment</h3>
                         <div class="callout callout--success">
-                            <h3 class="callout__title">This Week: Try It</h3>
+                            <h3 class="callout__title">Optional: Try It This Week</h3>
+                            <p>
+                                Recommended next step before the capstone &mdash; a low-stakes warm-up to surface real
+                                friction before you build the formal frontier map. The capstone (below) is the explicit
+                                deliverable for this course.
+                            </p>
                             <ol>
                                 <li>Pick <strong>one recurring task</strong> from your workflow map (Module 5)</li>
                                 <li>Try using AI on it this week</li>
@@ -1144,6 +1153,11 @@ Date: 03 February 2026
                             decompose it into subtasks. Builder Orientation assumes you can already apply all six
                             201 skills &mdash; there you will put them to work building actual tools.
                         </p>
+
+                        <div class="callout callout--info">
+                            <h3>What's next: Course 2 &mdash; Builder Orientation</h3>
+                            <p>You've finished AI Fluency Fundamentals. The next step on the Builder Path is <a href="orientation.html">Builder Orientation</a>, where you'll build your first tool from start to finish.</p>
+                        </div>
 
                         <h3>What You Now Know</h3>
                         <p>
@@ -1190,8 +1204,10 @@ Date: 03 February 2026
                     <!-- Knowledge Check -->
                     <section id="knowledge-check">
                         <h2>Knowledge Check</h2>
+                        <p>Click each module to expand its questions. Your answers save automatically.</p>
                         <div class="knowledge-check" data-course="ai-fluency-student" data-module="all">
-                        <div class="knowledge-check__module">
+                        <details class="knowledge-check__module">
+                            <summary><strong>Module 1 Questions (3 questions)</strong></summary>
                             <h3 class="knowledge-check__title">Module 1: Why 80% Quit</h3>
 
                             <div class="knowledge-check__question" data-correct="2">
@@ -1268,9 +1284,10 @@ Date: 03 February 2026
                                     <p>The management framing says you should treat AI the same way you would manage a capable but inexperienced team member. You break work into pieces, provide context, explain standards, review output, and give specific feedback. The same leadership skills that make you effective with people make you effective with AI.</p>
                                 </div>
                             </div>
-                        </div>
+                        </details>
 
-                        <div class="knowledge-check__module">
+                        <details class="knowledge-check__module">
+                            <summary><strong>Module 2 Questions (3 questions)</strong></summary>
                             <h3 class="knowledge-check__title">Module 2: The Six 201-Level Skills</h3>
 
                             <div class="knowledge-check__question" data-correct="0">
@@ -1347,9 +1364,10 @@ Date: 03 February 2026
                                     <p>Workflow Integration means AI becomes part of a recurring process, not a one-time experiment. For example, "Every Friday, the duty NCO uses AI to draft the weekend safety brief." Microsoft research shows it takes up to 11 weeks to build the AI habit, and the time savings only compound when AI is integrated into standing workflows.</p>
                                 </div>
                             </div>
-                        </div>
+                        </details>
 
-                        <div class="knowledge-check__module">
+                        <details class="knowledge-check__module">
+                            <summary><strong>Module 3 Questions (3 questions)</strong></summary>
                             <h3 class="knowledge-check__title">Module 3: The Delegation Equation</h3>
 
                             <div class="knowledge-check__question" data-correct="3">
@@ -1426,58 +1444,59 @@ Date: 03 February 2026
                                     <p>Domain expertise improves all three variables in the Delegation Equation: you estimate human baseline time more accurately, you judge AI success probability more accurately, and you review AI output faster because you know what right looks like. AI does not replace expertise; it rewards it.</p>
                                 </div>
                             </div>
-                        </div>
+                        </details>
 
-                        <div class="knowledge-check__module">
+                        <details class="knowledge-check__module">
+                            <summary><strong>Module 4 Questions (3 questions)</strong></summary>
                             <h3 class="knowledge-check__title">Module 4: Red Pen Review</h3>
 
-                            <div class="knowledge-check__question" data-correct="1">
-                                <p class="knowledge-check__prompt">In the naval message review exercise, the AI-generated DTG read "R 06 FEB 2026 1430Z." What category of error does this represent?</p>
+                            <div class="knowledge-check__question" data-correct="0">
+                                <p class="knowledge-check__prompt">In the award narrative document, the AI claimed the Marine "increased mission readiness by 47%." What error category does this represent?</p>
                                 <div class="knowledge-check__options">
                                     <label class="knowledge-check__option">
                                         <input type="radio" name="kc_ai-fluency-student_4_q1" value="0">
-                                        <span>Fabricated reference: the AI invented a nonexistent regulation</span>
+                                        <span>Hallucinated metric (most common)</span>
                                     </label>
                                     <label class="knowledge-check__option">
                                         <input type="radio" name="kc_ai-fluency-student_4_q1" value="1">
-                                        <span>Formatting error: AI defaulted to civilian date conventions instead of military DTG format</span>
+                                        <span>Style error</span>
                                     </label>
                                     <label class="knowledge-check__option">
                                         <input type="radio" name="kc_ai-fluency-student_4_q1" value="2">
-                                        <span>Logic error: the date and time are internally contradictory</span>
+                                        <span>Grammar mistake</span>
                                     </label>
                                     <label class="knowledge-check__option">
                                         <input type="radio" name="kc_ai-fluency-student_4_q1" value="3">
-                                        <span>Content error: the date itself is wrong for the scenario</span>
+                                        <span>Format issue</span>
                                     </label>
                                 </div>
                                 <div class="knowledge-check__feedback" hidden>
-                                    <p>The correct DTG format is "R 061430Z FEB 2026" where day and time run together followed by the Zulu designator. AI frequently defaults to civilian date conventions because they are more common in its training data. A communications clerk would catch this immediately, which illustrates why domain expertise is the quality gate.</p>
+                                    <p>Hallucinated metrics are the most common category of AI error in military writing. AI fabricates precise-sounding numbers to make claims more authoritative, but there is no audit, no baseline measurement, and no methodology behind them. Strong award narratives use verifiable accomplishments, not AI-generated percentages.</p>
                                 </div>
                             </div>
 
-                            <div class="knowledge-check__question" data-correct="3">
-                                <p class="knowledge-check__prompt">The Red Pen Review exercise describes fabricated references (like fake MARADMIN numbers) as the "single most dangerous category of AI error." Why are fabricated references more dangerous than other errors?</p>
+                            <div class="knowledge-check__question" data-correct="0">
+                                <p class="knowledge-check__prompt">What category of error is "MARADMIN 045/26" when the document references it as a citation?</p>
                                 <div class="knowledge-check__options">
                                     <label class="knowledge-check__option">
                                         <input type="radio" name="kc_ai-fluency-student_4_q2" value="0">
-                                        <span>They are technically illegal to include in official documents</span>
+                                        <span>Fabricated reference (the most dangerous category)</span>
                                     </label>
                                     <label class="knowledge-check__option">
                                         <input type="radio" name="kc_ai-fluency-student_4_q2" value="1">
-                                        <span>They cause automated systems to reject the document</span>
+                                        <span>Outdated citation</span>
                                     </label>
                                     <label class="knowledge-check__option">
                                         <input type="radio" name="kc_ai-fluency-student_4_q2" value="2">
-                                        <span>They are the easiest type of error for AI to fix if you point them out</span>
+                                        <span>Incorrect formatting</span>
                                     </label>
                                     <label class="knowledge-check__option">
                                         <input type="radio" name="kc_ai-fluency-student_4_q2" value="3">
-                                        <span>They look completely plausible and AI presents them with the same confidence as real references</span>
+                                        <span>Wrong department</span>
                                     </label>
                                 </div>
                                 <div class="knowledge-check__feedback" hidden>
-                                    <p>Fabricated references are dangerous precisely because they look real. AI generates plausible-looking MCO numbers, MARADMIN numbers, and study citations with full confidence. It will never flag its own fabrication. The only way to catch them is to verify every reference against the actual source. This is why the review checklist starts with "Does every reference actually exist?"</p>
+                                    <p>Fabricated references &mdash; fake MARADMINs, made-up policy numbers, invented sources &mdash; are the single most dangerous category of AI error because they look authoritative but cannot be verified.</p>
                                 </div>
                             </div>
 
@@ -1505,9 +1524,10 @@ Date: 03 February 2026
                                     <p>AI fabricates precise-sounding statistics to make claims more authoritative. "47%" and "156 man-hours" sound specific and credible, but there is no audit, no baseline measurement, and no methodology behind them. If the CO asks "where did you get 47%?" there is no answer. Strong award narratives use verifiable accomplishments, not AI-generated numbers.</p>
                                 </div>
                             </div>
-                        </div>
+                        </details>
 
-                        <div class="knowledge-check__module">
+                        <details class="knowledge-check__module">
+                            <summary><strong>Module 5 Questions (3 questions)</strong></summary>
                             <h3 class="knowledge-check__title">Module 5: Centaur and Cyborg Modes</h3>
 
                             <div class="knowledge-check__question" data-correct="2">
@@ -1584,9 +1604,10 @@ Date: 03 February 2026
                                     <p>The workflow map example breaks the task into five specific subtasks, labels each one, and identifies where AI contributes. The time savings estimate comes from subtracting the time AI handles (routine formatting, initial drafting) while keeping human-only tasks at their original duration. A subtask-level breakdown makes the estimate testable rather than aspirational.</p>
                                 </div>
                             </div>
-                        </div>
+                        </details>
 
-                        <div class="knowledge-check__module">
+                        <details class="knowledge-check__module">
+                            <summary><strong>Module 6 Questions (3 questions)</strong></summary>
                             <h3 class="knowledge-check__title">Module 6: Frontier Mapping</h3>
 
                             <div class="knowledge-check__question" data-correct="2">
@@ -1663,7 +1684,7 @@ Date: 03 February 2026
                                     <p>Classifying tasks requires Frontier Recognition (understanding what AI can and cannot handle in your domain) combined with Task Decomposition (breaking your work into pieces small enough to evaluate individually). You cannot classify a task like "do admin work" because it is too broad. You must decompose it into specific subtasks and then map each one against the frontier.</p>
                                 </div>
                             </div>
-                        </div>
+                        </details>
 
                         <button class="knowledge-check__submit btn btn--primary">Check Answers</button>
                         <div class="knowledge-check__result" hidden></div>
@@ -1749,7 +1770,7 @@ Date: 03 February 2026
                 <div class="footer-section">
                     <h3 class="footer-section__title">Expert-Driven Development</h3>
                     <p>
-                        Open-source AI-assisted development training for DoW personnel.
+                        Open-source AI-assisted development training for DoD personnel.
                         Built by SSgt Jesse C. Morgan at MCD-Monterey.
                     </p>
                 </div>
