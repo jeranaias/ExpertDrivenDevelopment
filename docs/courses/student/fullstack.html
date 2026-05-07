@@ -74,6 +74,9 @@
             <p class="mt-lg">
                 <strong>Prerequisite:</strong> Advanced Workshop (Course 4), at least 1 deployed tool, computer with admin rights
             </p>
+            <div class="page-header__actions mt-lg" role="group" aria-label="Course 6 student materials">
+                <a href="../../decks/week-6-fullstack.html" class="btn btn--secondary btn--sm" target="_blank" rel="noopener">Open the Slide Deck</a>
+            </div>
             <p class="mt-sm">
                 <a href="../fullstack.html">Instructor Guide</a>
             </p>
@@ -118,6 +121,11 @@
 
 <section id="overview">
     <h2>Course Overview</h2>
+
+    <div class="callout callout--info">
+        <h3 class="callout__title">Recommended delivery: 2 days, not 1</h3>
+        <p>This course is budgeted at 8 hours, but the realistic target audience (one deployed tool, no full-stack background) needs two sittings. Default delivery: <strong>Day 1 &mdash; Modules 1-5</strong> (frontier shift, env, backend, data, frontend; ends at &ldquo;I can fetch JSON from my own server&rdquo;). <strong>Day 2 &mdash; Modules 6-10</strong> (pages, AI chat, auth, integration, deploy). The 1-day variant is an intensive offering for experienced builders only &mdash; most students will not complete in one sitting.</p>
+    </div>
 
     <p>
         Courses 1&ndash;5 taught you to build tools on Power Platform &mdash; low-code applications
@@ -187,15 +195,6 @@
             Don&rsquo;t say &ldquo;it doesn&rsquo;t work&rdquo; &mdash; say &ldquo;I get this error when I run go build.&rdquo;
         </li>
     </ol>
-
-    <div class="callout callout--success">
-        <h3 class="callout__title">Module 1 Complete When</h3>
-        <ul>
-            <li>Students can articulate the four layers of a web application</li>
-            <li>Students understand they won&rsquo;t &ldquo;learn to code&rdquo; &mdash; they&rsquo;ll learn to direct AI to code for them</li>
-            <li>Students have seen the live Heywood demo and understand the target</li>
-        </ul>
-    </div>
 </section>
 
 <!-- ============================================================ -->
@@ -303,14 +302,8 @@
     <div class="callout callout--warning">
         <h3 class="callout__title">Pacing Note</h3>
         <p>
-            This is an aggressive pace. Some students will fall behind, especially in Modules 3&ndash;4 (backend)
-            and Module 7 (AI chat). That&rsquo;s expected. The instructor should:
+            This is an aggressive pace. If you fall behind in Modules 3&ndash;4 (backend) or Module 7 (AI chat), that&rsquo;s normal. If you&rsquo;re tight on time, skip Module 9 (External Integrations) &mdash; it&rsquo;s the most independent and can be done later. Plan two sittings minimum.
         </p>
-        <ul>
-            <li>Have a pre-built &ldquo;checkpoint&rdquo; version of the app at each module boundary</li>
-            <li>Students who fall behind can clone the checkpoint and continue from there</li>
-            <li>Prioritize: if time is short, skip Module 9 (External Integrations) &mdash; it&rsquo;s the most independent module</li>
-        </ul>
     </div>
 </section>
 
@@ -345,7 +338,7 @@
             &ldquo;This application has 8,400 lines of Go backend code, 4,400 lines of React frontend code,
             35 API endpoints, 5 database backends, Microsoft Graph integration, CAC authentication,
             and FIPS 140-3 compliance. It was built in <strong>days, not months</strong>, by one person
-            working with AI. No team of contractors. No six-month timeline. No $2M budget.&rdquo;
+            working with AI. Comparable contractor estimates run multi-month timelines and six-figure budgets. The point is not the savings claim &mdash; it&rsquo;s that the work is now possible at a different scale of person-hours.&rdquo;
         </p>
     </div>
 
@@ -478,9 +471,7 @@
     <div class="callout callout--warning">
         <h3 class="callout__title">Pre-Class Preparation</h3>
         <p>
-            Ideally, send setup instructions to students <strong>before class</strong> so they arrive
-            with tools installed. In practice, expect 30&ndash;50% to need help during this module.
-            Have the instructor and any TAs circulate during this time.
+            Install the tools in Section 2.1 before starting Module 3. Plan for 30&ndash;60 minutes if this is your first time installing developer tools. Expect at least one tool to need a system restart or PATH fix &mdash; that is normal. Have the EDD Discussions tab open in another window if you get stuck.
         </p>
     </div>
 
@@ -1006,11 +997,15 @@ curl http://localhost:8080/api/v1/health
     </p>
 
     <div class="callout callout--warning">
+        <h3 class="callout__title">DoD network note</h3>
+        <p>This module&rsquo;s example uses <code>api.openai.com</code> for simplicity. <strong>For DoD networks, use Azure OpenAI Government or GenAI.mil endpoints, not the commercial OpenAI API.</strong> The code pattern is identical &mdash; only the base URL and auth header change. When you&rsquo;re ready to deploy on a DoD network, ask the AI: &ldquo;Convert this OpenAI client to Azure OpenAI Government with API key auth. Base URL is https://[your-resource].openai.azure.us/openai/deployments/[deployment-name].&rdquo; Per MARADMIN 018/26, GenAI.mil is the default platform for AI tools handling DoD data.</p>
+    </div>
+
+    <div class="callout callout--warning">
         <h3 class="callout__title">API Key Required</h3>
         <p>
             You need an OpenAI API key (<code>OPENAI_API_KEY</code>) or Azure OpenAI credentials
-            for this module. If keys aren&rsquo;t available, the instructor should demo this module live
-            and you can add it later. Alternatively, have one shared API key for the class.
+            for this module. If you don&rsquo;t have an OpenAI key, skip the live calls in this module &mdash; read the prompts, examine the expected code, and complete this module against a mock response. Wire in real keys later when access is approved. The Module 7 lessons (chat backend, tool use, system-prompt design) work without live calls.
         </p>
     </div>
 
@@ -1489,24 +1484,27 @@ docker run -p 8080:8080 -e OPENAI_API_KEY=sk-... my-staff-app
         before you can submit.
     </p>
 
+    <p>Click each module to expand its questions. Your answers save automatically.</p>
+
     <div class="knowledge-check" data-course="fullstack-student" data-module="all">
-        <div class="knowledge-check__module">
-            <h3 class="knowledge-check__title">End-of-Course Check</h3>
+        <details class="knowledge-check__module">
+            <summary><strong>Principles 1&ndash;3 (Conversation, Scaffold, 3-Minute Rule)</strong></summary>
+            <h3 class="knowledge-check__title">Foundations: How AI-Assisted Full-Stack Work Differs</h3>
 
             <div class="knowledge-check__question" data-correct="2">
                 <p class="knowledge-check__prompt">In Principle 1 (&ldquo;The Conversation is the IDE&rdquo;), what role does your code editor play during a full-stack build?</p>
                 <div class="knowledge-check__options">
                     <label class="knowledge-check__option">
-                        <input type="radio" value="0"><span>Primary authoring tool &mdash; you write the code, the AI reviews it</span>
+                        <input type="radio" name="kc_fullstack_q1" value="0"><span>Primary authoring tool &mdash; you write the code, the AI reviews it</span>
                     </label>
                     <label class="knowledge-check__option">
-                        <input type="radio" value="1"><span>Optional &mdash; the AI handles all editing inside the chat window</span>
+                        <input type="radio" name="kc_fullstack_q1" value="1"><span>Optional &mdash; the AI handles all editing inside the chat window</span>
                     </label>
                     <label class="knowledge-check__option">
-                        <input type="radio" value="2"><span>Verification surface &mdash; you read AI output there to confirm it makes sense, then run it</span>
+                        <input type="radio" name="kc_fullstack_q1" value="2"><span>Verification surface &mdash; you read AI output there to confirm it makes sense, then run it</span>
                     </label>
                     <label class="knowledge-check__option">
-                        <input type="radio" value="3"><span>Source of truth &mdash; the editor overrides the chat when they disagree</span>
+                        <input type="radio" name="kc_fullstack_q1" value="3"><span>Source of truth &mdash; the editor overrides the chat when they disagree</span>
                     </label>
                 </div>
                 <div class="knowledge-check__feedback" hidden>
@@ -1518,16 +1516,16 @@ docker run -p 8080:8080 -e OPENAI_API_KEY=sk-... my-staff-app
                 <p class="knowledge-check__prompt">You are following Principle 2 (Scaffold &rarr; Flesh Out &rarr; Integrate). The AI just produced 600 lines that wire up the backend, the database, and three frontend pages in one shot. What should you do?</p>
                 <div class="knowledge-check__options">
                     <label class="knowledge-check__option">
-                        <input type="radio" value="0"><span>Run it &mdash; if it works, you saved hours</span>
+                        <input type="radio" name="kc_fullstack_q2" value="0"><span>Run it &mdash; if it works, you saved hours</span>
                     </label>
                     <label class="knowledge-check__option">
-                        <input type="radio" value="1"><span>Discard it and ask the AI to start with just a blank server returning &ldquo;hello&rdquo; on one route</span>
+                        <input type="radio" name="kc_fullstack_q2" value="1"><span>Discard it and ask the AI to start with just a blank server returning &ldquo;hello&rdquo; on one route</span>
                     </label>
                     <label class="knowledge-check__option">
-                        <input type="radio" value="2"><span>Keep it but comment out everything except the database layer</span>
+                        <input type="radio" name="kc_fullstack_q2" value="2"><span>Keep it but comment out everything except the database layer</span>
                     </label>
                     <label class="knowledge-check__option">
-                        <input type="radio" value="3"><span>Paste it into the editor and start manually fixing the parts that look wrong</span>
+                        <input type="radio" name="kc_fullstack_q2" value="3"><span>Paste it into the editor and start manually fixing the parts that look wrong</span>
                     </label>
                 </div>
                 <div class="knowledge-check__feedback" hidden>
@@ -1539,37 +1537,42 @@ docker run -p 8080:8080 -e OPENAI_API_KEY=sk-... my-staff-app
                 <p class="knowledge-check__prompt">You hit a runtime error. You spend three minutes reading the stack trace and trying small tweaks in the editor. The 3-Minute Rule says: what next?</p>
                 <div class="knowledge-check__options">
                     <label class="knowledge-check__option">
-                        <input type="radio" value="0"><span>Spend another 10 minutes &mdash; you almost have it</span>
+                        <input type="radio" name="kc_fullstack_q3" value="0"><span>Spend another 10 minutes &mdash; you almost have it</span>
                     </label>
                     <label class="knowledge-check__option">
-                        <input type="radio" value="1"><span>Search the web for the error message</span>
+                        <input type="radio" name="kc_fullstack_q3" value="1"><span>Search the web for the error message</span>
                     </label>
                     <label class="knowledge-check__option">
-                        <input type="radio" value="2"><span>Roll back to the last working commit and try a different approach yourself</span>
+                        <input type="radio" name="kc_fullstack_q3" value="2"><span>Roll back to the last working commit and try a different approach yourself</span>
                     </label>
                     <label class="knowledge-check__option">
-                        <input type="radio" value="3"><span>Paste the exact error message back to the AI and let it fix its own work</span>
+                        <input type="radio" name="kc_fullstack_q3" value="3"><span>Paste the exact error message back to the AI and let it fix its own work</span>
                     </label>
                 </div>
                 <div class="knowledge-check__feedback" hidden>
                     <p>The 3-Minute Rule exists because manual debugging of AI-generated code is slow and tends to introduce a second bug. The AI wrote the code; the AI knows the most recent context; let it fix the error.</p>
                 </div>
             </div>
+        </details>
+
+        <details class="knowledge-check__module">
+            <summary><strong>Principles 4&ndash;5 (Incremental Deployment, Interface-First)</strong></summary>
+            <h3 class="knowledge-check__title">Build &amp; Deploy Habits</h3>
 
             <div class="knowledge-check__question" data-correct="0">
                 <p class="knowledge-check__prompt">Principle 4 says &ldquo;Incremental Deployment &mdash; deploy after every major feature.&rdquo; Why is waiting until the end to deploy actually slower?</p>
                 <div class="knowledge-check__options">
                     <label class="knowledge-check__option">
-                        <input type="radio" value="0"><span>You collapse all environment problems into one debugging session and lose hours that could have been spent on features</span>
+                        <input type="radio" name="kc_fullstack_q4" value="0"><span>You collapse all environment problems into one debugging session and lose hours that could have been spent on features</span>
                     </label>
                     <label class="knowledge-check__option">
-                        <input type="radio" value="1"><span>Cloud platforms charge a setup fee per deployment</span>
+                        <input type="radio" name="kc_fullstack_q4" value="1"><span>Cloud platforms charge a setup fee per deployment</span>
                     </label>
                     <label class="knowledge-check__option">
-                        <input type="radio" value="2"><span>The AI cannot help with deployment, so each deploy must be done by hand</span>
+                        <input type="radio" name="kc_fullstack_q4" value="2"><span>The AI cannot help with deployment, so each deploy must be done by hand</span>
                     </label>
                     <label class="knowledge-check__option">
-                        <input type="radio" value="3"><span>It is faster to deploy at the end &mdash; the principle is about safety, not speed</span>
+                        <input type="radio" name="kc_fullstack_q4" value="3"><span>It is faster to deploy at the end &mdash; the principle is about safety, not speed</span>
                     </label>
                 </div>
                 <div class="knowledge-check__feedback" hidden>
@@ -1581,47 +1584,52 @@ docker run -p 8080:8080 -e OPENAI_API_KEY=sk-... my-staff-app
                 <p class="knowledge-check__prompt">Principle 5 (Interface-First Design) tells you to specify <em>what</em> a component does before <em>how</em>. Which prompt below best follows that principle?</p>
                 <div class="knowledge-check__options">
                     <label class="knowledge-check__option">
-                        <input type="radio" value="0"><span>&ldquo;Write me a SQL query that joins users to roles.&rdquo;</span>
+                        <input type="radio" name="kc_fullstack_q5" value="0"><span>&ldquo;Write me a SQL query that joins users to roles.&rdquo;</span>
                     </label>
                     <label class="knowledge-check__option">
-                        <input type="radio" value="1"><span>&ldquo;Use Sequelize ORM to set up the user model.&rdquo;</span>
+                        <input type="radio" name="kc_fullstack_q5" value="1"><span>&ldquo;Use Sequelize ORM to set up the user model.&rdquo;</span>
                     </label>
                     <label class="knowledge-check__option">
-                        <input type="radio" value="2"><span>&ldquo;I need a function that takes a student ID and returns their record, including their assigned role.&rdquo;</span>
+                        <input type="radio" name="kc_fullstack_q5" value="2"><span>&ldquo;I need a function that takes a student ID and returns their record, including their assigned role.&rdquo;</span>
                     </label>
                     <label class="knowledge-check__option">
-                        <input type="radio" value="3"><span>&ldquo;Optimize the database for read performance.&rdquo;</span>
+                        <input type="radio" name="kc_fullstack_q5" value="3"><span>&ldquo;Optimize the database for read performance.&rdquo;</span>
                     </label>
                 </div>
                 <div class="knowledge-check__feedback" hidden>
                     <p>Interface-first prompts describe inputs, outputs, and behavior &mdash; not implementation details. The AI will pick a reasonable implementation; you keep authority over the contract.</p>
                 </div>
             </div>
+        </details>
+
+        <details class="knowledge-check__module">
+            <summary><strong>Synthesis: Cyborg Pattern at Full-Stack Scale</strong></summary>
+            <h3 class="knowledge-check__title">Tying It Together</h3>
 
             <div class="knowledge-check__question" data-correct="1">
                 <p class="knowledge-check__prompt">Course 3 introduced the Cyborg pattern (fluid, continuous human/AI integration). Course 6 applies it at full-stack scale. Which sentence best describes the difference at this scale?</p>
                 <div class="knowledge-check__options">
                     <label class="knowledge-check__option">
-                        <input type="radio" value="0"><span>Full-stack work is Centaur, not Cyborg &mdash; the AI writes code in batches and you verify at phase boundaries only</span>
+                        <input type="radio" name="kc_fullstack_q6" value="0"><span>Full-stack work is Centaur, not Cyborg &mdash; the AI writes code in batches and you verify at phase boundaries only</span>
                     </label>
                     <label class="knowledge-check__option">
-                        <input type="radio" value="1"><span>The Cyborg pattern still applies, but verification is denser: you read AI-generated code immediately, run it, and pipe errors back into the same conversation rather than letting drift accumulate</span>
+                        <input type="radio" name="kc_fullstack_q6" value="1"><span>The Cyborg pattern still applies, but verification is denser: you read AI-generated code immediately, run it, and pipe errors back into the same conversation rather than letting drift accumulate</span>
                     </label>
                     <label class="knowledge-check__option">
-                        <input type="radio" value="2"><span>At full-stack scale you stop verifying and trust the AI &mdash; otherwise the loop is too slow</span>
+                        <input type="radio" name="kc_fullstack_q6" value="2"><span>At full-stack scale you stop verifying and trust the AI &mdash; otherwise the loop is too slow</span>
                     </label>
                     <label class="knowledge-check__option">
-                        <input type="radio" value="3"><span>Full-stack work is unique and does not fit either pattern</span>
+                        <input type="radio" name="kc_fullstack_q6" value="3"><span>Full-stack work is unique and does not fit either pattern</span>
                     </label>
                 </div>
                 <div class="knowledge-check__feedback" hidden>
                     <p>Cyborg with denser verification is the right framing. The 3-Minute Rule, incremental deployment, and the &ldquo;paste the error back&rdquo; reflex are all ways of keeping the loop tight enough to catch problems before they compound.</p>
                 </div>
             </div>
+        </details>
 
-            <button type="button" class="btn btn--primary knowledge-check__submit">Submit Answers</button>
-            <div class="knowledge-check__result" hidden></div>
-        </div>
+        <button type="button" class="btn btn--primary knowledge-check__submit">Submit Answers</button>
+        <div class="knowledge-check__result" hidden></div>
     </div>
 </section>
 
@@ -1717,6 +1725,16 @@ docker run -p 8080:8080 -e OPENAI_API_KEY=sk-... my-staff-app
             </div>
         </div>
     </div>
+
+    <div class="callout callout--info">
+        <h3>Where to next?</h3>
+        <p>You&rsquo;ve shipped a complete full-stack application. Three suggested next moves:</p>
+        <ol>
+            <li><strong>Rebuild from scratch.</strong> Repeat the course without the prompts. The fastest path to fluency is doing it twice.</li>
+            <li><strong>Post your repo to <a href="https://github.com/jeranaias/ExpertDrivenDevelopment/discussions">EDD Discussions</a>.</strong> Get feedback from other builders. Inspire someone in their first week.</li>
+            <li><strong>Start a real project for your unit.</strong> Use the Course 3 Problem Definition Worksheet to scope it. Apply the Course 4 Workflow Playbook to plan it. Ship something.</li>
+        </ol>
+    </div>
 </section>
 
                 </div> <!-- /page-content -->
@@ -1731,7 +1749,7 @@ docker run -p 8080:8080 -e OPENAI_API_KEY=sk-... my-staff-app
                 <div class="footer-section">
                     <h3 class="footer-section__title">Expert-Driven Development</h3>
                     <p>
-                        Open-source AI-assisted development training for DoW personnel.
+                        Open-source AI-assisted development training for DoD personnel.
                         Built by SSgt Jesse C. Morgan at MCD-Monterey.
                     </p>
                 </div>

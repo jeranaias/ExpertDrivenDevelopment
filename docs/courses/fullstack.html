@@ -119,6 +119,11 @@
 <section id="overview">
     <h2>Course Overview</h2>
 
+    <div class="callout callout--info">
+        <h3 class="callout__title">Recommended delivery: 2 days, not 1</h3>
+        <p>This course is budgeted at 8 hours, but the realistic target audience (one deployed tool, no full-stack background) needs two sittings. Default delivery: <strong>Day 1 &mdash; Modules 1-5</strong> (frontier shift, env, backend, data, frontend; ends at &ldquo;I can fetch JSON from my own server&rdquo;). <strong>Day 2 &mdash; Modules 6-10</strong> (pages, AI chat, auth, integration, deploy). The 1-day variant is an intensive offering for experienced builders only &mdash; most students will not complete in one sitting.</p>
+    </div>
+
     <p>
         Courses 1&ndash;5 taught you to build tools on Power Platform &mdash; low-code applications
         within the Microsoft ecosystem. That&rsquo;s powerful, and most Marines will never need more.
@@ -321,6 +326,9 @@
             <li>Students who fall behind can clone the checkpoint and continue from there</li>
             <li>Prioritize: if time is short, skip Module 9 (External Integrations) &mdash; it&rsquo;s the most independent module</li>
         </ul>
+        <p>
+            Modules 7 and 9 are the heaviest &mdash; for time-pressed deliveries, demo Module 7 live and have students complete the prompts as homework; Module 9 (External Integrations) is the most independent and can be skipped without breaking the rest of the course.
+        </p>
     </div>
 </section>
 
@@ -357,7 +365,7 @@
             &ldquo;This application has 8,400 lines of Go backend code, 4,400 lines of React frontend code,
             35 API endpoints, 5 database backends, Microsoft Graph integration, CAC authentication,
             and FIPS 140-3 compliance. It was built in <strong>days, not months</strong>, by one person
-            working with AI. No team of contractors. No six-month timeline. No $2M budget.&rdquo;
+            working with AI. Comparable contractor estimates run multi-month timelines and six-figure budgets. The point is not the savings claim &mdash; it&rsquo;s that the work is now possible at a different scale of person-hours.&rdquo;
         </p>
     </div>
 
@@ -874,6 +882,15 @@ curl http://localhost:8080/api/v1/health
         </ul>
     </div>
 
+    <div class="callout">
+        <h3 class="callout__title">Common Issues</h3>
+        <ol>
+            <li>SQLite file permission errors on Windows &mdash; run as admin or specify an absolute path.</li>
+            <li>Connection-pool errors &mdash; close DB handles in <code>defer db.Close()</code>.</li>
+            <li>ORM &ldquo;foreign key constraint&rdquo; errors &mdash; check that referenced tables exist before dependent tables.</li>
+        </ol>
+    </div>
+
     <div class="callout callout--success">
         <h3 class="callout__title">Module 4 Complete When</h3>
         <ul>
@@ -1067,6 +1084,15 @@ curl http://localhost:8080/api/v1/health
         </ul>
     </div>
 
+    <div class="callout">
+        <h3 class="callout__title">Common Issues</h3>
+        <ol>
+            <li>CORS errors &mdash; frontend running on :3000, backend on :8080. Add <code>cors.AllowAll()</code> middleware in dev only.</li>
+            <li>404 on refresh of SPA routes &mdash; frontend dev server needs <code>historyApiFallback: true</code>.</li>
+            <li>State lost between routes &mdash; verify React Router is wrapping the app, not nested.</li>
+        </ol>
+    </div>
+
     <div class="callout callout--success">
         <h3 class="callout__title">Module 6 Complete When</h3>
         <ul>
@@ -1091,6 +1117,11 @@ curl http://localhost:8080/api/v1/health
         Students will add a chat interface to their application that connects to OpenAI
         and can query the application&rsquo;s own data through tool use.
     </p>
+
+    <div class="callout callout--warning">
+        <h3 class="callout__title">DoD network note</h3>
+        <p>This module&rsquo;s example uses <code>api.openai.com</code> for simplicity. <strong>For DoD networks, use Azure OpenAI Government or GenAI.mil endpoints, not the commercial OpenAI API.</strong> The code pattern is identical &mdash; only the base URL and auth header change. When you&rsquo;re ready to deploy on a DoD network, ask the AI: &ldquo;Convert this OpenAI client to Azure OpenAI Government with API key auth. Base URL is https://[your-resource].openai.azure.us/openai/deployments/[deployment-name].&rdquo; Per MARADMIN 018/26, GenAI.mil is the default platform for AI tools handling DoD data.</p>
+    </div>
 
     <div class="callout callout--warning">
         <h3 class="callout__title">API Key Required</h3>
@@ -1286,6 +1317,15 @@ curl http://localhost:8080/api/v1/health
         </ul>
     </div>
 
+    <div class="callout">
+        <h3 class="callout__title">Common Issues</h3>
+        <ol>
+            <li>Cookies not sending on cross-origin requests &mdash; set <code>credentials: 'include'</code> on fetch AND <code>Access-Control-Allow-Credentials: true</code> on backend.</li>
+            <li>Role middleware fires on <code>/login</code> itself &mdash; exclude the login endpoint.</li>
+            <li>JWT expires immediately &mdash; check <code>exp</code> field is in seconds, not milliseconds.</li>
+        </ol>
+    </div>
+
     <div class="callout callout--success">
         <h3 class="callout__title">Module 8 Complete When</h3>
         <ul>
@@ -1379,12 +1419,25 @@ curl http://localhost:8080/api/v1/health
                 <li>GET /api/v1/mail/summary &mdash; returns recent email subjects and senders</li>
             </ul>
         </div>
+
+        <p>
+            After Path B implementation, the calendar endpoint should return JSON like <code>{ "events": [...] }</code> for the test tenant. Common failure mode: tenant-not-authorized 401 from the Graph API &mdash; the Marine&rsquo;s account does not have calendar.read consent yet. Have a TA pre-grant consent on the test tenant before class, or skip the live test and review the prompt only.
+        </p>
     </details>
 
     <div class="callout callout--instructor">
         <h3 class="callout__title">Instructor Checkpoint: Integration Working</h3>
         <p><strong>Path A:</strong> App starts with <code>-db sqlite</code>, data persists after restart.</p>
         <p><strong>Path B:</strong> Calendar and mail endpoints return real data from Outlook.</p>
+    </div>
+
+    <div class="callout">
+        <h3 class="callout__title">Common Issues</h3>
+        <ol>
+            <li>API rate limits hit during testing &mdash; back off with exponential retry, don&rsquo;t hammer.</li>
+            <li>Secrets accidentally committed &mdash; gitignore <code>.env</code> BEFORE first commit, not after.</li>
+            <li>Webhook receiver not reachable &mdash; use ngrok or similar for local dev; webhooks need a public URL.</li>
+        </ol>
     </div>
 
     <div class="callout callout--success">
@@ -1587,7 +1640,7 @@ docker run -p 8080:8080 -e OPENAI_API_KEY=sk-... my-staff-app
             structure your conversations with AI.
         </p>
         <p>
-            For comparison: a contractor would quote 6&ndash;12 months and $500K+ for the same application.
+            For comparison: a contractor would typically quote multi-month timelines and six-figure budgets &mdash; but verify against your unit&rsquo;s actual procurement experience, not this number.
         </p>
     </div>
 
@@ -1617,7 +1670,7 @@ docker run -p 8080:8080 -e OPENAI_API_KEY=sk-... my-staff-app
                 <div class="footer-section">
                     <h3 class="footer-section__title">Expert-Driven Development</h3>
                     <p>
-                        Open-source AI-assisted development training for DoW personnel.
+                        Open-source AI-assisted development training for DoD personnel.
                         Built by SSgt Jesse C. Morgan at MCD-Monterey.
                     </p>
                 </div>
