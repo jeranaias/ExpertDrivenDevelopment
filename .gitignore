@@ -25,9 +25,9 @@ npm-debug.log
 # Serena (MCP tool config)
 .serena/
 
-# Planning/internal templates (not user-facing)
-templates/
-docs/templates/
+# Top-level /templates/ is a local working-copy duplicate of docs/templates/.
+# docs/templates/ is the shipped version (backs the Download buttons on resources/templates.html).
+/templates/
 
 # Screenshots (local testing)
 *.png

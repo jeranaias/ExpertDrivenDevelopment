@@ -121,27 +121,29 @@
                         </div>
                         <div class="cs-mod__prompts">
                             <ol>
-                                <li><strong>Hand-off (audible):</strong> &ldquo;Watch &mdash; do not type along.&rdquo; Open <em>make.powerapps.com</em>; press <kbd>P</kbd> in the deck to keep speaker notes pinned.</li>
-                                <li><strong>5-min decompose on whiteboard:</strong> &ldquo;Before I touch anything &mdash; what are the data fields for an equipment tracker? What can a user <em>do</em>?&rdquo; Capture: Serial #, Item, Holder, Status, Last-checked. Actions: add, transfer, mark missing.</li>
-                                <li><strong>Prompt 1 (live, narrate):</strong> &ldquo;Build a SharePoint list with these 5 columns&hellip;&rdquo;</li>
-                                <li><strong>Prompt 2:</strong> &ldquo;Generate a Power Apps canvas app with a gallery and a form bound to that list.&rdquo;</li>
-                                <li><strong>Prompt 3:</strong> &ldquo;Add a search box that filters by Serial or Holder.&rdquo;</li>
-                                <li><strong>Prompt 4:</strong> &ldquo;Wire the Save button to patch the list.&rdquo;</li>
-                                <li><strong>Prompt 5:</strong> &ldquo;Show me one breakage I should expect.&rdquo;</li>
-                                <li><em>Narrate every rejection</em> &mdash; when AI suggests JavaScript instead of Power Fx, stop and re-prompt out loud. The rejection <em>is</em> the lesson.</li>
+                                <li><strong>Hand-off (audible):</strong> &ldquo;Watch &mdash; do not type along.&rdquo; Open <em>make.powerapps.com</em> and GenAI.mil; press <kbd>P</kbd> in the deck to keep speaker notes pinned.</li>
+                                <li><strong>5-min decompose on whiteboard:</strong> Four questions &mdash; data fields? user actions? simplest useful version? data structure? Capture: item name, serial, assigned-to, date out, date due, status. Actions: check out, check in, see what&rsquo;s out, see overdue.</li>
+                                <li><strong>Prompt 1 (Define, 2 min):</strong> &ldquo;I need an equipment checkout tracker for a Marine rifle section (~30 people, ~50 items) in Power Apps&hellip; Give me a step-by-step plan before we build.&rdquo;</li>
+                                <li><strong>Prompt 2 (Data structure, 3 min):</strong> &ldquo;Give me the exact SharePoint list configuration &mdash; <em>EquipmentCheckout</em>: columns, types, CSV template, post-import steps.&rdquo;</li>
+                                <li><strong>Shortcut (audible):</strong> SharePoint &rarr; Integrate &rarr; Power Apps &rarr; Create an app. Power Apps auto-generates form + gallery.</li>
+                                <li><strong>Prompt 3 (Refine, 5 min):</strong> &ldquo;Filter the gallery to checked-out items, color overdue rows red, add a check-in button next to each row.&rdquo;</li>
+                                <li><strong>Prompt 4 (Iterate, 3 min):</strong> &ldquo;Add a SearchBox + an overdue warning icon, sort overdue to the top.&rdquo;</li>
+                                <li><strong>Prompt 5 (Debug, 4 min):</strong> introduce one error intentionally (Choice syntax or type mismatch). Show the debug loop live.</li>
+                                <li><strong>Prompt 6 (Polish, 3 min):</strong> &ldquo;Marine color scheme &mdash; red, gold, dark background.&rdquo;</li>
+                                <li><em>Narrate every rejection.</em> When AI emits JavaScript instead of Power Fx, stop and re-prompt out loud. The rejection <em>is</em> the lesson.</li>
                             </ol>
                         </div>
                         <div class="cs-mod__milestone">
                             <span class="layer">Outcome &middot; demo artefact</span>
                             <span class="arch">Half-built tracker on screen</span>
-                            <span class="desc">Leave it visible in a second tab over the break &mdash; students return to it for M3.</span>
+                            <span class="desc">Leave it visible in a second tab over the break &mdash; reference point for M3, not a copy target.</span>
                         </div>
                     </div>
 
                     <div class="cs-mod cs-mod--break">
                         <div class="cs-mod__no"><span class="n">BRK</span><span class="dur">10 min</span></div>
                         <div class="cs-mod__line">
-                            <span><strong>Break.</strong> Be back at H+0:50. Pre-flight: confirm the staged <em>EquipmentTest</em> SharePoint list still exists; load the Slide 26 fallback demo in case Power Apps misbehaves.</span>
+                            <span><strong>Break.</strong> Be back at H+0:50. Pre-flight: confirm GenAI.mil + Power Apps are still responsive; load the Debugging Exercise Fallback (instructor page Module 2) in case anything dies.</span>
                             <span class="when">0:40&ndash;0:50</span>
                         </div>
                     </div>
@@ -149,21 +151,22 @@
                     <div class="cs-mod cs-mod--build">
                         <div class="cs-mod__no"><span class="n">3</span><span class="dur">40 min</span></div>
                         <div class="cs-mod__name">
-                            <span class="title">Student Build + Recovery</span>
+                            <span class="title">Student Build + Peer Review</span>
                             <span class="clock">0:50&ndash;1:30</span>
-                            <span class="kind">Hands-on &middot; you coach</span>
+                            <span class="kind">25 build &middot; 15 review</span>
                         </div>
                         <div class="cs-mod__prompts">
                             <ol>
-                                <li><strong>Hand-off (read verbatim):</strong> &ldquo;Now you build. I&rsquo;ll roam in chat. If you get stuck, post the screenshot &mdash; do not DM me.&rdquo;</li>
-                                <li><strong>Brief (35 min):</strong> &ldquo;Build the same Equipment Tracker yourself. Use my prompts as a starting point. You will hit at least one error &mdash; that is the assignment. Post your error <em>and</em> your re-prompt in chat so the room can see how you recovered.&rdquo;</li>
-                                <li><strong>Last 5 min &middot; peer review:</strong> &ldquo;Pair up. Show your partner one thing that worked and one thing that broke. Two minutes each.&rdquo;</li>
-                                <li><em>Coach &mdash; do not type.</em> If a student demands you fix it, refuse: &ldquo;If I type it, you don&rsquo;t learn it.&rdquo;</li>
+                                <li><strong>Hand-off (read verbatim):</strong> &ldquo;Now you build. I&rsquo;ll roam &mdash; if you get stuck, post the screenshot in chat; do not DM me.&rdquo;</li>
+                                <li><strong>Brief (25 min build):</strong> &ldquo;Pick one starter problem &mdash; Leave request tracker, Training attendance log, Vehicle inspection checklist, or your own (clear scope with me first). Decompose on paper for 2 min. Then prompt. Post your errors and re-prompts in chat so the room sees the recovery.&rdquo;</li>
+                                <li><strong>Time cues:</strong> call &ldquo;15 minutes left,&rdquo; &ldquo;5 minutes left,&rdquo; hard stop at 25.</li>
+                                <li><strong>Peer review (15 min):</strong> pair up. 6 min each &mdash; demo + four checks (clear problem, core function works, evidence of iteration, can explain decisions). Last minute: full-class debrief.</li>
+                                <li><em>Coach &mdash; do not type.</em> If a student demands you fix it, refuse: &ldquo;If I type it, you don&rsquo;t learn it.&rdquo; Ask the question that leads them to the answer.</li>
                             </ol>
                         </div>
                         <div class="cs-mod__milestone">
                             <span class="layer">Outcome &middot; first build</span>
-                            <span class="arch">Every student has a tracker on screen</span>
+                            <span class="arch">Every student has a prototype on screen</span>
                             <span class="desc">Plus at least one recovered error per student logged in chat &mdash; raw material for next week.</span>
                         </div>
                     </div>
@@ -178,14 +181,16 @@
                         <div class="cs-mod__prompts">
                             <ol>
                                 <li><strong>Hand-off (audible):</strong> &ldquo;Close laptops.&rdquo; M4 is whiteboard / paper only. The whole point is no AI.</li>
-                                <li><strong>Brief (read verbatim):</strong> &ldquo;Three scenarios on the whiteboard: <em>Leave request form</em>, <em>Inventory dashboard</em>, <em>Awards routing</em>. Pick one. In ten minutes, write: data fields, user actions, success criteria, one failure mode. No AI. No screens. Then we trade.&rdquo;</li>
-                                <li><strong>Trade (10 min):</strong> swap papers with a partner; redline anything missing. Three students share their critique.</li>
+                                <li><strong>Individual (10 min):</strong> &ldquo;Pick one real problem from <em>your</em> section &mdash; the annoying recurring one. On paper: problem statement (one sentence), core requirements, 4&ndash;6 subtasks with Human/AI/Pattern columns, frontier risks, simplest useful version.&rdquo;</li>
+                                <li><strong>Pair review (8 min):</strong> trade worksheets. 4 min each &mdash; run the four checks: clarity, scope, frontier, MVP.</li>
+                                <li><strong>Debrief (2 min):</strong> &ldquo;Who changed their decomposition based on what their partner caught?&rdquo; Take one or two examples.</li>
+                                <li><em>Walk the room.</em> Watch for: problem too big, problem too vague, no frontier recognition, all-AI subtasks. The decomposition they walk out with is the homework they will build.</li>
                             </ol>
                         </div>
                         <div class="cs-mod__milestone">
                             <span class="layer">Outcome &middot; foundation</span>
-                            <span class="arch">Decomposition habit on paper</span>
-                            <span class="desc">Foundation for Week 3&rsquo;s &ldquo;decompose before you prompt&rdquo; rule and Week 4&rsquo;s SOP-QA drill.</span>
+                            <span class="arch">One-page decomposition of a real problem</span>
+                            <span class="desc">Foundation for the homework prototype and Week 3&rsquo;s failure-sharing block.</span>
                         </div>
                     </div>
 
@@ -240,9 +245,9 @@
                     <h2>Pre-flight &amp; hand-off cues<span class="lede">Verified at T-30 min &middot; two platform switches today, narrate every decision</span></h2>
                     <ul>
                         <li><strong>Account check.</strong> Every student needs Power Apps + Power Automate licensed in M365 and a working AI tool (GenAI.mil preferred). Run a roster check 48 h before; pair the unprovisioned with a provisioned partner.</li>
-                        <li><strong>Tabs open.</strong> Deck (Week 2), this cheat sheet, GenAI.mil, <code>make.powerapps.com</code>, a clean SharePoint test site for the Equipment Tracker list.</li>
-                        <li><strong>Sample data.</strong> Stage a SharePoint list named <em>EquipmentTest</em> with 5 rows (Serial, Item, Holder, Status). Delete it after class.</li>
-                        <li><strong>Paper exercise.</strong> Print 1 decomposition worksheet per student (or post a Word/Forms link); have whiteboard markers ready for the M4 drill.</li>
+                        <li><strong>Tabs open.</strong> Deck (Week 2), this cheat sheet, GenAI.mil, <code>make.powerapps.com</code>, a clean SharePoint test site you can create the <em>EquipmentCheckout</em> list on during M2.</li>
+                        <li><strong>Do <em>not</em> pre-build anything.</strong> The whole value of M2 is the room watching you decide live. Start from a blank SharePoint site.</li>
+                        <li><strong>Paper exercise.</strong> Print 1 decomposition worksheet per student (or post a Word/Forms link); have whiteboard markers ready for the M2 whiteboard decompose and the M4 individual drill.</li>
                         <li><strong>0:15 &middot; deck &rarr; Power Apps.</strong> Open <em>make.powerapps.com</em>. Audible cue: &ldquo;Watch &mdash; do not type along.&rdquo;</li>
                         <li><strong>0:40 &middot; back to deck</strong> for the break slide. Leave the half-built tracker visible in a second tab.</li>
                         <li><strong>0:50 &middot; M3 hand-off.</strong> &ldquo;Now you build. I&rsquo;ll roam in chat. If you get stuck, post the screenshot &mdash; do not DM me.&rdquo;</li>
@@ -267,12 +272,12 @@
                     <section class="cs-box" aria-label="Recovery and pacing cues">
                         <h2>Recovery &amp; pacing cues<span class="lede">When the room slips, this is the order of operations</span></h2>
                         <ul>
-                            <li><strong>Power Platform is down for the whole region.</strong> Pivot to paper. Run M2 as a chalk-talk decomposition; expand M4 to all three scenarios. Do <em>not</em> cancel.</li>
-                            <li><strong>AI emits JavaScript / C# / Python instead of Power Fx.</strong> Show the error. Re-prompt: &ldquo;Use Power Fx for canvas apps; show the formula for the OnSelect of a button.&rdquo; Use it as a teaching moment.</li>
+                            <li><strong>Power Platform / GenAI.mil / internet down.</strong> Switch to the Debugging Exercise Fallback on the instructor page (orientation.html#module-2). Walk the room through the four-bug Filter / Patch / Overdue case on paper. Do <em>not</em> cancel.</li>
+                            <li><strong>AI emits JavaScript / C# / Python instead of Power Fx.</strong> Show the error. Re-prompt: &ldquo;Use Power Fx for canvas apps only &mdash; no JavaScript, no forEach, no arrow functions.&rdquo; Use it as a teaching moment.</li>
                             <li><strong>Half the room is unprovisioned in Power Apps.</strong> Pair-and-share &mdash; one driver, one navigator per laptop. Log the unprovisioned roster for the program lead before close.</li>
                             <li><strong>Student skips decomposition and just prompts.</strong> Stop them. &ldquo;Show me your fields and actions on paper. We will not unblock you until that exists.&rdquo;</li>
-                            <li><strong>Live build runs long; M3 is being squeezed.</strong> Cut M2 prompts 4 and 5; pick up the &ldquo;break&rdquo; demo on Slide&nbsp;26 instead. Protect M3 hands-on time at all costs.</li>
-                            <li><strong>Pacing valve.</strong> If you fall behind at the break, M4 contracts to one scenario, not three. Never cut M3 or the wrap-assignment.</li>
+                            <li><strong>Live build runs long; M3 is being squeezed.</strong> Cut M2 prompts 5 (debug) and 6 (polish). The room will hit their own errors in M3 &mdash; more authentic. Protect M3 hands-on time at all costs.</li>
+                            <li><strong>Pacing valve at the break.</strong> If you are behind, M4 pair review contracts from 8 min to 4 min. Never cut M3 build time or the M5 assignment.</li>
                         </ul>
                     </section>
                 </div>

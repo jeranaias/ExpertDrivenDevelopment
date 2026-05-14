@@ -122,9 +122,9 @@
                             <h3 class="callout__title">Before You Begin</h3>
                             <p>
                                 This page assumes you have completed <strong>AI Fluency Fundamentals</strong> and can
-                                apply all six 201 skills: Task Decomposition, Context Assembly, Iterative Refinement,
-                                Quality Judgment, Frontier Recognition, and Failure Recovery. If you cannot recall
-                                at least four of these from memory, go back and review before continuing.
+                                apply all six 201 skills: Context Assembly, Quality Judgment, Task Decomposition,
+                                Iterative Refinement, Workflow Integration, and Frontier Recognition. If you cannot
+                                recall at least four of these from memory, go back and review before continuing.
                             </p>
                         </div>
 
@@ -151,7 +151,7 @@
                                     <tr>
                                         <td>When Something Breaks</td>
                                         <td>25 min hands-on</td>
-                                        <td>Iterative Refinement, Quality Judgment, Failure Recovery</td>
+                                        <td>Iterative Refinement, Quality Judgment, Frontier Recognition</td>
                                     </tr>
                                     <tr>
                                         <td>Your Problem &mdash; Decomposition Exercise</td>
@@ -302,11 +302,13 @@ CSS, and JavaScript. Start with just the data entry form.</div>
                         <div class="callout callout--info">
                             <h3 class="callout__title">What to Expect</h3>
                             <p>
-                                Your output should include a SharePoint list structure with columns for:
-                                Equipment Name (text), Serial Number (text), Status (choice: Available/Checked
-                                Out/Maintenance), Assigned To (text), Date Checked Out (date), and Expected
-                                Return (date). If your output is missing columns or has different data types,
-                                that is normal &mdash; use the refinement prompts in the next step to fix it.
+                                Your output should be a single HTML file (or three files &mdash; <code>index.html</code>,
+                                <code>styles.css</code>, <code>tracker.js</code>) that you can save and open in any browser.
+                                The form should have inputs for all six data fields. Submitting it should add a row to a
+                                table below the form. If the AI gives you React, Vue, or any other framework, re-prompt:
+                                <em>&ldquo;Use plain HTML, CSS, and JavaScript only &mdash; no frameworks.&rdquo;</em> If
+                                fields are missing or the form does not submit, that is normal &mdash; the refinement
+                                prompts in Step 4 will fix it.
                             </p>
                         </div>
 
@@ -753,6 +755,42 @@ Frontier Risks:
                                 target users, at least 3 success criteria, required functions with priorities,
                                 and data considerations.
                             </p>
+                            <p class="mt-md">
+                                <a href="../../templates/problem-definition.md" class="btn btn--primary btn--sm" download>Download the Problem Definition Worksheet</a>
+                                <span class="ml-sm">Markdown &mdash; fill it out in any text editor or VS&nbsp;Code.</span>
+                            </p>
+                        </div>
+
+                        <p class="mt-lg">
+                            Your finished worksheet should have every section filled in &mdash; no &ldquo;TBD&rdquo;
+                            entries. Bring the completed file to Platform Training (Course&nbsp;3); your supervisor
+                            must sign it before development begins.
+                        </p>
+
+                        <div class="template-display">
+                            <div class="template-display__header">
+                                <h4 class="template-display__title">Worksheet Sections at a Glance</h4>
+                            </div>
+                            <div class="template-display__content">1. Tool Information
+   Tool Name | Developer | Date
+
+2. Problem Statement (2-3 sentences)
+   What currently happens, why it's a problem, who is affected.
+
+3. Target Users
+   Primary User Group | Secondary Users | Estimated Count
+
+4. Success Criteria (at least 3, all measurable)
+   Metric | Current State | Target State | How Measured
+
+5. Required Functions
+   Function Description | Priority (Must / Should / Nice)
+
+6. Data Considerations
+   PII / PHI handling | Security controls | Data sensitivity | Platform
+
+7. Approvals
+   Developer signature | Supervisor signature | Dates</div>
                         </div>
                     </section>
 
