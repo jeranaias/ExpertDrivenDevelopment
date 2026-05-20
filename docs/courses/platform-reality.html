@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Course 3.5: Platform Training (Locked Tenant Reality). A 4-hour workshop building deployable static-HTML tools when M365 and Power Platform are unavailable. Practices centaur and cyborg patterns, produces a Capability Gap Map for HQMC.">
+    <title>Platform Training (Locked Tenant Reality) | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="site-wrapper">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./" class="active">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="./" class="active">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="../resources/">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Courses</a></li>
+                    <li aria-current="page">Platform Training (Locked Tenant Reality)</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Course 3.5: Platform Training (Locked Tenant Reality)</h1>
+            <p class="page-header__desc">
+                4 hours. Same three builds, same centaur/cyborg framing, same frontier discipline as Course 3.
+                What changes is the execution layer. When the tenant is locked and Power Platform is not on the table,
+                students still ship working tools by Monday using static HTML and free public hosting that reaches MCEN.
+                The session produces two artifacts in parallel: deployable tools, and a Capability Gap Map that documents
+                what production access would unlock.
+            </p>
+            <div class="mt-lg">
+                <span class="badge badge--gold">Reality Track</span>
+                <span class="badge">4 Hours</span>
+                <span class="badge badge--scarlet">Builders</span>
+            </div>
+            <p class="mt-lg">
+                <strong>Prerequisite:</strong> Builder Orientation. <strong>Required access:</strong> genai.mil, a text editor, a free GitHub account, and the ability to reach github.io from your duty workstation.
+            </p>
+            <div class="page-header__actions mt-lg" role="group" aria-label="Course 3.5 materials">
+                <a href="../builds/watch-bill.html" class="btn btn--primary" target="_blank" rel="noopener">Open Reference Build: Watch Bill</a>
+                <a href="../builds/teep.html" class="btn btn--primary" target="_blank" rel="noopener">Open Reference Build: TEEP</a>
+                <a href="../handouts/platform-reality-handout.html" class="btn btn--secondary" target="_blank" rel="noopener">Open the Student Handout</a>
+                <a href="../resources/capability-gap-map.html" class="btn btn--secondary" target="_blank" rel="noopener">Open the Capability Gap Map</a>
+                <a href="../resources/static-hosting-cheat-sheet.html" class="btn btn--secondary" target="_blank" rel="noopener">Open the Static Hosting Cheat Sheet</a>
+            </div>
+            <p class="mt-md">
+                <strong>Companion course:</strong>
+                <a href="platform.html">Course 3: Platform Training</a> (the Power Platform version this course pivots from).
+            </p>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+            <div class="page-layout page-layout--sidebar">
+
+                <aside class="sidebar sidebar--sticky" aria-label="Table of contents">
+                    <nav class="toc">
+                        <h2 class="toc__title">On This Page</h2>
+                        <ul class="toc__list">
+                            <li><a href="#three-layers">The Three Layers</a></li>
+                            <li><a href="#agenda">Agenda &amp; Timing</a></li>
+                            <li><a href="#setup-review">Module 1: Setup, Hosting, Review</a></li>
+                            <li><a href="#build-1">Module 2: Build #1 (Centaur, Watch Bill)</a></li>
+                            <li><a href="#failure-sharing">Failure Sharing</a></li>
+                            <li><a href="#build-2">Module 4: Build #2 (Cyborg, TEEP)</a></li>
+                            <li><a href="#build-3">Module 5: Build #3 (Your Problem)</a></li>
+                            <li><a href="#wrap">Module 6: Frontier Map &amp; Capability Gap Map</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <div class="page-content">
+
+                    <!-- THREE LAYERS -->
+                    <section id="three-layers">
+                        <h2>The Three Layers</h2>
+                        <p>
+                            Today the room sits across three layers. Some are available right now. Some are not.
+                            We work every layer we can reach, and we document the wall where the work stops.
+                        </p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Layer</th>
+                                        <th scope="col">What It Is</th>
+                                        <th scope="col">Status Today</th>
+                                        <th scope="col">What You Use It For</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>1. Spec</strong></td>
+                                        <td>genai.mil. Conversation. Thinking out loud with an AI on a CUI-aware tenant.</td>
+                                        <td>Always available.</td>
+                                        <td>Design, decompose, draft, prompt-write, peer-review your own logic.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>2. Prototype</strong></td>
+                                        <td>Static HTML in a single file. Deployed to GitHub Pages or another free public host that MCEN can reach.</td>
+                                        <td>Always available.</td>
+                                        <td>Build the tool. Run it offline. Print it. Share the URL. Hand it to a Marine on a phone.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>3. Production</strong></td>
+                                        <td>Power Apps, Dataverse, Power Automate, real connectors, identity, write-back.</td>
+                                        <td>Often unavailable. Tenant-dependent.</td>
+                                        <td>Where the tool gets 10x better if access is granted. Document the wish today.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Opening Line for the Room</h3>
+                            <p>
+                                "Today we design the tools our units need, build everything we can right here, and clearly mark where we hit the wall. That wall map becomes the case for changing what we have access to."
+                            </p>
+                        </div>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Closing Line for the Room</h3>
+                            <p>
+                                "Power Apps skills die when you turn in your CAC. HTML skills don't."
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- AGENDA -->
+                    <section id="agenda">
+                        <h2>Agenda</h2>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Module</th>
+                                        <th scope="col">201 Skills Applied</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>0:00 to 0:15</td>
+                                        <td>Setup, Hosting Check, Three Layers</td>
+                                        <td>All six (quick check)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>0:15 to 0:35</td>
+                                        <td>Whiteboard Planning (Centaur Phase 1)</td>
+                                        <td>Task Decomposition, Context Assembly</td>
+                                    </tr>
+                                    <tr>
+                                        <td>0:35 to 1:20</td>
+                                        <td>Build #1: Watch Bill Builder (Centaur Phase 2 to 4)</td>
+                                        <td>Context Assembly, Quality Judgment</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1:20 to 1:30</td>
+                                        <td>Break and Failure Sharing</td>
+                                        <td>Frontier Recognition</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1:30 to 2:30</td>
+                                        <td>Build #2: TEEP Builder (Cyborg Mode)</td>
+                                        <td>Iterative Refinement, Workflow Integration</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2:30 to 2:40</td>
+                                        <td>Break</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2:40 to 3:30</td>
+                                        <td>Build #3: Your Problem (Choose Your Mode)</td>
+                                        <td>Task Decomposition, all six</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3:30 to 3:50</td>
+                                        <td>Frontier Map and Capability Gap Map Wrap</td>
+                                        <td>Frontier Recognition</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2"><strong>Total Course Time</strong></td>
+                                        <td><strong>3 hours 50 minutes instruction. Schedule a 4-hour block to absorb overruns.</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Contingency Plan: If Public Hosting Is Blocked Today</h3>
+                            <p>
+                                If GitHub Pages does not load from your network for any reason, the course still runs. Pivot to:
+                            </p>
+                            <ol>
+                                <li><strong>Build to a local file:</strong> Every reference build runs offline as a single .html file. Students open their build directly from <code>file://</code> in a browser. They can demo it, print it, attach it to an email, and copy the source into a Confluence or wiki page that does render on MCEN.</li>
+                                <li><strong>Hand-carry the bundle:</strong> Email the .html file to the Marine who will use the tool. They double-click. It works.</li>
+                                <li><strong>Add a Capability Gap Map row:</strong> "Hosting reach is blocked on this network." That is a real, fixable policy gap. Capture it.</li>
+                            </ol>
+                            <p>
+                                The pedagogy holds either way. Centaur and cyborg patterns are independent of where the file lives.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- MODULE 1: SETUP -->
+                    <section id="setup-review">
+                        <h2>Module 1: Setup, Hosting, Review</h2>
+                        <p><strong>Duration:</strong> 15 minutes</p>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Pre-Flight Access Check</h3>
+                            <p>
+                                Before starting Module 2, confirm each item below. Resolve issues now, not during a build.
+                            </p>
+                            <ul>
+                                <li><strong>genai.mil:</strong> can sign in, can start a conversation. This is your AI tool for every build today.</li>
+                                <li><strong>Text editor:</strong> Notepad, Notepad++, VS Code, or any editor that saves a plain <code>.html</code> file.</li>
+                                <li><strong>Browser:</strong> Edge or Chrome. Both render every reference build identically.</li>
+                                <li><strong>GitHub account:</strong> A free personal account at <code>github.com</code>. Personal email is fine. Two-factor is required and you will set it up today if you have not already.</li>
+                                <li><strong>github.io reachable:</strong> Open <a href="https://jeranaias.github.io/ExpertDrivenDevelopment/builds/watch-bill.html" target="_blank" rel="noopener">jeranaias.github.io/ExpertDrivenDevelopment/builds/watch-bill.html</a> from your duty workstation. If it loads, you are good. If it does not, see the contingency plan above.</li>
+                                <li><strong>Clipboard works:</strong> You can copy text out of the browser and paste into Outlook. Many DoD workstations restrict this in odd ways. Test it now.</li>
+                            </ul>
+                        </div>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">AI Tool for Today</h3>
+                            <p>
+                                Use <strong>genai.mil</strong>. The January 2026 MARADMIN consolidated USMC onto genai.mil as the standard AI tenant. Anonymize PII (real names, SSNs, contact info) in your prompts unless a PIA authorizes the data. CUI-level unit context (unit name, approval chain, T&amp;R references) is acceptable on genai.mil.
+                            </p>
+                            <p>
+                                If genai.mil is briefly down, you can do your prompt and design work locally on a sheet of paper or a whiteboard. The build itself is just typing the answer into your editor.
+                            </p>
+                        </div>
+
+                        <h3>Hosting in 60 Seconds</h3>
+                        <p>
+                            Your tool is a single <code>.html</code> file. Public hosting means a URL that other Marines can open from their phone or workstation, without you emailing the file. The path of least resistance today:
+                        </p>
+
+                        <ol>
+                            <li>Create a new repo on github.com. Name it after your tool.</li>
+                            <li>Drag the <code>.html</code> file into the browser onto the empty repo. GitHub commits it.</li>
+                            <li>In the repo go to <strong>Settings &rarr; Pages</strong>. Source: <code>main</code> branch, root. Save.</li>
+                            <li>Wait 60 seconds. The URL is <code>https://&lt;your-username&gt;.github.io/&lt;your-repo&gt;/&lt;filename&gt;.html</code>.</li>
+                            <li>Open the URL on your phone. If it loads, you just deployed a tool.</li>
+                        </ol>
+
+                        <p>
+                            Other hosts work the same way at the conceptual level. See the <a href="../resources/static-hosting-cheat-sheet.html">Static Hosting Cheat Sheet</a> for the full menu with MCEN-reachability notes.
+                        </p>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Instructor Note</h3>
+                            <p>
+                                Walk every student through the GitHub Pages deploy of an empty placeholder file before Module 2 starts. If any student cannot reach their own github.io URL by minute 14, do not start Build #1. Either resolve the network issue or move that student to local-file mode for the rest of the day. Trying to debug hosting during a centaur build kills the build.
+                            </p>
+                        </div>
+
+                        <h3>Centaur and Cyborg, 90 Seconds</h3>
+                        <p>
+                            Quick refresher from Builder Orientation. Two work patterns:
+                        </p>
+                        <ul>
+                            <li><strong>Centaur:</strong> distinct human phases and AI phases with clear boundaries. Human designs. AI builds. Human verifies. Best for workflows with strict business rules.</li>
+                            <li><strong>Cyborg:</strong> continuous back-and-forth. You discover requirements as you build. Best for exploratory work where you do not fully know what you want until you see it.</li>
+                        </ul>
+                        <p>
+                            Build #1 is centaur. Build #2 is cyborg. Build #3 is your choice.
+                        </p>
+                    </section>
+
+                    <!-- BUILD 1 -->
+                    <section id="build-1">
+                        <h2>Module 2: Build #1, Centaur Mode (Watch Bill Builder)</h2>
+                        <p><strong>Duration:</strong> 65 minutes (20 min whiteboard + 45 min build)</p>
+
+                        <p>
+                            <strong>Problem:</strong> A section leader has to publish a watch bill for the next two weeks. Rotation through the available roster, skip anyone on leave, fair distribution, prints clean, emails clean. Today it is done in Excel and an email chain. MOL does not solve this. We do, today, in HTML.
+                        </p>
+
+                        <p>
+                            <strong>Why this build:</strong> Universal NCO pain. Every section has one of these. Logic is real (rotation plus exclusions plus fairness) but small enough to ship in 45 minutes. The Marine using the tool needs zero training to read the output.
+                        </p>
+
+                        <p>
+                            <strong>Reference build:</strong> <a href="../builds/watch-bill.html" target="_blank" rel="noopener">builds/watch-bill.html</a>. Open it now. This is what you are building toward. Use it to check your work, not to copy-paste from.
+                        </p>
+
+                        <h3>Phase 1: Human Designs (20 minutes, no AI yet)</h3>
+                        <p>
+                            On a whiteboard or a sheet of paper, define the tool before you touch a tool. No AI in this phase.
+                        </p>
+
+                        <div class="template-display">
+                            <h4>Filled-In Whiteboard Planning Template (Watch Bill Builder)</h4>
+
+                            <h5>Business Rules</h5>
+                            <ul>
+                                <li>One Marine per day on the bill.</li>
+                                <li>Rotate through the available roster in order.</li>
+                                <li>Anyone marked LV, TAD, APPT, MED, or PCS is skipped (not eligible).</li>
+                                <li>Fairness check: spread between most-watches and fewest-watches should be 0 or 1 across the period.</li>
+                                <li>Weekends shown but not treated differently (this section stands the watch every day).</li>
+                            </ul>
+
+                            <h5>Inputs</h5>
+                            <ul>
+                                <li>Section / unit name (string).</li>
+                                <li>Watch type (Duty NCO, Fire Watch, Quarterdeck, Phone Watch, Barracks Duty, SDO, OOD, or custom string).</li>
+                                <li>Start date (YYYY-MM-DD).</li>
+                                <li>Number of days (1 to 365).</li>
+                                <li>Roster: free-text list, one Marine per line, optional <code>- LV</code> suffix to mark unavailable.</li>
+                            </ul>
+
+                            <h5>Outputs</h5>
+                            <ul>
+                                <li>On-screen table: Date, Day of Week, Watchstander.</li>
+                                <li>Fairness summary: count per Marine, total slots, spread number.</li>
+                                <li>Skipped list: who was excluded and why.</li>
+                                <li>Email body in a textarea (plain-text monospace table) with Copy button. Subject auto-built.</li>
+                                <li>Print: clean, no header chrome, dates and names readable on US Letter.</li>
+                            </ul>
+
+                            <h5>Edge Cases</h5>
+                            <ul>
+                                <li>Empty roster: show inline error, do not generate.</li>
+                                <li>Everyone marked unavailable: show inline error.</li>
+                                <li>Single available Marine plus 14 days: that Marine on every day. Surface it in fairness summary so it cannot hide.</li>
+                                <li>Invalid date: show inline error.</li>
+                                <li>Days &gt; 365: cap and error.</li>
+                            </ul>
+
+                            <h5>Out of Scope (Capability Gap candidates)</h5>
+                            <ul>
+                                <li>Pulling roster from MOL or Outlook contact group automatically.</li>
+                                <li>Reading leave block schedules from a system of record.</li>
+                                <li>Notifying watchstanders by email when the bill is published.</li>
+                                <li>Persisting bills across sessions for multiple sections.</li>
+                            </ul>
+                        </div>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Instructor Checkpoint: End of Phase 1</h3>
+                            <p>
+                                Walk the room. Every student should have a written plan that covers: inputs, business rules, edge cases, outputs. If a student starts writing HTML before they have an edge case list, stop them and send them back to the whiteboard. The centaur discipline is that the plan exists before the AI sees it.
+                            </p>
+                            <p>
+                                Have one or two students read their plan to the room. Look for missed edge cases. Empty roster and everyone-on-leave are the two most often forgotten.
+                            </p>
+                        </div>
+
+                        <h3>Phase 2: AI Builds (25 minutes)</h3>
+                        <p>
+                            Open genai.mil. Feed it your plan as one prompt. Then iterate on smaller chunks.
+                        </p>
+
+                        <div class="prompt-block">
+                            <strong>Student Prompt to AI (Phase 2, full plan handoff):</strong>
+                            <p>
+                                Build me a single-file static HTML tool called Watch Bill Builder. Constraints:
+                            </p>
+                            <ul>
+                                <li>One <code>.html</code> file. Inline CSS. Inline JavaScript. No external scripts, no external fonts, no external stylesheets, no CDN. It must work 100% offline after page load.</li>
+                                <li>Mobile responsive. Prints clean to US Letter.</li>
+                                <li>Has an UNCLASSIFIED banner top and bottom.</li>
+                                <li>Inputs: section name, watch type (dropdown of Duty NCO, Fire Watch, Quarterdeck, Phone Watch, Barracks Duty, SDO, OOD, Custom), start date, number of days, roster textarea (one name per line, suffix <code>- LV</code> or <code>- TAD</code> or <code>- APPT</code> means skip).</li>
+                                <li>Logic: rotate available Marines in order, skip anyone with a skip suffix, build a date range starting at start date.</li>
+                                <li>Outputs: a table of Date / Day / Watchstander, a fairness summary with per-Marine counts and a spread number, a skipped list, and an email-pasteable plain-text table in a textarea with a Copy button. Subject line auto-built.</li>
+                                <li>Errors handled inline: empty section, empty roster, all unavailable, invalid date, days less than 1 or more than 365.</li>
+                            </ul>
+                            <p>
+                                Give me the full HTML. Do not split it into multiple files. Do not use any framework.
+                            </p>
+                        </div>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">What to Expect Back</h3>
+                            <p>
+                                genai.mil typically returns one large HTML block. It will run. The first pass will have at least one of: a missing edge case, a print layout that does not actually print clean, a copy button that fails on Edge, or a fairness summary that double-counts. That is normal. Phase 3 is where you catch it.
+                            </p>
+                        </div>
+
+                        <h3>Phase 3: Human Verifies (10 minutes)</h3>
+                        <p>
+                            Save the AI's output as <code>watch-bill.html</code>. Open in a browser. Run the bill through every edge case from your Phase 1 plan. Specifically:
+                        </p>
+
+                        <ol>
+                            <li>Empty roster. Hit Generate. Does it show an inline error or silently produce nothing?</li>
+                            <li>All Marines marked <code>- LV</code>. Same test.</li>
+                            <li>Days = 0. Days = 400. Both should error.</li>
+                            <li>Single available Marine, 14 days. Does the fairness summary make the imbalance visible, or hide it?</li>
+                            <li>Copy email body to clipboard. Paste into Outlook. Does the monospace table survive?</li>
+                            <li>Hit print. Does the input form vanish? Does the bill stay readable on one page?</li>
+                        </ol>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Instructor Verification Standard</h3>
+                            <p>
+                                A student declares Build #1 done only after they have tested all six checks above. Have them mark each off out loud. Verification is the discipline. The build is just typing.
+                            </p>
+                        </div>
+
+                        <h3>Phase 4: AI Refines (10 minutes)</h3>
+                        <p>
+                            Take the specific failures you found in Phase 3 back to genai.mil. Be specific.
+                        </p>
+
+                        <div class="prompt-block">
+                            <strong>Student Prompt to AI (Phase 4, targeted fix):</strong>
+                            <p>
+                                In the Watch Bill Builder you generated, when I leave the roster empty and click Generate, nothing happens and no error appears. I want an inline error that says exactly "Roster is empty. Add at least one Marine." appearing below the form. Show me only the JavaScript change. Do not regenerate the whole file.
+                            </p>
+                        </div>
+
+                        <p>
+                            Paste only the changed lines into your file. Save. Reload. Re-test.
+                        </p>
+
+                        <h3>Phase 5: Human Accepts</h3>
+                        <p>
+                            One final walk-through. Does the tool match your Phase 1 plan? If yes, deploy:
+                        </p>
+
+                        <ol>
+                            <li>Drop the file into your GitHub repo.</li>
+                            <li>Confirm the GitHub Pages URL loads on your phone.</li>
+                            <li>Share the URL with one other Marine in the room.</li>
+                            <li>Have them test it on their phone. Watch them. Note any friction.</li>
+                        </ol>
+
+                        <div class="callout">
+                            <h3 class="callout__title">Key Teaching Point</h3>
+                            <p>
+                                At every phase boundary there is a verification checkpoint. The human is responsible for design and verification. The AI handles execution. That separation is what makes centaur reliable for any workflow that other Marines will trust.
+                            </p>
+                        </div>
+
+                        <div class="callout callout--success">
+                            <h4 class="callout__title">Build #1 Success Indicators</h4>
+                            <ul>
+                                <li>A single <code>.html</code> file that runs offline and produces a correct watch bill.</li>
+                                <li>Inline errors fire on every edge case in the Phase 1 list.</li>
+                                <li>Fairness summary correctly reports the spread.</li>
+                                <li>Email body copies cleanly into Outlook.</li>
+                                <li>Print layout fits one page for a 14-day bill.</li>
+                                <li>Deployed to a github.io URL that opens on a phone.</li>
+                                <li>Student can articulate one specific point where they caught an AI error and corrected it.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- FAILURE SHARING -->
+                    <section id="failure-sharing">
+                        <h2>Module 3: Failure Sharing</h2>
+                        <p><strong>Duration:</strong> 10 minutes (during break)</p>
+
+                        <p>
+                            <strong>This is not optional.</strong> Same beat as Course 3. The most valuable 10 minutes in the session.
+                        </p>
+
+                        <p>Each participant shares:</p>
+                        <ul>
+                            <li>What the AI got wrong on Build #1.</li>
+                            <li>How they caught it.</li>
+                            <li>How they fixed it.</li>
+                        </ul>
+
+                        <p>
+                            Document failures on a shared whiteboard or in the classroom Capability Gap Map row. The pattern is the value. If three Marines all hit the same broken-on-first-pass behavior from genai.mil, that becomes a unit-level prompt note for next session.
+                        </p>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Instructor Note</h3>
+                            <p>
+                                Create psychological safety. Share your own first-pass failure on the reference build. The more specific and honest the sharing, the better the frontier map. Frame failure as data, not embarrassment.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- BUILD 2 -->
+                    <section id="build-2">
+                        <h2>Module 4: Build #2, Cyborg Mode (TEEP Builder)</h2>
+                        <p><strong>Duration:</strong> 60 minutes</p>
+
+                        <p>
+                            <strong>Problem:</strong> The S-3 shop runs the Training, Exercise, and Employment Plan in a Word doc, an Excel sheet, and a whiteboard. None of those talk to each other. By Friday the brief slide is stale. Build a TEEP tool that lives in the browser, persists across sessions, and produces a current S-3 brief on demand.
+                        </p>
+
+                        <p>
+                            <strong>Why this build:</strong> Cyborg mode is for when you do not fully know what you need until you see it. TEEP is exactly that. You will rebuild the data model at least once during this hour. That is the lesson.
+                        </p>
+
+                        <p>
+                            <strong>Reference build:</strong> <a href="../builds/teep.html" target="_blank" rel="noopener">builds/teep.html</a>. Open it. This is the destination. The path to it is messy on purpose.
+                        </p>
+
+                        <h3>Cyborg Pattern (no distinct phases)</h3>
+                        <p>
+                            Keep genai.mil open in one window and your editor in another. Conversation is continuous. Context accumulates in a single thread. You will not write a plan upfront. You will discover the plan by building.
+                        </p>
+
+                        <h3>Iteration 1: Get Something Visible (10 minutes)</h3>
+
+                        <div class="prompt-block">
+                            <strong>Student Prompt to AI:</strong>
+                            <p>
+                                Build me a single-file static HTML TEEP tool. Stores training events with name, type, start date, end date, status (Planned / Confirmed / Executed / Cancelled), and a resources / notes field. Inline CSS, inline JS, no external dependencies. Stores data in localStorage so it survives a reload. Shows a table of events sorted by start date. UNCLASSIFIED banner top and bottom.
+                            </p>
+                        </div>
+
+                        <p>
+                            Save the result as <code>teep.html</code>. Open it. It probably works for the happy path. Now do something with it.
+                        </p>
+
+                        <h3>Iteration 2: Realize the Data Is Not Enough</h3>
+                        <p>
+                            Add three sample events through the UI. Try to brief them to your CO in your head.
+                        </p>
+
+                        <ul>
+                            <li>You cannot tell which events are inside 14 days.</li>
+                            <li>You cannot tell which Planned events are about to fall off because no one confirmed them.</li>
+                            <li>You cannot count anything fast.</li>
+                        </ul>
+
+                        <div class="prompt-block">
+                            <strong>Student Prompt to AI:</strong>
+                            <p>
+                                The tool works but I cannot brief from it. Add: summary cards at the top showing total events, count by status. Add a "T-X days" indicator next to each event. Highlight events inside 14 days that are still Planned (not Confirmed) so they stand out as confirmation gaps. The summary cards must use color to communicate status at a glance.
+                            </p>
+                        </div>
+
+                        <div class="callout callout--instructor">
+                            <h4 class="callout__title">Instructor Teaching Point: This Is Cyborg Mode</h4>
+                            <p>
+                                Name what just happened. The student did not plan summary cards upfront. They built, evaluated, realized it could not brief, pivoted. That is the cyborg pattern. In centaur mode this would have been a Phase 1 requirement on the whiteboard. In cyborg mode it surfaces only when you try to use the thing.
+                            </p>
+                        </div>
+
+                        <h3>Iteration 3: Conditional Styling (Deliberate AI Failure Moment)</h3>
+
+                        <div class="callout callout--warning">
+                            <h4 class="callout__title">INSTRUCTOR: DELIBERATE AI MISTAKE COMING. DO NOT WARN STUDENTS.</h4>
+                            <p>
+                                On the first prompt for color-coding, genai.mil will almost always return code that does not work as advertised. Common failure modes observed in classroom runs:
+                            </p>
+                            <ul>
+                                <li>Sets <code>element.style.background = color</code> on the row but the CSS class on the cell wins because of specificity, so nothing changes visually.</li>
+                                <li>Uses <code>element.bgColor = "red"</code> (deprecated, ignored by modern browsers).</li>
+                                <li>Uses a <code>:contains()</code> CSS selector (does not exist).</li>
+                                <li>Compares status with loose equality and falls into the wrong branch because of whitespace.</li>
+                                <li>Colors the wrong cell because <code>querySelector</code> matches the first descendant rather than the intended one.</li>
+                            </ul>
+                            <p>
+                                Let students attempt this. Do not intervene yet. When hands go up, ask the four questions in the debrief below.
+                            </p>
+                        </div>
+
+                        <div class="prompt-block">
+                            <strong>Student Prompt to AI:</strong>
+                            <p>
+                                Add color coding to the status column. Planned blue, Confirmed green, Executed gray, Cancelled red. Make the colors WCAG AA. Show me only the changes I need to apply to the file I already have.
+                            </p>
+                        </div>
+
+                        <div class="callout callout--instructor">
+                            <h4 class="callout__title">Debrief Questions When Students Get Stuck</h4>
+                            <ol>
+                                <li>"What did the AI tell you to do?"</li>
+                                <li>"What result did you expect?"</li>
+                                <li>"What result did you actually get?"</li>
+                                <li>"What would you ask the AI to clarify or fix?"</li>
+                            </ol>
+                            <p>
+                                This is frontier recognition. The AI gave plausible code that does not actually do what it claimed. The human catches it. The teaching beat lands here regardless of whether the failure happens in Power BI or in vanilla JS.
+                            </p>
+                        </div>
+
+                        <h3>Iteration 4: Fix the Conditional Styling (Student-Driven)</h3>
+
+                        <div class="prompt-block">
+                            <strong>Student Prompt to AI (after testing the failure):</strong>
+                            <p>
+                                The styling does not apply. I set the style inline on the cell with <code>element.style.background</code> and nothing changes. The browser shows the cell still white. I think a CSS class on the parent is winning the specificity battle. Give me a CSS-class-based approach instead: one class per status (<code>.status-Planned</code>, <code>.status-Confirmed</code>, etc.) defined in the &lt;style&gt; block, and JS that sets <code>className</code> on the status pill element. Show me the &lt;style&gt; additions and the JS line that sets the class.
+                            </p>
+                        </div>
+
+                        <div class="callout callout--instructor">
+                            <h4 class="callout__title">Instructor Debrief: Failure Recognition</h4>
+                            <p>
+                                After the fix works, pause and ask:
+                            </p>
+                            <ol>
+                                <li>"What was wrong with the AI's first answer?"</li>
+                                <li>"How did you know it was wrong?"</li>
+                                <li>"What did you change in your prompt the second time that the AI needed in order to succeed?"</li>
+                            </ol>
+                            <p>
+                                The answer to question three is usually some version of "I told it about the constraint I had discovered." That is the centaur-cyborg blend that experienced builders develop. Name it.
+                            </p>
+                        </div>
+
+                        <h3>Iteration 5: Generate the S-3 Brief</h3>
+
+                        <div class="prompt-block">
+                            <strong>Student Prompt to AI:</strong>
+                            <p>
+                                Add a button labeled "Generate S-3 Brief." It produces a plain-text briefing block in a read-only textarea. Format: header with unit and as-of date, status summary with counts, "Next 14 Days" section listing upcoming Planned and Confirmed events with T-X days, a "Confirmation Gaps" section listing any Planned events inside 14 days, and a one-line REQUEST at the end (push for confirmation gaps if any, otherwise steady state). Add a Copy button next to it.
+                            </p>
+                        </div>
+
+                        <div class="callout callout--instructor">
+                            <h4 class="callout__title">Instructor Time Check</h4>
+                            <p>
+                                At 50 minutes into this build, stop adding features. The core cyborg pattern is demonstrated by Iteration 4. Iteration 5 is enhancement. If the room is on time, do it. If not, declare and move on.
+                            </p>
+                        </div>
+
+                        <div class="callout callout--success">
+                            <h4 class="callout__title">Build #2 Success Indicators</h4>
+                            <ul>
+                                <li>localStorage persistence verified by reload.</li>
+                                <li>Color-coded status with a class-based approach the student can explain.</li>
+                                <li>Summary cards that count by status.</li>
+                                <li>S-3 Brief generator that produces a copy-pasteable paragraph block.</li>
+                                <li>Student restructured something at least once based on evaluation.</li>
+                                <li>Student caught at least one AI mistake (Iteration 3 should produce one).</li>
+                                <li>Student can explain how cyborg differs from centaur using this build as the example.</li>
+                            </ul>
+                        </div>
+
+                        <div class="callout">
+                            <h3 class="callout__title">Key Teaching Point</h3>
+                            <p>
+                                Cyborg is faster but requires constant attention. You cannot walk away. It is the right mode when you are discovering the shape of the problem. It is the wrong mode for a Build #1 with strict approval rules.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- BUILD 3 -->
+                    <section id="build-3">
+                        <h2>Module 5: Build #3, Your Problem (Choose Your Mode)</h2>
+                        <p><strong>Duration:</strong> 50 minutes</p>
+
+                        <p>
+                            Each participant builds the tool they identified during Builder Orientation. Real problem, real users, real requirements. Single-file HTML. Deployed to their own github.io URL by the end of the block.
+                        </p>
+
+                        <p>Before starting, each participant declares:</p>
+                        <ol>
+                            <li><strong>What they are building.</strong> One sentence. Names the tool type and the user. Not "something for training," but "a Combat Lifesaver currency tracker for the SACO."</li>
+                            <li><strong>Which mode and why.</strong> Centaur if rules are strict. Cyborg if you do not yet know the shape.</li>
+                            <li><strong>At least two specific frontier risks.</strong> Where do you expect genai.mil to struggle? Common ones: date math, print layout, large lists, copy-to-clipboard variance across browsers, anything that involves dates around fiscal year boundaries.</li>
+                        </ol>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Data Handling Reminder</h3>
+                            <p>
+                                CUI-level unit data is acceptable in prompts on genai.mil. PII (real Marine names, SSNs, contact info) must be anonymized unless a PIA authorizes its use. Substitute fictional names. If you are publishing to a public github.io URL, no CUI in the file itself. The file is world-readable the moment the repo is public.
+                            </p>
+                        </div>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Decomposition Template (5 minutes)</h3>
+                            <p>Fill this out before writing your first prompt.</p>
+                            <ol>
+                                <li><strong>Inputs:</strong> What does the user type or select?</li>
+                                <li><strong>Logic:</strong> What does the tool compute or decide?</li>
+                                <li><strong>Outputs:</strong> On-screen result, printable view, copyable text, all three?</li>
+                                <li><strong>Persistence:</strong> Does state need to survive reload? localStorage yes or no.</li>
+                                <li><strong>Edge cases:</strong> List three. Empty input, max input, weird input.</li>
+                            </ol>
+                            <p>Five minutes saves an hour.</p>
+                        </div>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Instructor Note</h3>
+                            <p>
+                                Resist solving every problem. When a Marine gets stuck, ask: <em>"What would you tell the AI about what is going wrong?"</em> This builds the self-sufficiency they need after the course ends. Your job is to coach the prompt, not write the prompt.
+                            </p>
+                        </div>
+
+                        <h3>Assessment Criteria for All Three Builds</h3>
+                        <p>
+                            Same rubric as Course 3. Verification, frontier recognition, and appropriate use of centaur vs cyborg modes. The execution layer changed. The discipline did not.
+                        </p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Criteria</th>
+                                        <th scope="col">Exceeds Standard</th>
+                                        <th scope="col">Meets Standard</th>
+                                        <th scope="col">Developing</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Functional Prototype</strong><br>Does the tool work end-to-end?</td>
+                                        <td>Works completely. All edge cases handled. Deployed to a public URL that other Marines can open.</td>
+                                        <td>Works for happy path. Some edge cases not handled. Deployed.</td>
+                                        <td>Errors on basic use. Not deployed.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Centaur Pattern (Build #1)</strong></td>
+                                        <td>Clear Phase 1 plan on paper. Verification checkpoints documented at phase boundaries. Student can articulate what the AI owned vs what they verified.</td>
+                                        <td>Plan exists but is incomplete. Some verification happened.</td>
+                                        <td>No plan. Jumped straight to AI. No verification checkpoints.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Cyborg Pattern (Build #2)</strong></td>
+                                        <td>Multiple iterations. Pivoted at least once based on evaluating output. Can explain why cyborg fit this build.</td>
+                                        <td>Some iteration. At least one course correction.</td>
+                                        <td>Tried to plan everything upfront. No pivots.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Independent Problem-Solving (Build #3)</strong></td>
+                                        <td>Resolved errors independently. Asked clarifying questions, not step-by-step help.</td>
+                                        <td>Needed some guidance but applied it. Could articulate the problem.</td>
+                                        <td>Needed constant intervention.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Verification</strong></td>
+                                        <td>Tested all paths including error cases. Documented at least one AI mistake they caught.</td>
+                                        <td>Tested happy path. Caught at least one error.</td>
+                                        <td>Assumed AI output was correct. Did not test.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Frontier Recognition</strong></td>
+                                        <td>Articulates at least three areas where AI struggled. Contributed to the frontier map and the Capability Gap Map.</td>
+                                        <td>Identified at least one frontier issue.</td>
+                                        <td>Could not identify any AI failures.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Grading Guidance</h3>
+                            <p>
+                                Formative, not summative. Use this to coach. The single most important indicator is Verification. If a Marine is not testing AI output, they are not ready for independent work yet. That is the core EDD discipline.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- WRAP: FRONTIER + GAP MAP -->
+                    <section id="wrap">
+                        <h2>Module 6: Frontier Map and Capability Gap Map</h2>
+                        <p><strong>Duration:</strong> 20 minutes</p>
+
+                        <p>
+                            This block produces two artifacts. The Frontier Map captures where AI is reliable and where it is not. The Capability Gap Map captures where the tenant blocks the work. Both go to leadership. Both compound over time.
+                        </p>
+
+                        <h3>Artifact 1: Frontier Map (existing)</h3>
+                        <p>
+                            Compile all failure cases from the session. This is collective intelligence of the room. Examples adapted to the static-HTML stack:
+                        </p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Task Type</th>
+                                        <th scope="col">AI Handles Well</th>
+                                        <th scope="col">AI Handles Poorly</th>
+                                        <th scope="col">Verification Needed</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>HTML form scaffolding</td>
+                                        <td>Standard inputs, labels, basic validation patterns</td>
+                                        <td>Accessible focus order, dependent field visibility</td>
+                                        <td>Tab through the form. Hit Submit with everything empty.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Inline CSS for print</td>
+                                        <td>Basic <code>@media print</code> rules, hiding nav chrome</td>
+                                        <td>Color preservation flags, table page-breaks</td>
+                                        <td>Actually print the page. Look at the PDF preview.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date math in JS</td>
+                                        <td>Simple day add / subtract</td>
+                                        <td>Timezone offsets, fiscal-year boundary logic, ISO parsing</td>
+                                        <td>Test at start of October. Test at end of December. Test across the date that bit you last time.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>localStorage persistence</td>
+                                        <td>JSON serialize / parse for simple objects</td>
+                                        <td>Schema migration, quota errors, private-browsing mode</td>
+                                        <td>Open in InPrivate. Reload. See what survives.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Copy to clipboard</td>
+                                        <td>Modern <code>navigator.clipboard.writeText</code></td>
+                                        <td>Fallback for older browsers and HTTP context</td>
+                                        <td>Test in Edge, Chrome, and on a phone.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Color coding by status</td>
+                                        <td>Class-based styling with status in the class name</td>
+                                        <td>Inline-style approaches that fight CSS specificity (Iteration 3 trap)</td>
+                                        <td>Visually inspect every status value. Do not trust the first rule.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p>
+                            Each student adds at least two rows specific to what bit them today. Specific task type, specific failure, specific verification action. Not "check the output," but "open the file in InPrivate to verify localStorage is not just relying on cached state."
+                        </p>
+
+                        <h3>Artifact 2: Capability Gap Map (new)</h3>
+                        <p>
+                            This is the second deliverable of the course, and the case for changing what your tenant gives you. Every tool the room built today has a wish list: things that would make it 10x better if production access were unlocked. Capture them.
+                        </p>
+
+                        <p>
+                            Open the <a href="../resources/capability-gap-map.html">Capability Gap Map template</a>. For each of the three builds (and the unit's earlier static prototypes if any), fill one or more rows.
+                        </p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Field</th>
+                                        <th scope="col">What Goes Here</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Task Type</strong></td>
+                                        <td>The category. "Watch bill generation," "Training calendar," "Counseling tracker."</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Prototype Layer Solution</strong></td>
+                                        <td>What the student built today. URL + one-line description.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Production Layer Wish</strong></td>
+                                        <td>What it would do with real connectors. "Pull roster from MOL. Read leave block from system of record. Email watchstanders automatically."</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Blocking Permission / Tool</strong></td>
+                                        <td>The specific gate. "MOL API not exposed to unit-developed tools." "Power Automate Office 365 connector restricted at tenant level." Name it.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Beneficiary Count</strong></td>
+                                        <td>Rough headcount. "1 section, 12 Marines, weekly." "All of 1st Bn, 800 Marines, daily."</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Estimated Time Savings</strong></td>
+                                        <td>Hours per week or per cycle. "2 hrs / week per section leader." Conservative is fine.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Where This Goes</h3>
+                            <p>
+                                Capability Gap Map rows compile across sessions. They form the evidence base for tenant policy review at the HQMC AI working group level. A single Marine asking for a connector is a request. Forty Marines documenting the same blocked connector with beneficiary counts and time savings is a policy case.
+                            </p>
+                            <p>
+                                Forward your unit's compiled Capability Gap Map up through your AI POC. If you are an instructor, your set of Capability Gap Maps from each session is one of the most valuable artifacts the course produces.
+                            </p>
+                        </div>
+
+                        <h3>Assignment Before Advanced Workshop</h3>
+                        <ol>
+                            <li>Polish Build #3 to a deployable state. Keep the URL live.</li>
+                            <li>Run through the EDD SOP QA process on at least one of your three builds.</li>
+                            <li>Document three failure cases with specifics: what failed, how you caught it, how you fixed it.</li>
+                            <li>Add at least two rows to your unit's Capability Gap Map based on the limitations you ran into.</li>
+                            <li>Identify one area where AI capability surprised you. Something it did better than you expected.</li>
+                        </ol>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>
+                        Open-source AI-assisted development training for DoW personnel.
+                        Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="./">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="../toolkit/">Toolkit</a></li>
+                        <li><a href="../tools/">Tools</a></li>
+                        <li><a href="../resources/">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../builds/watch-bill.html">Reference Build: Watch Bill</a></li>
+                        <li><a href="../builds/teep.html">Reference Build: TEEP</a></li>
+                        <li><a href="../resources/capability-gap-map.html">Capability Gap Map</a></li>
+                        <li><a href="../resources/static-hosting-cheat-sheet.html">Static Hosting Cheat Sheet</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function() {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+
+    <script src="../js/enhancements.js"></script>
+    <script src="../js/knowledge-check.js"></script>
+    <script src="../js/course-progress.js"></script>
+    <script src="../js/user-identity.js"></script>
+
+</body>
+</html>

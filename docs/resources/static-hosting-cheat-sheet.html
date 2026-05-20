@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Static hosting cheat sheet for Marines building tools on the prototype layer. Three tiers of free public hosts with MCEN-reachability notes, testing methodology, and TOS guidance.">
+    <title>Static Hosting Cheat Sheet | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+      /* One-page print friendly */
+      @media print {
+        body { background: #fff; }
+        .site-header, .mobile-nav, .page-header, .site-footer, .skip-link { display: none; }
+        .container { max-width: none; padding: 0 0.25in; }
+        main { padding: 0; }
+        h2 { font-size: 1.1rem; page-break-after: avoid; }
+        h3 { font-size: 1rem; page-break-after: avoid; }
+        table { font-size: 0.78rem; }
+        .callout { page-break-inside: avoid; }
+        section { page-break-inside: avoid; }
+      }
+      .tier-card { margin-bottom: 1rem; }
+    </style>
+</head>
+<body class="site-wrapper">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="./" class="active">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="./" class="active">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Resources</a></li>
+                    <li aria-current="page">Static Hosting Cheat Sheet</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Static Hosting Cheat Sheet</h1>
+            <p class="page-header__desc">
+                Where to put a single-file HTML tool so other Marines can reach it from a duty workstation or phone. Three tiers, sorted by how likely the host is to load from MCEN. <strong>Test before betting on any of them.</strong> Tenant settings, base posture, and network changes can shift any host between tiers without notice.
+            </p>
+            <div class="mt-lg">
+                <span class="badge badge--gold">Course 3.5 Resource</span>
+                <span class="badge">One-Page Reference</span>
+            </div>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+
+            <section>
+                <h2>Strategic Note: Teach the Pattern, Not the Host</h2>
+                <p>
+                    Every host below works the same way at the conceptual level. Push an <code>.html</code> file to a repo. The host serves it at a public URL. If your unit moves between bases, networks, or contracts, the host name changes but the skill does not. Your Marines learn HTML, Git, and deployment once. They keep that for the rest of their career.
+                </p>
+                <p>
+                    Power Apps skills die when you turn in your CAC. HTML skills do not.
+                </p>
+            </section>
+
+            <section>
+                <h2>Tier 1: Very Likely to Load on MCEN</h2>
+                <p>
+                    Confirmed loading on at least one MCEN-attached duty workstation as of the last classroom run. Still: test before relying on it.
+                </p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Host</th>
+                                <th scope="col">URL Pattern</th>
+                                <th scope="col">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>GitHub Pages</strong></td>
+                                <td><code>https://&lt;user&gt;.github.io/&lt;repo&gt;/</code></td>
+                                <td>Confirmed working. Free with personal account. Two-factor required. Auto-deploy from <code>main</code> branch.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>GitLab Pages</strong></td>
+                                <td><code>https://&lt;user&gt;.gitlab.io/&lt;repo&gt;/</code></td>
+                                <td>Confirmed working. Free with personal account. Requires a one-line <code>.gitlab-ci.yml</code> in the repo root.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Azure Static Web Apps (Free)</strong></td>
+                                <td><code>https://&lt;name&gt;.azurestaticapps.net/</code></td>
+                                <td>Confirmed working. Free tier exists. Microsoft-owned, may align with DoD allowlists already in place.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cloudflare Pages</strong></td>
+                                <td><code>https://&lt;project&gt;.pages.dev/</code></td>
+                                <td>Confirmed working. Free tier generous. Fast global CDN.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <h2>Tier 2: Probably Work, Test First</h2>
+                <p>
+                    Plausible defaults. Some classrooms get them, some do not. Treat as backup if Tier 1 is blocked.
+                </p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Host</th>
+                                <th scope="col">URL Pattern</th>
+                                <th scope="col">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Netlify</strong></td>
+                                <td><code>https://&lt;name&gt;.netlify.app/</code></td>
+                                <td>Drag-and-drop deploy from the dashboard. Free tier generous. Sometimes blocked by base proxies.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Vercel</strong></td>
+                                <td><code>https://&lt;name&gt;.vercel.app/</code></td>
+                                <td>Connects to GitHub. Free tier. Mixed track record on MCEN depending on installation.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Firebase Hosting</strong></td>
+                                <td><code>https://&lt;project&gt;.web.app/</code></td>
+                                <td>Google-owned. Free tier. Some bases block Google domains aggressively.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Render</strong></td>
+                                <td><code>https://&lt;name&gt;.onrender.com/</code></td>
+                                <td>Static site free tier. Spins down on inactivity but a static page loads fine.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Codeberg Pages</strong></td>
+                                <td><code>https://&lt;user&gt;.codeberg.page/</code></td>
+                                <td>EU-based, non-profit, Git-backed. Lower profile, sometimes blocked, sometimes not.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <h2>Tier 3: Coin Flip</h2>
+                <p>
+                    Useful only after you have tested. Higher likelihood of being categorized as "personal" or "uncategorized" by network filters.
+                </p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Host</th>
+                                <th scope="col">URL Pattern</th>
+                                <th scope="col">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Surge.sh</strong></td>
+                                <td><code>https://&lt;name&gt;.surge.sh/</code></td>
+                                <td>One-command deploy from terminal. Often blocked.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Glitch</strong></td>
+                                <td><code>https://&lt;name&gt;.glitch.me/</code></td>
+                                <td>Web-based editor with auto-deploy. Sometimes works on MCEN, sometimes not.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Replit</strong></td>
+                                <td><code>https://&lt;name&gt;.replit.app/</code></td>
+                                <td>Web IDE plus hosting. May be categorized as a development tool and blocked.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CodePen Full Page</strong></td>
+                                <td><code>https://codepen.io/&lt;user&gt;/full/&lt;id&gt;</code></td>
+                                <td>Works for demos but not a real deploy target. Useful for showing a teammate a quick snippet.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <h2>Testing Methodology (Do This First Thing in Class)</h2>
+                <ol>
+                    <li>Pick one demo URL from each tier. The Course 3.5 reference builds work as demos:
+                        <ul>
+                            <li>Tier 1: <a href="https://jeranaias.github.io/ExpertDrivenDevelopment/builds/watch-bill.html" target="_blank" rel="noopener">jeranaias.github.io/ExpertDrivenDevelopment/builds/watch-bill.html</a></li>
+                            <li>Tier 2 / 3: pick any working demo URL from the hosts you want to evaluate.</li>
+                        </ul>
+                    </li>
+                    <li>Open each from the duty workstation you intend to deploy from.</li>
+                    <li>Document for each: loads / blocked / partial (mixed-content warning).</li>
+                    <li>Mark which Tier 1 host you will use today. Move on.</li>
+                    <li>Capture the blocked hosts in a Capability Gap Map row. "Hosting reach blocked for X, Y, Z" is a real, fixable policy gap.</li>
+                </ol>
+
+                <div class="callout callout--info">
+                    <h3 class="callout__title">If All Three Tiers Are Blocked</h3>
+                    <p>
+                        You can still build. Every reference build runs from a local <code>file://</code> path. Hand-carry the file to the Marine who will use it. Add a Capability Gap Map row for "Public static hosting reach blocked entirely." That is data leadership needs.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Terms of Service Note</h2>
+                <p>
+                    Read the TOS of the host you choose. The summary points to know for the common ones:
+                </p>
+                <ul>
+                    <li><strong>GitHub Pages:</strong> TOS prohibits commercial / SaaS use. Educational and unit-level tools are fine. Personal projects are fine. Do not run a business off it.</li>
+                    <li><strong>Cloudflare Pages:</strong> Free tier permits personal and non-commercial use. Commercial use allowed with paid tier.</li>
+                    <li><strong>Netlify / Vercel:</strong> Free tier explicitly permits personal and team development. Production commercial use is a paid tier in both cases.</li>
+                    <li><strong>All hosts:</strong> Content is your responsibility. No CUI, no PII, no PHI on a public URL. If the file is reachable from the open internet, treat it as published.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Quick Deploy Walkthrough (GitHub Pages)</h2>
+                <ol>
+                    <li>Sign in at <a href="https://github.com/" target="_blank" rel="noopener">github.com</a>.</li>
+                    <li>Click the <strong>+</strong> in the top right. Pick <strong>New repository</strong>. Name it after your tool (e.g., <code>watch-bill</code>). Set it Public. Click Create.</li>
+                    <li>On the empty repo page, click <strong>uploading an existing file</strong>. Drag your <code>.html</code> file in. Commit.</li>
+                    <li>Go to <strong>Settings &rarr; Pages</strong>. Source: <code>Deploy from a branch</code>. Branch: <code>main</code>, folder <code>/ (root)</code>. Save.</li>
+                    <li>Wait 60 to 90 seconds. The URL is <code>https://&lt;your-username&gt;.github.io/&lt;repo&gt;/&lt;filename&gt;.html</code>.</li>
+                    <li>Open it on your phone. If it loads, you just deployed.</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>One More Thing</h2>
+                <p>
+                    The host is the means, not the end. The artifact is the tool, and the tool is the proof that the work can ship today, on what you have. Every Marine in the room leaving this course with a live URL is the goal. The URL is also a Capability Gap Map data point: it proves that the wall is not Marines, and it is not AI. It is the tenant.
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>
+                        Open-source AI-assisted development training for DoW personnel.
+                        Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Course 3.5 Materials</h3>
+                    <ul>
+                        <li><a href="../courses/platform-reality.html">Course 3.5 Page</a></li>
+                        <li><a href="../builds/watch-bill.html">Reference Build: Watch Bill</a></li>
+                        <li><a href="../builds/teep.html">Reference Build: TEEP</a></li>
+                        <li><a href="capability-gap-map.html">Capability Gap Map</a></li>
+                        <li><a href="../handouts/platform-reality-handout.html">Student Handout</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../courses/">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="./">Resources</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function() {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+
+    <script src="../js/enhancements.js"></script>
+
+</body>
+</html>

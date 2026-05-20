@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="EDD Reference Build: Watch Bill Builder. Single-file static HTML, runs offline, deploys via GitHub Pages.">
+<title>Watch Bill Builder | EDD Reference Build</title>
+<style>
+  :root {
+    --scarlet: #CC0000;
+    --scarlet-dark: #a30000;
+    --gold: #F5D130;
+    --ink: #1a1a1a;
+    --muted: #6e6e6e;
+    --border: #d9d8d4;
+    --bg: #ffffff;
+    --bg-soft: #f8f7f5;
+    --bg-code: #f4f3f0;
+    --ok: #1b5e20;
+    --ok-bg: #e6f4ea;
+    --warn: #5f4b08;
+    --warn-bg: #fef7e0;
+    --err: #5c0000;
+    --err-bg: #fce8e8;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg-soft);
+    line-height: 1.5;
+    font-size: 16px;
+  }
+  header.top {
+    background: var(--ink);
+    color: #fff;
+    padding: 14px 20px;
+    border-bottom: 4px solid var(--scarlet);
+  }
+  header.top h1 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  header.top .sub {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-top: 2px;
+  }
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 20px 60px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 800px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px;
+  }
+  .card h2 {
+    margin: 0 0 14px;
+    font-size: 1.05rem;
+    border-bottom: 2px solid var(--scarlet);
+    padding-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin: 12px 0 4px;
+    color: #333;
+  }
+  label .hint {
+    display: block;
+    font-weight: 400;
+    color: var(--muted);
+    font-size: 0.78rem;
+    margin-top: 2px;
+  }
+  input[type=text], input[type=date], input[type=number], select, textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #fff;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: 2px solid var(--scarlet);
+    outline-offset: -1px;
+    border-color: var(--scarlet);
+  }
+  textarea { min-height: 180px; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.88rem; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .err {
+    color: var(--err);
+    background: var(--err-bg);
+    border-left: 3px solid var(--err);
+    padding: 8px 12px;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    border-radius: 0 4px 4px 0;
+    display: none;
+  }
+  .err.show { display: block; }
+  .actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+  }
+  button {
+    font-family: inherit;
+    font-size: 0.92rem;
+    font-weight: 600;
+    padding: 9px 16px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+  }
+  button.primary {
+    background: var(--scarlet);
+    color: #fff;
+  }
+  button.primary:hover { background: var(--scarlet-dark); }
+  button.secondary {
+    background: #fff;
+    color: var(--ink);
+    border-color: var(--border);
+  }
+  button.secondary:hover { background: var(--bg-code); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 0.92rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    background: var(--bg-code);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  tr.weekend td { background: #fffbe6; }
+  .badge-fair {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: var(--bg-code);
+    font-size: 0.78rem;
+    margin-right: 6px;
+    margin-bottom: 4px;
+  }
+  .fair-summary {
+    margin-top: 14px;
+    padding: 10px 12px;
+    background: var(--bg-code);
+    border-radius: 4px;
+    font-size: 0.88rem;
+  }
+  .fair-summary strong { color: var(--scarlet-dark); }
+  .empty-state {
+    text-align: center;
+    color: var(--muted);
+    padding: 30px 20px;
+    font-size: 0.9rem;
+  }
+  .empty-state .big {
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--border);
+    margin-bottom: 8px;
+  }
+  .notice {
+    background: var(--warn-bg);
+    color: var(--warn);
+    border-left: 3px solid var(--gold);
+    padding: 10px 14px;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.85rem;
+    margin-bottom: 14px;
+  }
+  footer.foot {
+    margin-top: 40px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  footer.foot a { color: var(--scarlet-dark); }
+  .classmark {
+    background: #006400;
+    color: #fff;
+    text-align: center;
+    padding: 4px 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+  }
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--ink);
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 4px;
+    font-size: 0.88rem;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.18s, transform 0.18s;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  @media print {
+    body { background: #fff; }
+    header.top, .input-card, .actions, footer.foot { display: none; }
+    .classmark { background: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    main { max-width: none; padding: 0; }
+    .grid { display: block; }
+    .card { border: none; padding: 0; }
+    table { font-size: 0.85rem; }
+    tr.weekend td { background: #f0f0f0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    th { background: #e5e5e5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    h2 { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="classmark">UNCLASSIFIED</div>
+
+<header class="top">
+  <h1>Watch Bill Builder</h1>
+  <div class="sub">EDD Reference Build &middot; works offline, prints clean, copies to Outlook</div>
+</header>
+
+<main>
+
+  <div class="grid">
+
+    <!-- LEFT: Inputs -->
+    <section class="card input-card" aria-labelledby="inputs-h">
+      <h2 id="inputs-h">Inputs</h2>
+
+      <div class="notice">
+        One name per line. Mark any Marine unavailable with <code>- LV</code>, <code>- TAD</code>, or <code>- APPT</code> after the name. They get skipped in the rotation.
+      </div>
+
+      <label for="section">Section / Unit
+        <span class="hint">Shows in the bill header and email subject.</span>
+      </label>
+      <input type="text" id="section" placeholder="HQ Co, 1st Bn, 99th Marines" value="HQ Co, 1st Bn, 99th Marines">
+
+      <label for="watch">Watch Type</label>
+      <select id="watch">
+        <option>Duty NCO</option>
+        <option>Fire Watch</option>
+        <option>Quarterdeck Watch</option>
+        <option>Phone Watch</option>
+        <option>Barracks Duty</option>
+        <option>SDO</option>
+        <option>OOD</option>
+        <option>Custom</option>
+      </select>
+
+      <div id="custom-wrap" style="display:none">
+        <label for="customWatch">Custom Watch Name</label>
+        <input type="text" id="customWatch" placeholder="e.g., Range Safety Officer">
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="start">Start Date</label>
+          <input type="date" id="start">
+        </div>
+        <div>
+          <label for="days">Number of Days</label>
+          <input type="number" id="days" min="1" max="365" value="14">
+        </div>
+      </div>
+
+      <label for="roster">Roster
+        <span class="hint">One per line. Suffix with <code>- LV</code>, <code>- TAD</code>, <code>- APPT</code> to skip.</span>
+      </label>
+      <textarea id="roster" spellcheck="false">Sgt Reyes, M.A.
+Cpl Nguyen, T.D.
+Cpl Foster, J.B.
+LCpl Martinez, J.R.
+LCpl Okafor, C.I.
+LCpl Park, H.S.
+PFC Williams, D.M. - LV
+PFC Chen, R.L.
+PFC Brennan, K.T.</textarea>
+
+      <div class="err" id="err"></div>
+
+      <div class="actions">
+        <button class="primary" id="gen">Generate Watch Bill</button>
+        <button class="secondary" id="reset">Reset to Defaults</button>
+        <button class="secondary" id="print">Print</button>
+      </div>
+    </section>
+
+    <!-- RIGHT: Output -->
+    <section class="card" aria-labelledby="output-h">
+      <h2 id="output-h">Watch Bill</h2>
+      <div id="output">
+        <div class="empty-state">
+          <div class="big">&#9728;</div>
+          <div>Fill the form on the left and hit Generate.</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Email export card, full width below the grid -->
+  <section class="card" style="margin-top:24px" id="email-card" aria-labelledby="email-h" hidden>
+    <h2 id="email-h">Email Body (paste into Outlook)</h2>
+    <label for="email-subject">Subject</label>
+    <input type="text" id="email-subject" readonly>
+    <label for="email-body">Body</label>
+    <textarea id="email-body" readonly></textarea>
+    <div class="actions">
+      <button class="primary" id="copy-email">Copy Email Body</button>
+      <button class="secondary" id="copy-subject">Copy Subject</button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <p><strong>EDD Reference Build &middot; Watch Bill Builder</strong><br>
+  Course 3.5: Platform Training (Locked Tenant Reality) &middot; Expert-Driven Development<br>
+  Author: SSgt Jesse C. Morgan, MCD-Monterey &middot;
+  <a href="https://jeranaias.github.io/ExpertDrivenDevelopment/">jeranaias.github.io/ExpertDrivenDevelopment</a></p>
+  <p>Runs 100% offline after page load. No external scripts, fonts, or stylesheets. Source is the page itself: View Source.</p>
+</footer>
+
+<div class="classmark">UNCLASSIFIED</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function() {
+  'use strict';
+
+  // Set default start date to today on load
+  var today = new Date();
+  var iso = today.toISOString().split('T')[0];
+  document.getElementById('start').value = iso;
+
+  var watch = document.getElementById('watch');
+  var customWrap = document.getElementById('custom-wrap');
+  watch.addEventListener('change', function() {
+    customWrap.style.display = watch.value === 'Custom' ? 'block' : 'none';
+  });
+
+  function showErr(msg) {
+    var e = document.getElementById('err');
+    e.textContent = msg;
+    e.classList.add('show');
+  }
+  function clearErr() {
+    var e = document.getElementById('err');
+    e.classList.remove('show');
+    e.textContent = '';
+  }
+
+  function toast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function() { t.classList.remove('show'); }, 1800);
+  }
+
+  // Parse roster: returns [{name, status}]
+  function parseRoster(raw) {
+    var lines = raw.split(/\r?\n/);
+    var out = [];
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i].trim();
+      if (!line) continue;
+      var status = 'AVAILABLE';
+      var name = line;
+      var m = line.match(/^(.*?)\s*-\s*(LV|TAD|APPT|MED|PCS)\s*$/i);
+      if (m) {
+        name = m[1].trim();
+        status = m[2].toUpperCase();
+      }
+      if (name) out.push({ name: name, status: status });
+    }
+    return out;
+  }
+
+  function formatDate(d) {
+    var dow = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getDay()];
+    var mon = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()];
+    return { dow: dow, dom: d.getDate(), mon: mon, year: d.getFullYear(), isWeekend: d.getDay() === 0 || d.getDay() === 6 };
+  }
+
+  function pad2(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function(c) {
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+    });
+  }
+
+  function buildBill() {
+    clearErr();
+
+    var section = document.getElementById('section').value.trim();
+    var watchType = watch.value;
+    if (watchType === 'Custom') {
+      watchType = document.getElementById('customWatch').value.trim();
+      if (!watchType) { showErr('Enter a custom watch name.'); return; }
+    }
+    var startStr = document.getElementById('start').value;
+    var days = parseInt(document.getElementById('days').value, 10);
+
+    if (!section) { showErr('Section / Unit is required.'); return; }
+    if (!startStr) { showErr('Start Date is required.'); return; }
+    if (!days || days < 1) { showErr('Number of Days must be 1 or more.'); return; }
+    if (days > 365) { showErr('Number of Days cannot exceed 365.'); return; }
+
+    var roster = parseRoster(document.getElementById('roster').value);
+    if (roster.length === 0) {
+      showErr('Roster is empty. Add at least one Marine.');
+      return;
+    }
+    var available = roster.filter(function(p) { return p.status === 'AVAILABLE'; });
+    if (available.length === 0) {
+      showErr('No available Marines. Everyone on the roster is marked unavailable.');
+      return;
+    }
+
+    // Generate bill: rotate through available list
+    var startDate = new Date(startStr + 'T00:00:00');
+    if (isNaN(startDate.getTime())) {
+      showErr('Start Date is invalid.');
+      return;
+    }
+
+    var bill = [];
+    var counts = {};
+    for (var i = 0; i < available.length; i++) counts[available[i].name] = 0;
+
+    for (var d = 0; d < days; d++) {
+      var date = new Date(startDate);
+      date.setDate(startDate.getDate() + d);
+      var watchstander = available[d % available.length];
+      counts[watchstander.name]++;
+      bill.push({
+        date: date,
+        name: watchstander.name
+      });
+    }
+
+    renderBill(section, watchType, bill, counts, roster);
+    renderEmail(section, watchType, bill);
+  }
+
+  function renderBill(section, watchType, bill, counts, roster) {
+    var html = '<div style="margin-bottom:10px;font-size:0.88rem;color:var(--muted)">';
+    html += '<strong>' + escapeHtml(section) + '</strong> &middot; ' + escapeHtml(watchType);
+    html += '</div>';
+
+    html += '<table><thead><tr>';
+    html += '<th>Date</th><th>Day</th><th>' + escapeHtml(watchType) + '</th>';
+    html += '</tr></thead><tbody>';
+    for (var i = 0; i < bill.length; i++) {
+      var f = formatDate(bill[i].date);
+      html += '<tr' + (f.isWeekend ? ' class="weekend"' : '') + '>';
+      html += '<td>' + pad2(f.dom) + ' ' + f.mon.toUpperCase() + ' ' + String(f.year).slice(2) + '</td>';
+      html += '<td>' + f.dow + '</td>';
+      html += '<td>' + escapeHtml(bill[i].name) + '</td>';
+      html += '</tr>';
+    }
+    html += '</tbody></table>';
+
+    // Fairness
+    var totalSlots = bill.length;
+    var names = Object.keys(counts);
+    var min = Infinity, max = 0;
+    for (var j = 0; j < names.length; j++) {
+      if (counts[names[j]] < min) min = counts[names[j]];
+      if (counts[names[j]] > max) max = counts[names[j]];
+    }
+    var spread = max - min;
+
+    html += '<div class="fair-summary">';
+    html += '<strong>Fairness check:</strong> ' + totalSlots + ' watches across ' + names.length + ' Marines. ';
+    if (spread <= 1) {
+      html += 'Spread is ' + spread + ', rotation is balanced.';
+    } else {
+      html += 'Spread is ' + spread + ' (' + min + ' to ' + max + '). Consider rotating starting position next cycle.';
+    }
+    html += '<div style="margin-top:8px">';
+    for (var k = 0; k < names.length; k++) {
+      html += '<span class="badge-fair">' + escapeHtml(names[k]) + ': ' + counts[names[k]] + '</span>';
+    }
+    html += '</div>';
+
+    // Unavailable summary
+    var unavail = roster.filter(function(p) { return p.status !== 'AVAILABLE'; });
+    if (unavail.length) {
+      html += '<div style="margin-top:10px;font-size:0.82rem"><strong>Skipped:</strong> ';
+      var parts = [];
+      for (var u = 0; u < unavail.length; u++) {
+        parts.push(escapeHtml(unavail[u].name) + ' (' + unavail[u].status + ')');
+      }
+      html += parts.join(', ') + '</div>';
+    }
+    html += '</div>';
+
+    document.getElementById('output').innerHTML = html;
+  }
+
+  function renderEmail(section, watchType, bill) {
+    var first = formatDate(bill[0].date);
+    var last = formatDate(bill[bill.length - 1].date);
+    var subject = watchType + ' Bill: ' + section + ' (' +
+      pad2(first.dom) + ' ' + first.mon.toUpperCase() + ' ' + String(first.year).slice(2) + ' to ' +
+      pad2(last.dom) + ' ' + last.mon.toUpperCase() + ' ' + String(last.year).slice(2) + ')';
+
+    var body = '';
+    body += 'All,\n\n';
+    body += watchType + ' bill for ' + section + ' is posted below. Acknowledge receipt.\n\n';
+
+    // Plain text table
+    var maxName = 0;
+    for (var i = 0; i < bill.length; i++) {
+      if (bill[i].name.length > maxName) maxName = bill[i].name.length;
+    }
+    if (maxName < 16) maxName = 16;
+
+    var dateHdr = 'Date     ';
+    var dayHdr = 'Day  ';
+    var nameHdr = watchType;
+    while (nameHdr.length < maxName) nameHdr += ' ';
+
+    body += dateHdr + dayHdr + nameHdr + '\n';
+    body += '-------- ---- ' + '-'.repeat(maxName) + '\n';
+    for (var i = 0; i < bill.length; i++) {
+      var f = formatDate(bill[i].date);
+      var dStr = pad2(f.dom) + f.mon.toUpperCase().slice(0,3) + String(f.year).slice(2);
+      while (dStr.length < 8) dStr += ' ';
+      var dayStr = f.dow;
+      while (dayStr.length < 4) dayStr += ' ';
+      var nameStr = bill[i].name;
+      body += dStr + ' ' + dayStr + ' ' + nameStr + '\n';
+    }
+
+    body += '\n';
+    body += 'Swaps require my approval in writing. No-shows get a Page 11.\n\n';
+    body += 'Semper Fi,\n';
+
+    document.getElementById('email-subject').value = subject;
+    document.getElementById('email-body').value = body;
+    document.getElementById('email-card').hidden = false;
+  }
+
+  function copyToClipboard(text, label) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        toast(label + ' copied');
+      }, function() {
+        fallbackCopy(text, label);
+      });
+    } else {
+      fallbackCopy(text, label);
+    }
+  }
+  function fallbackCopy(text, label) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand('copy');
+      toast(label + ' copied');
+    } catch (e) {
+      toast('Copy failed. Select manually.');
+    }
+    document.body.removeChild(ta);
+  }
+
+  document.getElementById('gen').addEventListener('click', buildBill);
+  document.getElementById('print').addEventListener('click', function() { window.print(); });
+  document.getElementById('reset').addEventListener('click', function() {
+    if (!confirm('Reset all fields to defaults?')) return;
+    document.getElementById('section').value = 'HQ Co, 1st Bn, 99th Marines';
+    watch.value = 'Duty NCO';
+    customWrap.style.display = 'none';
+    document.getElementById('start').value = iso;
+    document.getElementById('days').value = 14;
+    document.getElementById('roster').value = 'Sgt Reyes, M.A.\nCpl Nguyen, T.D.\nCpl Foster, J.B.\nLCpl Martinez, J.R.\nLCpl Okafor, C.I.\nLCpl Park, H.S.\nPFC Williams, D.M. - LV\nPFC Chen, R.L.\nPFC Brennan, K.T.';
+    document.getElementById('output').innerHTML = '<div class="empty-state"><div class="big">&#9728;</div><div>Fill the form on the left and hit Generate.</div></div>';
+    document.getElementById('email-card').hidden = true;
+    clearErr();
+  });
+  document.getElementById('copy-email').addEventListener('click', function() {
+    copyToClipboard(document.getElementById('email-body').value, 'Email body');
+  });
+  document.getElementById('copy-subject').addEventListener('click', function() {
+    copyToClipboard(document.getElementById('email-subject').value, 'Subject');
+  });
+
+  // Auto-generate on Ctrl/Cmd-Enter from any input
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      buildBill();
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>

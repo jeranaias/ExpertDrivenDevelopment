@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Course 3.5 student handout. One-page printable. Three-layer model, 4-hour agenda, live fill-in: What We Built / What We Wanted / What's Blocked.">
+    <title>Course 3.5 Handout | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+      /* Screen view */
+      .handout-page {
+        max-width: 8.5in;
+        margin: 1.5rem auto;
+        background: #fff;
+        padding: 0.4in 0.5in;
+        border: 1px solid #d9d8d4;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      }
+      .handout-page h1 { font-size: 1.3rem; margin: 0 0 0.1rem; }
+      .handout-page h2 { font-size: 0.95rem; margin: 0.5rem 0 0.25rem; border-bottom: 2px solid #CC0000; padding-bottom: 2px; }
+      .handout-page p { margin: 0.2rem 0; font-size: 0.85rem; line-height: 1.35; }
+      .handout-page ul, .handout-page ol { margin: 0.2rem 0 0.25rem; padding-left: 1.1rem; font-size: 0.82rem; line-height: 1.35; }
+      .handout-page table { width: 100%; border-collapse: collapse; font-size: 0.78rem; margin: 0.25rem 0; }
+      .handout-page th, .handout-page td { border: 1px solid #d9d8d4; padding: 4px 6px; text-align: left; vertical-align: top; }
+      .handout-page th { background: #f4f3f0; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.04em; }
+      .meta-row { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; flex-wrap: wrap; font-size: 0.78rem; color: #4a4a4a; margin-bottom: 0.35rem; }
+      .three-cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 0.4rem;
+        margin: 0.35rem 0;
+      }
+      .fill-card {
+        border: 1px solid #1a1a1a;
+        border-radius: 4px;
+        padding: 6px 8px;
+        min-height: 1.85in;
+        display: flex;
+        flex-direction: column;
+      }
+      .fill-card h3 { font-size: 0.85rem; margin: 0 0 4px; color: #CC0000; }
+      .fill-card .prompt { font-size: 0.72rem; color: #4a4a4a; margin-bottom: 4px; line-height: 1.3; }
+      .fill-card .lines {
+        flex: 1;
+        background-image: repeating-linear-gradient(transparent, transparent 16px, #d9d8d4 16px, #d9d8d4 17px);
+        margin-top: 4px;
+      }
+      .build-block {
+        border: 1px solid #d9d8d4;
+        border-radius: 4px;
+        padding: 6px 8px;
+        margin-bottom: 0.4rem;
+      }
+      .build-block h3 { font-size: 0.85rem; margin: 0 0 2px; }
+      .build-block .meta { font-size: 0.72rem; color: #6e6e6e; margin-bottom: 4px; }
+      .reminders {
+        background: #fce8e8;
+        border-left: 3px solid #CC0000;
+        padding: 6px 10px;
+        font-size: 0.78rem;
+        line-height: 1.35;
+        margin: 0.35rem 0;
+        border-radius: 0 4px 4px 0;
+      }
+      .reminders strong { color: #5c0000; }
+      .classmark {
+        background: #006400;
+        color: #fff;
+        text-align: center;
+        padding: 2px 0;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        border-radius: 2px;
+      }
+      .small { font-size: 0.74rem; color: #6e6e6e; }
+      .name-line {
+        display: flex;
+        gap: 0.8rem;
+        font-size: 0.78rem;
+        margin-top: 0.35rem;
+      }
+      .name-line span { flex: 1; border-bottom: 1px solid #1a1a1a; padding-bottom: 1px; }
+
+      @media print {
+        @page { size: letter; margin: 0.4in; }
+        body { background: #fff; }
+        .site-header, .mobile-nav, .page-header, .site-footer, .skip-link, .print-only-hide { display: none !important; }
+        .handout-page { margin: 0; padding: 0; max-width: none; border: none; box-shadow: none; }
+        .classmark { background: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        th { background: #e5e5e5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .reminders { background: #f8f7f5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .fill-card { background: #fff !important; }
+        .fill-card .lines { background-image: repeating-linear-gradient(transparent, transparent 15px, #999 15px, #999 16px) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        h2 { page-break-after: avoid; }
+      }
+    </style>
+</head>
+<body class="site-wrapper">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="../resources/">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <section class="page-header print-only-hide">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Handouts</a></li>
+                    <li aria-current="page">Course 3.5 Handout</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Course 3.5 Student Handout</h1>
+            <p class="page-header__desc">
+                One-page printable. Hit <strong>Ctrl+P</strong> (or <strong>Cmd+P</strong>) to print on US Letter. Bring one per Marine to class.
+            </p>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="handout-page">
+
+            <div class="classmark">UNCLASSIFIED</div>
+
+            <div class="meta-row" style="margin-top:0.25rem">
+                <div>
+                    <h1>Course 3.5: Platform Training (Locked Tenant Reality)</h1>
+                    <div class="small">Expert-Driven Development &middot; 4-Hour Workshop &middot; SSgt Jesse C. Morgan, MCD-Monterey</div>
+                </div>
+                <div class="name-line" style="margin-top:0">
+                    <span>Name:</span>
+                    <span>Unit:</span>
+                    <span>Date:</span>
+                </div>
+            </div>
+
+            <h2>The Three Layers</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:18%">Layer</th>
+                        <th>What It Is</th>
+                        <th style="width:18%">Available Today?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>1. Spec</strong></td><td>genai.mil. Think, design, prompt, decompose. Conversation with an AI on a CUI-aware tenant.</td><td>Always</td></tr>
+                    <tr><td><strong>2. Prototype</strong></td><td>Static HTML in a single file. Deployed to a free public host MCEN can reach (GitHub Pages, others).</td><td>Always</td></tr>
+                    <tr><td><strong>3. Production</strong></td><td>Power Apps, Dataverse, Power Automate, real connectors, identity. The wishlist layer.</td><td>Often blocked. Document what would unlock.</td></tr>
+                </tbody>
+            </table>
+
+            <h2>Agenda</h2>
+            <table>
+                <thead>
+                    <tr><th style="width:14%">Time</th><th>Module</th><th style="width:24%">Mode</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>0:00 to 0:15</td><td>Setup, Hosting Check, Three Layers</td><td>Brief</td></tr>
+                    <tr><td>0:15 to 0:35</td><td>Build #1 Whiteboard Planning</td><td>Centaur Phase 1</td></tr>
+                    <tr><td>0:35 to 1:20</td><td>Build #1: Watch Bill Builder</td><td>Centaur Phase 2 to 5</td></tr>
+                    <tr><td>1:20 to 1:30</td><td>Failure Sharing</td><td>Frontier capture</td></tr>
+                    <tr><td>1:30 to 2:30</td><td>Build #2: TEEP Builder</td><td>Cyborg</td></tr>
+                    <tr><td>2:30 to 2:40</td><td>Break</td><td></td></tr>
+                    <tr><td>2:40 to 3:30</td><td>Build #3: Your Problem</td><td>Your choice</td></tr>
+                    <tr><td>3:30 to 3:50</td><td>Frontier Map + Capability Gap Map</td><td>Both artifacts</td></tr>
+                </tbody>
+            </table>
+
+            <h2>Live Fill-In (One Block Per Build)</h2>
+
+            <div class="build-block">
+                <h3>Build #1: Watch Bill Builder (Centaur)</h3>
+                <div class="meta">Mode: Centaur &middot; Phase 1 plan on paper before AI &middot; Reference: builds/watch-bill.html</div>
+                <div class="three-cols">
+                    <div class="fill-card">
+                        <h3>What We Built</h3>
+                        <div class="prompt">Tool name, deployed URL, one-line demo description.</div>
+                        <div class="lines" aria-label="Notes lines"></div>
+                    </div>
+                    <div class="fill-card">
+                        <h3>What We Wanted</h3>
+                        <div class="prompt">Production layer capability that would make it 10x better.</div>
+                        <div class="lines" aria-label="Notes lines"></div>
+                    </div>
+                    <div class="fill-card">
+                        <h3>What's Blocked</h3>
+                        <div class="prompt">Specific connector, license, admin grant, or policy. Who or what gates the unlock?</div>
+                        <div class="lines" aria-label="Notes lines"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="build-block">
+                <h3>Build #2: TEEP Builder (Cyborg)</h3>
+                <div class="meta">Mode: Cyborg &middot; Discover requirements while building &middot; Reference: builds/teep.html</div>
+                <div class="three-cols">
+                    <div class="fill-card">
+                        <h3>What We Built</h3>
+                        <div class="prompt">Tool name, deployed URL, one-line demo description.</div>
+                        <div class="lines"></div>
+                    </div>
+                    <div class="fill-card">
+                        <h3>What We Wanted</h3>
+                        <div class="prompt">Production layer capability that would make it 10x better.</div>
+                        <div class="lines"></div>
+                    </div>
+                    <div class="fill-card">
+                        <h3>What's Blocked</h3>
+                        <div class="prompt">Specific connector, license, admin grant, or policy.</div>
+                        <div class="lines"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="build-block">
+                <h3>Build #3: Your Problem (Your Choice)</h3>
+                <div class="meta">Mode: Centaur or Cyborg &middot; Your unit's real tool &middot; Deploy to your own github.io URL</div>
+                <div class="three-cols">
+                    <div class="fill-card">
+                        <h3>What We Built</h3>
+                        <div class="prompt">Tool name, deployed URL, one-line demo description.</div>
+                        <div class="lines"></div>
+                    </div>
+                    <div class="fill-card">
+                        <h3>What We Wanted</h3>
+                        <div class="prompt">Production layer capability that would make it 10x better.</div>
+                        <div class="lines"></div>
+                    </div>
+                    <div class="fill-card">
+                        <h3>What's Blocked</h3>
+                        <div class="prompt">Specific connector, license, admin grant, or policy.</div>
+                        <div class="lines"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h2>EDD Framework Reminders</h2>
+            <div class="reminders">
+                <p><strong>Centaur:</strong> distinct phases. Human designs. AI builds. Human verifies. Human refines. Human accepts. Best for strict business rules.</p>
+                <p><strong>Cyborg:</strong> continuous back-and-forth. Discover requirements while building. Best for exploratory work where the shape is not yet clear.</p>
+                <p><strong>Verification is the discipline.</strong> Test edge cases, not just the happy path. Document one AI mistake you caught and corrected per build.</p>
+                <p><strong>Frontier Recognition:</strong> name the specific task types where AI is reliable and where it is not. Add at least two rows to your frontier map today.</p>
+                <p><strong>Capability Gap Map:</strong> name the wall. Specific connector. Specific license. Specific permission. Beneficiary count and time savings. That row becomes policy evidence.</p>
+            </div>
+
+            <div class="meta-row" style="margin-top:0.4rem">
+                <div class="small">
+                    <strong>Public site:</strong> jeranaias.github.io/ExpertDrivenDevelopment &middot;
+                    <strong>Repo:</strong> github.com/jeranaias/ExpertDrivenDevelopment
+                </div>
+                <div class="classmark" style="padding:2px 14px">UNCLASSIFIED</div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="site-footer print-only-hide" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>
+                        Open-source AI-assisted development training for DoW personnel.
+                        Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Course 3.5 Materials</h3>
+                    <ul>
+                        <li><a href="../courses/platform-reality.html">Course 3.5 Page</a></li>
+                        <li><a href="../builds/watch-bill.html">Reference Build: Watch Bill</a></li>
+                        <li><a href="../builds/teep.html">Reference Build: TEEP</a></li>
+                        <li><a href="../resources/capability-gap-map.html">Capability Gap Map</a></li>
+                        <li><a href="../resources/static-hosting-cheat-sheet.html">Static Hosting Cheat Sheet</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../courses/">Courses</a></li>
+                        <li><a href="./">Handouts</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function() {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+
+    <script src="../js/enhancements.js"></script>
+
+</body>
+</html>

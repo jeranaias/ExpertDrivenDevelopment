@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Capability Gap Map template. Documents tenant-blocked capabilities that Marines would deploy if access were granted. Compiled across EDD training sessions as evidence base for HQMC tenant policy review.">
+    <title>Capability Gap Map | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="site-wrapper">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="./" class="active">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="./" class="active">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Resources</a></li>
+                    <li aria-current="page">Capability Gap Map</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Capability Gap Map</h1>
+            <p class="page-header__desc">
+                This document captures institutional capabilities Marines would deploy if access were granted. Compiled across training sessions, it forms the evidence base for tenant policy review at the HQMC AI working group level. A single Marine asking for a connector is a request. Forty Marines documenting the same blocked connector with beneficiary counts and time savings is a policy case.
+            </p>
+            <div class="mt-lg">
+                <span class="badge badge--gold">Course 3.5 Artifact</span>
+                <span class="badge">Template</span>
+            </div>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+
+            <section>
+                <h2>How to Use This Template</h2>
+                <ol>
+                    <li>During Course 3.5 Module 6, fill at least one row per build (three rows minimum per Marine).</li>
+                    <li>Be specific in "Blocking Permission / Tool." Name the connector, license, or admin grant. Generic "Power Platform access" is not actionable. "Office 365 Outlook connector blocked at tenant level" is.</li>
+                    <li>Beneficiary Count and Estimated Time Savings should be conservative and defensible. Round numbers are fine. Hours are fine.</li>
+                    <li>At the end of session, the instructor consolidates rows into a unit Capability Gap Map and forwards through the AI POC to HQMC.</li>
+                    <li>Rows are public-facing. No CUI, no PII. Use unit type, not unit name, when in doubt.</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>The Three Layers (Refresher)</h2>
+                <p>
+                    Every row maps a gap between the <strong>Prototype Layer</strong> (what you built today in static HTML) and the <strong>Production Layer</strong> (what would be possible with full tenant access). The <strong>Spec Layer</strong> (genai.mil) is always available and is not the bottleneck.
+                </p>
+            </section>
+
+            <section>
+                <h2>Capability Gap Map Template</h2>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Task Type</th>
+                                <th scope="col">Prototype Layer Solution<br>(built today)</th>
+                                <th scope="col">Production Layer Wish<br>(10x better with access)</th>
+                                <th scope="col">Blocking Permission / Tool</th>
+                                <th scope="col">Beneficiary Count</th>
+                                <th scope="col">Estimated Time Savings</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Watch Bill Generation</strong></td>
+                                <td>Static HTML tool. Roster typed in by section leader, rotates with fairness check, exports printable bill plus email body. Deployed on github.io.</td>
+                                <td>Pulls current roster from MOL with one click. Reads active leave blocks from system of record. Sends notification to each watchstander when bill is published. Stores history for the section so swaps can be tracked.</td>
+                                <td>MOL API not exposed to unit-developed tools. Office 365 Outlook connector restricted at tenant level. No general-purpose write-back to a unit-owned data store.</td>
+                                <td>1 section leader, 12 to 30 Marines per section, weekly. Battalion total: 8 to 12 section leaders.</td>
+                                <td>1.5 to 2 hours per section leader per week. Battalion: 12 to 24 hrs/week.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Training Calendar / TEEP</strong></td>
+                                <td>Static HTML TEEP tool with localStorage. Add / edit / delete events with status. Color-coded by status. Generates an S-3 brief paragraph on demand.</td>
+                                <td>Two-way sync with Outlook calendar. Resource holds (ranges, ammo, vehicles) tracked against a shared resource pool. Subordinate unit events visible to higher HQ for deconfliction. Cancellation propagates to attendees.</td>
+                                <td>Outlook calendar connector requires Office 365 license tier our tenant does not grant. Shared resource pools require Dataverse, which is gated. Cross-tenant calendar visibility blocked.</td>
+                                <td>1 S-3 shop per battalion. 4 to 6 battalions per regiment. Each shop briefs weekly to the CO.</td>
+                                <td>3 to 5 hours per S-3 shop per week (calendar consolidation alone).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Initial Counseling Tracker</strong></td>
+                                <td>Static HTML form that builds a NAVMC 11380 page body, with localStorage to track who has been counseled and when within a section.</td>
+                                <td>Direct write to MOL counseling record. Auto-reminder when 90-day follow-up is due. Print as official record format. Co-signature workflow with the Marine.</td>
+                                <td>MOL has no public write API for unit-developed tools. No supported counseling record import path. Digital signature workflow requires CAC integration our tenant does not expose.</td>
+                                <td>Every NCO in the Corps. Conservatively: 1 NCO per 5 Marines, USMC-wide.</td>
+                                <td>20 to 40 minutes per counseling event saved. 4 to 8 per NCO per month.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Range Coordination Tracker</strong></td>
+                                <td>Static HTML tool tracking range requests by date with status, ammo requirement, and supported unit. Browser-only. Each user has their own copy.</td>
+                                <td>Single shared database read by RTAM scheduler. Auto-conflict detection against published range schedule. Ammo request auto-routes to S-4. Range officer assignment lookup against personnel system.</td>
+                                <td>RTAM has no documented integration surface for unit tools. S-4 ammo system air-gapped from training network. Shared database access (Dataverse / SharePoint write-back) restricted.</td>
+                                <td>Every battalion training shop. Higher use during pre-deployment.</td>
+                                <td>2 to 4 hours per range event coordinated. 4 to 10 range events per month per battalion.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Personnel Currency Dashboard</strong></td>
+                                <td>Static HTML tool that takes a CSV export and displays color-coded training currency for a section. Stale within minutes of any update.</td>
+                                <td>Live read of MCTIMS data. Push notification to Marines and NCOs when an event goes from "due in 30" to "overdue." Predictive resourcing for the next training quarter based on cohort trends.</td>
+                                <td>MCTIMS read access restricted to platform tooling. No mechanism for unit-developed tools to subscribe to currency events. No tenant-level push notification surface.</td>
+                                <td>Every section leader and platoon sergeant. USMC-wide.</td>
+                                <td>30 to 60 minutes per section per week. Plus failure-mode value: catching a fall-off-currency before it costs a deployment slot.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout callout--info">
+                    <h3 class="callout__title">Add Your Own Rows</h3>
+                    <p>
+                        The five rows above are examples. Pattern-match against your unit's actual builds. The most useful rows are the ones with a named blocking permission and a defensible beneficiary count. Vague gaps do not produce policy change. Specific gaps with numbers do.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>What Makes a Strong Row</h2>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Field</th>
+                                <th scope="col">Weak (does not get acted on)</th>
+                                <th scope="col">Strong (gets reviewed)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Task Type</td>
+                                <td>"Training stuff"</td>
+                                <td>"Quarterly TEEP consolidation and S-3 brief generation"</td>
+                            </tr>
+                            <tr>
+                                <td>Prototype Layer Solution</td>
+                                <td>"I built a thing"</td>
+                                <td>"Static HTML tool, deployed at github.com/&lt;user&gt;/teep, takes manual event entry, color-codes status, exports paragraph brief"</td>
+                            </tr>
+                            <tr>
+                                <td>Production Layer Wish</td>
+                                <td>"Make it better"</td>
+                                <td>"Pull events from Outlook calendar via connector, sync resource holds against shared range schedule, notify attendees on cancellation"</td>
+                            </tr>
+                            <tr>
+                                <td>Blocking Permission / Tool</td>
+                                <td>"Power Apps not allowed"</td>
+                                <td>"Office 365 Outlook connector restricted at tenant level. Dataverse environment not provisioned. SharePoint write-back outside of personal site disabled."</td>
+                            </tr>
+                            <tr>
+                                <td>Beneficiary Count</td>
+                                <td>"A lot of Marines"</td>
+                                <td>"1 S-3 shop per battalion, 4 battalions in the regiment, weekly use"</td>
+                            </tr>
+                            <tr>
+                                <td>Estimated Time Savings</td>
+                                <td>"Saves time"</td>
+                                <td>"3 to 5 hours per S-3 shop per week, conservatively. Annual: 150 to 250 hrs per shop."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <h2>What Happens to This Document</h2>
+                <ol>
+                    <li>End of session: instructor consolidates the room's rows into one Capability Gap Map.</li>
+                    <li>Instructor forwards to their unit's AI POC.</li>
+                    <li>AI POC forwards to the HQMC AI working group quarterly compilation.</li>
+                    <li>Each quarter, HQMC reviews the compiled gap map and prioritizes tenant policy changes. The strongest signal is repeat hits across units for the same blocking permission.</li>
+                    <li>When a gap is unblocked, the affected rows get marked CLOSED with a note about what was granted and when.</li>
+                </ol>
+
+                <div class="callout callout--instructor">
+                    <h3 class="callout__title">Instructor Note</h3>
+                    <p>
+                        Do not let students leave the session without putting at least one row in. The artifact is only useful if it is collected. A folder of training certificates without Capability Gap Maps is not the deliverable. The Capability Gap Map is the deliverable.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Print View</h2>
+                <p>
+                    Use your browser Print function to produce a PDF for routing. The page header chrome is hidden on print. Each section breaks cleanly.
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>
+                        Open-source AI-assisted development training for DoW personnel.
+                        Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../courses/">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="../toolkit/">Toolkit</a></li>
+                        <li><a href="../tools/">Tools</a></li>
+                        <li><a href="./">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Course 3.5 Materials</h3>
+                    <ul>
+                        <li><a href="../courses/platform-reality.html">Course 3.5 Page</a></li>
+                        <li><a href="../builds/watch-bill.html">Reference Build: Watch Bill</a></li>
+                        <li><a href="../builds/teep.html">Reference Build: TEEP</a></li>
+                        <li><a href="static-hosting-cheat-sheet.html">Static Hosting Cheat Sheet</a></li>
+                        <li><a href="../handouts/platform-reality-handout.html">Student Handout</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function() {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+
+    <script src="../js/enhancements.js"></script>
+
+</body>
+</html>
