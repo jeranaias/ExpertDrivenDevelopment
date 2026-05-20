@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Week 3.5 student handout, Platform Training (Locked Tenant Reality). One-page printable take-home for the Course 3.5 session: key terms, three static-HTML builds, the assignment before Week 4, plus the Capability Gap Map artifact.">
+    <title>Week 3.5 Student Handout, Platform Training (Locked Tenant Reality) | EDD</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/handout.css">
+</head>
+<body class="site-wrapper">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Student Handouts</a></li>
+                    <li aria-current="page">Week 3.5, Platform Training (Locked Tenant Reality)</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Week 3.5 Student Handout</h1>
+            <p class="page-header__desc">One-page take-home for the Course 3.5 session. Print landscape and bring it with you, or save as PDF. For the live fill-in version with three blank columns, see the <a href="platform-reality-handout.html">in-class handout</a>.</p>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+            <div class="handout-intro">
+                <p>Print this page in <strong>landscape</strong> from Chrome or Edge: <kbd>Ctrl</kbd>+<kbd>P</kbd> &rarr; Layout <em>Landscape</em> &rarr; Margins <em>None</em> or <em>Default</em> &rarr; Background graphics <em>on</em>. The site chrome above is hidden in print.</p>
+                <p class="handout-intro__tip">In the print dialog, leave <strong>Margins</strong> at <em>Default</em> (or pick <em>None</em>). Picking <em>Custom</em> or <em>Minimum</em> shrinks the printable area below what this layout assumes and the handout tips onto a second page.</p>
+            </div>
+
+            <article class="handout-page" aria-label="Week 3.5 student handout">
+
+                <!-- Header -->
+                <header class="hd-head">
+                    <div class="hd-head__week"><span class="num">3.5</span> Course 3.5 &middot; Student Handout</div>
+                    <div class="hd-head__title">
+                        <h1>Platform Training (Locked Tenant Reality)</h1>
+                        <p class="sub">Three deployed static-HTML tools in four hours. Centaur, cyborg, and your own problem. Plus a Capability Gap Map row for HQMC.</p>
+                    </div>
+                    <div class="hd-head__meta">
+                        <div><span>Duration</span><strong>4 hr (2 breaks)</strong></div>
+                        <div><span>Audience</span><strong>Builders</strong></div>
+                        <div><span>Prereq</span><strong>Course 2 + GitHub account</strong></div>
+                    </div>
+                </header>
+
+                <!-- Module strip -->
+                <section class="hd-modules" aria-label="Module timing">
+                    <div class="hd-modules__cell"><span class="t">0:00,0:15</span><span class="n">M1 Setup, Hosting, Review</span><span class="d">15 min &middot; talk + deploy</span></div>
+                    <div class="hd-modules__cell"><span class="t">0:15,1:20</span><span class="n">M2 Build #1 &middot; Centaur</span><span class="d">65 min &middot; Watch Bill</span></div>
+                    <div class="hd-modules__cell hd-modules__cell--break"><span class="t">1:20,1:30</span><span class="n">M3 Break + Failure share</span><span class="d">10 min</span></div>
+                    <div class="hd-modules__cell"><span class="t">1:30,2:30</span><span class="n">M4 Build #2 &middot; Cyborg</span><span class="d">60 min &middot; TEEP</span></div>
+                    <div class="hd-modules__cell hd-modules__cell--break"><span class="t">2:30,2:40</span><span class="n">Break</span><span class="d">10 min</span></div>
+                    <div class="hd-modules__cell"><span class="t">2:40,3:30</span><span class="n">M5 Build #3 &middot; Your Problem</span><span class="d">50 min &middot; build</span></div>
+                    <div class="hd-modules__cell"><span class="t">3:30,3:50</span><span class="n">M6 Frontier + Gap Map</span><span class="d">20 min &middot; both maps</span></div>
+                </section>
+
+                <!-- Body -->
+                <div class="hd-body">
+
+                    <!-- Bring with you -->
+                    <section class="hd-box hd-box--bring">
+                        <h2>Bring with you<span class="lede">Done before you walk in</span></h2>
+                        <ul>
+                            <li><strong>Course 2 prototype</strong> with notes on what worked, what didn't, and one <strong>failure case</strong>. Failure sharing is the first 10 minutes after Build #1.</li>
+                            <li><strong>genai.mil access verified.</strong> Sign in on the workstation you will use. Test starting a conversation.</li>
+                            <li><strong>Free GitHub account.</strong> Sign up at <code>github.com</code> if you don't already have one. Personal email works. Two-factor takes 10 min the first time.</li>
+                            <li><strong>Text editor.</strong> Notepad, Notepad++, or VS Code. Anything that saves a plain <code>.html</code> file.</li>
+                            <li><strong>Hosting check.</strong> Open the reference build URL from your duty workstation before class. If it loads, you are good. If not, talk to the instructor about file:// fallback.</li>
+                            <li><strong>Build #3 problem statement.</strong> One sentence on tool + user. You will declare it out loud at 2:40.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Key terms -->
+                    <section class="hd-box hd-box--terms hd-box--gold">
+                        <h2>Key terms<span class="lede">The vocabulary you will hear today</span></h2>
+                        <ul class="hd-terms">
+                            <li><span class="term">The Three Layers</span><span class="def">Spec (genai.mil), Prototype (static HTML on a public host), Production (the wishlist). We work the layers we can reach. We document the wall on the layer we can't.</span></li>
+                            <li><span class="term">Phase boundary (centaur)</span><span class="def">A non-negotiable checkpoint between design, build, and verify. You cross only when the previous phase is complete and signed.</span></li>
+                            <li><span class="term">Whiteboard first</span><span class="def">Every input, business rule, and edge case written down <em>before</em> AI runs a single prompt. Centaur opener.</span></li>
+                            <li><span class="term">Deliberate failure</span><span class="def">A point in the build where AI is known to give wrong instructions. You let it happen so you learn to spot it.</span></li>
+                            <li><span class="term">Frontier recognition</span><span class="def">Catching a wrong AI answer fast enough to course-correct in the same prompt, not three prompts later.</span></li>
+                            <li><span class="term">Capability Gap Map</span><span class="def">The second artifact of the course. For each build, name the production-layer capability that would 10x the tool and the specific permission that blocks it. Forwarded to HQMC.</span></li>
+                        </ul>
+                    </section>
+
+                    <!-- Exercises (tall column) -->
+                    <section class="hd-box hd-box--exercise hd-box--ink">
+                        <h2>Exercises in class<span class="lede">Three deployed builds, two artifacts</span></h2>
+
+                        <p><strong>Build #1 &middot; Centaur (65 min), Watch Bill Builder.</strong> Section leader's recurring Tuesday-afternoon problem. Rotation through the available roster, skip anyone on leave, fairness check, prints clean, copies clean into Outlook. Single HTML file. <em>Phase 1 (20 min) is whiteboard only, no AI.</em> <em>Done:</em> a 14-day bill prints clean, the email body pastes into Outlook intact, every edge case errors instead of silently doing nothing, URL openable on a phone.</p>
+
+                        <p><strong>Failure share (10 min, post-Build #1).</strong> Bring one failure case from Build #1 to the room. We capture patterns. Specific is better than tidy.</p>
+
+                        <p><strong>Build #2 &middot; Cyborg (60 min), TEEP Builder.</strong> The S-3 brief slide is stale by Friday. Build a TEEP that lives in the browser, persists across sessions, color-codes status, and produces a current S-3 brief paragraph on demand. <em>You will restructure something mid-build, that is the point.</em> <em>Done:</em> a working TEEP with localStorage persistence, class-based status coloring you can explain, and a copy-pasteable brief.</p>
+
+                        <p><strong>Build #3 &middot; Your problem (50 min), Declare first.</strong> One sentence: tool type + user. One mode + why. Two specific frontier risks. <em>If you can't name two specific risks, revise before you start.</em> <em>Done at 3:25:</em> simplest version of your tool runs, deployed to a public URL.</p>
+
+                        <p><strong>M6 &middot; Frontier Map + Capability Gap Map (20 min).</strong> Add at least one row to each map. Frontier Map names a specific task type where AI surprised you. Capability Gap Map names the specific production-layer permission that would 10x one of your builds.</p>
+
+                        <span class="hd-anchor"><strong>Anchor phrase</strong>Power Apps skills die when you turn in your CAC. HTML skills don't.</span>
+                    </section>
+
+                    <!-- What you'll be able to do -->
+                    <section class="hd-box hd-box--learn">
+                        <h2>What you'll be able to do<span class="lede">By the end of the session</span></h2>
+                        <ul>
+                            <li>Build a single-file static-HTML tool in <strong>centaur mode</strong> with verification at every phase boundary.</li>
+                            <li>Build a single-file static-HTML tool in <strong>cyborg mode</strong>, including a deliberate restructure mid-build.</li>
+                            <li>Choose between modes for your own problem, defend the choice, and ship in 50 minutes.</li>
+                            <li>Deploy to a public URL another Marine can open on their phone.</li>
+                            <li>Recognize a wrong AI answer fast enough to course-correct in the same prompt.</li>
+                            <li>Write a Frontier Map row and a Capability Gap Map row that another Marine could act on.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Homework -->
+                    <section class="hd-box hd-box--homework hd-box--gold">
+                        <h2>Homework<span class="lede">Required to attend Week 4 Advanced Workshop</span></h2>
+                        <ul>
+                            <li><strong>Polish Build #3</strong> to a deployable state. Keep the URL live.</li>
+                            <li><strong>Run one build through the EDD SOP QA process.</strong> Don't skip the verification checkpoints, they are the entry ticket.</li>
+                            <li><strong>Document three specific failure cases</strong> from finishing. Log them on the shared frontier-map doc.</li>
+                            <li><strong>Add at least two Capability Gap Map rows.</strong> Real, specific, named. The instructor consolidates quarterly to HQMC AI working group.</li>
+                            <li><strong>Identify one capability surprise.</strong> Somewhere AI performed better than you expected.</li>
+                            <li><strong>If you get blocked,</strong> contact the program lead before Week 4. We'd rather unblock you than have you skip the workshop.</li>
+                        </ul>
+                    </section>
+
+                </div>
+
+                <!-- Footer -->
+                <footer class="hd-foot">
+                    <div class="left"><strong>EDD &middot; Week 3.5 Student Handout</strong> &middot; UNCLASSIFIED &middot; print one-sided, landscape</div>
+                    <div class="right">
+                        <a href="../decks/week-3-5-platform-reality.html">Week 3.5 Deck</a> &middot;
+                        <a href="../courses/platform-reality.html">Course 3.5 page</a> &middot;
+                        <a href="./">All handouts</a>
+                    </div>
+                </footer>
+
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../pdf/">Briefs Library</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                        <li><a href="../pdf/TRAINING_CURRICULA_v5.pdf">Curricula (PDF)</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

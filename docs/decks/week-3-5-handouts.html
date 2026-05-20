@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chat-paste-ready hand-out blocks for the Course 3.5 Platform Training (Locked Tenant Reality) session. Build #1 Watch Bill phases 1 to 5, Build #2 TEEP iterations 1 to 5, Build #3 declaration and decomposition, Frontier Map and Capability Gap Map seeds.">
+    <title>Week 3.5 Facilitator Hand-Outs | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .handout-intro {
+            background: var(--color-bg-secondary);
+            border-left: 4px solid var(--color-scarlet);
+            padding: var(--space-lg) var(--space-xl);
+            margin-bottom: var(--space-xl);
+            border-radius: 0 var(--space-sm) var(--space-sm) 0;
+        }
+        .handout-intro p { margin: 0 0 var(--space-sm); }
+        .handout-intro p:last-child { margin-bottom: 0; }
+
+        .handout-toc {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-md);
+            margin: var(--space-xl) 0 var(--space-2xl);
+        }
+        .handout-toc a {
+            display: block;
+            padding: var(--space-md);
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--space-sm);
+            text-decoration: none;
+            color: var(--color-text-primary);
+            transition: border-color 0.15s, transform 0.15s;
+        }
+        .handout-toc a:hover {
+            border-color: var(--color-scarlet);
+            transform: translateY(-1px);
+        }
+        .handout-toc .slide-tag {
+            display: inline-block;
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-bold);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-scarlet);
+            margin-bottom: var(--space-xs);
+        }
+        .handout-toc .toc-title {
+            display: block;
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-md);
+        }
+
+        .copy-block {
+            border: 1px solid var(--color-border);
+            border-radius: var(--space-sm);
+            margin: var(--space-lg) 0 var(--space-2xl);
+            overflow: hidden;
+            background: var(--color-bg-primary);
+        }
+        .copy-block__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--color-bg-dark);
+            color: var(--color-text-inverse);
+            flex-wrap: wrap;
+        }
+        .copy-block__label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+        .slide-pill {
+            display: inline-block;
+            padding: 2px 10px;
+            background: var(--color-gold);
+            color: var(--color-text-primary);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-bold);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-radius: 999px;
+        }
+        .copy-block__title {
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-base);
+        }
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--color-scarlet);
+            color: var(--color-text-inverse);
+            border: 0;
+            border-radius: var(--space-sm);
+            font-family: var(--font-family-sans);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+            transition: background-color 0.15s;
+        }
+        .copy-btn:hover { background: var(--color-scarlet-dark); }
+        .copy-btn:focus-visible {
+            outline: 2px solid var(--color-gold);
+            outline-offset: 2px;
+        }
+        .copy-btn.is-copied { background: var(--color-success-border); }
+
+        .copy-block__cue {
+            padding: var(--space-md) var(--space-lg);
+            background: var(--color-warning-bg);
+            border-bottom: 1px solid var(--color-warning-border);
+            font-size: var(--font-size-sm);
+            color: var(--color-warning-text);
+        }
+        .copy-block__cue strong { color: var(--color-warning-text); }
+
+        .copy-block__body {
+            margin: 0;
+            padding: var(--space-lg);
+            white-space: pre-wrap;
+            font-family: var(--font-family-mono);
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-normal);
+            color: var(--color-text-primary);
+            background: var(--color-bg-code);
+            max-height: 520px;
+            overflow: auto;
+        }
+
+        .back-bar {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-md);
+            font-size: var(--font-size-sm);
+        }
+    </style>
+</head>
+<body class="site-wrapper">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/" class="active">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/" class="active">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="../resources/">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../courses/platform-reality.html">Platform Training (Locked Tenant Reality)</a></li>
+                    <li aria-current="page">Facilitator Hand-Outs</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Week 3.5 Facilitator Hand-Outs</h1>
+            <p class="page-header__desc">
+                Fourteen chat-paste-ready blocks for the Course 3.5 Platform Training (Locked Tenant Reality) session. Open this tab in a second window before the session, then copy each block into Microsoft Teams chat at the slide it pairs with.
+            </p>
+            <div class="back-bar mt-md">
+                <a href="week-3-5-platform-reality.html">&larr; Back to Week 3.5 Slide Deck</a>
+                <span aria-hidden="true">&middot;</span>
+                <a href="../courses/platform-reality.html">Course 3.5 Instructor Page</a>
+                <span aria-hidden="true">&middot;</span>
+                <a href="week-3-5-cheatsheet.html">Cheat Sheet</a>
+            </div>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container container--narrow">
+
+            <div class="handout-intro">
+                <p><strong>How to use this page.</strong> Keep it open in a second browser tab. When the deck reaches the slide called out on each block's gold pill, click <em>Copy to clipboard</em>, then paste into the Teams chat. Plain text is intentional, it survives the Teams paste cleanly.</p>
+                <p><strong>Print fallback.</strong> If you lose your second screen, this page prints with the copy buttons hidden. Use <kbd>Ctrl</kbd>+<kbd>P</kbd> / <kbd>&#8984;</kbd>+<kbd>P</kbd>.</p>
+                <p><strong>Where these come from.</strong> Each block is lifted verbatim from the <a href="../courses/platform-reality.html">Platform Training (Locked Tenant Reality) instructor page</a>. Build #1 Watch Bill Builder (Phases 1 to 5, centaur), Build #2 TEEP Builder (Iterations 1 to 5, cyborg), Build #3 declaration / decomposition, Frontier Map and Capability Gap Map seeds.</p>
+            </div>
+
+            <nav class="handout-toc" aria-label="Hand-out jump links">
+                <a href="#handout-b1-phase1">
+                    <span class="slide-tag">Module 2 &middot; Build #1 Phase 1</span>
+                    <span class="toc-title">Watch Bill, whiteboard planning template</span>
+                </a>
+                <a href="#handout-b1-phase2">
+                    <span class="slide-tag">Module 2 &middot; Build #1 Phase 2</span>
+                    <span class="toc-title">Watch Bill, full-plan handoff prompt</span>
+                </a>
+                <a href="#handout-b1-phase3">
+                    <span class="slide-tag">Module 2 &middot; Build #1 Phase 3</span>
+                    <span class="toc-title">Watch Bill, six-test verification</span>
+                </a>
+                <a href="#handout-b1-phase4">
+                    <span class="slide-tag">Module 2 &middot; Build #1 Phase 4</span>
+                    <span class="toc-title">Watch Bill, targeted-fix prompt</span>
+                </a>
+                <a href="#handout-b1-phase5">
+                    <span class="slide-tag">Module 2 &middot; Build #1 Phase 5</span>
+                    <span class="toc-title">Deploy to GitHub Pages, 5 steps</span>
+                </a>
+                <a href="#handout-b2-iter1">
+                    <span class="slide-tag">Module 4 &middot; Build #2 Iter 1</span>
+                    <span class="toc-title">TEEP, get something visible</span>
+                </a>
+                <a href="#handout-b2-iter2">
+                    <span class="slide-tag">Module 4 &middot; Build #2 Iter 2</span>
+                    <span class="toc-title">TEEP, summary cards + T-X days</span>
+                </a>
+                <a href="#handout-b2-iter3">
+                    <span class="slide-tag">Module 4 &middot; Build #2 Iter 3</span>
+                    <span class="toc-title">TEEP, color coding (the trap)</span>
+                </a>
+                <a href="#handout-b2-iter4">
+                    <span class="slide-tag">Module 4 &middot; Build #2 Iter 4</span>
+                    <span class="toc-title">TEEP, class-based styling fix</span>
+                </a>
+                <a href="#handout-b2-iter5">
+                    <span class="slide-tag">Module 4 &middot; Build #2 Iter 5</span>
+                    <span class="toc-title">TEEP, generate S-3 brief</span>
+                </a>
+                <a href="#handout-b3-declaration">
+                    <span class="slide-tag">Module 5 &middot; Build #3</span>
+                    <span class="toc-title">Build #3 declaration template</span>
+                </a>
+                <a href="#handout-b3-decomposition">
+                    <span class="slide-tag">Module 5 &middot; Decomposition</span>
+                    <span class="toc-title">Build #3 decomposition (5 questions)</span>
+                </a>
+                <a href="#handout-frontier-seed">
+                    <span class="slide-tag">Module 6 &middot; Frontier Map</span>
+                    <span class="toc-title">Frontier map starter (6 rows)</span>
+                </a>
+                <a href="#handout-gap-seed">
+                    <span class="slide-tag">Module 6 &middot; Capability Gap</span>
+                    <span class="toc-title">Capability Gap Map starter (5 rows)</span>
+                </a>
+            </nav>
+
+            <!-- ===========================================================
+                 BLOCK 1, Build #1 Phase 1 (whiteboard planning template)
+                 =========================================================== -->
+            <article id="handout-b1-phase1">
+                <h2>Build #1 Phase 1: Watch Bill whiteboard planning template</h2>
+                <p>
+                    Phase 1 cue. Drop in chat at 0:15 right after the Build #1 framing slide. Students whiteboard or paper-write each section before any AI is involved. Twenty minutes, no editor.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Build #1 Phase 1 slide</span>
+                            <span class="copy-block__title">Watch Bill, whiteboard planning template</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w35-b1p1" aria-label="Copy Build #1 Phase 1 to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Build #1 Phase 1 in chat. Whiteboard the five sections below. No editor. No AI. Twenty minutes."
+                    </div>
+<pre class="copy-block__body" id="copy-w35-b1p1">WATCH BILL BUILDER, Phase 1 whiteboard plan. Twenty minutes. No AI yet.
+
+Write all five sections on paper or whiteboard before you touch your editor.
+
+1. INPUTS
+   - Section / unit name
+   - Watch type (Duty NCO, Fire Watch, Quarterdeck, Phone Watch, Barracks Duty, SDO, OOD, or custom)
+   - Start date (YYYY-MM-DD)
+   - Number of days (1 to 365)
+   - Roster: free-text list, one Marine per line
+   - Skip suffix on roster lines: "- LV" or "- TAD" or "- APPT" means unavailable
+
+2. RULES
+   - Rotate through available Marines in order
+   - Skip anyone with a skip suffix
+   - Fairness check: spread between most-watches and fewest-watches should be 0 or 1 across the period
+   - Weekends shown but not treated differently
+
+3. OUTPUTS
+   - On-screen table: Date, Day of Week, Watchstander
+   - Fairness summary: per-Marine counts, total slots, spread number
+   - Skipped list: who was excluded and why
+   - Email body in a textarea with Copy button, plain-text monospace table
+   - Print: clean, no header chrome, fits US Letter
+
+4. EDGE CASES
+   - Empty roster: inline error, do not generate
+   - Everyone marked unavailable: inline error
+   - Single available Marine over 14 days: that Marine on every day, surface in fairness summary
+   - Invalid date: inline error
+   - Days &lt; 1 or &gt; 365: inline error
+
+5. OUT OF SCOPE (Capability Gap Map candidates)
+   - Pulling roster from MOL automatically
+   - Reading leave block from system of record
+   - Notifying watchstanders by email
+   - Persisting bills across sessions for multiple sections</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 2, Build #1 Phase 2 (full-plan handoff prompt)
+                 =========================================================== -->
+            <article id="handout-b1-phase2">
+                <h2>Build #1 Phase 2: Watch Bill full-plan handoff prompt</h2>
+                <p>
+                    Phase 2 cue. Drop at 0:35 right after the Phase 1 whiteboard time ends. Students paste this into genai.mil as one prompt. genai.mil returns the full HTML file.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Build #1 Phase 2 slide</span>
+                            <span class="copy-block__title">Watch Bill, full-plan handoff prompt</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w35-b1p2" aria-label="Copy Build #1 Phase 2 to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Phase 2 prompt in chat. Paste into genai.mil. Save the response as watch-bill.html. We verify next."
+                    </div>
+<pre class="copy-block__body" id="copy-w35-b1p2">Build me a single-file static HTML tool called Watch Bill Builder. Constraints:
+
+- One .html file. Inline CSS. Inline JavaScript. No external scripts, no external fonts, no external stylesheets, no CDN. It must work 100% offline after page load.
+- Mobile responsive. Prints clean to US Letter.
+- Has an UNCLASSIFIED banner at top and bottom.
+
+Inputs:
+- Section name (text)
+- Watch type (dropdown: Duty NCO, Fire Watch, Quarterdeck, Phone Watch, Barracks Duty, SDO, OOD, Custom)
+- Custom watch name (text, shown only when Custom is selected)
+- Start date (date)
+- Number of days (number, 1 to 365)
+- Roster textarea (one name per line; suffix "- LV", "- TAD", or "- APPT" means skip)
+
+Logic:
+- Rotate available Marines in order
+- Skip anyone with a skip suffix
+- Build a date range starting at start date
+- Fairness check: report per-Marine watch counts and the spread (max minus min)
+
+Outputs:
+- Table of Date / Day / Watchstander
+- Fairness summary section with per-Marine counts and spread number
+- Skipped list showing who was excluded and the reason
+- Email-pasteable plain-text table in a textarea with a Copy button
+- Subject line auto-built from inputs
+
+Errors handled inline (not silent):
+- Empty section name
+- Empty roster
+- All Marines marked unavailable
+- Invalid date
+- Days less than 1 or more than 365
+
+Give me the full HTML in one response. Do not split into multiple files. Do not use any framework.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 3, Build #1 Phase 3 (verification checklist)
+                 =========================================================== -->
+            <article id="handout-b1-phase3">
+                <h2>Build #1 Phase 3: Watch Bill six-test verification</h2>
+                <p>
+                    Phase 3 cue. Drop in chat after the AI's first response is saved. Students run all six tests in order. A student declares Build #1 done only after marking each off.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Build #1 Phase 3 slide</span>
+                            <span class="copy-block__title">Watch Bill, six-test verification</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w35-b1p3" aria-label="Copy Build #1 Phase 3 to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Phase 3 verification in chat. Run all six. Mark each off out loud. Do not declare done before all six pass."
+                    </div>
+<pre class="copy-block__body" id="copy-w35-b1p3">WATCH BILL BUILDER, Phase 3 verification. Run all six tests in order.
+
+[ ] 1. EMPTY ROSTER
+    Clear the roster textarea. Click Generate.
+    Expected: inline error, "Roster is empty" or similar.
+    Fail mode: silent no-op (no error appears).
+
+[ ] 2. ALL ON LEAVE
+    Roster: every line ends with "- LV".
+    Expected: inline error, "No available Marines" or similar.
+
+[ ] 3. ZERO DAYS
+    Set Number of Days to 0. Click Generate.
+    Expected: inline error.
+
+[ ] 4. OVER-MAX DAYS
+    Set Number of Days to 400. Click Generate.
+    Expected: inline error capping at 365.
+
+[ ] 5. SINGLE MARINE, 14 DAYS
+    Roster: one available Marine. Days: 14.
+    Expected: that Marine on every day, fairness summary reports spread = 0 across 1 Marine (or surfaces the imbalance).
+    Fail mode: silent or hidden imbalance.
+
+[ ] 6. COPY TO OUTLOOK
+    Generate a bill. Click Copy Email Body. Open Outlook. Paste.
+    Expected: monospace table survives, columns align, no broken characters.
+    Fail mode: lost spacing, weird characters, or copy did nothing.
+
+[ ] 7. PRINT (bonus)
+    Ctrl+P or Cmd+P. Preview.
+    Expected: input form is hidden, bill table is the whole page, fits US Letter for 14 days.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 4, Build #1 Phase 4 (targeted-fix prompt template)
+                 =========================================================== -->
+            <article id="handout-b1-phase4">
+                <h2>Build #1 Phase 4: Watch Bill targeted-fix prompt template</h2>
+                <p>
+                    Phase 4 cue. Drop when a Marine hits a failure in Phase 3 verification. Targeted, not "redo the file." They paste only the changed lines back.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Build #1 Phase 4 slide</span>
+                            <span class="copy-block__title">Watch Bill, targeted-fix prompt</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w35-b1p4" aria-label="Copy Build #1 Phase 4 to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Phase 4 fix prompt. Fill in the brackets with the specific failure you found. Paste ONLY the changed lines back."
+                    </div>
+<pre class="copy-block__body" id="copy-w35-b1p4">In the Watch Bill Builder you generated, when I [describe the test you ran, e.g., "leave the roster empty and click Generate"], [describe what happened, e.g., "nothing happens and no error appears"].
+
+I want it to instead [describe the desired behavior, e.g., "show an inline error below the form that says exactly 'Roster is empty. Add at least one Marine.'"].
+
+Show me only the JavaScript change. Do not regenerate the whole file. Do not change anything else.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 5, Build #1 Phase 5 (deploy walkthrough)
+                 =========================================================== -->
+            <article id="handout-b1-phase5">
+                <h2>Build #1 Phase 5: Deploy to GitHub Pages, 5 steps</h2>
+                <p>
+                    Phase 5 cue. Drop when a Marine has Phase 3 fully passing. Five steps to a live URL another Marine can open on their phone. Sixty seconds.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Build #1 Phase 5 slide</span>
+                            <span class="copy-block__title">Deploy to GitHub Pages, 5 steps</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w35-b1p5" aria-label="Copy Phase 5 deploy walkthrough to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Phase 5 deploy in chat. Five steps. If github.io is blocked from here, see the static hosting cheat sheet and try Tier 2."
+                    </div>
+<pre class="copy-block__body" id="copy-w35-b1p5">DEPLOY YOUR WATCH BILL TO A PUBLIC URL, 5 steps.
+
+1. Go to github.com. Sign in. Click the "+" in the top right. Pick "New repository."
+   - Name: watch-bill (or whatever you want)
+   - Visibility: Public
+   - Click "Create repository."
+
+2. On the new empty repo page, click "uploading an existing file" (in the quick setup section).
+   - Drag your watch-bill.html into the browser.
+   - Click "Commit changes."
+
+3. In the repo, click Settings (top menu).
+   - In the left sidebar, click Pages.
+   - Under "Source," pick "Deploy from a branch."
+   - Branch: main, folder: / (root).
+   - Click Save.
+
+4. Wait 60 to 90 seconds. GitHub builds the site.
+   - URL is: https://&lt;your-username&gt;.github.io/&lt;repo-name&gt;/watch-bill.html
+
+5. Open the URL in your browser. Open it on your phone.
+   - If both load, you just deployed.
+   - Share the URL with the Marine next to you. Watch them open it.
+
+If github.io is blocked from your duty workstation, see the static hosting cheat sheet for Tier 2 alternates (Cloudflare Pages, GitLab Pages). The skill is identical across hosts.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 6, Build #2 Iteration 1
+                 =========================================================== -->
+            <article id="handout-b2-iter1">
+                <h2>Build #2 Iteration 1: TEEP, get something visible</h2>
+                <p>
+                    First cyborg prompt. Drop at 1:30 right after the Build #2 framing slide. The boundary stays fluid from here.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Build #2 Iter 1 slide</span>
+                            <span class="copy-block__title">TEEP, get something visible</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w35-b2i1" aria-label="Copy Build #2 Iteration 1 to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Iteration 1 in chat. Get something visible. Save the response as teep.html, open it, add three events through the UI."
+                    </div>
+<pre class="copy-block__body" id="copy-w35-b2i1">Build me a single-file static HTML TEEP tool (Training, Exercise, and Employment Plan).
+
+- One .html file. Inline CSS, inline JS, no external dependencies. 100% offline after page load.
+- UNCLASSIFIED banner top and bottom.
+- Mobile responsive.
+
+Stores training events with these fields:
+- Name (text)
+- Type (dropdown: Field, Live Fire, Range, CBT, Garrison, Inspection, Coordination, Annual Training, School, Deployment)
+- Start date (date)
+- End date (date)
+- Status (Planned / Confirmed / Executed / Cancelled)
+- Resources or notes (textarea)
+- T&amp;R references (text, optional)
+
+UI:
+- Toolbar with unit name, "Add Event" button
+- Table of events sorted by start date
+- Each row shows the fields above plus Edit and Delete buttons
+
+Persistence:
+- Use localStorage so events survive a page reload
+- Store under key "edd-teep-v1"
+
+Give me the full HTML in one response.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 7, Build #2 Iteration 2
+                 =========================================================== -->
+            <article id="handout-b2-iter2">
+                <h2>Build #2 Iteration 2: TEEP, summary cards and T-X days</h2>
+                <p>
+                    Cyborg pivot 1. Drop when the Marine realizes they can't brief from the bare table. The instructor cues "Add three events and try to brief them in your head, then come back."
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Build #2 Iter 2 slide</span>
+                            <span class="copy-block__title">TEEP, summary cards + T-X days</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w35-b2i2" aria-label="Copy Build #2 Iteration 2 to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Iteration 2 in chat. You realized the bare table can't brief. Add what you need."
+                    </div>
+<pre class="copy-block__body" id="copy-w35-b2i2">The TEEP tool works but I cannot brief from it. Add the following to the existing file:
+
+1. SUMMARY CARDS at the top of the page:
+   - Total events
+   - Count Planned
+   - Count Confirmed
+   - Count Executed
+   - Count Cancelled
+   Each card has a label, a number, and a color cue. Use color to differentiate status at a glance.
+
+2. T-X DAYS INDICATOR next to each event row.
+   - If the event is upcoming, show "T-Nd" where N is days until start
+   - "TODAY" if N = 0
+   - "tomorrow" if N = 1
+   - "Nd ago" if past
+   - "complete" if status is Executed
+   - "cancelled" if status is Cancelled
+
+3. HIGHLIGHT CONFIRMATION GAPS.
+   - Any event with status "Planned" that is inside 14 days should visually stand out (different color or weight).
+   - Tooltip or label: "Confirmation gap, push for confirmation."
+
+Show me only the changes to the existing file, not the whole rebuild. Where does each addition go (which function, which CSS rule).</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 8, Build #2 Iteration 3 (the trap)
+                 =========================================================== -->
+            <article id="handout-b2-iter3">
+                <h2>Build #2 Iteration 3: TEEP, color coding (the trap)</h2>
+                <p>
+                    Deliberate-failure cue. <strong>Do not warn students.</strong> genai.mil typically returns broken code on the first pass (inline style.background losing to CSS specificity, deprecated bgColor, fake :contains() selectors, or string-compare with wrong type coercion). Let them hit it.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Build #2 Iter 3 slide</span>
+                            <span class="copy-block__title">TEEP, color coding (the trap)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w35-b2i3" aria-label="Copy Build #2 Iteration 3 to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Iteration 3 in chat. Color coding. Try it. If it doesn't work the way you expect, raise a hand BEFORE re-prompting."
+                    </div>
+<pre class="copy-block__body" id="copy-w35-b2i3">Add color coding to the status column.
+
+- Planned: blue
+- Confirmed: green
+- Executed: gray
+- Cancelled: red
+
+Make the colors WCAG AA contrast against the background. Show me only the changes I need to apply to the file I already have.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 9, Build #2 Iteration 4 (class-based fix)
+                 =========================================================== -->
+            <article id="handout-b2-iter4">
+                <h2>Build #2 Iteration 4: TEEP, class-based styling fix</h2>
+                <p>
+                    Recovery prompt. Issue after students have hit the Iteration 3 trap and the instructor has run the four-question debrief.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Build #2 Iter 4 slide</span>
+                            <span class="copy-block__title">TEEP, class-based styling fix</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w35-b2i4" aria-label="Copy Build #2 Iteration 4 to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Iteration 4 in chat. The fix. Class-based, not inline. Notice the prompt names the specific failure mode."
+                    </div>
+<pre class="copy-block__body" id="copy-w35-b2i4">The styling does not apply. I tried setting the style inline on the cell with element.style.background and nothing changes. The browser shows the cell still white. I think a CSS class on the parent is winning the specificity battle.
+
+Give me a CSS-class-based approach instead:
+- One CSS class per status: .status-Planned, .status-Confirmed, .status-Executed, .status-Cancelled
+- Define each class in the &lt;style&gt; block with background, color, and any other treatment needed for WCAG AA contrast
+- In the JS that renders each row, set element.className = "status-pill status-" + event.status
+
+Show me:
+1. The &lt;style&gt; additions
+2. The JS line that sets the class (and which function it goes in)
+
+Do not regenerate the whole file. Only the changes.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 10, Build #2 Iteration 5 (S-3 brief)
+                 =========================================================== -->
+            <article id="handout-b2-iter5">
+                <h2>Build #2 Iteration 5: TEEP, generate S-3 brief</h2>
+                <p>
+                    Final TEEP iteration. Drop if time allows. The brief generator is what makes the tool actually useful to the S-3 shop.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Build #2 Iter 5 slide</span>
+                            <span class="copy-block__title">TEEP, generate S-3 brief</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w35-b2i5" aria-label="Copy Build #2 Iteration 5 to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Iteration 5 in chat. The brief generator. This is what makes the tool useful, not just visible."
+                    </div>
+<pre class="copy-block__body" id="copy-w35-b2i5">Add a button labeled "Generate S-3 Brief" to the TEEP tool. When clicked, it produces a plain-text briefing block in a read-only textarea. Format:
+
+Line 1: "S-3 TRAINING BRIEF"
+Line 2: "Unit: [unit name]"
+Line 3: "As of: [today's date in DD MMM YY format] ([fiscal year and quarter, e.g., FY26 Q3])"
+(blank line)
+STATUS SUMMARY
+[one line: "Total TEEP events: N. Planned: X. Confirmed: Y. Executed: Z. Cancelled: W."]
+(blank line)
+NEXT 14 DAYS (count events)
+[one line per event in next 14 days: "T-Nd  DD MMM YY  Event name (Type, Status)"]
+[indent and show "Resources: ..." line under any event that has resources]
+(blank line)
+NEXT 15 TO 30 DAYS (count events)
+[same format]
+(blank line)
+CONFIRMATION GAPS
+[any Planned events inside 14 days, listed one per line with "- Event name (T-Nd)"]
+(blank line)
+REQUEST
+[if there are confirmation gaps: "Request CO push on N confirmation gap(s)."]
+[else if upcoming events exist: "Steady state. No confirmation gaps inside 14 days."]
+[else: "All events executed or cancelled. TEEP needs refresh for next quarter."]
+
+Add a Copy button next to the textarea that copies the brief to clipboard.
+
+Show me only the changes needed (the button, the textarea, the JS function that builds the brief). Where in the file does each piece go.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 11, Build #3 declaration template
+                 =========================================================== -->
+            <article id="handout-b3-declaration">
+                <h2>Build #3 declaration template (3 lines)</h2>
+                <p>
+                    Drop at 2:40, right after the Build #3 framing slide. Each Marine fills the three lines in chat before opening their editor.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Build #3 Declaration slide</span>
+                            <span class="copy-block__title">Build #3 declaration template</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w35-b3decl" aria-label="Copy Build #3 declaration template to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Build #3 declaration in chat. Each of you fills three lines BEFORE you open your editor. If you can't name two specific frontier risks, revise."
+                    </div>
+<pre class="copy-block__body" id="copy-w35-b3decl">BUILD #3 DECLARATION, fill all three lines in chat before opening your editor.
+
+1. WHAT I'M BUILDING (one sentence, name the tool type and the user)
+   Example: "A Combat Lifesaver currency tracker for the SACO."
+   Example: "A range coordination checklist for the company gunny."
+   Mine: ___________________________________________________________
+
+2. MODE AND WHY (one sentence)
+   Example: "Centaur, because currency rules are strict and the tool goes to the SACO."
+   Example: "Cyborg, because I do not yet know if range coord is per-event or per-range."
+   Mine: ___________________________________________________________
+
+3. TWO SPECIFIC FRONTIER RISKS (one sentence each)
+   Example A: "AI may not handle the FY boundary correctly in the date math."
+   Example B: "Copy-to-clipboard may behave differently in Edge vs Chrome."
+   If you cannot name TWO specific risks (not vague ones), revise this declaration before you start.
+   Risk 1: ___________________________________________________________
+   Risk 2: ___________________________________________________________</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 12, Build #3 decomposition (5 questions)
+                 =========================================================== -->
+            <article id="handout-b3-decomposition">
+                <h2>Build #3 decomposition template (5 questions)</h2>
+                <p>
+                    Drop right after declarations. Each Marine answers all five questions before writing their first prompt to genai.mil. Five minutes of decomposition saves an hour of building.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Build #3 Decomposition slide</span>
+                            <span class="copy-block__title">Build #3 decomposition template</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w35-b3decomp" aria-label="Copy Build #3 decomposition template to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Decomposition in chat. Five questions. Five minutes. Then you can write your first prompt."
+                    </div>
+<pre class="copy-block__body" id="copy-w35-b3decomp">BUILD #3 DECOMPOSITION, answer all five before writing your first prompt.
+
+1. INPUTS
+   What does the user type or select?
+   ___________________________________________________________
+
+2. LOGIC
+   What does the tool compute, route, or decide?
+   ___________________________________________________________
+
+3. OUTPUTS
+   On-screen result? Printable view? Copyable text? All three?
+   ___________________________________________________________
+
+4. PERSISTENCE
+   Does state need to survive reload? localStorage yes or no?
+   ___________________________________________________________
+
+5. EDGE CASES (list three)
+   Empty input: ___________________________________________________
+   Max input: ___________________________________________________
+   Weird input: ___________________________________________________</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 13, Frontier Map starter
+                 =========================================================== -->
+            <article id="handout-frontier-seed">
+                <h2>Frontier Map starter table (6 rows)</h2>
+                <p>
+                    Drop at 3:30 on the Frontier Map reference slide. Each Marine reads the six pre-filled rows, then adds at least two of their own from today's builds.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 6 Frontier Map slide</span>
+                            <span class="copy-block__title">Frontier Map starter table</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w35-frontier" aria-label="Copy Frontier Map starter to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Frontier Map starter in chat. Six rows for the static-HTML stack. Add at least two of your own from today before we wrap."
+                    </div>
+<pre class="copy-block__body" id="copy-w35-frontier">FRONTIER MAP, starter rows for the static-HTML stack.
+
+Add at least TWO specific rows of your own from today's builds.
+
+| Task type                  | AI handles well                          | AI handles poorly                            | Verification needed                                  |
+|----------------------------|------------------------------------------|----------------------------------------------|------------------------------------------------------|
+| HTML form scaffolding      | Standard inputs, labels, basic validation| Accessible focus order, dependent fields     | Tab through the form. Submit with everything empty.  |
+| Inline CSS for print       | Basic @media print, hiding nav chrome    | Color preservation, table page-breaks        | Actually print the page. Look at the PDF preview.    |
+| Date math in JS            | Simple add and subtract                  | Timezone offsets, FY boundary, ISO parsing   | Test at start of October. Test at end of December.   |
+| localStorage persistence   | JSON serialize and parse                 | Schema migration, quota, private browsing    | Open in InPrivate. Reload. See what survives.        |
+| Copy to clipboard          | navigator.clipboard.writeText            | Fallback for older browsers and HTTP context | Test in Edge, Chrome, and on a phone.                |
+| Color coding by status     | Class-based styling, status in class     | Inline-style approaches fighting specificity | Visually inspect every status value, all four.       |
+| [Your row]                 |                                          |                                              |                                                      |
+| [Your row]                 |                                          |                                              |                                                      |
+
+What makes a useful row:
+- Specific task type (not "AI stuff")
+- Concrete examples in "Handles Well"
+- Specific failure mode with enough detail to recognize next time
+- A testable verification action (not "check it")</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 14, Capability Gap Map starter
+                 =========================================================== -->
+            <article id="handout-gap-seed">
+                <h2>Capability Gap Map starter (5 rows + framing)</h2>
+                <p>
+                    Drop at 3:40 on the Capability Gap Map reference slide. The second artifact of the course. Forwarded to HQMC quarterly as evidence for tenant policy review.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 6 Capability Gap Map slide</span>
+                            <span class="copy-block__title">Capability Gap Map starter</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w35-gap" aria-label="Copy Capability Gap Map starter to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Capability Gap Map starter in chat. Five rows. Add at least ONE of your own. This is the artifact that goes to HQMC."
+                    </div>
+<pre class="copy-block__body" id="copy-w35-gap">CAPABILITY GAP MAP, starter rows.
+
+This artifact captures institutional capabilities Marines would deploy if access were granted. Compiled across training sessions, it forms the evidence base for tenant policy review at HQMC.
+
+A single Marine asking for a connector is a request. Forty Marines documenting the same blocked connector with beneficiary counts and time savings is a policy case.
+
+| Task Type                    | Prototype today (built today)               | Production wish (10x with access)               | Blocking permission / tool                   | Beneficiary count             | Time savings              |
+|------------------------------|---------------------------------------------|-------------------------------------------------|----------------------------------------------|-------------------------------|---------------------------|
+| Watch Bill Generation        | Static HTML, manual roster, github.io       | Pull roster from MOL, notify watchstanders      | MOL API not exposed; Office 365 connector    | 1 section leader x 8 sections | 1.5-2 hrs/wk per leader   |
+| Training Calendar / TEEP     | Static HTML, localStorage, S-3 brief        | Two-way Outlook sync, shared resource pool      | Outlook connector license tier; Dataverse    | 1 S-3 per battalion           | 3-5 hrs/wk per shop       |
+| Initial Counseling Tracker   | Static HTML NAVMC 11380 builder             | Direct write to MOL counseling record           | MOL no write API; no digital signature       | Every NCO USMC-wide           | 20-40 min per counseling  |
+| Range Coordination           | Static HTML range request tracker           | Conflict detection vs RTAM schedule             | RTAM no documented integration surface       | Every battalion training shop | 2-4 hrs per range event   |
+| Personnel Currency Dashboard | Static HTML CSV-import dashboard            | Live read of MCTIMS, push notifications         | MCTIMS read access restricted                | Every section leader USMC     | 30-60 min per section/wk  |
+| [Your row]                   |                                             |                                                 |                                              |                               |                           |
+
+What makes a STRONG row vs a WEAK one:
+
+WEAK: "Power Apps not allowed"
+STRONG: "Office 365 Outlook connector restricted at tenant level. Dataverse environment not provisioned. SharePoint write-back outside personal site disabled."
+
+WEAK: "A lot of Marines"
+STRONG: "1 S-3 shop per battalion, 4 battalions in the regiment, weekly use."
+
+WEAK: "Saves time"
+STRONG: "3 to 5 hours per S-3 shop per week, conservatively. Annual: 150 to 250 hrs per shop."
+
+Instructor consolidates the room's rows and forwards through the unit AI POC to HQMC AI working group quarterly. Repeat hits across units for the same blocked permission are the strongest signal.</pre>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Course 3.5 Materials</h3>
+                    <ul>
+                        <li><a href="../courses/platform-reality.html">Course 3.5 Page</a></li>
+                        <li><a href="week-3-5-platform-reality.html">Week 3.5 Slide Deck</a></li>
+                        <li><a href="week-3-5-cheatsheet.html">Cheat Sheet</a></li>
+                        <li><a href="../facilitator/week-3-5-platform-reality.html">Facilitator Pack</a></li>
+                        <li><a href="../handouts/platform-reality-handout.html">Live Fill-In Handout</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Reference Builds</h3>
+                    <ul>
+                        <li><a href="../builds/watch-bill.html">Watch Bill Builder</a></li>
+                        <li><a href="../builds/teep.html">TEEP Builder</a></li>
+                        <li><a href="../resources/capability-gap-map.html">Capability Gap Map</a></li>
+                        <li><a href="../resources/static-hosting-cheat-sheet.html">Static Hosting Cheat Sheet</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function () {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+
+            document.querySelectorAll('.copy-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var targetId = btn.getAttribute('data-copy-target');
+                    var target = document.getElementById(targetId);
+                    if (!target) return;
+                    var text = target.textContent;
+                    var label = btn.querySelector('.copy-btn__label');
+                    var originalLabel = label ? label.textContent : '';
+
+                    var done = function () {
+                        btn.classList.add('is-copied');
+                        if (label) label.textContent = 'Copied';
+                        setTimeout(function () {
+                            btn.classList.remove('is-copied');
+                            if (label) label.textContent = originalLabel;
+                        }, 1800);
+                    };
+                    var fail = function () {
+                        if (label) label.textContent = 'Copy failed, select and Ctrl/Cmd+C';
+                        setTimeout(function () {
+                            if (label) label.textContent = originalLabel;
+                        }, 2500);
+                    };
+
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(text).then(done).catch(function () {
+                            try {
+                                var range = document.createRange();
+                                range.selectNodeContents(target);
+                                var sel = window.getSelection();
+                                sel.removeAllRanges();
+                                sel.addRange(range);
+                                document.execCommand('copy');
+                                sel.removeAllRanges();
+                                done();
+                            } catch (err) { fail(); }
+                        });
+                    } else {
+                        try {
+                            var range = document.createRange();
+                            range.selectNodeContents(target);
+                            var sel = window.getSelection();
+                            sel.removeAllRanges();
+                            sel.addRange(range);
+                            document.execCommand('copy');
+                            sel.removeAllRanges();
+                            done();
+                        } catch (err) { fail(); }
+                    }
+                });
+            });
+        })();
+    </script>
+
+</body>
+</html>

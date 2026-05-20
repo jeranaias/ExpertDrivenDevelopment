@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Two-page printable instructor cheat sheet for the Week 3.5 Platform Training (Locked Tenant Reality) deck: module-by-module timing, the build specs to drop in chat, the artifact each build leaves deployed, breaks, anchor phrases, and recovery cues for the static-HTML stack.">
+    <title>Week 3.5 Instructor Cheat Sheet, Platform Training (Locked Tenant Reality) | EDD</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/cheatsheet.css">
+    <style>
+        /* Week 3.5 deltas: 7-cell pacing strip */
+        .cs-pacing { grid-template-columns: repeat(7, 1fr); }
+    </style>
+</head>
+<body class="site-wrapper">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Weekly Decks</a></li>
+                    <li aria-current="page">Week 3.5, Instructor Cheat Sheet</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Week 3.5 Instructor Cheat Sheet</h1>
+            <p class="page-header__desc">A two-page printable reference card for the Course 3.5 Platform Training (Locked Tenant Reality) deck. Designed to sit next to the deck during the four-hour Teams session so you never have to scrub back through 35 slides for a build spec, a switch cue, or the next failure share.</p>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+
+            <div class="cheat-intro">
+                <p><strong>Print:</strong> <kbd>Ctrl</kbd>+<kbd>P</kbd> &rarr; Layout <em>Portrait</em>, Margins <em>Default</em>, Background graphics <em>on</em>. Two US Letter pages. Site chrome and this preview note are hidden in print.</p>
+                <p><strong>Use:</strong> page 1 is the live-delivery card. Pacing strip, the three build specs to drop in chat, the failure share script, the centaur and cyborg posture switches. Page 2 is anchors you repeat all afternoon, recovery cues for when hosting or genai.mil misbehaves, and the homework that gates Week 4.</p>
+            </div>
+
+            <!-- ========================================================
+                 PAGE 1
+                 ======================================================== -->
+            <article class="cheat-page" aria-label="Week 3.5 cheat sheet, page 1">
+
+                <header class="cs-head">
+                    <div class="cs-head__week"><span class="num">3.5</span><span>Course 3.5 &middot; Platform Training<br>(Locked Tenant Reality)<br>Instructor cheat sheet</span></div>
+                    <div class="cs-head__title">
+                        <h1>Platform Training (Locked Tenant Reality)</h1>
+                        <p class="sub">Three deployed static-HTML tools in four hours. Build #1 Centaur (Watch Bill), Build #2 Cyborg (TEEP), Build #3 your own. Plus the Capability Gap Map artifact for HQMC.</p>
+                    </div>
+                    <div class="cs-head__meta">
+                        <div><strong>4 hr</strong> &middot; 6 modules + Capability Gap Map wrap</div>
+                        <div>35 slides &middot; 2 breaks &middot; 3 editor switches</div>
+                        <div>Companion to <strong>week-3-5-platform-reality.html</strong></div>
+                    </div>
+                </header>
+
+                <!-- Pacing strip -->
+                <section class="cs-pacing" aria-label="Session pacing strip">
+                    <div class="cs-pacing__cell"><span class="t">0:00</span><span class="n">M1 Setup + Hosting</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">0:15</span><span class="n">Build #1 Centaur</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--break"><span class="t">1:20</span><span class="n">Brk + Share 10&prime;</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">1:30</span><span class="n">Build #2 Cyborg</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--break"><span class="t">2:30</span><span class="n">Break 10&prime;</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">2:40</span><span class="n">Build #3 Your Own</span></div>
+                    <div class="cs-pacing__cell"><span class="t">3:30</span><span class="n">Frontier + Gap Map</span></div>
+                </section>
+
+                <!-- Module-by-module prompts and outcomes -->
+                <section class="cs-modules" aria-label="Per-module specs and outcomes">
+
+                    <div class="cs-mod cs-mod--framing">
+                        <div class="cs-mod__no"><span class="n">1</span><span class="dur">15 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Setup, Hosting, Review</span>
+                            <span class="clock">0:00,0:15</span>
+                            <span class="kind">Framing + GitHub Pages walkthrough</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Three Layers anchor (Slide 5):</strong> Spec (genai.mil), Prototype (static HTML on public host), Production (the wishlist). Today we work two, document the wall on three.</li>
+                                <li><strong>Hosting walk (Slide 8):</strong> walk every Marine through a placeholder repo + GitHub Pages toggle. If they can't reach github.io by minute 14, switch them to local file:// for the day and add a Capability Gap Map row.</li>
+                                <li><strong>Tabs check (audible):</strong> deck, this cheat sheet, genai.mil, github.com (signed in), a text editor. Confirm clipboard copies from browser into Outlook on this workstation.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Outcome &middot; calibration</span>
+                            <span class="arch">Every Marine has a live github.io URL</span>
+                            <span class="desc">Anyone blocked is paired and on file:// fallback. Nobody discovers a hosting issue during Build #1.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">B1</span><span class="dur">65 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Build #1, Watch Bill Builder</span>
+                            <span class="clock">0:15,1:20</span>
+                            <span class="kind">Centaur &middot; you know the answer</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Phase 1 (0:15,0:35):</strong> whiteboard only. No AI. Define inputs, rules, outputs, edge cases, out-of-scope (those become Capability Gap rows).</li>
+                                <li><strong>Phase 2 spec (paste verbatim):</strong> see Build #1 full-plan handoff block in the chat-paste handouts pack. Single file, inline CSS and JS, no external dependencies, mobile responsive, prints clean, copies clean.</li>
+                                <li><strong>Posture brief (read aloud):</strong> "Centaur mode means you design the logic; AI writes the code. No exploration. You know the answer before you prompt."</li>
+                                <li><strong>Phase 3 verification:</strong> six edge cases out loud. Empty roster, all on leave, days=0, days=400, single Marine over 14 days, copy-to-Outlook test.</li>
+                                <li><em>Coach in chat.</em> Phase 4 fix prompts are targeted, not "redo the file."</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Deliverable &middot; build #1</span>
+                            <span class="arch">Watch Bill on a public URL</span>
+                            <span class="desc">A 14-day bill prints clean, the email body pastes into Outlook with the monospace table intact. URL openable on phone.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--break">
+                        <div class="cs-mod__no"><span class="n">BRK</span><span class="dur">10 min</span></div>
+                        <div class="cs-mod__line">
+                            <span><strong>Break + failure share.</strong> Be back at H+1:30. Run the failure share slide on return. Surface 2,3 Marines' Build #1 errors. <em>Do not solve.</em> Pattern-match into prompt / edge case / CSS specificity / clipboard variance.</span>
+                            <span class="when">1:20,1:30</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">B2</span><span class="dur">60 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Build #2, TEEP Builder</span>
+                            <span class="clock">1:30,2:30</span>
+                            <span class="kind">Cyborg &middot; you don't know the answer</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Hand-off (1:30):</strong> deck &rarr; editor. Switch posture audibly: "Now it's exploratory. You drive, AI rides shotgun."</li>
+                                <li><strong>Iteration 1 spec:</strong> bare CRUD with localStorage. See chat-paste block.</li>
+                                <li><strong>Iteration 3 deliberate failure:</strong> the conditional-styling prompt. <strong>Do not warn students.</strong> Let AI hand back broken inline-style or specificity-losing code. When hands go up, ask the four questions: what did the AI tell you, what result did you expect, what did you get, what would you ask it to clarify.</li>
+                                <li><strong>Iteration 4 fix:</strong> students re-prompt for class-based styling. They learn the lesson by experiencing the failure.</li>
+                                <li><em>Roam in chat.</em> Students who lock in too early get "What's the path you didn't try?"</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Deliverable &middot; build #2</span>
+                            <span class="arch">TEEP + S-3 brief paragraph</span>
+                            <span class="desc">Plus one restructured approach documented in chat. That's the cyborg artifact, not just the tool.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--break">
+                        <div class="cs-mod__no"><span class="n">BRK</span><span class="dur">10 min</span></div>
+                        <div class="cs-mod__line">
+                            <span><strong>Break.</strong> Be back at H+2:40. Reset your screen-share to a fresh genai.mil conversation. Have the Build #3 declarations slide queued.</span>
+                            <span class="when">2:30,2:40</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">B3</span><span class="dur">50 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Build #3, Your Problem</span>
+                            <span class="clock">2:40,3:30</span>
+                            <span class="kind">Choose mode &middot; deploy</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Declarations (2:40):</strong> each Marine states one sentence (tool + user), one mode + why, two specific frontier risks. If they can't name two specific risks, revise before they start.</li>
+                                <li><strong>Brief (read verbatim):</strong> "Pick one tool from your unit's real backlog. State in chat which mode and why. CUI is OK in your genai.mil prompts. No CUI in the file you publish. Deploy by 3:25 and post the URL."</li>
+                                <li><em>Coach, do not solve.</em> When stuck: "What would you tell the AI about what is going wrong?"</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Deliverable &middot; build #3</span>
+                            <span class="arch">Deployed URL in chat</span>
+                            <span class="desc">If they didn't finish, they owe the URL by EOW. The Week 4 gate hangs on it.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--framing">
+                        <div class="cs-mod__no"><span class="n">F</span><span class="dur">20 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Frontier Map + Capability Gap Map</span>
+                            <span class="clock">3:30,3:50</span>
+                            <span class="kind">Two artifacts</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Frontier sync (Slide 29):</strong> "Across all three builds, where did AI land inside the frontier? Where did it fall outside? Add at least two specific rows to your unit's map."</li>
+                                <li><strong>Capability Gap Map (Slide 30):</strong> "For each build, name the production-layer capability that would 10x the tool. Then name the specific connector, license, or admin grant that blocks it. Specifics, not generalities."</li>
+                                <li><strong>Worktime (Slide 31, 10 min):</strong> set a literal timer. Walk the room. Push back on generic entries.</li>
+                                <li><strong>Issue the Week-4 gate:</strong> at least one deployed URL plus two Capability Gap rows due 72 h before Week 4. No URL, no seat.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Outcome &middot; both artifacts</span>
+                            <span class="arch">Frontier + Gap Map filed</span>
+                            <span class="desc">Each Marine logs at least one row in each map. Instructor consolidates and forwards through the unit AI POC to HQMC.</span>
+                        </div>
+                    </div>
+
+                </section>
+
+                <div class="cs-foot">
+                    <span class="lhs"><span class="mark" aria-hidden="true"></span><strong>EDD &middot; Week 3.5 cheat sheet</strong> &middot; page 1 of 2 &middot; pacing, build specs, deliverables</span>
+                    <span>Print landscape <em>off</em> &middot; portrait, default margins, background graphics on</span>
+                </div>
+            </article>
+
+            <!-- ========================================================
+                 PAGE 2
+                 ======================================================== -->
+            <article class="cheat-page" aria-label="Week 3.5 cheat sheet, page 2">
+
+                <header class="cs-head">
+                    <div class="cs-head__week"><span class="num">3.5</span><span>Course 3.5 &middot; Cheat sheet<br>page 2</span></div>
+                    <div class="cs-head__title">
+                        <h1>Anchors, recovery, homework</h1>
+                        <p class="sub">The phrases you repeat all afternoon, the failure modes to watch for when hosting or genai.mil misbehaves, and the homework that gates Week 4 attendance.</p>
+                    </div>
+                    <div class="cs-head__meta">
+                        <div><strong>Use during:</strong> 1:20 failure share</div>
+                        <div><strong>Use during:</strong> any hosting glitch</div>
+                        <div>Companion to <strong>week-3-5-platform-reality.html</strong></div>
+                    </div>
+                </header>
+
+                <!-- Pre-flight + hand-off cues -->
+                <section class="cs-box" aria-label="Pre-flight and live hand-off cues">
+                    <h2>Pre-flight + hand-off cues<span class="lede">Done 48 h before; verified at T-30 min &middot; three editor switches today</span></h2>
+                    <ul>
+                        <li><strong>Hosting reachability test.</strong> From the actual classroom or duty workstation, open the reference build URL. Loads? Tier 1 is good. Blocked? Try Tier 2 from the cheat sheet. All blocked? Plan for file:// fallback and put it on the Gap Map.</li>
+                        <li><strong>Tabs and portals.</strong> Deck (Week 3.5), this cheat sheet, genai.mil, github.com (signed in), a text editor, the two reference builds in pinned tabs.</li>
+                        <li><strong>GitHub account sweep.</strong> Send the sign-up link to anyone without an account 24 h out. Two-factor takes 10 min the first time; resolve before class.</li>
+                        <li><strong>Sample roster ready.</strong> Have a stand-in roster of 8,9 fictional Marines (the reference build's seed roster works) on a sticky in case a Marine forgets one.</li>
+                        <li><strong>Course 2 failures collected.</strong> Pull homework failure cases from the Week 2 chat into a one-screen list for the 1:20 failure share.</li>
+                        <li><strong>0:15.</strong> Deck &rarr; editor + genai.mil side-by-side. Drop Build #1 full-plan prompt into chat.</li>
+                        <li><strong>1:20.</strong> Return to deck. Failure share. Pattern-match, do not solve.</li>
+                        <li><strong>1:30.</strong> Deck &rarr; editor for Build #2. Switch posture audibly.</li>
+                        <li><strong>2:40.</strong> Deck &rarr; each Marine's editor. Declarations in chat.</li>
+                        <li><strong>3:30.</strong> All laptops up. Capability Gap Map worktime begins.</li>
+                    </ul>
+                </section>
+
+                <!-- Two-column: anchors + recovery -->
+                <div class="cs-cols">
+                    <section class="cs-box" aria-label="Anchor phrases">
+                        <h2>Anchor phrases<span class="lede">Plant in M1; cite by name when you need them</span></h2>
+                        <ul>
+                            <li><strong>1. "Centaur when you know the answer. Cyborg when you don't. Pick on purpose."</strong> Open with it; cite at every build hand-off.</li>
+                            <li><strong>2. "Power Apps skills die when you turn in your CAC. HTML skills don't."</strong> The thesis. Cite when a Marine questions why we are not using Power Platform.</li>
+                            <li><strong>3. "We work every layer we can reach. We document the wall where the work stops."</strong> The Three Layers framing.</li>
+                            <li><strong>4. We pattern-match, we don't solve.</strong> The failure share is diagnosis, not group debugging.</li>
+                            <li><strong>5. CSS class names beat inline styles.</strong> Iteration 3 of Build #2 is where this lands. If a Marine has lost specificity, the answer is almost always a class.</li>
+                            <li><strong>6. Try one path you discard.</strong> Cyborg without exploration is just slow centaur. The discarded path is the artifact.</li>
+                            <li><strong>7. Map the world as it is.</strong> Tenant gaps are Capability Gap rows, not complaints. Specifics. Beneficiary counts. Time savings.</li>
+                            <li><strong>8. Deployed beats demoed.</strong> A URL in chat is the only acceptable Build #3 artifact.</li>
+                        </ul>
+                    </section>
+
+                    <section class="cs-box" aria-label="Recovery and pacing cues">
+                        <h2>Recovery + pacing cues<span class="lede">When hosting or genai.mil misbehaves, this is the order of operations</span></h2>
+                        <ul>
+                            <li><strong>github.io blocked from this network.</strong> Try GitLab Pages or Cloudflare Pages from the cheat sheet. If all blocked, switch to file:// for the day and add "Public static hosting reach blocked" as a Capability Gap row.</li>
+                            <li><strong>GitHub account not set up.</strong> Walk the Marine through sign-up at the projector while everyone else is on Phase 1 whiteboarding. Two-factor takes 10 min.</li>
+                            <li><strong>genai.mil session reset mid-build.</strong> Start a new conversation. Paste the current state of the file plus a one-line "I'm at Phase 4 fixing X." Specificity beats restart.</li>
+                            <li><strong>Clipboard refuses to copy from browser.</strong> Some DoD workstations block it. Use right-click &rarr; Copy on the textarea. If that's also blocked, dictate the email or screenshot it. Gap row.</li>
+                            <li><strong>AI returns the wrong thing on first pass.</strong> Expected. Coach: "What did the AI tell you, what result did you get, what would you ask it to clarify?" Do not paste the fix.</li>
+                            <li><strong>Marine finishes Build #1 in 30 min.</strong> Stretch: add localStorage to the watch bill so the roster persists. Or pair as navigator with a stuck Marine.</li>
+                            <li><strong>Whole room is behind at 2:30.</strong> Compress Build #3 to spec-only, no deploy. Protect the Capability Gap Map worktime. That artifact is the Week 4 hand-off.</li>
+                            <li><strong>Pacing valve.</strong> If behind at 1:20, cut the failure share to one Marine and the Build #2 framing to two sentences. Never cut the Capability Gap Map worktime.</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <!-- Homework -->
+                <section class="cs-box" aria-label="Homework to issue before logoff">
+                    <h2>Homework to issue before logoff<span class="lede">Slide 33, Week 4 attendance gate hangs on these</span></h2>
+                    <ul>
+                        <li><strong>Polish Build #3.</strong> Keep the URL live. If you didn't finish, ship the smallest defensible version by EOW. Post the URL in the Week 3.5 chat thread.</li>
+                        <li><strong>Run one build through the EDD SOP QA process.</strong> Don't skip the verification checkpoints.</li>
+                        <li><strong>Document three failure cases.</strong> Log on the shared frontier-map doc.</li>
+                        <li><strong>Add at least two Capability Gap Map rows.</strong> Real, specific, named. Instructor consolidates quarterly to HQMC AI working group.</li>
+                        <li><strong>Identify one capability surprise.</strong> Somewhere AI performed better than you expected.</li>
+                        <li><strong>Week 4 gate.</strong> To attend Advanced Workshop, post evidence (deployed URL or screenshot) plus two Gap Map rows by 72 h before Week 4. No evidence, no seat.</li>
+                    </ul>
+                </section>
+
+                <div class="cs-foot">
+                    <span class="lhs"><span class="mark" aria-hidden="true"></span><strong>EDD &middot; Week 3.5 cheat sheet</strong> &middot; page 2 of 2 &middot; anchors, recovery, homework</span>
+                    <span>Pair with the Week 3.5 Facilitator Pack for prep / hand-off / homework detail</span>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="week-3-5-platform-reality.html">Week 3.5 Deck</a></li>
+                        <li><a href="../courses/platform-reality.html">Course 3.5 Page</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

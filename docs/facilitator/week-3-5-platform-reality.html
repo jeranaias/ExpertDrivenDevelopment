@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Week 3.5 facilitator pack, Platform Training (Locked Tenant Reality). One-page printable companion for the Course 3.5 deck: timing strip, prep checklist, hand-off cues, exercise prompts, recovery scripts, post-session homework. Plus the printed-pack URL sheet appendix.">
+    <title>Week 3.5 Facilitator Pack, Platform Training (Locked Tenant Reality) | EDD</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/pack.css">
+</head>
+<body class="site-wrapper">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Facilitator Packs</a></li>
+                    <li aria-current="page">Week 3.5, Platform Training (Locked Tenant Reality)</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Week 3.5 Facilitator Pack</h1>
+            <p class="page-header__desc">One-page companion for the Course 3.5 instructor deck. Print landscape, keep next to the deck during delivery.</p>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+            <div class="pack-intro">
+                <p>Print this page in <strong>landscape</strong> from Chrome or Edge: <kbd>Ctrl</kbd>+<kbd>P</kbd> &rarr; Layout <em>Landscape</em> &rarr; Margins <em>None</em> or <em>Default</em> &rarr; Background graphics <em>on</em>. The site chrome above is hidden in print. Chat-paste blocks for this session live in the <a href="../decks/week-3-5-handouts.html">Week&nbsp;3.5 hand-out pack</a>.</p>
+                <p class="pack-intro__tip">In the print dialog, leave <strong>Margins</strong> at <em>Default</em> (or pick <em>None</em>). Picking <em>Custom</em> or <em>Minimum</em> shrinks the printable area below what this layout assumes and the pack tips onto a second page.</p>
+            </div>
+
+            <article class="pack-page" aria-label="Week 3.5 facilitator pack">
+
+                <header class="pk-head">
+                    <div class="pk-head__week"><span class="num">3.5</span> Course 3.5 &middot; Facilitator Pack</div>
+                    <div class="pk-head__title">
+                        <h1>Platform Training (Locked Tenant Reality)</h1>
+                        <p class="sub">Three deployed static-HTML tools: Centaur (Watch Bill), Cyborg (TEEP), and your own. Plus the Capability Gap Map artifact for HQMC.</p>
+                    </div>
+                    <div class="pk-head__meta">
+                        <div><span>Duration</span><strong>4 hr (2 breaks)</strong></div>
+                        <div><span>Audience</span><strong>Builders</strong></div>
+                        <div><span>Prereq</span><strong>Course 2 + GitHub account + genai.mil</strong></div>
+                    </div>
+                </header>
+
+                <section class="pk-timing" aria-label="Module timing">
+                    <div class="pk-timing__cell"><span class="t">0:00,0:15</span><span class="n">M1 Setup, Hosting, Review</span><span class="d">15 min</span></div>
+                    <div class="pk-timing__cell"><span class="t">0:15,1:20</span><span class="n">Build #1 Watch Bill</span><span class="d">65 min &middot; Centaur</span></div>
+                    <div class="pk-timing__cell pk-timing__cell--break"><span class="t">1:20,1:30</span><span class="n">Break + Failure share</span><span class="d">10 min</span></div>
+                    <div class="pk-timing__cell"><span class="t">1:30,2:30</span><span class="n">Build #2 TEEP</span><span class="d">60 min &middot; Cyborg</span></div>
+                    <div class="pk-timing__cell pk-timing__cell--break"><span class="t">2:30,2:40</span><span class="n">Break</span><span class="d">10 min</span></div>
+                    <div class="pk-timing__cell"><span class="t">2:40,3:30</span><span class="n">Build #3 Your Problem</span><span class="d">50 min &middot; choose mode</span></div>
+                    <div class="pk-timing__cell"><span class="t">3:30,3:50</span><span class="n">Frontier + Gap Map</span><span class="d">20 min</span></div>
+                </section>
+
+                <div class="pk-body">
+
+                    <section class="pk-box pk-box--prep">
+                        <h2>Pre-session prep<span class="lede">Done 48 h before; verified at T-30 min</span></h2>
+                        <ul>
+                            <li><strong>Hosting reachability test.</strong> Open the reference build URL on the actual classroom workstation. Tier 1 reachable? Use github.io. Blocked? Try Tier 2 (Cloudflare Pages, GitLab Pages). All blocked? Plan for file:// fallback and add a Capability Gap row.</li>
+                            <li><strong>Tabs and portals.</strong> Deck (Week 3.5), this pack, genai.mil, <em>github.com</em> (signed in), a text editor, both reference builds pinned.</li>
+                            <li><strong>GitHub account sweep.</strong> Send the sign-up link to anyone without an account 24 h out. Two-factor takes 10 min the first time. Resolve before class, not during it.</li>
+                            <li><strong>Sample roster ready.</strong> The reference Watch Bill's seed roster (Sgt Reyes / Cpl Nguyen / etc.) is fictional and reusable if a Marine forgets their own.</li>
+                            <li><strong>Course 2 failures collected.</strong> Pull homework failure cases from the Week 2 chat into a one-screen list for the 1:20 failure share.</li>
+                        </ul>
+                    </section>
+
+                    <section class="pk-box pk-box--handoff pk-box--gold">
+                        <h2>Live hand-off cues<span class="lede">Three editor switches; deck stays as anchor</span></h2>
+                        <ul>
+                            <li><strong>0:15.</strong> Deck &rarr; editor + genai.mil side-by-side. Drop the Build #1 full-plan prompt into chat.</li>
+                            <li><strong>1:20 break.</strong> Return to deck. Run the "failure share" slide. Surface 2,3 Marines' Build #1 errors. Do not solve, pattern-match.</li>
+                            <li><strong>1:30.</strong> Deck &rarr; editor for Build #2. Switch posture: "Now it's exploratory. You drive, AI rides shotgun."</li>
+                            <li><strong>2:40.</strong> Deck &rarr; each Marine's editor. Each picks centaur or cyborg before they start. Record the choice in chat.</li>
+                            <li><strong>3:30.</strong> All laptops up. Capability Gap Map worktime. Capture in deck on Slides 29 and 30.</li>
+                        </ul>
+                    </section>
+
+                    <section class="pk-box pk-box--exercise pk-box--ink">
+                        <h2>Exercise + activity prompts<span class="lede">Read these to the room verbatim</span></h2>
+
+                        <p><strong>Build #1 &middot; Centaur (65 min), Watch Bill Builder.</strong> "You are building a section-leader Watch Bill in a single HTML file. Inline CSS, inline JS, no external dependencies. Inputs: section, watch type, start date, days, roster with skip suffixes. Logic: rotate available Marines, skip <code>LV/TAD/APPT</code>, fairness check. Outputs: on-screen table, email body, print-friendly, copy-to-clipboard. Centaur mode means you design the rules; AI writes the code. No exploration, you know the answer before you prompt."</p>
+
+                        <p><strong>Failure share (10 min, after the break).</strong> "Three of you in chat. Post your single biggest error from Build #1 and what you tried. We do not solve. We label: prompt issue, missed edge case, CSS specificity, clipboard variance."</p>
+
+                        <p><strong>Build #2 &middot; Cyborg (60 min), TEEP Builder.</strong> "Build a TEEP tool that stores events with status, persists via localStorage, color-codes by status, and produces an S-3 brief paragraph on demand. Cyborg mode means continuous loop, you and the AI explore options together. You will restructure at least once."</p>
+
+                        <p><strong>Build #3 &middot; Your Problem (50 min).</strong> "Pick one tool from your unit's real backlog. State in chat which mode you are in and why. CUI is OK in your genai.mil prompts. No CUI in the file you publish. Deploy to your github.io URL and post it in chat by 3:25."</p>
+
+                        <p><strong>Frontier Map + Capability Gap Map (20 min).</strong> "Across all three builds today, where did AI land inside the frontier? Where did it fall outside? Add at least one Frontier row. Then name one production-layer capability that would 10x one of your builds, and the specific permission that blocks it. That is a Capability Gap row."</p>
+
+                        <span class="pk-cue"><strong>Anchor phrase</strong>"Power Apps skills die when you turn in your CAC. HTML skills don't."</span>
+                    </section>
+
+                    <section class="pk-box pk-box--sideways">
+                        <h2>When this goes sideways<span class="lede">Top failure modes + recovery</span></h2>
+                        <ul class="pk-fail">
+                            <li>
+                                <span class="sym">github.io blocked from this network.</span>
+                                <span class="fix">Try Cloudflare Pages or GitLab Pages from the hosting cheat sheet. All blocked? Switch to file:// for the day. Add "Public static hosting reach blocked" as a Capability Gap row.</span>
+                            </li>
+                            <li>
+                                <span class="sym">Marine without a GitHub account.</span>
+                                <span class="fix">Walk through sign-up at the projector during Phase 1 whiteboarding. Two-factor takes 10 min. Don't lose Build #1 time to setup.</span>
+                            </li>
+                            <li>
+                                <span class="sym">genai.mil session resets mid-build.</span>
+                                <span class="fix">Start a new conversation. Paste current state of the file plus a one-line "I'm at Phase 4 fixing X." Specificity beats restart.</span>
+                            </li>
+                            <li>
+                                <span class="sym">Clipboard refuses to copy from browser.</span>
+                                <span class="fix">Some DoD workstations block it. Use right-click &rarr; Copy on the textarea. If still blocked, dictate or screenshot. Add a Gap row.</span>
+                            </li>
+                            <li>
+                                <span class="sym">AI returns broken inline-style code at Build #2 Iteration 3.</span>
+                                <span class="fix">Expected. Do not warn students. Let them fail. Then ask the four questions and let them re-prompt for class-based styling. That is the lesson.</span>
+                            </li>
+                            <li>
+                                <span class="sym">Marine finishes Build #1 in 30 min.</span>
+                                <span class="fix">Stretch: add localStorage so the roster persists. Or pair as navigator with a stuck Marine.</span>
+                            </li>
+                            <li>
+                                <span class="sym">Whole room is behind at 2:30.</span>
+                                <span class="fix">Compress Build #3 to spec-only, no deploy. Protect the Capability Gap Map worktime. That artifact is the Week 4 hand-off.</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="pk-box pk-box--homework pk-box--gold">
+                        <h2>Post-session homework<span class="lede">Issue at Slide 33, before logoff</span></h2>
+                        <ul>
+                            <li><strong>Polish Build #3.</strong> If you didn't finish, ship the smallest version you can defend by EOW. Post the URL in the Week 3.5 chat thread.</li>
+                            <li><strong>Run one build through the EDD SOP QA process.</strong> Don't skip the verification checkpoints.</li>
+                            <li><strong>Three failure cases.</strong> Log on the shared frontier-map doc.</li>
+                            <li><strong>Two Capability Gap Map rows.</strong> Real, specific, named permission. Instructor forwards quarterly to HQMC.</li>
+                            <li><strong>Advanced track gate.</strong> To attend Week 4, post evidence (deployed URL) plus two Gap rows by 72 h before Week 4. No evidence, no seat.</li>
+                        </ul>
+                    </section>
+
+                </div>
+
+                <footer class="pk-foot">
+                    <div class="left"><strong>EDD &middot; Week 3.5 Facilitator Pack</strong> &middot; UNCLASSIFIED &middot; print one-sided, landscape</div>
+                    <div class="right">
+                        <a href="../decks/week-3-5-platform-reality.html">Week 3.5 Deck</a> &middot;
+                        <a href="../decks/week-3-5-handouts.html">Hand-out pack</a> &middot;
+                        <a href="../decks/week-3-5-cheatsheet.html">Cheat sheet</a> &middot;
+                        <a href="../courses/platform-reality.html">Course 3.5 page</a>
+                    </div>
+                </footer>
+
+            </article>
+
+            <!-- BEGIN: share-in-chat URL sheet appendix -->
+            <article class="pack-urlsheet" aria-label="Week 3.5 share-in-chat URL sheet">
+
+                <header class="pack-urlsheet__head">
+                    <div class="pk-head__week"><span class="num">3.5</span> Share-in-chat URL sheet</div>
+                    <div class="title">
+                        <h1>Platform Training (Locked Tenant Reality), class links</h1>
+                        <p class="sub">Every URL the Week 3.5 deck cues you to drop into Microsoft Teams chat. Read aloud or type into the chat (no copy buttons since this is the printed pack).</p>
+                    </div>
+                </header>
+
+                <div class="pack-urlsheet__columns">
+                    <section class="pack-urlsheet__section" aria-labelledby="urlsheet-w35-sec-deck">
+                        <h2 id="urlsheet-w35-sec-deck">Deck and student materials</h2>
+                        <p class="lede">The pages instructors typically share at the start of the four-hour session.</p>
+                        <ul class="pack-urlsheet__list">
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Course 3.5 Page</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> Drop in chat at session start. Has agenda, three-layer thesis, every module note, and the rubric.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/courses/platform-reality.html</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Week 3.5 Student Handout (printable)</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> Drop in chat at session start. For latecomers and reference.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/handouts/week-3-5-platform-reality.html</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Week 3.5 Live Fill-In Handout</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> Drop at the Capability Gap Map worktime (Slide 31). Three-column fill-in for live note-taking.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/handouts/platform-reality-handout.html</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Week 3.5 Facilitator Pack (HTML)</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> Send to a co-facilitator running the failure-sharing capture in Module 3 or 6.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/facilitator/week-3-5-platform-reality.html</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Week 3.5 Slide Deck (HTML)</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> For students who missed the live session.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/decks/week-3-5-platform-reality.html</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Week 3.5 Instructor Cheat Sheet</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> For instructors prepping the session.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/decks/week-3-5-cheatsheet.html</p>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="pack-urlsheet__section" aria-labelledby="urlsheet-w35-sec-build">
+                        <h2 id="urlsheet-w35-sec-build">Reference builds + resources</h2>
+                        <p class="lede">Resources to drop in chat during the three live builds.</p>
+                        <ul class="pack-urlsheet__list">
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Reference Build #1, Watch Bill</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> Slide 12 (Build #1 framing). Use to check work, not to copy-paste from.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/builds/watch-bill.html</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Reference Build #2, TEEP</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> Slide 20 (Build #2 framing). The cyborg destination.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/builds/teep.html</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Static Hosting Cheat Sheet</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> Slide 8 (Hosting in 60 Seconds). Three tiers of free public hosts with MCEN-reachability notes.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/resources/static-hosting-cheat-sheet.html</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Capability Gap Map Template</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> Slide 30 (Gap Map Reference). The artifact every Marine fills in during the wrap. Quarterly compilation to HQMC.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/resources/capability-gap-map.html</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">EDD SOP (PDF)</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> Reference for verification habit and the Week 4 gate.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/pdf/SOP_Expert_Driven_Development_v5.pdf</p>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+
+                <footer class="pack-urlsheet__foot">
+                    <div><strong>EDD &middot; Week 3.5 Share-in-chat URL sheet</strong> &middot; UNCLASSIFIED &middot; mirror of the on-site Class Links page</div>
+                    <div>jeranaias.github.io/ExpertDrivenDevelopment/decks/links/week-3-5-platform-reality.html</div>
+                </footer>
+
+            </article>
+            <!-- END: share-in-chat URL sheet appendix -->
+
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../pdf/">Briefs Library</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                        <li><a href="../pdf/TRAINING_CURRICULA_v5.pdf">Curricula (PDF)</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
