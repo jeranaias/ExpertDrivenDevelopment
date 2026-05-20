@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 3.5, Platform Training (Locked Tenant Reality) | EDD Training Deck</title>
+  <meta name="description" content="Slide deck for Course 3.5. A 4-hour live session pivoting the Course 3 build set from Power Platform to single-file static HTML on free public hosting, with a parallel Capability Gap Map artifact for HQMC tenant policy review.">
+  <link rel="stylesheet" href="css/deck.css">
+</head>
+<body class="w3-deck">
+
+<a class="deck-back" href="../courses/platform-reality.html" title="Return to the Platform Training (Locked Tenant Reality) course page">
+  <span class="deck-back__arrow" aria-hidden="true">&larr;</span>
+  <span>Back to Platform Training (Locked Tenant Reality)</span>
+</a>
+
+<div class="deck" id="deck">
+
+  <!-- ======================================================
+       SLIDE 1: COVER
+       ====================================================== -->
+  <section class="slide layout-cover" data-title="Cover" data-module="Cover">
+    <div class="cover__top">Expert-Driven Development</div>
+    <div>
+      <div class="cover__week">Course 3.5 &middot; Reality Track</div>
+      <h1 class="cover__title">Platform Training<br>(Locked Tenant Reality)</h1>
+      <p class="cover__sub">Same three builds. Same centaur and cyborg patterns. Different execution layer. When the tenant is locked, we still ship working tools by Monday using static HTML and free public hosting that reaches MCEN.</p>
+    </div>
+    <div class="cover__meta">
+      <span><strong>4 hours</strong> &middot; Builders</span>
+      <span><strong>Prerequisite:</strong> Builder Orientation &middot; genai.mil &middot; GitHub account</span>
+    </div>
+    <p class="cover-classlinks"><a href="links/week-3-5-platform-reality.html" target="_blank" rel="noopener">Class Links &middot; share-in-chat URLs for this deck &rarr;</a></p>
+    <p class="cover-classlinks"><a href="../handouts/platform-reality-handout.html" target="_blank" rel="noopener">Student Handout &middot; one-page fill-in for live use &rarr;</a></p>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Open</span>Welcome the room. Confirm everyone has a laptop, a text editor, a signed-in browser at github.com, and a working genai.mil session. Today is the longest session in the program: four hours, three live builds, two artifacts.</p>
+      <p>Tone: this is the working session under realistic constraints. Builder Orientation was the on-ramp. Course 3 was the Power Platform path. Today is the path that does not need a tenant we have not been granted.</p>
+      <p><span class="notes__cue">Opening line</span>Read the line from the course page out loud: <em>"Today we design the tools our units need, build everything we can right here, and clearly mark where we hit the wall. That wall map becomes the case for changing what we have access to."</em></p>
+      <p><span class="notes__cue">Logistics</span>Tell the room how to follow along, where the bathroom is, and that they can press <strong>N</strong> on a presenter laptop to pull up speaker notes if co-presenting.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 2: RECAP WEEKS 1-2
+       ====================================================== -->
+  <section class="slide layout-content" data-title="Recap: Weeks 1-2" data-module="Recap">
+    <div class="slide__header">
+      <span class="slide__eyebrow">Where we are</span>
+      <span class="chip chip--ghost">Weeks 1 &amp; 2</span>
+    </div>
+    <h2 class="h-title">You've already done the hard part.</h2>
+    <div class="rule"></div>
+    <div class="body">
+      <div class="layout-two body" style="display:grid; grid-template-columns:1fr 1fr; gap:calc(2.6 * var(--u));">
+        <div class="col">
+          <div class="col__head">Week 1 &middot; AI Fluency</div>
+          <ul>
+            <li>The six 201 skills</li>
+            <li>The jagged frontier</li>
+            <li>Quality judgment over prompting</li>
+            <li>The delegation equation</li>
+          </ul>
+        </div>
+        <div class="col">
+          <div class="col__head">Week 2 &middot; Builder Orientation</div>
+          <ul>
+            <li>From user to builder</li>
+            <li>Your first prototype</li>
+            <li>Task decomposition in practice</li>
+            <li>The problem you brought to today</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Recap</span>Two weeks ago you learned the management skills. Last week you turned them into a build. Today you do it three times in a row, on a stack you can actually deploy from your duty workstation.</p>
+      <p>Ask quickly: "Show of hands: who has a GitHub account already?" If most hands are up, great. If few, signal that the first fifteen minutes covers GitHub Pages setup and we will move together.</p>
+      <p><span class="notes__cue">Pivot</span>"Everything we do today is the same skill set, applied to a different execution layer. Centaur, cyborg, frontier recognition: we exercise all of it. The difference is we deploy to a URL Marines can actually open, on a host MCEN can actually reach."</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 3: TODAY'S MISSION
+       ====================================================== -->
+  <section class="slide layout-content" data-title="Today's mission" data-module="Framing">
+    <div class="slide__header">
+      <span class="slide__eyebrow">Today's mission</span>
+      <span class="chip">By 4 hours from now</span>
+    </div>
+    <h2 class="h-title">Three deployed tools. Two artifacts. One unit case file.</h2>
+    <div class="rule"></div>
+    <div class="body">
+      <ul>
+        <li><strong>Build #1, Centaur:</strong> a Watch Bill Builder you would trust to publish to your section. Single file. Public URL.</li>
+        <li><strong>Build #2, Cyborg:</strong> a TEEP tool you discover the shape of while building. localStorage. S-3 brief on demand.</li>
+        <li><strong>Build #3, Your Problem:</strong> the tool you brought from Week 2, in the mode you choose.</li>
+        <li><strong>Frontier Map update:</strong> at least one new entry per Marine.</li>
+        <li><strong>Capability Gap Map:</strong> at least one row per build. This is the artifact that goes to HQMC.</li>
+      </ul>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Stakes</span>Make it concrete. By the time we wrap, every Marine in this room has a public URL for each build and a Capability Gap Map row that names a specific tenant constraint with beneficiary count and time savings.</p>
+      <p>Reinforce the through-line: Build #1 forces structure. Build #2 forces fluidity. Build #3 forces you to choose. Both artifacts force you to name what works and what blocks the work.</p>
+      <p><span class="notes__cue">Watch the room</span>If anyone looks anxious about the pace or the unfamiliar stack, name it: <em>"You don't need to be a web developer. You need to be able to copy a single file and click two buttons in GitHub. We'll do both together in the first fifteen minutes."</em></p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 4: THE 4-HOUR MAP
+       ====================================================== -->
+  <section class="slide layout-agenda" data-title="The 4-hour map" data-module="Agenda">
+    <div class="slide__header">
+      <span class="slide__eyebrow">The 4-hour map</span>
+      <span class="chip">Pace yourself</span>
+    </div>
+    <h2 class="h-title">Three builds. Two breaks. Two artifacts.</h2>
+    <div class="rule"></div>
+    <div class="body">
+      <div class="timeline">
+        <span class="timeline__time">0:00</span>
+        <span class="timeline__what">Module 1 &middot; Setup, Hosting, Review</span>
+        <span class="timeline__meta">15 min &middot; All six skills</span>
+
+        <span class="timeline__time">0:15</span>
+        <span class="timeline__what">Build #1 &middot; Watch Bill Builder (Centaur)</span>
+        <span class="timeline__meta">65 min &middot; Context, Quality</span>
+
+        <span class="timeline__time timeline__row--break">1:20</span>
+        <span class="timeline__what timeline__row--break">Break + Failure Sharing</span>
+        <span class="timeline__meta">10 min &middot; Frontier</span>
+
+        <span class="timeline__time">1:30</span>
+        <span class="timeline__what">Build #2 &middot; TEEP Builder (Cyborg)</span>
+        <span class="timeline__meta">60 min &middot; Iteration, Workflow</span>
+
+        <span class="timeline__time timeline__row--break">2:30</span>
+        <span class="timeline__what timeline__row--break">Break</span>
+        <span class="timeline__meta">10 min</span>
+
+        <span class="timeline__time">2:40</span>
+        <span class="timeline__what">Build #3 &middot; Your Problem (Choose Mode)</span>
+        <span class="timeline__meta">50 min &middot; Decomposition, all six</span>
+
+        <span class="timeline__time">3:30</span>
+        <span class="timeline__what">Frontier Map + Capability Gap Map</span>
+        <span class="timeline__meta">20 min &middot; Frontier + Policy</span>
+      </div>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Pace</span>Walk the timeline once, top to bottom. Don't dwell. The point is that they see the rhythm: setup, build, debrief, break, build, debrief, break, build, debrief, map.</p>
+      <p>Call out the wrap explicitly: <em>"The last twenty minutes are not slack. We produce two artifacts in that block. The Frontier Map is for us. The Capability Gap Map is for HQMC."</em></p>
+      <p><span class="notes__cue">Buffer</span>The course budget is 3h50m of instruction inside the 4-hour block. Don't say "we have buffer." Say "we'll move." Use the buffer privately if a build runs over.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 5: THE THREE LAYERS
+       ====================================================== -->
+  <section class="slide layout-content" data-title="The Three Layers" data-module="Framing">
+    <div class="slide__header">
+      <span class="slide__eyebrow">Today's thesis</span>
+      <span class="chip chip--gold">New for 3.5</span>
+    </div>
+    <h2 class="h-title">Three layers. Two we always have. One we sometimes don't.</h2>
+    <div class="rule"></div>
+    <div class="body">
+      <div class="layout-two body" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:calc(2.0 * var(--u));">
+        <div class="col">
+          <div class="col__head">1. Spec</div>
+          <p class="lead">genai.mil. Think, design, prompt, decompose.</p>
+          <p style="font-size:calc(1.2 * var(--u)); color:var(--c-ink-muted);"><strong>Always available.</strong></p>
+        </div>
+        <div class="col">
+          <div class="col__head">2. Prototype</div>
+          <p class="lead">Single-file static HTML. Deployed to a free public host MCEN can reach.</p>
+          <p style="font-size:calc(1.2 * var(--u)); color:var(--c-ink-muted);"><strong>Always available.</strong></p>
+        </div>
+        <div class="col">
+          <div class="col__head">3. Production</div>
+          <p class="lead">Power Apps, Dataverse, Power Automate, real connectors, identity.</p>
+          <p style="font-size:calc(1.2 * var(--u)); color:var(--c-ink-muted);"><strong>Often blocked.</strong> The wishlist layer.</p>
+        </div>
+      </div>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Frame</span>Read the three columns left to right. Land the thesis: <em>"We work every layer we can reach. We document the wall where the work stops. The wall map becomes the case for changing what we have access to."</em></p>
+      <p><span class="notes__cue">Anchor</span>Every build today produces two things. A working tool on the Prototype layer, and a row on the Capability Gap Map that names the Production layer wish and the specific permission that blocks it. Both are the product.</p>
+      <p><span class="notes__cue">Common confusion</span>If anyone asks <em>"why not just teach the Power Platform path?"</em>, answer plainly: many of us cannot get Power Platform access in our current tenant, and the courses that pretend otherwise burn class time on tools nobody can deploy. This course works whether the tenant is locked or open. Skills carry both ways.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 6: SECTION: MODULE 1
+       ====================================================== -->
+  <section class="slide layout-section" data-title="Section: Module 1" data-module="Module 1">
+    <div class="section__eyebrow">Module 1 of 6</div>
+    <h2 class="h-display">Setup, Hosting, Review.</h2>
+    <div class="rule"></div>
+    <div class="section__meta">
+      <span class="chip chip--gold">15 minutes</span>
+      <span class="chip">Goal: every Marine reaches their own github.io URL before Build #1</span>
+    </div>
+    <a class="section__notes-link" href="../courses/platform-reality.html#setup-review" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Section</span>Brief stop. The goal of this module is single-purpose: confirm everybody has genai.mil, a text editor, a GitHub account, and can reach github.io from this network. If we discover a hosting problem during Build #1, we lose twenty minutes recovering. We discover it now.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 7: PRE-FLIGHT ACCESS CHECK
+       ====================================================== -->
+  <section class="slide layout-content" data-title="Pre-flight access check" data-module="Module 1">
+    <div class="slide__header">
+      <span class="slide__eyebrow">Module 1 &middot; Pre-flight</span>
+      <span class="chip chip--scarlet">Resolve before Build #1</span>
+    </div>
+    <h2 class="h-title">Six checks. None optional.</h2>
+    <div class="rule"></div>
+    <div class="body">
+      <div class="layout-two body" style="display:grid; grid-template-columns:1fr 1fr; gap:calc(2.4 * var(--u));">
+        <div class="col">
+          <div class="col__head">Tooling</div>
+          <ul>
+            <li><strong>genai.mil</strong> &middot; signed in, can start a conversation</li>
+            <li><strong>Text editor</strong> &middot; Notepad, Notepad++, or VS Code</li>
+            <li><strong>Browser</strong> &middot; Edge or Chrome</li>
+          </ul>
+        </div>
+        <div class="col">
+          <div class="col__head">Reachability</div>
+          <ul>
+            <li><strong>GitHub account</strong> &middot; signed in, two-factor on</li>
+            <li><strong>github.io reachable</strong> &middot; the reference build loads from this network</li>
+            <li><strong>Clipboard works</strong> &middot; copy from browser, paste into Outlook</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Run the check</span>Have everyone open the reference build URL right now from their duty workstation. If it loads, they're good on hosting. If it doesn't, capture which URL pattern blocked and move them to local-file mode for the rest of the session.</p>
+      <p>Triage in this order: (1) genai.mil sign-in failure → IT support, (2) no GitHub account → walk through sign-up at github.com in 90 seconds, (3) github.io blocked → fallback to local <code>file://</code> and add a Capability Gap Map row.</p>
+      <p><span class="notes__cue">Time check</span>Spend at most 10 minutes here. Anyone fully blocked gets paired with a working partner for Build #1 and works the access issue in the background.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 8: HOSTING IN 60 SECONDS
+       ====================================================== -->
+  <section class="slide layout-content" data-title="Hosting in 60 seconds" data-module="Module 1">
+    <div class="slide__header">
+      <span class="slide__eyebrow">Module 1 &middot; Deploy</span>
+      <span class="chip chip--gold">New for 3.5</span>
+    </div>
+    <h2 class="h-title">Push a file. Flip a switch. Open a URL.</h2>
+    <div class="rule"></div>
+    <div class="body">
+      <ol>
+        <li>Create a new repo on <code>github.com</code>. Name it after your tool. Public.</li>
+        <li>Drag the <code>.html</code> file onto the empty repo. GitHub commits it.</li>
+        <li>Settings &rarr; Pages. Source: <code>main</code> branch, root. Save.</li>
+        <li>Wait 60 seconds. URL is <code>https://&lt;user&gt;.github.io/&lt;repo&gt;/&lt;file&gt;.html</code>.</li>
+        <li>Open the URL on your phone. If it loads, you deployed.</li>
+      </ol>
+      <p style="font-size:calc(1.3 * var(--u)); color:var(--c-ink-muted); margin-top:calc(0.8 * var(--u));">See the <a href="../resources/static-hosting-cheat-sheet.html" target="_blank" rel="noopener">Static Hosting Cheat Sheet</a> for the full host menu with MCEN-reachability tiers.</p>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Walk it</span>Demo on screen. Create a placeholder repo with a one-line <code>hello.html</code>. Show every click. Show the Settings &rarr; Pages dialog. Watch the URL go live in real time.</p>
+      <p>The whole point: this is not a developer workflow. It is a copy-and-click workflow. Anyone in the room who can attach a file to an email can deploy.</p>
+      <p><span class="notes__cue">If hosting is blocked</span>Some networks block github.io. Have students try the alternate Tier 1 hosts from the cheat sheet (GitLab Pages, Cloudflare Pages, Azure Static Web Apps). At least one will load. Whatever loads becomes today's host. The pattern is identical across hosts.</p>
+      <p><span class="notes__cue">Land the strategic note</span>"You're learning the pattern, not the host. The skill is portable. The host name changes by base or network. The skill stays."</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 9: CENTAUR VS CYBORG REFRESHER
+       ====================================================== -->
+  <section class="slide layout-two" data-title="Centaur vs cyborg refresher" data-module="Module 1">
+    <div class="slide__header">
+      <span class="slide__eyebrow">Module 1 &middot; Refresher</span>
+      <span class="chip">From Week 2</span>
+    </div>
+    <h2 class="h-title">Two patterns. Pick the one that fits the build.</h2>
+    <div class="rule"></div>
+    <div class="body">
+      <div class="col">
+        <div class="col__head">Centaur</div>
+        <p class="lead">Clear phases. Human designs and verifies. AI executes between checkpoints.</p>
+        <ul>
+          <li><strong>Best for:</strong> high-stakes, accuracy-critical workflows</li>
+          <li><strong>Risk:</strong> slower, but reliable</li>
+          <li><strong>Today:</strong> Build #1 &middot; Watch Bill Builder</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="col__head">Cyborg</div>
+        <p class="lead">Continuous back-and-forth. Boundary between human and AI work stays fluid.</p>
+        <ul>
+          <li><strong>Best for:</strong> exploratory, requirements-discovered-as-you-build work</li>
+          <li><strong>Risk:</strong> faster, but demands constant attention</li>
+          <li><strong>Today:</strong> Build #2 &middot; TEEP Builder</li>
+        </ul>
+      </div>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Refresh</span>One-minute review. We're not relearning this. We're calibrating the room before we apply it twice.</p>
+      <p>Ask two or three students: "Last week's assignment: what mode did you use, and did it fit the problem?" Use one short answer to land that mode-choice is itself a 201 skill.</p>
+      <p><span class="notes__cue">Anchor</span>Today: Build #1 forces centaur. Build #2 forces cyborg. Build #3 you choose. By the end you'll have lived in both.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 10: AI TOOL FOR TODAY
+       ====================================================== -->
+  <section class="slide layout-content" data-title="AI tool for today" data-module="Module 1">
+    <div class="slide__header">
+      <span class="slide__eyebrow">Module 1 &middot; Tooling</span>
+      <span class="chip">Pick before you prompt</span>
+    </div>
+    <h2 class="h-title">genai.mil for everything today.</h2>
+    <div class="rule"></div>
+    <div class="body">
+      <ul>
+        <li>The January 2026 MARADMIN consolidated USMC onto <strong>genai.mil</strong>.</li>
+        <li><strong>CUI-level unit data</strong> (unit names, approval chains, T&amp;R references) is acceptable in prompts.</li>
+        <li><strong>PII</strong> (real names, SSNs, contact info) stays anonymized unless a PIA authorizes the data.</li>
+        <li><strong>Public URL note:</strong> the file you publish is world-readable the moment the repo is public. No CUI in the file itself.</li>
+      </ul>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Anchor</span>One tool today: genai.mil. The Course 3 path mentioned multiple tools but the consolidation simplified it. We use one. We get good at it.</p>
+      <p>Reinforce the public-URL gotcha. CUI-level unit context is OK in your genai.mil prompts. But the prototype you push to github.io is world-readable. Build with fictional names and dates. Production layer is where the real data lives, and the real data needs the real connectors.</p>
+      <p><span class="notes__cue">Tip</span>If a prompt response is wrong on the first pass, paste your current file or its broken section back to genai.mil and describe what is failing. Specificity beats re-prompting.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 11: SECTION: BUILD #1 CENTAUR
+       ====================================================== -->
+  <section class="slide layout-section" data-title="Section: Build #1, Centaur" data-module="Module 2">
+    <div class="section__eyebrow">Build #1 of 3 &middot; Module 2</div>
+    <h2 class="h-display">Centaur Mode.<br>Watch Bill Builder.</h2>
+    <div class="rule"></div>
+    <div class="section__meta">
+      <span class="chip chip--gold">65 minutes</span>
+      <span class="chip">Five phases. Four checkpoints.</span>
+    </div>
+    <a class="section__notes-link" href="../courses/platform-reality.html#build-1" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Section</span>Hard pivot into the first build. Energy up. From here until 1:20, we're heads-down on a real tool that section leaders will use tomorrow.</p>
+      <p>Frame the centaur pattern out loud one more time: <em>"You design. AI builds. You verify. AI refines. You accept. At every boundary, you check before you cross."</em></p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 12: BUILD #1 FRAMING
+       ====================================================== -->
+  <section class="slide layout-frame" data-title="Build #1 framing" data-module="Module 2">
+    <div class="slide__header">
+      <span class="slide__eyebrow">Build #1 &middot; Pre-build framing</span>
+      <span class="chip chip--scarlet">Centaur</span>
+    </div>
+    <h2 class="h-title">Before you touch the editor.</h2>
+    <div class="rule"></div>
+    <div class="body">
+      <div class="frame__hero">
+        <span class="frame__label">The problem</span>
+        <h3>Publish a two-week watch bill for your section. Today. From this laptop.</h3>
+        <p>Section leader's recurring Tuesday-afternoon problem. Excel and an email chain today. MOL doesn't solve it. Rotation through the available roster, skip anyone on leave, fairness check, prints clean, copies clean into Outlook. Single HTML file. Deployed to a public URL by the end of the block.</p>
+      </div>
+      <div class="frame__cards">
+        <div class="frame__card">
+          <div class="card__label">Mode</div>
+          <div class="card__value"><strong>Centaur</strong> &middot; the rules are strict and the output goes to other Marines</div>
+          <div class="card__sub">Wrong rotation = real consequences. Wrong skip-logic = a Marine on leave standing watch. Phase boundaries are non-negotiable.</div>
+        </div>
+        <div class="frame__card">
+          <div class="card__label">Success looks like</div>
+          <div class="card__value">A 14-day bill prints clean, the email body pastes into Outlook with the monospace table intact, every edge case errors instead of silently doing nothing.</div>
+          <div class="card__sub">Bonus: deployed and openable on your phone before the break.</div>
+        </div>
+      </div>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Frame</span>Read all three boxes aloud. The point of this slide is that everyone in the room can repeat back: what we're building, why centaur fits, and what done looks like.</p>
+      <p>If a student can't repeat those three things, they're not ready to start. Pause and re-frame.</p>
+      <p><span class="notes__cue">Anti-pattern to call out</span>"Don't open your editor yet. We design first. The single biggest failure mode in centaur is starting to type HTML before the rules are written down."</p>
+      <p><span class="notes__cue">Reference build</span>Point them to <a href="../builds/watch-bill.html" target="_blank" rel="noopener">builds/watch-bill.html</a>. It is the destination. Use it to check your work, not to copy-paste from.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 13: PHASE 1: WHITEBOARD FIRST
+       ====================================================== -->
+  <section class="slide layout-content" data-title="Phase 1, Whiteboard first" data-module="Module 2">
+    <div class="slide__header">
+      <span class="slide__eyebrow">Build #1 &middot; Phase 1</span>
+      <span class="chip">20 minutes &middot; No AI yet</span>
+    </div>
+    <h2 class="h-title">Whiteboard first. AI never.</h2>
+    <div class="rule"></div>
+    <div class="body">
+      <p class="lead">Define every input, every rule, every output, every edge case. On paper or a whiteboard. The quality of your design decides the quality of the final tool.</p>
+      <ul>
+        <li><strong>Inputs</strong> &middot; section, watch type, start date, days, roster (with skip suffixes)</li>
+        <li><strong>Rules</strong> &middot; rotate available Marines, skip <code>LV / TAD / APPT</code>, fairness check</li>
+        <li><strong>Outputs</strong> &middot; on-screen table, email body, print-friendly, copy-to-clipboard</li>
+        <li><strong>Edge cases</strong> &middot; empty roster, all unavailable, invalid date, days outside 1 to 365</li>
+        <li><strong>Out of scope</strong> &middot; the production-layer wish list. Capture for the Capability Gap Map.</li>
+      </ul>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Cue</span><strong>Stop clicking. Pick up a marker.</strong> Have students whiteboard or paper-write the five sections above for fifteen minutes, alone or in pairs. No AI, no editor. Just rules.</p>
+      <p>Walk the room. Look for two failure modes: (1) someone has skipped straight to typing HTML, and (2) someone has written "rotate the Marines" and called it a rule. Push back: <em>"What about a Marine on leave? What if everyone is on leave? What does fair mean when the period doesn't divide evenly?"</em></p>
+      <p><span class="notes__cue">Sample answers</span>If someone is stuck, share the canonical answers from the course page: rotate available roster in order, skip suffix <code>- LV/TAD/APPT/MED/PCS</code>, fairness spread of 0 or 1 across the period, empty roster errors, all-unavailable errors. But make them write it themselves.</p>
+      <p><span class="notes__cue">Bridge</span>"Once your rules are on the board, you're ready to feed them to AI. Next slide is your switch cue."</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 14: SWITCH TO EDITOR (BUILD #1)
+       ====================================================== -->
+  <section class="slide layout-switch" data-title="Switch to editor, Build #1" data-module="Module 2">
+    <span class="switch__badge">Switch to editor &middot; Now</span>
+    <h2>Open genai.mil and your editor side-by-side.</h2>
+    <p class="switch__caption">We leave the deck for the next ~40 minutes. I'll walk the canonical prompt sequence on the projector. Hand off the AI's full HTML response, save as <code>watch-bill.html</code>, test, refine, deploy.</p>
+    <div class="switch__chips">
+      <span class="chip">Phase 2 &middot; Single full-plan prompt to genai.mil</span>
+      <span class="chip">Phase 3 &middot; Human verifies six edge cases</span>
+      <span class="chip">Phase 4 &middot; Targeted fix prompt</span>
+      <span class="chip">Phase 5 &middot; Deploy to github.io</span>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Switch</span><strong>Stop advancing slides. Switch your screen-share to a side-by-side of genai.mil and your editor.</strong> From here you teach live. Walk through the four phases with the room building alongside you.</p>
+      <p>Order of operations on screen:</p>
+      <p>1. Paste your Phase 1 plan into genai.mil as one prompt. Demand a single file, inline CSS, inline JS, no external dependencies. 2. Save the AI's full response as <code>watch-bill.html</code>. Open in browser. 3. Run the six edge cases out loud: empty roster, all on leave, days=0, days=400, single available Marine over 14 days, copy-to-Outlook test. 4. Targeted fix prompt for whatever broke. Paste only the changed lines back. 5. Deploy to github.io.</p>
+      <p><span class="notes__cue">Mid-build check at Phase 3</span>Pause and ask: <em>"Which edge case did the AI's first pass forget?"</em> Take two or three answers. Don't move on without one.</p>
+      <p><span class="notes__cue">Time discipline</span>If a student is past 50 minutes into this build, skip Phase 5 deployment and have them work from <code>file://</code> for the rest of the session. They deploy as homework.</p>
+      <p><span class="notes__cue">When it works</span>Have students share their github.io URL with the Marine next to them. The partner opens it on their phone. Watch their face. Note any friction.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 15: RETURN: BUILD #1 DEBRIEF
+       ====================================================== -->
+  <section class="slide layout-debrief" data-title="Return, Build #1 debrief" data-module="Module 2">
+    <span class="return__badge">Back to deck &middot; Build #1 debrief</span>
+    <div class="slide__header">
+      <span class="slide__eyebrow">Build #1 &middot; Debrief</span>
+      <span class="chip">5 minutes</span>
+    </div>
+    <h2 class="h-title">What centaur cost you. What it bought you.</h2>
+    <div class="rule"></div>
+    <div class="debrief__grid">
+      <div class="debrief__panel">
+        <h3>What it cost</h3>
+        <ul>
+          <li>Twenty minutes on a whiteboard before any HTML</li>
+          <li>A verification checkpoint at every phase boundary</li>
+          <li>Slower than "just ask AI to build it"</li>
+        </ul>
+      </div>
+      <div class="debrief__panel">
+        <h3>What it bought</h3>
+        <ul>
+          <li>A bill you'd actually publish to your section tomorrow</li>
+          <li>Edge cases caught at the boundary, not in production</li>
+          <li>A public URL another Marine can open on their phone</li>
+        </ul>
+      </div>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Debrief</span>Three short questions, one minute each. Take quick verbal answers. No slides, no prompts, no "let me think."</p>
+      <p>1. <em>"Which edge case did your AI's first pass forget?"</em></p>
+      <p>2. <em>"What did the whiteboard catch that the AI didn't?"</em></p>
+      <p>3. <em>"Where would your tool be right now if you'd skipped Phase 1?"</em></p>
+      <p><span class="notes__cue">Land the point</span>"This is what centaur buys you. Slow at the front, sturdy at the back. Now we go to break, and during the break we share what AI got wrong."</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 16: SECTION: BREAK + FAILURE SHARING
+       ====================================================== -->
+  <section class="slide layout-section" data-title="Section: Break + Failure Sharing" data-module="Module 3">
+    <div class="section__eyebrow">Module 3 &middot; During the break</div>
+    <h2 class="h-display">Failure Sharing.</h2>
+    <div class="rule"></div>
+    <div class="section__meta">
+      <span class="chip chip--gold">10 minutes</span>
+      <span class="chip">Quiet, open, attributable</span>
+    </div>
+    <a class="section__notes-link" href="../courses/platform-reality.html#failure-sharing" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Setup</span>Frame this carefully before the break. <em>"This is one of the most important ten minutes in the program. We're going to share what AI got wrong in Build #1, and how we caught it. No grades. No judgment. Every failure case you share saves someone else an hour of confusion."</em></p>
+      <p>Lead by sharing your own AI failure first. Be specific: a missing edge case, a print layout that promised to be clean but wasn't, a copy-to-clipboard that worked in Chrome but not Edge. Set the tone that experienced builders fail too.</p>
+      <p>Move to the quiet layout next slide. Encourage people to grab coffee, then come back to share.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 17: FAILURE SHARING (QUIET)
+       ====================================================== -->
+  <section class="slide layout-quiet" data-title="Failure sharing, open discussion" data-module="Module 3">
+    <div class="quiet__eyebrow">Open discussion &middot; 8 minutes</div>
+    <h2>What did AI get wrong? How did you catch it? What will you check next time?</h2>
+    <p class="quiet__lead">Share one specific failure case. Skip the framing &middot; we already know the build. Tell us what you saw and how you fixed it.</p>
+    <ul class="quiet__prompts">
+      <li>The exact AI output that was wrong</li>
+      <li>The phase, step, or test where you noticed</li>
+      <li>What you told the AI to fix it</li>
+      <li>One line you're adding to your verification checklist</li>
+    </ul>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Run the discussion</span>Stand back. Let the room talk. Aim for at least three people sharing. Start with anyone who's already volunteered, then specifically invite a quieter participant.</p>
+      <p>Capture failure cases on a whiteboard or shared doc as people share. Group them by type: <em>"AI missed an edge case"</em>, <em>"AI's print CSS didn't actually print clean"</em>, <em>"AI's clipboard fallback was Chrome-only"</em>. The grouping is the start of the unit's frontier map. We come back to this list in Module 6.</p>
+      <p><span class="notes__cue">Psychological safety</span>If the room is quiet, don't fill the silence. Re-prompt with: <em>"What's the dumbest thing AI did to you in the last hour? Bonus points for embarrassing."</em> A laugh usually opens it up.</p>
+      <p><span class="notes__cue">End</span>At the 8-minute mark, name two patterns you heard, then move to the break splash.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 18: BREAK SPLASH
+       ====================================================== -->
+  <section class="slide layout-break" data-title="Break, return at 1:30" data-module="Break">
+    <div class="break__label">Break</div>
+    <h2>2 minutes</h2>
+    <div class="break__sub">Stretch, refill, then we open Build #2 at the cyborg pace.</div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Break</span>Two minutes of true downtime after failure sharing. Project the time on the wall clock. Reset your own screen-share to a fresh genai.mil conversation. Build #2 starts fast and runs hot.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 19: SECTION: BUILD #2 CYBORG
+       ====================================================== -->
+  <section class="slide layout-section" data-title="Section: Build #2, Cyborg" data-module="Module 4">
+    <div class="section__eyebrow">Build #2 of 3 &middot; Module 4</div>
+    <h2 class="h-display">Cyborg Mode.<br>TEEP Builder.</h2>
+    <div class="rule"></div>
+    <div class="section__meta">
+      <span class="chip chip--gold">60 minutes</span>
+      <span class="chip">No phases. Continuous conversation.</span>
+    </div>
+    <a class="section__notes-link" href="../courses/platform-reality.html#build-2" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Section</span>Energy back up. We're shifting modes deliberately. Where Build #1 made you wait at every checkpoint, Build #2 wants you in continuous conversation. You'll feel the difference in the first ten minutes.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 20: BUILD #2 FRAMING
+       ====================================================== -->
+  <section class="slide layout-frame" data-title="Build #2 framing" data-module="Module 4">
+    <div class="slide__header">
+      <span class="slide__eyebrow">Build #2 &middot; Pre-build framing</span>
+      <span class="chip chip--scarlet">Cyborg</span>
+    </div>
+    <h2 class="h-title">Discover the shape while you build.</h2>
+    <div class="rule"></div>
+    <div class="body">
+      <div class="frame__hero">
+        <span class="frame__label">The problem</span>
+        <h3>"The S-3 brief slide is stale by Friday."</h3>
+        <p>The TEEP lives in a Word doc, an Excel sheet, and a whiteboard. None of them talk. Build a TEEP tool in the browser that persists, color-codes status, and produces a current S-3 brief paragraph on demand. You'll restructure something at least once during the build. That is the lesson.</p>
+      </div>
+      <div class="frame__cards">
+        <div class="frame__card">
+          <div class="card__label">Mode</div>
+          <div class="card__value gold"><strong>Cyborg</strong> &middot; the right shape isn't obvious yet</div>
+          <div class="card__sub">You'll change your mind about the data model, or the rendering, or the brief format at least once. That's the point.</div>
+        </div>
+        <div class="frame__card">
+          <div class="card__label">Success looks like</div>
+          <div class="card__value">A working TEEP that survives page reload via localStorage, color-codes status with CSS classes, and produces a copy-pasteable S-3 brief paragraph.</div>
+          <div class="card__sub">Bonus: a "confirmation gaps" section in the brief that names every Planned event inside 14 days.</div>
+        </div>
+      </div>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Frame</span>Read all three boxes. Emphasize that the restructure is intentional. Whatever the AI hands back first will not be the shape you ship. You'll discover that, throw it out, and rebuild. That's cyborg at full speed.</p>
+      <p><span class="notes__cue">Calibration</span>"In Build #1 you weren't allowed to touch the editor until the rules were written. In Build #2 you start typing prompts in 90 seconds. Notice how different that feels."</p>
+      <p><span class="notes__cue">Reference build</span>Point them to <a href="../builds/teep.html" target="_blank" rel="noopener">builds/teep.html</a>. The reference is the destination. The path to it is messy on purpose.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 21: SWITCH TO EDITOR (BUILD #2)
+       ====================================================== -->
+  <section class="slide layout-switch" data-title="Switch to editor, Build #2" data-module="Module 4">
+    <span class="switch__badge">Switch to editor &middot; Now</span>
+    <h2>Open a fresh genai.mil conversation. Start typing.</h2>
+    <p class="switch__caption">No whiteboard. No outline. Tell the AI the rough need, evaluate what comes back, and redirect. The boundary stays fluid for the next ~50 minutes.</p>
+    <div class="switch__chips">
+      <span class="chip">Iteration 1 &middot; Get something visible</span>
+      <span class="chip">Iteration 2 &middot; Realize the data is not enough</span>
+      <span class="chip">Iteration 3 &middot; Conditional styling (the trap)</span>
+      <span class="chip">Iteration 4 &middot; Fix it with classes, not inline styles</span>
+      <span class="chip">Iteration 5 &middot; Generate S-3 brief</span>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Switch</span><strong>Stop advancing slides. Switch your screen-share to your editor.</strong> Live-walk the five iterations from the course page:</p>
+      <p>1. Get something visible: bare CRUD with localStorage. 2. Realize you can't brief from it; ask for summary cards and T-X days. 3. Ask for color coding (THIS IS THE TRAP). 4. Fix the styling with CSS classes after students hit the wall. 5. Generate S-3 brief paragraph.</p>
+      <p><span class="notes__cue">Deliberate failure at Iteration 3</span>The AI's first conditional-styling answer will be wrong. Common modes: inline <code>style.background</code> that loses to CSS specificity, deprecated <code>bgColor</code> attributes, fake <code>:contains()</code> selectors, or loose-equality string compares that fall into wrong branches. <strong>Do not correct it.</strong> Let students fail. When hands go up, ask: <em>"What did the AI tell you to do? What result did you get? What would you ask it to clarify?"</em> This is frontier recognition in real time.</p>
+      <p><span class="notes__cue">Mid-build check at Iteration 3</span>Pause and ask: <em>"How is this different from Build #1? What feels different about working with the AI?"</em></p>
+      <p><span class="notes__cue">Time discipline</span>If you're past 50 minutes, stop adding features. The core cyborg pattern is demonstrated by Iteration 4. Iteration 5 is enhancement.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 22: RETURN: BUILD #2 DEBRIEF
+       ====================================================== -->
+  <section class="slide layout-debrief" data-title="Return, Build #2 debrief" data-module="Module 4">
+    <span class="return__badge">Back to deck &middot; Build #2 debrief</span>
+    <div class="slide__header">
+      <span class="slide__eyebrow">Build #2 &middot; Debrief</span>
+      <span class="chip">5 minutes</span>
+    </div>
+    <h2 class="h-title">What cyborg cost you. What it bought you.</h2>
+    <div class="rule"></div>
+    <div class="debrief__grid">
+      <div class="debrief__panel">
+        <h3>What it cost</h3>
+        <ul>
+          <li>You threw away your first conditional-styling approach</li>
+          <li>You had to spot a wrong AI answer in real time</li>
+          <li>You couldn't walk away from the conversation</li>
+        </ul>
+      </div>
+      <div class="debrief__panel">
+        <h3>What it bought</h3>
+        <ul>
+          <li>You shipped a working TEEP tool in 60 minutes</li>
+          <li>The shape emerged from the build, not from a meeting</li>
+          <li>You practiced fail-and-pivot at speed</li>
+        </ul>
+      </div>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Debrief</span>Three quick questions:</p>
+      <p>1. <em>"At what point did you realize the first styling approach wouldn't work?"</em></p>
+      <p>2. <em>"How did Build #2 feel different from Build #1?"</em></p>
+      <p>3. <em>"What's the one thing you'd do differently if you redid Build #2?"</em></p>
+      <p><span class="notes__cue">Land the point</span>"Cyborg is faster, but it's not safer. It works because you're paying attention every second. The minute you stop watching, it goes off the rails."</p>
+      <p>Hand off to the second break.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 23: BREAK 2
+       ====================================================== -->
+  <section class="slide layout-break" data-title="Break, return at 2:40" data-module="Break">
+    <div class="break__label">Break</div>
+    <h2>10 minutes</h2>
+    <div class="break__sub">Eat. Walk. Come back ready to build your own thing.</div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Break</span>Real break. Reset clocks, refill water, and quietly check in with anyone who fell behind during Build #2. Pair them with a working partner for Build #3 if needed.</p>
+      <p>Use this time to look around the room. Anyone visibly struggling? Anyone visibly bored? Calibrate Build #3 difficulty in your head before you start.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 24: SECTION: BUILD #3 YOUR PROBLEM
+       ====================================================== -->
+  <section class="slide layout-section" data-title="Section: Build #3, Your Problem" data-module="Module 5">
+    <div class="section__eyebrow">Build #3 of 3 &middot; Module 5</div>
+    <h2 class="h-display">Your Problem.<br>Choose Your Mode.</h2>
+    <div class="rule"></div>
+    <div class="section__meta">
+      <span class="chip chip--gold">50 minutes</span>
+      <span class="chip">Real problem &middot; real users &middot; your unit</span>
+    </div>
+    <a class="section__notes-link" href="../courses/platform-reality.html#build-3" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Section</span>Tone shift. The first two builds were yours to run, but the rules were mine. This one is yours all the way down. Real problem. Real users. Your call on the mode.</p>
+      <p>Reinforce the data-handling reminder: real unit context is OK on genai.mil. PII gets anonymized. Public-URL files contain no CUI, no PII.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 25: BUILD #3 DECLARE
+       ====================================================== -->
+  <section class="slide layout-frame" data-title="Build #3, declare before you build" data-module="Module 5">
+    <div class="slide__header">
+      <span class="slide__eyebrow">Build #3 &middot; Pre-build framing</span>
+      <span class="chip chip--scarlet">Your call</span>
+    </div>
+    <h2 class="h-title">State three things out loud. Then start.</h2>
+    <div class="rule"></div>
+    <div class="body">
+      <div class="frame__hero">
+        <span class="frame__label">Declare to the room</span>
+        <h3>One sentence. One mode. Two frontier risks.</h3>
+        <p>Before you open your editor, say what you're building, which mode you're using and why, and where you expect AI to struggle. If you can't name two specific frontier risks, you're not ready. Revise.</p>
+      </div>
+      <div class="frame__cards">
+        <div class="frame__card">
+          <div class="card__label">What you're building</div>
+          <div class="card__value">Name the tool type and the user. <em>"A Combat Lifesaver currency tracker for the SACO."</em></div>
+        </div>
+        <div class="frame__card">
+          <div class="card__label">Mode &amp; why</div>
+          <div class="card__value">Tie the mode to the task. <em>"Cyborg, because I don't know yet whether currency is per-Marine or per-skill."</em></div>
+        </div>
+      </div>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Run declarations</span>Go around the room. Each person gets 30 seconds. <strong>You assess in under a minute:</strong> is the scope realistic for 50 minutes, is the mode choice defensible, are the frontier risks specific?</p>
+      <p>Push back hard on vagueness. <em>"Something to help with training"</em> → revise. <em>"AI might struggle"</em> with no specifics → revise. The declaration is itself a 201 skill. The act of stating it sharpens the build.</p>
+      <p><span class="notes__cue">Cue success criteria</span>For each person: "What does done look like at 3:30?" If they can't say it, they don't have it.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 26: SWITCH TO EDITOR (BUILD #3)
+       ====================================================== -->
+  <section class="slide layout-switch" data-title="Switch to editor, Build #3" data-module="Module 5">
+    <span class="switch__badge">Switch to editor &middot; Now</span>
+    <h2>Build the thing you came here to build.</h2>
+    <p class="switch__caption">I'll circulate. When you hit a block, ask me what you'd tell the AI &middot; not how to fix it. Teaching you to debug with AI is more valuable than fixing it for you.</p>
+    <div class="switch__chips">
+      <span class="chip">CUI in prompts on genai.mil only</span>
+      <span class="chip">No CUI in the published file</span>
+      <span class="chip">Choose centaur or cyborg deliberately</span>
+      <span class="chip">Stop at 3:25 &middot; debrief in deck</span>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Switch</span><strong>Stop advancing slides. Switch to your editor and circulate the room.</strong> No live build on screen this time. The room is heads-down on their own work.</p>
+      <p><span class="notes__cue">How to coach</span>When a student hits a wall, resist the urge to give the answer. Instead ask: <em>"What would you tell the AI about what's going wrong?"</em> Then pause. Let them rephrase the prompt. The skill is the rephrasing.</p>
+      <p><span class="notes__cue">Watch for</span>Students who haven't typed in 5 minutes (stuck, go help). Students who haven't paused to test in 20 minutes (going too fast, make them verify). Students who declared centaur but jumped straight to building (call it out).</p>
+      <p><span class="notes__cue">Time discipline</span>At 3:20, give a 10-minute warning. At 3:25, return everyone to the deck for debrief.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 27: RETURN: BUILD #3 DEBRIEF
+       ====================================================== -->
+  <section class="slide layout-debrief" data-title="Return, Build #3 debrief" data-module="Module 5">
+    <span class="return__badge">Back to deck &middot; Build #3 debrief</span>
+    <div class="slide__header">
+      <span class="slide__eyebrow">Build #3 &middot; Debrief</span>
+      <span class="chip">5 minutes</span>
+    </div>
+    <h2 class="h-title">Did your mode choice survive contact with the build?</h2>
+    <div class="rule"></div>
+    <div class="debrief__grid">
+      <div class="debrief__panel">
+        <h3>Look back</h3>
+        <ul>
+          <li>What did your mode choice actually buy you?</li>
+          <li>Did you switch modes mid-build? If so, when and why?</li>
+          <li>Where on the frontier did your AI fail?</li>
+        </ul>
+      </div>
+      <div class="debrief__panel">
+        <h3>Look forward</h3>
+        <ul>
+          <li>What's the smallest next step to make this deployable?</li>
+          <li>Who's the first Marine you'd put it in front of?</li>
+          <li>What verification protocol runs before they touch it?</li>
+        </ul>
+      </div>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Debrief</span>Two-question rotation around the room. Each person answers <strong>one question from the left and one from the right.</strong> Keep it tight, 30 seconds per answer. We need to be at the wrap module by 3:30.</p>
+      <p><span class="notes__cue">Capture</span>As people speak, jot down failure cases on the same whiteboard you started during failure sharing. We're folding them into both maps next.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 28: SECTION: FRONTIER MAP + CAPABILITY GAP MAP
+       ====================================================== -->
+  <section class="slide layout-section" data-title="Section: Frontier Map + Capability Gap Map" data-module="Module 6">
+    <div class="section__eyebrow">Module 6 &middot; Wrap</div>
+    <h2 class="h-display">Frontier Map.<br>Capability Gap Map.</h2>
+    <div class="rule"></div>
+    <div class="section__meta">
+      <span class="chip chip--gold">20 minutes</span>
+      <span class="chip">Two artifacts. One unit. One case file.</span>
+    </div>
+    <a class="section__notes-link" href="../courses/platform-reality.html#wrap" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Section</span>Final stretch. This block produces both artifacts that survive past today. Three tools end up on the floor when you leave. The maps go back to your section and up to HQMC.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 29: FRONTIER MAP REFERENCE
+       ====================================================== -->
+  <section class="slide layout-content layout-map" data-title="Frontier map, reference layout" data-module="Module 6">
+    <div class="slide__header">
+      <span class="slide__eyebrow">Module 6 &middot; Reference</span>
+      <span class="chip">Use this shape for your own map</span>
+    </div>
+    <h2 class="h-title">The unit frontier map.</h2>
+    <div class="rule"></div>
+    <div class="map">
+      <div class="map__cell map__cell--head">Task type</div>
+      <div class="map__cell map__cell--head">AI handles well</div>
+      <div class="map__cell map__cell--head">AI handles poorly</div>
+      <div class="map__cell map__cell--head">Verification needed</div>
+
+      <div class="map__cell map__cell--task">HTML form scaffolding</div>
+      <div class="map__cell map__cell--good">Standard inputs, labels, basic validation patterns</div>
+      <div class="map__cell map__cell--bad">Accessible focus order, dependent field visibility</div>
+      <div class="map__cell map__cell--check">Tab through the form. Submit with everything empty.</div>
+
+      <div class="map__cell map__cell--task">Inline CSS for print</div>
+      <div class="map__cell map__cell--good">Basic <code>@media print</code> rules, hiding nav chrome</div>
+      <div class="map__cell map__cell--bad">Color preservation flags, table page-breaks</div>
+      <div class="map__cell map__cell--check">Actually print the page. Look at the PDF preview.</div>
+
+      <div class="map__cell map__cell--task">Date math in JS</div>
+      <div class="map__cell map__cell--good">Simple add and subtract</div>
+      <div class="map__cell map__cell--bad">Timezone offsets, FY boundary logic, ISO parsing</div>
+      <div class="map__cell map__cell--check">Test at start of October and end of December.</div>
+
+      <div class="map__cell map__cell--task">Color coding by status</div>
+      <div class="map__cell map__cell--good">Class-based styling with status in the class name</div>
+      <div class="map__cell map__cell--bad">Inline-style approaches that fight CSS specificity</div>
+      <div class="map__cell map__cell--check">Visually inspect every status value. Don't trust the first rule.</div>
+
+      <div class="map__cell map__cell--task map__row-empty">Your row from today &rarr;</div>
+      <div class="map__cell map__row-empty">add what worked</div>
+      <div class="map__cell map__row-empty">add what failed</div>
+      <div class="map__cell map__row-empty">add the check that catches it</div>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Walk the map</span>Read the four columns out loud once, then walk the four pre-filled rows. Tell the room: <em>"This is what an EDD frontier map looks like for the static-HTML stack. Four columns, one row per task type. The last row is what you're about to add."</em></p>
+      <p>Keep this slide up while students start drafting their own row on the next slide.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 30: CAPABILITY GAP MAP REFERENCE
+       ====================================================== -->
+  <section class="slide layout-content layout-map" data-title="Capability Gap Map, reference layout" data-module="Module 6">
+    <div class="slide__header">
+      <span class="slide__eyebrow">Module 6 &middot; Reference</span>
+      <span class="chip chip--gold">The artifact that goes to HQMC</span>
+    </div>
+    <h2 class="h-title">The Capability Gap Map.</h2>
+    <div class="rule"></div>
+    <div class="map" style="grid-template-columns:1.05fr 1.4fr 1.4fr 1.6fr;">
+      <div class="map__cell map__cell--head">Task type</div>
+      <div class="map__cell map__cell--head">Prototype today</div>
+      <div class="map__cell map__cell--head">Production wish</div>
+      <div class="map__cell map__cell--head">Blocking permission / tool</div>
+
+      <div class="map__cell map__cell--task">Watch Bill Generation</div>
+      <div class="map__cell map__cell--good">Static HTML, roster typed in, rotates with fairness check, deployed to github.io</div>
+      <div class="map__cell map__cell--bad">Pulls roster from MOL. Reads leave block. Notifies watchstanders.</div>
+      <div class="map__cell map__cell--check">MOL API not exposed. Office 365 connector restricted.</div>
+
+      <div class="map__cell map__cell--task">Training Calendar / TEEP</div>
+      <div class="map__cell map__cell--good">Static HTML with localStorage, status grid, S-3 brief paragraph</div>
+      <div class="map__cell map__cell--bad">Two-way Outlook sync. Resource holds. Cross-unit visibility.</div>
+      <div class="map__cell map__cell--check">Outlook connector gated by license tier. Dataverse not provisioned.</div>
+
+      <div class="map__cell map__cell--task map__row-empty">Your row from today &rarr;</div>
+      <div class="map__cell map__row-empty">what you shipped</div>
+      <div class="map__cell map__row-empty">what would be 10x with access</div>
+      <div class="map__cell map__row-empty">the specific block</div>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Walk the map</span>Read the columns. Walk the two example rows. Land the point: <em>"This is the artifact that turns a single Marine asking for a connector into a policy case. Forty Marines naming the same blocked permission with beneficiary counts is what moves HQMC."</em></p>
+      <p>Open the live template on screen: <a href="../resources/capability-gap-map.html" target="_blank" rel="noopener">resources/capability-gap-map.html</a>. Show the full six-column version and the "What makes a strong row" comparison table.</p>
+      <p><span class="notes__cue">Tone</span>Frame the artifact as evidence, not complaint. Specific, named, defensible. Beneficiary counts. Time savings. The blocked permission named explicitly.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 31: WORKTIME: WRITE BOTH ROWS
+       ====================================================== -->
+  <section class="slide layout-worktime" data-title="Write both rows, worktime" data-module="Module 6">
+    <div class="slide__header">
+      <span class="slide__eyebrow">Module 6 &middot; Worktime</span>
+      <span class="chip chip--scarlet">One row in each map, minimum</span>
+    </div>
+    <h2>Write both rows.</h2>
+    <p class="worktime__sub">One row in your Frontier Map about a task type where AI surprised you today. One row in your Capability Gap Map naming the specific tenant permission that would 10x one of your builds.</p>
+    <div class="worktime__timer">
+      <span class="num">10</span>
+      <span class="label">Minutes</span>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Worktime</span>Set a literal ten-minute timer. Project the two reference slides on a side screen if you can. Students need to see the column headings while they write.</p>
+      <p>Walk the room. The most common failure mode is generic entries. <em>"AI sometimes makes mistakes"</em> is not a Frontier row. <em>"Power Apps not allowed"</em> is not a Capability Gap row. Push for specifics: which task type, which failure mode, which named permission.</p>
+      <p>At the end, ask three volunteers to read one row each, mixed across both maps. Capture the rest in the shared docs. Tell them: <em>"The instructor consolidates and forwards through the AI POC to HQMC quarterly. Your row helps everyone."</em></p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 32: WHAT YOU CAN NOW DO
+       ====================================================== -->
+  <section class="slide layout-content" data-title="What you can now do" data-module="Module 6">
+    <div class="slide__header">
+      <span class="slide__eyebrow">Wrap</span>
+      <span class="chip">Four hours later</span>
+    </div>
+    <h2 class="h-title">What you can now do.</h2>
+    <div class="rule"></div>
+    <div class="body">
+      <ul>
+        <li>Build a single-file static-HTML tool in <strong>centaur mode</strong> with verification at every phase boundary.</li>
+        <li>Build a single-file static-HTML tool in <strong>cyborg mode</strong>, including a deliberate restructure mid-build.</li>
+        <li>Choose between modes for your own problem, defend the choice, and ship in 50 minutes.</li>
+        <li>Deploy to a public URL another Marine can open on their phone.</li>
+        <li>Recognize a wrong AI answer fast enough to course-correct in the same prompt.</li>
+        <li>Write a Frontier Map row and a Capability Gap Map row that another Marine could act on.</li>
+      </ul>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Land the wrap</span>Read the list once, slowly. Then say: <em>"This is what you couldn't do at 0900. You can do it now."</em></p>
+      <p>Don't oversell. The room knows what they shipped. Acknowledge that the third build was harder than the first two and that some people are still mid-flight on it. That's expected.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 33: ASSIGNMENT BEFORE WEEK 4
+       ====================================================== -->
+  <section class="slide layout-content" data-title="Assignment before Week 4" data-module="Module 6">
+    <div class="slide__header">
+      <span class="slide__eyebrow">Before Week 4</span>
+      <span class="chip chip--scarlet">Required to attend Advanced Workshop</span>
+    </div>
+    <h2 class="h-title">Five things between now and Week 4.</h2>
+    <div class="rule"></div>
+    <div class="body">
+      <ul>
+        <li><strong>Polish Build #3</strong> to a deployable state. Keep the URL live.</li>
+        <li><strong>Run it through the EDD SOP QA process</strong> on at least one of your three builds.</li>
+        <li><strong>Document three specific failure cases</strong> you encountered while finishing.</li>
+        <li><strong>Add at least two rows</strong> to your unit's Capability Gap Map based on real limitations you ran into.</li>
+        <li><strong>Identify one capability surprise.</strong> Somewhere AI performed better than you expected.</li>
+      </ul>
+    </div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Assignment</span>This is the entry ticket to Week 4. Advanced Workshop assumes you've shipped at least one tool and have failure cases and gap rows to bring. Without those, the Week 4 exercises don't land.</p>
+      <p><span class="notes__cue">Logistics</span>Tell them where to log failure cases (the shared frontier-map and gap-map docs on the EDD site) and who to contact if they get blocked finishing Build #3 between sessions.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 34: WEEK 4 PREVIEW
+       ====================================================== -->
+  <section class="slide layout-preview" data-title="Next week, Week 4 preview" data-module="Module 6">
+    <div class="preview__badge">Week 4 of 6 &middot; Course 4</div>
+    <h2 class="preview__title">Advanced Workshop.</h2>
+    <p class="preview__sub">Four hours for experienced builders. You bring a deployed tool and the failure cases you collected this week. We map the frontier for your domain and build verification protocols you can hand to someone else.</p>
+    <ul class="preview__list">
+      <li>Frontier mapping for your specific domain</li>
+      <li>Multi-component system build with named QA gates</li>
+      <li>Verification protocols: write them, hand them off</li>
+      <li>Group debugging on real, in-flight problems</li>
+      <li>Teaching others &middot; the 201 multiplier</li>
+      <li>Bring: at least one deployed tool, three failure cases, two Capability Gap rows</li>
+    </ul>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Preview</span>Set the tone. Week 4 is a different beast: less guided build, more peer review and verification design. You want them excited but realistic about the prerequisite.</p>
+      <p>Confirm the date, time, and location of Week 4 if you have them. Note that anyone who can't finish Build #3 by then should reach out. There's a path to catch up.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SLIDE 35: CLOSING
+       ====================================================== -->
+  <section class="slide layout-closing" data-title="Closing" data-module="Closing">
+    <h2>Power Apps skills die when you turn in your CAC.<br>HTML skills don't.</h2>
+    <div class="rule"></div>
+    <div class="closing__sub">Ship the tool. File the gap. Questions before we close?</div>
+    <div class="speaker-notes">
+      <p><span class="notes__cue">Close</span>Read the line. Pause. Open for questions. Don't rush the room out. The questions you get in the last five minutes are often the ones that matter most for what they actually build between now and Week 4.</p>
+      <p><span class="notes__cue">Instructor housekeeping after class</span>Capture the consolidated Frontier Map and Capability Gap Map entries from today. Push both to the shared docs. Ping any Marine who didn't ship a working Build #3 to schedule a 1:1 catch-up before Week 4. Note any hosting issues that came up in Module 1 and add them to the gap map as their own row.</p>
+    </div>
+  </section>
+
+</div>
+
+<script src="js/deck.js"></script>
+</body>
+</html>
