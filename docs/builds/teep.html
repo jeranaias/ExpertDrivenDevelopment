@@ -479,7 +479,8 @@
       var dStart = formatDateShort(ev.start);
       var dEnd = ev.end && ev.end !== ev.start ? ' to ' + formatDateShort(ev.end) : '';
       var dTill = daysUntil(ev.start);
-      var ttdClass = (dTill !== null && dTill >= 0 && dTill <= 14 && (ev.status === 'Planned' || ev.status === 'Confirmed')) ? 'ttd urgent' : 'ttd';
+      var isUpcoming = dTill !== null && dTill >= 0 && dTill <= 14;
+      var ttdClass = (isUpcoming && (ev.status === 'Planned' || ev.status === 'Confirmed')) ? 'ttd urgent' : 'ttd';
       var ttdText = '';
       if (dTill !== null) {
         if (ev.status === 'Executed') ttdText = 'complete';
@@ -512,12 +513,12 @@
     }
     var edits = wrap.querySelectorAll('[data-edit]');
     for (var e = 0; e < edits.length; e++) {
-      edits[e].addEventListener('click', function(ev) { openModal(ev.target.dataset.edit); });
+      edits[e].addEventListener('click', function(ev) { openModal(ev.currentTarget.dataset.edit); });
     }
     var dels = wrap.querySelectorAll('[data-del]');
     for (var d = 0; d < dels.length; d++) {
       dels[d].addEventListener('click', function(ev) {
-        var i = ev.target.dataset.del;
+        var i = ev.currentTarget.dataset.del;
         var found = events.find(function(x) { return x.id === i; });
         if (!found) return;
         if (!confirm('Delete "' + found.name + '"?')) return;
@@ -713,7 +714,9 @@
     if (e.target === document.getElementById('modal-bg')) closeModal();
   });
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeModal();
+    if (e.key === 'Escape' && document.getElementById('modal-bg').classList.contains('show')) {
+      closeModal();
+    }
   });
 
   document.getElementById('seed').addEventListener('click', function() {

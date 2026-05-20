@@ -469,10 +469,15 @@ PFC Brennan, K.T.</textarea>
     var counts = {};
     for (var i = 0; i < available.length; i++) counts[available[i].name] = 0;
 
+    // Deterministic rotation offset so two consecutive bills with the same
+    // roster but different start dates do not both put the same Marine on day 1.
+    var startOffset = Math.floor(startDate.getTime() / 86400000) % available.length;
+    if (startOffset < 0) startOffset += available.length;
+
     for (var d = 0; d < days; d++) {
       var date = new Date(startDate);
       date.setDate(startDate.getDate() + d);
-      var watchstander = available[d % available.length];
+      var watchstander = available[(d + startOffset) % available.length];
       counts[watchstander.name]++;
       bill.push({
         date: date,
@@ -552,27 +557,25 @@ PFC Brennan, K.T.</textarea>
     body += watchType + ' bill for ' + section + ' is posted below. Acknowledge receipt.\n\n';
 
     // Plain text table
-    var maxName = 0;
+    var maxName = 16;
     for (var i = 0; i < bill.length; i++) {
       if (bill[i].name.length > maxName) maxName = bill[i].name.length;
     }
-    if (maxName < 16) maxName = 16;
+    if (watchType.length > maxName) maxName = watchType.length;
 
-    var dateHdr = 'Date     ';
-    var dayHdr = 'Day  ';
+    var dateW = 8, dayW = 4;
     var nameHdr = watchType;
     while (nameHdr.length < maxName) nameHdr += ' ';
 
-    body += dateHdr + dayHdr + nameHdr + '\n';
-    body += '-------- ---- ' + '-'.repeat(maxName) + '\n';
+    body += 'Date     Day  ' + nameHdr + '\n';
+    body += '-'.repeat(dateW) + ' ' + '-'.repeat(dayW) + ' ' + '-'.repeat(maxName) + '\n';
     for (var i = 0; i < bill.length; i++) {
       var f = formatDate(bill[i].date);
-      var dStr = pad2(f.dom) + f.mon.toUpperCase().slice(0,3) + String(f.year).slice(2);
-      while (dStr.length < 8) dStr += ' ';
+      var dStr = pad2(f.dom) + f.mon.toUpperCase() + String(f.year).slice(2);
+      while (dStr.length < dateW) dStr += ' ';
       var dayStr = f.dow;
-      while (dayStr.length < 4) dayStr += ' ';
-      var nameStr = bill[i].name;
-      body += dStr + ' ' + dayStr + ' ' + nameStr + '\n';
+      while (dayStr.length < dayW) dayStr += ' ';
+      body += dStr + ' ' + dayStr + ' ' + bill[i].name + '\n';
     }
 
     body += '\n';
@@ -617,6 +620,7 @@ PFC Brennan, K.T.</textarea>
     if (!confirm('Reset all fields to defaults?')) return;
     document.getElementById('section').value = 'HQ Co, 1st Bn, 99th Marines';
     watch.value = 'Duty NCO';
+    document.getElementById('customWatch').value = '';
     customWrap.style.display = 'none';
     document.getElementById('start').value = iso;
     document.getElementById('days').value = 14;

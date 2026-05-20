@@ -34,26 +34,26 @@
       .fill-card {
         border: 1px solid #1a1a1a;
         border-radius: 4px;
-        padding: 6px 8px;
-        min-height: 1.85in;
+        padding: 5px 7px;
+        min-height: 1.55in;
         display: flex;
         flex-direction: column;
       }
-      .fill-card h3 { font-size: 0.85rem; margin: 0 0 4px; color: #CC0000; }
-      .fill-card .prompt { font-size: 0.72rem; color: #4a4a4a; margin-bottom: 4px; line-height: 1.3; }
+      .fill-card h3 { font-size: 0.82rem; margin: 0 0 3px; color: #CC0000; }
+      .fill-card .prompt { font-size: 0.7rem; color: #4a4a4a; margin-bottom: 3px; line-height: 1.25; }
       .fill-card .lines {
         flex: 1;
-        background-image: repeating-linear-gradient(transparent, transparent 16px, #d9d8d4 16px, #d9d8d4 17px);
-        margin-top: 4px;
+        background-image: repeating-linear-gradient(transparent, transparent 15px, #d9d8d4 15px, #d9d8d4 16px);
+        margin-top: 3px;
       }
       .build-block {
         border: 1px solid #d9d8d4;
         border-radius: 4px;
-        padding: 6px 8px;
-        margin-bottom: 0.4rem;
+        padding: 5px 7px;
+        margin-bottom: 0.3rem;
       }
-      .build-block h3 { font-size: 0.85rem; margin: 0 0 2px; }
-      .build-block .meta { font-size: 0.72rem; color: #6e6e6e; margin-bottom: 4px; }
+      .build-block h3 { font-size: 0.82rem; margin: 0 0 1px; }
+      .build-block .meta { font-size: 0.7rem; color: #6e6e6e; margin-bottom: 3px; }
       .reminders {
         background: #fce8e8;
         border-left: 3px solid #CC0000;
@@ -84,16 +84,29 @@
       .name-line span { flex: 1; border-bottom: 1px solid #1a1a1a; padding-bottom: 1px; }
 
       @media print {
-        @page { size: letter; margin: 0.4in; }
-        body { background: #fff; }
+        @page { size: letter; margin: 0.35in; }
+        body { background: #fff; font-size: 9pt; }
         .site-header, .mobile-nav, .page-header, .site-footer, .skip-link, .print-only-hide { display: none !important; }
         .handout-page { margin: 0; padding: 0; max-width: none; border: none; box-shadow: none; }
-        .classmark { background: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .handout-page h1 { font-size: 1.1rem; }
+        .handout-page h2 { font-size: 0.82rem; margin: 0.25rem 0 0.15rem; }
+        .handout-page p { font-size: 0.74rem; margin: 0.1rem 0; }
+        .handout-page table { font-size: 0.7rem; }
+        .handout-page th, .handout-page td { padding: 2px 4px; }
+        .fill-card { background: #fff !important; min-height: 1.25in; padding: 4px 6px; }
+        .fill-card h3 { font-size: 0.74rem; }
+        .fill-card .prompt { font-size: 0.64rem; line-height: 1.2; }
+        .fill-card .lines { background-image: repeating-linear-gradient(transparent, transparent 13px, #999 13px, #999 14px) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .build-block { padding: 4px 6px; margin-bottom: 0.2rem; }
+        .build-block h3 { font-size: 0.76rem; }
+        .build-block .meta { font-size: 0.64rem; margin-bottom: 2px; }
+        .reminders { background: #f8f7f5 !important; padding: 4px 8px; font-size: 0.7rem; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .reminders p { margin: 0.08rem 0; }
+        .classmark { background: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 1px 0; font-size: 0.62rem; }
         th { background: #e5e5e5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-        .reminders { background: #f8f7f5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-        .fill-card { background: #fff !important; }
-        .fill-card .lines { background-image: repeating-linear-gradient(transparent, transparent 15px, #999 15px, #999 16px) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         h2 { page-break-after: avoid; }
+        .build-block { page-break-inside: avoid; }
+        .meta-row { font-size: 0.66rem; }
       }
     </style>
 </head>
@@ -233,17 +246,17 @@
                     <div class="fill-card">
                         <h3>What We Built</h3>
                         <div class="prompt">Tool name, deployed URL, one-line demo description.</div>
-                        <div class="lines"></div>
+                        <div class="lines" aria-label="Notes lines"></div>
                     </div>
                     <div class="fill-card">
                         <h3>What We Wanted</h3>
                         <div class="prompt">Production layer capability that would make it 10x better.</div>
-                        <div class="lines"></div>
+                        <div class="lines" aria-label="Notes lines"></div>
                     </div>
                     <div class="fill-card">
                         <h3>What's Blocked</h3>
                         <div class="prompt">Specific connector, license, admin grant, or policy.</div>
-                        <div class="lines"></div>
+                        <div class="lines" aria-label="Notes lines"></div>
                     </div>
                 </div>
             </div>
@@ -255,17 +268,17 @@
                     <div class="fill-card">
                         <h3>What We Built</h3>
                         <div class="prompt">Tool name, deployed URL, one-line demo description.</div>
-                        <div class="lines"></div>
+                        <div class="lines" aria-label="Notes lines"></div>
                     </div>
                     <div class="fill-card">
                         <h3>What We Wanted</h3>
                         <div class="prompt">Production layer capability that would make it 10x better.</div>
-                        <div class="lines"></div>
+                        <div class="lines" aria-label="Notes lines"></div>
                     </div>
                     <div class="fill-card">
                         <h3>What's Blocked</h3>
                         <div class="prompt">Specific connector, license, admin grant, or policy.</div>
-                        <div class="lines"></div>
+                        <div class="lines" aria-label="Notes lines"></div>
                     </div>
                 </div>
             </div>
