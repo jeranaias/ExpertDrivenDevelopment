@@ -76,11 +76,12 @@
   .toolbar .meta { color: var(--muted); font-size: 0.85rem; }
   .summary-cards {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 12px;
     margin-bottom: 18px;
   }
-  @media (max-width: 800px) { .summary-cards { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 1100px) { .summary-cards { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 700px) { .summary-cards { grid-template-columns: repeat(2, 1fr); } }
   .scard {
     background: var(--bg);
     border: 1px solid var(--border);
@@ -197,6 +198,159 @@
   .empty-state { text-align: center; color: var(--muted); padding: 40px 20px; font-size: 0.9rem; }
   .empty-state .big { font-size: 2.4rem; line-height: 1; color: var(--border); margin-bottom: 8px; }
 
+  /* View tabs and range filter */
+  .view-tabs {
+    display: inline-flex;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .view-tabs button {
+    border: none; border-radius: 0;
+    background: #fff; color: var(--ink);
+    padding: 6px 14px; font-size: 0.85rem; font-weight: 600;
+    cursor: pointer;
+    border-right: 1px solid var(--border);
+  }
+  .view-tabs button:last-child { border-right: none; }
+  .view-tabs button.active { background: var(--ink); color: #fff; }
+  .view-tabs button:not(.active):hover { background: var(--bg-code); }
+  .range-filter {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.82rem; color: var(--muted);
+  }
+  .range-filter select {
+    padding: 5px 8px; font-size: 0.85rem;
+    border: 1px solid var(--border); border-radius: 4px; background: #fff;
+  }
+  .scard.conflicts .value { color: var(--scarlet-dark); }
+  .scard.conflicts.zero .value { color: var(--muted); }
+
+  /* Calendar / Timeline view */
+  .view-controls {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    align-items: center; margin-bottom: 14px;
+    padding-bottom: 12px; border-bottom: 1px solid var(--border);
+  }
+  .view-controls .spacer { flex: 1; }
+  .view-controls .counts {
+    font-size: 0.78rem; color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .conflict-banner {
+    background: #fce8e8; border-left: 4px solid var(--scarlet);
+    color: #5c0000; padding: 8px 14px;
+    border-radius: 0 4px 4px 0; margin-bottom: 12px;
+    font-size: 0.85rem;
+  }
+  .conflict-banner strong { color: #5c0000; }
+  .conflict-banner ul { margin: 4px 0 0 18px; padding: 0; }
+  .conflict-banner li { margin: 1px 0; }
+
+  .timeline-header {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 12px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 4px; margin-bottom: 6px;
+  }
+  .timeline-header-label {
+    font-size: 0.7rem; text-transform: uppercase;
+    letter-spacing: 0.05em; color: var(--muted);
+    font-weight: 700; align-self: end;
+  }
+  .timeline-axis {
+    position: relative; height: 22px;
+  }
+  .timeline-tick {
+    position: absolute; top: 0; bottom: 0;
+    border-left: 1px solid var(--border);
+    padding-left: 3px; font-size: 0.7rem;
+    color: var(--muted); white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .timeline-tick.month-start {
+    border-left: 2px solid var(--ink);
+    font-weight: 700; color: var(--ink);
+  }
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+    padding: 6px 0; min-height: 40px;
+  }
+  .timeline-row:last-child { border-bottom: none; }
+  .timeline-row:hover { background: #fafaf8; }
+  .timeline-row-label {
+    font-size: 0.85rem;
+    display: flex; flex-direction: column; justify-content: center;
+    overflow: hidden;
+  }
+  .timeline-row-label .name {
+    font-weight: 600;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .timeline-row-label .meta {
+    font-size: 0.7rem; color: var(--muted); margin-top: 2px;
+  }
+  .timeline-track {
+    position: relative;
+    min-height: 30px;
+    display: flex; align-items: center;
+  }
+  .timeline-today-line {
+    position: absolute; top: -2px; bottom: -2px;
+    width: 2px; background: var(--scarlet);
+    z-index: 2; opacity: 0.85; pointer-events: none;
+  }
+  .timeline-today-label {
+    position: absolute; top: -20px;
+    transform: translateX(-50%);
+    font-size: 0.62rem; font-weight: 700;
+    color: var(--scarlet-dark); background: var(--bg);
+    padding: 1px 4px; border-radius: 3px;
+    letter-spacing: 0.05em; pointer-events: none;
+  }
+  .timeline-bar {
+    position: absolute; height: 22px;
+    border-radius: 3px; border: 1px solid;
+    cursor: pointer; font-size: 0.72rem;
+    padding: 2px 6px; font-weight: 600;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    display: flex; align-items: center;
+    user-select: none; transition: filter 0.12s;
+  }
+  .timeline-bar:hover { filter: brightness(0.92); }
+  .timeline-bar.status-Planned { background: var(--status-planned-bg); color: var(--status-planned-fg); border-color: var(--status-planned-bd); }
+  .timeline-bar.status-Confirmed { background: var(--status-confirmed-bg); color: var(--status-confirmed-fg); border-color: var(--status-confirmed-bd); }
+  .timeline-bar.status-Executed { background: var(--status-executed-bg); color: var(--status-executed-fg); border-color: var(--status-executed-bd); }
+  .timeline-bar.status-Cancelled { background: var(--status-cancelled-bg); color: var(--status-cancelled-fg); border-color: var(--status-cancelled-bd); text-decoration: line-through; }
+  .timeline-bar.conflict {
+    box-shadow: 0 0 0 2px var(--scarlet);
+  }
+  .timeline-bar .conflict-mark {
+    background: var(--scarlet); color: #fff;
+    border-radius: 50%; width: 14px; height: 14px;
+    text-align: center; line-height: 14px;
+    font-size: 0.7rem; font-weight: 700;
+    margin-left: 6px; flex-shrink: 0;
+  }
+  tr.conflict-row { background: #fef5f5; }
+  tr.conflict-row td:first-child { border-left: 3px solid var(--scarlet); }
+  .conflict-badge {
+    display: inline-block;
+    background: var(--scarlet); color: #fff;
+    font-size: 0.65rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    padding: 1px 6px; border-radius: 3px;
+    margin-left: 6px; vertical-align: middle;
+  }
+  .timeline-empty {
+    text-align: center; color: var(--muted);
+    padding: 30px; font-size: 0.9rem;
+  }
+
   .toast {
     position: fixed; bottom: 24px; right: 24px;
     background: var(--ink); color: #fff;
@@ -252,10 +406,31 @@
     <div class="scard confirmed"><div class="label">Confirmed</div><div class="value" id="c-confirmed">0</div></div>
     <div class="scard executed"><div class="label">Executed</div><div class="value" id="c-executed">0</div></div>
     <div class="scard cancelled"><div class="label">Cancelled</div><div class="value" id="c-cancelled">0</div></div>
+    <div class="scard conflicts zero"><div class="label">Conflicts</div><div class="value" id="c-conflicts">0</div></div>
   </div>
 
   <section class="grid-card" aria-labelledby="grid-h">
     <h2 id="grid-h">Event Timeline</h2>
+
+    <div class="view-controls">
+      <div class="view-tabs" role="tablist" aria-label="View mode">
+        <button type="button" id="view-calendar" class="active" role="tab" aria-selected="true">Calendar</button>
+        <button type="button" id="view-list" role="tab" aria-selected="false">List</button>
+      </div>
+      <div class="range-filter">
+        <label for="range-select">Range:</label>
+        <select id="range-select">
+          <option value="30d">Next 30 days</option>
+          <option value="90d" selected>Next 90 days</option>
+          <option value="quarter">This FY quarter</option>
+          <option value="all">All events</option>
+        </select>
+      </div>
+      <div class="spacer"></div>
+      <div class="counts" id="filter-counts">Showing 0 of 0</div>
+    </div>
+
+    <div id="conflict-banner-wrap"></div>
     <div id="event-table-wrap">
       <div class="empty-state">
         <div class="big">&#9678;</div>
@@ -340,12 +515,18 @@
 
   var STORAGE_KEY = 'edd-teep-v1';
   var STORAGE_UNIT = 'edd-teep-unit-v1';
+  var STORAGE_VIEW = 'edd-teep-view-v1';
+  var STORAGE_RANGE = 'edd-teep-range-v1';
 
   var STATUSES = ['Planned', 'Confirmed', 'Executed', 'Cancelled'];
+  var RANGES = ['30d', '90d', 'quarter', 'all'];
+  var VIEWS = ['calendar', 'list'];
 
   // ---- State ----
   var events = [];
   var unitName = 'HQ Co, 1st Bn, 99th Marines';
+  var viewMode = 'calendar';
+  var rangeMode = '90d';
   var editingId = null;
 
   // ---- Sample seed ----
@@ -361,6 +542,7 @@
       { id: id(), name: 'Annual Rifle Qualification', type: 'Range', start: offset(today, 10), end: offset(today, 12), status: 'Confirmed', resources: 'Range 7, 90 rds 5.56 per Marine, 2x 7-ton, RSO assigned', tr: 'INF-MAN-1001' },
       { id: id(), name: 'CBRN Annual Decon Lane', type: 'CBT', start: offset(today, 18), end: offset(today, 18), status: 'Planned', resources: 'CBRN cell, decon line, M50 masks per individual issue', tr: 'CBRN-IND-1101' },
       { id: id(), name: 'Battalion Field Training Exercise', type: 'Field', start: offset(today, 28), end: offset(today, 34), status: 'Planned', resources: 'Range 200, ammo per CO mod, 8x 7-ton, MEDEVAC standby, comms LP/OP', tr: 'INF-PLT-2001, INF-PLT-2002' },
+      { id: id(), name: 'BN OPSEC Brief', type: 'Garrison', start: offset(today, 30), end: offset(today, 30), status: 'Planned', resources: 'BN theater, OPSEC officer (conflicts with FTX, deconflict before confirming)', tr: 'OPSEC-ANL' },
       { id: id(), name: 'SACO Training', type: 'Garrison', start: offset(today, 38), end: offset(today, 38), status: 'Planned', resources: 'BN classroom, SACO instructor', tr: '' },
       { id: id(), name: 'PFT Section', type: 'Annual Training', start: offset(today, 45), end: offset(today, 45), status: 'Planned', resources: 'Track at Lejeune Field, PFT instructors, medical standby', tr: 'PHYS-PFT' },
       { id: id(), name: 'IG Inspection (CMC)', type: 'Inspection', start: offset(today, 60), end: offset(today, 62), status: 'Confirmed', resources: 'BN HQ, all admin records, supply records, training records', tr: '' },
@@ -379,6 +561,10 @@
       if (raw) events = JSON.parse(raw);
       var u = localStorage.getItem(STORAGE_UNIT);
       if (u) unitName = u;
+      var v = localStorage.getItem(STORAGE_VIEW);
+      if (v && VIEWS.indexOf(v) >= 0) viewMode = v;
+      var r = localStorage.getItem(STORAGE_RANGE);
+      if (r && RANGES.indexOf(r) >= 0) rangeMode = r;
     } catch (e) {
       events = [];
     }
@@ -387,6 +573,8 @@
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
       localStorage.setItem(STORAGE_UNIT, unitName);
+      localStorage.setItem(STORAGE_VIEW, viewMode);
+      localStorage.setItem(STORAGE_RANGE, rangeMode);
     } catch (e) {
       toast('Storage save failed. Data not persisted.');
     }
@@ -438,6 +626,66 @@
     setTimeout(function() { t.classList.remove('show'); }, 1800);
   }
 
+  // ---- Conflict detection ----
+  // Returns { idMap: { eventId: true }, pairs: [[a, b], ...] }
+  function detectConflicts(evs) {
+    var idMap = {};
+    var pairs = [];
+    for (var i = 0; i < evs.length; i++) {
+      var a = evs[i];
+      if (a.status === 'Cancelled' || !a.start) continue;
+      var aStart = parseDate(a.start);
+      var aEnd = parseDate(a.end || a.start);
+      if (!aStart || !aEnd) continue;
+      for (var j = i + 1; j < evs.length; j++) {
+        var b = evs[j];
+        if (b.status === 'Cancelled' || !b.start) continue;
+        var bStart = parseDate(b.start);
+        var bEnd = parseDate(b.end || b.start);
+        if (!bStart || !bEnd) continue;
+        if (aStart <= bEnd && bStart <= aEnd) {
+          idMap[a.id] = true;
+          idMap[b.id] = true;
+          pairs.push([a, b]);
+        }
+      }
+    }
+    return { idMap: idMap, pairs: pairs };
+  }
+
+  // ---- Range filter ----
+  function filterByRange(evs, mode) {
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (mode === 'all') return evs.slice();
+
+    var rangeStart, rangeEnd;
+    if (mode === '30d') {
+      rangeStart = today;
+      rangeEnd = new Date(today); rangeEnd.setDate(rangeEnd.getDate() + 30);
+    } else if (mode === '90d') {
+      rangeStart = today;
+      rangeEnd = new Date(today); rangeEnd.setDate(rangeEnd.getDate() + 90);
+    } else if (mode === 'quarter') {
+      var q = currentQuarter();
+      // FY quarters: Q1=Oct-Dec (year before FY), Q2=Jan-Mar (FY year), Q3=Apr-Jun, Q4=Jul-Sep
+      var qMonth = { 1: 9, 2: 0, 3: 3, 4: 6 }[q.q];
+      var qYear = q.q === 1 ? q.fy - 1 : q.fy;
+      rangeStart = new Date(qYear, qMonth, 1);
+      rangeEnd = new Date(qYear, qMonth + 3, 0); // last day of quarter
+    } else {
+      return evs.slice();
+    }
+
+    return evs.filter(function(e) {
+      if (!e.start) return false;
+      var s = parseDate(e.start);
+      var en = parseDate(e.end || e.start);
+      if (!s || !en) return false;
+      return s <= rangeEnd && en >= rangeStart;
+    });
+  }
+
   // ---- Rendering ----
   function render() {
     document.getElementById('unit-name').textContent = unitName;
@@ -446,7 +694,7 @@
     document.getElementById('quarter-meta').textContent =
       'Current quarter: ' + q.label + ' · As of: ' + formatDateShort(today.toISOString().split('T')[0]);
 
-    // Counts
+    // Counts (across ALL events, not filtered)
     var counts = { Planned: 0, Confirmed: 0, Executed: 0, Cancelled: 0 };
     for (var i = 0; i < events.length; i++) {
       if (counts[events[i].status] !== undefined) counts[events[i].status]++;
@@ -457,25 +705,81 @@
     document.getElementById('c-executed').textContent = counts.Executed;
     document.getElementById('c-cancelled').textContent = counts.Cancelled;
 
+    // Conflicts across ALL events
+    var conflicts = detectConflicts(events);
+    var conflictCount = Object.keys(conflicts.idMap).length;
+    document.getElementById('c-conflicts').textContent = conflictCount;
+    var conflictCard = document.getElementById('c-conflicts').parentElement;
+    if (conflictCount > 0) conflictCard.classList.remove('zero');
+    else conflictCard.classList.add('zero');
+
+    // View tabs + range filter UI state
+    document.getElementById('view-calendar').classList.toggle('active', viewMode === 'calendar');
+    document.getElementById('view-list').classList.toggle('active', viewMode === 'list');
+    document.getElementById('view-calendar').setAttribute('aria-selected', viewMode === 'calendar');
+    document.getElementById('view-list').setAttribute('aria-selected', viewMode === 'list');
+    document.getElementById('range-select').value = rangeMode;
+
+    var bannerWrap = document.getElementById('conflict-banner-wrap');
     var wrap = document.getElementById('event-table-wrap');
+
     if (events.length === 0) {
+      bannerWrap.innerHTML = '';
       wrap.innerHTML = '<div class="empty-state"><div class="big">&#9678;</div><div>No events. Add one or load sample data.</div></div>';
+      document.getElementById('filter-counts').textContent = 'Showing 0 of 0';
       return;
     }
 
-    // Sort by start date asc
-    var sorted = events.slice().sort(function(a, b) {
+    // Filter then sort by start asc
+    var filtered = filterByRange(events, rangeMode).sort(function(a, b) {
       if (!a.start) return 1;
       if (!b.start) return -1;
       return a.start < b.start ? -1 : (a.start > b.start ? 1 : 0);
     });
 
+    document.getElementById('filter-counts').textContent =
+      'Showing ' + filtered.length + ' of ' + events.length;
+
+    // Conflict banner for pairs visible in the filtered set
+    var filteredIds = {};
+    for (var fi = 0; fi < filtered.length; fi++) filteredIds[filtered[fi].id] = true;
+    var visiblePairs = conflicts.pairs.filter(function(p) {
+      return filteredIds[p[0].id] && filteredIds[p[1].id];
+    });
+    if (visiblePairs.length) {
+      var bannerHtml = '<div class="conflict-banner"><strong>' + visiblePairs.length +
+        ' conflict' + (visiblePairs.length === 1 ? '' : 's') + ' in view.</strong> Overlapping date ranges:';
+      bannerHtml += '<ul>';
+      for (var bp = 0; bp < visiblePairs.length; bp++) {
+        bannerHtml += '<li>' + escapeHtml(visiblePairs[bp][0].name) + ' &harr; ' +
+          escapeHtml(visiblePairs[bp][1].name) + '</li>';
+      }
+      bannerHtml += '</ul></div>';
+      bannerWrap.innerHTML = bannerHtml;
+    } else {
+      bannerWrap.innerHTML = '';
+    }
+
+    if (filtered.length === 0) {
+      wrap.innerHTML = '<div class="timeline-empty">No events in the selected range. Try a wider range or add events.</div>';
+      return;
+    }
+
+    if (viewMode === 'calendar') {
+      renderCalendarView(wrap, filtered, conflicts.idMap);
+    } else {
+      renderListView(wrap, filtered, conflicts.idMap);
+    }
+  }
+
+  function renderListView(wrap, sorted, conflictMap) {
     var html = '<table><thead><tr>';
     html += '<th>Event</th><th>Dates</th><th>Status</th><th>Resources</th><th>T&amp;R</th><th></th>';
     html += '</tr></thead><tbody>';
 
     for (var i = 0; i < sorted.length; i++) {
       var ev = sorted[i];
+      var hasConflict = !!conflictMap[ev.id];
       var dStart = formatDateShort(ev.start);
       var dEnd = ev.end && ev.end !== ev.start ? ' to ' + formatDateShort(ev.end) : '';
       var dTill = daysUntil(ev.start);
@@ -491,8 +795,9 @@
         else ttdText = 'T-' + dTill + 'd';
       }
 
-      html += '<tr>';
-      html += '<td><div class="event-name">' + escapeHtml(ev.name) + '</div>';
+      html += '<tr' + (hasConflict ? ' class="conflict-row"' : '') + '>';
+      html += '<td><div class="event-name">' + escapeHtml(ev.name) +
+        (hasConflict ? '<span class="conflict-badge" title="Overlaps another event">Conflict</span>' : '') + '</div>';
       html += '<div><span class="event-type">' + escapeHtml(ev.type) + '</span></div></td>';
       html += '<td><div class="dates">' + dStart + dEnd + '</div>';
       html += '<div class="' + ttdClass + '">' + ttdText + '</div></td>';
@@ -505,8 +810,124 @@
     html += '</tbody></table>';
 
     wrap.innerHTML = html;
+    wireRowEvents(wrap);
+  }
 
-    // Wire up status cycling
+  function renderCalendarView(wrap, sorted, conflictMap) {
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // Determine view window from data span
+    var minStart = null, maxEnd = null;
+    for (var i = 0; i < sorted.length; i++) {
+      var s = parseDate(sorted[i].start);
+      var en = parseDate(sorted[i].end || sorted[i].start);
+      if (!minStart || s < minStart) minStart = s;
+      if (!maxEnd || en > maxEnd) maxEnd = en;
+    }
+    // Pad the window: include today, and at least 3 days of context on each side
+    var viewStart = new Date(Math.min(today.getTime(), minStart.getTime()));
+    viewStart.setDate(viewStart.getDate() - 3);
+    var viewEnd = new Date(maxEnd);
+    viewEnd.setDate(viewEnd.getDate() + 3);
+
+    var totalDays = Math.round((viewEnd - viewStart) / 86400000) + 1;
+    if (totalDays < 14) {
+      viewEnd = new Date(viewStart);
+      viewEnd.setDate(viewEnd.getDate() + 13);
+      totalDays = 14;
+    }
+
+    // Pick tick spacing based on totalDays
+    var tickEvery;
+    if (totalDays <= 21) tickEvery = 2;
+    else if (totalDays <= 45) tickEvery = 5;
+    else if (totalDays <= 100) tickEvery = 7;
+    else tickEvery = 14;
+
+    function dayOffset(d) {
+      return Math.round((parseDate(d) - viewStart) / 86400000);
+    }
+    function pct(offset) {
+      return (offset / totalDays) * 100;
+    }
+
+    var html = '';
+
+    // Header row: label column header + axis ticks
+    html += '<div class="timeline-header">';
+    html += '<div class="timeline-header-label">Event</div>';
+    html += '<div class="timeline-axis">';
+    for (var d = 0; d <= totalDays; d += tickEvery) {
+      var tickDate = new Date(viewStart);
+      tickDate.setDate(tickDate.getDate() + d);
+      var isMonthStart = tickDate.getDate() <= tickEvery;
+      var mon = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][tickDate.getMonth()];
+      var label = String(tickDate.getDate()).padStart(2, '0') + ' ' + mon;
+      var leftPct = pct(d);
+      if (leftPct >= 99) continue;
+      html += '<span class="timeline-tick' + (isMonthStart ? ' month-start' : '') + '" style="left:' + leftPct + '%">' + label + '</span>';
+    }
+    html += '</div></div>';
+
+    // Today line position
+    var todayOffset = Math.round((today - viewStart) / 86400000);
+    var todayInView = todayOffset >= 0 && todayOffset <= totalDays;
+    var todayPct = todayInView ? pct(todayOffset) : null;
+
+    // One row per event
+    for (var j = 0; j < sorted.length; j++) {
+      var ev = sorted[j];
+      var hasConflict = !!conflictMap[ev.id];
+      var startOffset = dayOffset(ev.start);
+      var endOffset = dayOffset(ev.end || ev.start);
+      var barLeft = Math.max(0, pct(startOffset));
+      var barWidth = Math.max(pct(endOffset - startOffset + 1), 1.5);
+      if (barLeft + barWidth > 100) barWidth = 100 - barLeft;
+
+      var dStart = formatDateShort(ev.start);
+      var dEnd = ev.end && ev.end !== ev.start ? ' to ' + formatDateShort(ev.end) : '';
+      var dTill = daysUntil(ev.start);
+      var ttd = '';
+      if (dTill !== null) {
+        if (ev.status === 'Executed') ttd = 'complete';
+        else if (ev.status === 'Cancelled') ttd = 'cancelled';
+        else if (dTill < 0) ttd = Math.abs(dTill) + 'd ago';
+        else if (dTill === 0) ttd = 'TODAY';
+        else if (dTill === 1) ttd = 'tomorrow';
+        else ttd = 'T-' + dTill + 'd';
+      }
+
+      html += '<div class="timeline-row">';
+      html += '<div class="timeline-row-label">';
+      html += '<span class="name">' + escapeHtml(ev.name) +
+        (hasConflict ? '<span class="conflict-badge" title="Overlaps another event">!</span>' : '') + '</span>';
+      html += '<span class="meta">' + escapeHtml(ev.type) + ' &middot; ' + dStart + dEnd + ' &middot; ' + ttd + '</span>';
+      html += '</div>';
+
+      html += '<div class="timeline-track">';
+      if (todayInView) {
+        if (j === 0) {
+          html += '<div class="timeline-today-line" style="left:' + todayPct + '%"></div>';
+          html += '<div class="timeline-today-label" style="left:' + todayPct + '%">TODAY</div>';
+        } else {
+          html += '<div class="timeline-today-line" style="left:' + todayPct + '%"></div>';
+        }
+      }
+      var conflictMark = hasConflict ? '<span class="conflict-mark" aria-hidden="true">!</span>' : '';
+      html += '<button type="button" class="timeline-bar status-' + ev.status + (hasConflict ? ' conflict' : '') +
+        '" style="left:' + barLeft + '%; width:' + barWidth + '%" data-edit="' + ev.id +
+        '" title="' + escapeHtml(ev.name) + ' (' + ev.status + ', ' + dStart + dEnd + ')">' +
+        '<span>' + escapeHtml(ev.name) + '</span>' + conflictMark + '</button>';
+      html += '</div>';
+      html += '</div>';
+    }
+
+    wrap.innerHTML = html;
+    wireRowEvents(wrap);
+  }
+
+  function wireRowEvents(wrap) {
     var pills = wrap.querySelectorAll('.status-pill');
     for (var p = 0; p < pills.length; p++) {
       pills[p].addEventListener('click', cycleStatus);
@@ -660,13 +1081,28 @@
       lines.push('');
     }
 
-    // Confirmation gaps: planned events within 14 days that are still Planned (not Confirmed)
+    // Confirmation gaps: planned events within 14 days that are still Planned
     var gaps = next14.filter(function(e) { return e.status === 'Planned'; });
     if (gaps.length) {
       lines.push('CONFIRMATION GAPS');
       lines.push(gaps.length + ' events inside 14 days are still Planned. Need confirmation NLT this week:');
       for (var k = 0; k < gaps.length; k++) {
         lines.push('  - ' + gaps[k].name + ' (T-' + daysUntil(gaps[k].start) + 'd)');
+      }
+      lines.push('');
+    }
+
+    // Schedule conflicts: overlapping date ranges (excluding Cancelled)
+    var conflictResult = detectConflicts(events);
+    var conflictPairs = conflictResult.pairs;
+    if (conflictPairs.length) {
+      lines.push('SCHEDULE CONFLICTS');
+      lines.push(conflictPairs.length + ' overlapping date range' + (conflictPairs.length === 1 ? '' : 's') + ' detected:');
+      for (var cp = 0; cp < conflictPairs.length; cp++) {
+        var p0 = conflictPairs[cp][0];
+        var p1 = conflictPairs[cp][1];
+        lines.push('  - ' + p0.name + ' (' + formatDateShort(p0.start) + ') vs ' +
+          p1.name + ' (' + formatDateShort(p1.start) + ')');
       }
       lines.push('');
     }
@@ -680,10 +1116,17 @@
     }
 
     lines.push('REQUEST');
+    var requests = [];
     if (gaps.length) {
-      lines.push('Request CO push on ' + gaps.length + ' confirmation gap' + (gaps.length === 1 ? '' : 's') + ' listed above.');
+      requests.push('CO push on ' + gaps.length + ' confirmation gap' + (gaps.length === 1 ? '' : 's'));
+    }
+    if (conflictPairs.length) {
+      requests.push('deconflict ' + conflictPairs.length + ' overlapping event pair' + (conflictPairs.length === 1 ? '' : 's'));
+    }
+    if (requests.length) {
+      lines.push('Request: ' + requests.join('; ') + '.');
     } else if (upcoming.length) {
-      lines.push('Steady state. No confirmation gaps inside 14 days.');
+      lines.push('Steady state. No confirmation gaps inside 14 days. No schedule conflicts.');
     } else {
       lines.push('All events executed or cancelled. TEEP needs refresh for next quarter.');
     }
@@ -740,6 +1183,30 @@
     if (n && n.trim()) { unitName = n.trim(); save(); render(); }
   });
   document.getElementById('print').addEventListener('click', function() { window.print(); });
+
+  // View tabs
+  document.getElementById('view-calendar').addEventListener('click', function() {
+    if (viewMode === 'calendar') return;
+    viewMode = 'calendar';
+    save();
+    render();
+  });
+  document.getElementById('view-list').addEventListener('click', function() {
+    if (viewMode === 'list') return;
+    viewMode = 'list';
+    save();
+    render();
+  });
+
+  // Range filter
+  document.getElementById('range-select').addEventListener('change', function(e) {
+    var v = e.target.value;
+    if (RANGES.indexOf(v) < 0) return;
+    rangeMode = v;
+    save();
+    render();
+  });
+
   document.getElementById('gen-brief').addEventListener('click', generateBrief);
   document.getElementById('copy-brief').addEventListener('click', function() {
     var t = document.getElementById('brief-out').value;
