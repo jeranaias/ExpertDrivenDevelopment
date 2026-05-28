@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Week 4.5 student handout, Advanced Workshop (Locked Tenant Reality). One-page printable take-home for the Course 4.5 session: Three Layers reminder, Frontier classification, tool-selection cheat sheet, Capability Gap Map seed, Workflow Playbook seed, and the URLs to come back to.">
+    <title>Week 4.5 Student Handout, Advanced Workshop (Locked Tenant Reality) | EDD</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/handout.css">
+</head>
+<body class="site-wrapper">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Student Handouts</a></li>
+                    <li aria-current="page">Week 4.5, Advanced Workshop (Locked Tenant Reality)</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Week 4.5 Student Handout</h1>
+            <p class="page-header__desc">One-page take-home for the Course 4.5 session. Print landscape and bring it with you, or save as PDF. The most important reference material from the workshop is on this sheet: the Three Layers, the Frontier classification, the tool-selection cheat sheet, and seed rows for the Capability Gap Map and Workflow Playbook.</p>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+            <div class="handout-intro">
+                <p>Print this page in <strong>landscape</strong> from Chrome or Edge: <kbd>Ctrl</kbd>+<kbd>P</kbd> &rarr; Layout <em>Landscape</em> &rarr; Margins <em>None</em> or <em>Default</em> &rarr; Background graphics <em>on</em>. The site chrome above is hidden in print.</p>
+                <p class="handout-intro__tip">In the print dialog, leave <strong>Margins</strong> at <em>Default</em> (or pick <em>None</em>). Picking <em>Custom</em> or <em>Minimum</em> shrinks the printable area below what this layout assumes and the handout tips onto a second page.</p>
+            </div>
+
+            <article class="handout-page" aria-label="Week 4.5 student handout">
+
+                <!-- Header -->
+                <header class="hd-head">
+                    <div class="hd-head__week"><span class="num">4.5</span> Course 4.5 &middot; Student Handout</div>
+                    <div class="hd-head__title">
+                        <h1>Advanced Workshop (Locked Tenant Reality)</h1>
+                        <p class="sub">Take this home. Three Layers, Frontier classification, tool-selection cheat sheet, plus seed rows for the Capability Gap Map and your Workflow Playbook.</p>
+                    </div>
+                    <div class="hd-head__meta">
+                        <div><span>Duration</span><strong>4 hr (2 breaks)</strong></div>
+                        <div><span>Audience</span><strong>Experienced builders</strong></div>
+                        <div><span>Prereq</span><strong>Course 3.5 + 1 deployed tool</strong></div>
+                    </div>
+                </header>
+
+                <!-- Module strip -->
+                <section class="hd-modules" aria-label="Module timing">
+                    <div class="hd-modules__cell"><span class="t">0:00,0:40</span><span class="n">M1 Frontier Mapping</span><span class="d">40 min &middot; build map</span></div>
+                    <div class="hd-modules__cell"><span class="t">0:40,1:40</span><span class="n">M2 Complex Build</span><span class="d">60 min &middot; build</span></div>
+                    <div class="hd-modules__cell hd-modules__cell--break"><span class="t">1:40,1:50</span><span class="n">Break</span><span class="d">10 min</span></div>
+                    <div class="hd-modules__cell"><span class="t">1:50,2:30</span><span class="n">M3 Debugging Clinic</span><span class="d">40 min &middot; pair</span></div>
+                    <div class="hd-modules__cell"><span class="t">2:30,3:00</span><span class="n">M4 QA &amp; Verification Drill</span><span class="d">30 min &middot; timed</span></div>
+                    <div class="hd-modules__cell hd-modules__cell--break"><span class="t">3:00,3:10</span><span class="n">Break</span><span class="d">10 min</span></div>
+                    <div class="hd-modules__cell"><span class="t">3:10,3:30</span><span class="n">M5 Teach-Back</span><span class="d">20 min &middot; breakouts</span></div>
+                    <div class="hd-modules__cell"><span class="t">3:30,4:00</span><span class="n">M6 Workflow Playbook</span><span class="d">30 min &middot; build</span></div>
+                </section>
+
+                <!-- Body -->
+                <div class="hd-body">
+
+                    <!-- Three Layers reminder -->
+                    <section class="hd-box hd-box--bring">
+                        <h2>The Three Layers<span class="lede">Where we work, where we can't, and what to write down</span></h2>
+                        <p>The locked tenant doesn't change the work. It changes which layer you reach for first. Spec is where ideas get shaped, Prototype is where they get a URL, Production is where the wall is. Every Course 4.5 build moves through all three.</p>
+                        <ul>
+                            <li><strong>Spec layer.</strong> <strong>genai.mil</strong> for single-shot chat and short reasoning. <strong>Ask Sage</strong> for multi-file uploads, longer context, and dataset work. Both are first-class. Pick the one whose limits don't matter for your task.</li>
+                            <li><strong>Prototype layer.</strong> Single-file static HTML on a public host (GitHub Pages, Cloudflare Pages, Netlify). A URL another Marine can open on their phone. This is where Course 3.5 deliverables live.</li>
+                            <li><strong>Production layer.</strong> The wishlist. Power Platform inside the locked tenant, official systems of record, anything that needs CAC-gated auth. Write the gap down on the Capability Gap Map, then ship the prototype anyway.</li>
+                            <li><strong>Rule.</strong> Work the layers you can reach. Document the wall on the layer you can't. Don't fake a production answer with a prototype.</li>
+                            <li><strong>Mode-switching across layers.</strong> Start cyborg on Spec to discover the shape of the problem. Move to centaur on Prototype to verify before you sign anything. Production is a separate conversation, not the next step in the same prompt.</li>
+                            <li><strong>Hosting check.</strong> Open your deployed prototype from the duty workstation before class. If GitHub Pages, Cloudflare Pages, or Netlify is blocked, raise it in M1 so we can pick a fallback before the build clock starts.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Frontier classification -->
+                    <section class="hd-box hd-box--terms hd-box--gold">
+                        <h2>Frontier classification<span class="lede">Three buckets to sort every task into</span></h2>
+                        <p>Every task in your section sits in one of three buckets. Knowing which bucket you're in tells you how hard to verify, which tool to reach for, and whether to bet a deliverable on the result. Sort before you prompt.</p>
+                        <ul class="hd-terms">
+                            <li><span class="term">Context</span><span class="def">Inside the frontier. AI does this well today with normal prompting. Reach for the tool, verify the output, ship. No drama.</span></li>
+                            <li><span class="term">Frontier</span><span class="def">On the edge. AI gets it right <em>sometimes</em>. You only catch the wrong answers if you already knew the answer. Use centaur mode and verify at every phase boundary.</span></li>
+                            <li><span class="term">Meta-frontier</span><span class="def">Outside the frontier today, but moving fast enough that it will land inside within a quarter or two. Watch it. Re-test monthly. Don't bet a deliverable on it yet.</span></li>
+                            <li><span class="term">Sorting rule</span><span class="def">If you can't tell which bucket a task is in, treat it as frontier and verify. Cost of over-verifying a context task is small. Cost of under-verifying a frontier task is a wrong answer that ships.</span></li>
+                            <li><span class="term">Date your map</span><span class="def">The frontier moves. A meta-frontier task today is a context task two quarters from now. Write the date next to every row. Re-sort quarterly.</span></li>
+                            <li><span class="term">Surprise both ways</span><span class="def">Log capability surprises (AI did better than you expected) in the same map as failure surprises. Both signals are how you keep the map honest.</span></li>
+                        </ul>
+                    </section>
+
+                    <!-- Tool selection cheat sheet -->
+                    <section class="hd-box hd-box--exercise hd-box--ink">
+                        <h2>Tool-selection cheat sheet<span class="lede">Which Spec-layer tool, when</span></h2>
+                        <p>Both genai.mil and Ask Sage are first-class Spec-layer tools. Different shapes. Pick by the task in front of you, not by habit. The four rules below cover 90 percent of decisions.</p>
+
+                        <p><strong>Single-shot chat, short reasoning, fast iteration &rarr; genai.mil.</strong> Drafting a paragraph, refactoring 200 lines of HTML, sanity-checking logic, sketching an outline. CAC sign-in, no setup. The default for centaur whiteboard sessions and quick cyborg sketches.</p>
+
+                        <p><strong>Multi-file, dataset, long context, attached references &rarr; Ask Sage.</strong> A real folder of source docs. A CSV you want sliced. An SOP you want cross-checked against three policy PDFs. Larger context window, file handling, model choice. The default when "paste it into the prompt" is laughable.</p>
+
+                        <p><strong>High-stakes output (briefs, formal correspondence, anything signed) &rarr; both, deliberately.</strong> Draft in one, verify in the other. Different models catch different errors. The five QA protocols (source, logic, format, numbers, substance) apply either way. <em>If the output is going to a GO, run both.</em></p>
+
+                        <p><strong>If your tool of choice is down &rarr; the other one is the fallback,</strong> not "wait until Monday." Both work inside the tenant. Both are sanctioned. Knowing both means you don't get stuck.</p>
+
+                        <p><strong>Switching costs you a minute, not a session.</strong> If you find yourself jamming a multi-file task into a single-shot prompt, that's the signal. Stop, open the other tab, paste the files. The five QA protocols catch the rest.</p>
+
+                        <span class="hd-anchor"><strong>Anchor phrase</strong>The tool isn't the skill. Knowing when to switch is.</span>
+                    </section>
+
+                    <!-- Capability Gap Map seed -->
+                    <section class="hd-box hd-box--learn">
+                        <h2>Capability Gap Map seed<span class="lede">Two rows to fill before you leave</span></h2>
+                        <p><strong>How to write a row.</strong> Name the specific production-layer capability that would 10x one of your tools. Name the specific permission, system, or policy that blocks it. Name the workaround you're using today. Specific is better than tidy.</p>
+                        <ul>
+                            <li><strong>Row 1, build:</strong> __________________ &middot; <strong>capability needed:</strong> __________________ &middot; <strong>blocker:</strong> __________________ &middot; <strong>workaround:</strong> __________________</li>
+                            <li><strong>Row 2, build:</strong> __________________ &middot; <strong>capability needed:</strong> __________________ &middot; <strong>blocker:</strong> __________________ &middot; <strong>workaround:</strong> __________________</li>
+                            <li><strong>What counts as a real blocker.</strong> A named policy, permission, or system, not "the tenant is locked." Examples: SharePoint app-only API access denied, Power Platform premium connector behind a paywall, no outbound HTTPS from the duty workstation.</li>
+                            <li><strong>What counts as a real workaround.</strong> A path you'd actually walk a junior Marine through. "Copy-paste from the CAC-gated portal once a week" counts. "I'll figure it out" doesn't.</li>
+                            <li><strong>Quarterly consolidation.</strong> Instructor rolls every student's rows into a single matrix and forwards to the HQMC AI working group. Your row is the unit's voice.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Workflow Playbook seed -->
+                    <section class="hd-box hd-box--homework hd-box--gold">
+                        <h2>Workflow Playbook seed<span class="lede">One row, seven fields, one recurring task</span></h2>
+                        <p>The Workflow Playbook is the graduation deliverable. Not the tool, the playbook. A one-page sheet a relief in place can run without calling you.</p>
+                        <p><strong>Pick one real, recurring task from your job.</strong> Fill the seven fields below before you leave Module 6. Specific enough that a junior Marine could run it without you. That's the graduation deliverable.</p>
+                        <ul>
+                            <li><strong>Task:</strong> __________________</li>
+                            <li><strong>Frequency &amp; mode:</strong> __________________ &middot; (centaur / cyborg / mixed)</li>
+                            <li><strong>4 to 8 H/AI steps:</strong> __________________</li>
+                            <li><strong>Verification checklist (3 to 5 items):</strong> __________________ &middot; <em>if your playbook has none, it isn't done.</em></li>
+                            <li><strong>Known frontier issues:</strong> __________________ &middot; <strong>Time savings:</strong> __________________ &middot; <strong>Junior development note:</strong> __________________</li>
+                            <li><strong>The 201 multiplier.</strong> You owe two Marines forward. Calendar the first teach-back before your next PCS, not after. The unit's capability compounds when the playbook runs without you.</li>
+                            <li><strong>Run it once before you teach it.</strong> End-to-end, with the real task, on a real workday. If a step breaks, fix it before the playbook leaves your hand.</li>
+                        </ul>
+                    </section>
+
+                    <!-- URLs to come back to -->
+                    <section class="hd-box hd-box--bring">
+                        <h2>URLs to come back to<span class="lede">Bookmark these on the workstation you build from</span></h2>
+                        <p>These are the post-session references. Open them from your duty workstation, not your phone. If a URL doesn't load from a duty laptop, that's a Capability Gap Map row right there.</p>
+                        <ul>
+                            <li><strong>Course 4.5 page:</strong> <code>/courses/advanced-reality.html</code> &middot; agenda, prereqs, the deck, the live in-class handout.</li>
+                            <li><strong>Reference build:</strong> <code>/tools/</code> &middot; the deployed tools index. Open one from your duty workstation as a hosting check before class.</li>
+                            <li><strong>Tool-selection guide:</strong> <code>/resources/tool-selection.html</code> &middot; the long-form version of the cheat sheet above. genai.mil vs Ask Sage, by task type.</li>
+                            <li><strong>Debugging scenarios:</strong> <code>/resources/debugging-scenarios.html</code> &middot; pair-clinic scenarios with planted bugs and the prompts that unlock them.</li>
+                            <li><strong>Capability Gap Map:</strong> <code>/tools/capability-gap-map.html</code> &middot; the live matrix. Add your rows here after class. Quarterly export to HQMC.</li>
+                            <li><strong>Static hosting cheat sheet:</strong> <code>/resources/static-hosting.html</code> &middot; GitHub Pages, Cloudflare Pages, Netlify. The 10-minute path from <code>.html</code> on disk to a public URL.</li>
+                            <li><strong>SOP (PDF):</strong> <code>/pdf/SOP_Expert_Driven_Development_v5.pdf</code> &middot; the verification checkpoints and the five QA protocols, in one document.</li>
+                            <li><strong>Frontier map template:</strong> <code>/toolkit/frontier-map.html</code> &middot; blank matrix to rebuild your unit's map at full resolution. Date it. Re-sort quarterly.</li>
+                            <li><strong>Workflow playbook template:</strong> <code>/toolkit/workflow-playbook.html</code> &middot; the seven-field form, ready to fill. Print it or save it. Submit your first one in chat by 4:00.</li>
+                            <li><strong>All handouts index:</strong> <code>/handouts/</code> &middot; every course's take-home in one place. Print the ones for the courses you're running next.</li>
+                        </ul>
+                    </section>
+
+                </div>
+
+                <!-- Footer -->
+                <footer class="hd-foot">
+                    <div class="left"><strong>EDD &middot; Week 4.5 Student Handout</strong> &middot; UNCLASSIFIED &middot; print one-sided, landscape</div>
+                    <div class="right">
+                        <a href="../decks/week-4-5-advanced-reality.html">Week 4.5 Deck</a> &middot;
+                        <a href="../courses/advanced-reality.html">Course 4.5 page</a> &middot;
+                        <a href="./">All handouts</a>
+                    </div>
+                </footer>
+
+                <!-- Closing line -->
+                <p class="hd-closing"><strong>Power Apps skills die when you turn in your CAC. HTML skills don't. Knowing when to switch tools makes both skills last.</strong></p>
+
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../pdf/">Briefs Library</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                        <li><a href="../pdf/TRAINING_CURRICULA_v5.pdf">Curricula (PDF)</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

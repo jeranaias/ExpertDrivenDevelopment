@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Week 4.5 facilitator pack, Advanced Workshop (Locked Tenant Reality). One-page printable companion for the Course 4.5 deck: timing strip, prep checklist, two-tool hand-off cues, exercise prompts, recovery scripts, post-session homework. Plus the printed-pack URL sheet appendix.">
+    <title>Week 4.5 Facilitator Pack, Advanced Workshop (Locked Tenant Reality) | EDD</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/pack.css">
+</head>
+<body class="site-wrapper">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Facilitator Packs</a></li>
+                    <li aria-current="page">Week 4.5, Advanced Workshop (Locked Tenant Reality)</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Week 4.5 Facilitator Pack</h1>
+            <p class="page-header__desc">One-page companion for the Course 4.5 instructor deck. Print landscape, keep next to the deck during delivery. Two enterprise AI tools (genai.mil and Ask Sage) run side by side.</p>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+            <div class="pack-intro">
+                <p>Print this page in <strong>landscape</strong> from Chrome or Edge: <kbd>Ctrl</kbd>+<kbd>P</kbd> &rarr; Layout <em>Landscape</em> &rarr; Margins <em>None</em> or <em>Default</em> &rarr; Background graphics <em>on</em>. The site chrome above is hidden in print. Chat-paste blocks for this session live in the <a href="../decks/week-4-5-handouts.html">Week&nbsp;4.5 hand-out pack</a>.</p>
+                <p class="pack-intro__tip">In the print dialog, leave <strong>Margins</strong> at <em>Default</em> (or pick <em>None</em>). Picking <em>Custom</em> or <em>Minimum</em> shrinks the printable area below what this layout assumes and the pack tips onto a second page.</p>
+            </div>
+
+            <article class="pack-page" aria-label="Week 4.5 facilitator pack">
+
+                <header class="pk-head">
+                    <div class="pk-head__week"><span class="num">4.5</span> Course 4.5 &middot; Facilitator Pack</div>
+                    <div class="pk-head__title">
+                        <h1>Advanced Workshop (Locked Tenant Reality)</h1>
+                        <p class="sub">Frontier mapping by tool, single-file static-HTML Readiness Dashboard, group debugging across five scenarios, two-tool cross-check QA, teach-back, and the workflow playbook with tool selection.</p>
+                    </div>
+                    <div class="pk-head__meta">
+                        <div><span>Duration</span><strong>4 hr (1 break)</strong></div>
+                        <div><span>Audience</span><strong>Advanced builders</strong></div>
+                        <div><span>Prereq</span><strong>Course 3.5 + deployed static tool</strong></div>
+                    </div>
+                </header>
+
+                <section class="pk-timing" aria-label="Module timing">
+                    <div class="pk-timing__cell"><span class="t">0:00,0:30</span><span class="n">M1 Frontier Mapping (per-tool)</span><span class="d">30 min &middot; silent + share</span></div>
+                    <div class="pk-timing__cell"><span class="t">0:30,1:30</span><span class="n">M2 Complex Build (Readiness Dashboard)</span><span class="d">60 min &middot; build</span></div>
+                    <div class="pk-timing__cell pk-timing__cell--break"><span class="t">1:30,1:40</span><span class="n">Break</span><span class="d">10 min</span></div>
+                    <div class="pk-timing__cell"><span class="t">1:40,2:20</span><span class="n">M3 Group Debugging (5 scenarios)</span><span class="d">40 min</span></div>
+                    <div class="pk-timing__cell"><span class="t">2:20,2:50</span><span class="n">M4 Verification + Two-Tool Cross-Check</span><span class="d">30 min</span></div>
+                    <div class="pk-timing__cell"><span class="t">2:50,3:20</span><span class="n">M5 Teach-Back</span><span class="d">30 min</span></div>
+                    <div class="pk-timing__cell"><span class="t">3:20,3:50</span><span class="n">M6 Workflow Playbook + Gap Map</span><span class="d">30 min</span></div>
+                </section>
+
+                <div class="pk-body">
+
+                    <section class="pk-box pk-box--prep">
+                        <h2>Pre-session prep<span class="lede">Done 48 h before; verified at T-30 min</span></h2>
+                        <ul>
+                            <li><strong>genai.mil access verified.</strong> Sign in on the actual classroom workstation. If a Marine on the roster cannot reach it from their duty machine, resolve before class or pair them with someone who can.</li>
+                            <li><strong>Ask Sage access verified.</strong> Sign in and confirm a reasoning model (Claude 3 or a GPT o-series, whichever the tenant exposes) is selectable. If the tenant only has genai.mil, switch to the contingency plan: every Ask Sage phase becomes paste-and-summarize on genai.mil, and "Ask Sage access blocked" becomes the first Capability Gap row.</li>
+                            <li><strong>Sample CSVs staged.</strong> Three files for Build #2: <code>personnel_source.csv</code>, <code>training.csv</code>, <code>equipment.csv</code>. Pre-loaded with 500+ rows so the O(n^2) failure surfaces visibly during Phase 2. Linkable from chat.</li>
+                            <li><strong>Hosting account active.</strong> Every attendee has a github.io URL on file from Course 3.5. Pull anyone without one to a 1:1 catch-up; do not let them sit through M2.</li>
+                            <li><strong>Tabs and portals.</strong> Deck (Week 4.5), this pack, the Week 4.5 hand-out pack, genai.mil, Ask Sage, text editor, the reference Readiness Dashboard pinned, Tool Selection Guide open.</li>
+                            <li><strong>Bug bank.</strong> Three real prompt-failures from Week 3.5 chat ready for M3 if no one volunteers, including at least one tool-selection failure.</li>
+                        </ul>
+                    </section>
+
+                    <section class="pk-box pk-box--handoff pk-box--gold">
+                        <h2>Live hand-off cues<span class="lede">Frequent switches between two tools; deck stays as anchor</span></h2>
+                        <ul>
+                            <li><strong>0:00.</strong> Open the deck. Drop the Frontier Map starter from the hand-out pack into chat. Silent timer 15 min. Tell the room: "Two columns. genai.mil column and Ask Sage column. Fill both."</li>
+                            <li><strong>0:30.</strong> Deck &rarr; Ask Sage in one tab, editor in another. Phase 1 (data architecture) runs in Ask Sage with a reasoning model. Name the meta-frontier call out loud.</li>
+                            <li><strong>0:45.</strong> Phase 2 (ingestion + join) switches tools. Students pick genai.mil chat OR continue in Ask Sage. Record their choice in chat.</li>
+                            <li><strong>1:40.</strong> Deck &rarr; a student's screen-share for the Debug Clinic. You coach, you do not type.</li>
+                            <li><strong>2:20.</strong> Drop the M4 QA chat-paste (planted SOP excerpt) into chat. Demo the two-tool cross-check: same prompt into both, compare.</li>
+                            <li><strong>3:20.</strong> Drop the Workflow Playbook template. Show the two completed examples (training schedule on genai.mil, readiness rollup on Ask Sage) before students start their own.</li>
+                        </ul>
+                    </section>
+
+                    <section class="pk-box pk-box--exercise pk-box--ink">
+                        <h2>Exercise + activity prompts<span class="lede">Read these to the room verbatim</span></h2>
+
+                        <p><strong>M1 &middot; Frontier Mapping per tool (15 min silent + 15 share).</strong> "Three columns: Task, genai.mil handles, Ask Sage handles. Fifteen minutes silent. Use the starter from the hand-out pack. Add one row of your own for a domain task you actually do. The new column for this course is the meta-frontier: when the failure is tool selection, not AI capability."</p>
+
+                        <p><strong>M2 &middot; Readiness Dashboard (60 min, single-file static HTML).</strong> "Spec: one HTML file, inline CSS and JS, no external scripts or CDN. Join three CSVs (personnel, training, equipment) by EDIPI. Compute readiness percentage per Marine and per company. Hand-rolled SVG bar chart by company. Not-Ready table. Commander's Snapshot button. Phase 1 (architecture) goes to Ask Sage with a reasoning model. Phase 2 (ingestion) is your choice. Phase 3 (visualization) watches for the Chart.js CDN smuggle. Phase 4 (verification) cross-checks output against source CSVs in Ask Sage."</p>
+
+                        <p><strong>M3 &middot; Group Debugging (40 min, 5 scenarios, 7 min each).</strong> "Five scenarios in the debugging-scenarios resource. Scenario 1 fetch race. Scenario 2 stale localStorage after schema change. Scenario 3 CSS specificity plus timezone. Scenario 4 event delegation on dynamic content. Scenario 5 the meta-frontier: 47-turn refactor that should have been on Ask Sage from the start. Three minutes group diagnosis, two minutes instructor synthesis, two minutes documenting the pattern. If you cannot solve it in seven minutes, move on. The lesson is the pattern, not the fix."</p>
+
+                        <p><strong>M4 &middot; Two-Tool Cross-Check QA (30 min).</strong> "Take the AI-drafted SOP excerpt from the hand-out pack. Find the five planted errors. Then run the same SOP-draft prompt through both genai.mil AND Ask Sage with a reasoning model. Where do the two outputs disagree? Disagreements are flags. Document any systematic disagreement as a Frontier Map row."</p>
+
+                        <p><strong>M5 &middot; Teach-Back (30 min).</strong> "Pick one EDD concept. Use the prep template (definition, why it matters, real example from your work, common mistake, key takeaway). Three minutes per teach-back. Tool selection is a valid concept choice and a high-leverage one. Brevity is the skill."</p>
+
+                        <p><strong>M6 &middot; Workflow Playbook + Gap Map (30 min).</strong> "Pick one recurring task from your job. Fill the template, including the Which Tool column. Two completed examples are in the deck: the weekly training schedule runs on genai.mil chat (cyborg), and the weekly readiness rollup runs on Ask Sage with a reasoning model (centaur). Add at least two Capability Gap Map rows mapping your playbook to Production-Layer wishes."</p>
+
+                        <span class="pk-cue"><strong>Anchor phrase</strong>"The tool is replaceable. The judgment about which tool to use is what we are actually teaching."</span>
+                    </section>
+
+                    <section class="pk-box pk-box--sideways">
+                        <h2>When this goes sideways<span class="lede">Top failure modes + recovery</span></h2>
+                        <ul class="pk-fail">
+                            <li>
+                                <span class="sym">Ask Sage is not available on this tenant today.</span>
+                                <span class="fix">Run every Ask Sage phase in genai.mil with paste-and-summarize. Surface the cost (token limits, no persistent context). Add "Ask Sage access blocked" as Capability Gap row #1. The pedagogy holds; the gap is felt directly.</span>
+                            </li>
+                            <li>
+                                <span class="sym">M2 Phase 2: fast chat returns an O(n^2) join that stalls on 500 records.</span>
+                                <span class="fix">Expected. Deliberate failure target. Do not warn the room. When hands go up, debrief on "frontier or context?" The fix is to state the record count up front and ask for a Map-keyed indexed join, plus try/catch on JSON.parse.</span>
+                            </li>
+                            <li>
+                                <span class="sym">M2 Phase 3: fast chat smuggles a <code>&lt;script src&gt;</code> CDN tag for Chart.js.</span>
+                                <span class="fix">Second deliberate failure. Let the student catch it. If they do not, ask: "Open DevTools. What does the Network tab show?" Re-prompt with no-CDN constraint repeated, render inline SVG. Beat the SVG-vs-Chart.js moment hard; it is the cleanest model-capability contrast between fast chat and a reasoning model on Ask Sage.</span>
+                            </li>
+                            <li>
+                                <span class="sym">M3 student wants to fully fix every scenario.</span>
+                                <span class="fix">Hold time. Seven minutes per scenario, no exceptions. The value is the pattern, not the resolution. Scenario 5 (meta-frontier) is the one to name out loud, even if you have to cold-call it.</span>
+                            </li>
+                            <li>
+                                <span class="sym">M4 two-tool cross-check produces identical outputs.</span>
+                                <span class="fix">Good. That is also a result. "Both tools agree" raises confidence. Move on. The point is the protocol, not finding disagreement every time.</span>
+                            </li>
+                            <li>
+                                <span class="sym">Builder demands you type their fix during M3.</span>
+                                <span class="fix">Refuse. "If I type it, you do not learn it. Re-prompt with these three changes." Walk away from the keyboard.</span>
+                            </li>
+                            <li>
+                                <span class="sym">github.io blocked from this network mid-build.</span>
+                                <span class="fix">Try Cloudflare Pages or GitLab Pages from the hosting cheat sheet. All blocked? Switch to <code>file://</code> for the day. Add "Public static hosting reach blocked" as a Capability Gap row.</span>
+                            </li>
+                            <li>
+                                <span class="sym">Whole room is behind at 2:20.</span>
+                                <span class="fix">Compress M5 to a single round-robin (90 seconds each, no rubric scoring). Protect M6 worktime. The playbook artifact plus Gap Map rows are the hand-off to leadership.</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="pk-box pk-box--homework pk-box--gold">
+                        <h2>Post-session homework<span class="lede">Issue before logoff</span></h2>
+                        <ul>
+                            <li><strong>Polish the Readiness Dashboard.</strong> Ship the smallest deployable version by EOW. Keep the URL live. Post in the Week 4.5 chat thread.</li>
+                            <li><strong>One workflow through the EDD SOP QA + two-tool cross-check.</strong> Document where the tools agreed and where they disagreed.</li>
+                            <li><strong>Three failure cases on the Advanced Frontier Map.</strong> Each row names the tool that failed and whether the root cause was frontier, context, platform, or meta-frontier (tool selection).</li>
+                            <li><strong>Two Capability Gap Map rows.</strong> Specific, costed, named permission. Forwarded quarterly to HQMC.</li>
+                            <li><strong>Teach one section Marine the tool-selection beat</strong> within 14 days. Five minutes, witnessed by supervisor. The 201 multiplier ships when others can pick the right tool without you in the room.</li>
+                        </ul>
+                    </section>
+
+                </div>
+
+                <footer class="pk-foot">
+                    <div class="left"><strong>EDD &middot; Week 4.5 Facilitator Pack</strong> &middot; UNCLASSIFIED &middot; print one-sided, landscape</div>
+                    <div class="right">
+                        <a href="../decks/week-4-5-advanced-reality.html">Week 4.5 Deck</a> &middot;
+                        <a href="../decks/week-4-5-handouts.html">Hand-out pack</a> &middot;
+                        <a href="../decks/week-4-5-cheatsheet.html">Cheat sheet</a> &middot;
+                        <a href="../courses/advanced-reality.html">Course 4.5 page</a>
+                    </div>
+                </footer>
+
+            </article>
+
+            <!-- BEGIN: share-in-chat URL sheet appendix -->
+            <article class="pack-urlsheet" aria-label="Week 4.5 share-in-chat URL sheet">
+
+                <header class="pack-urlsheet__head">
+                    <div class="pk-head__week"><span class="num">4.5</span> Share-in-chat URL sheet</div>
+                    <div class="title">
+                        <h1>Advanced Workshop (Locked Tenant Reality), class links</h1>
+                        <p class="sub">Every URL the Week 4.5 deck cues you to drop into Microsoft Teams chat. Read aloud or type into the chat (no copy buttons since this is the printed pack).</p>
+                    </div>
+                </header>
+
+                <div class="pack-urlsheet__columns">
+                    <section class="pack-urlsheet__section" aria-labelledby="urlsheet-w45-sec-deck">
+                        <h2 id="urlsheet-w45-sec-deck">Deck and student materials</h2>
+                        <p class="lede">The pages instructors typically share at the start of the four-hour session.</p>
+                        <ul class="pack-urlsheet__list">
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Course 4.5 Page</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> Drop in chat at session start. Has agenda, three-layer thesis, every module note, and the rubric.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/courses/advanced-reality.html</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Week 4.5 Student Handout (printable)</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> Drop in chat at session start. For latecomers and reference.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/handouts/week-4-5-advanced-reality.html</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Week 4.5 Live Fill-In Handout</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> Drop at the Module 1 Frontier Map silent worktime. Per-tool two-column fill-in.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/handouts/advanced-reality-handout.html</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Week 4.5 Facilitator Hand-Outs (chat blocks)</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> Cued from the deck at the Frontier Map starter, the planted-error SOP excerpt, and the Workflow Playbook template. Copy buttons on the page.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/decks/week-4-5-handouts.html</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Week 4.5 Slide Deck (HTML)</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> For students who missed the live session.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/decks/week-4-5-advanced-reality.html</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Week 4.5 Instructor Cheat Sheet</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> For instructors prepping the session.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/decks/week-4-5-cheatsheet.html</p>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="pack-urlsheet__section" aria-labelledby="urlsheet-w45-sec-tools">
+                        <h2 id="urlsheet-w45-sec-tools">Live tools + reference build</h2>
+                        <p class="lede">The two enterprise AI tools and the M2 reference build, dropped in chat as students hit each phase.</p>
+                        <ul class="pack-urlsheet__list">
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">genai.mil (fast chat layer)</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> Session start. Default tool for single-prompt work, M2 Phase 2 ingestion, M2 Phase 3 visualization, M4 fast side of the two-tool cross-check.</p>
+                                <p class="pack-urlsheet__url">https://genai.mil</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Ask Sage (multi-file + reasoning layer)</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> Session start. Default tool for M2 Phase 1 architecture, M2 Phase 4 verification, dataset analysis, deliberate side of the two-tool cross-check.</p>
+                                <p class="pack-urlsheet__url">https://chat.asksage.ai</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Tool Selection Guide</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> Drop during M1 Frontier Mapping and again at the M2 Phase 2 tool-switch beat. Names which tool wins which task and why.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/resources/tool-selection-guide.html</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Reference Build, Readiness Dashboard</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> Slide cueing M2 framing. The destination. Use to check work, not to copy-paste from.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/builds/readiness-dashboard.html</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Debugging Scenarios (5)</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> M3 Group Debugging. Five scenarios with answer keys, including the meta-frontier tool-selection scenario.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/resources/debugging-scenarios.html</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Capability Gap Map Template</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> M6 close. The artifact every Marine fills in during the wrap. Quarterly compilation to HQMC.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/resources/capability-gap-map.html</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">Static Hosting Cheat Sheet</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> Reference if github.io reach is blocked. Tier 2 and Tier 3 fallbacks.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/resources/static-hosting-cheat-sheet.html</p>
+                            </li>
+                            <li class="pack-urlsheet__item">
+                                <p class="pack-urlsheet__title">EDD SOP (PDF)</p>
+                                <p class="pack-urlsheet__when"><strong>When:</strong> M4 reference. The canonical SOP behind the QA verification habit and the two-tool cross-check protocol.</p>
+                                <p class="pack-urlsheet__url">https://jeranaias.github.io/ExpertDrivenDevelopment/pdf/SOP_Expert_Driven_Development_v5.pdf</p>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+
+                <footer class="pack-urlsheet__foot">
+                    <div><strong>EDD &middot; Week 4.5 Share-in-chat URL sheet</strong> &middot; UNCLASSIFIED &middot; mirror of the on-site Class Links page</div>
+                    <div>jeranaias.github.io/ExpertDrivenDevelopment/decks/links/week-4-5-advanced-reality.html</div>
+                </footer>
+
+            </article>
+            <!-- END: share-in-chat URL sheet appendix -->
+
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../pdf/">Briefs Library</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                        <li><a href="../pdf/TRAINING_CURRICULA_v5.pdf">Curricula (PDF)</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

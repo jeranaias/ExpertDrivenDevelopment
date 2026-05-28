@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Two-page printable instructor cheat sheet for the Week 4.5 Advanced Workshop (Locked Tenant Reality) deck: module-by-module timing, the two-tool frontier table, Readiness Dashboard phase prompts, deliberate failure targets, Debug Clinic protocol, two-tool cross-check, and the workflow playbook with Which Tool column.">
+    <title>Week 4.5 Instructor Cheat Sheet, Advanced Workshop (Locked Tenant Reality) | EDD</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/cheatsheet.css">
+    <style>
+        /* Week 4.5 deltas: 7-cell pacing strip */
+        .cs-pacing { grid-template-columns: repeat(7, 1fr); }
+    </style>
+</head>
+<body class="site-wrapper">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Weekly Decks</a></li>
+                    <li aria-current="page">Week 4.5, Instructor Cheat Sheet</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Week 4.5 Instructor Cheat Sheet</h1>
+            <p class="page-header__desc">A two-page printable reference card for the Course 4.5 Advanced Workshop (Locked Tenant Reality) deck. Designed to sit next to the deck during the four-hour Teams session so you never have to scrub back through 40+ slides for a build phase spec, a tool-switch cue, or the next failure target. The reality-track companion to the Week 4 cheat sheet: same six modules, static-HTML execution layer, two CUI-authorized enterprise AI tools (genai.mil and Ask Sage) running side by side.</p>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+
+            <div class="cheat-intro">
+                <p><strong>Print:</strong> <kbd>Ctrl</kbd>+<kbd>P</kbd> &rarr; Layout <em>Portrait</em>, Margins <em>Default</em>, Background graphics <em>on</em>. Two US Letter pages. Site chrome and this preview note are hidden in print.</p>
+                <p><strong>Use:</strong> page 1 is the live-delivery card. Pacing strip, the two-tool frontier table to drop in chat, the Readiness Dashboard four-phase prompts, the two deliberate failure targets (O(n&sup2;) join in Phase 2, Chart.js CDN in Phase 3), and the Debug Clinic five-scenario rotation. Page 2 is the anchors you repeat all afternoon, recovery cues for when Ask Sage is unavailable or genai.mil misbehaves, the two-tool cross-check protocol, and the homework that gates Week 6.</p>
+            </div>
+
+            <!-- ========================================================
+                 PAGE 1
+                 ======================================================== -->
+            <article class="cheat-page" aria-label="Week 4.5 cheat sheet, page 1">
+
+                <header class="cs-head">
+                    <div class="cs-head__week"><span class="num">4.5</span><span>Course 4.5 &middot; Advanced Workshop<br>(Locked Tenant Reality)<br>Instructor cheat sheet</span></div>
+                    <div class="cs-head__title">
+                        <h1>Advanced Workshop (Locked Tenant Reality)</h1>
+                        <p class="sub">Frontier mapping across two tools, complex multi-component static-HTML build (Readiness Dashboard), Debug Clinic with five scenarios, two-tool QA cross-check, paired teach-back, workflow playbook with Which Tool column. Coach the re-prompt and the tool selection. Never type the fix.</p>
+                    </div>
+                    <div class="cs-head__meta">
+                        <div><strong>4 hr</strong> &middot; 6 modules</div>
+                        <div>40+ slides &middot; 1 break &middot; 2 deliberate failure targets</div>
+                        <div>Companion to <strong>week-4-5-advanced-reality.html</strong> + <strong>week-4-5-handouts.html</strong></div>
+                    </div>
+                </header>
+
+                <!-- Pacing strip -->
+                <section class="cs-pacing" aria-label="Session pacing strip">
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">0:00</span><span class="n">M1 Frontier (two-tool)</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">0:30</span><span class="n">M2 Readiness Build</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--break"><span class="t">1:30</span><span class="n">Break 10&prime;</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">1:40</span><span class="n">M3 Debug Clinic</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">2:20</span><span class="n">M4 QA + Cross-Check</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">2:50</span><span class="n">M5 Teach-Back</span></div>
+                    <div class="cs-pacing__cell cs-pacing__cell--build"><span class="t">3:20</span><span class="n">M6 Playbook</span></div>
+                </section>
+
+                <!-- Module-by-module prompts and outcomes -->
+                <section class="cs-modules" aria-label="Per-module specs and outcomes">
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">1</span><span class="dur">30 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Frontier Mapping (Two-Tool)</span>
+                            <span class="clock">0:00,0:30</span>
+                            <span class="kind">Silent + share &middot; meta-frontier introduced</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Drop in chat (0:00):</strong> the two-column Tool Handles table (genai.mil vs Ask Sage) from the Week 4.5 hand-out pack. Set silent timer 15 min.</li>
+                                <li><strong>Brief (read verbatim):</strong> "Two columns: what <em>genai.mil chat</em> handles in your domain, what <em>Ask Sage with a reasoning model</em> handles in your domain. Fifteen minutes silent, then we share, one row per builder. Picking the wrong tool is its own failure mode. We are naming it today."</li>
+                                <li><strong>Introduce four classification categories:</strong> Frontier (AI capability limit), Platform (browser, OS, hosting), Context (prompt was insufficient), <strong>Meta-frontier (wrong tool for the job)</strong>. The fourth is new for advanced builders.</li>
+                                <li><strong>Share (15 min):</strong> one row per builder. When a Marine cites a recent failure, ask "frontier or meta-frontier?" before they answer with "the AI was bad."</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Outcome &middot; map</span>
+                            <span class="arch">Unit Advanced Frontier Map seeded</span>
+                            <span class="desc">One row per builder logged. Each map distinguishes genai.mil from Ask Sage. Restriction list captured separately for the program lead and the Capability Gap Map.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">2</span><span class="dur">60 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Complex Build, Readiness Dashboard</span>
+                            <span class="clock">0:30,1:30</span>
+                            <span class="kind">Four phases &middot; mode + tool switching</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Hand-off (0:30):</strong> Deck &rarr; editor + Ask Sage + genai.mil in adjacent tabs. Pin the Readiness Dashboard reference build (<em>builds/readiness-dashboard.html</em>) in a side tab.</li>
+                                <li><strong>Phase 1 (0:30,0:45) Centaur &middot; Ask Sage with reasoning model:</strong> data architecture. Upload three sample CSVs (personnel, training, equipment). Ask for a join model, three edge cases, and the in-memory data shape. <em>Constraint stated up front:</em> single file, inline CSS+JS, no external scripts, no CDN.</li>
+                                <li><strong>Checkpoint:</strong> every Marine names three edge cases out loud before they prompt again. Most rooms hit orphaned EDIPIs, NULL training, duplicate serials or expired certs.</li>
+                                <li><strong>Phase 2 (0:45,1:00) Cyborg &middot; student picks the tool:</strong> data ingestion + join. Student chooses genai.mil chat (fast iteration) or Ask Sage with the CSVs already uploaded. <strong>This is the first explicit tool-switch beat.</strong> Both paths are valid. Make them articulate the choice.</li>
+                                <li><strong>DELIBERATE FAILURE TARGET (Phase 2, genai.mil path):</strong> the prompt asks for a join over 500+ records. Fast chat returns an <code>array.find()</code> O(n&sup2;) join that stalls, OR a <code>JSON.parse</code> without try/catch. <em>Do not warn students.</em> When hands go up, debrief on "frontier or context?" Answer: context. Fix: tell the AI it is getting 500+ records, ask for a Map keyed on EDIPI, wrap parse in try/catch.</li>
+                                <li><strong>Phase 3 (1:00,1:20) Centaur:</strong> visualization. Readiness card, SVG bar chart by company, Not-Ready table.</li>
+                                <li><strong>DELIBERATE FAILURE TARGET (Phase 3):</strong> fast chat returns a <code>&lt;script src&gt;</code> Chart.js CDN. <em>Let the student catch the violation.</em> If they do not, ask "Where is that chart actually coming from? Open DevTools, check Network." Re-prompt for inline SVG, vanilla JS, scarlet/gold/ink palette.</li>
+                                <li><strong>Reasoning-vs-chat-model beat:</strong> name it out loud. The same Phase 3 prompt run through Ask Sage with a reasoning model honors the no-CDN constraint from the first response. Fast chat pushes verification onto the human. Neither is wrong. <em>Pick deliberately.</em></li>
+                                <li><strong>Phase 4 (1:20,1:30):</strong> verification + brief. Upload the generated <code>readiness_output.csv</code> and the original <code>personnel_source.csv</code> to Ask Sage. Ask it to find discrepancies. Then back to genai.mil to add the Commander's Snapshot button (read-only textarea + Copy).</li>
+                                <li><em>Coach in chat.</em> If anyone skips the Ask Sage cross-check in Phase 4, stop them. "The cross-check IS the verification. Spot-check by hand only if the tool is down."</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Deliverable &middot; complex build</span>
+                            <span class="arch">Readiness Dashboard, single file, deployed</span>
+                            <span class="desc">Three sources joined, SVG chart rendered without a CDN, Not-Ready table accurate against source, Commander's Snapshot generates. Every builder articulates at least one mode switch AND at least one tool switch with a reason.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--break">
+                        <div class="cs-mod__no"><span class="n">BRK</span><span class="dur">10 min</span></div>
+                        <div class="cs-mod__line">
+                            <span><strong>Break.</strong> Be back at H+1:40. Pre-flight: pick the three Debug Clinic volunteers from chat (or queue scenarios from <em>resources/debugging-scenarios.html</em>); have the first volunteer's screen-share authorized; reset your genai.mil tab to a fresh conversation.</span>
+                            <span class="when">1:30,1:40</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">3</span><span class="dur">40 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Debug Clinic (Five Scenarios)</span>
+                            <span class="clock">1:40,2:20</span>
+                            <span class="kind">Coach &middot; fishbowl &middot; 7 min per problem</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Hand-off (1:40):</strong> switch from your screen to a <em>student's</em> screen-share. You coach, you do not type.</li>
+                                <li><strong>Protocol per problem (7 min total):</strong> Student presents in 2 min (expected, actual, what tried). Group diagnoses in 3 min. Instructor synthesizes the root-cause category in 2 min. Aim for 5 problems in 35 min.</li>
+                                <li><strong>Five categories to name out loud:</strong> Frontier limitation, insufficient context, incorrect assumption, integration failure, data quality, OR <strong>tool-selection failure (meta-frontier)</strong>.</li>
+                                <li><strong>Five pre-built scenarios (fall-back if no volunteers):</strong> (1) Fetch race / double-submit, (2) Stale localStorage after schema change, (3) CSS specificity + timezone bug, (4) Event delegation on dynamic content, (5) <strong>Tool-selection failure (47 turns of context drift in genai.mil for a multi-file refactor that should have gone to Ask Sage from the start)</strong>.</li>
+                                <li><em>Refuse the keyboard.</em> "If I type it, you do not learn it. Re-prompt with these three changes." Walk away.</li>
+                                <li><em>Refuse the wrong tool.</em> When the diagnosis is meta-frontier, the fix is to switch tools, not to re-prompt the same one harder.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Outcome &middot; coaching habit</span>
+                            <span class="arch">Five live recoveries on the wall</span>
+                            <span class="desc">Each builder demonstrates re-prompt OR tool-switch, not rescue. At least one Scenario 5 (meta-frontier) sticks. The room sees coaching modeled five times.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">4</span><span class="dur">30 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">QA Checklist + Two-Tool Cross-Check</span>
+                            <span class="clock">2:20,2:50</span>
+                            <span class="kind">Pairs &middot; 7-min rotations &middot; new protocol</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Drop in chat (2:20):</strong> the planted-error SOP excerpt from the hand-out pack (five errors: two fabricated references, one contradictory-timeline, one steps-out-of-order, one numbering-inconsistency). Pairs work in breakouts.</li>
+                                <li><strong>QA Checklist (read once):</strong> Source verification (AI fabricates citations) &middot; Data accuracy &middot; Logic check &middot; Format compliance &middot; Domain review (smell test).</li>
+                                <li><strong>NEW: Two-Tool Cross-Check Protocol.</strong> For high-stakes outputs (anything going to a CO, anything that becomes a system of record, anything that ends up in a FITREP), run the SAME prompt through both genai.mil AND Ask Sage with a reasoning model. <em>Agreement raises confidence. Disagreement is a flag, not noise.</em> Document systematic disagreements as frontier-map rows.</li>
+                                <li><strong>Cost callout:</strong> the cross-check is not free. Two prompts + a comparison turn. Reserve it for outputs that will be acted on.</li>
+                                <li><strong>Rotate every 7 min;</strong> reconvene at 2:47 for room scoring.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Outcome &middot; verification</span>
+                            <span class="arch">5 errors caught + cross-check protocol absorbed</span>
+                            <span class="desc">Pairs find all 5 in under 10 min. Each builder names one of their own past artifacts that should have gotten the two-tool cross-check.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">5</span><span class="dur">30 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Teach-Back</span>
+                            <span class="clock">2:50,3:20</span>
+                            <span class="kind">Pairs &middot; 3-min teach + retell</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Reveal pairs</strong> drafted before the session (mix experience levels).</li>
+                                <li><strong>Concept list (expanded for 4.5):</strong> Centaur vs Cyborg modes, Frontier mapping, Context-building, Iterative refinement, Verification protocols, The Jagged Frontier, <strong>Layer separation (Spec / Prototype / Production)</strong>, <strong>Tool selection (genai.mil vs Ask Sage)</strong>. The last two are new for 4.5.</li>
+                                <li><strong>Brief (read verbatim):</strong> "Three minutes to teach the other person <em>one</em> concept from the curriculum. They retell it back. If they cannot, you have not taught it yet. The reality-track concept list adds Layer Separation and Tool Selection. Pick deliberately."</li>
+                                <li><strong>Model the template once</strong> before students prepare. Concept + one-sentence definition + why it matters + real example from your work + common mistake + key takeaway.</li>
+                                <li><strong>Force a deliverable</strong> if pairs go silent: "In ten minutes I want one slide each: the technique, when to use it, when not to."</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Outcome &middot; transferred skill</span>
+                            <span class="arch">Each builder taught one technique</span>
+                            <span class="desc">Required deliverable: one technique re-told back. Tool Selection and Layer Separation each chosen by at least one pair in the room.</span>
+                        </div>
+                    </div>
+
+                    <div class="cs-mod cs-mod--build">
+                        <div class="cs-mod__no"><span class="n">6</span><span class="dur">30 min</span></div>
+                        <div class="cs-mod__name">
+                            <span class="title">Workflow Playbook (with Which Tool column)</span>
+                            <span class="clock">3:20,3:50</span>
+                            <span class="kind">Hand-off doc &middot; tool selection is a design field</span>
+                        </div>
+                        <div class="cs-mod__prompts">
+                            <ol>
+                                <li><strong>Drop in chat (3:20):</strong> the Workflow Playbook blank template from the hand-out pack. <strong>NEW column: Which Tool</strong> (genai.mil / Ask Sage with reasoning model / both for two-tool cross-check).</li>
+                                <li><strong>Show both worked examples first:</strong>
+                                    <ul>
+                                        <li><strong>Example 1: Weekly Training Schedule</strong> on <em>genai.mil chat</em>, Cyborg mode. Fast iteration on a single-prompt task. ~45 min vs ~3 hr without AI.</li>
+                                        <li><strong>Example 2: Weekly Readiness Rollup</strong> on <em>Ask Sage with Claude 3</em>, Centaur mode. Three CSVs uploaded once, reasoning model holds schema across turns. ~1 hr vs ~4 hr without AI.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Brief (read verbatim):</strong> "Pick one of your own recurring tools. Fill in: Task, Frequency, Mode, <em>Which Tool</em>, 4-8 Steps with Human/AI labels, Verification Checklist, Known Frontier Issues, Time Savings, Junior Development. The Which Tool field is not optional. Tool selection IS the workflow design."</li>
+                                <li><strong>Capability Gap Map integration:</strong> each playbook generates at least two Gap Map rows tied to Production-Layer wishes (e.g., MOL write-back, automated brief delivery, direct connector to training currency).</li>
+                                <li><strong>Issue the homework</strong> live (final 5 min): submit the playbook + 2 Gap Map rows to the unit shared library by EOW.</li>
+                            </ol>
+                        </div>
+                        <div class="cs-mod__milestone">
+                            <span class="layer">Deliverable &middot; institutional</span>
+                            <span class="arch">One playbook + 2 Gap Map rows per builder</span>
+                            <span class="desc">First entry in the unit's reality-track playbook library. Which Tool field filled with rationale. Capstone-gate proposal due in 7 days.</span>
+                        </div>
+                    </div>
+
+                </section>
+
+                <div class="cs-foot">
+                    <span class="lhs"><span class="mark" aria-hidden="true"></span><strong>EDD &middot; Week 4.5 cheat sheet</strong> &middot; page 1 of 2 &middot; pacing, phase prompts, deliverables</span>
+                    <span>Print landscape <em>off</em> &middot; portrait, default margins, background graphics on</span>
+                </div>
+            </article>
+
+            <!-- ========================================================
+                 PAGE 2
+                 ======================================================== -->
+            <article class="cheat-page" aria-label="Week 4.5 cheat sheet, page 2">
+
+                <header class="cs-head">
+                    <div class="cs-head__week"><span class="num">4.5</span><span>Course 4.5 &middot; Advanced Workshop<br>(Locked Tenant Reality)<br>Cheat sheet &middot; page 2</span></div>
+                    <div class="cs-head__title">
+                        <h1>Anchors, recovery, homework</h1>
+                        <p class="sub">The phrases you repeat all afternoon, the failure modes to watch for when Ask Sage is down or genai.mil drifts, the two-tool cross-check posture, and the homework that gates Week 6 attendance.</p>
+                    </div>
+                    <div class="cs-head__meta">
+                        <div><strong>Use during:</strong> M2 tool-switch beats</div>
+                        <div><strong>Use during:</strong> M3 meta-frontier scenario</div>
+                        <div>Companion to <strong>week-4-5-advanced-reality.html</strong></div>
+                    </div>
+                </header>
+
+                <!-- Pre-flight + hand-off cues -->
+                <section class="cs-box" aria-label="Pre-flight and live hand-off cues">
+                    <h2>Pre-flight + hand-off cues<span class="lede">Done 48 h before; verified at T-30 min &middot; chat-paste blocks staged for M1, M4, M6</span></h2>
+                    <ul>
+                        <li><strong>Gate-check the roster.</strong> Every attendee has a deployed-tool URL on file from Course 3.5 (or Course 3 + at least one deployed reality-track build). Pull anyone without one to a 1:1 catch-up before M2.</li>
+                        <li><strong>Ask Sage access check.</strong> Confirm tenant access for each Marine 48 h out. If anyone is blocked, queue the contingency plan (genai.mil paste-and-summarize for the Ask Sage phases) and pre-stage a Capability Gap Map row: "Ask Sage access blocked for this unit."</li>
+                        <li><strong>Tabs and portals.</strong> Deck (Week 4.5), this cheat sheet, the Week 4.5 hand-out pack (Tool Handles table, SOP planted-error excerpt, playbook template), genai.mil, Ask Sage (signed in, reasoning model selected), a text editor, GitHub.com, the Readiness Dashboard reference build.</li>
+                        <li><strong>Sample data for M2.</strong> Three CSVs pre-staged in a OneDrive folder linkable from chat: <em>personnel_source.csv</em> (500+ rows), <em>training_currency.csv</em>, <em>equipment_status.csv</em>. Include the planted edge cases (orphaned EDIPIs, NULL training rows, duplicate serial numbers).</li>
+                        <li><strong>Bug bank.</strong> Keep three real prompt-failures from Week-3 or Week-3.5 chat ready for M3 if no one volunteers, including at least one tool-selection failure (Scenario 5 candidate).</li>
+                        <li><strong>Teach-back pairs</strong> drafted from the roster (mix experience levels). Reveal at the start of M5.</li>
+                        <li><strong>0:00.</strong> Drop the two-column Tool Handles table into chat. Silent timer 15 min.</li>
+                        <li><strong>0:30.</strong> Deck &rarr; editor + Ask Sage + genai.mil. Pin the Readiness Dashboard reference build in a side tab.</li>
+                        <li><strong>0:45 &middot; Phase 2 hand-off.</strong> Audibly: "Now you pick the tool. State your choice in chat before you prompt."</li>
+                        <li><strong>1:40 &middot; Debug Clinic.</strong> Switch from your screen to a student's screen-share. Coach only.</li>
+                        <li><strong>2:20 &middot; QA + Cross-Check.</strong> Drop the planted-error SOP excerpt. Pairs in breakouts; rotate every 7 min.</li>
+                        <li><strong>3:20 &middot; Playbook.</strong> Drop the blank template. Show both worked examples (Training Schedule on genai.mil, Readiness Rollup on Ask Sage) before students start their own.</li>
+                    </ul>
+                </section>
+
+                <!-- Two-column: anchors + recovery -->
+                <div class="cs-cols">
+                    <section class="cs-box" aria-label="Anchor phrases">
+                        <h2>Anchor phrases<span class="lede">Plant in M1; cite by name when you need them</span></h2>
+                        <ul>
+                            <li><strong>1. "Coach the re-prompt AND the tool selection. Never type the fix."</strong> The Debug Clinic test. If you took the keyboard, or you picked the tool for them, you broke the rule.</li>
+                            <li><strong>2. "Frontier, context, platform, or meta-frontier?"</strong> The four categories. The fourth is new for 4.5. Cite at every failure debrief.</li>
+                            <li><strong>3. Map the world as it is.</strong> Restrictions go in <em>Outside</em>. Captured separately for the program lead. Tool gaps become Capability Gap rows.</li>
+                            <li><strong>4. Decompose before you prompt.</strong> Phase 1 of M2 is on paper (and Ask Sage with a reasoning model). No architecture, no help.</li>
+                            <li><strong>5. Pick the tool on purpose.</strong> Fast chat for single-prompt drafts. Reasoning model for architecture and multi-file. Both for high-stakes cross-check. Defaulting to whichever tab is open is not a choice.</li>
+                            <li><strong>6. Agreement raises confidence. Disagreement is a flag.</strong> The two-tool cross-check. Reserve for outputs that will be acted on.</li>
+                            <li><strong>7. The teach-back is the test.</strong> If your partner cannot repeat it, you have not taught it.</li>
+                            <li><strong>8. The playbook ships, not the prototype.</strong> Trigger, inputs, steps, verification, fallback, owner, <em>which tool</em>. The institutional artifact has a tool-selection field.</li>
+                            <li><strong>9. HTML skills do not die when you turn in your CAC.</strong> The static-stack thesis. Cite when anyone asks why we are not on Power Platform today.</li>
+                        </ul>
+                    </section>
+
+                    <section class="cs-box" aria-label="Recovery and pacing cues">
+                        <h2>Recovery + pacing cues<span class="lede">When the room slips or a tool goes down, this is the order of operations</span></h2>
+                        <ul>
+                            <li><strong>Ask Sage is not available for this unit today.</strong> Pivot every Ask Sage phase to genai.mil with paste-and-summarize. Surface the cost (token limits, no persistent context) explicitly. Add the Gap row. The pedagogy still works because the gap is felt directly.</li>
+                            <li><strong>genai.mil session resets mid-build.</strong> Start a new conversation. Paste the current state of the file plus a one-line "I am at Phase X fixing Y." Specificity beats restart.</li>
+                            <li><strong>github.io blocked from the network.</strong> Try GitLab Pages or Cloudflare Pages from the Static Hosting Cheat Sheet. If all blocked, switch to file:// for the day and add a Gap row.</li>
+                            <li><strong>No one volunteers for the Debug Clinic.</strong> Cold-call the bug bank. Run Scenario 5 (meta-frontier, 47 turns of context drift) as a fishbowl. That one is the highest-yield teaching moment.</li>
+                            <li><strong>A builder demands you type their fix during M3.</strong> Refuse. "If I type it, you do not learn it. Re-prompt with these three changes" OR "Switch tools and restate the goal once."</li>
+                            <li><strong>Frontier map turns into venting about tool restrictions.</strong> Re-anchor: "Map the world as it is, not as you wish it. Restrictions go in <em>Outside</em>. Specifics. Beneficiary counts. Time savings."</li>
+                            <li><strong>Phase 2 deliberate failure does not fire.</strong> Genai.mil sometimes gets the join right on the first try. If so, prompt a follow-up: "Now scale this to 5,000 records and add a malformed row to the input." The failure usually surfaces there.</li>
+                            <li><strong>Whole room is behind at 1:20.</strong> Compress Phase 4 verification to Ask Sage cross-check only (skip the Commander's Snapshot button). Protect M3 Debug Clinic and M6 Playbook. The playbook is the artifact that survives the week.</li>
+                            <li><strong>Pacing valve.</strong> Cut M3 to four scenarios (drop #4 Event Delegation, keep Scenario 5). Cut M5 teach-back to 2 minutes per pair. Never cut M6.</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <!-- Homework -->
+                <section class="cs-box" aria-label="Homework to issue before logoff">
+                    <h2>Homework to issue before logoff<span class="lede">Week 6 (Capstone) attendance gate hangs on the proposal</span></h2>
+                    <ul>
+                        <li><strong>Polish the Readiness Dashboard.</strong> Keep the URL live. If you did not finish, ship the smallest defensible version by EOW. Post the URL in the Week 4.5 chat thread.</li>
+                        <li><strong>Submit the workflow playbook</strong> from M6 to the unit shared library by EOW. One per builder, with the Which Tool field filled and at least two Capability Gap Map rows attached. No exceptions.</li>
+                        <li><strong>Run one build through the EDD SOP QA process</strong> using the two-tool cross-check. Document one substantive disagreement between genai.mil and Ask Sage if one surfaces.</li>
+                        <li><strong>Document three failure cases</strong> with specifics: what failed, how you caught it, how you fixed it, <em>which tool you used and whether the right move was switching tools</em>. Log on the shared Advanced Frontier Map.</li>
+                        <li><strong>Run a teach-back at your section</strong> within 14 days. Three minutes, one technique, witnessed by your supervisor.</li>
+                        <li><strong>Identify one capability surprise.</strong> Somewhere AI performed better than you expected, on either tool.</li>
+                        <li><strong>Capstone gate.</strong> To attend Week 6 (Full-Stack), submit a brief proposal naming the problem you will ship end-to-end and the tool selection rationale. Due 7 days before Week 6. No proposal, no seat.</li>
+                    </ul>
+                </section>
+
+                <div class="cs-foot">
+                    <span class="lhs"><span class="mark" aria-hidden="true"></span><strong>EDD &middot; Week 4.5 cheat sheet</strong> &middot; page 2 of 2 &middot; anchors, recovery, homework</span>
+                    <span>Pair with the Week 4.5 Facilitator Pack and the Week 4.5 hand-out pack</span>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="week-4-5-advanced-reality.html">Week 4.5 Deck</a></li>
+                        <li><a href="../courses/advanced-reality.html">Course 4.5 Page</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

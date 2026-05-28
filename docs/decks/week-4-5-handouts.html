@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chat-paste-ready hand-out blocks for the Course 4.5 Advanced Workshop (Locked Tenant Reality) session. Frontier Mapping starters, Readiness Dashboard Phases 1 to 4, Commander's Snapshot, group debugging protocol, two-tool cross-check, teach-back list, Workflow Playbook template plus two worked examples, and Frontier Map / Capability Gap Map seeds.">
+    <title>Week 4.5 Facilitator Hand-Outs | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .handout-intro {
+            background: var(--color-bg-secondary);
+            border-left: 4px solid var(--color-scarlet);
+            padding: var(--space-lg) var(--space-xl);
+            margin-bottom: var(--space-xl);
+            border-radius: 0 var(--space-sm) var(--space-sm) 0;
+        }
+        .handout-intro p { margin: 0 0 var(--space-sm); }
+        .handout-intro p:last-child { margin-bottom: 0; }
+
+        .handout-toc {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-md);
+            margin: var(--space-xl) 0 var(--space-2xl);
+        }
+        .handout-toc a {
+            display: block;
+            padding: var(--space-md);
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--space-sm);
+            text-decoration: none;
+            color: var(--color-text-primary);
+            transition: border-color 0.15s, transform 0.15s;
+        }
+        .handout-toc a:hover {
+            border-color: var(--color-scarlet);
+            transform: translateY(-1px);
+        }
+        .handout-toc .slide-tag {
+            display: inline-block;
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-bold);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-scarlet);
+            margin-bottom: var(--space-xs);
+        }
+        .handout-toc .toc-title {
+            display: block;
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-md);
+        }
+
+        .copy-block {
+            border: 1px solid var(--color-border);
+            border-radius: var(--space-sm);
+            margin: var(--space-lg) 0 var(--space-2xl);
+            overflow: hidden;
+            background: var(--color-bg-primary);
+        }
+        .copy-block__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--color-bg-dark);
+            color: var(--color-text-inverse);
+            flex-wrap: wrap;
+        }
+        .copy-block__label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+        .slide-pill {
+            display: inline-block;
+            padding: 2px 10px;
+            background: var(--color-gold);
+            color: var(--color-text-primary);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-bold);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-radius: 999px;
+        }
+        .copy-block__title {
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-base);
+        }
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--color-scarlet);
+            color: var(--color-text-inverse);
+            border: 0;
+            border-radius: var(--space-sm);
+            font-family: var(--font-family-sans);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+            transition: background-color 0.15s;
+        }
+        .copy-btn:hover { background: var(--color-scarlet-dark); }
+        .copy-btn:focus-visible {
+            outline: 2px solid var(--color-gold);
+            outline-offset: 2px;
+        }
+        .copy-btn.is-copied { background: var(--color-success-border); }
+
+        .copy-block__cue {
+            padding: var(--space-md) var(--space-lg);
+            background: var(--color-warning-bg);
+            border-bottom: 1px solid var(--color-warning-border);
+            font-size: var(--font-size-sm);
+            color: var(--color-warning-text);
+        }
+        .copy-block__cue strong { color: var(--color-warning-text); }
+
+        .copy-block__body {
+            margin: 0;
+            padding: var(--space-lg);
+            white-space: pre-wrap;
+            font-family: var(--font-family-mono);
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-normal);
+            color: var(--color-text-primary);
+            background: var(--color-bg-code);
+            max-height: 520px;
+            overflow: auto;
+        }
+
+        .back-bar {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-md);
+            font-size: var(--font-size-sm);
+        }
+    </style>
+</head>
+<body class="site-wrapper">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/" class="active">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/" class="active">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="../resources/">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../courses/advanced-reality.html">Advanced Workshop (Locked Tenant Reality)</a></li>
+                    <li aria-current="page">Facilitator Hand-Outs</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Week 4.5 Facilitator Hand-Outs</h1>
+            <p class="page-header__desc">
+                Sixteen chat-paste-ready blocks for the Course 4.5 Advanced Workshop (Locked Tenant Reality) session. Open this tab in a second window before the session, then copy each block into Microsoft Teams chat at the slide it pairs with. The pack covers Frontier Mapping starters, the four-phase Readiness Dashboard build (with two deliberate-failure traps), the group debugging clinic protocol, the two-tool cross-check, the teach-back concept list, and a Workflow Playbook template with two worked examples.
+            </p>
+            <div class="back-bar mt-md">
+                <a href="week-4-5-advanced-reality.html">&larr; Back to Week 4.5 Slide Deck</a>
+                <span aria-hidden="true">&middot;</span>
+                <a href="../courses/advanced-reality.html">Course 4.5 Instructor Page</a>
+                <span aria-hidden="true">&middot;</span>
+                <a href="week-4-5-cheatsheet.html">Cheat Sheet</a>
+            </div>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container container--narrow">
+
+            <div class="handout-intro">
+                <p><strong>How to use this page.</strong> Keep it open in a second browser tab. When the deck reaches the slide called out on each block's gold pill, click <em>Copy to clipboard</em>, then paste into the Teams chat. Plain text is intentional, it survives the Teams paste cleanly.</p>
+                <p><strong>Print fallback.</strong> If you lose your second screen, this page prints with the copy buttons hidden. Use <kbd>Ctrl</kbd>+<kbd>P</kbd> / <kbd>&#8984;</kbd>+<kbd>P</kbd>.</p>
+                <p><strong>Where these come from.</strong> Each block is lifted verbatim from the <a href="../courses/advanced-reality.html">Advanced Workshop (Locked Tenant Reality) instructor page</a>. Two enterprise AI tools sit side by side throughout the day, genai.mil for fast chat and Ask Sage for multi-file reasoning. The build is the Unit Readiness Dashboard (Phases 1 to 4), the deliverables are the Advanced Frontier Map and new rows on the Capability Gap Map.</p>
+            </div>
+
+            <nav class="handout-toc" aria-label="Hand-out jump links">
+                <a href="#handout-m1-frontier-starter">
+                    <span class="slide-tag">Module 1 &middot; Frontier Map</span>
+                    <span class="toc-title">Frontier Map row starter prompt</span>
+                </a>
+                <a href="#handout-m1-tool-handles">
+                    <span class="slide-tag">Module 1 &middot; Tool Handles</span>
+                    <span class="toc-title">Tool Handles table framing</span>
+                </a>
+                <a href="#handout-m2-p1-prompt">
+                    <span class="slide-tag">Module 2 &middot; Phase 1</span>
+                    <span class="toc-title">Readiness Dashboard, Phase 1 (Ask Sage)</span>
+                </a>
+                <a href="#handout-m2-p1-rubric">
+                    <span class="slide-tag">Module 2 &middot; Phase 1 Verify</span>
+                    <span class="toc-title">Phase 1 verification rubric (3 edge cases)</span>
+                </a>
+                <a href="#handout-m2-p2-prompt">
+                    <span class="slide-tag">Module 2 &middot; Phase 2</span>
+                    <span class="toc-title">Phase 2 join prompt (genai.mil, the trap)</span>
+                </a>
+                <a href="#handout-m2-p2-debrief">
+                    <span class="slide-tag">Module 2 &middot; Phase 2 Debrief</span>
+                    <span class="toc-title">Phase 2 deliberate-failure debrief prompt</span>
+                </a>
+                <a href="#handout-m2-p3-trap">
+                    <span class="slide-tag">Module 2 &middot; Phase 3 Trap</span>
+                    <span class="toc-title">Phase 3 Chart.js trap prompt</span>
+                </a>
+                <a href="#handout-m2-p3-fix">
+                    <span class="slide-tag">Module 2 &middot; Phase 3 Fix</span>
+                    <span class="toc-title">Phase 3 constraint reprompt (inline SVG)</span>
+                </a>
+                <a href="#handout-m2-p4-crosscheck">
+                    <span class="slide-tag">Module 2 &middot; Phase 4</span>
+                    <span class="toc-title">Phase 4 Ask Sage cross-check prompt</span>
+                </a>
+                <a href="#handout-m2-snapshot">
+                    <span class="slide-tag">Module 2 &middot; Snapshot</span>
+                    <span class="toc-title">Commander's Snapshot generator prompt</span>
+                </a>
+                <a href="#handout-m3-clinic">
+                    <span class="slide-tag">Module 3 &middot; Clinic</span>
+                    <span class="toc-title">Group debugging clinic protocol</span>
+                </a>
+                <a href="#handout-m4-crosscheck">
+                    <span class="slide-tag">Module 4 &middot; QA</span>
+                    <span class="toc-title">Two-tool cross-check protocol</span>
+                </a>
+                <a href="#handout-m5-teachback">
+                    <span class="slide-tag">Module 5 &middot; Teach-Back</span>
+                    <span class="toc-title">Teach-back concept list</span>
+                </a>
+                <a href="#handout-m6-template">
+                    <span class="slide-tag">Module 6 &middot; Playbook</span>
+                    <span class="toc-title">Workflow Playbook blank template</span>
+                </a>
+                <a href="#handout-m6-example1">
+                    <span class="slide-tag">Module 6 &middot; Example 1</span>
+                    <span class="toc-title">Worked example: Weekly Training Schedule</span>
+                </a>
+                <a href="#handout-m6-example2">
+                    <span class="slide-tag">Module 6 &middot; Example 2</span>
+                    <span class="toc-title">Worked example: Weekly Readiness Rollup</span>
+                </a>
+                <a href="#handout-frontier-seed">
+                    <span class="slide-tag">Module 6 &middot; Frontier Map</span>
+                    <span class="toc-title">Frontier Map starter table (9 rows)</span>
+                </a>
+                <a href="#handout-gap-seed">
+                    <span class="slide-tag">Module 6 &middot; Capability Gap</span>
+                    <span class="toc-title">Capability Gap Map seed table (7 rows)</span>
+                </a>
+            </nav>
+
+            <!-- ===========================================================
+                 BLOCK 1, Module 1 Frontier Map row starter (genai.mil chat)
+                 =========================================================== -->
+            <article id="handout-m1-frontier-starter">
+                <h2>Module 1 Block 1: Frontier Map row starter prompt</h2>
+                <p>
+                    Module 1 cue. Drop at 0:10 right after the Frontier Mapping framing slide. Students paste this into genai.mil chat any time they hit a specific issue. The categorization (Context / Frontier / Meta-frontier / Platform) is what makes the row useful later.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 1 Frontier Map slide</span>
+                            <span class="copy-block__title">Frontier Map row starter, genai.mil chat</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w45-m1-frontier" aria-label="Copy Module 1 Frontier Map starter to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Frontier Map row starter in chat. Use this any time you hit a wall today. The category is what makes the row useful later, not the description."
+                    </div>
+<pre class="copy-block__body" id="copy-w45-m1-frontier">FRONTIER MAP ROW STARTER, paste into genai.mil chat when you hit a specific issue.
+
+I am building a static-HTML tool in a locked-tenant environment and I just hit this issue:
+
+[Describe the issue in one or two sentences. Be specific. "AI inserted a script src to a CDN" not "AI broke the rules."]
+
+Help me categorize it as one of:
+
+1. CONTEXT, the AI guessed wrong because my prompt did not give it enough information. Fix: more context in the next prompt.
+
+2. FRONTIER, the AI capability does not currently handle this task well on the tool I used. Fix: switch tools, switch modes, or accept the limit and handle the task manually.
+
+3. META-FRONTIER, I used the wrong tool for the job. Fix: switch tools (genai.mil to Ask Sage, or the reverse). The capability exists, just not on the tool I reached for first.
+
+4. PLATFORM, the browser, OS, or hosting environment has a quirk the AI did not know about. Fix: tell the AI the platform constraint explicitly.
+
+For each category, give me the one-sentence test that would confirm it, and the one-sentence fix.
+
+Then propose a single Frontier Map row I can add, with these columns:
+- Task type (specific, not "AI stuff")
+- AI handles well (concrete examples)
+- AI handles poorly (the specific failure mode I just hit, in enough detail to recognize next time)
+- Verification needed (a testable action, not "check it")</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 2, Module 1 Tool Handles table framing
+                 =========================================================== -->
+            <article id="handout-m1-tool-handles">
+                <h2>Module 1 Block 2: Tool Handles table framing</h2>
+                <p>
+                    Drop at 0:20 right after the Tool Handles table appears on the deck. One-paragraph framing the instructor pastes to set up the two-tool comparison exercise. Students will fill rows for their own domain after this.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 1 Tool Handles slide</span>
+                            <span class="copy-block__title">Tool Handles table framing</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w45-m1-handles" aria-label="Copy Tool Handles framing to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Tool Handles framing in chat. Read it. Then write three rows for your own domain. We will compare across the room in ten minutes."
+                    </div>
+<pre class="copy-block__body" id="copy-w45-m1-handles">TOOL HANDLES TABLE, two columns, one for each enterprise AI tool you have access to today.
+
+genai.mil is your FAST chat layer. Single-prompt work. One prompt in, one polished draft out. Cheap per turn. Pushes the verification burden onto you.
+
+Ask Sage is your MULTI-FILE and REASONING layer. Architecture decisions, dataset analysis, multi-file refactors. Uses a reasoning model (Claude 3 or whichever the tenant exposes). Slower per turn, fewer turns needed, holds schema across the conversation.
+
+The selection is part of the discipline. The wrong tool on the wrong task is one of the most common failure modes advanced builders hit, and it is the one most easily mistaken for an AI capability ceiling.
+
+For each row, ask three questions:
+1. What is the task? (Specific. "Multi-file refactor of a static-stack tool" not "coding.")
+2. What does genai.mil handle on this task? (Concrete examples. Include the failure mode if it has one.)
+3. What does Ask Sage handle on this task? (Same standard. Include where it is overkill.)
+
+A useful row tells you which tool to reach for next time, before you start the work. A vague row ("both are fine") tells you nothing.
+
+Fill three rows from your own job before we move on. Examples from the deck:
+- Single-prompt drafts (counseling, awards, memos)
+- Multi-file refactor of a static-stack tool
+- Dataset analysis with three CSVs (readiness, training, equipment)
+- Architecture decision (data model, schema migration plan)
+- Verification cross-check (run same prompt through both, look for disagreement)</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 3, Module 2 Phase 1 prompt (Ask Sage, reasoning model)
+                 =========================================================== -->
+            <article id="handout-m2-p1-prompt">
+                <h2>Module 2 Block 3: Phase 1 Ask Sage architecture prompt</h2>
+                <p>
+                    Phase 1 cue. Drop at 0:35 right after the Build framing slide. Students upload three sample CSVs to Ask Sage and paste this prompt. Reasoning model required, Claude 3 if the tenant exposes it.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 2 Phase 1 slide</span>
+                            <span class="copy-block__title">Phase 1 Ask Sage architecture prompt</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w45-m2-p1" aria-label="Copy Phase 1 Ask Sage prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Phase 1 prompt in chat. Paste into Ask Sage with a reasoning model. Upload the three sample CSVs first. We verify three edge cases out loud before Phase 2."
+                    </div>
+<pre class="copy-block__body" id="copy-w45-m2-p1">You are helping me design a Unit Readiness Dashboard. I have three CSV datasets (personnel, training, equipment) I am about to upload. I need you to:
+
+1. Propose a join model that produces a readiness percentage per Marine and aggregated by company.
+2. Identify three edge cases that will break the naive join (orphaned EDIPIs, NULL training records, unassigned equipment).
+3. Recommend the in-memory data shape after parsing. Plain JS objects, no framework, single-file HTML.
+
+Constraint: the final tool must run 100% offline in a single HTML file with no external scripts or CDN.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 4, Module 2 Phase 1 verification rubric
+                 =========================================================== -->
+            <article id="handout-m2-p1-rubric">
+                <h2>Module 2 Block 4: Phase 1 verification rubric (3 edge cases out loud)</h2>
+                <p>
+                    Drop right after Phase 1 prompt. Walk the room. Every student should be able to name three edge cases out loud before they proceed. If they cannot, send them back to Ask Sage with the second prompt at the bottom of this block.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 2 Phase 1 Verify slide</span>
+                            <span class="copy-block__title">Phase 1 verification rubric</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w45-m2-p1-rubric" aria-label="Copy Phase 1 verification rubric to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Phase 1 verification in chat. Name three edge cases out loud. If you cannot, paste the second prompt at the bottom of this block into Ask Sage."
+                    </div>
+<pre class="copy-block__body" id="copy-w45-m2-p1-rubric">PHASE 1 VERIFICATION RUBRIC, name three edge cases OUT LOUD before Phase 2.
+
+You should be able to name at least three of the following without looking at notes:
+
+[ ] ORPHANED EDIPIs
+    A training or equipment row has an EDIPI that does not appear in personnel.
+    Naive join: row is silently dropped, readiness percentage is wrong but plausible.
+    Fix: log orphans, surface a count in the dashboard, do not silently drop.
+
+[ ] NULL TRAINING RECORDS
+    A Marine appears in personnel with no corresponding training row at all.
+    Naive join: Marine is treated as fully trained (no missing records found).
+    Fix: explicit "no training record" status, treat as NOT READY with a specific reason.
+
+[ ] UNASSIGNED EQUIPMENT
+    A Marine appears in personnel with no equipment serial assigned.
+    Naive join: Marine is treated as equipped (no missing assignment found).
+    Fix: explicit "no equipment assigned" status, decide per the unit's rules whether that is READY or NOT READY.
+
+[ ] DUPLICATE SERIAL NUMBERS ON EQUIPMENT
+    Same serial number appears on two equipment rows.
+    Naive join: last-write-wins, one Marine silently loses their assignment.
+    Fix: detect duplicates at parse time, surface them, refuse to compute readiness until resolved.
+
+[ ] EXPIRED TRAINING CERTIFICATIONS
+    Training row exists but the certification expired before the as-of date.
+    Naive join: training present, Marine treated as ready.
+    Fix: compare expiration to as-of date at compute time.
+
+[ ] MARINES MARKED NJP OR UNFIT
+    Personnel row has a status flag that should exclude the Marine from the deployable count.
+    Naive join: status is ignored.
+    Fix: honor the status flag in the readiness rule.
+
+IF YOU CANNOT NAME THREE, paste this into Ask Sage:
+
+"List five more edge cases for a personnel-training-equipment join I am not thinking of. For each, name the symptom in the dashboard and the one-line fix."</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 5, Module 2 Phase 2 join prompt (genai.mil, the trap)
+                 =========================================================== -->
+            <article id="handout-m2-p2-prompt">
+                <h2>Module 2 Block 5: Phase 2 join prompt (genai.mil chat, the trap)</h2>
+                <p>
+                    Deliberate-failure cue. <strong>Do not warn students.</strong> Fast chat almost always returns an O(n^2) <code>array.find()</code> join, a <code>JSON.parse</code> without try/catch, or a join that silently drops orphans. Let them hit it. The fix is in Block 6.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 2 Phase 2 slide</span>
+                            <span class="copy-block__title">Phase 2 join prompt, genai.mil chat</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w45-m2-p2" aria-label="Copy Phase 2 join prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Phase 2 prompt in chat. Paste into genai.mil. Try the result on the 500-record dataset. If it stalls, raise a hand BEFORE re-prompting."
+                    </div>
+<pre class="copy-block__body" id="copy-w45-m2-p2">Write JavaScript that parses a JSON array of personnel records and a JSON array of training records. Join by EDIPI. Output an array of {marine, training_status} objects. Inline JS, no dependencies, single function.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 6, Module 2 Phase 2 deliberate-failure debrief prompt
+                 =========================================================== -->
+            <article id="handout-m2-p2-debrief">
+                <h2>Module 2 Block 6: Phase 2 deliberate-failure debrief and fix prompt</h2>
+                <p>
+                    Recovery cue. Issue after students have hit the Phase 2 trap and the instructor has run the "frontier or context" debrief. The honest answer is CONTEXT. Tell the AI it is getting 500+ records and ask for an indexed join.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 2 Phase 2 Debrief slide</span>
+                            <span class="copy-block__title">Phase 2 error-recovery prompt</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w45-m2-p2-fix" aria-label="Copy Phase 2 error-recovery prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Phase 2 recovery prompt in chat. Notice the prompt names the specific failure (O(n^2), missing try/catch). That is what makes it work. Vague prompts get vague fixes."
+                    </div>
+<pre class="copy-block__body" id="copy-w45-m2-p2-fix">PHASE 2 ERROR-RECOVERY, drop this in genai.mil chat after the join stalls on the 500-record dataset.
+
+The join works on 5 sample records but stalls on the 500-record dataset. I think the find() call is the issue. Rewrite this to build a Map keyed on EDIPI from training records first, then iterate personnel once and look up by Map key. Also wrap the JSON.parse in try/catch and surface a visible inline error if parsing fails.
+
+FOUR-QUESTION DEBRIEF (instructor leads out loud before students re-prompt):
+
+1. Was this a FRONTIER issue or a CONTEXT issue?
+   Honest answer: context. Fast chat did not know the dataset would be 500+ records. The model's default for a small example is fine. The default for production scale is not.
+
+2. What did the AI not know that I did know?
+   The dataset size. The shape of malformed input. The cost of silent drops vs flagged drops on a readiness number that a CO will act on.
+
+3. What context did I leave out of the first prompt that would have prevented this?
+   Three things: scale ("500+ records"), error mode ("malformed paste should surface inline, not crash silently"), and orphan handling ("count orphans and surface them, do not drop").
+
+4. Where does this row land on the Frontier Map?
+   Task: "JS join across two datasets." genai.mil handles well: small samples, sketch quality. genai.mil handles poorly: production-scale joins without explicit scale and error-handling context. Verification: run on the 500-record fixture and watch the browser tab CPU spike.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 7, Module 2 Phase 3 Chart.js trap prompt
+                 =========================================================== -->
+            <article id="handout-m2-p3-trap">
+                <h2>Module 2 Block 7: Phase 3 Chart.js trap prompt</h2>
+                <p>
+                    Second deliberate-failure cue. <strong>Do not warn students.</strong> Fast chat will almost always return an answer that includes a <code>&lt;script src=&quot;...&quot;&gt;</code> pulling Chart.js from a CDN. That violates the no-external-dependencies constraint stated up front. Let the student catch it.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 2 Phase 3 Trap slide</span>
+                            <span class="copy-block__title">Phase 3 bar chart prompt (the trap)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w45-m2-p3" aria-label="Copy Phase 3 trap prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Phase 3 prompt in chat. Paste into genai.mil. Open DevTools, Network tab, BEFORE you accept the answer. Look at what loads."
+                    </div>
+<pre class="copy-block__body" id="copy-w45-m2-p3">Build a horizontal bar chart of readiness by company. Company on the left axis, percentage as the bar length, value label on the right. Colors: scarlet for under 75, gold for 75 to 90, ink for above 90.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 8, Module 2 Phase 3 constraint reprompt
+                 =========================================================== -->
+            <article id="handout-m2-p3-fix">
+                <h2>Module 2 Block 8: Phase 3 constraint reprompt (inline SVG)</h2>
+                <p>
+                    Recovery prompt. Drop when the student catches the Chart.js CDN violation. Same prompt run through Ask Sage with a reasoning model honors the constraint more reliably from the first response. The contrast IS the lesson.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 2 Phase 3 Fix slide</span>
+                            <span class="copy-block__title">Phase 3 constraint reprompt</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w45-m2-p3-fix" aria-label="Copy Phase 3 constraint reprompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Phase 3 fix prompt in chat. Run it on both genai.mil and Ask Sage. Watch the difference. The reasoning model on Ask Sage holds the constraint better. That difference is your meta-frontier row."
+                    </div>
+<pre class="copy-block__body" id="copy-w45-m2-p3-fix">No external scripts, no CDN, no Chart.js. Render as inline SVG using vanilla JS. Bars labeled with company name on the left and percentage on the right, scaled to 0 to 100. Use the scarlet/gold/ink palette already in the stylesheet.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 9, Module 2 Phase 4 Ask Sage cross-check prompt
+                 =========================================================== -->
+            <article id="handout-m2-p4-crosscheck">
+                <h2>Module 2 Block 9: Phase 4 Ask Sage cross-check prompt</h2>
+                <p>
+                    Phase 4 cue. Drop at 1:20 right after the dashboard renders. This is a real cross-check against the source data, not a spot-check. Ask Sage holds both files in context and verifies row-by-row.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 2 Phase 4 slide</span>
+                            <span class="copy-block__title">Phase 4 Ask Sage cross-check prompt</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w45-m2-p4" aria-label="Copy Phase 4 Ask Sage cross-check prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Phase 4 cross-check in chat. Upload both CSVs to Ask Sage. This is the cleaner version of the source spot-check. We run a manual spot-check on one Marine after, just to keep the discipline."
+                    </div>
+<pre class="copy-block__body" id="copy-w45-m2-p4">I am uploading two files: readiness_output.csv (what my dashboard generated) and personnel_source.csv (the original data). For each Marine in readiness_output.csv flagged as NOT READY, verify the reason by cross-referencing the source. Flag any rows where the source data does not support the NOT READY classification.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 10, Module 2 Commander's Snapshot generator
+                 =========================================================== -->
+            <article id="handout-m2-snapshot">
+                <h2>Module 2 Block 10: Commander's Snapshot generator prompt</h2>
+                <p>
+                    Final Phase 4 cue. Drop at 1:25. The Snapshot is what makes the dashboard useful to the CO, not just visible to the builder. Plain text, overall percentage with delta, per-company breakdown, top three NOT READY drivers, REQUEST line if any company is under 75.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 2 Snapshot slide</span>
+                            <span class="copy-block__title">Commander's Snapshot generator prompt</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w45-m2-snap" aria-label="Copy Commander's Snapshot prompt to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Commander's Snapshot in chat. Paste into genai.mil. The Copy button at the end is what gets it into the brief slide in one click."
+                    </div>
+<pre class="copy-block__body" id="copy-w45-m2-snap">Add a "Generate Commander's Snapshot" button. It produces a plain-text brief in a read-only textarea. Format: header with unit and as-of date, overall readiness percentage with delta vs last week from localStorage, breakdown by company, top three NOT READY drivers, and a one-line REQUEST at the end if any company is below 75. Add a Copy button next to it.
+
+Output format the brief should produce:
+
+UNIT READINESS SNAPSHOT
+Unit: [unit name]
+As of: [DD MMM YY]
+
+OVERALL
+[overall percentage] READY ([delta] vs last week)
+
+BY COMPANY
+[Company A]: [pct] READY
+[Company B]: [pct] READY
+[Company C]: [pct] READY
+
+TOP NOT-READY DRIVERS
+1. [driver, e.g., "Expired CBRN training"], N Marines
+2. [driver], N Marines
+3. [driver], N Marines
+
+REQUEST
+[only if any company is below 75: "Request CO push on [Company X] at [pct] READY, primary driver [driver]."]
+[else: "Steady state. No company below 75. No CO action requested."]
+
+Show me only the changes I need to apply to the existing file: the button, the textarea, the JS function that builds the brief, and the Copy button wiring. Where in the file does each piece go.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 11, Module 3 Group Debugging Clinic Protocol
+                 =========================================================== -->
+            <article id="handout-m3-clinic">
+                <h2>Module 3 Block 11: Group debugging clinic protocol framing</h2>
+                <p>
+                    Module 3 cue. Drop at 1:40 right after the Group Debugging framing slide. The 7-minute clinic loop runs five times, leaving five minutes for final synthesis. Time strictly. The value is in recognizing the pattern, not in fully fixing every problem.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 3 Clinic slide</span>
+                            <span class="copy-block__title">Group debugging clinic protocol</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w45-m3-clinic" aria-label="Copy Group debugging clinic protocol to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Debugging clinic protocol in chat. Seven minutes per problem, hard. Goal is the pattern, not the fix. Five problems, five minutes synthesis at the end."
+                    </div>
+<pre class="copy-block__body" id="copy-w45-m3-clinic">GROUP DEBUGGING CLINIC PROTOCOL, 7-minute loop. Repeat 5 times.
+
+Per-problem time allocation: 2 + 3 + 2 = 7 minutes, hard stop.
+
+1. STUDENT PRESENTATION (2 minutes)
+   Student explains, in this order:
+   - EXPECTED behavior. ("Click Save and the row appears in the table.")
+   - ACTUAL behavior. ("Click Save and two identical rows appear.")
+   - STEPS ALREADY TAKEN. ("Added confirm dialog, then setTimeout debounce, neither worked.")
+   No backstory beyond this. No "let me show you the code." That comes if the group asks.
+
+2. GROUP DIAGNOSIS (3 minutes)
+   Group asks clarifying questions and proposes hypotheses. Instructor guides with these questions, in this order:
+   - Is this a DATA issue or a LOGIC issue?
+   - Is the problem at INPUT or at OUTPUT?
+   - Have we seen this pattern before? (If yes, name the prior case.)
+   - Was the RIGHT TOOL used for this work? (genai.mil for the build? Ask Sage with file ingestion? Either way, was it the right choice?)
+   After 3 minutes, move to synthesis even if the problem is not solved.
+
+3. INSTRUCTOR SYNTHESIS (2 minutes)
+   Instructor names the root cause category:
+   - FRONTIER LIMITATION (AI capability ceiling on this task)
+   - INSUFFICIENT CONTEXT (prompt did not give the AI what it needed)
+   - INCORRECT ASSUMPTION (student or AI assumed wrong about platform behavior)
+   - INTEGRATION FAILURE (the platform / browser / hosting interaction broke)
+   - DATA QUALITY ISSUE (the input data is the actual problem)
+   - TOOL-SELECTION FAILURE (meta-frontier, the wrong tool was reached for first)
+   Then the one-line fix.
+
+4. DOCUMENT THE PATTERN (counted in the 2-minute synthesis)
+   Add the failure case to the collective Advanced Frontier Map. If the failure points to a missing capability that the locked tenant blocks, add a Capability Gap Map row too.
+
+INSTRUCTOR NOTE: keep time STRICTLY. The room will want to fully fix every problem. Resist. The value is in the pattern, not the fix. After 5 problems, run a 5-minute synthesis covering:
+- Which problems were context, which were frontier, which were tool-selection?
+- How many were fixable by the human (1, 2, 4, 5)? How many were actual AI capability ceilings (3 only)?
+- Which patterns repeated? Those are your highest-value Frontier Map rows.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 12, Module 4 Two-Tool Cross-Check Protocol
+                 =========================================================== -->
+            <article id="handout-m4-crosscheck">
+                <h2>Module 4 Block 12: Two-tool cross-check protocol prompt</h2>
+                <p>
+                    Module 4 cue. Drop at 2:25 right after the Verification framing slide. For high-stakes outputs (anything that goes to a CO, anything that becomes a system of record, anything that ends up in a fitness report), run the same prompt through both tools.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 4 QA slide</span>
+                            <span class="copy-block__title">Two-tool cross-check protocol</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w45-m4-crosscheck" aria-label="Copy two-tool cross-check protocol to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Two-tool cross-check in chat. Use it for anything a CO will act on. Not for one-line code snippets. The cost is real, reserve it for outputs that matter."
+                    </div>
+<pre class="copy-block__body" id="copy-w45-m4-crosscheck">TWO-TOOL CROSS-CHECK PROTOCOL, for high-stakes outputs only.
+
+WHEN TO USE IT:
+- Output goes to a CO or higher.
+- Output becomes a system of record (counseling entry, page 11, FITREP excerpt).
+- Output is acted on by another Marine without further review.
+- The cost of being wrong is hours of rework or a real second-order effect.
+
+WHEN NOT TO USE IT:
+- One-line code snippets (regex, date math).
+- Single-shot drafts you will hand-edit anyway.
+- Throwaway exploration prompts where you are figuring out what you want.
+
+THE PROTOCOL:
+
+1. PROMPT, IDENTICAL on both tools.
+   Paste the exact same prompt into genai.mil chat AND into Ask Sage (use a reasoning model on the Ask Sage side).
+   Word-for-word identical. Differences in prompt make the comparison meaningless.
+
+2. COMPARE THE TWO ANSWERS.
+   Read both. Look for AGREEMENT and DISAGREEMENT on substantive points.
+   - Agree on the same number? Confidence up.
+   - Agree on the same recommendation? Confidence up.
+   - Disagree on a substantive point? FLAG IT. The disagreement is data.
+
+3. INTERPRET DISAGREEMENTS.
+   When the two tools disagree:
+   - Read both reasonings out loud.
+   - Find the assumption that differs. ("genai.mil assumed the as-of date was today. Ask Sage assumed end of last week.")
+   - Decide which assumption matches your intent. Use that answer.
+   - If you cannot tell which is right, that is the strongest possible signal to slow down. Verify against source data manually.
+
+4. DOCUMENT REPEAT DISAGREEMENTS.
+   When the two tools systematically disagree on the same kind of task, that is a Frontier Map row.
+   Task type. Where they disagree. Which one is usually right (with evidence). Verification action.
+   Repeat hits across multiple tasks become a Capability Gap Map row: "Cross-tool agreement on [task type] is unreliable. Need [specific capability] to resolve disagreements internally."
+
+5. COST AWARENESS.
+   This costs you two prompts and a comparison turn. Reserve it for outputs that will be acted on. The two-tool cross-check on every prompt is theater. The two-tool cross-check on the right prompts is judgment.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 13, Module 5 Teach-Back concept list
+                 =========================================================== -->
+            <article id="handout-m5-teachback">
+                <h2>Module 5 Block 13: Teach-back concept list</h2>
+                <p>
+                    Module 5 cue. Drop at 2:50 right after the Teach-Back framing slide. Students pick one concept and have five minutes to prep with the template, then three minutes to teach in a small group. Two new entries for the 4.5 reality track are at the bottom.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 5 Teach-Back slide</span>
+                            <span class="copy-block__title">Teach-back concept list and template</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w45-m5-teachback" aria-label="Copy teach-back concept list to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Teach-back concept list in chat. Pick one. Five minutes to prep with the template, three minutes to teach in your small group. Pick a concept you have actually used today."
+                    </div>
+<pre class="copy-block__body" id="copy-w45-m5-teachback">TEACH-BACK CONCEPT LIST, pick ONE concept. Three minutes of teaching. Five minutes of prep.
+
+Concepts from the curriculum:
+
+- Centaur vs Cyborg modes
+- Frontier mapping
+- Context-building in prompts
+- Iterative refinement
+- Verification protocols
+- The Jagged Frontier
+- Layer separation (Spec / Prototype / Production)
+- Tool selection (genai.mil vs Ask Sage)     [NEW in 4.5]
+- Two-tool cross-check protocol                [NEW in 4.5]
+
+PREPARATION TEMPLATE, fill all six lines before you teach.
+
+Concept: ___________________________________________________________
+
+One-Sentence Definition:
+___________________________________________________________
+
+Why It Matters (one sentence):
+___________________________________________________________
+
+Real Example from Your Work (specific, not generic):
+___________________________________________________________
+
+Common Mistake (one mistake people make applying this concept):
+___________________________________________________________
+
+Key Takeaway (one sentence the audience should remember):
+___________________________________________________________
+
+PEER EVALUATION RUBRIC, the group rates each teach-back on three criteria:
+
+1. Clarity of Definition. Strong: "I could explain this to someone else now." Needs Improvement: "I am still unclear on what this concept means."
+2. Relevance of Example. Strong: "The example made the concept concrete and believable." Needs Improvement: "The example was generic."
+3. Practical Takeaway. Strong: "I know what to do differently because of this teaching." Needs Improvement: "I understand the concept but do not know how to apply it."
+
+Watch out for:
+- Reading the template instead of teaching conversationally.
+- Examples too vague ("I used this on a project" vs specific details).
+- Exceeding 3 minutes. Brevity IS a teaching skill.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 14, Module 6 Workflow Playbook blank template
+                 =========================================================== -->
+            <article id="handout-m6-template">
+                <h2>Module 6 Block 14: Workflow Playbook blank template</h2>
+                <p>
+                    Module 6 cue. Drop at 3:20 right after the Playbook framing slide. The Which Tool column is the 4.5-specific addition. A complete playbook has 4 to 8 steps with Human/AI labels, a verification checklist with 3 to 5 items, and at least one known frontier issue.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 6 Playbook slide</span>
+                            <span class="copy-block__title">Workflow Playbook blank template</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w45-m6-template" aria-label="Copy Workflow Playbook template to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Workflow Playbook template in chat. Pick a recurring task from your job. The Which Tool column is the new piece. If your playbook has fewer than 4 steps or no verification checklist, it is not detailed enough."
+                    </div>
+<pre class="copy-block__body" id="copy-w45-m6-template">WORKFLOW PLAYBOOK BLANK TEMPLATE, fill in for ONE recurring task from your job.
+
+A completed playbook has:
+- 4 to 8 concrete steps with Human/AI labels
+- A verification checklist with 3 to 5 testable items
+- At least one known frontier issue (from real experience, not theory)
+- A specific time savings estimate (with vs without AI)
+- A junior development note (how the workflow preserves skill-building)
+
+| Field                       | Content                                                            |
+|-----------------------------|--------------------------------------------------------------------|
+| Task                        | A specific, recurring task from your job                           |
+| Frequency                   | How often you perform this task (daily, weekly, monthly)           |
+| Mode                        | Centaur (distinct phases) OR Cyborg (continuous back-and-forth)    |
+| Which Tool                  | genai.mil chat / Ask Sage with reasoning model / both (cross-check)|
+| Step 1                      | [Human or AI label] [What happens] ([Who owns it])                 |
+| Step 2                      | [Human or AI label] [What happens] ([Who owns it])                 |
+| Step 3                      | [Human or AI label] [What happens] ([Who owns it])                 |
+| Step 4                      | [Human or AI label] [What happens] ([Who owns it])                 |
+| Step 5                      | [Human or AI label] [What happens] ([Who owns it])                 |
+| Step 6 (optional)           | [Human or AI label] [What happens] ([Who owns it])                 |
+| Verification Checklist      | 3 to 5 testable items, one per line, each ending in a verb         |
+| Known Frontier Issues       | Where AI has failed on this task before, with the specific symptom |
+| Time Savings Estimate       | Without AI: [hours]. With AI: [hours]. Net: [delta].               |
+| Junior Development Note     | How this workflow preserves skill-building for junior personnel    |
+
+GUIDANCE ON THE "WHICH TOOL" COLUMN:
+
+- genai.mil chat: single-prompt drafts, quick code snippets, single-turn frontier classification, fast iteration on UI tweaks.
+- Ask Sage with reasoning model: multi-file refactor, dataset analysis across CSVs, architecture decisions, multi-turn workflows that need persistent schema.
+- Both (two-tool cross-check): high-stakes outputs (briefs to CO, system-of-record entries, FITREP excerpts). Use the cross-check protocol from Module 4.
+
+CAPABILITY GAP MAP INTEGRATION:
+
+Add at least two rows to the Capability Gap Map that map your playbook to Production-Layer wishes. Examples from a readiness-rollup workflow: "MOL write-back so the snapshot posts back to the system of record," "Automated brief delivery once the rollup is approved," "Direct connector to the training currency database so the manual export is eliminated."</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 15, Module 6 Worked Example 1, Weekly Training Schedule
+                 =========================================================== -->
+            <article id="handout-m6-example1">
+                <h2>Module 6 Block 15: Worked example 1, Weekly Training Schedule (genai.mil)</h2>
+                <p>
+                    Drop at 3:25 right after the blank template. Filled-in example using genai.mil chat. Shows what a finished playbook looks like before students build their own.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 6 Example 1 slide</span>
+                            <span class="copy-block__title">Worked example: Weekly Training Schedule</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w45-m6-ex1" aria-label="Copy worked example 1 to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Worked example 1 in chat. Cyborg, genai.mil. Read it. Notice the Step labels (Human Only / AI generates Human reviews / AI generates Human decides). That is the discipline."
+                    </div>
+<pre class="copy-block__body" id="copy-w45-m6-ex1">WORKED EXAMPLE 1, Weekly Training Schedule Publication. Cyborg mode, genai.mil chat.
+
+| Field                  | Content                                                                                          |
+|------------------------|--------------------------------------------------------------------------------------------------|
+| Task                   | Weekly training schedule publication for the section                                             |
+| Frequency              | Weekly. Every Thursday by 1600.                                                                  |
+| Mode                   | Cyborg (continuous back-and-forth refinement)                                                    |
+| Which Tool             | genai.mil chat                                                                                   |
+| Step 1                 | Human: Pull next week's events from training calendar, OPORD, and any new taskings (Human Only) |
+| Step 2                 | AI: Draft the schedule in standard weekly format with times, locations, and uniform requirements (AI generates, Human reviews) |
+| Step 3                 | Human: Cross-reference against range bookings, vehicle requests, and instructor availability (Human Only) |
+| Step 4                 | AI: Format conflicts as a decision matrix. "Event A conflicts with Event B at 0900. Options: move A to 1300, move B to Tuesday, or split the section." (AI generates options, Human decides) |
+| Step 5                 | Human: Make final decisions on conflicts, add section leader notes (Human Only)                  |
+| Step 6                 | AI: Generate the final formatted schedule with all corrections applied, ready for distribution (AI generates, Human approves) |
+| Verification Checklist | All events have confirmed locations. All times are in 24-hour format. No double-bookings remain. Uniform for each event is specified. POC listed for each event. |
+| Known Frontier Issues  | AI sometimes invents room numbers that do not exist on base. AI cannot verify range availability, must be checked manually. AI occasionally uses 12-hour time format even when told to use 24-hour. |
+| Time Savings           | Without AI: about 3 hours (gathering info, formatting, resolving conflicts manually). With AI: about 45 minutes (human gathers info, AI formats and generates options). |
+| Junior Development     | Rotate schedule duty among junior Marines weekly. Require the Marine to review AI output and brief back why each event is scheduled (builds planning judgment). Monthly: have one schedule created entirely without AI to maintain baseline skill. |
+
+WHY genai.mil AND NOT Ask Sage FOR THIS WORKFLOW:
+Schedule publication is a single-domain, single-prompt task with iterative refinement on the result. Fast chat is the right tool. The cost of loading multi-file context to Ask Sage is not justified when one well-structured prompt to genai.mil produces the draft.
+
+WHY CYBORG AND NOT CENTAUR:
+The workflow is conflict-driven. You will not know what the conflicts are until the first draft is rendered. That is a cyborg pattern. The boundary between "human work" and "AI work" stays fluid as conflicts surface.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 BLOCK 16, Module 6 Worked Example 2, Weekly Readiness Rollup
+                 =========================================================== -->
+            <article id="handout-m6-example2">
+                <h2>Module 6 Block 16: Worked example 2, Weekly Readiness Rollup (Ask Sage + Claude 3)</h2>
+                <p>
+                    Drop at 3:30 right after worked example 1. Same template, different tool selection. This is the multi-file dataset workflow that the Module 2 build prepared students for.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 6 Example 2 slide</span>
+                            <span class="copy-block__title">Worked example: Weekly Readiness Rollup</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w45-m6-ex2" aria-label="Copy worked example 2 to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Worked example 2 in chat. Centaur, Ask Sage with Claude 3. Same task you would build with a static-HTML dashboard, now run as a weekly recurring workflow. The Step 3 spot-check is the discipline."
+                    </div>
+<pre class="copy-block__body" id="copy-w45-m6-ex2">WORKED EXAMPLE 2, Weekly Readiness Rollup. Centaur mode, Ask Sage with Claude 3 (or another reasoning model the tenant exposes).
+
+| Field                  | Content                                                                                          |
+|------------------------|--------------------------------------------------------------------------------------------------|
+| Task                   | Weekly readiness rollup for the company commander's brief                                        |
+| Frequency              | Weekly. Every Monday by 1000.                                                                    |
+| Mode                   | Centaur (distinct human phases and AI phases with verification at each boundary)                 |
+| Which Tool             | Ask Sage with Claude 3 (or another reasoning model the tenant exposes)                           |
+| Step 1                 | Human: Export current rosters from MOL: personnel, training currency, equipment status (Human Only) |
+| Step 2                 | AI: Upload all three CSVs to Ask Sage. Ask Claude 3 to compute deltas vs last week's saved snapshot. Output the top three drivers of any change in readiness percentage (AI generates, Human reviews) |
+| Step 3                 | Human: Spot-check three Marines flagged as new NOT READY this week against the source CSVs to verify the AI's attribution (Human Only) |
+| Step 4                 | AI: Generate a plain-text rollup with overall percentage, delta, top three drivers, and a one-line recommended commander action (AI generates, Human approves) |
+| Step 5                 | Human: Review, paste into the brief slide, log to the readiness dashboard tool for next week's delta (Human Only) |
+| Verification Checklist | Overall percentage matches manual count of READY Marines divided by total. Delta sign and magnitude check against last week's saved snapshot. Top three drivers each trace back to a specific source row. No Marine appears in the rollup who is not in this week's personnel export. |
+| Known Frontier Issues  | Ask Sage occasionally misattributes a NOT READY classification when a Marine appears in two units (cross-attached). The two-tool cross-check (run the same prompt through genai.mil with paste-and-summarize on a sample) catches this. Reasoning models occasionally over-explain. Constrain the output format up front. |
+| Time Savings           | Without AI: about 4 hours (manual joins in Excel, three sets of pivot tables, narrative writing). With AI: about 1 hour. Net savings: 3 hours per week per company commander's S-3 shop. |
+| Junior Development     | Have a junior Marine do Step 3 (the source-data spot-check) every week. That step builds the readiness-data literacy the rest of the workflow assumes. Monthly: have the junior do the full rollup without AI for one company to maintain baseline skill. |
+
+WHY Ask Sage AND NOT genai.mil FOR THIS WORKFLOW:
+Three CSVs, hundreds of rows each, week-over-week delta computation, attribution back to source rows. That is a multi-file reasoning task. genai.mil fast chat with paste-and-summarize would either drop fidelity or take 30+ turns to recover the schema across paste boundaries. Ask Sage holds all three files in context and the reasoning model holds the join model across the conversation.
+
+WHY CENTAUR AND NOT CYBORG:
+The data is fixed before the AI sees it (Step 1). The verification is fixed before the AI runs (Step 3). The output format is fixed before generation (Step 4). The human-AI boundaries are crisp, not fluid. That is a centaur pattern. The cost of a mid-flow pivot would be redoing the spot-check, which defeats the verification discipline.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 STARTER TABLE 1, Frontier Map seed (9 rows)
+                 =========================================================== -->
+            <article id="handout-frontier-seed">
+                <h2>Starter Table 1: Frontier Map seed (9 rows, 6 from 3.5 plus 3 new for the dashboard build)</h2>
+                <p>
+                    Drop at 3:40 on the Frontier Map slide. Six rows carry over from the Course 3.5 static-stack frontier. Three new rows specific to the readiness dashboard build. Each Marine adds at least two of their own from today before wrap.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 6 Frontier Map slide</span>
+                            <span class="copy-block__title">Frontier Map starter table (9 rows)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w45-frontier" aria-label="Copy Frontier Map starter to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Frontier Map starter in chat. Nine rows. Six carry over from 3.5. Three are new for today's build. Add at least two of your own before we wrap."
+                    </div>
+<pre class="copy-block__body" id="copy-w45-frontier">FRONTIER MAP, starter rows for the static-HTML stack with two-tool selection.
+
+Add at least TWO specific rows of your own from today's builds.
+
+| Task type                                  | AI handles well                                       | AI handles poorly                                            | Verification needed                                                |
+|--------------------------------------------|-------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------------|
+| HTML form scaffolding                      | Standard inputs, labels, basic validation             | Accessible focus order, dependent fields                     | Tab through the form. Submit with everything empty.                |
+| Inline CSS for print                       | Basic @media print, hiding nav chrome                 | Color preservation, table page-breaks                        | Actually print the page. Look at the PDF preview.                  |
+| Date math in JS                            | Simple add and subtract                               | Timezone offsets, FY boundary, ISO parsing                   | Test at start of October. Test at end of December.                 |
+| localStorage persistence                   | JSON serialize and parse                              | Schema migration, quota, private browsing                    | Open in InPrivate. Reload. See what survives.                      |
+| Copy to clipboard                          | navigator.clipboard.writeText                         | Fallback for older browsers and HTTP context                 | Test in Edge, Chrome, and on a phone.                              |
+| Color coding by status                     | Class-based styling, status in class                  | Inline-style approaches fighting specificity                 | Visually inspect every status value, all four.                     |
+| Multi-dataset join in vanilla JS           | Map-keyed indexed join on EDIPI, single iteration     | O(n^2) array.find() join on 500+ records, silent orphan drop | Run on 500-record fixture. Watch CPU. Count orphans surfaced.      |
+| Chart rendering under no-CDN constraint    | Inline SVG via vanilla JS when constraint restated    | Defaults to <script src> CDN unless constraint refreshed     | Open DevTools, Network tab, BEFORE accepting the answer.           |
+| Tool selection between genai.mil / Ask Sage| Cross-tool agreement on simple single-shot tasks      | Reaching for fast chat on multi-file reasoning by reflex     | If you hit 20+ turns of context drift on one tool, you picked wrong.|
+| [Your row]                                 |                                                       |                                                              |                                                                    |
+| [Your row]                                 |                                                       |                                                              |                                                                    |
+
+What makes a useful row:
+- Specific task type (not "AI stuff")
+- Concrete examples in "Handles Well"
+- Specific failure mode with enough detail to recognize next time
+- A testable verification action (not "check it")
+
+The 4.5 addition: rows that name TOOL SELECTION as the failure mode, not the AI itself. "Reached for genai.mil on a multi-file refactor and hit 47 turns of context drift" is a meta-frontier row. The fix is not better prompting, it is switching to Ask Sage with file ingestion.</pre>
+                </div>
+            </article>
+
+            <!-- ===========================================================
+                 STARTER TABLE 2, Capability Gap Map seed (7 rows)
+                 =========================================================== -->
+            <article id="handout-gap-seed">
+                <h2>Starter Table 2: Capability Gap Map seed (7 rows, 5 from 3.5 plus 2 new for the dashboard workflow)</h2>
+                <p>
+                    Drop at 3:45 on the Capability Gap Map slide. The second artifact of the course. Five rows carry over from the 3.5 build set. Two new rows specific to the readiness dashboard workflow. Forwarded to HQMC quarterly as evidence for tenant policy review.
+                </p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="slide-pill">Use on Module 6 Capability Gap Map slide</span>
+                            <span class="copy-block__title">Capability Gap Map starter (7 rows)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-w45-gap" aria-label="Copy Capability Gap Map starter to clipboard">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__cue">
+                        <strong>Cue line for the room:</strong> "Capability Gap Map starter in chat. Seven rows. Five carry from 3.5. Two are new from today's readiness rollup. Add at least ONE of your own. This is the artifact that goes to HQMC."
+                    </div>
+<pre class="copy-block__body" id="copy-w45-gap">CAPABILITY GAP MAP, starter rows.
+
+This artifact captures institutional capabilities Marines would deploy if access were granted. Compiled across training sessions, it forms the evidence base for tenant policy review at HQMC.
+
+A single Marine asking for a connector is a request. Forty Marines documenting the same blocked connector with beneficiary counts and time savings is a policy case.
+
+| Task Type                       | Prototype today (built today)                    | Production wish (10x with access)                       | Blocking permission / tool                      | Beneficiary count                | Time savings              |
+|---------------------------------|--------------------------------------------------|---------------------------------------------------------|-------------------------------------------------|----------------------------------|---------------------------|
+| Watch Bill Generation           | Static HTML, manual roster, github.io            | Pull roster from MOL, notify watchstanders              | MOL API not exposed; Office 365 connector       | 1 section leader x 8 sections    | 1.5-2 hrs/wk per leader   |
+| Training Calendar / TEEP        | Static HTML, localStorage, S-3 brief             | Two-way Outlook sync, shared resource pool              | Outlook connector license tier; Dataverse       | 1 S-3 per battalion              | 3-5 hrs/wk per shop       |
+| Initial Counseling Tracker      | Static HTML NAVMC 11380 builder                  | Direct write to MOL counseling record                   | MOL no write API; no digital signature          | Every NCO USMC-wide              | 20-40 min per counseling  |
+| Range Coordination              | Static HTML range request tracker                | Conflict detection vs RTAM schedule                     | RTAM no documented integration surface          | Every battalion training shop    | 2-4 hrs per range event   |
+| Personnel Currency Dashboard    | Static HTML CSV-import dashboard                 | Live read of MCTIMS, push notifications                 | MCTIMS read access restricted                   | Every section leader USMC        | 30-60 min per section/wk  |
+| Unit Readiness Rollup (weekly)  | Ask Sage on three exported CSVs, plain-text brief| MOL write-back so the snapshot posts to system of record| MOL no write API; automated brief delivery blocked| Every company commander S-3 shop | 3 hrs/wk per shop         |
+| Multi-file reasoning AI access  | Ask Sage with Claude 3 where tenant grants it    | Universal Ask Sage with reasoning model in all tenants  | Ask Sage access blocked in some tenants         | Every Course 4.5 graduate        | 1-2 hrs per multi-file task|
+| [Your row]                      |                                                  |                                                         |                                                 |                                  |                           |
+
+What makes a STRONG row vs a WEAK one:
+
+WEAK: "Need better AI"
+STRONG: "Ask Sage with a reasoning model is blocked for this tenant. The locked-tenant builders fall back to genai.mil fast chat on multi-file reasoning tasks, which costs 20 to 40 extra turns per build and produces measurable context drift."
+
+WEAK: "A lot of Marines"
+STRONG: "1 S-3 shop per battalion, 4 battalions in the regiment, weekly use."
+
+WEAK: "Saves time"
+STRONG: "3 to 5 hours per S-3 shop per week, conservatively. Annual: 150 to 250 hrs per shop."
+
+Instructor consolidates the room's rows and forwards through the unit AI POC to HQMC AI working group quarterly. Repeat hits across units for the same blocked permission are the strongest signal. The 4.5-specific addition: any row that names a TOOL SELECTION gap (the tenant exposes one tool but not the other) is a high-leverage row. Tool parity between tenants is a tractable policy decision.</pre>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Course 4.5 Materials</h3>
+                    <ul>
+                        <li><a href="../courses/advanced-reality.html">Course 4.5 Page</a></li>
+                        <li><a href="week-4-5-advanced-reality.html">Week 4.5 Slide Deck</a></li>
+                        <li><a href="week-4-5-cheatsheet.html">Cheat Sheet</a></li>
+                        <li><a href="../facilitator/week-4-5-advanced-reality.html">Facilitator Pack</a></li>
+                        <li><a href="../handouts/advanced-reality-handout.html">Live Fill-In Handout</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Reference Builds &amp; Resources</h3>
+                    <ul>
+                        <li><a href="../builds/readiness-dashboard.html">Readiness Dashboard</a></li>
+                        <li><a href="../resources/debugging-scenarios.html">Debugging Scenarios</a></li>
+                        <li><a href="../resources/tool-selection-guide.html">Tool Selection Guide</a></li>
+                        <li><a href="../resources/capability-gap-map.html">Capability Gap Map</a></li>
+                        <li><a href="../resources/static-hosting-cheat-sheet.html">Static Hosting Cheat Sheet</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../pdf/SOP_Expert_Driven_Development_v5.pdf">SOP (PDF)</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function () {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+
+            document.querySelectorAll('.copy-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var targetId = btn.getAttribute('data-copy-target');
+                    var target = document.getElementById(targetId);
+                    if (!target) return;
+                    var text = target.textContent;
+                    var label = btn.querySelector('.copy-btn__label');
+                    var originalLabel = label ? label.textContent : '';
+
+                    var done = function () {
+                        btn.classList.add('is-copied');
+                        if (label) label.textContent = 'Copied';
+                        setTimeout(function () {
+                            btn.classList.remove('is-copied');
+                            if (label) label.textContent = originalLabel;
+                        }, 1800);
+                    };
+                    var fail = function () {
+                        if (label) label.textContent = 'Copy failed, select and Ctrl/Cmd+C';
+                        setTimeout(function () {
+                            if (label) label.textContent = originalLabel;
+                        }, 2500);
+                    };
+
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(text).then(done).catch(function () {
+                            try {
+                                var range = document.createRange();
+                                range.selectNodeContents(target);
+                                var sel = window.getSelection();
+                                sel.removeAllRanges();
+                                sel.addRange(range);
+                                document.execCommand('copy');
+                                sel.removeAllRanges();
+                                done();
+                            } catch (err) { fail(); }
+                        });
+                    } else {
+                        try {
+                            var range = document.createRange();
+                            range.selectNodeContents(target);
+                            var sel = window.getSelection();
+                            sel.removeAllRanges();
+                            sel.addRange(range);
+                            document.execCommand('copy');
+                            sel.removeAllRanges();
+                            done();
+                        } catch (err) { fail(); }
+                    }
+                });
+            });
+        })();
+    </script>
+
+</body>
+</html>
