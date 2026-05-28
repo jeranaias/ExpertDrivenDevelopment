@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Decision tree and quick reference for when to use genai.mil (enterprise chat) vs Ask Sage (multi-file reasoning) for Marine Corps AI workflows. Built for Course 4.5 (Advanced Workshop, Locked Tenant Reality).">
+    <title>Tool Selection Guide: genai.mil vs Ask Sage | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+      /* One-page print friendly */
+      @media print {
+        body { background: #fff; }
+        .site-header, .mobile-nav, .page-header, .site-footer, .skip-link, .toc { display: none; }
+        .container { max-width: none; padding: 0 0.25in; }
+        main { padding: 0; }
+        h2 { font-size: 1.1rem; page-break-after: avoid; }
+        h3 { font-size: 1rem; page-break-after: avoid; }
+        table { font-size: 0.78rem; }
+        .callout { page-break-inside: avoid; }
+        section { page-break-inside: avoid; }
+      }
+    </style>
+</head>
+<body class="site-wrapper">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="./" class="active">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="./" class="active">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Resources</a></li>
+                    <li aria-current="page">Tool Selection Guide</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Tool Selection Guide: genai.mil vs Ask Sage</h1>
+            <p class="page-header__desc">
+                Two enterprise AI platforms are available to Marines today, and they are NOT interchangeable. genai.mil is the fast-chat enterprise default (Jan 2026 MARADMIN). Ask Sage is the multi-file reasoning platform with 150+ LLMs at IL5/IL6/Top Secret. This guide is the decision tree: given the task in front of you, which tool gets the work done faster and with fewer prompt iterations?
+            </p>
+            <div class="mt-lg">
+                <span class="badge badge--gold">Course 4.5</span>
+                <span class="badge">Reference</span>
+            </div>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+
+            <nav class="toc" aria-label="On this page">
+                <p class="toc__title">On this page</p>
+                <ul class="toc__list">
+                    <li><a href="#two-tool-world">1. The Two-Tool World</a></li>
+                    <li><a href="#decision-tree">2. Decision Tree</a></li>
+                    <li><a href="#quick-reference">3. Quick Reference Table</a></li>
+                    <li><a href="#common-patterns">4. Common Patterns</a></li>
+                    <li><a href="#only-genai">5. When You Only Have genai.mil</a></li>
+                    <li><a href="#voice-constraints">6. Voice and Constraints</a></li>
+                </ul>
+            </nav>
+
+            <section id="two-tool-world">
+                <h2>1. The Two-Tool World</h2>
+                <p>
+                    The post-Jan-2026 landscape settled around two enterprise AI platforms. Both are first-class for the Marines today. Tool selection is itself a skill, and it is the skill that lets a Marine ship a counseling statement in three minutes instead of thirty.
+                </p>
+                <ul>
+                    <li><strong>genai.mil</strong> is the Marines' enterprise default chat platform (Jan 2026 MARADMIN, replaces NIPRGPT). Always-on conversational AI. CUI-authorized. Fast for single-shot prompts. Browser-based, no setup, no file uploads.</li>
+                    <li><strong>Ask Sage</strong> is IL5/IL6/Top Secret/FedRAMP High authorized. Azure Government hosted. 150+ LLMs including GPT-4o, GPT o-series reasoning models, Claude 3, Gemini Pro, Llama 3, and Mistral. Ingests DOCX, PDF, JSON, CSV, and code. API plus Continue.dev IDE integration. CUI and PHI authorized (DHA deployment Dec 2025).</li>
+                    <li>The Army runs Ask Sage on cArmy Cloud under a $49M IDIQ contract. DHA uses it for clinical and operational workflows. Adoption across DoW is past the experimental stage.</li>
+                </ul>
+                <p>
+                    The post-Power-Platform pivot left a gap: Marines need real work done on real tenants, and the answer for any given task is one of these two tools. Picking the wrong one costs iterations.
+                </p>
+            </section>
+
+            <section id="decision-tree">
+                <h2>2. Decision Tree</h2>
+                <p>
+                    Read top to bottom. The first branch that matches your task is the answer. If two branches match, the lower one wins (it is more specific).
+                </p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">If your task is&hellip;</th>
+                                <th scope="col">Use</th>
+                                <th scope="col">Why</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>A single-shot prompt (one paragraph in, one answer out).</td>
+                                <td><strong>genai.mil</strong></td>
+                                <td>Always. Faster. No setup overhead. Browser tab is open already.</td>
+                            </tr>
+                            <tr>
+                                <td>About to paste a dataset into the chat (CSV, JSON, table).</td>
+                                <td><strong>Ask Sage</strong></td>
+                                <td>Upload the actual file. Do not paste-and-pray. Parsing accuracy is night and day.</td>
+                            </tr>
+                            <tr>
+                                <td>Working across more than two files at once.</td>
+                                <td><strong>Ask Sage</strong></td>
+                                <td>File ingestion plus reasoning models hold context. Chat-tier models drop files three and four.</td>
+                            </tr>
+                            <tr>
+                                <td>About to iterate 10+ times to refine a complex output.</td>
+                                <td><strong>Ask Sage with a reasoning model</strong> (Claude 3 or GPT o-series)</td>
+                                <td>Chat models drift after roughly 6 to 8 iterations. Reasoning models hold the thread longer.</td>
+                            </tr>
+                            <tr>
+                                <td>An architecture, data-model, or design decision.</td>
+                                <td><strong>Ask Sage with reasoning model</strong></td>
+                                <td>Worth the extra setup. Design decisions are expensive to undo.</td>
+                            </tr>
+                            <tr>
+                                <td>A regex, date math, or format-conversion one-liner.</td>
+                                <td><strong>genai.mil</strong></td>
+                                <td>Faster. A reasoning model is overkill for a one-liner.</td>
+                            </tr>
+                            <tr>
+                                <td>A drafting task (memo, counseling, award, brief).</td>
+                                <td><strong>genai.mil</strong> for first draft. <strong>Ask Sage</strong> if you need to ingest multiple source documents (citations, references, prior counseling).</td>
+                                <td>First drafts are single-shot. Multi-source drafting needs file ingestion.</td>
+                            </tr>
+                            <tr>
+                                <td>A high-stakes output (commander's brief, awards package, eval).</td>
+                                <td><strong>Both. Cross-check.</strong></td>
+                                <td>Run the same prompt through both and look for disagreements. Course 4.5 Module 4 cross-check protocol.</td>
+                            </tr>
+                            <tr>
+                                <td>Wiring AI into an IDE or pipeline (Continue.dev, scripted prompts).</td>
+                                <td><strong>Ask Sage</strong></td>
+                                <td>API plus integrations. genai.mil has no programmatic surface.</td>
+                            </tr>
+                            <tr>
+                                <td>Dataset analysis (readiness rollup, training stats, equipment trends).</td>
+                                <td><strong>Ask Sage with reasoning model plus CSV upload</strong></td>
+                                <td>Reasoning over structured data is the platform's strong suit.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout callout--info">
+                    <h3 class="callout__title">Rule of Thumb</h3>
+                    <p>
+                        If you can describe the whole task in one sentence and the answer fits in a few paragraphs, use genai.mil. If the task involves files, multiple iterations, or a downstream system, use Ask Sage. If it is high-stakes, use both and reconcile.
+                    </p>
+                </div>
+            </section>
+
+            <section id="quick-reference">
+                <h2>3. Quick Reference Table</h2>
+                <p>
+                    Side-by-side capability comparison. Use this when you need to defend a tool choice to a peer or to a senior who asks "why not just use the other one."
+                </p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Capability</th>
+                                <th scope="col">genai.mil</th>
+                                <th scope="col">Ask Sage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Models available</strong></td>
+                                <td>Chat-tier OpenAI plus a couple of others; varies by tenant.</td>
+                                <td>150+ models: GPT-4o, GPT o-series, Claude 3, Gemini Pro, Llama 3, Mistral, Cohere.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>File ingestion (DOCX/PDF/JSON/CSV/code)</strong></td>
+                                <td>No.</td>
+                                <td>Yes.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Multi-file context</strong></td>
+                                <td>No.</td>
+                                <td>Yes.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Reasoning models (GPT o-series, Claude 3)</strong></td>
+                                <td>Limited.</td>
+                                <td>Yes.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>API + IDE integration</strong></td>
+                                <td>No API for external integration.</td>
+                                <td>API plus Continue.dev IDE integration.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CUI authorized</strong></td>
+                                <td>Yes.</td>
+                                <td>Yes.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>PHI authorized</strong></td>
+                                <td>No.</td>
+                                <td>Yes (DHA deployment Dec 2025).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>IL level</strong></td>
+                                <td>IL5.</td>
+                                <td>IL5, IL6, Top Secret.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Best for</strong></td>
+                                <td>Fast chat, single-shot drafts, regex, date math.</td>
+                                <td>Multi-file refactors, dataset analysis, architecture decisions, IDE integration.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Avoid for</strong></td>
+                                <td>Multi-file work, dataset analysis, iterative refactors.</td>
+                                <td>Single-shot prompts where genai.mil is faster.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="common-patterns">
+                <h2>4. Common Patterns</h2>
+                <p>
+                    Five concrete workflows that show up across units. Each one is a worked example: scenario, tool, and why.
+                </p>
+
+                <h3>Pattern 1: Weekly readiness rollup</h3>
+                <p>
+                    <strong>Use Ask Sage with Claude 3.</strong> Upload last-week and this-week CSV exports. Ask for delta analysis: who fell off currency, who came on, what trends matter for the CO's brief. <em>Why:</em> dataset comparison is reasoning plus multi-file. genai.mil cannot ingest the CSVs and pasting them is lossy.
+                </p>
+
+                <h3>Pattern 2: Counseling statement first draft</h3>
+                <p>
+                    <strong>Use genai.mil.</strong> One paragraph in (Marine's name, billet, period, key observations), one draft out. <em>Why:</em> single-shot. Ask Sage setup for a routine counseling is overkill and slower.
+                </p>
+
+                <h3>Pattern 3: Refactor a static-stack tool across three files</h3>
+                <p>
+                    <strong>Use Ask Sage with a reasoning model.</strong> Upload the three files. Ask for the refactor in one pass. <em>Why:</em> multi-file context is required. A chat model loses track of file two by the time it reaches file three.
+                </p>
+
+                <h3>Pattern 4: High-stakes commander's brief</h3>
+                <p>
+                    <strong>Use both.</strong> Run the same prompt through genai.mil and Ask Sage. Compare outputs. Reconcile differences. <em>Why:</em> cross-check protocol for high-stakes outputs (Course 4.5 Module 4). Disagreement between the two is a flag for human review. Agreement is corroboration.
+                </p>
+
+                <h3>Pattern 5: Quick regex for parsing T&amp;R codes</h3>
+                <p>
+                    <strong>Use genai.mil.</strong> <em>Why:</em> one-liner. Faster than Ask Sage's setup overhead. The whole interaction is under thirty seconds.
+                </p>
+
+                <div class="callout callout--success">
+                    <h3 class="callout__title">The Cross-Check Pattern Generalizes</h3>
+                    <p>
+                        Pattern 4 (run the same prompt through both and reconcile) is not just for commander's briefs. Use it any time the cost of being wrong is higher than the cost of running the prompt twice. Awards packages, evals, official correspondence, recommendations for a board.
+                    </p>
+                </div>
+            </section>
+
+            <section id="only-genai">
+                <h2>5. When You Only Have genai.mil (Tenant Limitations)</h2>
+                <p>
+                    Not every Marine has Ask Sage access yet. On tenants where Ask Sage is not provisioned, Course 4.5 module work degrades gracefully. Here is how to ship anyway.
+                </p>
+
+                <h3>Workflow degradation</h3>
+                <p>
+                    The Ask Sage phases of Course 4.5 modules degrade to paste-and-summarize on genai.mil. You lose multi-file context. You gain time on setup. The outputs are lower quality but they are still usable for low-stakes work.
+                </p>
+
+                <h3>Multi-file work in genai.mil only</h3>
+                <p>
+                    Summarize each file in its own chat first. Be specific in the summary: keep names, dates, references, and any field that downstream prompts will need. Then start a fresh chat with the summaries as the context block. This is lossy but workable for two or three files. Past four files the loss compounds and the output is not defensible.
+                </p>
+
+                <h3>Dataset analysis in genai.mil only</h3>
+                <p>
+                    Hand-aggregate the raw data to a 20-row summary in a textarea. Paste the summary. Analyze. Acceptable for small datasets where the aggregation step is itself the work. Useless for large datasets where the value is in the rows you would have missed.
+                </p>
+
+                <h3>File an access request</h3>
+                <p>
+                    Ask Sage access is the unblock. Contact your unit's AI lead or the Marine Corps AI working group through the appropriate channel for your command. The request is routine. Document the gap in a Capability Gap Map row while you wait, so the access pathway gets shorter for the next Marine.
+                </p>
+
+                <div class="callout callout--warning">
+                    <h3 class="callout__title">Do Not Force-Fit genai.mil</h3>
+                    <p>
+                        If the task is genuinely multi-file or dataset-heavy and you do not have Ask Sage, sometimes the right answer is to wait one day for access rather than ship a degraded output the CO has to redo. Tool selection includes the choice to delay.
+                    </p>
+                </div>
+            </section>
+
+            <section id="voice-constraints">
+                <h2>6. Voice and Constraints</h2>
+
+                <div class="callout callout--instructor">
+                    <h3 class="callout__title">Constraints That Apply to Both Tools</h3>
+                    <ul>
+                        <li>Both tools are CUI-authorized. PII should be anonymized in prompts where it is not load-bearing. CUI-level unit context (unit name, T&amp;R refs, billet titles) is acceptable on both.</li>
+                        <li>github.io is world-public. Never paste CUI into a static-HTML build that goes to a public github.io URL. The tools are CUI-clean. The static deploy target is not.</li>
+                        <li>Tool selection is itself a teachable skill. See Course 4.5 Module 1 (the two-tool world), Module 3 Scenario 5 (when to escalate to Ask Sage), and Module 4 (cross-check protocol for high-stakes outputs).</li>
+                        <li>PHI requires Ask Sage. Do not paste PHI into genai.mil under any circumstances. If you are not sure whether something is PHI, treat it as PHI.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>Print View</h2>
+                <p>
+                    Use your browser Print function to produce a PDF for routing or for a unit AI binder. The page header chrome and the table of contents are hidden on print. Each section breaks cleanly.
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>
+                        Open-source AI-assisted development training for DoW personnel.
+                        Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../courses/">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="../toolkit/">Toolkit</a></li>
+                        <li><a href="../tools/">Tools</a></li>
+                        <li><a href="./">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Course 4.5 Materials</h3>
+                    <ul>
+                        <li><a href="../courses/advanced.html">Course 4.5 Page</a></li>
+                        <li><a href="capability-gap-map.html">Capability Gap Map</a></li>
+                        <li><a href="static-hosting-cheat-sheet.html">Static Hosting Cheat Sheet</a></li>
+                        <li><a href="prompt-library.html">Prompt Library</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function() {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+
+    <script src="../js/enhancements.js"></script>
+
+</body>
+</html>

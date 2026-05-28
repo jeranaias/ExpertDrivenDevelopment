@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Five static-stack debugging scenarios for Course 4.5 Module 3 (Group Debugging) and informal team debriefs. Each scenario includes symptoms, attempted fixes, root cause, diagnostic questions, solution approach, and frontier classification.">
+    <title>Group Debugging Scenarios | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="site-wrapper">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="./" class="active">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="./" class="active">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Resources</a></li>
+                    <li aria-current="page">Group Debugging Scenarios</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Group Debugging Scenarios</h1>
+            <p class="page-header__desc">
+                Five canned debugging scenarios for the static-HTML stack. Each follows the same structure: a builder hits a bug, exhausts their first-pass fixes, and brings the problem to the group. The room diagnoses; the instructor synthesizes; the pattern gets documented. Use these when running Course 4.5 Module 3, or as standalone 30-minute team debriefs. Each answer key is collapsible so the room can think before peeking.
+            </p>
+            <div class="mt-lg">
+                <span class="badge badge--gold">Course 4.5</span>
+                <span class="badge">Resource</span>
+                <span class="badge">Module 3</span>
+            </div>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+            <div class="page-layout page-layout--sidebar">
+
+                <aside class="sidebar sidebar--sticky" aria-label="Table of contents">
+                    <nav class="toc">
+                        <h2 class="toc__title">On This Page</h2>
+                        <ul class="toc__list">
+                            <li><a href="#how-to-use">How to Use This Resource</a></li>
+                            <li><a href="#scenario-1">Scenario 1: Fetch Race / Double-Submit</a></li>
+                            <li><a href="#scenario-2">Scenario 2: Stale localStorage After Schema Change</a></li>
+                            <li><a href="#scenario-3">Scenario 3: CSS Specificity + Timezone</a></li>
+                            <li><a href="#scenario-4">Scenario 4: Event Delegation on Dynamic Content</a></li>
+                            <li><a href="#scenario-5">Scenario 5: Tool-Selection Failure</a></li>
+                            <li><a href="#final-synthesis">Final Synthesis</a></li>
+                            <li><a href="#when-to-use">When to Use in Training</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <div class="page-content">
+
+                    <section id="how-to-use">
+                        <h2>How to Use This Resource</h2>
+
+                        <h3>Course 4.5 Context</h3>
+                        <p>
+                            Course 4.5 Module 3 uses these scenarios when students don't bring their own broken tools. Run the Debugging Clinic Protocol: Student Presentation 2 min, Group Diagnosis 3 min, Instructor Synthesis 2 min, Document Pattern. That's 7 min per scenario, roughly 5 scenarios in 35 min.
+                        </p>
+
+                        <h3>Standalone Use</h3>
+                        <p>
+                            An NCO running an informal team debrief on a Tuesday can pull this URL up and run a 30-minute group debug without standing up the whole course apparatus. Pick one scenario, walk through it as a group. Two minutes to read it aloud, five minutes for the room to throw out diagnostic questions, two minutes for whoever has the right instinct to walk through the fix, three minutes to write the pattern down somewhere your section can find it again.
+                        </p>
+
+                        <h3>Reuse Outside Course 4.5</h3>
+                        <p>
+                            Course 3.5 graduates encountering these bugs in the field will Google "edd fetch race debug" and land here. That is intentional. The scenarios are written to be useful on their own, not just inside the course flow. If you are an NCO troubleshooting a tool a Marine in your section built and the symptoms match one of these, work the scenario before going back to the AI.
+                        </p>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">The Clinic Protocol in One Box</h3>
+                            <ol>
+                                <li><strong>Student Presentation (2 min).</strong> The presenter reads the Tool, Symptom, and Attempted Fixes aloud. No diagnostics yet.</li>
+                                <li><strong>Group Diagnosis (3 min).</strong> The room asks diagnostic questions in order of triage value. The presenter answers from what they know about their own code.</li>
+                                <li><strong>Instructor Synthesis (2 min).</strong> Reveal the answer key. Name the root cause. Connect it back to one of the three recurring patterns.</li>
+                                <li><strong>Document Pattern.</strong> Add a row to your Frontier Map for Frontier or Meta-frontier bugs. Context bugs go in the unit's tribal-knowledge doc, not the Frontier Map.</li>
+                            </ol>
+                        </div>
+                    </section>
+
+                    <section id="scenario-1">
+                        <h2>Scenario 1: Fetch Race / Double-Submit</h2>
+
+                        <h3>Tool</h3>
+                        <p>
+                            Counseling-tracker static page that POSTs form data to a Google Sheets webhook on submit.
+                        </p>
+
+                        <h3>Symptom</h3>
+                        <p>
+                            Occasionally creates duplicate rows in the sheet. When the user clicks Submit fast (double-clicks), it always duplicates.
+                        </p>
+
+                        <h3>Student's Attempted Fixes</h3>
+                        <ul>
+                            <li>"I added <code>event.preventDefault()</code> at the top of the click handler."</li>
+                            <li>"I added a flag variable, <code>isSubmitting = true</code>, and check it before the fetch."</li>
+                            <li>"I asked the AI for help. It gave me debounce code wrapped around the click handler. The duplicates still happen on a hard double-click."</li>
+                        </ul>
+
+                        <h3>Diagnostic Questions (the room asks)</h3>
+                        <ol>
+                            <li>Where is the click handler attached? On the button, or on the form?</li>
+                            <li>Is there ALSO a default form-submit handler firing?</li>
+                            <li>When the user double-clicks, in what order do the events fire?</li>
+                            <li>What does <code>event.preventDefault()</code> actually prevent on each handler?</li>
+                            <li>Does the debounce wrap the form-submit handler too, or just the click handler?</li>
+                            <li>If you disable the submit button on first click, does the second click still produce a form-submit event?</li>
+                        </ol>
+
+                        <details>
+                            <summary><strong>Answer Key (do not open until the room has diagnosed)</strong></summary>
+
+                            <h3>Root Cause</h3>
+                            <p>
+                                The AI's debounce wraps the click handler, but the form has BOTH a click handler on the button AND a default submit handler on the form element. A double-click triggers the click handler once (debounced) and the form-submit twice (not debounced, because the click event bubbles into the form's submit event independently). Two fetches go out. Two rows land in the sheet. The flag variable was checked inside the click handler only, so the form-submit path skipped the guard entirely.
+                            </p>
+
+                            <h3>Solution Approach</h3>
+                            <p>
+                                Single guard flag on the form-submit event. Set the flag true at the start of the async request, set it false in <code>.finally()</code>. Toggle the submit button's <code>disabled</code> attribute in sync so the user gets visual feedback. Remove the click handler entirely. The submit event covers Enter-key submission too, so you do not lose keyboard accessibility.
+                            </p>
+                            <pre><code>form.addEventListener('submit', async (event) =&gt; {
+  event.preventDefault();
+  if (form.dataset.busy === 'true') return;
+  form.dataset.busy = 'true';
+  submitBtn.disabled = true;
+  try {
+    await fetch(WEBHOOK_URL, { method: 'POST', body: new FormData(form) });
+  } finally {
+    form.dataset.busy = 'false';
+    submitBtn.disabled = false;
+  }
+});</code></pre>
+
+                            <h3>Frontier Classification</h3>
+                            <p>
+                                <strong>Context.</strong> The AI didn't know there were two handlers attached because the student only pasted the click handler. The AI's debounce was correct for the code it could see. Fix is to give the AI the whole event-binding picture, or skip the AI and reason about the event flow yourself.
+                            </p>
+                        </details>
+                    </section>
+
+                    <section id="scenario-2">
+                        <h2>Scenario 2: Stale localStorage After Schema Change</h2>
+
+                        <h3>Tool</h3>
+                        <p>
+                            A TEEP-like tracker the student built last week. They added a new field, <code>t_and_r_reference</code>, to the form yesterday.
+                        </p>
+
+                        <h3>Symptom</h3>
+                        <p>
+                            Existing rows render with <code>undefined</code> in the new column. Saving any edit overwrites the field with empty. The student cleared localStorage locally and it worked, but a Marine in the field reopened an old browser tab from before the field was added and lost data.
+                        </p>
+
+                        <h3>Student's Attempted Fixes</h3>
+                        <ul>
+                            <li>"I wrapped the render in a <code>|| ''</code> fallback so the <code>undefined</code> stopped showing."</li>
+                            <li>"But the saves from old tabs still wipe the field on rows that already had the new data."</li>
+                            <li>"I added a comment in the code that says 'do not open old tabs.' That obviously is not a fix."</li>
+                        </ul>
+
+                        <h3>Diagnostic Questions (the room asks)</h3>
+                        <ol>
+                            <li>When the old tab writes back, what version of the code is it running?</li>
+                            <li>What localStorage key is it writing to?</li>
+                            <li>What happens on read if the JSON shape changes between code versions?</li>
+                            <li>Is there a way for one tab to know whether another tab has the new code loaded?</li>
+                            <li>How would you migrate the data without breaking the still-open old tabs?</li>
+                            <li>What's the cost of a one-time migration vs. ongoing compatibility shims?</li>
+                        </ol>
+
+                        <details>
+                            <summary><strong>Answer Key (do not open until the room has diagnosed)</strong></summary>
+
+                            <h3>Root Cause</h3>
+                            <p>
+                                Schema version mismatch across tabs. The new tab loaded the new code with the new field. The old tab is still running yesterday's code and writes back JSON without the new field. Both write to the same <code>edd-teep-v1</code> key, so the old tab silently overwrites the new tab's data on every save. The fallback in render hid the symptom but did not stop the data loss.
+                            </p>
+
+                            <h3>Solution Approach</h3>
+                            <p>
+                                Bump the localStorage key from <code>v1</code> to <code>v2</code> (<code>edd-teep-v2</code>). Write a migration function that runs at page load: read v1, if present, copy each row to v2 adding the new field with a default value, leave v1 in place as read-only for any still-open old tabs. New writes go to v2 only. Include a <code>schemaVersion</code> field in the JSON so any old tab that does happen to read v2 knows not to write back. Optionally add a load-time check that compares the in-page code version to the stored <code>schemaVersion</code> and shows a "reload to update" banner if mismatched.
+                            </p>
+                            <pre><code>const SCHEMA_VERSION = 2;
+const KEY = 'edd-teep-v2';
+
+function migrate() {
+  if (localStorage.getItem(KEY)) return;
+  const old = localStorage.getItem('edd-teep-v1');
+  if (!old) return;
+  const rows = JSON.parse(old).map(r =&gt; ({
+    ...r,
+    t_and_r_reference: r.t_and_r_reference || '',
+    schemaVersion: SCHEMA_VERSION
+  }));
+  localStorage.setItem(KEY, JSON.stringify(rows));
+}</code></pre>
+
+                            <h3>Frontier Classification</h3>
+                            <p>
+                                <strong>Frontier.</strong> The AI does not natively reason about cross-tab consistency or schema migration. It will generate a working tool on day one and a working schema change on day two and never warn you that day-two breaks day-one tabs. Students must learn the pattern explicitly and prompt for it. Add it to the Frontier Map.
+                            </p>
+                        </details>
+                    </section>
+
+                    <section id="scenario-3">
+                        <h2>Scenario 3: CSS Specificity Collision Plus Timezone Bug</h2>
+
+                        <h3>Tool</h3>
+                        <p>
+                            The student's watch-bill output table. They added a "highlight today" class so the current day's row stands out.
+                        </p>
+
+                        <h3>Symptom</h3>
+                        <p>
+                            The row stays default-colored. After adding <code>!important</code>, it highlights, but also highlights yesterday and tomorrow. The student asked the AI for a stricter date comparison, got <code>===</code>, but rows still mismatch.
+                        </p>
+
+                        <h3>Student's Attempted Fixes</h3>
+                        <ul>
+                            <li>"I made the <code>.highlight</code> class <code>!important</code>. Now it highlights, but also highlights yesterday and tomorrow."</li>
+                            <li>"I asked the AI to make the date comparison stricter and it generated code that uses <code>===</code>. The row still matches yesterday."</li>
+                            <li>"I tried storing the date as a string instead of a Date object. Same problem."</li>
+                        </ul>
+
+                        <h3>Diagnostic Questions (the room asks)</h3>
+                        <p>This is two bugs stacked. Work them separately.</p>
+                        <ol>
+                            <li>Why didn't the class apply at all before <code>!important</code>?</li>
+                            <li>What's the existing CSS rule for <code>tr td.day</code> vs. <code>tr.highlight td</code>?</li>
+                            <li>What are the specificity scores of those two selectors?</li>
+                            <li>When you compare <code>new Date(dateStr)</code> to <code>new Date()</code>, what timezone is each in?</li>
+                            <li>What does <code>toDateString()</code> return at 23:00 local time east of UTC vs. 02:00 local time west of UTC?</li>
+                            <li>If two Marines run this tool at the same wall-clock moment in different timezones, do they see the same "today"?</li>
+                        </ol>
+
+                        <details>
+                            <summary><strong>Answer Key (do not open until the room has diagnosed)</strong></summary>
+
+                            <h3>Root Cause (Two Bugs)</h3>
+                            <p>
+                                <strong>(a) Specificity collision.</strong> <code>tr.highlight td { background: ...}</code> is being overridden by the existing <code>tr td.day { background: ...}</code> rule, because the td-class selector wins on specificity (0,1,2 vs. 0,2,1, the td-class side has more class selectors at a lower level). The new rule never wins until <code>!important</code> is bolted on, and <code>!important</code> is not actually fixing the highlight scope.
+                            </p>
+                            <p>
+                                <strong>(b) Timezone mismatch.</strong> <code>new Date(dateStr)</code> on a bare YYYY-MM-DD string gives midnight UTC. Comparison against <code>new Date()</code> (local "now") hits yesterday's date for any user west of UTC after about 16:00 local, and tomorrow's for users east of UTC before about 08:00 local. The <code>===</code> the AI suggested is a stricter comparison of two values that are already in different timezones, so it does not help.
+                            </p>
+
+                            <h3>Solution Approach</h3>
+                            <p>
+                                Drop <code>!important</code>. Restructure to set the highlight class on the <code>&lt;td&gt;</code> directly (<code>td.day.highlight</code>) matching specificity, OR change the existing <code>tr td.day</code> rule to <code>tr:not(.highlight) td.day</code> so the highlight row falls through. For the date comparison, use <code>toDateString()</code> on both sides (which renders in local time) OR compare on local date parts (<code>getFullYear()</code>, <code>getMonth()</code>, <code>getDate()</code>) so both sides are in the user's local timezone.
+                            </p>
+                            <pre><code>function isToday(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00'); // local midnight
+  const now = new Date();
+  return d.getFullYear() === now.getFullYear()
+      && d.getMonth() === now.getMonth()
+      && d.getDate() === now.getDate();
+}</code></pre>
+
+                            <h3>Frontier Classification</h3>
+                            <p>
+                                <strong>Mixed.</strong> The specificity collision is Context: the AI didn't know about the existing <code>tr td.day</code> rule in the stylesheet because the student only pasted the new rule. The timezone bug is Frontier: the AI consistently misses date-comparison timezone gotchas without explicit prompting. Two different lessons in one bug.
+                            </p>
+                        </details>
+                    </section>
+
+                    <section id="scenario-4">
+                        <h2>Scenario 4: Event Delegation on Dynamic Content</h2>
+
+                        <h3>Tool</h3>
+                        <p>
+                            A list-based tool (call it a Tasking Tracker) where rows are re-rendered on every state change.
+                        </p>
+
+                        <h3>Symptom</h3>
+                        <p>
+                            Clicking "Delete" works on initial-render rows. Clicking "Delete" on rows added later in the session is silent. The AI suggested <code>addEventListener</code> on each button after rendering, which the student did, but new rows still don't respond reliably.
+                        </p>
+
+                        <h3>Student's Attempted Fixes</h3>
+                        <ul>
+                            <li>"I added the click handler in the render function for every button."</li>
+                            <li>"The AI said use <code>addEventListener</code> on each button after rendering, which I do, but new rows added later still don't respond."</li>
+                            <li>"I added a <code>console.log</code> in the handler. It never fires for the new rows."</li>
+                            <li>"I tried <code>removeEventListener</code> before re-adding. Same problem."</li>
+                        </ul>
+
+                        <h3>Diagnostic Questions (the room asks)</h3>
+                        <ol>
+                            <li>When you call <code>render()</code>, what happens to the existing <code>&lt;tbody&gt;</code> and its child buttons?</li>
+                            <li>When you re-attach handlers in render, what DOM nodes are you re-attaching to?</li>
+                            <li>Are the old handler references being garbage-collected with their nodes?</li>
+                            <li>What if the user clicks during the render window?</li>
+                            <li>What is a single handler that survives every re-render?</li>
+                            <li>If the handler lives on the container, how does it know which row was clicked?</li>
+                        </ol>
+
+                        <details>
+                            <summary><strong>Answer Key (do not open until the room has diagnosed)</strong></summary>
+
+                            <h3>Root Cause</h3>
+                            <p>
+                                The render function tears down and rebuilds the entire <code>&lt;tbody&gt;</code> on each state change. Per-element handlers attached inside <code>render()</code> exist only for the lifetime of that render's DOM nodes. The next render destroys those nodes and their handlers. New buttons get new handlers in the next render, so the user perceives it as working "sometimes." The real architecture fix is event delegation: one handler on a stable parent element that dispatches by inspecting the click target.
+                            </p>
+
+                            <h3>Solution Approach</h3>
+                            <p>
+                                One click listener on <code>&lt;tbody&gt;</code> (or whatever container survives renders). Dispatch based on <code>event.target.closest('[data-action]')</code>. Each button gets a <code>data-action="delete"</code> and <code>data-row-id="N"</code> attribute instead of a per-element handler. The handler reads the attributes, dispatches to the appropriate state mutation, triggers a re-render. The listener survives all future renders because the container element never gets replaced.
+                            </p>
+                            <pre><code>tbody.addEventListener('click', (event) =&gt; {
+  const btn = event.target.closest('[data-action]');
+  if (!btn) return;
+  const action = btn.dataset.action;
+  const id = btn.dataset.rowId;
+  if (action === 'delete') {
+    state.rows = state.rows.filter(r =&gt; r.id !== id);
+    render();
+  }
+});</code></pre>
+
+                            <h3>Frontier Classification</h3>
+                            <p>
+                                <strong>Frontier.</strong> The AI consistently writes per-element handlers and consistently fails to suggest delegation as the architecture fix without explicit prompting. Once you prompt with "use event delegation," the AI nails it. This is a high-value Frontier Map entry: any list-based tool with re-rendering is a candidate. Document it once, prompt with it forever.
+                            </p>
+                        </details>
+                    </section>
+
+                    <section id="scenario-5">
+                        <h2>Scenario 5: Tool-Selection Failure</h2>
+
+                        <h3>Tool</h3>
+                        <p>
+                            The student is refactoring a 600-line static-HTML readiness dashboard to add a new pivot view. Three files are involved: <code>dashboard.html</code>, <code>sample-data.json</code>, and a separate stylesheet.
+                        </p>
+
+                        <h3>Symptom</h3>
+                        <p>
+                            The student has been in a genai.mil chat session for 90 minutes, 47 prompt iterations. The AI keeps suggesting fixes that work for ONE file but break the others. The student keeps re-pasting the latest version of each file. The AI keeps losing context. The conversation has become incoherent.
+                        </p>
+
+                        <h3>Student's Attempted Fixes</h3>
+                        <ul>
+                            <li>"I tried explaining the whole architecture again at prompt 20."</li>
+                            <li>"I tried summarizing the previous prompts in a single block at prompt 32."</li>
+                            <li>"I tried starting a fresh chat. Same problem 15 prompts in."</li>
+                            <li>"I switched from GPT-4o to the reasoning model in genai.mil and it kept losing the file context between prompts."</li>
+                        </ul>
+
+                        <h3>Diagnostic Questions (the room asks)</h3>
+                        <ol>
+                            <li>What tool is the student using?</li>
+                            <li>What does that tool ingest? What does it NOT ingest?</li>
+                            <li>Where does Ask Sage differ from genai.mil for multi-file work?</li>
+                            <li>When does multi-file context outweigh prompt-iteration speed?</li>
+                            <li>Has the student tried Ask Sage's file ingestion for this refactor?</li>
+                            <li>What is the prompt that gets Ask Sage to "see" all three files at once?</li>
+                        </ol>
+
+                        <details>
+                            <summary><strong>Answer Key (do not open until the room has diagnosed)</strong></summary>
+
+                            <h3>Root Cause</h3>
+                            <p>
+                                The student is using the wrong tool. genai.mil chat is excellent for single-shot prompts and short conversational iteration, but it does not have persistent multi-file context. Every paste is a fresh re-read of every file. By prompt 30 the chat context is too large and the model is dropping earlier content. The student keeps trying harder at a tool that cannot do the job. Ask Sage ingests DOCX, PDF, JSON, CSV, and code directly, and with a reasoning model it can hold all three files in working context across many prompts.
+                            </p>
+
+                            <h3>Solution Approach</h3>
+                            <p>
+                                Stop the genai.mil session. Open Ask Sage. Upload all three files (<code>dashboard.html</code>, <code>sample-data.json</code>, the stylesheet). Select a reasoning-capable model. Issue one focused prompt that names the desired change set across all three files. Ask for the change set first, then a file-by-file walk-through.
+                            </p>
+                            <pre><code>Here are three files for a static-HTML readiness dashboard.
+I need to add a pivot view that groups by company and shows
+readiness trend over the last 4 weeks. Propose a single
+change set across all three files, then walk me through it
+file by file.</code></pre>
+
+                            <h3>Frontier Classification</h3>
+                            <p>
+                                <strong>Meta-frontier.</strong> Knowing when to switch tools is itself a 201-level skill. The frontier here isn't AI capability, it is AI-tool-fit. This is one of the highest-value lessons in Course 4.5 because it generalizes. Any time you find yourself iterating with the AI more than about 10 times on the same problem, the question to ask is "am I using the wrong tool for this kind of problem?"
+                            </p>
+                        </details>
+                    </section>
+
+                    <section id="final-synthesis">
+                        <h2>Final Synthesis</h2>
+
+                        <h3>The Three Patterns That Recur in Static-Stack Debugging</h3>
+                        <p>
+                            Look across the five scenarios and the same three patterns surface again and again. Name them out loud at the end of every clinic so the room hears the pattern, not just the bug.
+                        </p>
+                        <ul>
+                            <li><strong>State mismatch.</strong> The code in front of you is not the only state in play. Scenarios 2, 3, and 5 are all state mismatches: stored data is on an old schema, a date value is in a different timezone than its comparison, the AI's mental model of your files is several prompts stale. When a fix works "sometimes" or works in one environment and not another, suspect state mismatch first.</li>
+                            <li><strong>Wrong primitive.</strong> The student picked the wrong tool for the job at the code level. Scenarios 1 and 4 are wrong-primitive bugs: a click handler when the form-submit handler was the right anchor, per-element handlers when delegation was the right architecture. Wrong-primitive bugs almost always come with a tell, which is that you find yourself patching the same symptom in multiple places.</li>
+                            <li><strong>Wrong tool.</strong> Scenario 5 explicitly. The AI tool you are using cannot do the thing you are asking it to do. No amount of better prompting closes that gap. The fix is to switch tools, not to keep iterating.</li>
+                        </ul>
+
+                        <h3>The Two-Step Diagnostic Instinct</h3>
+                        <p>
+                            When a student brings a broken tool to the group, the instructor's job is to make the diagnostic instinct visible. Two questions, in order:
+                        </p>
+                        <ol>
+                            <li><strong>Is this Context, Frontier, or Meta-frontier?</strong> Context bugs get fixed by giving the AI more of the picture. Frontier bugs require you to know the pattern and prompt for it. Meta-frontier bugs require you to change tools.</li>
+                            <li><strong>Am I using the right AI for this kind of problem?</strong> If the answer is no, stop iterating and switch. The tool-selection question is the one most students skip, which is why scenario 5 is the highest-leverage scenario in the set.</li>
+                        </ol>
+
+                        <h3>Document the Pattern</h3>
+                        <p>
+                            Marines should add a row to their Frontier Map for each Frontier-classified or Meta-frontier-classified bug they diagnose in the room. Context-only bugs go in the unit's tribal-knowledge doc, not the Frontier Map, because Context fixes are situational and do not generalize. The Frontier Map is the institutional memory. It is the artifact that survives the Marine rotating out of the section. Without it, the next NCO rediscovers the cross-tab schema bug, the timezone bug, and the event-delegation bug from scratch.
+                        </p>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Instructor Note</h3>
+                            <p>
+                                If the room runs the full five scenarios and no Frontier Map rows get written, the clinic did not work. Names of bugs are not the deliverable. Documented patterns the next Marine can prompt with are the deliverable. End the module by reading the room's new Frontier Map rows aloud. If there are fewer than three, run one more scenario.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section id="when-to-use">
+                        <h2>When to Use in Training</h2>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Three Use Modes</h3>
+                            <ul>
+                                <li><strong>Course 4.5 Module 3 with no student-brought tools.</strong> Pick 4 or 5 of these in order. Run the full clinic protocol on each. Plan 35 to 40 minutes. The classroom always works because the scenarios are pre-baked.</li>
+                                <li><strong>Course 4.5 Module 3 with student-brought tools.</strong> Use 2 or 3 of these as warm-up to teach the protocol with low-stakes bugs, then dispatch the rest of Module 3 to the student-brought problems. Student-brought tools are higher-signal, but the warm-up gets the diagnostic instinct calibrated first.</li>
+                                <li><strong>Informal team debrief on a Tuesday.</strong> An NCO picks one scenario, runs the 7-minute clinic protocol, debriefs in 5 more minutes. 12-minute total commitment. No standing up the course apparatus, no formal session block. Just the URL and a whiteboard.</li>
+                            </ul>
+                        </div>
+
+                        <p>
+                            Sibling resources you may want at the same time: the <a href="capability-gap-map.html">Capability Gap Map</a> for Course 3.5, the <a href="static-hosting-cheat-sheet.html">Static Hosting Cheat Sheet</a> for the prototype-layer deployment question, and the <a href="../courses/advanced-reality.html">Course 4.5 page</a> for the full module breakdown.
+                        </p>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>
+                        Open-source AI-assisted development training for DoW personnel.
+                        Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../courses/">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="../toolkit/">Toolkit</a></li>
+                        <li><a href="../tools/">Tools</a></li>
+                        <li><a href="./">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Course 4.5 Materials</h3>
+                    <ul>
+                        <li><a href="../courses/advanced-reality.html">Course 4.5 Page</a></li>
+                        <li><a href="../decks/week-4-5-advanced-reality.html">Course 4.5 Deck</a></li>
+                        <li><a href="capability-gap-map.html">Capability Gap Map</a></li>
+                        <li><a href="static-hosting-cheat-sheet.html">Static Hosting Cheat Sheet</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function() {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+
+    <script src="../js/enhancements.js"></script>
+
+</body>
+</html>

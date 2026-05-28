@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="EDD Reference Build: Unit Readiness Dashboard. Single-file static HTML, runs offline, deploys via GitHub Pages.">
+<title>Unit Readiness Dashboard | EDD Reference Build</title>
+<style>
+  :root {
+    --scarlet: #CC0000;
+    --scarlet-dark: #a30000;
+    --gold: #F5D130;
+    --gold-dark: #c9a700;
+    --ink: #1a1a1a;
+    --muted: #6e6e6e;
+    --border: #d9d8d4;
+    --bg: #ffffff;
+    --bg-soft: #f8f7f5;
+    --bg-code: #f4f3f0;
+    --ok: #1b5e20;
+    --ok-bg: #e6f4ea;
+    --warn: #5f4b08;
+    --warn-bg: #fef7e0;
+    --err: #5c0000;
+    --err-bg: #fce8e8;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body.readiness-dashboard {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg-soft);
+    line-height: 1.5;
+    font-size: 16px;
+  }
+  header.top {
+    background: var(--ink);
+    color: #fff;
+    padding: 14px 20px;
+    border-bottom: 4px solid var(--scarlet);
+  }
+  header.top h1 {
+    margin: 0; font-size: 1.25rem; font-weight: 700; letter-spacing: 0.02em;
+  }
+  header.top .sub { font-size: 0.85rem; opacity: 0.8; margin-top: 2px; }
+  main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 20px 60px;
+  }
+  .classmark {
+    background: #006400; color: #fff; text-align: center;
+    padding: 4px 0; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.15em;
+  }
+  .toolbar {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  .toolbar h2 { margin: 0; font-size: 1rem; flex: 1; min-width: 200px; }
+  .toolbar .meta { color: var(--muted); font-size: 0.85rem; }
+  button {
+    font-family: inherit; font-size: 0.9rem; font-weight: 600;
+    padding: 8px 14px; border: 1px solid transparent; border-radius: 4px;
+    cursor: pointer; letter-spacing: 0.02em;
+  }
+  button.primary { background: var(--scarlet); color: #fff; }
+  button.primary:hover { background: var(--scarlet-dark); }
+  button.secondary { background: #fff; color: var(--ink); border-color: var(--border); }
+  button.secondary:hover { background: var(--bg-code); }
+  .callout {
+    background: var(--warn-bg);
+    border-left: 4px solid var(--gold);
+    padding: 12px 16px;
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 18px;
+    font-size: 0.88rem;
+    color: #4a3a08;
+  }
+  .callout strong { color: var(--ink); }
+  .input-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  @media (max-width: 1100px) { .input-grid { grid-template-columns: 1fr; } }
+  .input-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+  .input-card h3 {
+    margin: 0 0 10px;
+    font-size: 0.95rem;
+    border-bottom: 2px solid var(--scarlet);
+    padding-bottom: 6px;
+  }
+  .input-card .hint {
+    color: var(--muted);
+    font-size: 0.78rem;
+    margin-bottom: 8px;
+  }
+  textarea.data-input {
+    width: 100%;
+    min-height: 180px;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.78rem;
+    background: #fff;
+    resize: vertical;
+    line-height: 1.4;
+  }
+  textarea.data-input:focus {
+    outline: 2px solid var(--scarlet);
+    outline-offset: -1px;
+    border-color: var(--scarlet);
+  }
+  .input-status {
+    font-size: 0.78rem;
+    margin-top: 6px;
+    min-height: 18px;
+  }
+  .input-status.ok { color: var(--ok); }
+  .input-status.err { color: var(--err); }
+  .dash-grid {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+  @media (max-width: 900px) { .dash-grid { grid-template-columns: 1fr; } }
+  .overall-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 20px;
+    text-align: center;
+  }
+  .overall-card h2 {
+    margin: 0 0 12px;
+    font-size: 0.95rem;
+    border-bottom: 2px solid var(--scarlet);
+    padding-bottom: 6px;
+    text-align: left;
+  }
+  .overall-percent {
+    font-size: 4.5rem;
+    font-weight: 800;
+    line-height: 1;
+    margin: 8px 0 4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .overall-percent.green { color: var(--ok); }
+  .overall-percent.amber { color: var(--gold-dark); }
+  .overall-percent.red { color: var(--scarlet-dark); }
+  .overall-label {
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+  }
+  .overall-counts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 14px;
+    text-align: left;
+  }
+  .overall-counts .item {
+    padding: 8px 10px;
+    border-radius: 4px;
+    background: var(--bg-code);
+  }
+  .overall-counts .item .n {
+    font-size: 1.4rem; font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .overall-counts .item .lab {
+    font-size: 0.72rem; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+  .overall-counts .item.ready .n { color: var(--ok); }
+  .overall-counts .item.notready .n { color: var(--scarlet-dark); }
+  .chart-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+  }
+  .chart-card h2 {
+    margin: 0 0 12px;
+    font-size: 0.95rem;
+    border-bottom: 2px solid var(--scarlet);
+    padding-bottom: 6px;
+  }
+  .chart-svg-wrap {
+    width: 100%;
+    min-height: 200px;
+  }
+  .chart-svg-wrap svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .chart-empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 30px 20px;
+    font-size: 0.88rem;
+  }
+  .table-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+    overflow-x: auto;
+  }
+  .table-card h2 {
+    margin: 0 0 12px;
+    font-size: 0.95rem;
+    border-bottom: 2px solid var(--scarlet);
+    padding-bottom: 6px;
+  }
+  table.nrtable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    min-width: 720px;
+  }
+  table.nrtable th, table.nrtable td {
+    text-align: left;
+    padding: 7px 9px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table.nrtable th {
+    background: var(--bg-code);
+    font-weight: 700;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  table.nrtable tr:hover td { background: #fafaf8; }
+  .name-cell { font-weight: 600; }
+  .reason-cell { color: #444; font-size: 0.82rem; }
+  .reason-pill {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin: 1px 3px 1px 0;
+    border: 1px solid;
+    letter-spacing: 0.03em;
+  }
+  .reason-pill.training {
+    background: var(--warn-bg);
+    color: var(--warn);
+    border-color: var(--gold-dark);
+  }
+  .reason-pill.equipment {
+    background: var(--err-bg);
+    color: var(--err);
+    border-color: var(--scarlet);
+  }
+  .empty-state {
+    text-align: center; color: var(--muted);
+    padding: 40px 20px; font-size: 0.9rem;
+  }
+  .empty-state .big {
+    font-size: 2.4rem; line-height: 1;
+    color: var(--border); margin-bottom: 8px;
+  }
+  .brief-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+  }
+  .brief-card h2 {
+    margin: 0 0 10px;
+    font-size: 0.95rem;
+    border-bottom: 2px solid var(--scarlet);
+    padding-bottom: 6px;
+  }
+  .brief-out {
+    width: 100%;
+    min-height: 240px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    background: var(--bg-code);
+    resize: vertical;
+  }
+  .toast {
+    position: fixed; bottom: 24px; right: 24px;
+    background: var(--ink); color: #fff;
+    padding: 10px 16px; border-radius: 4px; font-size: 0.88rem;
+    opacity: 0; transform: translateY(8px);
+    transition: opacity 0.18s, transform 0.18s;
+    pointer-events: none; z-index: 100;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  footer.foot {
+    margin-top: 30px; padding-top: 18px;
+    border-top: 1px solid var(--border);
+    color: var(--muted); font-size: 0.8rem; text-align: center;
+  }
+  footer.foot a { color: var(--scarlet-dark); }
+  @media print {
+    body.readiness-dashboard { background: #fff; }
+    header.top, .toolbar, .callout, .input-grid, .brief-card, footer.foot { display: none; }
+    main { max-width: none; padding: 0; }
+    .overall-card, .chart-card, .table-card { border: none; padding: 0; margin-bottom: 18px; page-break-inside: avoid; }
+    table.nrtable { font-size: 0.78rem; min-width: 0; }
+    .classmark { background: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    table.nrtable th { background: #e5e5e5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .dash-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body class="readiness-dashboard">
+
+<div class="classmark">UNCLASSIFIED</div>
+
+<header class="top">
+  <h1>Unit Readiness Dashboard &middot; Personnel, Training, Equipment</h1>
+  <div class="sub">EDD Reference Build &middot; runs offline, persists to your browser, exports a commander's snapshot</div>
+</header>
+
+<main>
+
+  <div class="toolbar">
+    <h2>Unit: <span id="unit-name">1st Bn, 4th Marines</span></h2>
+    <span class="meta" id="readiness-meta"></span>
+    <button class="secondary" id="rename-unit" aria-label="Rename unit">Rename Unit</button>
+    <button class="primary" id="parse-all" aria-label="Recompute readiness from current data">Recompute Readiness</button>
+    <button class="secondary" id="seed" aria-label="Load sample data">Load Sample Data</button>
+    <button class="secondary" id="wipe" aria-label="Clear all data">Clear All</button>
+    <button class="secondary" id="print" aria-label="Print dashboard">Print</button>
+  </div>
+
+  <div class="callout" role="note">
+    <strong>Tool selection.</strong> This dashboard is the static-stack equivalent of a Power BI dashboard. For the dataset analysis phase (Phase 1), use Ask Sage with a reasoning model (Claude 3 or GPT o-series) and upload the actual CSVs. For fast iterative coding (Phase 2), genai.mil chat is fine. Both are first-class tools. Pick the right one for the phase.
+  </div>
+
+  <div class="input-grid">
+    <div class="input-card">
+      <h3>Personnel</h3>
+      <div class="hint">JSON array or CSV. Fields: last_name, first_name, rank, edipi, unit, billet.</div>
+      <label for="ta-personnel" class="visually-hidden" style="position:absolute;left:-9999px">Personnel data</label>
+      <textarea id="ta-personnel" class="data-input" spellcheck="false" aria-label="Personnel data"></textarea>
+      <div id="status-personnel" class="input-status"></div>
+    </div>
+    <div class="input-card">
+      <h3>Training</h3>
+      <div class="hint">JSON array or CSV. Fields: edipi, training_event, completion_date, expires.</div>
+      <textarea id="ta-training" class="data-input" spellcheck="false" aria-label="Training data"></textarea>
+      <div id="status-training" class="input-status"></div>
+    </div>
+    <div class="input-card">
+      <h3>Equipment</h3>
+      <div class="hint">JSON array or CSV. Fields: equipment_id, nomenclature, status_code (FMC/PMC/NMC), assigned_edipi.</div>
+      <textarea id="ta-equipment" class="data-input" spellcheck="false" aria-label="Equipment data"></textarea>
+      <div id="status-equipment" class="input-status"></div>
+    </div>
+  </div>
+
+  <div class="dash-grid">
+    <section class="overall-card" aria-labelledby="overall-h">
+      <h2 id="overall-h">Overall Readiness</h2>
+      <div id="overall-percent" class="overall-percent green">0%</div>
+      <div class="overall-label">Marines READY</div>
+      <div class="overall-counts">
+        <div class="item ready"><div class="n" id="count-ready">0</div><div class="lab">Ready</div></div>
+        <div class="item notready"><div class="n" id="count-notready">0</div><div class="lab">Not Ready</div></div>
+      </div>
+    </section>
+
+    <section class="chart-card" aria-labelledby="chart-h">
+      <h2 id="chart-h">Readiness by Company</h2>
+      <div id="chart-wrap" class="chart-svg-wrap">
+        <div class="chart-empty">Parse data to see per-company readiness.</div>
+      </div>
+    </section>
+  </div>
+
+  <section class="table-card" aria-labelledby="nr-h">
+    <h2 id="nr-h">Not Ready Marines</h2>
+    <div id="nr-wrap">
+      <div class="empty-state">
+        <div class="big">&#9678;</div>
+        <div>No data parsed yet. Paste data above and click Recompute Readiness.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="brief-card" aria-labelledby="brief-h">
+    <h2 id="brief-h">Commander's Readiness Snapshot</h2>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+      <button class="primary" id="gen-brief" aria-label="Generate commander's readiness snapshot">Generate Snapshot</button>
+      <button class="secondary" id="copy-brief" aria-label="Copy snapshot to clipboard">Copy</button>
+    </div>
+    <label for="brief-out" style="position:absolute;left:-9999px">Commander's readiness snapshot</label>
+    <textarea class="brief-out" id="brief-out" readonly placeholder="Click Generate to produce a plain-text readiness brief for the CO."></textarea>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <p><strong>EDD Reference Build &middot; Unit Readiness Dashboard</strong><br>
+  Course 4.5: Advanced Workshop (Locked Tenant Reality) &middot; Expert-Driven Development<br>
+  Author: SSgt Jesse C. Morgan, MCD-Monterey &middot;
+  <a href="https://jeranaias.github.io/ExpertDrivenDevelopment/">jeranaias.github.io/ExpertDrivenDevelopment</a></p>
+  <p>Runs 100% offline after page load. Data persists to your browser only. No external scripts, fonts, or stylesheets.</p>
+</footer>
+
+<div class="classmark">UNCLASSIFIED</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function() {
+  'use strict';
+
+  var STORAGE_PERSONNEL = 'edd-readiness-personnel-v1';
+  var STORAGE_TRAINING = 'edd-readiness-training-v1';
+  var STORAGE_EQUIPMENT = 'edd-readiness-equipment-v1';
+  var STORAGE_UNIT = 'edd-readiness-unit-v1';
+
+  var REQUIRED_TRAINING = ['Rifle Qual', 'Annual Training (PME)', 'Combat Lifesaver', 'Swim Qual'];
+  var RANK_ORDER = ['Pvt','PFC','LCpl','Cpl','Sgt','SSgt','GySgt','MSgt','1stSgt','MGySgt','SgtMaj','2ndLt','1stLt','Capt','Maj','LtCol','Col'];
+
+  var unitName = '1st Bn, 4th Marines';
+  var personnel = [];
+  var training = [];
+  var equipment = [];
+
+  // ---- Sample data ----
+  function samplePersonnel() {
+    return [
+      { last_name: 'Alvarez', first_name: 'Mateo', rank: 'Cpl', edipi: '1000000001', unit: 'A Co, 1/4', billet: 'Team Leader' },
+      { last_name: 'Bennett', first_name: 'Jordan', rank: 'LCpl', edipi: '1000000002', unit: 'A Co, 1/4', billet: 'Rifleman' },
+      { last_name: 'Choi', first_name: 'Daniel', rank: 'Sgt', edipi: '1000000003', unit: 'A Co, 1/4', billet: 'Squad Leader' },
+      { last_name: 'Diaz', first_name: 'Rafael', rank: 'PFC', edipi: '1000000004', unit: 'A Co, 1/4', billet: 'Rifleman' },
+      { last_name: 'Edwards', first_name: 'Marcus', rank: 'LCpl', edipi: '1000000005', unit: 'A Co, 1/4', billet: 'Automatic Rifleman' },
+      { last_name: 'Fischer', first_name: 'Liam', rank: 'Cpl', edipi: '1000000006', unit: 'A Co, 1/4', billet: 'Team Leader' },
+      { last_name: 'Garza', first_name: 'Eduardo', rank: 'SSgt', edipi: '1000000007', unit: 'A Co, 1/4', billet: 'Platoon Sergeant' },
+      { last_name: 'Holt', first_name: 'Nathaniel', rank: 'PFC', edipi: '1000000008', unit: 'A Co, 1/4', billet: 'Rifleman' },
+      { last_name: 'Ito', first_name: 'Kenji', rank: 'LCpl', edipi: '1000000009', unit: 'A Co, 1/4', billet: 'Rifleman' },
+      { last_name: 'Jackson', first_name: 'Andre', rank: 'Cpl', edipi: '1000000010', unit: 'A Co, 1/4', billet: 'Team Leader' },
+      { last_name: 'Khan', first_name: 'Imran', rank: 'Sgt', edipi: '1000000011', unit: 'B Co, 1/4', billet: 'Squad Leader' },
+      { last_name: 'Larson', first_name: 'Tyler', rank: 'LCpl', edipi: '1000000012', unit: 'B Co, 1/4', billet: 'Rifleman' },
+      { last_name: 'Morales', first_name: 'Hector', rank: 'PFC', edipi: '1000000013', unit: 'B Co, 1/4', billet: 'Rifleman' },
+      { last_name: 'Nguyen', first_name: 'Long', rank: 'Cpl', edipi: '1000000014', unit: 'B Co, 1/4', billet: 'Machine Gunner' },
+      { last_name: 'Okafor', first_name: 'Chidi', rank: 'LCpl', edipi: '1000000015', unit: 'B Co, 1/4', billet: 'Rifleman' },
+      { last_name: 'Patel', first_name: 'Arjun', rank: 'GySgt', edipi: '1000000016', unit: 'B Co, 1/4', billet: 'Company Gunny' },
+      { last_name: 'Quinn', first_name: 'Sean', rank: 'PFC', edipi: '1000000017', unit: 'B Co, 1/4', billet: 'Rifleman' },
+      { last_name: 'Reyes', first_name: 'Diego', rank: 'Cpl', edipi: '1000000018', unit: 'B Co, 1/4', billet: 'Team Leader' },
+      { last_name: 'Sokolov', first_name: 'Anton', rank: 'LCpl', edipi: '1000000019', unit: 'B Co, 1/4', billet: 'Rifleman' },
+      { last_name: 'Tran', first_name: 'Vincent', rank: 'Sgt', edipi: '1000000020', unit: 'B Co, 1/4', billet: 'Squad Leader' },
+      { last_name: 'Underwood', first_name: 'Caleb', rank: 'LCpl', edipi: '1000000021', unit: 'C Co, 1/4', billet: 'Rifleman' },
+      { last_name: 'Vargas', first_name: 'Joaquin', rank: 'Cpl', edipi: '1000000022', unit: 'C Co, 1/4', billet: 'Team Leader' },
+      { last_name: 'Walker', first_name: 'Brandon', rank: 'PFC', edipi: '1000000023', unit: 'C Co, 1/4', billet: 'Rifleman' },
+      { last_name: 'Xu', first_name: 'Wei', rank: 'LCpl', edipi: '1000000024', unit: 'C Co, 1/4', billet: 'Mortarman' },
+      { last_name: 'Young', first_name: 'Devon', rank: 'SSgt', edipi: '1000000025', unit: 'C Co, 1/4', billet: 'Platoon Sergeant' },
+      { last_name: 'Zamora', first_name: 'Luis', rank: 'Cpl', edipi: '1000000026', unit: 'C Co, 1/4', billet: 'Team Leader' },
+      { last_name: 'Adams', first_name: 'Owen', rank: 'LCpl', edipi: '1000000027', unit: 'C Co, 1/4', billet: 'Rifleman' },
+      { last_name: 'Burke', first_name: 'Ethan', rank: 'Sgt', edipi: '1000000028', unit: 'C Co, 1/4', billet: 'Squad Leader' },
+      { last_name: 'Castillo', first_name: 'Adrian', rank: 'PFC', edipi: '1000000029', unit: 'C Co, 1/4', billet: 'Rifleman' },
+      { last_name: 'Doyle', first_name: 'Patrick', rank: 'Cpl', edipi: '1000000030', unit: 'C Co, 1/4', billet: 'Team Leader' }
+    ];
+  }
+
+  function sampleTraining() {
+    // Mix of current and expired training records.
+    // expires field uses YYYY-MM-DD; treat as expired if past today.
+    return [
+      { edipi: '1000000001', training_event: 'Rifle Qual', completion_date: '2026-01-15', expires: '2027-01-15' },
+      { edipi: '1000000001', training_event: 'Annual Training (PME)', completion_date: '2025-09-10', expires: '2026-09-10' },
+      { edipi: '1000000001', training_event: 'Combat Lifesaver', completion_date: '2025-06-04', expires: '2027-06-04' },
+      { edipi: '1000000001', training_event: 'Swim Qual', completion_date: '2024-11-20', expires: '2027-11-20' },
+      { edipi: '1000000002', training_event: 'Rifle Qual', completion_date: '2024-01-10', expires: '2025-01-10' },
+      { edipi: '1000000002', training_event: 'Annual Training (PME)', completion_date: '2025-08-15', expires: '2026-08-15' },
+      { edipi: '1000000002', training_event: 'Swim Qual', completion_date: '2024-09-12', expires: '2027-09-12' },
+      { edipi: '1000000003', training_event: 'Rifle Qual', completion_date: '2026-02-20', expires: '2027-02-20' },
+      { edipi: '1000000003', training_event: 'Annual Training (PME)', completion_date: '2025-11-05', expires: '2026-11-05' },
+      { edipi: '1000000003', training_event: 'Combat Lifesaver', completion_date: '2025-07-22', expires: '2027-07-22' },
+      { edipi: '1000000003', training_event: 'Swim Qual', completion_date: '2024-08-30', expires: '2027-08-30' },
+      { edipi: '1000000003', training_event: 'MCMAP', completion_date: '2025-03-12', expires: '2027-03-12' },
+      { edipi: '1000000004', training_event: 'Rifle Qual', completion_date: '2026-03-08', expires: '2027-03-08' },
+      { edipi: '1000000004', training_event: 'Annual Training (PME)', completion_date: '2025-12-01', expires: '2026-12-01' },
+      { edipi: '1000000004', training_event: 'Combat Lifesaver', completion_date: '2024-02-14', expires: '2026-02-14' },
+      { edipi: '1000000005', training_event: 'Rifle Qual', completion_date: '2026-04-02', expires: '2027-04-02' },
+      { edipi: '1000000005', training_event: 'Annual Training (PME)', completion_date: '2025-10-18', expires: '2026-10-18' },
+      { edipi: '1000000005', training_event: 'Combat Lifesaver', completion_date: '2025-05-11', expires: '2027-05-11' },
+      { edipi: '1000000005', training_event: 'Swim Qual', completion_date: '2025-01-09', expires: '2028-01-09' },
+      { edipi: '1000000006', training_event: 'Rifle Qual', completion_date: '2026-01-30', expires: '2027-01-30' },
+      { edipi: '1000000006', training_event: 'Annual Training (PME)', completion_date: '2025-07-04', expires: '2026-07-04' },
+      { edipi: '1000000006', training_event: 'Combat Lifesaver', completion_date: '2025-06-15', expires: '2027-06-15' },
+      { edipi: '1000000006', training_event: 'Swim Qual', completion_date: '2024-12-08', expires: '2027-12-08' },
+      { edipi: '1000000007', training_event: 'Rifle Qual', completion_date: '2026-02-12', expires: '2027-02-12' },
+      { edipi: '1000000007', training_event: 'Annual Training (PME)', completion_date: '2025-09-22', expires: '2026-09-22' },
+      { edipi: '1000000007', training_event: 'Combat Lifesaver', completion_date: '2025-04-30', expires: '2027-04-30' },
+      { edipi: '1000000007', training_event: 'Swim Qual', completion_date: '2024-10-17', expires: '2027-10-17' },
+      { edipi: '1000000008', training_event: 'Rifle Qual', completion_date: '2026-03-25', expires: '2027-03-25' },
+      { edipi: '1000000008', training_event: 'Combat Lifesaver', completion_date: '2025-08-08', expires: '2027-08-08' },
+      { edipi: '1000000008', training_event: 'Swim Qual', completion_date: '2025-02-26', expires: '2028-02-26' },
+      { edipi: '1000000009', training_event: 'Rifle Qual', completion_date: '2026-04-14', expires: '2027-04-14' },
+      { edipi: '1000000009', training_event: 'Annual Training (PME)', completion_date: '2025-11-19', expires: '2026-11-19' },
+      { edipi: '1000000009', training_event: 'Combat Lifesaver', completion_date: '2025-09-03', expires: '2027-09-03' },
+      { edipi: '1000000009', training_event: 'Swim Qual', completion_date: '2024-07-21', expires: '2027-07-21' },
+      { edipi: '1000000010', training_event: 'Rifle Qual', completion_date: '2025-01-08', expires: '2026-01-08' },
+      { edipi: '1000000010', training_event: 'Annual Training (PME)', completion_date: '2025-08-12', expires: '2026-08-12' },
+      { edipi: '1000000010', training_event: 'Combat Lifesaver', completion_date: '2025-06-29', expires: '2027-06-29' },
+      { edipi: '1000000010', training_event: 'Swim Qual', completion_date: '2024-12-15', expires: '2027-12-15' },
+      { edipi: '1000000011', training_event: 'Rifle Qual', completion_date: '2026-02-05', expires: '2027-02-05' },
+      { edipi: '1000000011', training_event: 'Annual Training (PME)', completion_date: '2025-10-09', expires: '2026-10-09' },
+      { edipi: '1000000011', training_event: 'Combat Lifesaver', completion_date: '2025-05-20', expires: '2027-05-20' },
+      { edipi: '1000000011', training_event: 'Swim Qual', completion_date: '2025-03-14', expires: '2028-03-14' },
+      { edipi: '1000000012', training_event: 'Rifle Qual', completion_date: '2026-03-18', expires: '2027-03-18' },
+      { edipi: '1000000012', training_event: 'Annual Training (PME)', completion_date: '2025-09-28', expires: '2026-09-28' },
+      { edipi: '1000000013', training_event: 'Rifle Qual', completion_date: '2026-04-22', expires: '2027-04-22' },
+      { edipi: '1000000013', training_event: 'Annual Training (PME)', completion_date: '2025-12-12', expires: '2026-12-12' },
+      { edipi: '1000000013', training_event: 'Combat Lifesaver', completion_date: '2025-07-08', expires: '2027-07-08' },
+      { edipi: '1000000013', training_event: 'Swim Qual', completion_date: '2024-11-04', expires: '2027-11-04' },
+      { edipi: '1000000014', training_event: 'Rifle Qual', completion_date: '2026-01-23', expires: '2027-01-23' },
+      { edipi: '1000000014', training_event: 'Annual Training (PME)', completion_date: '2025-08-26', expires: '2026-08-26' },
+      { edipi: '1000000014', training_event: 'Combat Lifesaver', completion_date: '2025-04-17', expires: '2027-04-17' },
+      { edipi: '1000000014', training_event: 'Swim Qual', completion_date: '2025-01-31', expires: '2028-01-31' },
+      { edipi: '1000000015', training_event: 'Rifle Qual', completion_date: '2024-06-11', expires: '2025-06-11' },
+      { edipi: '1000000015', training_event: 'Annual Training (PME)', completion_date: '2025-11-26', expires: '2026-11-26' },
+      { edipi: '1000000015', training_event: 'Combat Lifesaver', completion_date: '2025-08-19', expires: '2027-08-19' },
+      { edipi: '1000000015', training_event: 'Swim Qual', completion_date: '2024-09-25', expires: '2027-09-25' },
+      { edipi: '1000000016', training_event: 'Rifle Qual', completion_date: '2026-02-28', expires: '2027-02-28' },
+      { edipi: '1000000016', training_event: 'Annual Training (PME)', completion_date: '2025-10-22', expires: '2026-10-22' },
+      { edipi: '1000000016', training_event: 'Combat Lifesaver', completion_date: '2025-06-08', expires: '2027-06-08' },
+      { edipi: '1000000016', training_event: 'Swim Qual', completion_date: '2024-08-14', expires: '2027-08-14' },
+      { edipi: '1000000017', training_event: 'Rifle Qual', completion_date: '2026-03-30', expires: '2027-03-30' },
+      { edipi: '1000000017', training_event: 'Annual Training (PME)', completion_date: '2025-09-15', expires: '2026-09-15' },
+      { edipi: '1000000017', training_event: 'Combat Lifesaver', completion_date: '2025-07-29', expires: '2027-07-29' },
+      { edipi: '1000000017', training_event: 'Swim Qual', completion_date: '2024-10-30', expires: '2027-10-30' },
+      { edipi: '1000000018', training_event: 'Rifle Qual', completion_date: '2026-01-09', expires: '2027-01-09' },
+      { edipi: '1000000018', training_event: 'Annual Training (PME)', completion_date: '2025-12-18', expires: '2026-12-18' },
+      { edipi: '1000000019', training_event: 'Rifle Qual', completion_date: '2026-04-08', expires: '2027-04-08' },
+      { edipi: '1000000019', training_event: 'Annual Training (PME)', completion_date: '2025-11-12', expires: '2026-11-12' },
+      { edipi: '1000000019', training_event: 'Combat Lifesaver', completion_date: '2025-05-27', expires: '2027-05-27' },
+      { edipi: '1000000019', training_event: 'Swim Qual', completion_date: '2025-02-10', expires: '2028-02-10' },
+      { edipi: '1000000020', training_event: 'Rifle Qual', completion_date: '2026-03-04', expires: '2027-03-04' },
+      { edipi: '1000000020', training_event: 'Annual Training (PME)', completion_date: '2025-10-31', expires: '2026-10-31' },
+      { edipi: '1000000020', training_event: 'Combat Lifesaver', completion_date: '2025-07-16', expires: '2027-07-16' },
+      { edipi: '1000000020', training_event: 'Swim Qual', completion_date: '2024-12-22', expires: '2027-12-22' },
+      { edipi: '1000000021', training_event: 'Rifle Qual', completion_date: '2026-02-17', expires: '2027-02-17' },
+      { edipi: '1000000021', training_event: 'Annual Training (PME)', completion_date: '2025-09-04', expires: '2026-09-04' },
+      { edipi: '1000000021', training_event: 'Combat Lifesaver', completion_date: '2025-06-21', expires: '2027-06-21' },
+      { edipi: '1000000021', training_event: 'Swim Qual', completion_date: '2024-11-13', expires: '2027-11-13' },
+      { edipi: '1000000022', training_event: 'Rifle Qual', completion_date: '2026-04-19', expires: '2027-04-19' },
+      { edipi: '1000000022', training_event: 'Combat Lifesaver', completion_date: '2025-08-25', expires: '2027-08-25' },
+      { edipi: '1000000022', training_event: 'Swim Qual', completion_date: '2025-01-18', expires: '2028-01-18' },
+      { edipi: '1000000023', training_event: 'Rifle Qual', completion_date: '2024-03-22', expires: '2025-03-22' },
+      { edipi: '1000000023', training_event: 'Annual Training (PME)', completion_date: '2025-08-02', expires: '2026-08-02' },
+      { edipi: '1000000023', training_event: 'Combat Lifesaver', completion_date: '2025-05-14', expires: '2027-05-14' },
+      { edipi: '1000000023', training_event: 'Swim Qual', completion_date: '2024-10-07', expires: '2027-10-07' },
+      { edipi: '1000000024', training_event: 'Rifle Qual', completion_date: '2026-01-26', expires: '2027-01-26' },
+      { edipi: '1000000024', training_event: 'Annual Training (PME)', completion_date: '2025-11-30', expires: '2026-11-30' },
+      { edipi: '1000000024', training_event: 'Combat Lifesaver', completion_date: '2025-04-09', expires: '2027-04-09' },
+      { edipi: '1000000024', training_event: 'Swim Qual', completion_date: '2025-03-21', expires: '2028-03-21' },
+      { edipi: '1000000025', training_event: 'Rifle Qual', completion_date: '2026-03-11', expires: '2027-03-11' },
+      { edipi: '1000000025', training_event: 'Annual Training (PME)', completion_date: '2025-10-04', expires: '2026-10-04' },
+      { edipi: '1000000025', training_event: 'Combat Lifesaver', completion_date: '2025-06-28', expires: '2027-06-28' },
+      { edipi: '1000000025', training_event: 'Swim Qual', completion_date: '2024-09-18', expires: '2027-09-18' },
+      { edipi: '1000000026', training_event: 'Rifle Qual', completion_date: '2026-04-27', expires: '2027-04-27' },
+      { edipi: '1000000026', training_event: 'Annual Training (PME)', completion_date: '2025-08-21', expires: '2026-08-21' },
+      { edipi: '1000000026', training_event: 'Combat Lifesaver', completion_date: '2025-07-12', expires: '2027-07-12' },
+      { edipi: '1000000026', training_event: 'Swim Qual', completion_date: '2024-12-29', expires: '2027-12-29' },
+      { edipi: '1000000027', training_event: 'Rifle Qual', completion_date: '2026-02-08', expires: '2027-02-08' },
+      { edipi: '1000000027', training_event: 'Annual Training (PME)', completion_date: '2025-09-30', expires: '2026-09-30' },
+      { edipi: '1000000027', training_event: 'Swim Qual', completion_date: '2025-02-04', expires: '2028-02-04' },
+      { edipi: '1000000028', training_event: 'Rifle Qual', completion_date: '2026-03-15', expires: '2027-03-15' },
+      { edipi: '1000000028', training_event: 'Annual Training (PME)', completion_date: '2025-11-08', expires: '2026-11-08' },
+      { edipi: '1000000028', training_event: 'Combat Lifesaver', completion_date: '2025-05-03', expires: '2027-05-03' },
+      { edipi: '1000000028', training_event: 'Swim Qual', completion_date: '2024-08-27', expires: '2027-08-27' },
+      { edipi: '1000000029', training_event: 'Rifle Qual', completion_date: '2026-01-12', expires: '2027-01-12' },
+      { edipi: '1000000029', training_event: 'Combat Lifesaver', completion_date: '2025-08-30', expires: '2027-08-30' },
+      { edipi: '1000000029', training_event: 'Swim Qual', completion_date: '2025-01-25', expires: '2028-01-25' },
+      { edipi: '1000000030', training_event: 'Rifle Qual', completion_date: '2026-04-25', expires: '2027-04-25' },
+      { edipi: '1000000030', training_event: 'Annual Training (PME)', completion_date: '2025-12-05', expires: '2026-12-05' },
+      { edipi: '1000000030', training_event: 'Combat Lifesaver', completion_date: '2025-06-12', expires: '2027-06-12' },
+      { edipi: '1000000030', training_event: 'Swim Qual', completion_date: '2024-10-23', expires: '2027-10-23' }
+    ];
+  }
+
+  function sampleEquipment() {
+    return [
+      { equipment_id: 'M4-00001', nomenclature: 'M4 Carbine', status_code: 'FMC', assigned_edipi: '1000000001' },
+      { equipment_id: 'M4-00002', nomenclature: 'M4 Carbine', status_code: 'FMC', assigned_edipi: '1000000002' },
+      { equipment_id: 'M4-00003', nomenclature: 'M4 Carbine', status_code: 'PMC', assigned_edipi: '1000000003' },
+      { equipment_id: 'M4-00004', nomenclature: 'M4 Carbine', status_code: 'FMC', assigned_edipi: '1000000004' },
+      { equipment_id: 'M27-00001', nomenclature: 'M27 IAR', status_code: 'FMC', assigned_edipi: '1000000005' },
+      { equipment_id: 'M4-00005', nomenclature: 'M4 Carbine', status_code: 'NMC', assigned_edipi: '1000000006' },
+      { equipment_id: 'M4-00006', nomenclature: 'M4 Carbine', status_code: 'FMC', assigned_edipi: '1000000007' },
+      { equipment_id: 'M4-00007', nomenclature: 'M4 Carbine', status_code: 'FMC', assigned_edipi: '1000000008' },
+      { equipment_id: 'M4-00008', nomenclature: 'M4 Carbine', status_code: 'PMC', assigned_edipi: '1000000009' },
+      { equipment_id: 'M4-00009', nomenclature: 'M4 Carbine', status_code: 'FMC', assigned_edipi: '1000000010' },
+      { equipment_id: 'M4-00010', nomenclature: 'M4 Carbine', status_code: 'FMC', assigned_edipi: '1000000011' },
+      { equipment_id: 'M4-00011', nomenclature: 'M4 Carbine', status_code: 'NMC', assigned_edipi: '1000000012' },
+      { equipment_id: 'M4-00012', nomenclature: 'M4 Carbine', status_code: 'FMC', assigned_edipi: '1000000013' },
+      { equipment_id: 'M240-00001', nomenclature: 'M240B MG', status_code: 'FMC', assigned_edipi: '1000000014' },
+      { equipment_id: 'M4-00013', nomenclature: 'M4 Carbine', status_code: 'PMC', assigned_edipi: '1000000015' },
+      { equipment_id: 'M4-00014', nomenclature: 'M4 Carbine', status_code: 'FMC', assigned_edipi: '1000000016' },
+      { equipment_id: 'M4-00015', nomenclature: 'M4 Carbine', status_code: 'FMC', assigned_edipi: '1000000017' },
+      { equipment_id: 'M4-00016', nomenclature: 'M4 Carbine', status_code: 'FMC', assigned_edipi: '1000000018' },
+      { equipment_id: 'M4-00017', nomenclature: 'M4 Carbine', status_code: 'FMC', assigned_edipi: '1000000019' },
+      { equipment_id: 'M4-00018', nomenclature: 'M4 Carbine', status_code: 'FMC', assigned_edipi: '1000000020' },
+      { equipment_id: 'M4-00019', nomenclature: 'M4 Carbine', status_code: 'FMC', assigned_edipi: '1000000022' },
+      { equipment_id: 'M4-00020', nomenclature: 'M4 Carbine', status_code: 'FMC', assigned_edipi: '1000000023' },
+      { equipment_id: 'M252-00001', nomenclature: '81mm Mortar', status_code: 'NMC', assigned_edipi: '1000000024' },
+      { equipment_id: 'M4-00021', nomenclature: 'M4 Carbine', status_code: 'FMC', assigned_edipi: '1000000025' },
+      { equipment_id: 'M4-00022', nomenclature: 'M4 Carbine', status_code: 'PMC', assigned_edipi: '1000000028' }
+    ];
+  }
+
+  // ---- Persistence ----
+  function load() {
+    try {
+      var p = localStorage.getItem(STORAGE_PERSONNEL);
+      var t = localStorage.getItem(STORAGE_TRAINING);
+      var e = localStorage.getItem(STORAGE_EQUIPMENT);
+      var u = localStorage.getItem(STORAGE_UNIT);
+      if (u) unitName = u;
+      document.getElementById('ta-personnel').value = p != null ? p : JSON.stringify(samplePersonnel(), null, 2);
+      document.getElementById('ta-training').value = t != null ? t : JSON.stringify(sampleTraining(), null, 2);
+      document.getElementById('ta-equipment').value = e != null ? e : JSON.stringify(sampleEquipment(), null, 2);
+    } catch (err) {
+      document.getElementById('ta-personnel').value = JSON.stringify(samplePersonnel(), null, 2);
+      document.getElementById('ta-training').value = JSON.stringify(sampleTraining(), null, 2);
+      document.getElementById('ta-equipment').value = JSON.stringify(sampleEquipment(), null, 2);
+    }
+    document.getElementById('unit-name').textContent = unitName;
+  }
+
+  function saveTextareas() {
+    try {
+      localStorage.setItem(STORAGE_PERSONNEL, document.getElementById('ta-personnel').value);
+      localStorage.setItem(STORAGE_TRAINING, document.getElementById('ta-training').value);
+      localStorage.setItem(STORAGE_EQUIPMENT, document.getElementById('ta-equipment').value);
+      localStorage.setItem(STORAGE_UNIT, unitName);
+    } catch (err) {
+      toast('Storage save failed. Data not persisted.');
+    }
+  }
+
+  // ---- Parsing ----
+  function detectAndParse(text) {
+    var trimmed = (text || '').trim();
+    if (!trimmed) return { rows: [], format: 'empty' };
+    if (trimmed.charAt(0) === '[') {
+      var arr = JSON.parse(trimmed);
+      if (!Array.isArray(arr)) throw new Error('JSON must be an array');
+      return { rows: arr, format: 'json' };
+    }
+    return { rows: parseCsv(trimmed), format: 'csv' };
+  }
+
+  function parseCsv(text) {
+    var lines = text.split(/\r?\n/).filter(function(l) { return l.trim().length > 0; });
+    if (lines.length < 2) return [];
+    var headers = splitCsvLine(lines[0]).map(function(h) { return h.trim(); });
+    var rows = [];
+    for (var i = 1; i < lines.length; i++) {
+      var cells = splitCsvLine(lines[i]);
+      var obj = {};
+      for (var j = 0; j < headers.length; j++) {
+        obj[headers[j]] = (cells[j] != null ? cells[j].trim() : '');
+      }
+      rows.push(obj);
+    }
+    return rows;
+  }
+
+  function splitCsvLine(line) {
+    var out = [];
+    var cur = '';
+    var inQuote = false;
+    for (var i = 0; i < line.length; i++) {
+      var ch = line.charAt(i);
+      if (inQuote) {
+        if (ch === '"' && line.charAt(i + 1) === '"') { cur += '"'; i++; }
+        else if (ch === '"') { inQuote = false; }
+        else { cur += ch; }
+      } else {
+        if (ch === ',') { out.push(cur); cur = ''; }
+        else if (ch === '"') { inQuote = true; }
+        else { cur += ch; }
+      }
+    }
+    out.push(cur);
+    return out;
+  }
+
+  function setStatus(id, msg, ok) {
+    var el = document.getElementById(id);
+    el.textContent = msg || '';
+    el.className = 'input-status ' + (ok ? 'ok' : (msg ? 'err' : ''));
+  }
+
+  // ---- Parse all three sources ----
+  function parseAll() {
+    var pTxt = document.getElementById('ta-personnel').value;
+    var tTxt = document.getElementById('ta-training').value;
+    var eTxt = document.getElementById('ta-equipment').value;
+    var ok = true;
+    try {
+      var pp = detectAndParse(pTxt);
+      personnel = pp.rows;
+      setStatus('status-personnel', 'Parsed ' + personnel.length + ' records (' + pp.format + ')', true);
+    } catch (err) {
+      personnel = [];
+      setStatus('status-personnel', 'Parse error: ' + err.message, false);
+      ok = false;
+    }
+    try {
+      var tt = detectAndParse(tTxt);
+      training = tt.rows;
+      setStatus('status-training', 'Parsed ' + training.length + ' records (' + tt.format + ')', true);
+    } catch (err) {
+      training = [];
+      setStatus('status-training', 'Parse error: ' + err.message, false);
+      ok = false;
+    }
+    try {
+      var ee = detectAndParse(eTxt);
+      equipment = ee.rows;
+      setStatus('status-equipment', 'Parsed ' + equipment.length + ' records (' + ee.format + ')', true);
+    } catch (err) {
+      equipment = [];
+      setStatus('status-equipment', 'Parse error: ' + err.message, false);
+      ok = false;
+    }
+    saveTextareas();
+    return ok;
+  }
+
+  // ---- Readiness computation ----
+  function todayStr() {
+    var d = new Date();
+    return d.toISOString().slice(0, 10);
+  }
+
+  function isExpired(expires, today) {
+    if (!expires) return true;
+    return String(expires) < today;
+  }
+
+  function computeReadiness() {
+    var today = todayStr();
+    // index training and equipment by edipi
+    var trByEdipi = {};
+    for (var i = 0; i < training.length; i++) {
+      var tr = training[i];
+      var k = String(tr.edipi || '').trim();
+      if (!k) continue;
+      if (!trByEdipi[k]) trByEdipi[k] = [];
+      trByEdipi[k].push(tr);
+    }
+    var eqByEdipi = {};
+    for (var j = 0; j < equipment.length; j++) {
+      var eq = equipment[j];
+      var k2 = String(eq.assigned_edipi || '').trim();
+      if (!k2) continue;
+      if (!eqByEdipi[k2]) eqByEdipi[k2] = [];
+      eqByEdipi[k2].push(eq);
+    }
+
+    var rows = [];
+    for (var p = 0; p < personnel.length; p++) {
+      var person = personnel[p];
+      var edipi = String(person.edipi || '').trim();
+      var trList = trByEdipi[edipi] || [];
+      var eqList = eqByEdipi[edipi] || [];
+
+      var trainingReasons = [];
+      for (var r = 0; r < REQUIRED_TRAINING.length; r++) {
+        var req = REQUIRED_TRAINING[r];
+        var match = null;
+        for (var s = 0; s < trList.length; s++) {
+          if (String(trList[s].training_event || '').trim().toLowerCase() === req.toLowerCase()) {
+            match = trList[s];
+            break;
+          }
+        }
+        if (!match) {
+          trainingReasons.push({ kind: 'missing', event: req });
+        } else if (isExpired(match.expires, today)) {
+          trainingReasons.push({ kind: 'expired', event: req, expires: match.expires });
+        }
+      }
+
+      var equipmentReasons = [];
+      for (var q = 0; q < eqList.length; q++) {
+        var status = String(eqList[q].status_code || '').trim().toUpperCase();
+        if (status === 'NMC') {
+          equipmentReasons.push({ kind: 'nmc', equipment_id: eqList[q].equipment_id, nomenclature: eqList[q].nomenclature });
+        }
+      }
+
+      var ready = trainingReasons.length === 0 && equipmentReasons.length === 0;
+      rows.push({
+        person: person,
+        ready: ready,
+        trainingReasons: trainingReasons,
+        equipmentReasons: equipmentReasons
+      });
+    }
+    return rows;
+  }
+
+  // ---- Rendering ----
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c) {
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+    });
+  }
+
+  function renderOverall(rows) {
+    var total = rows.length;
+    var ready = 0;
+    for (var i = 0; i < rows.length; i++) if (rows[i].ready) ready++;
+    var notReady = total - ready;
+    var pct = total === 0 ? 0 : Math.round((ready / total) * 100);
+    var el = document.getElementById('overall-percent');
+    el.textContent = pct + '%';
+    el.classList.remove('green', 'amber', 'red');
+    if (pct >= 85) el.classList.add('green');
+    else if (pct >= 70) el.classList.add('amber');
+    else el.classList.add('red');
+    document.getElementById('count-ready').textContent = ready;
+    document.getElementById('count-notready').textContent = notReady;
+    var meta = total === 0 ? 'No personnel parsed' :
+      ('Of ' + total + ' Marines, ' + ready + ' ready, ' + notReady + ' not ready as of ' + todayStr());
+    document.getElementById('readiness-meta').textContent = meta;
+  }
+
+  function groupByUnit(rows) {
+    var groups = {};
+    for (var i = 0; i < rows.length; i++) {
+      var u = String(rows[i].person.unit || 'Unassigned').trim() || 'Unassigned';
+      if (!groups[u]) groups[u] = { unit: u, total: 0, ready: 0 };
+      groups[u].total++;
+      if (rows[i].ready) groups[u].ready++;
+    }
+    var arr = [];
+    for (var k in groups) if (groups.hasOwnProperty(k)) {
+      var g = groups[k];
+      g.pct = g.total === 0 ? 0 : Math.round((g.ready / g.total) * 100);
+      arr.push(g);
+    }
+    arr.sort(function(a, b) { return a.unit.localeCompare(b.unit); });
+    return arr;
+  }
+
+  // Hand-rolled SVG horizontal bar chart.
+  function renderChart(rows) {
+    var wrap = document.getElementById('chart-wrap');
+    var groups = groupByUnit(rows);
+    if (!groups.length) {
+      wrap.innerHTML = '<div class="chart-empty">Parse data to see per-company readiness.</div>';
+      return;
+    }
+    var W = 640;
+    var labelW = 140;
+    var pctLabelW = 60;
+    var chartW = W - labelW - pctLabelW - 20;
+    var rowH = 30;
+    var gap = 10;
+    var topPad = 24;
+    var H = topPad + groups.length * (rowH + gap) + 20;
+
+    var svg = [];
+    svg.push('<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Readiness by company horizontal bar chart">');
+    svg.push('<title>Readiness by company</title>');
+    // axis ticks at 0, 25, 50, 75, 100
+    var axisX0 = labelW;
+    var axisX1 = labelW + chartW;
+    var ticks = [0, 25, 50, 75, 100];
+    for (var t = 0; t < ticks.length; t++) {
+      var tx = axisX0 + (ticks[t] / 100) * chartW;
+      svg.push('<line x1="' + tx + '" y1="' + (topPad - 6) + '" x2="' + tx + '" y2="' + (H - 14) + '" stroke="#e5e3df" stroke-width="1"/>');
+      svg.push('<text x="' + tx + '" y="' + (topPad - 10) + '" font-size="10" fill="#6e6e6e" text-anchor="middle" font-family="-apple-system, Segoe UI, Roboto, sans-serif">' + ticks[t] + '%</text>');
+    }
+    // 85% threshold marker
+    var thrX = axisX0 + 0.85 * chartW;
+    svg.push('<line x1="' + thrX + '" y1="' + (topPad - 6) + '" x2="' + thrX + '" y2="' + (H - 14) + '" stroke="#1b5e20" stroke-width="1" stroke-dasharray="3,3"/>');
+
+    for (var i = 0; i < groups.length; i++) {
+      var g = groups[i];
+      var y = topPad + i * (rowH + gap);
+      var barLen = (g.pct / 100) * chartW;
+      var color = '#CC0000';
+      if (g.pct >= 85) color = '#1b5e20';
+      else if (g.pct >= 70) color = '#c9a700';
+      // unit label
+      svg.push('<text x="' + (labelW - 10) + '" y="' + (y + rowH / 2 + 4) + '" font-size="12" fill="#1a1a1a" text-anchor="end" font-family="-apple-system, Segoe UI, Roboto, sans-serif" font-weight="600">' + escapeHtml(g.unit) + '</text>');
+      // background track
+      svg.push('<rect x="' + axisX0 + '" y="' + y + '" width="' + chartW + '" height="' + rowH + '" fill="#f4f3f0" stroke="#d9d8d4" stroke-width="1" rx="3"/>');
+      // filled bar
+      svg.push('<rect x="' + axisX0 + '" y="' + y + '" width="' + barLen + '" height="' + rowH + '" fill="' + color + '" rx="3"/>');
+      // % label on right
+      svg.push('<text x="' + (axisX1 + 8) + '" y="' + (y + rowH / 2 + 4) + '" font-size="12" fill="#1a1a1a" font-family="-apple-system, Segoe UI, Roboto, sans-serif" font-weight="700">' + g.pct + '%</text>');
+      // count below percent
+      svg.push('<text x="' + (axisX1 + 8) + '" y="' + (y + rowH / 2 + 16) + '" font-size="9" fill="#6e6e6e" font-family="-apple-system, Segoe UI, Roboto, sans-serif">' + g.ready + '/' + g.total + '</text>');
+    }
+    svg.push('</svg>');
+    wrap.innerHTML = svg.join('');
+  }
+
+  function rankIndex(r) {
+    var idx = RANK_ORDER.indexOf(String(r || '').trim());
+    return idx < 0 ? 999 : idx;
+  }
+
+  function renderNotReady(rows) {
+    var wrap = document.getElementById('nr-wrap');
+    var notReady = rows.filter(function(r) { return !r.ready; });
+    if (!notReady.length) {
+      if (!rows.length) {
+        wrap.innerHTML = '<div class="empty-state"><div class="big">&#9678;</div><div>No data parsed yet. Paste data above and click Recompute Readiness.</div></div>';
+      } else {
+        wrap.innerHTML = '<div class="empty-state"><div class="big">&#10003;</div><div>All Marines READY. No gaps in required training or equipment.</div></div>';
+      }
+      return;
+    }
+    // sort by unit, then rank
+    notReady.sort(function(a, b) {
+      var u = String(a.person.unit || '').localeCompare(String(b.person.unit || ''));
+      if (u !== 0) return u;
+      return rankIndex(a.person.rank) - rankIndex(b.person.rank);
+    });
+    var html = ['<table class="nrtable"><thead><tr>',
+      '<th>Name</th><th>Rank</th><th>Unit</th><th>Reason Not Ready</th>',
+      '</tr></thead><tbody>'];
+    for (var i = 0; i < notReady.length; i++) {
+      var nr = notReady[i];
+      var name = (nr.person.last_name || '') + ', ' + (nr.person.first_name || '');
+      var pills = [];
+      for (var t = 0; t < nr.trainingReasons.length; t++) {
+        var tr = nr.trainingReasons[t];
+        var label = tr.kind === 'missing'
+          ? (tr.event + ' missing')
+          : (tr.event + ' expired ' + (tr.expires || ''));
+        pills.push('<span class="reason-pill training">' + escapeHtml(label) + '</span>');
+      }
+      for (var e = 0; e < nr.equipmentReasons.length; e++) {
+        var er = nr.equipmentReasons[e];
+        var lab = (er.nomenclature || er.equipment_id || 'Equipment') + ' NMC';
+        pills.push('<span class="reason-pill equipment">' + escapeHtml(lab) + '</span>');
+      }
+      html.push('<tr>',
+        '<td class="name-cell">' + escapeHtml(name) + '</td>',
+        '<td>' + escapeHtml(nr.person.rank || '') + '</td>',
+        '<td>' + escapeHtml(nr.person.unit || '') + '</td>',
+        '<td class="reason-cell">' + pills.join(' ') + '</td>',
+        '</tr>');
+    }
+    html.push('</tbody></table>');
+    wrap.innerHTML = html.join('');
+  }
+
+  function renderAll() {
+    var rows = computeReadiness();
+    renderOverall(rows);
+    renderChart(rows);
+    renderNotReady(rows);
+    return rows;
+  }
+
+  // ---- Commander's snapshot ----
+  function generateBrief() {
+    var rows = renderAll();
+    var total = rows.length;
+    var ready = 0;
+    for (var i = 0; i < rows.length; i++) if (rows[i].ready) ready++;
+    var notReady = total - ready;
+    var pct = total === 0 ? 0 : Math.round((ready / total) * 100);
+    var groups = groupByUnit(rows);
+
+    var lines = [];
+    var dateLabel = todayStr();
+    lines.push('COMMANDER\'S READINESS SNAPSHOT');
+    lines.push('Unit: ' + unitName);
+    lines.push('Date: ' + dateLabel);
+    lines.push('');
+    lines.push('OVERALL');
+    lines.push('  Personnel on roster: ' + total);
+    lines.push('  Ready: ' + ready + ' (' + pct + '%)');
+    lines.push('  Not ready: ' + notReady);
+    var threshold = pct >= 85 ? 'GREEN (meets 85% threshold)'
+      : pct >= 70 ? 'AMBER (between 70% and 85%)'
+      : 'RED (below 70% threshold)';
+    lines.push('  Status: ' + threshold);
+    lines.push('');
+
+    if (groups.length) {
+      lines.push('BY COMPANY');
+      for (var g = 0; g < groups.length; g++) {
+        var grp = groups[g];
+        lines.push('  ' + grp.unit + ': ' + grp.ready + '/' + grp.total + ' (' + grp.pct + '%)');
+      }
+      lines.push('');
+    }
+
+    var nr = rows.filter(function(r) { return !r.ready; });
+    nr.sort(function(a, b) {
+      // most reasons first, then by unit
+      var aCount = a.trainingReasons.length + a.equipmentReasons.length;
+      var bCount = b.trainingReasons.length + b.equipmentReasons.length;
+      if (bCount !== aCount) return bCount - aCount;
+      return String(a.person.unit || '').localeCompare(String(b.person.unit || ''));
+    });
+    var topFive = nr.slice(0, 5);
+    if (topFive.length) {
+      lines.push('TOP NOT-READY MARINES (up to 5)');
+      for (var k = 0; k < topFive.length; k++) {
+        var m = topFive[k];
+        var reasons = [];
+        for (var t = 0; t < m.trainingReasons.length; t++) {
+          var tr = m.trainingReasons[t];
+          reasons.push(tr.kind === 'missing' ? (tr.event + ' missing') : (tr.event + ' expired'));
+        }
+        for (var q = 0; q < m.equipmentReasons.length; q++) {
+          reasons.push((m.equipmentReasons[q].nomenclature || m.equipmentReasons[q].equipment_id) + ' NMC');
+        }
+        lines.push('  ' + (m.person.rank || '') + ' ' + (m.person.last_name || '') + ', ' + (m.person.first_name || '') +
+          ' (' + (m.person.unit || '') + '): ' + reasons.join('; '));
+      }
+      lines.push('');
+    }
+
+    lines.push('REQUEST');
+    if (notReady === 0) {
+      lines.push('  Steady state. All Marines meet required training and equipment standard.');
+    } else if (pct < 70) {
+      lines.push('  CO push to recover ' + notReady + ' not-ready Marines. Coordinate range time, lifesaver class, and equipment turn-in within 14 days.');
+    } else {
+      lines.push('  Focused recovery on ' + notReady + ' not-ready Marines. Prioritize expired training first, then NMC equipment turn-in.');
+    }
+
+    document.getElementById('brief-out').value = lines.join('\n');
+  }
+
+  // ---- Clipboard ----
+  function copyText(text, label) {
+    function done(ok) { toast(ok ? (label + ' copied') : 'Copy failed'); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() { done(true); }, function() { fallback(); });
+    } else { fallback(); }
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(true); } catch (e) { done(false); }
+      document.body.removeChild(ta);
+    }
+  }
+
+  // ---- Toast ----
+  var toastTimer = null;
+  function toast(msg) {
+    var el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function() { el.classList.remove('show'); }, 1800);
+  }
+
+  // ---- Wiring ----
+  document.getElementById('parse-all').addEventListener('click', function() {
+    parseAll();
+    renderAll();
+    toast('Readiness recomputed');
+  });
+  document.getElementById('seed').addEventListener('click', function() {
+    if (!confirm('Replace current data with sample data?')) return;
+    document.getElementById('ta-personnel').value = JSON.stringify(samplePersonnel(), null, 2);
+    document.getElementById('ta-training').value = JSON.stringify(sampleTraining(), null, 2);
+    document.getElementById('ta-equipment').value = JSON.stringify(sampleEquipment(), null, 2);
+    parseAll();
+    renderAll();
+    document.getElementById('brief-out').value = '';
+    toast('Sample data loaded');
+  });
+  document.getElementById('wipe').addEventListener('click', function() {
+    if (!confirm('Clear ALL data? This cannot be undone.')) return;
+    document.getElementById('ta-personnel').value = '';
+    document.getElementById('ta-training').value = '';
+    document.getElementById('ta-equipment').value = '';
+    personnel = []; training = []; equipment = [];
+    saveTextareas();
+    setStatus('status-personnel', '', false);
+    setStatus('status-training', '', false);
+    setStatus('status-equipment', '', false);
+    renderAll();
+    document.getElementById('brief-out').value = '';
+    toast('Cleared');
+  });
+  document.getElementById('rename-unit').addEventListener('click', function() {
+    var n = prompt('Unit name:', unitName);
+    if (n && n.trim()) {
+      unitName = n.trim();
+      document.getElementById('unit-name').textContent = unitName;
+      saveTextareas();
+    }
+  });
+  document.getElementById('print').addEventListener('click', function() { window.print(); });
+  document.getElementById('gen-brief').addEventListener('click', generateBrief);
+  document.getElementById('copy-brief').addEventListener('click', function() {
+    var t = document.getElementById('brief-out').value;
+    if (!t.trim()) { toast('Generate snapshot first'); return; }
+    copyText(t, 'Snapshot');
+  });
+
+  // Persist textarea edits with light debounce.
+  var saveTimer = null;
+  function onInput() {
+    if (saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveTextareas, 400);
+  }
+  document.getElementById('ta-personnel').addEventListener('input', onInput);
+  document.getElementById('ta-training').addEventListener('input', onInput);
+  document.getElementById('ta-equipment').addEventListener('input', onInput);
+
+  // ---- Boot ----
+  load();
+  parseAll();
+  renderAll();
+
+})();
+</script>
+
+</body>
+</html>

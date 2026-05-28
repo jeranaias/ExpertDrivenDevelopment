@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="One-page live fill-in handout for Course 4.5 (Advanced Workshop, Locked Tenant Reality). Captures Module 1-6 deliverables: frontier map row, Module 2 readiness dashboard mode/tool switches, Module 3 debugging pattern, Module 4 QA findings, Module 5 teach-back concept, Module 6 workflow playbook + capability gap entries.">
+    <title>Course 4.5 Handout | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+      /* Screen view */
+      .handout-page {
+        max-width: 8.5in;
+        margin: 1.5rem auto;
+        background: #fff;
+        padding: 0.4in 0.5in;
+        border: 1px solid #d9d8d4;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      }
+      .handout-page h1 { font-size: 1.3rem; margin: 0 0 0.1rem; }
+      .handout-page h2 { font-size: 0.95rem; margin: 0.5rem 0 0.25rem; border-bottom: 2px solid #CC0000; padding-bottom: 2px; }
+      .handout-page p { margin: 0.2rem 0; font-size: 0.85rem; line-height: 1.35; }
+      .handout-page ul, .handout-page ol { margin: 0.2rem 0 0.25rem; padding-left: 1.1rem; font-size: 0.82rem; line-height: 1.35; }
+      .handout-page table { width: 100%; border-collapse: collapse; font-size: 0.78rem; margin: 0.25rem 0; }
+      .handout-page th, .handout-page td { border: 1px solid #d9d8d4; padding: 4px 6px; text-align: left; vertical-align: top; }
+      .handout-page th { background: #f4f3f0; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.04em; }
+      .meta-row { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; flex-wrap: wrap; font-size: 0.78rem; color: #4a4a4a; margin-bottom: 0.35rem; }
+      .three-cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 0.4rem;
+        margin: 0.35rem 0;
+      }
+      .two-cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.4rem;
+        margin: 0.35rem 0;
+      }
+      .fill-card {
+        border: 1px solid #1a1a1a;
+        border-radius: 4px;
+        padding: 5px 7px;
+        min-height: 1.45in;
+        display: flex;
+        flex-direction: column;
+      }
+      .fill-card h3 { font-size: 0.82rem; margin: 0 0 3px; color: #CC0000; }
+      .fill-card .prompt { font-size: 0.7rem; color: #4a4a4a; margin-bottom: 3px; line-height: 1.25; }
+      .fill-card .fields { font-size: 0.7rem; color: #1a1a1a; line-height: 1.3; }
+      .fill-card .fields div { border-bottom: 1px solid #d9d8d4; padding: 1px 0 2px; margin-bottom: 2px; }
+      .fill-card .fields div:last-child { margin-bottom: 0; }
+      .fill-card .lines {
+        flex: 1;
+        background-image: repeating-linear-gradient(transparent, transparent 15px, #d9d8d4 15px, #d9d8d4 16px);
+        margin-top: 3px;
+      }
+      .reminders {
+        background: #fce8e8;
+        border-left: 3px solid #CC0000;
+        padding: 6px 10px;
+        font-size: 0.78rem;
+        line-height: 1.35;
+        margin: 0.35rem 0;
+        border-radius: 0 4px 4px 0;
+      }
+      .reminders strong { color: #5c0000; }
+      .classmark {
+        background: #006400;
+        color: #fff;
+        text-align: center;
+        padding: 2px 0;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        border-radius: 2px;
+      }
+      .small { font-size: 0.74rem; color: #6e6e6e; }
+      .name-line {
+        display: flex;
+        gap: 0.8rem;
+        font-size: 0.78rem;
+        margin-top: 0.35rem;
+      }
+      .name-line span { flex: 1; border-bottom: 1px solid #1a1a1a; padding-bottom: 1px; }
+
+      @media print {
+        @page { size: letter; margin: 0.3in; }
+        body { background: #fff; font-size: 9pt; }
+        .site-header, .mobile-nav, .page-header, .site-footer, .skip-link, .print-only-hide { display: none !important; }
+        .handout-page { margin: 0; padding: 0; max-width: none; border: none; box-shadow: none; }
+        .handout-page h1 { font-size: 1.05rem; }
+        .handout-page h2 { font-size: 0.8rem; margin: 0.2rem 0 0.12rem; }
+        .handout-page p { font-size: 0.72rem; margin: 0.1rem 0; }
+        .handout-page table { font-size: 0.68rem; }
+        .handout-page th, .handout-page td { padding: 2px 4px; }
+        .fill-card { background: #fff !important; min-height: 1.1in; padding: 3px 5px; }
+        .fill-card h3 { font-size: 0.72rem; }
+        .fill-card .prompt { font-size: 0.6rem; line-height: 1.15; }
+        .fill-card .fields { font-size: 0.6rem; line-height: 1.2; }
+        .fill-card .lines { background-image: repeating-linear-gradient(transparent, transparent 12px, #999 12px, #999 13px) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .reminders { background: #f8f7f5 !important; padding: 4px 8px; font-size: 0.68rem; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .reminders p { margin: 0.08rem 0; }
+        .classmark { background: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 1px 0; font-size: 0.6rem; }
+        th { background: #e5e5e5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        h2 { page-break-after: avoid; }
+        .three-cols, .two-cols { page-break-inside: avoid; gap: 0.3rem; margin: 0.2rem 0; }
+        .meta-row { font-size: 0.64rem; }
+      }
+    </style>
+</head>
+<body class="site-wrapper advanced-reality-handout">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="../resources/">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <section class="page-header print-only-hide">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Handouts</a></li>
+                    <li aria-current="page">Course 4.5 Handout</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Course 4.5 Live Fill-In Handout</h1>
+            <p class="page-header__badges">
+                <span class="badge">Course 4.5</span>
+                <span class="badge">Live Handout</span>
+                <span class="badge">4 Hours</span>
+            </p>
+            <p class="page-header__desc">
+                This handout captures the deliverables Marines produce during Course 4.5 (Advanced Workshop, Locked Tenant Reality). Print it before class. Fill it in during the six modules. Submit at end of day, or keep it as your own playbook seed. Hit <strong>Ctrl+P</strong> (or <strong>Cmd+P</strong>) to print on US Letter.
+            </p>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="handout-page">
+
+            <div class="classmark">UNCLASSIFIED</div>
+
+            <div class="meta-row" style="margin-top:0.25rem">
+                <div>
+                    <h1>Course 4.5: Advanced Workshop (Locked Tenant Reality)</h1>
+                    <div class="small">Expert-Driven Development &middot; 4-Hour Workshop &middot; SSgt Jesse C. Morgan, MCD-Monterey</div>
+                </div>
+                <div class="name-line" style="margin-top:0">
+                    <span>Name:</span>
+                    <span>Unit:</span>
+                    <span>Date:</span>
+                </div>
+            </div>
+
+            <h2>Module Deliverables (Fill In During Class)</h2>
+
+            <div class="three-cols">
+                <div class="fill-card">
+                    <h3>1. Module 1 Frontier Map Row</h3>
+                    <div class="prompt">Pick one task in your daily workflow. Map it: AI capability column, your unit's stack, frontier issue, mitigation.</div>
+                    <div class="fields" aria-label="Frontier map row fields">
+                        <div>Task name:</div>
+                        <div>AI capability (genai.mil / Ask Sage / both):</div>
+                        <div>Frontier vs Context vs Meta-frontier:</div>
+                        <div>One sentence on mitigation:</div>
+                    </div>
+                </div>
+
+                <div class="fill-card">
+                    <h3>2. Module 2 Readiness Dashboard Build Notes</h3>
+                    <div class="prompt">Record where you switched modes, where you switched tools, and where the AI failed.</div>
+                    <div class="fields" aria-label="Readiness dashboard build notes fields">
+                        <div>Phase you switched to Cyborg:</div>
+                        <div>Phase you switched between genai.mil and Ask Sage:</div>
+                        <div>One concrete AI failure (be specific):</div>
+                        <div>Time-with-AI vs time-without estimate:</div>
+                    </div>
+                </div>
+
+                <div class="fill-card">
+                    <h3>3. Module 3 Debugging Pattern</h3>
+                    <div class="prompt">Document one bug from group debugging. Real or canned.</div>
+                    <div class="fields" aria-label="Debugging pattern fields">
+                        <div>Bug name (one line):</div>
+                        <div>Frontier classification:</div>
+                        <div>Root cause:</div>
+                        <div>Root cause (cont.):</div>
+                        <div>Pattern you'll remember:</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="three-cols">
+                <div class="fill-card">
+                    <h3>4. Module 4 QA Findings</h3>
+                    <div class="prompt">Document one planted-error you caught AND one you missed (be honest).</div>
+                    <div class="fields" aria-label="QA findings fields">
+                        <div>Caught:</div>
+                        <div>Missed:</div>
+                        <div>The verification habit you're committing to:</div>
+                        <div>&nbsp;</div>
+                    </div>
+                </div>
+
+                <div class="fill-card">
+                    <h3>5. Module 5 Teach-Back Concept</h3>
+                    <div class="prompt">Which concept did you teach? Who did you teach? What was the hardest question?</div>
+                    <div class="fields" aria-label="Teach-back concept fields">
+                        <div>Concept:</div>
+                        <div>Audience (rank, billet):</div>
+                        <div>Hardest question:</div>
+                        <div>How you'd handle it next time:</div>
+                    </div>
+                </div>
+
+                <div class="fill-card">
+                    <h3>6. Module 6 Workflow Playbook Seed</h3>
+                    <div class="prompt">One recurring task you'll automate this month. Pick something concrete.</div>
+                    <div class="fields" aria-label="Workflow playbook seed fields">
+                        <div>Task + frequency:</div>
+                        <div>Mode (Centaur / Cyborg):</div>
+                        <div>Which tool (genai.mil / Ask Sage / both):</div>
+                        <div>4-step outline:</div>
+                        <div>Time savings goal per week:</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two-cols">
+                <div class="fill-card">
+                    <h3>7. Capability Gap Map Entries (NEW for 4.5)</h3>
+                    <div class="prompt">Two rows for the Capability Gap Map. What would the Production layer unlock? Name the specific connector, license, admin grant, or policy that gates each one.</div>
+                    <div class="fields" aria-label="Capability gap map entry fields">
+                        <div>Gap 1 (workflow to production layer wish):</div>
+                        <div>Gap 1 (cont.):</div>
+                        <div>Gap 2 (workflow to production layer wish):</div>
+                        <div>Gap 2 (cont.):</div>
+                    </div>
+                </div>
+
+                <div class="fill-card">
+                    <h3>8. Assessment Self-Score</h3>
+                    <div class="prompt">Score yourself on the six rubric criteria. Honest self-assessment. Threshold for course completion is 5 of 6 at "Meets" or better.</div>
+                    <div class="fields" aria-label="Assessment self-score fields">
+                        <div>Frontier Map Completeness:</div>
+                        <div>Complex Build Quality:</div>
+                        <div>Debugging Contribution:</div>
+                        <div>QA Protocol Rigor:</div>
+                        <div>Teaching Effectiveness:</div>
+                        <div>Workflow Playbook Completeness:</div>
+                        <div>Met threshold (5 of 6 Meets)? yes / no:</div>
+                    </div>
+                </div>
+            </div>
+
+            <h2>EDD Framework Reminders</h2>
+            <div class="reminders">
+                <p><strong>Centaur:</strong> distinct phases. Human designs. AI builds. Human verifies. Human refines. Human accepts. Best for strict business rules.</p>
+                <p><strong>Cyborg:</strong> continuous back-and-forth. Discover requirements while building. Best for exploratory work where the shape is not yet clear.</p>
+                <p><strong>Tool choice:</strong> genai.mil and Ask Sage are both first-class. Pick per task. Note which one handled the work and why. Switch when one stalls.</p>
+                <p><strong>Frontier Recognition:</strong> name the specific task types where AI is reliable and where it is not. Capture failures in real time. Your frontier map gets sharper every cycle.</p>
+                <p><strong>Capability Gap Map:</strong> name the wall. Specific connector. Specific license. Specific permission. Beneficiary count and time savings. That row becomes policy evidence.</p>
+            </div>
+
+            <div class="meta-row" style="margin-top:0.4rem">
+                <div class="small">
+                    <strong>Public site:</strong> jeranaias.github.io/ExpertDrivenDevelopment &middot;
+                    <strong>Repo:</strong> github.com/jeranaias/ExpertDrivenDevelopment
+                </div>
+                <div class="classmark" style="padding:2px 14px">UNCLASSIFIED</div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="site-footer print-only-hide" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>
+                        Open-source AI-assisted development training for DoW personnel.
+                        Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Course 4.5 Materials</h3>
+                    <ul>
+                        <li><a href="../courses/advanced.html">Course 4.5 Page</a></li>
+                        <li><a href="../resources/capability-gap-map.html">Capability Gap Map</a></li>
+                        <li><a href="../resources/static-hosting-cheat-sheet.html">Static Hosting Cheat Sheet</a></li>
+                        <li><a href="./platform-reality-handout.html">Course 3.5 Handout</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../courses/">Courses</a></li>
+                        <li><a href="./">Handouts</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function() {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+
+    <script src="../js/enhancements.js"></script>
+
+</body>
+</html>

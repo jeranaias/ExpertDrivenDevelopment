@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Course 4.5: Advanced Workshop (Locked Tenant Reality). A 4-hour workshop covering frontier mapping, complex multi-component static-HTML builds, group debugging, verification protocols, teach-back, and workflow playbooks. Pivots Course 4 off Power Platform onto static HTML and adds Ask Sage as a peer enterprise AI tool alongside genai.mil.">
+    <title>Advanced Workshop (Locked Tenant Reality) | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="site-wrapper">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./" class="active">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="../resources/">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="./" class="active">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="../resources/">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Courses</a></li>
+                    <li aria-current="page">Advanced Workshop (Locked Tenant Reality)</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Course 4.5: Advanced Workshop (Locked Tenant Reality)</h1>
+            <p class="page-header__desc">
+                4 hours. Same six modules, same frontier-mapping, complex-build, group-debugging, QA, teach-back, and
+                playbook arc as Course 4. What changes is the execution layer (static HTML instead of Power BI/Power Apps/Power Automate)
+                and the available AI tooling. Builders run two CUI-authorized enterprise AI tools side by side:
+                genai.mil for fast chat and Ask Sage for multi-file reasoning workflows. Two artifacts ship in parallel:
+                an Advanced Frontier Map and new entries to the existing Capability Gap Map.
+            </p>
+            <div class="mt-lg">
+                <span class="badge badge--gold">Reality Track</span>
+                <span class="badge">4 Hours</span>
+                <span class="badge badge--scarlet">Builders</span>
+                <span class="badge">Advanced</span>
+            </div>
+            <p class="mt-lg">
+                <strong>Prerequisite:</strong> Course 3.5 (Platform Training, Locked Tenant Reality) OR Course 3 plus at least one deployed static-stack tool.
+                <strong>Required access:</strong> genai.mil, Ask Sage (recommended), a text editor, a free GitHub account, and the ability to reach github.io from your duty workstation.
+                If your tenant only has genai.mil, the Ask Sage phases degrade gracefully to paste-and-summarize.
+            </p>
+            <div class="page-header__actions mt-lg" role="group" aria-label="Course 4.5 materials">
+                <a href="../decks/week-4-5-advanced-reality.html" class="btn btn--primary" target="_blank" rel="noopener">Open the Slide Deck</a>
+                <a href="../decks/week-4-5-handouts.html" class="btn btn--secondary" target="_blank" rel="noopener">Open the Facilitator Hand-Outs</a>
+                <a href="../facilitator/week-4-5-advanced-reality.html" class="btn btn--secondary" target="_blank" rel="noopener">Open the Facilitator Pack</a>
+                <a href="../decks/week-4-5-cheatsheet.html" class="btn btn--secondary" target="_blank" rel="noopener">Open the Instructor Cheat Sheet</a>
+                <a href="../handouts/week-4-5-advanced-reality.html" class="btn btn--secondary" target="_blank" rel="noopener">Open the Student Handout</a>
+                <a href="../handouts/advanced-reality-handout.html" class="btn btn--secondary" target="_blank" rel="noopener">Open the Live Fill-In Handout</a>
+            </div>
+            <p class="mt-md">
+                <strong>Reference builds:</strong>
+                <a href="../builds/readiness-dashboard.html" target="_blank" rel="noopener">Readiness Dashboard</a> &middot;
+                <strong>Resources:</strong>
+                <a href="../resources/debugging-scenarios.html" target="_blank" rel="noopener">Debugging Scenarios</a> &middot;
+                <a href="../resources/tool-selection-guide.html" target="_blank" rel="noopener">Tool Selection Guide</a> &middot;
+                <a href="../resources/capability-gap-map.html" target="_blank" rel="noopener">Capability Gap Map</a> &middot;
+                <a href="../resources/static-hosting-cheat-sheet.html" target="_blank" rel="noopener">Static Hosting Cheat Sheet</a>
+            </p>
+            <p class="mt-md">
+                <strong>Companion courses:</strong>
+                <a href="advanced.html">Course 4: Advanced Workshop</a> (the Power Platform version this course pivots from) &middot;
+                <a href="platform-reality.html">Course 3.5: Platform Training (Locked Tenant Reality)</a> (the prerequisite reality-track companion).
+            </p>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+            <div class="page-layout page-layout--sidebar">
+
+                <aside class="sidebar sidebar--sticky" aria-label="Table of contents">
+                    <nav class="toc">
+                        <h2 class="toc__title">On This Page</h2>
+                        <ul class="toc__list">
+                            <li><a href="#three-layers">The Three Layers</a></li>
+                            <li><a href="#agenda">Agenda &amp; Timing</a></li>
+                            <li><a href="#frontier-mapping">Module 1: Frontier Mapping for Your Domain</a></li>
+                            <li><a href="#complex-build">Module 2: Complex Build (Readiness Dashboard)</a></li>
+                            <li><a href="#group-debugging">Module 3: Group Debugging</a></li>
+                            <li><a href="#verification">Module 4: Verification &amp; QA</a></li>
+                            <li><a href="#teaching-others">Module 5: Teaching Methodology</a></li>
+                            <li><a href="#workflow-playbook">Module 6: Workflow Playbook</a></li>
+                            <li><a href="#assessment">Assessment Rubric</a></li>
+                            <li><a href="#wrap">Wrap and Next Steps</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <div class="page-content">
+
+                    <!-- THREE LAYERS -->
+                    <section id="three-layers">
+                        <h2>The Three Layers</h2>
+                        <p>
+                            Today the room sits across three layers. Some are available right now. Some are not.
+                            We work every layer we can reach, and we document the wall where the work stops.
+                            Advanced builders operate fluently across two enterprise AI tools (genai.mil and Ask Sage),
+                            picking the right tool for the right task, and using both as a cross-check on high-stakes outputs.
+                        </p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Layer</th>
+                                        <th scope="col">What It Is</th>
+                                        <th scope="col">Status Today</th>
+                                        <th scope="col">What You Use It For</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>1. Spec</strong></td>
+                                        <td>genai.mil and Ask Sage. Both are CUI-authorized enterprise AI tenants. genai.mil is your fast chat layer for single-prompt work. Ask Sage is your multi-file and reasoning layer for architecture and dataset work.</td>
+                                        <td>Always available where the tenant grants access. If only genai.mil is available, Ask Sage phases degrade to paste-and-summarize.</td>
+                                        <td>Design, decompose, draft, prompt-write, peer-review your own logic. Multi-file refactor and dataset analysis go to Ask Sage. Quick single-shot drafts go to genai.mil.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>2. Prototype</strong></td>
+                                        <td>Static HTML in a single file. Deployed to GitHub Pages or another free public host that MCEN can reach.</td>
+                                        <td>Always available.</td>
+                                        <td>Build the tool. Run it offline. Print it. Share the URL. Hand it to a Marine on a phone.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>3. Production</strong></td>
+                                        <td>Power Apps, Dataverse, real connectors, identity, write-back to systems of record.</td>
+                                        <td>Often unavailable. Tenant-dependent.</td>
+                                        <td>Where the tool gets 10x better if access is granted. Document the wish today.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Opening Line for the Room</h3>
+                            <p>
+                                "Today we run two enterprise AI tools side by side, build a real multi-component tool the unit needs, and clearly mark where we hit the wall. That wall map becomes the case for changing what we have access to."
+                            </p>
+                        </div>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Closing Line for the Room</h3>
+                            <p>
+                                "The tool is replaceable. The judgment about which tool to use, and how to verify what it tells you, is what we are actually teaching."
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- AGENDA -->
+                    <section id="agenda">
+                        <h2>Agenda and Timing</h2>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Module</th>
+                                        <th scope="col">201 Skills Applied</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>0:00 to 0:30</td>
+                                        <td>Module 1: Frontier Mapping for Your Domain</td>
+                                        <td>Frontier Recognition</td>
+                                    </tr>
+                                    <tr>
+                                        <td>0:30 to 1:30</td>
+                                        <td>Module 2: Complex Build (Readiness Dashboard)</td>
+                                        <td>All six (Context Assembly, Quality Judgment, Task Decomposition, Iterative Refinement, Workflow Integration, Frontier Recognition)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1:30 to 1:40</td>
+                                        <td>Break</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1:40 to 2:20</td>
+                                        <td>Module 3: Group Debugging</td>
+                                        <td>Iterative Refinement, Frontier Recognition, Context Assembly</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2:20 to 2:50</td>
+                                        <td>Module 4: Verification Protocols and QA</td>
+                                        <td>Quality Judgment, Workflow Integration</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2:50 to 3:20</td>
+                                        <td>Module 5: Teaching Methodology and Teach-Back</td>
+                                        <td>Context Assembly, Quality Judgment</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3:20 to 3:50</td>
+                                        <td>Module 6: Workflow Playbook</td>
+                                        <td>Workflow Integration, Task Decomposition</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3:50 to 4:00</td>
+                                        <td>Wrap and Buffer</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2"><strong>Total Course Time</strong></td>
+                                        <td><strong>3 hours 50 minutes instruction plus 10-minute buffer. Schedule a 4-hour block.</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Contingency Plan: If Ask Sage Is Not Available Today</h3>
+                            <p>
+                                If your tenant has genai.mil only, the course still runs. Pivot to:
+                            </p>
+                            <ol>
+                                <li><strong>Run every Ask Sage phase in genai.mil with paste-and-summarize:</strong> manually paste the relevant CSV rows and ask genai.mil to reason over them. Surface the cost (token limits, no persistent context across turns) explicitly so students feel the gap.</li>
+                                <li><strong>Add a Capability Gap Map row:</strong> "Ask Sage access is blocked for this unit." That is a real, fixable policy gap. Capture it with beneficiary count and time-savings estimate.</li>
+                                <li><strong>Substitute a reasoning model on genai.mil where one is available:</strong> use whatever reasoning option the tenant exposes for the architecture and verification phases of Module 2.</li>
+                            </ol>
+                            <p>
+                                The pedagogy holds either way. The tool-selection beats teach the same lesson when the gap is felt directly.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- MODULE 1: FRONTIER MAPPING -->
+                    <section id="frontier-mapping">
+                        <h2>Module 1: Frontier Mapping for Your Domain</h2>
+                        <p><strong>Duration:</strong> 30 minutes</p>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Instructor Prerequisite Check</h3>
+                            <p>Before teaching this course, verify you can do all of the following without AI assistance:</p>
+                            <ul>
+                                <li>Deploy a single-file static HTML tool to github.io and verify it loads from MCEN.</li>
+                                <li>Read a fetch error or JavaScript error in browser DevTools and form a targeted fix prompt from it.</li>
+                                <li>Identify a CSS specificity collision and explain class-based resolution.</li>
+                                <li>Explain when localStorage persistence breaks (private browsing, quota exceeded, JSON parse failure on schema change).</li>
+                                <li>Explain when to escalate from genai.mil to Ask Sage (multi-file, reasoning-heavy, dataset analysis).</li>
+                            </ul>
+                            <p>If you cannot do any of these, complete Course 3.5 (Platform Training, Locked Tenant Reality) before teaching this course. Students will hit errors that require hands-on experience to diagnose.</p>
+                        </div>
+
+                        <p>
+                            Each participant builds a frontier map for their domain. Map the frontier for each tool separately.
+                            What genai.mil chat handles well in your domain differs from what Ask Sage with a reasoning model
+                            handles well. The selection is part of the discipline. The wrong tool on the wrong task is one of
+                            the most common failure modes advanced builders hit, and it is the one most easily mistaken for an
+                            AI capability ceiling.
+                        </p>
+
+                        <h3>Tool Handles Table</h3>
+                        <p>
+                            Two enterprise AI tools, two columns. Fill this in for your own domain as the workshop progresses.
+                            The rows below are the starting point.
+                        </p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Task</th>
+                                        <th scope="col">genai.mil Handles</th>
+                                        <th scope="col">Ask Sage Handles</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Single-prompt drafts (counseling, awards, memos)</td>
+                                        <td>Yes. Fast chat is the right tool. One prompt in, one polished draft out.</td>
+                                        <td>Overkill. Works, but the file-ingestion overhead is not justified for one-shot drafts.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Multi-file refactor of a static-stack tool</td>
+                                        <td>Painful. Context window blows out across iterations. Common to see the model lose track of what changed across 20 turns.</td>
+                                        <td>Yes. Upload the file, ask Claude 3 (or another reasoning model exposed by the tenant) for a targeted refactor with constraints stated up front.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Quick code snippet (regex, date math)</td>
+                                        <td>Yes. Bounce a single-line prompt, paste the result, verify.</td>
+                                        <td>Works, but slow for what should be a 10-second answer.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dataset analysis with three CSVs (readiness, training, equipment)</td>
+                                        <td>Limited. Can do it with paste-and-summarize on small samples. Loses fidelity at scale.</td>
+                                        <td>Yes. Upload all three files. Use a reasoning model. The model holds schema across the conversation.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Frontier classification of an issue you just hit</td>
+                                        <td>Yes. Fast bounce. "Is this a frontier issue, a context issue, or a platform quirk?"</td>
+                                        <td>Works, slower turn time.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Architecture decision (data model, schema migration plan)</td>
+                                        <td>Possible for small scope. Reasoning quality drops on larger trade-off questions.</td>
+                                        <td>Yes. Claude 3 or a GPT o-series reasoning model produces the best architecture analysis the locked-tenant world currently exposes.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Verification cross-check (run same prompt through both, look for disagreement)</td>
+                                        <td>Half of the two-tool cross-check. Use for the fast side.</td>
+                                        <td>Half of the two-tool cross-check. Use for the deliberate side. Disagreements are flags.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>Issue Tracking Format</h3>
+                        <p>
+                            As you encounter specific issues during builds, log them in this format. Over time this becomes your
+                            team's institutional knowledge of where AI helps and where it doesn't, and how often the right move is
+                            switching tools rather than rewriting the prompt.
+                        </p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Issue</th>
+                                        <th>Platform</th>
+                                        <th>Category</th>
+                                        <th>Workaround</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>AI inserts a CDN script tag despite "no external dependencies" constraint</td>
+                                        <td>static HTML</td>
+                                        <td>Frontier (model-specific)</td>
+                                        <td>Restate constraint up front. If recurring, escalate to Ask Sage with a reasoning model.</td>
+                                        <td>27 May 2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date math breaks across DST boundary in localStorage</td>
+                                        <td>static HTML</td>
+                                        <td>Context</td>
+                                        <td>Tell the AI it is storing UTC ISO strings and only formatting at render time.</td>
+                                        <td>27 May 2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td>AI iterates 47 times on multi-file refactor in genai.mil chat</td>
+                                        <td>static HTML</td>
+                                        <td>Meta-frontier (tool selection)</td>
+                                        <td>Switch to Ask Sage with file ingestion plus a reasoning model. Restate the goal once with the file attached.</td>
+                                        <td>27 May 2026</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p>Categories: <strong>Frontier</strong> (AI capability limit on this task), <strong>Platform limitation</strong> (browser, OS, hosting), <strong>Context</strong> (AI guessed wrong because prompt was insufficient), <strong>Meta-frontier</strong> (you were using the wrong tool for the job).</p>
+
+                        <p>
+                            <strong>Deliverable:</strong> One-page Advanced Frontier Map published on the EDD site. Each student adds at least
+                            three rows specific to what bit them during the workshop.
+                        </p>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Key Teaching Point</h3>
+                            <p>
+                                This map is the most valuable artifact. It prevents the 19-percentage-point performance drop from the
+                                BCG-Harvard study. When workers apply AI beyond the frontier without knowing it, quality collapses.
+                                The frontier map makes the boundary visible. The new column for advanced builders is the meta-frontier:
+                                knowing not just where the model breaks, but which tool to reach for in the first place.
+                            </p>
+                        </div>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Data Handling Reminder</h3>
+                            <p>
+                                Both genai.mil and Ask Sage are CUI-authorized enterprise tenants. CUI-level unit context (unit name, T&amp;R
+                                references, approval chain) is acceptable. PII (real Marine names, SSNs, contact info) must be anonymized
+                                unless a PIA authorizes the data on that tool. github.io is world-public the moment the repo is public;
+                                no CUI in the file itself or in the repo history.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- MODULE 2: COMPLEX BUILD -->
+                    <section id="complex-build">
+                        <h2>Module 2: Complex Build, Multi-Component System</h2>
+                        <p><strong>Duration:</strong> 60 minutes</p>
+
+                        <p>
+                            This is the most complex build in the entire reality-track curriculum. Students will build a single-file
+                            static HTML Unit Readiness Dashboard that joins three data sources, computes a readiness percentage,
+                            renders hand-rolled SVG bar charts by company, surfaces a Not-Ready table, and generates a plain-text
+                            Commander's Snapshot. The build requires 8 to 12 sequential prompts, deliberate switching between
+                            genai.mil and Ask Sage, and at least one error-recovery cycle. This build should feel significantly harder
+                            than anything in Course 3.5.
+                        </p>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Instructor Note: Mode-Switching and Tool-Switching Are Both the Goal</h3>
+                            <p>
+                                Course 4 teaches mode-switching (centaur vs cyborg). Course 4.5 layers a second axis on top:
+                                tool-switching (genai.mil vs Ask Sage). Assess students on their decision-making process, not on
+                                output polish. Watch for students who recognize when to slow down for accuracy-critical work,
+                                AND when to escalate from fast chat to a reasoning model. Those are two distinct skills.
+                            </p>
+                        </div>
+
+                        <h3>Build Target: Static HTML Unit Readiness Dashboard</h3>
+                        <p>
+                            Three JSON or CSV data sources (personnel, training, equipment) joined in JavaScript, computed readiness
+                            percentage, hand-rolled SVG bar chart by company, Not-Ready table, plain-text Commander's Snapshot.
+                            Single file. Inline CSS. Inline JavaScript. No external scripts, no CDN. localStorage persistence for
+                            the last loaded dataset so a reload does not lose state.
+                        </p>
+
+                        <p>
+                            <strong>Reference build:</strong> <a href="../builds/readiness-dashboard.html" target="_blank" rel="noopener">builds/readiness-dashboard.html</a>.
+                            Open it now. This is the destination. Use it to check your work, not to copy-paste from.
+                        </p>
+
+                        <h3>Phase 1: Data Architecture (Centaur, 15 minutes, Ask Sage with reasoning model)</h3>
+                        <p>
+                            <strong>Why centaur:</strong> Data schema errors compound. A bad join model means rework everywhere downstream. Slow down. Verify.
+                            <strong>Why Ask Sage:</strong> The reasoning quality on architecture trade-offs is materially higher with a reasoning model than with fast chat. This is a meta-frontier call. The right tool wins the next hour for you.
+                        </p>
+
+                        <p>
+                            Upload three sample CSVs to Ask Sage: personnel, training, and equipment. Select Claude 3 (or whatever
+                            reasoning model the tenant exposes) for the join-model proposal. Ask for an explicit join model, edge
+                            cases, and an in-memory data shape.
+                        </p>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Instructor Checkpoint</h3>
+                            <p>
+                                Before students prompt, ask: "Why are we using Ask Sage with a reasoning model for this phase, not
+                                genai.mil?" Correct answer: "Because the architecture decision sets up the next hour. A reasoning
+                                model holds the schema across the conversation and catches edge cases that fast chat misses. The
+                                cost of getting this wrong is rework on every downstream phase."
+                            </p>
+                        </div>
+
+                        <div class="prompt-block">
+                            <strong>Whiteboard Prompt (Ask Sage, Phase 1):</strong>
+                            <p>
+                                You are helping me design a Unit Readiness Dashboard. I have three CSV datasets (personnel, training, equipment) I am about to upload. I need you to:
+                            </p>
+                            <ol>
+                                <li>Propose a join model that produces a readiness percentage per Marine and aggregated by company.</li>
+                                <li>Identify three edge cases that will break the naive join (orphaned EDIPIs, NULL training records, unassigned equipment).</li>
+                                <li>Recommend the in-memory data shape after parsing. Plain JS objects, no framework, single-file HTML.</li>
+                            </ol>
+                            <p>
+                                Constraint: the final tool must run 100% offline in a single HTML file with no external scripts or CDN.
+                            </p>
+                        </div>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Verification Checkpoint: End of Phase 1</h3>
+                            <p>
+                                Walk the room. Every student should be able to name three edge cases out loud before they proceed.
+                                If a student cannot, send them back to Ask Sage with one more prompt: "List five more edge cases I
+                                am not thinking of." Most rooms hit orphaned EDIPIs, NULL training records, and one of: duplicate
+                                serial numbers on equipment, expired training certifications, or Marines listed in personnel but
+                                marked NJP or unfit.
+                            </p>
+                        </div>
+
+                        <h3>Phase 2: Data Ingestion and Joining (Cyborg, 15 minutes)</h3>
+                        <p>
+                            <strong>Why cyborg:</strong> Ingestion is trial-and-error. Parse errors, schema drift, edge cases revealed only by running the code.
+                        </p>
+
+                        <p>
+                            <strong>Student choice:</strong> paste-and-parse with genai.mil (Cyborg fast iteration, lower setup cost) OR upload
+                            the CSVs to Ask Sage and have it generate the join code with real schema knowledge (more deliberate, higher upfront
+                            cost but fewer rewrites). Both are valid. This is the first explicit tool-switch beat of the build, layered on
+                            top of the standard cyborg mode-switch beat.
+                        </p>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Instructor Teaching Point: The Tool-Switch Beat Inside the Mode-Switch Beat</h3>
+                            <p>
+                                Name what just happened to the room. Course 4 students switch between centaur and cyborg modes.
+                                Course 4.5 students switch BOTH modes AND tools. The two axes are independent. You can be in cyborg
+                                mode on genai.mil (fast chat, fast iteration) or in cyborg mode on Ask Sage (fewer turns, larger
+                                context per turn). Make the framing explicit.
+                            </p>
+                        </div>
+
+                        <div class="prompt-block">
+                            <strong>Prompt 2 (genai.mil chat):</strong>
+                            <p>
+                                Write JavaScript that parses a JSON array of personnel records and a JSON array of training records. Join by EDIPI. Output an array of <code>{marine, training_status}</code> objects. Inline JS, no dependencies, single function.
+                            </p>
+                        </div>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">INSTRUCTOR: DELIBERATE FAILURE TARGET. DO NOT WARN STUDENTS.</h3>
+                            <p>
+                                On Prompt 2, fast chat will almost always return one of the following:
+                            </p>
+                            <ul>
+                                <li>An O(n^2) <code>array.find()</code> join that visibly stalls on the sample data when scaled to 500+ records.</li>
+                                <li>A <code>JSON.parse</code> call without a try/catch that crashes on the first malformed paste.</li>
+                                <li>A join that silently drops orphans without flagging them, so the readiness percentage is wrong but plausible.</li>
+                            </ul>
+                            <p>
+                                Let students hit it. When hands go up, debrief on "frontier or context?" The honest answer is context.
+                                The fix is to tell the AI it is getting an array of 500+ records and ask for an indexed join
+                                (build a Map keyed on EDIPI, then iterate once), and to wrap the parse in try/catch with a visible
+                                error fallback.
+                            </p>
+                        </div>
+
+                        <div class="prompt-block">
+                            <strong>Prompt 3 (Error recovery, genai.mil chat):</strong>
+                            <p>
+                                The join works on 5 sample records but stalls on the 500-record dataset. I think the <code>find()</code> call is the issue. Rewrite this to build a Map keyed on EDIPI from training records first, then iterate personnel once and look up by Map key. Also wrap the <code>JSON.parse</code> in try/catch and surface a visible inline error if parsing fails.
+                            </p>
+                        </div>
+
+                        <p>
+                            Students who chose the Ask Sage path upload the three CSVs once and ask for the join code with schema
+                            already understood. Their iteration count is lower, but each iteration takes longer to set up. Both
+                            paths reach the same working join by the end of Phase 2. The point is not which path is faster, but
+                            that the student can articulate why they chose theirs.
+                        </p>
+
+                        <h3>Phase 3: Visualization (Centaur, 20 minutes)</h3>
+                        <p>
+                            Build the readiness card, SVG bar chart by company, and Not-Ready table.
+                        </p>
+
+                        <div class="prompt-block">
+                            <strong>Prompt 4:</strong>
+                            <p>
+                                Build a horizontal bar chart of readiness by company. Company on the left axis, percentage as the bar length, value label on the right. Colors: scarlet for under 75, gold for 75 to 90, ink for above 90.
+                            </p>
+                        </div>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">INSTRUCTOR: SECOND DELIBERATE FAILURE TARGET</h3>
+                            <p>
+                                Fast chat will almost always return an answer that includes a <code>&lt;script src="..."&gt;</code> pulling Chart.js from a CDN. That violates the no-external-dependencies constraint stated up front. Let the student catch the violation. If they do not, ask: "Where is that bar chart actually coming from? Open DevTools. What does the Network tab show?"
+                            </p>
+                        </div>
+
+                        <div class="prompt-block">
+                            <strong>Prompt 5 (Constraint refresh):</strong>
+                            <p>
+                                No external scripts, no CDN, no Chart.js. Render as inline SVG using vanilla JS. Bars labeled with company name on the left and percentage on the right, scaled to 0 to 100. Use the scarlet/gold/ink palette already in the stylesheet.
+                            </p>
+                        </div>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Key Teaching Beat: Model Capability Difference</h3>
+                            <p>
+                                When this prompt is run through Ask Sage with a reasoning model (Claude 3 or a GPT o-series), the
+                                no-external-dependencies constraint is honored more reliably from the first response. When run
+                                through genai.mil fast chat, the constraint gets violated and the student has to catch it. The
+                                contrast IS the lesson. Reasoning models follow stated constraints more rigorously. Fast chat is
+                                cheaper per turn but pushes the verification burden onto the human. Neither is wrong. Use both,
+                                pick deliberately.
+                            </p>
+                        </div>
+
+                        <h3>Phase 4: Verification and Brief Generation (10 minutes)</h3>
+                        <p>
+                            Upload the generated <code>readiness_output.csv</code> and the original <code>personnel_source.csv</code> to Ask Sage. Ask it to find discrepancies. This is a real cross-check, not a spot-check.
+                        </p>
+
+                        <div class="prompt-block">
+                            <strong>Prompt 6 (Ask Sage verification):</strong>
+                            <p>
+                                I am uploading two files: <code>readiness_output.csv</code> (what my dashboard generated) and <code>personnel_source.csv</code> (the original data). For each Marine in <code>readiness_output.csv</code> flagged as NOT READY, verify the reason by cross-referencing the source. Flag any rows where the source data does not support the NOT READY classification.
+                            </p>
+                        </div>
+
+                        <div class="prompt-block">
+                            <strong>Prompt 7 (Commander's Snapshot, genai.mil chat):</strong>
+                            <p>
+                                Add a "Generate Commander's Snapshot" button. It produces a plain-text brief in a read-only textarea. Format: header with unit and as-of date, overall readiness percentage with delta vs last week from localStorage, breakdown by company, top three NOT READY drivers, and a one-line REQUEST at the end if any company is below 75. Add a Copy button next to it.
+                            </p>
+                        </div>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Final Verification Standard</h3>
+                            <p>
+                                Before students declare the build done, run this protocol: "Pick one Marine from the Not-Ready table.
+                                Open the source CSV in a text editor. Can you confirm from the source that this Marine should be
+                                Not-Ready, and that the reason your dashboard cited matches the source?" If they cannot, the
+                                dashboard is not ready. The Ask Sage cross-check in Phase 4 is the cleaner way to do this at scale,
+                                but the manual spot-check is the discipline.
+                            </p>
+                        </div>
+
+                        <h3>Debrief Questions (5 minutes)</h3>
+                        <ul>
+                            <li>Where did you switch MODES? Why?</li>
+                            <li>Where did you switch TOOLS? Why?</li>
+                            <li>Where did the AI fail? Was it a frontier issue, a context issue, or a tool-selection (meta-frontier) issue?</li>
+                            <li>If you had to build this again, what would you do differently?</li>
+                            <li>How much time did this take? How long would it have taken without AI?</li>
+                        </ul>
+
+                        <div class="callout callout--success">
+                            <h3 class="callout__title">Key Takeaway</h3>
+                            <p>
+                                This build required 7+ prompts, at least two mode switches, at least one tool switch, and at least
+                                one error-recovery cycle. That is normal for advanced builds. The students who succeeded verified
+                                at each phase boundary, picked the right tool for each phase, and knew how to feed errors back into
+                                the conversation for refinement.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- MODULE 3: GROUP DEBUGGING -->
+                    <section id="group-debugging">
+                        <h2>Module 3: Group Debugging</h2>
+                        <p><strong>Duration:</strong> 40 minutes</p>
+
+                        <p>
+                            Participants bring actual broken tools. If they don't have any, use the five pre-built scenarios linked below.
+                            The five scenarios cover the most common failure modes in static-stack reality-track builds, plus one
+                            tool-selection failure unique to the two-tool world advanced builders operate in.
+                        </p>
+
+                        <h3>Debugging Clinic Protocol</h3>
+                        <ol>
+                            <li>
+                                <strong>Student Presentation (2 minutes):</strong> Student explains what the tool should do, what it actually does, and what they have already tried. Format: "Expected behavior. Actual behavior. Steps I have taken."
+                            </li>
+                            <li>
+                                <strong>Group Diagnosis (3 minutes):</strong> Group asks clarifying questions and proposes hypotheses. Instructor guides with questions: "Is this a data issue or a logic issue? Is the problem at input or at output? Have we seen this pattern before? Was the right tool used for this work?"
+                            </li>
+                            <li>
+                                <strong>Instructor Synthesis (2 minutes):</strong> Instructor identifies the root cause category (frontier limitation, insufficient context, incorrect assumption, integration failure, data quality issue, or tool-selection failure) and explains the fix.
+                            </li>
+                            <li>
+                                <strong>Document the Pattern:</strong> Add the failure case to the collective Advanced Frontier Map and, where it points to a missing capability, the Capability Gap Map.
+                            </li>
+                        </ol>
+
+                        <p>
+                            <strong>Time allocation:</strong> 7 minutes per problem. Aim for 5 problems in 35 minutes, leaving 5 minutes for final synthesis.
+                        </p>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Instructor Note: Managing the Session</h3>
+                            <p>
+                                Keep time strictly. Students will want to fully fix every problem. The goal is not to fix everything;
+                                the goal is to build diagnostic patterns. After 3 minutes of group diagnosis, move to synthesis even
+                                if the problem is not solved. The value is in recognizing the pattern.
+                            </p>
+                        </div>
+
+                        <h3>Pre-Built Debugging Scenarios</h3>
+                        <p>
+                            The full standalone resource with answer keys lives at <a href="../resources/debugging-scenarios.html" target="_blank" rel="noopener">resources/debugging-scenarios.html</a>. Summaries below.
+                        </p>
+
+                        <div class="template-display">
+                            <h4>Scenario 1: Fetch Race / Double-Submit (Counseling Tracker)</h4>
+                            <p>A counseling tracker tool double-saves the same entry whenever the user clicks Save twice quickly. Symptom: two identical rows in localStorage, both with the same timestamp. Student attempted fixes: added a confirm dialog, added <code>setTimeout</code> debounce. Neither worked. <a href="../resources/debugging-scenarios.html#scenario-1" target="_blank" rel="noopener">View answer key</a>.</p>
+                        </div>
+
+                        <div class="template-display">
+                            <h4>Scenario 2: Stale localStorage After Schema Change (TEEP-like Tracker)</h4>
+                            <p>Tool was updated to add a "Confirmed By" field. New entries save correctly. Old entries throw a JS error when displayed because the property does not exist on legacy rows. Student rebuilt the render function three times. <a href="../resources/debugging-scenarios.html#scenario-2" target="_blank" rel="noopener">View answer key</a>.</p>
+                        </div>
+
+                        <div class="template-display">
+                            <h4>Scenario 3: CSS Specificity Collision Plus Timezone Bug (Watch-Bill Highlight Rows)</h4>
+                            <p>Watch-bill tool should highlight rows for the current day in gold. The wrong row highlights, and only on Mondays. Two bugs stacked: the gold class is being overridden by a more specific selector, AND the day-of-week comparison uses local time but the rendered dates use UTC. <a href="../resources/debugging-scenarios.html#scenario-3" target="_blank" rel="noopener">View answer key</a>.</p>
+                        </div>
+
+                        <div class="template-display">
+                            <h4>Scenario 4: Event Delegation on Dynamic Content (List-Based Tool)</h4>
+                            <p>Tool renders a list of items with Delete buttons. The first three Delete buttons work. After clicking Add and rendering four more items, only the original three buttons respond. Click handlers were attached at render time and the new items never got them. <a href="../resources/debugging-scenarios.html#scenario-4" target="_blank" rel="noopener">View answer key</a>.</p>
+                        </div>
+
+                        <div class="template-display">
+                            <h4>Scenario 5: Tool-Selection Failure (Meta-Frontier)</h4>
+                            <p>Student used genai.mil chat for a complex multi-file refactor of a static-stack tool. After 47 turns, the model has lost track of which files changed and is reintroducing bugs that were fixed earlier in the thread. The correct move was Ask Sage with file ingestion plus a reasoning model from the start. This is not a frontier issue with the AI. It is a meta-frontier issue with the human's tool selection. <a href="../resources/debugging-scenarios.html#scenario-5" target="_blank" rel="noopener">View answer key</a>.</p>
+                        </div>
+
+                        <h3>Final Synthesis (5 minutes)</h3>
+                        <p>
+                            After all debugging sessions, lead a group discussion:
+                        </p>
+                        <ul>
+                            <li>What patterns did we see? (Common answer: most problems were context issues or tool-selection issues, not frontier issues.)</li>
+                            <li>How many problems were caused by insufficient prompting versus actual AI limitations versus picking the wrong tool?</li>
+                            <li>What questions should we ask the AI differently next time?</li>
+                            <li>Which problems belong on the Advanced Frontier Map?</li>
+                            <li>Which problems point to a missing capability that belongs on the Capability Gap Map?</li>
+                        </ul>
+
+                        <div class="callout callout--success">
+                            <h3 class="callout__title">Key Takeaway</h3>
+                            <p>
+                                Most debugging comes down to four categories: (1) the AI did not have enough context, (2) the platform
+                                has a quirk the AI does not know about, (3) we hit an actual frontier limitation, or (4) we were using
+                                the wrong tool for the job. Categories 1, 2, and 4 are fixable by the human. Category 3 goes on the
+                                frontier map. The fourth category did not exist for Course 4 students. It does for Course 4.5 students,
+                                because they have two tools to pick between.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- MODULE 4: VERIFICATION + QA -->
+                    <section id="verification">
+                        <h2>Module 4: Verification Protocols and QA</h2>
+                        <p><strong>Duration:</strong> 30 minutes</p>
+
+                        <p>
+                            Build a QA checklist for your domain. For AI-generated output, what must be checked?
+                        </p>
+
+                        <h3>QA Checklist</h3>
+                        <ol>
+                            <li>
+                                <strong>Source verification.</strong> AI fabricates references. Every citation, regulation number, and URL must be independently verified.
+                            </li>
+                            <li>
+                                <strong>Data accuracy.</strong> Numbers, dates, names, and quantities must be checked against source data.
+                            </li>
+                            <li>
+                                <strong>Logic check.</strong> Does the reasoning hold? Are conclusions supported by the premises?
+                            </li>
+                            <li>
+                                <strong>Format compliance.</strong> Does the output match required formats, templates, and standards?
+                            </li>
+                            <li>
+                                <strong>Domain review.</strong> Does this pass the smell test for someone who knows this domain?
+                            </li>
+                        </ol>
+
+                        <h3>The Two-Tool Cross-Check Protocol</h3>
+                        <p>
+                            For high-stakes outputs (anything that goes to a CO, anything that becomes a system of record, anything
+                            that ends up in a fitness report), run the same prompt through both genai.mil and Ask Sage with a
+                            reasoning model. Compare the answers. Disagreements are flags.
+                        </p>
+                        <ul>
+                            <li>When both tools agree on a substantive judgment, your confidence increases (not to certainty, but materially).</li>
+                            <li>When the tools disagree, treat that as a flag and dig in. The disagreement is data about where the model is uncertain.</li>
+                            <li>This is not free. It costs you two prompts and a comparison turn. Reserve it for outputs that will be acted on.</li>
+                            <li>Document any case where the two tools systematically disagree. That is a frontier-map row and probably a Capability Gap Map row.</li>
+                        </ul>
+
+                        <h3>Exercise: Timed QA Review</h3>
+                        <p>
+                            Take an AI-generated SOP excerpt with planted errors. Run it through your checklist. Time yourself.
+                            Compare QA time to creation-from-scratch time. Usually 30 to 50 percent. That's the time savings.
+                        </p>
+
+                        <div class="template-display">
+                            <h4>AI-Generated SOP Excerpt, QA Timed Exercise</h4>
+                            <p><strong>Instructions:</strong> Time yourself. How long does it take you to find all five issues? Typical completion time: 5 to 10 minutes.</p>
+                            <hr>
+                            <p><strong>STANDARD OPERATING PROCEDURE</strong><br>
+                            Marine Corps Detachment, 99th Training Group<br>
+                            <strong>Subject:</strong> Unit Check-In / Check-Out Procedure<br>
+                            <strong>Reference:</strong> (a) MCO 1000.6B, Individual Records Administration<br>
+                            (b) NAVMC 11800/4 (Rev 03-2025), Check-In/Check-Out Sheet</p>
+
+                            <p><strong>1. Purpose.</strong> To establish standardized procedures for all personnel checking in to and checking out of Marine Corps Detachment, 99th Training Group. All personnel shall complete check-in within 72 hours of reporting aboard.</p>
+
+                            <p><strong>2. Scope.</strong> This SOP applies to all Marines, Sailors, and civilian personnel assigned to or transferring from the Detachment.</p>
+
+                            <p><strong>3. Procedure, Check-In.</strong> Personnel reporting aboard shall complete the following steps in order:</p>
+
+                            <p>Step 1: Report to the Officer of the Day (OOD) with original orders and ten copies of PCS orders.<br>
+                            Step 2: Obtain a check-in sheet per reference (b).<br>
+                            Step 3: Receive unit orientation brief from S-1 covering unit organization, key personnel, and local policies.<br>
+                            Step 4: Report to assigned section SNCOIC/OIC for introduction and initial task assignment.<br>
+                            5. Report to S-1 for initial in-processing, including service record book review and page 11 entry.<br>
+                            6. Complete remaining check-in sheet signatures (S-3, S-4, Medical, Dental, IPAC) within 48 hours of reporting.</p>
+
+                            <p><strong>4. Procedure, Check-Out.</strong> Personnel transferring from the unit shall initiate check-out procedures no later than 10 working days prior to the date of detachment.</p>
+                        </div>
+
+                        <details>
+                            <summary><strong>Answer Key: Five Planted Errors</strong></summary>
+                            <ol>
+                                <li>
+                                    <strong>Fabricated Reference #1:</strong> "MCO 1000.6B" is cited as the governing order for check-in procedures. This MCO does not exist. AI-generated regulation numbers must always be independently verified against the official Marine Corps Publications System.
+                                </li>
+                                <li>
+                                    <strong>Fabricated Reference #2:</strong> "NAVMC 11800/4 (Rev 03-2025)" is cited as the check-in/check-out form. This form number is fabricated. AI frequently generates plausible-sounding form numbers that do not correspond to real NAVMC forms.
+                                </li>
+                                <li>
+                                    <strong>Data Accuracy Error, Contradictory Timelines:</strong> Paragraph 1 states check-in must be completed "within 72 hours of reporting aboard," but Step 6 states remaining signatures must be completed "within 48 hours of reporting." These timelines contradict each other. AI often introduces subtle inconsistencies between sections of longer documents.
+                                </li>
+                                <li>
+                                    <strong>Logic Error, Steps Out of Order:</strong> Step 3 has the Marine receiving a "unit orientation brief from S-1," but Step 5 has the Marine reporting "to S-1 for initial in-processing." Logically, you would in-process at S-1 (Step 5) before receiving the orientation brief (Step 3). The S-1 steps are reversed.
+                                </li>
+                                <li>
+                                    <strong>Format Error, Inconsistent Numbering:</strong> Steps 1 through 4 use the "Step 1:" format, but the procedure then switches to a bare "5." and "6." format midway through. AI frequently loses formatting consistency in longer documents, especially when generating numbered procedures.
+                                </li>
+                            </ol>
+                        </details>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Key Teaching Point</h3>
+                            <p>
+                                The GDPval study found human experts averaged 7 hours per task. AI-assisted with review was
+                                1.4x faster and 1.6x cheaper. The review step is where value is created. The two-tool cross-check
+                                is one of the cheapest ways to raise the floor on review quality without adding human review time.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- MODULE 5: TEACHING METHODOLOGY -->
+                    <section id="teaching-others">
+                        <h2>Module 5: Teaching Methodology, The 201 Multiplier</h2>
+                        <p><strong>Duration:</strong> 30 minutes</p>
+
+                        <h3>The Permission Gap</h3>
+                        <p>
+                            Mollick's research shows workers already using AI but hiding it. Worried about organizational reaction.
+                            This creates a shadow AI culture where best practices are not shared. Your role as an Advanced Workshop
+                            graduate is to formalize AI use, share techniques, and train others. The reality-track version of that
+                            role includes teaching tool selection: when to reach for genai.mil, when to reach for Ask Sage, and
+                            when to cross-check both.
+                        </p>
+
+                        <h3>Discussion: The Apprentice Problem (5 minutes)</h3>
+                        <p>
+                            Entry-level job postings dropped 35 percent from 2023 to 2025. AI is automating the routine tasks that
+                            juniors traditionally learned on. If a junior never manually writes a key document because AI generates
+                            it, how do they develop the judgment to know when the AI-generated version is wrong? And how do they
+                            learn which tool to reach for when the task gets harder?
+                        </p>
+
+                        <h3>Protocol for Junior Marines Using AI</h3>
+                        <ul>
+                            <li>
+                                <strong>Require review and explanation.</strong> Juniors must review AI output and explain WHY it is correct or incorrect.
+                            </li>
+                            <li>
+                                <strong>Periodically work without AI.</strong> Key tasks should periodically be done from scratch to build foundational skills.
+                            </li>
+                            <li>
+                                <strong>Use AI output as a teaching tool.</strong> Give juniors AI-generated products and have them find the problems.
+                            </li>
+                            <li>
+                                <strong>Rotate QA review.</strong> Assign juniors to the QA review step so they develop quality judgment through repeated exposure.
+                            </li>
+                            <li>
+                                <strong>Teach tool selection deliberately.</strong> When a junior asks for help, ask them which tool they reached for first and why. Coach the selection, not just the prompt.
+                            </li>
+                        </ul>
+
+                        <h3>Structured Teach-Back Exercise (20 minutes)</h3>
+                        <p>
+                            This exercise develops your ability to teach EDD concepts to others. Each student will prepare and deliver a 3-minute teaching segment on one concept from the EDD curriculum.
+                        </p>
+
+                        <h4>Step 1: Select a Concept (2 minutes)</h4>
+                        <p>Choose one of the following concepts from the curriculum:</p>
+                        <ul>
+                            <li>Centaur vs Cyborg modes</li>
+                            <li>Frontier mapping</li>
+                            <li>Context-building in prompts</li>
+                            <li>Iterative refinement</li>
+                            <li>Verification protocols</li>
+                            <li>The Jagged Frontier</li>
+                            <li>Layer separation (Spec / Prototype / Production)</li>
+                            <li>Tool selection (genai.mil vs Ask Sage)</li>
+                        </ul>
+
+                        <h4>Step 2: Preparation Using Template (5 minutes)</h4>
+                        <p>Use this template to prepare your teaching segment:</p>
+
+                        <div class="template-display">
+                            <h5>Teach-Back Preparation Template</h5>
+                            <p><strong>Concept:</strong> Which concept are you teaching?</p>
+                            <p><strong>One-Sentence Definition:</strong> Define the concept in one clear sentence.</p>
+                            <p><strong>Why It Matters:</strong> One sentence explaining why this concept is important.</p>
+                            <p><strong>Real Example from Your Work:</strong> Specific example from your actual job where this concept applies.</p>
+                            <p><strong>Common Mistake:</strong> One mistake people make when applying this concept.</p>
+                            <p><strong>Key Takeaway:</strong> One sentence the audience should remember.</p>
+                        </div>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Instructor Note: Template Modeling</h3>
+                            <p>
+                                Before students prepare, model the template yourself with a completed example. Show them what "good"
+                                looks like. Example: "I am teaching Tool selection. Definition: genai.mil is the fast chat layer for
+                                single-prompt tasks; Ask Sage is the multi-file and reasoning layer for architecture and dataset tasks.
+                                Why it matters: picking the wrong tool burns hours and looks like a frontier issue when it is really a
+                                meta-frontier issue. My example: when I refactored a static-stack dashboard across three files, I tried
+                                genai.mil first, hit 30 turns of context drift, switched to Ask Sage with the files uploaded, and
+                                shipped in two turns. Common mistake: defaulting to whichever tool you opened first. Key takeaway:
+                                the selection is part of the discipline, not an implementation detail."
+                            </p>
+                        </div>
+
+                        <h4>Step 3: Small Group Teaching (10 minutes)</h4>
+                        <p>Break into groups of 3 or 4. Each person delivers their 3-minute teaching segment. Rotate until everyone has taught.</p>
+
+                        <h4>Step 4: Peer Evaluation (3 minutes)</h4>
+                        <p>After each teaching segment, group members provide feedback using this rubric:</p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Criteria</th>
+                                        <th scope="col">Strong</th>
+                                        <th scope="col">Needs Improvement</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Clarity of Definition</td>
+                                        <td>I could explain this concept to someone else now</td>
+                                        <td>I am still unclear on what this concept means</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Relevance of Example</td>
+                                        <td>The example made the concept concrete and believable</td>
+                                        <td>The example was generic or did not clearly illustrate the concept</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Practical Takeaway</td>
+                                        <td>I know what to do differently because of this teaching</td>
+                                        <td>I understand the concept but do not know how to apply it</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Facilitating the Exercise</h3>
+                            <p>
+                                Walk the room during small group teaching. Listen for common issues: (1) Students who read from their template instead of teaching conversationally, (2) Examples that are too vague ("I used this on a project" instead of specific details), (3) Students who exceed 3 minutes (this is a teaching skill: brevity). Give real-time coaching. The goal is not perfect teaching; the goal is building awareness of what effective teaching looks like.
+                            </p>
+                        </div>
+
+                        <h3>Group Debrief (5 minutes)</h3>
+                        <p>Reconvene as a full group. Discuss:</p>
+                        <ul>
+                            <li>What made a teaching segment effective?</li>
+                            <li>What was difficult about teaching something you know well?</li>
+                            <li>How would you adapt this approach to teach a 30-minute Platform Training session?</li>
+                            <li>Who in your unit could benefit from learning these concepts?</li>
+                        </ul>
+                    </section>
+
+                    <!-- MODULE 6: WORKFLOW PLAYBOOK -->
+                    <section id="workflow-playbook">
+                        <h2>Module 6: Workflow Playbook</h2>
+                        <p><strong>Duration:</strong> 30 minutes</p>
+
+                        <p>
+                            Each participant produces a one-page playbook for one AI-integrated workflow from their actual job.
+                            This is the final deliverable of the Advanced Workshop. The reality-track version adds a "Which tool"
+                            column to the template, because tool selection is part of the workflow design.
+                        </p>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Completed Example 1: Weekly Training Schedule Publication</h3>
+                            <p>Use this filled-in example to show participants what a finished playbook looks like before they create their own.</p>
+                        </div>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Field</th>
+                                        <th scope="col">Content</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Task</strong></td>
+                                        <td>Weekly training schedule publication for the section</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Frequency</strong></td>
+                                        <td>Weekly. Every Thursday by 1600.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Mode</strong></td>
+                                        <td>Cyborg (continuous back-and-forth refinement)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Which Tool</strong></td>
+                                        <td>genai.mil chat</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Step 1</strong></td>
+                                        <td><strong>Human:</strong> Pull next week's events from training calendar, OPORD, and any new taskings (Human Only).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Step 2</strong></td>
+                                        <td><strong>AI:</strong> Draft the schedule in standard weekly format with times, locations, and uniform requirements (AI generates, Human reviews).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Step 3</strong></td>
+                                        <td><strong>Human:</strong> Cross-reference against range bookings, vehicle requests, and instructor availability (Human Only).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Step 4</strong></td>
+                                        <td><strong>AI:</strong> Format conflicts as a decision matrix. "Event A conflicts with Event B at 0900. Options: move A to 1300, move B to Tuesday, or split the section." (AI generates options, Human decides.)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Step 5</strong></td>
+                                        <td><strong>Human:</strong> Make final decisions on conflicts, add section leader notes (Human Only).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Step 6</strong></td>
+                                        <td><strong>AI:</strong> Generate the final formatted schedule with all corrections applied, ready for distribution (AI generates, Human approves).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Verification Checklist</strong></td>
+                                        <td>All events have confirmed locations. All times are in 24-hour format. No double-bookings remain. Uniform for each event is specified. POC listed for each event.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Known Frontier Issues</strong></td>
+                                        <td>AI sometimes invents room numbers that do not exist on base. AI cannot verify range availability. Must be checked manually. AI occasionally uses 12-hour time format even when told to use 24-hour.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Time Savings</strong></td>
+                                        <td>Without AI: about 3 hours (gathering info, formatting, resolving conflicts manually). With AI: about 45 minutes (human gathers info, AI formats and generates options).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Junior Development</strong></td>
+                                        <td>Rotate schedule duty among junior Marines weekly. Require the Marine to review AI output and brief back why each event is scheduled (builds planning judgment). Monthly: have one schedule created entirely without AI to maintain baseline skill.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Completed Example 2: Weekly Readiness Rollup</h3>
+                            <p>Same template, different tool selection. This is the multi-file dataset workflow that the Module 2 build prepared students for.</p>
+                        </div>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Field</th>
+                                        <th scope="col">Content</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Task</strong></td>
+                                        <td>Weekly readiness rollup for the company commander's brief</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Frequency</strong></td>
+                                        <td>Weekly. Every Monday by 1000.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Mode</strong></td>
+                                        <td>Centaur (distinct human phases and AI phases with verification at each boundary)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Which Tool</strong></td>
+                                        <td>Ask Sage with Claude 3 (or another reasoning model the tenant exposes)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Step 1</strong></td>
+                                        <td><strong>Human:</strong> Export current rosters from MOL: personnel, training currency, equipment status (Human Only).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Step 2</strong></td>
+                                        <td><strong>AI:</strong> Upload all three CSVs to Ask Sage. Ask Claude 3 to compute deltas vs last week's saved snapshot. Output the top three drivers of any change in readiness percentage (AI generates, Human reviews).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Step 3</strong></td>
+                                        <td><strong>Human:</strong> Spot-check three Marines flagged as new NOT READY this week against the source CSVs to verify the AI's attribution (Human Only).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Step 4</strong></td>
+                                        <td><strong>AI:</strong> Generate a plain-text rollup with overall percentage, delta, top three drivers, and a one-line recommended commander action (AI generates, Human approves).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Step 5</strong></td>
+                                        <td><strong>Human:</strong> Review, paste into the brief slide, log to the readiness dashboard tool for next week's delta (Human Only).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Verification Checklist</strong></td>
+                                        <td>Overall percentage matches manual count of READY Marines divided by total. Delta sign and magnitude check against last week's saved snapshot. Top three drivers each trace back to a specific source row. No Marine appears in the rollup who is not in this week's personnel export.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Known Frontier Issues</strong></td>
+                                        <td>Ask Sage occasionally misattributes a NOT READY classification when a Marine appears in two units (cross-attached). The two-tool cross-check (run the same prompt through genai.mil with paste-and-summarize on a sample) catches this. Reasoning models occasionally over-explain. Constrain the output format up front.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Time Savings</strong></td>
+                                        <td>Without AI: about 4 hours (manual joins in Excel, three sets of pivot tables, narrative writing). With AI: about 1 hour. Net savings: 3 hours per week per company commander's S-3 shop.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Junior Development</strong></td>
+                                        <td>Have a junior Marine do Step 3 (the source-data spot-check) every week. That step builds the readiness-data literacy the rest of the workflow assumes. Monthly: have the junior do the full rollup without AI for one company to maintain baseline skill.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4>Blank Template, Create Your Own</h4>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Field</th>
+                                        <th scope="col">Content</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Task</td>
+                                        <td>A specific, recurring task from your job</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Frequency</td>
+                                        <td>How often you perform this task</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mode</td>
+                                        <td>Centaur or Cyborg</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Which Tool</td>
+                                        <td>genai.mil chat / Ask Sage with reasoning model / both (two-tool cross-check)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Steps</td>
+                                        <td>Step-by-step process with Human/AI labels for each step</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Verification Checklist</td>
+                                        <td>What must be checked before output is final</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Known Frontier Issues</td>
+                                        <td>Where AI has failed on this task before</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Time Savings Estimate</td>
+                                        <td>Time without AI vs time with AI</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Junior Development Note</td>
+                                        <td>How this workflow preserves skill-building for junior personnel</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Completion Criteria: What a Finished Playbook Looks Like</h3>
+                            <p>
+                                A completed playbook entry should have: a clear task name, realistic frequency, the correct mode (Centaur or Cyborg), the correct tool (genai.mil / Ask Sage / both), 4 to 8 concrete steps with Human/AI labels, a verification checklist with 3 to 5 items, at least one known frontier issue, and a specific time savings estimate. If your playbook has fewer than 4 steps or no verification checklist, it is not detailed enough.
+                            </p>
+                        </div>
+
+                        <h3>Capability Gap Map Integration</h3>
+                        <p>
+                            Add at least two rows to your Capability Gap Map during Module 6 that map your workflow playbook to
+                            Production-Layer wishes. Examples from the readiness rollup workflow: "MOL write-back so the snapshot
+                            posts back to the system of record," "Automated brief delivery once the rollup is approved," "Direct
+                            connector to the training currency database so the manual export is eliminated."
+                        </p>
+                        <p>
+                            Open the <a href="../resources/capability-gap-map.html" target="_blank" rel="noopener">Capability Gap Map template</a> and fill in the rows now, while the workflow design is fresh. The compiled Capability Gap Map across the room is the policy case for production access. Specific, costed, beneficiary-counted gaps are what move tenant decisions.
+                        </p>
+                    </section>
+
+                    <!-- ASSESSMENT RUBRIC -->
+                    <section id="assessment">
+                        <h2>Assessment Rubric</h2>
+                        <p>
+                            Use this rubric to evaluate student performance across all modules. Students should achieve "Meets" or higher
+                            in at least 5 of 6 categories to be considered Course 4.5 graduates.
+                        </p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Criteria</th>
+                                        <th scope="col">Exceeds Expectations</th>
+                                        <th scope="col">Meets Expectations</th>
+                                        <th scope="col">Developing</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Frontier Map Completeness</strong><br>(Module 1)</td>
+                                        <td>Frontier map covers 5+ tasks with specific examples of what each tool handles, what it fails at, and what is changing. Map includes evidence from student's own testing. Meta-frontier (tool-selection) issues are explicitly documented.</td>
+                                        <td>Frontier map covers 3 to 4 tasks with clear boundaries. Examples are specific to the student's domain. Distinguishes between genai.mil and Ask Sage strengths accurately.</td>
+                                        <td>Frontier map is generic or vague. Tasks are not specific to student's domain. Does not distinguish between the two tools or relies on assumptions rather than testing.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Complex Build Quality</strong><br>(Module 2)</td>
+                                        <td>Successfully completed the Readiness Dashboard as a single-file static HTML build with all three data sources joined and the SVG bar chart hand-rolled. Made conscious mode-switching AND tool-switching decisions and articulated why each phase required that mode and that tool. Verified outputs at phase boundaries. Numbers are accurate when spot-checked against source data.</td>
+                                        <td>Completed most of the dashboard build as single-file static HTML. Made at least 2 mode switches and at least 1 tool switch with clear rationale. Attempted verification even if errors were found. Understands the difference between centaur and cyborg modes in practice.</td>
+                                        <td>Did not complete the build OR stayed in one mode and one tool throughout OR could not articulate why mode-switching or tool-switching matters. Did not verify outputs. Build contains obvious errors not caught in QA.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Debugging Contribution</strong><br>(Module 3)</td>
+                                        <td>Actively diagnosed problems during group debugging. Asked clarifying questions that narrowed down root cause. Correctly identified whether failures were frontier, context, platform, or meta-frontier (tool selection) issues. Contributed patterns to the collective frontier map.</td>
+                                        <td>Participated in group debugging. Asked questions and proposed solutions. Could distinguish between AI limitations, prompting issues, and tool-selection issues when guided by instructor. Documented at least one failure pattern.</td>
+                                        <td>Did not actively participate in debugging OR could not identify root causes OR attributed all problems to "AI limitations" without deeper analysis. Did not document patterns.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>QA Protocol Rigor</strong><br>(Module 4)</td>
+                                        <td>Identified all 5 errors in the QA exercise in under 10 minutes. Explained why each error is dangerous. Applied the QA checklist plus the two-tool cross-check to own work and found at least one issue. QA process is systematic and repeatable.</td>
+                                        <td>Identified 3 to 4 errors in the QA exercise. Understands the importance of verification and the two-tool cross-check. Can articulate what must be checked in AI-generated output for their domain.</td>
+                                        <td>Identified fewer than 3 errors OR took longer than 15 minutes OR did not apply QA thinking to own work. Treats QA as optional rather than critical.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Teaching Effectiveness</strong><br>(Module 5)</td>
+                                        <td>Delivered a clear, concise teach-back with a specific real-world example. Stayed within 3 minutes. Explained not just what the concept is, but why it matters and how to apply it. Received "Strong" ratings on all three rubric criteria from peers.</td>
+                                        <td>Delivered a teach-back that communicated the concept clearly. Used a real example. Stayed close to time limit. Received "Strong" on at least 2 of 3 rubric criteria from peers.</td>
+                                        <td>Teach-back was unclear, too long, or relied on generic examples. Could not explain how to apply the concept. Did not receive "Strong" on any rubric criteria from peers.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Workflow Playbook Completeness</strong><br>(Module 6)</td>
+                                        <td>Workflow playbook covers a real, recurring task with specific step-by-step details. Each step is labeled Human/AI with rationale. Which Tool column is filled with a justified selection. Verification checklist is thorough and testable. Known frontier issues are documented from actual experience. Time savings estimate is backed by real data. Junior development protocol is specific and actionable. At least two Capability Gap Map rows added.</td>
+                                        <td>Workflow playbook covers a real task. Steps are clear. Which Tool column is filled. Verification checklist is present. Frontier issues are identified. Time savings estimate is reasonable. Junior development note is included. At least one Capability Gap Map row added.</td>
+                                        <td>Workflow playbook is incomplete or generic. Steps are vague. Which Tool column missing or unjustified. Verification checklist is missing or not specific. No documented frontier issues or time savings. No Capability Gap Map rows added.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Using This Rubric</h3>
+                            <p>
+                                This rubric is not a checklist. Use it as a guide for observing student performance throughout the workshop. The most important indicator of success is whether students demonstrate conscious decision-making about when and how to use AI, and which AI to reach for. A student who completes all deliverables but cannot articulate their reasoning has not achieved the learning objectives. Conversely, a student who struggles with technical execution but shows strong diagnostic thinking, mode-switching awareness, and tool-selection awareness is on the right track.
+                            </p>
+                        </div>
+
+                        <h3>Certification Recommendation</h3>
+                        <p>
+                            Students who achieve "Meets" or higher in at least 5 of 6 categories are recommended for:
+                        </p>
+                        <ul>
+                            <li>Serving as Platform Training (Locked Tenant Reality) instructors</li>
+                            <li>Leading tool development projects in their units</li>
+                            <li>Mentoring junior personnel in AI-assisted workflows</li>
+                            <li>Contributing to frontier map updates, workflow documentation, and Capability Gap Map rows</li>
+                        </ul>
+
+                        <p>
+                            Students who do not meet this threshold should be encouraged to continue practicing, revisit specific modules, and attempt Course 4.5 again after building 1 to 2 additional tools.
+                        </p>
+                    </section>
+
+                    <!-- WRAP -->
+                    <section id="wrap">
+                        <h2>Wrap and Next Steps</h2>
+                        <p>
+                            Course 4.5 produces two deliverables that compound over time. The Advanced Frontier Map captures where
+                            AI is reliable and where it is not, broken down by tool. The Capability Gap Map captures where the
+                            tenant blocks the work. Both go to leadership. Both compound across sessions.
+                        </p>
+
+                        <h3>Artifact 1: Advanced Frontier Map</h3>
+                        <p>
+                            Compile all failure cases from the session. This is collective intelligence of the room. Each student
+                            adds at least three rows specific to what bit them today. Specific task, specific failure, specific
+                            verification action. Specific tool. Not "check the output," but "run the same prompt through both
+                            tools and look for disagreement on the company-by-company readiness percentages."
+                        </p>
+
+                        <h3>Artifact 2: Capability Gap Map (Compounded)</h3>
+                        <p>
+                            Every tool the room built today has a wish list. Things that would make it 10x better if production
+                            access were unlocked. Capture them. The compiled Capability Gap Map across the room is the case for
+                            changing what the tenant gives you. Forward your unit's compiled Capability Gap Map up through your AI POC.
+                        </p>
+
+                        <h3>Assignment Before the Next Workshop</h3>
+                        <ol>
+                            <li>Polish the Readiness Dashboard build to a deployable state. Keep the URL live.</li>
+                            <li>Run through the EDD SOP QA process on at least one of your reality-track builds, using the two-tool cross-check.</li>
+                            <li>Document three failure cases with specifics: what failed, how you caught it, how you fixed it, which tool you used.</li>
+                            <li>Add at least two rows to your unit's Capability Gap Map based on the limitations you ran into.</li>
+                            <li>Identify one area where AI capability surprised you. Something it did better than you expected, on either tool.</li>
+                        </ol>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>
+                        Open-source AI-assisted development training for DoW personnel.
+                        Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="./">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="../toolkit/">Toolkit</a></li>
+                        <li><a href="../tools/">Tools</a></li>
+                        <li><a href="../resources/">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/jeranaias/ExpertDrivenDevelopment">GitHub Repository</a></li>
+                        <li><a href="../builds/readiness-dashboard.html">Reference Build: Readiness Dashboard</a></li>
+                        <li><a href="../resources/debugging-scenarios.html">Debugging Scenarios</a></li>
+                        <li><a href="../resources/tool-selection-guide.html">Tool Selection Guide</a></li>
+                        <li><a href="../resources/capability-gap-map.html">Capability Gap Map</a></li>
+                        <li><a href="../resources/static-hosting-cheat-sheet.html">Static Hosting Cheat Sheet</a></li>
+                        <li>MIT License</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function() {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+
+    <script src="../js/enhancements.js"></script>
+    <script src="../js/knowledge-check.js"></script>
+    <script src="../js/course-progress.js"></script>
+    <script src="../js/user-identity.js"></script>
+
+</body>
+</html>
