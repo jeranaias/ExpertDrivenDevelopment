@@ -62,7 +62,7 @@
                         <p class="sub">Take this home. Three Layers, Frontier classification, tool-selection cheat sheet, plus seed rows for the Capability Gap Map and your Workflow Playbook.</p>
                     </div>
                     <div class="hd-head__meta">
-                        <div><span>Duration</span><strong>4 hr (2 breaks)</strong></div>
+                        <div><span>Duration</span><strong>4 hr (1 break)</strong></div>
                         <div><span>Audience</span><strong>Experienced builders</strong></div>
                         <div><span>Prereq</span><strong>Course 3.5 + 1 deployed tool</strong></div>
                     </div>
@@ -70,14 +70,14 @@
 
                 <!-- Module strip -->
                 <section class="hd-modules" aria-label="Module timing">
-                    <div class="hd-modules__cell"><span class="t">0:00,0:40</span><span class="n">M1 Frontier Mapping</span><span class="d">40 min &middot; build map</span></div>
-                    <div class="hd-modules__cell"><span class="t">0:40,1:40</span><span class="n">M2 Complex Build</span><span class="d">60 min &middot; build</span></div>
-                    <div class="hd-modules__cell hd-modules__cell--break"><span class="t">1:40,1:50</span><span class="n">Break</span><span class="d">10 min</span></div>
-                    <div class="hd-modules__cell"><span class="t">1:50,2:30</span><span class="n">M3 Debugging Clinic</span><span class="d">40 min &middot; pair</span></div>
-                    <div class="hd-modules__cell"><span class="t">2:30,3:00</span><span class="n">M4 QA &amp; Verification Drill</span><span class="d">30 min &middot; timed</span></div>
-                    <div class="hd-modules__cell hd-modules__cell--break"><span class="t">3:00,3:10</span><span class="n">Break</span><span class="d">10 min</span></div>
-                    <div class="hd-modules__cell"><span class="t">3:10,3:30</span><span class="n">M5 Teach-Back</span><span class="d">20 min &middot; breakouts</span></div>
-                    <div class="hd-modules__cell"><span class="t">3:30,4:00</span><span class="n">M6 Workflow Playbook</span><span class="d">30 min &middot; build</span></div>
+                    <div class="hd-modules__cell"><span class="t">0:00,0:30</span><span class="n">M1 Frontier Mapping</span><span class="d">30 min &middot; build map</span></div>
+                    <div class="hd-modules__cell"><span class="t">0:30,1:30</span><span class="n">M2 Complex Build</span><span class="d">60 min &middot; Readiness Dashboard</span></div>
+                    <div class="hd-modules__cell hd-modules__cell--break"><span class="t">1:30,1:40</span><span class="n">Break</span><span class="d">10 min</span></div>
+                    <div class="hd-modules__cell"><span class="t">1:40,2:20</span><span class="n">M3 Debugging Clinic</span><span class="d">40 min &middot; pair</span></div>
+                    <div class="hd-modules__cell"><span class="t">2:20,2:50</span><span class="n">M4 QA &amp; Verification Drill</span><span class="d">30 min &middot; timed</span></div>
+                    <div class="hd-modules__cell"><span class="t">2:50,3:20</span><span class="n">M5 Teach-Back</span><span class="d">30 min &middot; breakouts</span></div>
+                    <div class="hd-modules__cell"><span class="t">3:20,3:50</span><span class="n">M6 Workflow Playbook</span><span class="d">30 min &middot; build</span></div>
+                    <div class="hd-modules__cell"><span class="t">3:50,4:00</span><span class="n">Wrap</span><span class="d">10 min</span></div>
                 </section>
 
                 <!-- Body -->
@@ -104,7 +104,7 @@
                         <ul class="hd-terms">
                             <li><span class="term">Context</span><span class="def">Inside the frontier. AI does this well today with normal prompting. Reach for the tool, verify the output, ship. No drama.</span></li>
                             <li><span class="term">Frontier</span><span class="def">On the edge. AI gets it right <em>sometimes</em>. You only catch the wrong answers if you already knew the answer. Use centaur mode and verify at every phase boundary.</span></li>
-                            <li><span class="term">Meta-frontier</span><span class="def">Outside the frontier today, but moving fast enough that it will land inside within a quarter or two. Watch it. Re-test monthly. Don't bet a deliverable on it yet.</span></li>
+                            <li><span class="term">Meta-frontier</span><span class="def">Wrong tool reached for. The AI's actual capability is fine; you're using the wrong one for this kind of problem (genai.mil chat for a multi-file refactor that needs Ask Sage + reasoning, or vice versa). The fix is tool selection, not better prompting. See Module 3 Scenario 5.</span></li>
                             <li><span class="term">Sorting rule</span><span class="def">If you can't tell which bucket a task is in, treat it as frontier and verify. Cost of over-verifying a context task is small. Cost of under-verifying a frontier task is a wrong answer that ships.</span></li>
                             <li><span class="term">Date your map</span><span class="def">The frontier moves. A meta-frontier task today is a context task two quarters from now. Write the date next to every row. Re-sort quarterly.</span></li>
                             <li><span class="term">Surprise both ways</span><span class="def">Log capability surprises (AI did better than you expected) in the same map as failure surprises. Both signals are how you keep the map honest.</span></li>
@@ -116,11 +116,11 @@
                         <h2>Tool-selection cheat sheet<span class="lede">Which Spec-layer tool, when</span></h2>
                         <p>Both genai.mil and Ask Sage are first-class Spec-layer tools. Different shapes. Pick by the task in front of you, not by habit. The four rules below cover 90 percent of decisions.</p>
 
-                        <p><strong>Single-shot chat, short reasoning, fast iteration &rarr; genai.mil.</strong> Drafting a paragraph, refactoring 200 lines of HTML, sanity-checking logic, sketching an outline. CAC sign-in, no setup. The default for centaur whiteboard sessions and quick cyborg sketches.</p>
+                        <p><strong>Single-shot chat, short reasoning, fast iteration &rarr; genai.mil.</strong> Drafting a paragraph, sanity-checking logic, sketching an outline, a regex or date math one-liner, a small targeted code change. CAC sign-in, no setup. The default for centaur whiteboard sessions and quick cyborg sketches. Multi-file refactors of a static-stack tool are painful here; that's an Ask Sage task.</p>
 
                         <p><strong>Multi-file, dataset, long context, attached references &rarr; Ask Sage.</strong> A real folder of source docs. A CSV you want sliced. An SOP you want cross-checked against three policy PDFs. Larger context window, file handling, model choice. The default when "paste it into the prompt" is laughable.</p>
 
-                        <p><strong>High-stakes output (briefs, formal correspondence, anything signed) &rarr; both, deliberately.</strong> Draft in one, verify in the other. Different models catch different errors. The five QA protocols (source, logic, format, numbers, substance) apply either way. <em>If the output is going to a GO, run both.</em></p>
+                        <p><strong>High-stakes output (briefs, formal correspondence, anything signed) &rarr; both, deliberately.</strong> Draft in one, verify in the other. Different models catch different errors. The five QA protocols (source, logic, format, numbers, substance) apply either way. <em>If the output is going to the CO, run both.</em></p>
 
                         <p><strong>If your tool of choice is down &rarr; the other one is the fallback,</strong> not "wait until Monday." Both work inside the tenant. Both are sanctioned. Knowing both means you don't get stuck.</p>
 
@@ -164,14 +164,15 @@
                         <p>These are the post-session references. Open them from your duty workstation, not your phone. If a URL doesn't load from a duty laptop, that's a Capability Gap Map row right there.</p>
                         <ul>
                             <li><strong>Course 4.5 page:</strong> <code>/courses/advanced-reality.html</code> &middot; agenda, prereqs, the deck, the live in-class handout.</li>
-                            <li><strong>Reference build:</strong> <code>/tools/</code> &middot; the deployed tools index. Open one from your duty workstation as a hosting check before class.</li>
-                            <li><strong>Tool-selection guide:</strong> <code>/resources/tool-selection.html</code> &middot; the long-form version of the cheat sheet above. genai.mil vs Ask Sage, by task type.</li>
-                            <li><strong>Debugging scenarios:</strong> <code>/resources/debugging-scenarios.html</code> &middot; pair-clinic scenarios with planted bugs and the prompts that unlock them.</li>
-                            <li><strong>Capability Gap Map:</strong> <code>/tools/capability-gap-map.html</code> &middot; the live matrix. Add your rows here after class. Quarterly export to HQMC.</li>
-                            <li><strong>Static hosting cheat sheet:</strong> <code>/resources/static-hosting.html</code> &middot; GitHub Pages, Cloudflare Pages, Netlify. The 10-minute path from <code>.html</code> on disk to a public URL.</li>
+                            <li><strong>Reference build (Readiness Dashboard):</strong> <code>/builds/readiness-dashboard.html</code> &middot; the Module 2 build target. Open it from your duty workstation as a hosting check before class.</li>
+                            <li><strong>Tool-selection guide:</strong> <code>/resources/tool-selection-guide.html</code> &middot; the long-form version of the cheat sheet above. genai.mil vs Ask Sage, by task type. Includes the Ask Sage model picker.</li>
+                            <li><strong>Marine Prompt Library:</strong> <code>/resources/marine-prompt-library.html</code> &middot; 35 battle-tested prompts for awards, counseling, FITREP, MCO interpretation, OPSEC scrub, DD-form drafting. Paste and ship.</li>
+                            <li><strong>Tips and Tricks:</strong> <code>/resources/tips-and-tricks.html</code> &middot; model-switching, context window discipline, file ingestion, the 4-line prompt template.</li>
+                            <li><strong>Citation Verification:</strong> <code>/resources/citation-verification.html</code> &middot; the protocol that stops you from signing a document with a hallucinated MCO citation.</li>
+                            <li><strong>Debugging scenarios:</strong> <code>/resources/debugging-scenarios.html</code> &middot; the five Module 3 scenarios with answer keys. Use them for informal team debriefs.</li>
+                            <li><strong>Capability Gap Map:</strong> <code>/resources/capability-gap-map.html</code> &middot; the template. Add your rows here after class. Quarterly export to HQMC.</li>
+                            <li><strong>Static hosting cheat sheet:</strong> <code>/resources/static-hosting-cheat-sheet.html</code> &middot; GitHub Pages, Cloudflare Pages, Netlify. The 10-minute path from <code>.html</code> on disk to a public URL.</li>
                             <li><strong>SOP (PDF):</strong> <code>/pdf/SOP_Expert_Driven_Development_v5.pdf</code> &middot; the verification checkpoints and the five QA protocols, in one document.</li>
-                            <li><strong>Frontier map template:</strong> <code>/toolkit/frontier-map.html</code> &middot; blank matrix to rebuild your unit's map at full resolution. Date it. Re-sort quarterly.</li>
-                            <li><strong>Workflow playbook template:</strong> <code>/toolkit/workflow-playbook.html</code> &middot; the seven-field form, ready to fill. Print it or save it. Submit your first one in chat by 4:00.</li>
                             <li><strong>All handouts index:</strong> <code>/handouts/</code> &middot; every course's take-home in one place. Print the ones for the courses you're running next.</li>
                         </ul>
                     </section>
