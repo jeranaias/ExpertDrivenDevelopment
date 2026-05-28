@@ -498,7 +498,7 @@ CONSTRAINTS:
                     <div class="copy-block__meta">
                         <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 90 sec. <strong>Risk:</strong> low. <strong>Verify after:</strong> billet expectations match unit SOP.
                     </div>
-<pre class="copy-block__body" id="copy-06-initial">ROLE: You are a SNCO writing the initial counseling for a Marine new to your section, per MCO 1610.7 series.
+<pre class="copy-block__body" id="copy-06-initial">ROLE: You are a SNCO writing the initial counseling for a Marine new to your section, per MCRP 6-10B (Marine Corps Counseling Program).
 
 CONTEXT: New Marine just checked in. I need an initial counseling that sets standards, expectations, and the path to the next promotion or qualification, all in plain language the Marine will actually read.
 
@@ -542,7 +542,7 @@ CONSTRAINTS:
                     <div class="copy-block__meta">
                         <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 90 sec. <strong>Risk:</strong> low.
                     </div>
-<pre class="copy-block__body" id="copy-07-perf">ROLE: You are a SNCO writing a periodic performance counseling per MCO 1610.7 series. Format requested: {30-DAY / 60-DAY / 90-DAY / QUARTERLY}.
+<pre class="copy-block__body" id="copy-07-perf">ROLE: You are a SNCO writing a periodic performance counseling per MCRP 6-10B (Marine Corps Counseling Program). Format requested: {30-DAY / 60-DAY / 90-DAY / QUARTERLY}.
 
 CONTEXT: Periodic counseling to document progress against the goals set in the prior counseling and reset goals for the next period.
 
@@ -732,7 +732,7 @@ CONSTRAINTS:
                     <div class="copy-block__meta">
                         <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 2 min. <strong>Risk:</strong> high. <strong>Verify after:</strong> consistency with marked attributes; OPSEC scrub of specific operations.
                     </div>
-<pre class="copy-block__body" id="copy-11-fitrep">ROLE: You are a Reporting Senior with experience writing FITREP Section I comments that align with marked attributes and survive Reviewing Officer review per MCO 1610.7 series.
+<pre class="copy-block__body" id="copy-11-fitrep">ROLE: You are a Reporting Senior with experience writing FITREP Section I (RS narrative) or Section K (RO narrative) comments that align with marked attributes and survive review, per MCO 1610.7 (Performance Evaluation System; verify current revision letter).
 
 CONTEXT: I need a Section I comment for a Marine whose marked attributes are {SUMMARIZE THE PROFILE: average / above-average / top-performer / billet-specific}. The comment must be consistent with the marks. Inflated narrative on average marks is a flag.
 
@@ -901,7 +901,7 @@ OUTPUT FORMAT:
 - Closing paragraph: action requested or POC
 
 VERIFICATION CHECKLIST:
-1. Is the SSIC correct for the subject matter (verify against SECNAV M-5210.1)?
+1. Is the SSIC correct for the subject matter (verify against SECNAV M-5210.2)?
 2. Are References cited correctly with the current revision?
 3. Is the signature block at the right authority level?
 
@@ -1605,7 +1605,7 @@ CONTEXT: An NJP package is starting through routing. I need a checklist covering
 
 INPUT:
 Marine's Rank: {RANK}
-Forum Likely: {SUMMARY / COMPANY-GRADE / FIELD-GRADE / SPCM REFERRED}
+Forum Likely: {COMPANY-GRADE NJP / FIELD-GRADE NJP / REFERRED TO COURTS-MARTIAL}
 Offenses (UCMJ articles cited): {LIST, but I will verify articles separately}
 Stage in Process: {INITIAL ROUTING / RIGHTS ADVISEMENT / HEARING SCHEDULED / POST-HEARING}
 

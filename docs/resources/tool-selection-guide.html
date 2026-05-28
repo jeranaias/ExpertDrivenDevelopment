@@ -71,7 +71,7 @@
             </nav>
             <h1 class="page-header__title">Tool Selection Guide: genai.mil vs Ask Sage</h1>
             <p class="page-header__desc">
-                Two enterprise AI platforms are available to Marines today, and they are NOT interchangeable. genai.mil is the fast-chat enterprise default (Jan 2026 MARADMIN). Ask Sage is the multi-file reasoning platform with 150+ LLMs at IL5/IL6/Top Secret. This guide is the decision tree: given the task in front of you, which tool gets the work done faster and with fewer prompt iterations?
+                Two enterprise AI platforms are available to Marines today, and they are NOT interchangeable. genai.mil is the fast-chat enterprise default (Jan 2026 MARADMIN). Ask Sage is the multi-file reasoning platform with 150+ LLMs at IL5 default; IL6 / TS via separate enclaves. This guide is the decision tree: given the task in front of you, which tool gets the work done faster and with fewer prompt iterations?
             </p>
             <div class="mt-lg">
                 <span class="badge badge--gold">Course 4.5</span>
@@ -92,7 +92,7 @@
                     <li><a href="#common-patterns">4. Common Patterns</a></li>
                     <li><a href="#only-genai">5. When You Only Have genai.mil</a></li>
                     <li><a href="#ask-sage-models">6. Picking the Right Ask Sage Model</a></li>
-                    <li><a href="#dow-rebrand">7. The DoW Rebrand Handling Note</a></li>
+                    <li><a href="#dow-rebrand">7. The DoD / DoW Naming Note</a></li>
                     <li><a href="#opsec-scrub">8. CUI and OPSEC Anonymization</a></li>
                     <li><a href="#ask-sage-limits">9. What Ask Sage Cannot Do (Yet)</a></li>
                     <li><a href="#voice-constraints">10. Voice and Constraints</a></li>
@@ -102,12 +102,12 @@
             <section id="two-tool-world">
                 <h2>1. The Two-Tool World</h2>
                 <p>
-                    The post-Jan-2026 landscape settled around two enterprise AI platforms. Both are first-class for the Marines today. Tool selection is itself a skill, and it is the skill that lets a Marine ship a counseling statement in three minutes instead of thirty.
+                    The post-Jan-2026 landscape settled around two enterprise AI platforms. Both are first-class for the Marines today. Tool selection is itself a skill. Picking the wrong tool costs prompt iterations and review time even when the output is technically correct.
                 </p>
                 <ul>
                     <li><strong>genai.mil</strong> is the Marines' enterprise default chat platform (Jan 2026 MARADMIN, replaces NIPRGPT). Always-on conversational AI. CUI-authorized. Fast for single-shot prompts. Browser-based, no setup, no file uploads.</li>
-                    <li><strong>Ask Sage</strong> is IL5/IL6/Top Secret/FedRAMP High authorized. Azure Government hosted. 150+ LLMs including GPT-5 plus GPT-5 reasoning variants, Claude Opus 4.7, Claude Sonnet 4.6, Claude Haiku 4.5, Gemini 2.5, Llama 4 (Scout and Maverick), and Mistral. Ingests DOCX, PDF, JSON, CSV, and code. API plus Continue.dev IDE integration. CUI and PHI authorized (DHA deployment Dec 2025).</li>
-                    <li>The Army runs Ask Sage on cArmy Cloud under a $49M IDIQ contract. DHA uses it for clinical and operational workflows. Adoption across DoW is past the experimental stage.</li>
+                    <li><strong>Ask Sage</strong> is FedRAMP High and IL5 authorized in the default enclave; IL6 and Top Secret available through separate enclaves with separate provisioning. Azure Government or AWS GovCloud hosted (depending on the customer enclave). 150+ models including current Claude Opus and Sonnet, GPT-5 plus reasoning variants, Gemini 2.5, and Llama 4 Scout where available. Ingests DOCX, PDF, JSON, CSV, and code. API plus Continue.dev IDE integration. CUI and PHI authorized (DHA deployment Dec 2025).</li>
+                    <li>The Army runs Ask Sage on cArmy Cloud under a multi-year IDIQ. DHA uses it for clinical and operational workflows under a separate authorization. Adoption is past the experimental stage and the platform sits on real contracts; verify exact vehicle and ceiling against current contract data before quoting figures.</li>
                 </ul>
                 <p>
                     The post-Power-Platform pivot left a gap: Marines need real work done on real tenants, and the answer for any given task is one of these two tools. Picking the wrong one costs iterations.
@@ -148,7 +148,7 @@
                             <tr>
                                 <td>About to iterate 10+ times to refine a complex output.</td>
                                 <td><strong>Ask Sage with a reasoning model</strong> (Claude Opus 4.7 or GPT-5 reasoning)</td>
-                                <td>Chat models drift after roughly 6 to 8 iterations. Reasoning models hold the thread longer.</td>
+                                <td>Chat models tend to drift in long multi-file work as the context window fills. Reasoning models hold the thread longer in practice, though the exact iteration count varies by task and prompt complexity.</td>
                             </tr>
                             <tr>
                                 <td>An architecture, data-model, or design decision.</td>
@@ -211,7 +211,7 @@
                             <tr>
                                 <td><strong>Models available</strong></td>
                                 <td>Chat-tier OpenAI plus a couple of others; varies by tenant.</td>
-                                <td>150+ models: GPT-5, GPT-5 reasoning, Claude Opus 4.7, Claude Sonnet 4.6, Claude Haiku 4.5, Gemini 2.5, Llama 4, Mistral, Cohere.</td>
+                                <td>150+ models. Today's lineup includes the current Claude Opus and Sonnet families, GPT-5 plus reasoning variants, Gemini 2.5, and Llama 4. Available models drift; check the picker in your tenant.</td>
                             </tr>
                             <tr>
                                 <td><strong>File ingestion (DOCX/PDF/JSON/CSV/code)</strong></td>
@@ -224,7 +224,7 @@
                                 <td>Yes.</td>
                             </tr>
                             <tr>
-                                <td><strong>Reasoning models (GPT-5 reasoning, Claude Opus 4.7)</strong></td>
+                                <td><strong>Reasoning models (current Claude Opus, GPT-5 reasoning)</strong></td>
                                 <td>Limited.</td>
                                 <td>Yes.</td>
                             </tr>
@@ -393,7 +393,7 @@
 
                 <h3>When Opus 4.7 Is Worth the Cost</h3>
                 <p>
-                    Opus 4.7 is the most expensive model the tenant exposes. Reserve it for tasks where the reasoning premium pays for itself: data-model proposals, multi-file refactors, architecture decisions, citation verification, the verification turn at the end of a long Sonnet or Haiku session. Do not default to Opus 4.7 for tasks Sonnet 4.6 or Haiku 4.5 would handle. The bill scales with use, and there is a real budget constraint at the tenant level.
+                    Current Claude Opus is the heaviest model the tenant exposes. Reserve it for tasks where the reasoning premium pays for itself in fewer turns and better outputs: data-model proposals, multi-file refactors, architecture decisions, citation verification, the verification turn at the end of a long Sonnet or Haiku session. Do not default to Opus for tasks the workhorse Sonnet or a fast Haiku model would handle. Heavier reasoning models are slower and more quota-heavy; on bulk-seat tenants the budget pressure is real even when individual Marines do not see per-token billing.
                 </p>
 
                 <div class="callout callout--success">
@@ -405,33 +405,33 @@
             </section>
 
             <section id="dow-rebrand">
-                <h2>7. The DoW Rebrand Handling Note</h2>
+                <h2>7. The DoD / DoW Naming Note</h2>
                 <p>
-                    The Department of Defense became the Department of War. Model training cutoffs predate the rebrand for most of the models Ask Sage exposes. Every model defaults to writing "DoD" because that is what the training data says. Marines who paste AI output into official documents will end up with stale terminology unless they correct it.
+                    Executive Order 14347 (5 September 2025) authorized "Department of War" as a secondary name and authorized officials including the Secretary of War to use that title in public communications and nonstatutory documents. The statutory name remains "Department of Defense" until Congress acts. Both names are in use today. Model training cutoffs predate the EO for most of the models Ask Sage exposes, so AI output defaults to "DoD." Marines drafting official documents should match the convention their command and the audience expect.
                 </p>
 
                 <h3>The Fix: A System-Prompt Snippet</h3>
                 <p>
-                    Paste this at the start of every Ask Sage or genai.mil session that will produce official-document text:
+                    Paste this at the start of any Ask Sage or genai.mil session that will produce official-document text where naming matters:
                 </p>
                 <div class="callout callout--instructor">
                     <p>
-                        <strong>Terminology constraint:</strong> the Department of Defense was renamed to the Department of War. Use "Department of War" or "DoW" in all output. On first use in a document, write "Department of War (formerly Department of Defense)" to preserve clarity for readers who have not adjusted yet. Apply the same convention to subsidiary organizations where applicable (the Office of the Secretary of War, etc.). If you are unsure whether a specific organization was renamed, flag it and ask for verification.
+                        <strong>Terminology constraint:</strong> Executive Order 14347 authorized "Department of War" as a secondary name for the Department of Defense, which remains the statutory name pending congressional action. In this session, use the convention {pick one: "Department of War (DoW)" / "Department of Defense (DoD)" / both on first use}. Apply the same convention to subsidiary organizations only when verifiable. If you are unsure whether a specific component has adopted the secondary name, flag it and ask for verification instead of guessing.
                     </p>
                 </div>
 
-                <h3>Where It Matters Most</h3>
+                <h3>Where Naming Choice Matters Most</h3>
                 <ul>
                     <li>Awards citations, FITREP comments, official correspondence (signed documents).</li>
                     <li>SOPs, SOAs, and internal policy documents.</li>
-                    <li>Briefs for outside-DoW audiences (Congress, allies, civilian press) where the audience may not know the rebrand happened.</li>
+                    <li>Briefs for outside audiences (Congress, allies, civilian press) who may or may not be tracking the EO 14347 secondary-name authorization.</li>
                 </ul>
 
                 <h3>Where It Does Not Matter</h3>
                 <ul>
                     <li>Drafting code or technical specifications that never reference the organization name.</li>
                     <li>Internal informal correspondence where the audience knows the context.</li>
-                    <li>Citations to pre-rebrand source documents (cite them with their original organizational name and let the reader infer).</li>
+                    <li>Citations to pre-EO source documents (cite them with their original organizational name as published).</li>
                 </ul>
             </section>
 
@@ -537,13 +537,13 @@ OUTPUT:
                     <li><strong>Real-time information.</strong> Ask Sage models have training cutoffs. They do not know today's weather, today's MARADMIN, or today's roster changes.</li>
                     <li><strong>Math beyond two-step reasoning.</strong> Reasoning models help, but for serious math, use a spreadsheet.</li>
                     <li><strong>Long-document summarization where every word matters.</strong> Summary loses fidelity. Quote-back specific paragraphs if you need exactness.</li>
-                    <li><strong>Citation verification.</strong> Ask Sage hallucinates MCO paragraph numbers more than 10% of the time even when it gets the MCO right. See the <a href="citation-verification.html">Citation Verification</a> resource for the protocol.</li>
+                    <li><strong>Citation verification.</strong> Ask Sage hallucinates MCO paragraph numbers frequently, even when it gets the MCO right. See the <a href="citation-verification.html">Citation Verification</a> resource for the protocol.</li>
                 </ul>
 
                 <div class="callout callout--info">
                     <h3 class="callout__title">The Capability Gap Map Loop</h3>
                     <p>
-                        Every item in this section is a Capability Gap Map row waiting to be written. If you have a workflow that Ask Sage cannot complete because of a missing connector, document it on the Capability Gap Map. Aggregated Marine-level requests are how connectors get added to the tenant. A single Marine asking is a request. Forty Marines documenting the same blocked connector with beneficiary counts is a policy case.
+                        Every item in this section is a Capability Gap Map row waiting to be written. If you have a workflow that Ask Sage cannot complete because of a missing connector, document it on the Capability Gap Map. Aggregated Marine-level requests are how connectors get added to the tenant. A single Marine asking is a request. A cohort of Marines documenting the same blocked connector with beneficiary counts is a policy case.
                     </p>
                 </div>
             </section>
