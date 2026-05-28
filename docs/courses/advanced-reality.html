@@ -535,7 +535,7 @@
                         <div class="callout callout--warning">
                             <h3 class="callout__title">INSTRUCTOR: DELIBERATE FAILURE TARGET. DO NOT WARN STUDENTS.</h3>
                             <p>
-                                On Prompt 2, fast chat will almost always return one of the following:
+                                On Prompt 2, fast chat models commonly return one of the following without prompting for scale:
                             </p>
                             <ul>
                                 <li>An O(n^2) <code>array.find()</code> join that visibly stalls on the sample data when scaled to 500+ records.</li>
@@ -547,6 +547,9 @@
                                 The fix is to tell the AI it is getting an array of 500+ records and ask for an indexed join
                                 (build a Map keyed on EDIPI, then iterate once), and to wrap the parse in try/catch with a visible
                                 error fallback.
+                            </p>
+                            <p>
+                                <strong>If the AI produces a clean join on the first try</strong> (newer or reasoning models do this more often), pivot the debrief: "Why did the AI get it right this time? What did you give it in the prompt that older instructors found their AI missed?" The teaching beat becomes prompt quality and context provision rather than AI-failure-recovery. Both versions land the frontier-vs-context lesson.
                             </p>
                         </div>
 
@@ -579,7 +582,7 @@
                         <div class="callout callout--warning">
                             <h3 class="callout__title">INSTRUCTOR: SECOND DELIBERATE FAILURE TARGET</h3>
                             <p>
-                                Fast chat will almost always return an answer that includes a <code>&lt;script src="..."&gt;</code> pulling Chart.js from a CDN. That violates the no-external-dependencies constraint stated up front. Let the student catch the violation. If they do not, ask: "Where is that bar chart actually coming from? Open DevTools. What does the Network tab show?"
+                                Fast chat models commonly return an answer that includes a <code>&lt;script src="..."&gt;</code> pulling Chart.js from a CDN. That violates the no-external-dependencies constraint stated up front. Let the student catch the violation. If they do not, ask: "Where is that bar chart actually coming from? Open DevTools. What does the Network tab show?" If the AI honored the constraint on the first try, ask why: what about the prompt or the model's posture made it remember the constraint when other rooms have seen it forgotten?
                             </p>
                         </div>
 
@@ -593,12 +596,7 @@
                         <div class="callout callout--info">
                             <h3 class="callout__title">Key Teaching Beat: Model Capability Difference</h3>
                             <p>
-                                When this prompt is run through Ask Sage with a reasoning model (Claude Opus 4.7 or a GPT-5 reasoning), the
-                                no-external-dependencies constraint is honored more reliably from the first response. When run
-                                through genai.mil fast chat, the constraint gets violated and the student has to catch it. The
-                                contrast IS the lesson. Reasoning models follow stated constraints more rigorously. Fast chat is
-                                cheaper per turn but pushes the verification burden onto the human. Neither is wrong. Use both,
-                                pick deliberately.
+                                In practice, reasoning models (current Claude Opus, GPT-5 reasoning) tend to honor the no-external-dependencies constraint from the first response more often than fast chat models. The contrast is not absolute and depends on prompt phrasing and the current state of each model, but it is reliable enough to make the point. Reasoning models follow stated constraints more rigorously on average. Fast chat is cheaper per turn but pushes more verification onto the human. Neither is wrong. Use both, pick deliberately, and verify the output regardless of which model produced it.
                             </p>
                         </div>
 

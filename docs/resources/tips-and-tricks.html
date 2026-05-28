@@ -202,6 +202,9 @@
 
             <section id="ide-integration">
                 <h2>4. IDE Integration (Continue.dev for Ask Sage)</h2>
+                <div class="callout callout--warning">
+                    <p><strong>Tenant warning before you read further.</strong> On a standard MCEN duty workstation, VS Code making outbound API calls to Ask Sage will likely be blocked by AppLocker, endpoint protection, or outbound proxy policy. This section describes what becomes possible on a developer-tier endpoint where you have control over the editor and outbound traffic. Treat it as "what to ask for" rather than "what to deploy this week."</p>
+                </div>
                 <p>
                     Ask Sage exposes an API, and the open-source Continue.dev IDE plugin can route to that API. This lets you use Ask Sage models for in-editor code completion in VS Code (and any other Continue.dev-supported editor your tenant allows). Most static-stack work happens in an editor anyway. Round-tripping every change to a web UI is friction. Cutting that friction is one of the largest single-day productivity gains a Marine can make.
                 </p>
