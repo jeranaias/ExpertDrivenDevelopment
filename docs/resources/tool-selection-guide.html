@@ -91,7 +91,11 @@
                     <li><a href="#quick-reference">3. Quick Reference Table</a></li>
                     <li><a href="#common-patterns">4. Common Patterns</a></li>
                     <li><a href="#only-genai">5. When You Only Have genai.mil</a></li>
-                    <li><a href="#voice-constraints">6. Voice and Constraints</a></li>
+                    <li><a href="#ask-sage-models">6. Picking the Right Ask Sage Model</a></li>
+                    <li><a href="#dow-rebrand">7. The DoW Rebrand Handling Note</a></li>
+                    <li><a href="#opsec-scrub">8. CUI and OPSEC Anonymization</a></li>
+                    <li><a href="#ask-sage-limits">9. What Ask Sage Cannot Do (Yet)</a></li>
+                    <li><a href="#voice-constraints">10. Voice and Constraints</a></li>
                 </ul>
             </nav>
 
@@ -332,8 +336,220 @@
                 </div>
             </section>
 
+            <section id="ask-sage-models">
+                <h2>6. Picking the Right Ask Sage Model</h2>
+                <p>
+                    Ask Sage exposes 150+ models. The decision in Section 2 picks the tool. This section picks the model within Ask Sage. Treating Ask Sage as monolithic costs iterations the same way picking the wrong tool does. The model choice is its own 201-level decision.
+                </p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">If your task is&hellip;</th>
+                                <th scope="col">Use</th>
+                                <th scope="col">Why</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Architecture decision, data-model design, schema migration plan, multi-file refactor across more than three files.</td>
+                                <td><strong>Claude Opus 4.7</strong></td>
+                                <td>Top reasoning tier. Holds long context coherently. Honors constraints stated in the system prompt. The model for hard problems where wrong is expensive.</td>
+                            </tr>
+                            <tr>
+                                <td>Workhorse implementation, code generation across two or three files, dataset analysis on CSVs under 1000 rows, drafting a long-form document with citations.</td>
+                                <td><strong>Claude Sonnet 4.6</strong> or <strong>GPT-5</strong></td>
+                                <td>Fast enough for iteration, strong enough to hold the thread. The default for most billable AI work.</td>
+                            </tr>
+                            <tr>
+                                <td>Fast iteration on small changes, autocomplete, line-by-line code suggestions, single-shot prompts inside a long Ask Sage session.</td>
+                                <td><strong>Claude Haiku 4.5</strong></td>
+                                <td>Lowest cost per call. Holds enough context for short tasks. Use it for the 80% of turns that are not the hard ones.</td>
+                            </tr>
+                            <tr>
+                                <td>Second opinion on a high-stakes output. Citation verification. The verification turn after a long Opus session.</td>
+                                <td><strong>GPT-5 reasoning</strong></td>
+                                <td>Different training data, different failure modes. Disagreement between Opus 4.7 and GPT-5 reasoning on the same prompt is the cleanest flag you can get.</td>
+                            </tr>
+                            <tr>
+                                <td>Open-source preference, lab work, anything where you need to verify the model's weights are inspectable.</td>
+                                <td><strong>Llama 4 (Scout for fast / Maverick for reasoning)</strong></td>
+                                <td>Open weights. Useful when policy or research requires open-source provenance.</td>
+                            </tr>
+                            <tr>
+                                <td>Multimodal task, image analysis, chart reading from a screenshot.</td>
+                                <td><strong>Gemini 2.5</strong> or <strong>GPT-5</strong></td>
+                                <td>Both handle vision. Test both on a representative image and use whichever performs better for the specific image class.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Model Switching Mid-Conversation</h3>
+                <p>
+                    Ask Sage lets you switch models within a single conversation. Most Marines miss this. The pattern: <strong>Opus 4.7</strong> for the Phase 1 architecture turn, <strong>Sonnet 4.6</strong> for the Phase 2 implementation turns, <strong>Haiku 4.5</strong> for the Phase 3 small-fix turns, then <strong>GPT-5 reasoning</strong> for the Phase 4 verification turn. You are using one model to QA another. Disagreement at the verification turn is a flag.
+                </p>
+
+                <h3>When Opus 4.7 Is Worth the Cost</h3>
+                <p>
+                    Opus 4.7 is the most expensive model the tenant exposes. Reserve it for tasks where the reasoning premium pays for itself: data-model proposals, multi-file refactors, architecture decisions, citation verification, the verification turn at the end of a long Sonnet or Haiku session. Do not default to Opus 4.7 for tasks Sonnet 4.6 or Haiku 4.5 would handle. The bill scales with use, and there is a real budget constraint at the tenant level.
+                </p>
+
+                <div class="callout callout--success">
+                    <h3 class="callout__title">The Verification Turn</h3>
+                    <p>
+                        After a long Sonnet 4.6 or Haiku 4.5 session produces a finished output, switch to Opus 4.7 or GPT-5 reasoning and ask: "Review the above for errors, omissions, unsupported claims, and hallucinated citations. Be specific." This single turn catches more errors than any other discipline. It is the Course 4.5 Module 4 cross-check applied at the model level instead of the tool level.
+                    </p>
+                </div>
+            </section>
+
+            <section id="dow-rebrand">
+                <h2>7. The DoW Rebrand Handling Note</h2>
+                <p>
+                    The Department of Defense became the Department of War. Model training cutoffs predate the rebrand for most of the models Ask Sage exposes. Every model defaults to writing "DoD" because that is what the training data says. Marines who paste AI output into official documents will end up with stale terminology unless they correct it.
+                </p>
+
+                <h3>The Fix: A System-Prompt Snippet</h3>
+                <p>
+                    Paste this at the start of every Ask Sage or genai.mil session that will produce official-document text:
+                </p>
+                <div class="callout callout--instructor">
+                    <p>
+                        <strong>Terminology constraint:</strong> the Department of Defense was renamed to the Department of War. Use "Department of War" or "DoW" in all output. On first use in a document, write "Department of War (formerly Department of Defense)" to preserve clarity for readers who have not adjusted yet. Apply the same convention to subsidiary organizations where applicable (the Office of the Secretary of War, etc.). If you are unsure whether a specific organization was renamed, flag it and ask for verification.
+                    </p>
+                </div>
+
+                <h3>Where It Matters Most</h3>
+                <ul>
+                    <li>Awards citations, FITREP comments, official correspondence (signed documents).</li>
+                    <li>SOPs, SOAs, and internal policy documents.</li>
+                    <li>Briefs for outside-DoW audiences (Congress, allies, civilian press) where the audience may not know the rebrand happened.</li>
+                </ul>
+
+                <h3>Where It Does Not Matter</h3>
+                <ul>
+                    <li>Drafting code or technical specifications that never reference the organization name.</li>
+                    <li>Internal informal correspondence where the audience knows the context.</li>
+                    <li>Citations to pre-rebrand source documents (cite them with their original organizational name and let the reader infer).</li>
+                </ul>
+            </section>
+
+            <section id="opsec-scrub">
+                <h2>8. CUI and OPSEC Anonymization Workflow</h2>
+                <p>
+                    Both genai.mil and Ask Sage are CUI-authorized. Neither is PII-clean. Marines should scrub PII before pasting, even though the tenant allows it, because the discipline of scrubbing forces a second look at what is in the input. The discipline catches more spillage than tenant policy enforcement does.
+                </p>
+
+                <h3>The Pre-Paste Scrub Prompt</h3>
+                <p>
+                    Run this on your input BEFORE pasting it into the working prompt. Paste your raw input where indicated, then paste the scrubbed output into your real prompt.
+                </p>
+
+                <div class="callout callout--instructor">
+                    <h3 class="callout__title">Scrub Prompt (copy and paste)</h3>
+                    <pre style="white-space: pre-wrap; font-family: var(--font-mono, monospace); font-size: 0.875rem; margin: 0;">Review the following text for OPSEC, PII, and CUI markings. Produce a scrubbed version that is safe to paste into a CUI-authorized AI tool.
+
+Rules:
+- Replace specific Marine names with rank and billet (e.g., "Sgt Smith" becomes "the SNCO" or "Sgt A").
+- Replace EDIPI with "EDIPI" or "{EDIPI}".
+- Replace specific unit identifiers (UIC, PIIN, T-line) with the unit type ("an infantry battalion" instead of "1/4").
+- Preserve T&amp;R references, MCO citations, and authority references (those are public).
+- Preserve dates and times unless they would compromise OPSEC.
+- Flag anything that is not safe to scrub and should be removed entirely.
+
+INPUT:
+{PASTE_RAW_INPUT_HERE}
+
+OUTPUT:
+- The scrubbed version.
+- A list of items you removed or flagged.</pre>
+                </div>
+
+                <h3>What to Scrub vs What to Keep</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Scrub</th>
+                                <th scope="col">Keep</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Specific Marine names.</td>
+                                <td>Rank, billet, MOS.</td>
+                            </tr>
+                            <tr>
+                                <td>EDIPI, SSN, phone, email.</td>
+                                <td>Generic unit type, billet titles.</td>
+                            </tr>
+                            <tr>
+                                <td>Specific UIC, PIIN, T-line.</td>
+                                <td>MCO, NAVMC, SECNAVINST citations (public).</td>
+                            </tr>
+                            <tr>
+                                <td>Specific dates tied to operations.</td>
+                                <td>T&amp;R event codes and training references.</td>
+                            </tr>
+                            <tr>
+                                <td>Geographic specificity that reveals operations.</td>
+                                <td>Common knowledge geography (CONUS, OCONUS, MEU).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout callout--warning">
+                    <h3 class="callout__title">PHI Is Not CUI</h3>
+                    <p>
+                        Protected Health Information requires Ask Sage. Do not paste PHI into genai.mil under any circumstances. If you are unsure whether something qualifies as PHI, treat it as PHI. Ask Sage has been authorized for PHI handling across the Defense Health Agency since December 2025.
+                    </p>
+                </div>
+            </section>
+
+            <section id="ask-sage-limits">
+                <h2>9. What Ask Sage Cannot Do (Yet)</h2>
+                <p>
+                    Honest assessment. Saves Marines from wasting time on tasks Ask Sage cannot complete in the current tenant.
+                </p>
+
+                <h3>Connections Ask Sage Does Not Have</h3>
+                <ul>
+                    <li><strong>GCSS-MC.</strong> No direct connector. You can paste exported reports or upload CSVs from GCSS-MC, but Ask Sage cannot pull live data.</li>
+                    <li><strong>Marine Online (MOL).</strong> No connector. Same paste-and-summarize workflow as GCSS-MC.</li>
+                    <li><strong>MarineNet.</strong> No connector. For PME or training-record queries, you upload the export or paste the text.</li>
+                    <li><strong>DTS.</strong> No connector. Travel orders drafting is one-shot prompt territory.</li>
+                    <li><strong>SharePoint write-back.</strong> Ask Sage can read uploaded files. It cannot push updates to a SharePoint list, library, or page.</li>
+                    <li><strong>Microsoft Graph API.</strong> Not exposed in the tenant. Outlook, Teams, calendar workflows are out of scope.</li>
+                </ul>
+
+                <h3>Data Ask Sage Does Not Know About You</h3>
+                <ul>
+                    <li>Your unit's PIIN, UIC, T-line, or table of organization.</li>
+                    <li>Your unit's mission essential task list unless you provide it.</li>
+                    <li>Your unit's specific MCBul or unit-level standing orders.</li>
+                    <li>Any internal pubs that are not on the public Marine Corps Publications library.</li>
+                </ul>
+
+                <h3>Tasks Where Ask Sage Drifts</h3>
+                <ul>
+                    <li><strong>Real-time information.</strong> Ask Sage models have training cutoffs. They do not know today's weather, today's MARADMIN, or today's roster changes.</li>
+                    <li><strong>Math beyond two-step reasoning.</strong> Reasoning models help, but for serious math, use a spreadsheet.</li>
+                    <li><strong>Long-document summarization where every word matters.</strong> Summary loses fidelity. Quote-back specific paragraphs if you need exactness.</li>
+                    <li><strong>Citation verification.</strong> Ask Sage hallucinates MCO paragraph numbers more than 10% of the time even when it gets the MCO right. See the <a href="citation-verification.html">Citation Verification</a> resource for the protocol.</li>
+                </ul>
+
+                <div class="callout callout--info">
+                    <h3 class="callout__title">The Capability Gap Map Loop</h3>
+                    <p>
+                        Every item in this section is a Capability Gap Map row waiting to be written. If you have a workflow that Ask Sage cannot complete because of a missing connector, document it on the Capability Gap Map. Aggregated Marine-level requests are how connectors get added to the tenant. A single Marine asking is a request. Forty Marines documenting the same blocked connector with beneficiary counts is a policy case.
+                    </p>
+                </div>
+            </section>
+
             <section id="voice-constraints">
-                <h2>6. Voice and Constraints</h2>
+                <h2>10. Voice and Constraints</h2>
 
                 <div class="callout callout--instructor">
                     <h3 class="callout__title">Constraints That Apply to Both Tools</h3>
