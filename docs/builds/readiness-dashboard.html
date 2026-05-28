@@ -327,13 +327,31 @@
   footer.foot a { color: var(--scarlet-dark); }
   @media print {
     body.readiness-dashboard { background: #fff; }
-    header.top, .toolbar, .callout, .input-grid, .brief-card, footer.foot { display: none; }
+    .toolbar, .callout, .input-grid, footer.foot { display: none; }
     main { max-width: none; padding: 0; }
-    .overall-card, .chart-card, .table-card { border: none; padding: 0; margin-bottom: 18px; page-break-inside: avoid; }
+    .overall-card, .chart-card, .table-card, .brief-card { border: none; padding: 0; margin-bottom: 18px; page-break-inside: avoid; }
     table.nrtable { font-size: 0.78rem; min-width: 0; }
     .classmark { background: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     table.nrtable th { background: #e5e5e5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .dash-grid { grid-template-columns: 1fr; }
+    .brief-card .copy-btn { display: none; }
+    .brief-card button { display: none; }
+    .brief-card #brief-out {
+      border: 1px solid #999;
+      background: #fff;
+      height: auto;
+      min-height: 0;
+      font-family: monospace;
+      white-space: pre-wrap;
+      page-break-inside: avoid;
+    }
+  }
+  .sr-only {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
 </style>
 </head>
@@ -441,12 +459,29 @@
 (function() {
   'use strict';
 
-  var STORAGE_PERSONNEL = 'edd-readiness-personnel-v1';
-  var STORAGE_TRAINING = 'edd-readiness-training-v1';
-  var STORAGE_EQUIPMENT = 'edd-readiness-equipment-v1';
-  var STORAGE_UNIT = 'edd-readiness-unit-v1';
+  var SCHEMA_VERSION = 2;
+  var STORAGE_KEYS = {
+    schema: 'edd-readiness-schema',
+    personnel: 'edd-readiness-personnel-v2',
+    training: 'edd-readiness-training-v2',
+    equipment: 'edd-readiness-equipment-v2',
+    unit: 'edd-readiness-unit-v2'
+  };
 
   var REQUIRED_TRAINING = ['Rifle Qual', 'Annual Training (PME)', 'Combat Lifesaver', 'Swim Qual'];
+  var TRAINING_ALIASES = {
+    'rifle qual': ['rifle qual', 'rifle qualification', 'rifle-qual', 'm4 qual', 'm16 qual', 'annual rifle qual'],
+    'annual training (pme)': ['annual training (pme)', 'annual pme', 'pme', 'professional military education annual', 'annual training pme'],
+    'combat lifesaver': ['combat lifesaver', 'cls', 'combat life saver', 'cls course'],
+    'swim qual': ['swim qual', 'swim qualification', 'mcwst', 'marine corps water survival', 'swim']
+  };
+  function normalizeTrainingName(name) {
+    var n = String(name || '').trim().toLowerCase().replace(/\s+/g, ' ');
+    for (var req in TRAINING_ALIASES) {
+      if (TRAINING_ALIASES[req].indexOf(n) >= 0) return req;
+    }
+    return n;
+  }
   var RANK_ORDER = ['Pvt','PFC','LCpl','Cpl','Sgt','SSgt','GySgt','MSgt','1stSgt','MGySgt','SgtMaj','2ndLt','1stLt','Capt','Maj','LtCol','Col'];
 
   var unitName = '1st Bn, 4th Marines';
@@ -641,10 +676,27 @@
   // ---- Persistence ----
   function load() {
     try {
-      var p = localStorage.getItem(STORAGE_PERSONNEL);
-      var t = localStorage.getItem(STORAGE_TRAINING);
-      var e = localStorage.getItem(STORAGE_EQUIPMENT);
-      var u = localStorage.getItem(STORAGE_UNIT);
+      var savedSchema = parseInt(localStorage.getItem(STORAGE_KEYS.schema) || '0', 10);
+      if (savedSchema < SCHEMA_VERSION) {
+        var v1Keys = {
+          personnel: 'edd-readiness-personnel-v1',
+          training: 'edd-readiness-training-v1',
+          equipment: 'edd-readiness-equipment-v1',
+          unit: 'edd-readiness-unit-v1'
+        };
+        for (var migKey in v1Keys) {
+          if (!v1Keys.hasOwnProperty(migKey)) continue;
+          var oldVal = localStorage.getItem(v1Keys[migKey]);
+          if (oldVal != null && localStorage.getItem(STORAGE_KEYS[migKey]) == null) {
+            localStorage.setItem(STORAGE_KEYS[migKey], oldVal);
+          }
+        }
+        localStorage.setItem(STORAGE_KEYS.schema, String(SCHEMA_VERSION));
+      }
+      var p = localStorage.getItem(STORAGE_KEYS.personnel);
+      var t = localStorage.getItem(STORAGE_KEYS.training);
+      var e = localStorage.getItem(STORAGE_KEYS.equipment);
+      var u = localStorage.getItem(STORAGE_KEYS.unit);
       if (u) unitName = u;
       document.getElementById('ta-personnel').value = p != null ? p : JSON.stringify(samplePersonnel(), null, 2);
       document.getElementById('ta-training').value = t != null ? t : JSON.stringify(sampleTraining(), null, 2);
@@ -659,10 +711,11 @@
 
   function saveTextareas() {
     try {
-      localStorage.setItem(STORAGE_PERSONNEL, document.getElementById('ta-personnel').value);
-      localStorage.setItem(STORAGE_TRAINING, document.getElementById('ta-training').value);
-      localStorage.setItem(STORAGE_EQUIPMENT, document.getElementById('ta-equipment').value);
-      localStorage.setItem(STORAGE_UNIT, unitName);
+      localStorage.setItem(STORAGE_KEYS.personnel, document.getElementById('ta-personnel').value);
+      localStorage.setItem(STORAGE_KEYS.training, document.getElementById('ta-training').value);
+      localStorage.setItem(STORAGE_KEYS.equipment, document.getElementById('ta-equipment').value);
+      localStorage.setItem(STORAGE_KEYS.unit, unitName);
+      localStorage.setItem(STORAGE_KEYS.schema, String(SCHEMA_VERSION));
     } catch (err) {
       toast('Storage save failed. Data not persisted.');
     }
@@ -681,6 +734,7 @@
   }
 
   function parseCsv(text) {
+    text = String(text || '').replace(/^﻿/, '');
     var lines = text.split(/\r?\n/).filter(function(l) { return l.trim().length > 0; });
     if (lines.length < 2) return [];
     var headers = splitCsvLine(lines[0]).map(function(h) { return h.trim(); });
@@ -732,6 +786,15 @@
       var pp = detectAndParse(pTxt);
       personnel = pp.rows;
       setStatus('status-personnel', 'Parsed ' + personnel.length + ' records (' + pp.format + ')', true);
+      var seen = {};
+      var dupes = [];
+      for (var di = 0; di < personnel.length; di++) {
+        var eid = String(personnel[di].edipi || '').trim();
+        if (!eid) continue;
+        if (seen[eid]) dupes.push(eid);
+        seen[eid] = true;
+      }
+      if (dupes.length) toast('Warning: duplicate EDIPIs in personnel data (' + dupes.length + ')');
     } catch (err) {
       personnel = [];
       setStatus('status-personnel', 'Parse error: ' + err.message, false);
@@ -762,16 +825,49 @@
   // ---- Readiness computation ----
   function todayStr() {
     var d = new Date();
-    return d.toISOString().slice(0, 10);
+    var y = d.getFullYear();
+    var m = String(d.getMonth() + 1);
+    if (m.length < 2) m = '0' + m;
+    var day = String(d.getDate());
+    if (day.length < 2) day = '0' + day;
+    return y + '-' + m + '-' + day;
+  }
+
+  function todayLocal() {
+    var d = new Date();
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  }
+
+  function parseDate(s) {
+    if (!s) return null;
+    s = String(s).trim();
+    if (!s) return null;
+    var m;
+    if ((m = s.match(/^(\d{4})-(\d{2})-(\d{2})$/))) {
+      return new Date(parseInt(m[1],10), parseInt(m[2],10)-1, parseInt(m[3],10));
+    }
+    if ((m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/))) {
+      return new Date(parseInt(m[3],10), parseInt(m[1],10)-1, parseInt(m[2],10));
+    }
+    if ((m = s.match(/^(\d{1,2})-([A-Za-z]{3})-(\d{2,4})$/))) {
+      var months = {JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11};
+      var mon = months[m[2].toUpperCase()];
+      if (mon == null) return null;
+      var yr = parseInt(m[3],10);
+      if (yr < 100) yr += yr < 50 ? 2000 : 1900;
+      return new Date(yr, mon, parseInt(m[1],10));
+    }
+    return null;
   }
 
   function isExpired(expires, today) {
-    if (!expires) return true;
-    return String(expires) < today;
+    var d = parseDate(expires);
+    if (d == null) return false;
+    return d < today;
   }
 
   function computeReadiness() {
-    var today = todayStr();
+    var today = todayLocal();
     // index training and equipment by edipi
     var trByEdipi = {};
     for (var i = 0; i < training.length; i++) {
@@ -802,7 +898,7 @@
         var req = REQUIRED_TRAINING[r];
         var match = null;
         for (var s = 0; s < trList.length; s++) {
-          if (String(trList[s].training_event || '').trim().toLowerCase() === req.toLowerCase()) {
+          if (normalizeTrainingName(trList[s].training_event) === req.toLowerCase()) {
             match = trList[s];
             break;
           }
@@ -929,7 +1025,13 @@
       svg.push('<text x="' + (axisX1 + 8) + '" y="' + (y + rowH / 2 + 16) + '" font-size="9" fill="#6e6e6e" font-family="-apple-system, Segoe UI, Roboto, sans-serif">' + g.ready + '/' + g.total + '</text>');
     }
     svg.push('</svg>');
-    wrap.innerHTML = svg.join('');
+    var srTable = ['<table class="sr-only"><caption>Readiness by company</caption><thead><tr><th>Company</th><th>Ready</th><th>Total</th><th>Percent</th></tr></thead><tbody>'];
+    for (var sgi = 0; sgi < groups.length; sgi++) {
+      var sg = groups[sgi];
+      srTable.push('<tr><td>' + escapeHtml(sg.unit) + '</td><td>' + sg.ready + '</td><td>' + sg.total + '</td><td>' + sg.pct + '%</td></tr>');
+    }
+    srTable.push('</tbody></table>');
+    wrap.innerHTML = svg.join('') + srTable.join('');
   }
 
   function rankIndex(r) {
