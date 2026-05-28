@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Catch hallucinated MCO, NAVMC, SECNAVINST, and DoD instruction citations before they end up on a signed document. The verification protocol Marines run on every AI output that cites a regulation.">
+    <title>Citation Verification for AI-Generated Output | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .copy-block {
+            border: 1px solid var(--color-border);
+            border-radius: var(--space-sm);
+            margin: var(--space-lg) 0 var(--space-2xl);
+            overflow: hidden;
+            background: var(--color-bg-primary);
+        }
+        .copy-block__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--color-bg-dark);
+            color: var(--color-text-inverse);
+            flex-wrap: wrap;
+        }
+        .copy-block__label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+        .copy-block__title {
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-base);
+        }
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--color-scarlet);
+            color: var(--color-text-inverse);
+            border: 0;
+            border-radius: var(--space-sm);
+            font-family: var(--font-family-sans);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+            transition: background-color 0.15s;
+        }
+        .copy-btn:hover { background: var(--color-scarlet-dark); }
+        .copy-btn:focus-visible {
+            outline: 2px solid var(--color-gold);
+            outline-offset: 2px;
+        }
+        .copy-btn.is-copied { background: var(--color-success-border); }
+
+        .copy-block__body {
+            margin: 0;
+            padding: var(--space-lg);
+            white-space: pre-wrap;
+            font-family: var(--font-family-mono);
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-normal);
+            color: var(--color-text-primary);
+            background: var(--color-bg-code);
+            max-height: 520px;
+            overflow: auto;
+        }
+
+        @media print {
+            .copy-btn { display: none; }
+            .sidebar { display: none; }
+        }
+    </style>
+</head>
+<body class="site-wrapper">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="./" class="active">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="./" class="active">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Resources</a></li>
+                    <li aria-current="page">Citation Verification</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Citation Verification for AI-Generated Output</h1>
+            <p class="page-header__desc">
+                AI hallucinates citations more often than it hallucinates facts. Invented paragraph numbers are the top failure mode. This page is the discipline that prevents an AI-drafted counseling statement from citing an MCO that does not exist. Run this protocol on every AI output that cites a regulation, before you sign or distribute.
+            </p>
+            <div class="mt-lg">
+                <span class="badge badge--gold">Course 4.5</span>
+                <span class="badge">Reference</span>
+                <span class="badge">High-Stakes</span>
+            </div>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+            <div class="page-layout page-layout--sidebar">
+
+                <aside class="sidebar sidebar--sticky" aria-label="Table of contents">
+                    <nav class="toc">
+                        <h2 class="toc__title">On This Page</h2>
+                        <ul class="toc__list">
+                            <li><a href="#why-high-risk">1. Why Citations Are the Highest-Risk Failure Mode</a></li>
+                            <li><a href="#top-10-patterns">2. The Top 10 Hallucination Patterns</a></li>
+                            <li><a href="#protocol">3. The Verification Protocol (5 Steps)</a></li>
+                            <li><a href="#quote-back-prompt">4. Quote-Back Prompt</a></li>
+                            <li><a href="#two-tool-cross-check">5. Two-Tool Cross-Check for Citations</a></li>
+                            <li><a href="#source-lookup">6. Where to Look Up the Actual Source</a></li>
+                            <li><a href="#confusion-points">7. Common Confusion Points</a></li>
+                            <li><a href="#when-you-catch">8. When You Catch a Hallucinated Citation</a></li>
+                            <li><a href="#frontier-classification">9. The Frontier Classification of Citation Hallucination</a></li>
+                            <li><a href="#building-the-habit">10. Building the Verification Habit</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <div class="page-content">
+
+                    <section id="why-high-risk">
+                        <h2>1. Why Citations Are the Highest-Risk Failure Mode</h2>
+                        <p>
+                            AI loves citations. It loves looking authoritative. So it invents them.
+                        </p>
+                        <p>
+                            The real-world failure pattern looks like this. A Marine drafts a counseling statement. AI cites "MCO P1610.7G paragraph 4.2.3." The statement gets signed. The Marine appeals. Paragraph 4.2.3 does not exist. The MCO exists, but it ends at 4.1.7. Everyone gets embarrassed. The counseling statement gets pulled.
+                        </p>
+                        <p>
+                            Citations are the highest-risk failure mode because signed documents create legal exposure. A bad fact in a memo is fixable: re-issue with a correction. A bad citation in a counseling statement is grounds for appeal, and the appeal is a process loss that is fully avoidable.
+                        </p>
+                        <p>
+                            Why does the AI invent them? Training data includes many, many citations. The model knows the format cold: an alphanumeric MCO number, a revision letter, a paragraph in dotted decimal. The model fills in details that look plausible because the format is so well learned. Confidence in the response is unrelated to correctness of the citation.
+                        </p>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">The Confidence Trap</h3>
+                            <p>
+                                The hallucinated citation will be delivered in the same authoritative tone as the real one. There is no tell in the language. The only tell is the lookup.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section id="top-10-patterns">
+                        <h2>2. The Top 10 Hallucination Patterns</h2>
+                        <p>
+                            These are the failure shapes to watch for. Most AI citation errors are a variant of one of these ten.
+                        </p>
+                        <ol>
+                            <li><strong>Invented paragraph number on a real MCO.</strong> The MCO is real. The paragraph number is not. Example: MCO ends at 4.1.7 but the AI cites 4.2.3.</li>
+                            <li><strong>Conflated two MCOs.</strong> The paragraph text actually appears in MCO B, but the AI attributes it to MCO A.</li>
+                            <li><strong>Used outdated MCO number.</strong> The AI cites the predecessor order, not the current one. The current order has a different number entirely.</li>
+                            <li><strong>Wrong revision letter.</strong> Cites MCO P1900.16K when the current is P1900.16M. Same order family, wrong revision.</li>
+                            <li><strong>Invented entire MCO.</strong> Paragraph, MCO number, and content all fabricated. The order does not exist at all.</li>
+                            <li><strong>Cited SECNAVINST when the actual authority is MCO.</strong> Or the reverse. Wrong issuing authority for the policy described.</li>
+                            <li><strong>Confused MARADMIN with MCO.</strong> Different authority types. A MARADMIN is a message, not an order, and they have different lifespans and weight.</li>
+                            <li><strong>Confused MARADMIN year.</strong> MARADMIN numbers reset annually. MARADMIN 123/26 and MARADMIN 123/25 are different messages.</li>
+                            <li><strong>Cited a chapter that was removed in the current revision.</strong> The reg had that chapter once. It does not anymore. The AI is working from older training data.</li>
+                            <li><strong>Cited the right reg but misattributed authority.</strong> The reg exists, but the AI says "the Commandant directs" when the actual authority cited inside is the SecNav, or vice versa.</li>
+                        </ol>
+                    </section>
+
+                    <section id="protocol">
+                        <h2>3. The Verification Protocol (5 Steps, About 5 Minutes)</h2>
+                        <p>
+                            Run this on every AI output that cites a regulation, before the document gets signed or distributed.
+                        </p>
+                        <ol>
+                            <li>
+                                <strong>Extract every citation</strong> from the AI output. Make a numbered list. Read the document and pull anything that looks like an MCO, NAVMC, SECNAVINST, OPNAVINST, DoDI, DoDD, DoDM, MARADMIN, ALMAR, MCBul, Title 10 USC reference, or unit policy letter. Number them 1, 2, 3.
+                            </li>
+                            <li>
+                                <strong>Quote-back prompt.</strong> Paste each citation back into the AI in a fresh conversation and ask it to quote the exact text of that paragraph verbatim. If the AI cannot quote it, it must say so. The verbatim block in Section 4 is the canonical version.
+                            </li>
+                            <li>
+                                <strong>Source check.</strong> Look up the actual reg on Marine-Net, the DON Issuances site, or DoD Issuances. Verify the paragraph exists, and verify the paragraph says what the AI claims. The AI may produce a paragraph number that exists but a quote that does not.
+                            </li>
+                            <li>
+                                <strong>Revision check.</strong> Verify the citation is the CURRENT revision, not a superseded one. The publications library shows the active revision letter. The AI does not always know what the current revision is.
+                            </li>
+                            <li>
+                                <strong>Authority check.</strong> Does the cited authority actually have the power the document claims? An MCO can establish service-wide policy. A LtCol can establish unit-level policy but cannot supersede an MCO. If the document leans on a unit policy letter to override Marine Corps policy, the document is wrong even if the citation is real.
+                            </li>
+                        </ol>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Five Minutes Is the Budget</h3>
+                            <p>
+                                If a document has three citations, the protocol takes about five minutes. If it has fifteen, it takes longer. Either way, the protocol takes less time than re-issuing a signed document after an appeal.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section id="quote-back-prompt">
+                        <h2>4. Quote-Back Prompt</h2>
+                        <p>
+                            Paste this into a fresh AI conversation. Replace the placeholders with the citations you extracted in Step 1. This is Step 2 of the verification protocol.
+                        </p>
+
+                        <div class="copy-block">
+                            <div class="copy-block__header">
+                                <div class="copy-block__label">
+                                    <span class="copy-block__title">Quote-Back Verification Prompt</span>
+                                </div>
+                                <button class="copy-btn" type="button" data-copy-target="copy-quote-back" aria-label="Copy quote-back prompt to clipboard">
+                                    <span class="copy-btn__label">Copy to clipboard</span>
+                                </button>
+                            </div>
+<pre class="copy-block__body" id="copy-quote-back">For each of the following citations, quote the exact text of the cited paragraph verbatim. If you cannot quote it verbatim (because you don't have access to the source, or the paragraph does not exist), say so explicitly. Do not paraphrase. Do not summarize. Do not invent.
+
+CITATIONS:
+1. {CITATION_1}
+2. {CITATION_2}
+3. {CITATION_3}
+
+For each citation, respond in this format:
+"CITATION N: [exact quote]" OR
+"CITATION N: I cannot quote this verbatim because [reason]."</pre>
+                        </div>
+
+                        <p>
+                            What this prompt does: it forces the AI to either produce the exact text or admit it cannot. A model that is willing to admit "I cannot quote this verbatim" is being honest. A model that produces a quote that does not match the actual reg has just confirmed the citation is hallucinated. Either way, you have a signal.
+                        </p>
+                    </section>
+
+                    <section id="two-tool-cross-check">
+                        <h2>5. Two-Tool Cross-Check for Citations</h2>
+                        <p>
+                            This is the Course 4.5 Module 4 cross-check pattern, narrowed to citations. Run the same citation list into two different tools and compare.
+                        </p>
+                        <ol>
+                            <li>Paste the same citation list (with the quote-back prompt) into <strong>genai.mil</strong>.</li>
+                            <li>Paste the same citation list (with the quote-back prompt) into <strong>Ask Sage</strong> using a reasoning model (Opus 4.7 or Sonnet 4.6).</li>
+                            <li>Compare outputs.</li>
+                        </ol>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Outcome</th>
+                                        <th scope="col">What It Means</th>
+                                        <th scope="col">What to Do</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Both tools produce the same quoted text AND the quote matches the actual reg.</td>
+                                        <td>Citation verified.</td>
+                                        <td>Keep it. Move to the next.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>The two tools disagree on the quoted text.</td>
+                                        <td>At least one is wrong. Both are suspect until proven.</td>
+                                        <td>Look up the actual reg. Decide based on the source, not the AI.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Both tools produce the same wrong text.</td>
+                                        <td>Training-data echo. Two models trained on overlapping data hallucinated the same wrong thing. This is the most dangerous case: confident wrongness across models.</td>
+                                        <td>Look up the actual reg. Trust the source. Add this case to your Frontier Map.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Both tools refuse to quote it.</td>
+                                        <td>The reg is probably not in either training set, or it is recent enough to be unreliable.</td>
+                                        <td>Look up the actual reg yourself. Do not rely on either tool for this citation.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Two Tools Agreeing Is Not Proof</h3>
+                            <p>
+                                Two models producing the same answer feels like confirmation. It is not. It is only confirmation if the answer matches the source. Do not skip the source check.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section id="source-lookup">
+                        <h2>6. Where to Look Up the Actual Source</h2>
+                        <p>
+                            These are the publicly listed publications libraries. Use the search inside each library; do not rely on an AI-suggested deep link.
+                        </p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Citation Type</th>
+                                        <th scope="col">Where to Look</th>
+                                        <th scope="col">Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Marine Corps Orders</strong> (MCO, NAVMC)</td>
+                                        <td>Marine-Net publications library. Public-facing index at marines.mil/Marine-Corps-Publications.</td>
+                                        <td>Look for the current revision letter at the top of the publication.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Navy Issuances</strong> (OPNAVINST, SECNAVINST)</td>
+                                        <td>DON Issuances at secnav.navy.mil.</td>
+                                        <td>SECNAVINST applies department-wide; OPNAVINST applies inside the Navy.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>DoD Instructions and Directives</strong> (DoDI, DoDD, DoDM)</td>
+                                        <td>DoD Issuances at esd.whs.mil.</td>
+                                        <td>DoDD sets policy. DoDI implements. DoDM is the manual.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MARADMIN / ALMAR</strong></td>
+                                        <td>Marine-Net messages section.</td>
+                                        <td>MARADMIN numbers reset annually. Always include the year. MARADMIN 123/26 is not the same as MARADMIN 123/25.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>MCBul</strong></td>
+                                        <td>Marine Corps bulletins, in the publications library.</td>
+                                        <td>Bulletins expire automatically. Verify the bulletin is still active before citing.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Title 10 USC</strong></td>
+                                        <td>uscode.house.gov.</td>
+                                        <td>Codified federal law. Section numbers do not change often, but they do change.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">A Note on URLs</h3>
+                            <p>
+                                Do not let the AI hand you a specific URL to the cited paragraph. The AI will invent the URL with the same confidence it invents the paragraph. Navigate to the publications library yourself and search.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section id="confusion-points">
+                        <h2>7. Common Confusion Points</h2>
+                        <p>
+                            These are the pairs that get confused most often by both AI and humans.
+                        </p>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">What Sounds the Same</th>
+                                        <th scope="col">Actually Means</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>MCO vs MARADMIN vs MCBul</td>
+                                        <td>MCO is a Marine Corps Order, the standing policy. MARADMIN is a message, often time-bound. MCBul is a bulletin that expires automatically. Different authority types and different lifespans.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SECNAVINST vs OPNAVINST vs MCO</td>
+                                        <td>SECNAVINST is issued by the Secretary of the Navy and applies to both services. OPNAVINST is internal to the Navy. MCO is internal to the Marine Corps. Different issuing authorities.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>DoDI vs DoDD vs DoDM</td>
+                                        <td>DoDD is a Directive that sets policy. DoDI is an Instruction that implements the directive. DoDM is a Manual with procedures.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Revision letter vs change number</td>
+                                        <td>A revision letter (P1900.16M) replaces the prior revision in full. A change number is an amendment to a specific revision. Cite the revision letter, then the change if relevant.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ALMAR vs MARADMIN</td>
+                                        <td>ALMAR is sent to All Marines; MARADMIN is a Marine Administrative Message. Both come over Marine-Net but are not interchangeable as citation types.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section id="when-you-catch">
+                        <h2>8. When You Catch a Hallucinated Citation</h2>
+                        <ol>
+                            <li>
+                                <strong>Do NOT use the document.</strong> Even if everything else in the document is right, a bad citation invalidates the document as a piece of authoritative work. Pull it. Fix it. Then circulate.
+                            </li>
+                            <li>
+                                <strong>Re-prompt.</strong> Tell the AI: "the citation you provided does not exist. Provide the actual paragraph that supports the claim, or remove the claim." Be explicit. Do not let the AI off the hook with a paraphrase.
+                            </li>
+                            <li>
+                                <strong>If the AI cannot provide a real citation, the claim itself may be unsupported.</strong> Reconsider whether the document should make the claim at all. Sometimes the AI invented the citation because the claim has no authority to point to. That is a problem with the claim, not just the citation.
+                            </li>
+                            <li>
+                                <strong>Log it.</strong> Add the failure to your Frontier Map. Track which categories of citation the AI gets wrong most often in your domain. Counseling-statement MCOs, fitrep references, SOP authority chains. Patterns repeat.
+                            </li>
+                        </ol>
+
+                        <div class="callout callout--warning">
+                            <h3 class="callout__title">Never Patch a Hallucinated Citation</h3>
+                            <p>
+                                Do not "fix" a hallucinated paragraph number by guessing what the real one might be. Either find the real one in the source, or remove the citation. Guessing extends the lie.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section id="frontier-classification">
+                        <h2>9. The Frontier Classification of Citation Hallucination</h2>
+                        <p>
+                            Citation hallucination is a <strong>Frontier</strong> issue, not a Context issue. The AI does not have access to the actual reg text in most cases. It pattern-matches what a citation looks like. The shape is in training data; the specific paragraph numbers and quotes often are not.
+                        </p>
+                        <p>
+                            You can convert this from a Frontier issue to a Context issue. Upload the actual MCO (PDF) to Ask Sage. The AI now HAS the reg in working memory. The same model that hallucinated a paragraph number from training data alone will quote correctly when the document is in the context window.
+                        </p>
+
+                        <div class="callout callout--info">
+                            <h3 class="callout__title">Recommended Pattern for High-Stakes Drafting</h3>
+                            <p>
+                                For any document with multiple high-stakes citations, upload the actual regs to Ask Sage with Opus 4.7 or Sonnet 4.6, then draft and verify in the same session. Drafting and verification share the same context, so the AI quotes from what it has rather than from what it half-remembers.
+                            </p>
+                        </div>
+
+                        <p>
+                            This is the same pattern the Course 4.5 frontier-mapping module teaches. Identify where the model is weak (citation recall), and route that part of the work through Context (uploaded reg) instead of Frontier (training-data recall).
+                        </p>
+                    </section>
+
+                    <section id="building-the-habit">
+                        <h2>10. Building the Verification Habit</h2>
+                        <p>
+                            Treat citation verification like a pre-flight checklist. Five minutes per document. Every time. The discipline is what makes it work.
+                        </p>
+                        <p>
+                            The discipline is the value. Marines who skip this step will eventually hand someone a counseling statement with a hallucinated MCO citation. It is only a matter of how many documents they ship before it happens. The Marines who run the protocol do not ship that document.
+                        </p>
+                        <p>
+                            The discipline is also the proof. Marines who do this consistently demonstrate they are using AI correctly. Five-minute verification on every cited document is the difference between "I used AI" and "I used AI responsibly." Leadership notices the second one.
+                        </p>
+
+                        <div class="callout callout--instructor">
+                            <h3 class="callout__title">Instructor Note</h3>
+                            <p>
+                                Run this protocol live in front of the class on a real document. Pick an AI output with three or four citations. Walk through extraction, the quote-back prompt, the source lookup, and the revision check. Show one failure in real time. The class needs to see the protocol catch a real hallucination before they will believe it is worth five minutes.
+                            </p>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>
+                        Open-source AI-assisted development training for DoW personnel.
+                        Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../courses/">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="../toolkit/">Toolkit</a></li>
+                        <li><a href="../tools/">Tools</a></li>
+                        <li><a href="./">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Related Resources</h3>
+                    <ul>
+                        <li><a href="prompt-library.html">Prompt Library</a></li>
+                        <li><a href="tool-selection-guide.html">Tool Selection Guide</a></li>
+                        <li><a href="debugging-scenarios.html">Debugging Scenarios</a></li>
+                        <li><a href="templates.html">Templates</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function () {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+
+            document.querySelectorAll('.copy-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var targetId = btn.getAttribute('data-copy-target');
+                    var target = document.getElementById(targetId);
+                    if (!target) return;
+                    var text = target.textContent;
+                    var label = btn.querySelector('.copy-btn__label');
+                    var originalLabel = label ? label.textContent : '';
+
+                    var done = function () {
+                        btn.classList.add('is-copied');
+                        if (label) label.textContent = 'Copied';
+                        setTimeout(function () {
+                            btn.classList.remove('is-copied');
+                            if (label) label.textContent = originalLabel;
+                        }, 1800);
+                    };
+                    var fail = function () {
+                        if (label) label.textContent = 'Copy failed, select and Ctrl/Cmd+C';
+                        setTimeout(function () {
+                            if (label) label.textContent = originalLabel;
+                        }, 2500);
+                    };
+
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(text).then(done).catch(function () {
+                            try {
+                                var range = document.createRange();
+                                range.selectNodeContents(target);
+                                var sel = window.getSelection();
+                                sel.removeAllRanges();
+                                sel.addRange(range);
+                                document.execCommand('copy');
+                                sel.removeAllRanges();
+                                done();
+                            } catch (err) { fail(); }
+                        });
+                    } else {
+                        try {
+                            var range = document.createRange();
+                            range.selectNodeContents(target);
+                            var sel = window.getSelection();
+                            sel.removeAllRanges();
+                            sel.addRange(range);
+                            document.execCommand('copy');
+                            sel.removeAllRanges();
+                            done();
+                        } catch (err) { fail(); }
+                    }
+                });
+            });
+        })();
+    </script>
+
+    <script src="../js/enhancements.js"></script>
+
+</body>
+</html>

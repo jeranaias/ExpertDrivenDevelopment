@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Battle-tested prompts for Marine Corps AI workflows. Awards, counseling, FITREPs, MCO interpretation, OPSEC review, DD-forms, T&amp;R cross-reference, GCSS-MC, inspection prep. Paste into genai.mil or Ask Sage. Built for Course 4.5 (Advanced Workshop, Locked Tenant Reality).">
+    <title>Marine Prompt Library | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .library-intro {
+            background: var(--color-bg-secondary);
+            border-left: 4px solid var(--color-scarlet);
+            padding: var(--space-lg) var(--space-xl);
+            margin-bottom: var(--space-xl);
+            border-radius: 0 var(--space-sm) var(--space-sm) 0;
+        }
+        .library-intro p { margin: 0 0 var(--space-sm); }
+        .library-intro p:last-child { margin-bottom: 0; }
+
+        .library-toc {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-md);
+            margin: var(--space-xl) 0 var(--space-2xl);
+        }
+        .library-toc a {
+            display: block;
+            padding: var(--space-md);
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--space-sm);
+            text-decoration: none;
+            color: var(--color-text-primary);
+            transition: border-color 0.15s, transform 0.15s;
+        }
+        .library-toc a:hover {
+            border-color: var(--color-scarlet);
+            transform: translateY(-1px);
+        }
+        .library-toc .section-tag {
+            display: inline-block;
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-bold);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-scarlet);
+            margin-bottom: var(--space-xs);
+        }
+        .library-toc .toc-title {
+            display: block;
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-md);
+        }
+
+        .copy-block {
+            border: 1px solid var(--color-border);
+            border-radius: var(--space-sm);
+            margin: var(--space-lg) 0 var(--space-2xl);
+            overflow: hidden;
+            background: var(--color-bg-primary);
+        }
+        .copy-block__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--color-bg-dark);
+            color: var(--color-text-inverse);
+            flex-wrap: wrap;
+        }
+        .copy-block__label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+        .tool-pill {
+            display: inline-block;
+            padding: 2px 10px;
+            background: var(--color-gold);
+            color: var(--color-text-primary);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-bold);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-radius: 999px;
+        }
+        .copy-block__title {
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-base);
+        }
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--color-scarlet);
+            color: var(--color-text-inverse);
+            border: 0;
+            border-radius: var(--space-sm);
+            font-family: var(--font-family-sans);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+            transition: background-color 0.15s;
+        }
+        .copy-btn:hover { background: var(--color-scarlet-dark); }
+        .copy-btn:focus-visible {
+            outline: 2px solid var(--color-gold);
+            outline-offset: 2px;
+        }
+        .copy-btn.is-copied { background: var(--color-success-border); }
+
+        .copy-block__meta {
+            padding: var(--space-md) var(--space-lg);
+            background: var(--color-warning-bg);
+            border-bottom: 1px solid var(--color-warning-border);
+            font-size: var(--font-size-sm);
+            color: var(--color-warning-text);
+        }
+        .copy-block__meta strong { color: var(--color-warning-text); }
+
+        .copy-block__body {
+            margin: 0;
+            padding: var(--space-lg);
+            white-space: pre-wrap;
+            font-family: var(--font-family-mono);
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-normal);
+            color: var(--color-text-primary);
+            background: var(--color-bg-code);
+            max-height: 560px;
+            overflow: auto;
+        }
+
+        .section-heading {
+            margin-top: var(--space-2xl);
+            padding-top: var(--space-lg);
+            border-top: 2px solid var(--color-scarlet);
+        }
+    </style>
+</head>
+<body class="site-wrapper">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="./" class="active">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="./" class="active">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Resources</a></li>
+                    <li aria-current="page">Marine Prompt Library</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">Marine Prompt Library</h1>
+            <p class="page-header__desc">
+                Thirty-five battle-tested prompts you can paste into genai.mil or Ask Sage to get immediate value on the work Marines actually do every week. Awards, counseling, FITREPs, naval letters, MCO interpretation, T&amp;R cross-reference, OPSEC scrubs, DD forms, and PME study guides. Each block is verbatim copy-paste with a one-line "fill these blanks" header. The recommended tool is named at the top of every prompt. Built for Course 4.5 (Advanced Workshop, Locked Tenant Reality), but useful daily for any Marine with access to an enterprise AI tenant.
+            </p>
+            <div class="mt-lg">
+                <span class="badge badge--gold">Course 4.5</span>
+                <span class="badge">Reference</span>
+                <span class="badge">High-Use</span>
+            </div>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container container--narrow">
+
+            <div class="library-intro">
+                <p><strong>How to use this library.</strong> These prompts are starters, not finished products. Every prompt assumes you (the Marine) will review and own the final output. AI generates the first draft. You make it real. Your name goes on the document, not the model's.</p>
+                <p><strong>Citation verification habit.</strong> Any prompt that cites an MCO, NAVMC, SECNAVINST, or DoD instruction MUST be verified against the actual source before signing or distributing. The top hallucination pattern in this domain is invented paragraph numbers. If a prompt returns a citation, open the actual order and confirm the paragraph exists with that text at that revision date.</p>
+                <p><strong>OPSEC reminder.</strong> Scrub PII, CUI, and unit-specific identifiers before pasting. Names, EDIPIs, unit designators below the regiment level, deployment dates, and exact equipment serials should be redacted or generalized. Use prompt #32 (Pre-paste OPSEC scrub) if you are not sure.</p>
+                <p><strong>Tool selection.</strong> Single prompt with no file context: genai.mil. Multi-file or large reg ingestion: Ask Sage with Opus 4.7 or Sonnet 4.6. When in doubt, start on genai.mil and escalate to Ask Sage only when the task needs the model to hold multiple documents in context at once.</p>
+            </div>
+
+            <nav class="library-toc" aria-label="Prompt section jump links">
+                <a href="#section-1-awards">
+                    <span class="section-tag">Section 1</span>
+                    <span class="toc-title">Awards &amp; Recognition</span>
+                </a>
+                <a href="#section-2-counseling">
+                    <span class="section-tag">Section 2</span>
+                    <span class="toc-title">Counseling &amp; Performance</span>
+                </a>
+                <a href="#section-3-fitreps">
+                    <span class="section-tag">Section 3</span>
+                    <span class="toc-title">Fitness Reports &amp; Pros</span>
+                </a>
+                <a href="#section-4-correspondence">
+                    <span class="section-tag">Section 4</span>
+                    <span class="toc-title">Correspondence</span>
+                </a>
+                <a href="#section-5-regulations">
+                    <span class="section-tag">Section 5</span>
+                    <span class="toc-title">Regulations &amp; References</span>
+                </a>
+                <a href="#section-6-operational">
+                    <span class="section-tag">Section 6</span>
+                    <span class="toc-title">Operational Documents</span>
+                </a>
+                <a href="#section-7-admin">
+                    <span class="section-tag">Section 7</span>
+                    <span class="toc-title">Admin Forms</span>
+                </a>
+                <a href="#section-8-opsec">
+                    <span class="section-tag">Section 8</span>
+                    <span class="toc-title">OPSEC &amp; Cybersecurity</span>
+                </a>
+                <a href="#section-9-career">
+                    <span class="section-tag">Section 9</span>
+                    <span class="toc-title">Career Development</span>
+                </a>
+            </nav>
+
+            <!-- ===========================================================
+                 SECTION 1: AWARDS & RECOGNITION
+                 =========================================================== -->
+            <section id="section-1-awards">
+                <h2 class="section-heading">Section 1: Awards &amp; Recognition</h2>
+                <p>Citation drafts, LOAs, and Page 11 positive entries. All output requires verification of award-tier eligibility, dates of action, and proper format per SECNAVINST 1650.1J before submission.</p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#1. NAM Citation Draft (Bullet or Narrative)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-01-nam" aria-label="Copy NAM citation prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 60 sec. <strong>Risk:</strong> medium. <strong>Verify after:</strong> award-tier justification, dates of action, no AI-tells, no inflated language.
+                    </div>
+<pre class="copy-block__body" id="copy-01-nam">ROLE: You are a Marine Corps awards clerk with experience drafting NAM citations that survive the awards board with minimal edits.
+
+CONTEXT: I need a first-draft NAM citation. Format requested: {BULLET or NARRATIVE}. Marine is being recognized for {SPECIFIC ACHIEVEMENT}.
+
+INPUT:
+Rank/Name: {RANK LAST NAME}
+Billet: {BILLET}
+Unit: {UNIT TYPE, no specific unit name}
+Period of Action: {DD MMM YY to DD MMM YY}
+Key Accomplishments (specific, observable): {LIST 3 TO 5 BULLETS WITH NUMBERS WHERE POSSIBLE}
+Direct Impact (what changed because of this Marine): {1 TO 2 SENTENCES}
+
+OUTPUT FORMAT:
+- Open with "For meritorious service" or "For superior performance" per SECNAVINST 1650.1J
+- Third person, past tense
+- Verb-first sentences
+- Numbers and specifics, not adjectives ("processed 240 service records" not "processed numerous records")
+- Closes with a one-sentence summary reflecting credit on the Marine, the unit, and the Naval Service
+
+VERIFICATION CHECKLIST:
+1. Does every claim trace back to a specific accomplishment in the INPUT?
+2. Are dates inside the period of action?
+3. Is the closing sentence in the standard "reflected credit" form?
+4. Are there any superlatives ("unparalleled," "unmatched") that the action does not actually support?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells (avoid "It is worth noting", "Furthermore", "In conclusion", "delve")
+- Match Marine Corps voice: direct, active, verb-first
+- Do not invent accomplishments not in the INPUT
+- Do not cite specific SECNAVINST paragraph numbers unless I provide them</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#2. NAVCOM Citation Draft</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-02-navcom" aria-label="Copy NAVCOM citation prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 90 sec. <strong>Risk:</strong> medium. <strong>Verify after:</strong> award-tier match to action, period dates, voice.
+                    </div>
+<pre class="copy-block__body" id="copy-02-navcom">ROLE: You are a senior awards clerk who has drafted NAVCOM citations for end-of-tour and impact awards reviewed at the O-6 level.
+
+CONTEXT: I need a NAVCOM citation first draft. NAVCOM tier requires sustained superior performance, a specific high-impact action, or a meritorious end of tour. Confirm the action justifies NAVCOM (not NAM) before writing.
+
+INPUT:
+Rank/Name: {RANK LAST NAME}
+Billet: {BILLET}
+Unit: {UNIT TYPE}
+Period of Action: {DD MMM YY to DD MMM YY}
+Award Justification (end of tour / specific action / sustained): {ONE OF THE THREE}
+Key Accomplishments (5 to 7 bullets with measurable impact): {LIST}
+Second-Order Effects (what continued after the Marine left): {1 TO 2 SENTENCES}
+
+OUTPUT FORMAT:
+- Narrative form, third person, past tense
+- 4 to 6 sentences, verb-first, no filler
+- One sentence on scope and scale (numbers)
+- One sentence on second-order effect or institutional impact
+- Closes with the standard reflected-credit line
+
+VERIFICATION CHECKLIST:
+1. Does the citation distinguish this Marine from a baseline-performing peer in the same billet?
+2. Is the scope of impact (people, dollars, time, readiness) named with numbers?
+3. Is the language matched to NAVCOM tier (not NAM tier, not MSM tier)?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells, no superlatives without backing facts
+- Active verbs, no passive voice
+- Do not invent metrics</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#3. Meritorious Service Medal Draft</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-03-msm" aria-label="Copy MSM prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 2 min. <strong>Risk:</strong> high. <strong>Verify after:</strong> tier justification (MSM is for senior personnel in positions of significant responsibility); confirm with awards shop.
+                    </div>
+<pre class="copy-block__body" id="copy-03-msm">ROLE: You are an awards officer experienced with MSM citations for SNCOs and senior O-grade personnel in positions of significant responsibility.
+
+CONTEXT: I am drafting an MSM citation for end of tour or sustained meritorious service. MSM requires outstanding meritorious achievement or service in a position of significant responsibility, exceeding the standard expected at that grade.
+
+INPUT:
+Rank/Name: {RANK LAST NAME}
+Billet: {BILLET, must be a position of significant responsibility}
+Unit: {UNIT TYPE}
+Tour Length: {MONTHS}
+Period of Service: {DD MMM YY to DD MMM YY}
+Key Sustained Accomplishments: {LIST 6 TO 8 BULLETS WITH METRICS}
+Institutional Impact (what changed at the command, MOS, or Corps level): {2 TO 3 SENTENCES}
+
+OUTPUT FORMAT:
+- Narrative, 5 to 7 sentences
+- Opens with "For meritorious service" plus the billet
+- Each sentence carries scope (numbers, people, dollars, readiness percentages)
+- One sentence on leadership effect on subordinates
+- One sentence on institutional or cross-command impact
+- Closes with the standard reflected-credit line
+
+VERIFICATION CHECKLIST:
+1. Does the scope of responsibility match MSM tier?
+2. Are accomplishments above what is expected at the Marine's grade?
+3. Are metrics specific and defensible if challenged at the awards board?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells, no padding
+- Marine Corps voice: direct, active
+- Do not inflate the billet description</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#4. Letter of Appreciation Draft</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-04-loa" aria-label="Copy LOA prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 45 sec. <strong>Risk:</strong> low.
+                    </div>
+<pre class="copy-block__body" id="copy-04-loa">ROLE: You are an admin chief drafting LOAs for the CO's signature.
+
+CONTEXT: I need a one-page Letter of Appreciation for a Marine, civilian, or external partner who supported the command but is not eligible for a unit award.
+
+INPUT:
+Recipient: {RANK/NAME or "Mr/Ms LAST NAME"}
+Recipient Organization: {ORG}
+What They Did: {SPECIFIC ACTIONS, DATES, IMPACT}
+Audience Tone: {PEER, JUNIOR, SENIOR, CIVILIAN}
+
+OUTPUT FORMAT:
+- Standard naval-letter LOA format (From / To / Subj / opening paragraph / body / closing)
+- 2 to 3 short paragraphs
+- Paragraph 1: name the support and the period
+- Paragraph 2: name the specific impact and second-order effect
+- Paragraph 3: closing line of appreciation, signed by the CO
+
+VERIFICATION CHECKLIST:
+1. Are dates and actions specific?
+2. Is the tone appropriate to the recipient (peer vs civilian vs senior)?
+3. Is the impact statement defensible?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Marine Corps voice
+- Standard naval-letter formatting cues only, do not invent SSIC numbers</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#5. Page 11 Entry (Positive Performance)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-05-page11pos" aria-label="Copy Page 11 positive prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 30 sec. <strong>Risk:</strong> low.
+                    </div>
+<pre class="copy-block__body" id="copy-05-page11pos">ROLE: You are a SNCO drafting a positive Page 11 (NAVMC 118(11)) administrative entry to document sustained superior performance.
+
+CONTEXT: A Marine in my section has performed at a level worth documenting in the SRB outside of an award. I want a Page 11 entry that supports future board packages and promotion endorsements.
+
+INPUT:
+Rank/Name: {RANK LAST NAME}
+Period: {DD MMM YY to DD MMM YY}
+Sustained Behavior or Accomplishment: {SPECIFIC, OBSERVABLE}
+Why It Matters: {ONE SENTENCE}
+
+OUTPUT FORMAT:
+- First-person voice of the documenting Marine (typically the immediate SNCO)
+- 3 to 5 sentences
+- Specific dates and observable actions
+- Closes with "Marine elects to make a statement / Marine elects not to make a statement" placeholder
+
+VERIFICATION CHECKLIST:
+1. Is every claim observable, not interpretive?
+2. Are dates in the period specified?
+3. Is the language Page-11 appropriate (not citation language)?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Direct, factual voice
+- No inflated language</pre>
+                </div>
+            </section>
+
+            <!-- ===========================================================
+                 SECTION 2: COUNSELING & PERFORMANCE
+                 =========================================================== -->
+            <section id="section-2-counseling">
+                <h2 class="section-heading">Section 2: Counseling &amp; Performance</h2>
+                <p>Initial, performance, and corrective counseling drafts plus negative Page 11 entries and 6105 starters. Every output is a draft. Always review with the Marine before delivering, and route negative entries through legal as required.</p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#6. Initial Counseling (New Marine)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-06-initial" aria-label="Copy initial counseling prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 90 sec. <strong>Risk:</strong> low. <strong>Verify after:</strong> billet expectations match unit SOP.
+                    </div>
+<pre class="copy-block__body" id="copy-06-initial">ROLE: You are a SNCO writing the initial counseling for a Marine new to your section, per MCO 1610.7 series.
+
+CONTEXT: New Marine just checked in. I need an initial counseling that sets standards, expectations, and the path to the next promotion or qualification, all in plain language the Marine will actually read.
+
+INPUT:
+Rank/Name: {RANK LAST NAME}
+MOS: {MOS}
+Billet: {BILLET}
+Unit/Section: {UNIT TYPE / SECTION}
+Marine's Career Goal: {SHORT-TERM, e.g., "Make Cpl by next composite cycle"}
+Top 3 Section Standards: {LIST 3, e.g., "On time, in uniform, in a hard helmet by 0630"}
+Known Gaps to Close: {LIST 1 TO 3 GAPS, e.g., "Needs to complete annual training"}
+
+OUTPUT FORMAT:
+- First-person voice of the SNCO
+- Sections: Welcome / Standards / Expectations / Path to Next Step / 30-60-90 Goals
+- Bullets where bullets are clearer than prose
+- Closes with: "Marine acknowledges this counseling" placeholder line
+
+VERIFICATION CHECKLIST:
+1. Are standards observable and testable?
+2. Are 30-60-90 goals specific and dated?
+3. Does the path-to-next-step name the next promotion event and what is required?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Direct, active voice, verb-first
+- No legal language unless I asked for it</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#7. Performance Counseling (30/60/90 or 3-Month)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-07-perf" aria-label="Copy performance counseling prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 90 sec. <strong>Risk:</strong> low.
+                    </div>
+<pre class="copy-block__body" id="copy-07-perf">ROLE: You are a SNCO writing a periodic performance counseling per MCO 1610.7 series. Format requested: {30-DAY / 60-DAY / 90-DAY / QUARTERLY}.
+
+CONTEXT: Periodic counseling to document progress against the goals set in the prior counseling and reset goals for the next period.
+
+INPUT:
+Rank/Name: {RANK LAST NAME}
+Period Reviewed: {DD MMM YY to DD MMM YY}
+Goals From Last Counseling: {LIST}
+What the Marine Did Well (observable, dated): {LIST}
+What Needs Improvement (observable, dated): {LIST}
+New Goals for Next Period: {LIST WITH DATES}
+
+OUTPUT FORMAT:
+- First-person voice of the SNCO
+- Sections: Period Reviewed / Strengths / Areas for Improvement / Next Period Goals / Marine's Statement Placeholder
+- Specific dates and incidents under Strengths and Areas
+- Bullets where clearer
+
+VERIFICATION CHECKLIST:
+1. Does every Strength and every Area cite a specific dated incident?
+2. Are next-period goals SMART (specific, measurable, dated)?
+3. No language a Marine could reasonably dispute as opinion vs fact?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Direct, factual, dated
+- No threats, no sarcasm</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#8. Corrective Counseling First Draft</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-08-corrective" aria-label="Copy corrective counseling prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 60 sec. <strong>Risk:</strong> medium. <strong>Verify after:</strong> review with the Marine; confirm with chain of command before signature.
+                    </div>
+<pre class="copy-block__body" id="copy-08-corrective">ROLE: You are a senior Marine NCO with 15 years experience reviewing counseling statements before they are delivered. You write the first draft the SNCO will refine.
+
+CONTEXT: A Marine in my section had a specific lapse in standards that requires a documented corrective counseling, not punishment, not yet a Page 11 negative entry.
+
+INPUT:
+Rank/Name: {RANK LAST NAME}
+Incident (specific, dated, observable): {WHAT HAPPENED, WHEN, WHO WITNESSED}
+Standard That Was Not Met: {NAME THE STANDARD, e.g., "0630 formation in MARPAT, no exceptions"}
+Prior Counseling on This Topic: {NONE / DATE OF LAST VERBAL / DATE OF LAST WRITTEN}
+Desired Corrective Behavior: {SPECIFIC, OBSERVABLE, DATED}
+Consequences if Not Corrected: {NEXT STEP, e.g., "Page 11 entry; reduction in section trust"}
+
+OUTPUT FORMAT:
+- First-person voice as the SNCO
+- Bullets, not paragraphs
+- Specific, observable behaviors only, no generalities
+- Sections: Incident / Standard / Prior Counseling History / Required Corrective Action / Consequences / Marine's Statement Placeholder
+
+VERIFICATION CHECKLIST:
+1. Does the statement cite a specific incident with a date?
+2. Is the standard named (not implied)?
+3. Is the required corrective action observable and dated?
+4. Does the consequences section avoid threats and stay administrative?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Marine Corps voice: direct, active, verb-first
+- No emotional language, no sarcasm
+- Cite the specific MCO/NAVMC reference if applicable, BUT verify the citation exists before including it</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">Either</span>
+                            <span class="copy-block__title">#9. Page 11 Administrative Entry (Negative)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-09-page11neg" aria-label="Copy Page 11 negative prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat for first draft; Ask Sage if uploading prior counseling history. <strong>Time:</strong> 2 min. <strong>Risk:</strong> high. <strong>Verify after:</strong> route through legal; the Marine MUST be afforded the opportunity to make a statement.
+                    </div>
+<pre class="copy-block__body" id="copy-09-page11neg">ROLE: You are an admin chief drafting a NAVMC 118(11) negative administrative entry that will survive legal review.
+
+CONTEXT: A Marine's behavior or performance requires a documented negative Page 11 entry. Prior verbal and written counseling has not corrected the behavior, or the incident is significant enough on its own to require documentation.
+
+INPUT:
+Rank/Name: {RANK LAST NAME}
+Date of Entry: {DD MMM YY}
+Specific Incident or Sustained Behavior: {WHAT, WHEN, WITNESSES}
+Standard Violated: {NAME THE STANDARD, REGULATION, OR ORDER}
+Prior Counseling History (dated): {LIST EACH PRIOR COUNSELING WITH DATE}
+Corrective Action Required: {SPECIFIC, OBSERVABLE, DATED}
+Consequences of Continued Failure: {NEXT ADMINISTRATIVE STEP}
+
+OUTPUT FORMAT:
+- First-person voice of the documenting Marine
+- Standard Page 11 entry format
+- Opens with "On [date], [rank/name] failed to [specific failure]..."
+- One paragraph per: Incident / Standard / Prior Counseling / Required Action / Notice of Rights
+- Closes with the standard line: "Marine is advised of the right to make a statement..."
+
+VERIFICATION CHECKLIST:
+1. Is every fact in the entry observable, dated, and traceable to a witness or record?
+2. Is the standard named with the actual regulation reference (verify the reference before signature)?
+3. Are prior counseling dates accurate?
+4. Is the rights-advisement language present and correct?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Administrative tone only, no editorializing
+- No legal conclusions (e.g., "this constitutes a violation of UCMJ Art X"); state the facts and let legal classify
+- Verify any cited regulation paragraph before including it</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">Either</span>
+                            <span class="copy-block__title">#10. 6105 Entry First Draft</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-10-6105" aria-label="Copy 6105 entry prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> Ask Sage if uploading the Marine's prior 6105 history; genai.mil for a clean-sheet draft. <strong>Time:</strong> 2 min. <strong>Risk:</strong> high. <strong>Verify after:</strong> MUST route through legal and the SgtMaj before signature. 6105 entries have separation implications.
+                    </div>
+<pre class="copy-block__body" id="copy-10-6105">ROLE: You are a senior admin chief drafting a 6105 counseling entry per MCO 1900.16 (MARCORSEPMAN), which formally puts a Marine on notice that continued substandard performance may result in administrative separation.
+
+CONTEXT: A Marine's sustained substandard performance or conduct meets the threshold for a 6105 entry. The Marine must be formally counseled that continued failure may result in administrative separation, and the entry must give the Marine a reasonable opportunity to correct.
+
+INPUT:
+Rank/Name: {RANK LAST NAME}
+Date of Entry: {DD MMM YY}
+Pattern of Substandard Performance/Conduct (dated, observable, multiple incidents): {LIST}
+Prior Counseling (each dated, with what was addressed): {LIST}
+Reasonable Period to Correct: {DAYS, typically 30 to 90}
+Specific Corrective Actions Required: {LIST WITH OBSERVABLE STANDARDS AND DATES}
+Notification of Potential Separation Basis: {WHICH PARAGRAPH OF MARCORSEPMAN APPLIES, but verify before including}
+
+OUTPUT FORMAT:
+- First-person voice of the SNCO or officer documenting
+- Standard 6105 format per MCO 1900.16
+- Opens with a clear statement that this is a 6105 counseling
+- Sections: Pattern / Prior Counseling History / Required Corrective Actions / Period to Correct / Notice of Separation Risk / Marine's Statement Placeholder
+- Closes with the formal advisement language
+
+VERIFICATION CHECKLIST:
+1. Does the entry document a PATTERN, not a single incident?
+2. Is the period to correct reasonable and dated?
+3. Is the separation-basis paragraph verified against the current revision of MCO 1900.16?
+4. Has legal been notified that this draft is in routing?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Administrative tone only
+- Do not invent paragraph numbers for MCO 1900.16; insert {VERIFY PARA} if unsure
+- This draft is NEVER the final entry; legal review is mandatory</pre>
+                </div>
+            </section>
+
+            <!-- ===========================================================
+                 SECTION 3: FITNESS REPORTS & PROS
+                 =========================================================== -->
+            <section id="section-3-fitreps">
+                <h2 class="section-heading">Section 3: Fitness Reports &amp; Pros</h2>
+                <p>FITREP narrative comments, pro/con write-ups, and board package LORs. Every comment must be defensible at the Reviewing Officer level and not contradict the marked attributes.</p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#11. FITREP Narrative Comment (Section I)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-11-fitrep" aria-label="Copy FITREP narrative prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 2 min. <strong>Risk:</strong> high. <strong>Verify after:</strong> consistency with marked attributes; OPSEC scrub of specific operations.
+                    </div>
+<pre class="copy-block__body" id="copy-11-fitrep">ROLE: You are a Reporting Senior with experience writing FITREP Section I comments that align with marked attributes and survive Reviewing Officer review per MCO 1610.7 series.
+
+CONTEXT: I need a Section I comment for a Marine whose marked attributes are {SUMMARIZE THE PROFILE: average / above-average / top-performer / billet-specific}. The comment must be consistent with the marks. Inflated narrative on average marks is a flag.
+
+INPUT:
+Rank/Name: {RANK LAST NAME}
+Billet: {BILLET}
+Reporting Period: {DD MMM YY to DD MMM YY}
+Marked Attribute Profile (overall): {AVERAGE / ABOVE-AVG / TOP-PERFORMER / BILLET-SPECIFIC}
+Top 3 Accomplishments (specific, observable, measurable): {LIST}
+Leadership Effect on Subordinates: {1 SENTENCE WITH SPECIFICS}
+Recommendation Phrase Tier: {STANDARD-GROWTH / READY-FOR-NEXT-BILLET / RETAIN / PROMOTE-TO-NEXT-GRADE-WITH-PEERS}
+
+OUTPUT FORMAT:
+- Third person, past tense, dense
+- Character limit awareness: Section I has a fixed character limit, prioritize density over flourish
+- Open with one sentence on billet performance
+- One sentence with measurable accomplishments
+- One sentence on leadership/subordinate effect
+- Close with the recommendation phrase that matches the tier
+
+VERIFICATION CHECKLIST:
+1. Does the narrative match the marked profile (no inflated language on average marks)?
+2. Are accomplishments measurable, not adjectival?
+3. Is the recommendation phrase the one I requested?
+4. Is the comment under the character limit (assume 1000 characters as a working ceiling)?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Marine Corps voice: dense, active, verb-first
+- Do not invent metrics
+- OPSEC: do not name specific operations or unit designators below regiment</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#12. PRO/CON Write-Up</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-12-procon" aria-label="Copy pro/con prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 90 sec. <strong>Risk:</strong> medium.
+                    </div>
+<pre class="copy-block__body" id="copy-12-procon">ROLE: You are a SNCO writing a PRO/CON statement for a Marine being recommended for or against a specific opportunity (special duty assignment, school, retention, lateral move).
+
+CONTEXT: I need a balanced PRO/CON. The Marine deserves an honest assessment. Hiding cons is unhelpful to the Marine and to the receiving command.
+
+INPUT:
+Rank/Name: {RANK LAST NAME}
+Opportunity Under Consideration: {SDA / SCHOOL / RETENTION / LATERAL MOVE}
+Pros (specific, observable, dated): {LIST 3 TO 5}
+Cons (specific, observable, dated; include if known): {LIST 1 TO 3}
+Overall Recommendation: {RECOMMEND / RECOMMEND WITH RESERVATION / DO NOT RECOMMEND}
+
+OUTPUT FORMAT:
+- First-person voice of the recommending Marine
+- Three sections: PROS / CONS / RECOMMENDATION
+- Bullets in PROS and CONS
+- One-paragraph RECOMMENDATION with the overall tier and one sentence of rationale
+
+VERIFICATION CHECKLIST:
+1. Are pros and cons observable and dated?
+2. Does the recommendation match the balance of pros and cons (no overselling)?
+3. Is the language fair to the Marine?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Direct, factual voice
+- No editorializing</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#13. Letter of Recommendation (Board Package)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-13-lor" aria-label="Copy LOR prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 2 min. <strong>Risk:</strong> medium. <strong>Verify after:</strong> tone matches your actual knowledge of the Marine.
+                    </div>
+<pre class="copy-block__body" id="copy-13-lor">ROLE: You are a senior officer or SNCO writing a board-package Letter of Recommendation that will be read by a selection board.
+
+CONTEXT: A Marine has requested an LOR for {SPECIFIC BOARD: WO program / commissioning / SDA / scholarship}. The board will see this letter alongside a stack of others. Generic letters do not stand out.
+
+INPUT:
+Rank/Name: {RANK LAST NAME}
+Board: {NAME OF BOARD}
+My Relationship to the Marine: {BILLET, PERIOD I OBSERVED THEM, FREQUENCY OF INTERACTION}
+Top 3 Distinguishing Strengths (specific, observable): {LIST}
+One Anecdote That Captures the Marine: {SPECIFIC INCIDENT WITH DATE}
+Comparison to Peers: {TOP X% OF Y MARINES I HAVE OBSERVED IN THIS BILLET}
+Closing Recommendation Tier: {STRONGLY RECOMMEND / RECOMMEND / RECOMMEND WITH RESERVATION}
+
+OUTPUT FORMAT:
+- First-person voice of the recommender
+- Standard naval-letter LOR format
+- 4 paragraphs: relationship and observation period / strengths and impact / anecdote / closing recommendation
+- The anecdote paragraph is the differentiator, make it specific and short
+
+VERIFICATION CHECKLIST:
+1. Is the relationship explicit (billet, period, frequency)?
+2. Does the anecdote actually distinguish this Marine from a peer?
+3. Is the peer comparison defensible?
+4. Does the closing tier match the body?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Direct, active voice
+- Do not invent the anecdote; if I did not provide one, leave a placeholder and prompt me for it</pre>
+                </div>
+            </section>
+
+            <!-- ===========================================================
+                 SECTION 4: CORRESPONDENCE
+                 =========================================================== -->
+            <section id="section-4-correspondence">
+                <h2 class="section-heading">Section 4: Correspondence</h2>
+                <p>Naval letters, MFRs, endorsements, plain-language rewrites, and ALMAR/MARADMIN openings. Format per SECNAV M-5216.5 series. AI is helpful for first draft; format is your job to verify.</p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#14. Naval Letter First Draft (with SSIC)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-14-navalletter" aria-label="Copy naval letter prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 90 sec. <strong>Risk:</strong> medium. <strong>Verify after:</strong> SSIC accuracy; signature authority.
+                    </div>
+<pre class="copy-block__body" id="copy-14-navalletter">ROLE: You are an admin chief drafting a naval letter per SECNAV M-5216.5.
+
+CONTEXT: I need a first-draft naval letter. Verify SSIC selection at the end; do not invent an SSIC if I did not provide one.
+
+INPUT:
+Subject: {SUBJECT IN ALL CAPS, BRIEF}
+SSIC: {SSIC NUMBER, or "VERIFY" if I do not know}
+From: {YOUR COMMAND}
+To: {RECEIVING COMMAND}
+Via: {ROUTING CHAIN, optional}
+Reference: {LIST OF MCOs, INSTRUCTIONS, OR PRIOR CORRESPONDENCE}
+Enclosure: {LIST OF ATTACHMENTS}
+Purpose of Letter: {ONE SENTENCE}
+Key Points to Convey: {LIST 3 TO 5 BULLETS}
+Action Requested or Information Provided: {SPECIFIC ASK OR STATEMENT}
+
+OUTPUT FORMAT:
+- Standard naval letter format
+- SSIC and date right-aligned in header (placeholder if SSIC unknown)
+- From / To / Via / Subj / Ref / Encl
+- Numbered paragraphs
+- Paragraph 1: purpose
+- Paragraph 2 to N: key points, one topic per paragraph
+- Closing paragraph: action requested or POC
+
+VERIFICATION CHECKLIST:
+1. Is the SSIC correct for the subject matter (verify against SECNAV M-5210.1)?
+2. Are References cited correctly with the current revision?
+3. Is the signature block at the right authority level?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Naval-letter voice: direct, third-person, action-oriented
+- Do not invent SSIC numbers, paragraph references, or enclosure titles</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#15. Memorandum for the Record</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-15-mfr" aria-label="Copy MFR prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 60 sec. <strong>Risk:</strong> low.
+                    </div>
+<pre class="copy-block__body" id="copy-15-mfr">ROLE: You are a SNCO writing a Memorandum for the Record (MFR) to document a decision, conversation, or event for the file.
+
+CONTEXT: An action, decision, or conversation needs to be documented in case it is needed later. The MFR is the record, not the action.
+
+INPUT:
+Subject: {BRIEF, FACTUAL}
+Date of Event: {DD MMM YY}
+Participants: {LIST WITH RANK/BILLET}
+What Happened (factual, observable): {3 TO 5 BULLETS}
+Decision or Outcome: {ONE OR TWO SENTENCES}
+Reason for Documenting: {ONE SENTENCE}
+
+OUTPUT FORMAT:
+- Standard MFR header (Memorandum for the Record, date, subject)
+- Numbered paragraphs
+- Factual, no editorializing
+- Closes with the documenting Marine's signature block
+
+VERIFICATION CHECKLIST:
+1. Are facts verifiable against participants or other records?
+2. Is the decision clearly stated?
+3. No opinion, no inference, just facts?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Administrative tone
+- No "in my opinion" or "I felt" language</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#16. Endorsement Letter</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-16-endorsement" aria-label="Copy endorsement prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 45 sec. <strong>Risk:</strong> low.
+                    </div>
+<pre class="copy-block__body" id="copy-16-endorsement">ROLE: You are an admin chief drafting an endorsement (FIRST / SECOND / etc. ENDORSEMENT on a basic letter) per SECNAV M-5216.5.
+
+CONTEXT: A basic letter has come to me for endorsement up the chain. I need to add a clear endorsement that either concurs, concurs with comment, or non-concurs with rationale.
+
+INPUT:
+Endorsement Number: {FIRST / SECOND / etc.}
+SSIC: {SAME AS BASIC LETTER}
+From: {MY COMMAND}
+To: {NEXT ECHELON}
+Via: {IF APPLICABLE}
+My Position on the Basic Letter: {CONCUR / CONCUR WITH COMMENT / NON-CONCUR}
+Rationale (if not a clean concur): {1 TO 3 SENTENCES}
+Recommendation to Higher: {ONE SENTENCE}
+
+OUTPUT FORMAT:
+- Endorsement header (X ENDORSEMENT on basic letter SSIC, date)
+- Subject line repeated from basic letter
+- Numbered paragraph: position, rationale, recommendation
+- Standard signature block
+
+VERIFICATION CHECKLIST:
+1. Is the endorsement number correct in sequence?
+2. Is the position clearly stated in the first sentence?
+3. Does the recommendation give the next echelon something to act on?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Brief and direct
+- Do not rehash the basic letter, endorse it</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#17. Plain-Language Directive Rewrite</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-17-plainlang" aria-label="Copy plain language rewrite prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 60 sec. <strong>Risk:</strong> low. <strong>Verify after:</strong> rewritten meaning still matches the source paragraph.
+                    </div>
+<pre class="copy-block__body" id="copy-17-plainlang">ROLE: You are a Marine NCO who has to translate dense MCO and SECNAVINST language into something junior Marines can act on without misinterpreting.
+
+CONTEXT: I need a plain-English rewrite of a paragraph from an order. The goal is comprehension, not summarization. Every requirement in the source must survive into the rewrite. Nothing implied that was not in the source.
+
+INPUT:
+Source Document and Paragraph: {MCO/SECNAVINST/NAVMC NUMBER, PARA NUMBER, REVISION DATE}
+Source Text (paste verbatim): {VERBATIM PARAGRAPH}
+Target Audience: {JUNIOR MARINE / NCO / SNCO}
+
+OUTPUT FORMAT:
+- Plain-English rewrite, target reading level appropriate to the audience
+- Bullets where the source has a list of requirements
+- Each requirement in the source maps to one bullet or sentence in the rewrite
+- Closes with: "Source: {DOC} {PARA} {REVISION DATE}"
+
+VERIFICATION CHECKLIST:
+1. Does every "shall" or "will" in the source survive into the rewrite?
+2. Is any new requirement implied that was not in the source?
+3. Are exceptions and edge cases preserved?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Plain English, short sentences
+- Do not summarize away requirements
+- Do not soften "shall" or "will" into "should"</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#18. ALMAR/MARADMIN Subject Line + Opening</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-18-almar" aria-label="Copy ALMAR opening prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 45 sec. <strong>Risk:</strong> medium. <strong>Verify after:</strong> message classification and release authority before submission.
+                    </div>
+<pre class="copy-block__body" id="copy-18-almar">ROLE: You are a release authority drafting the subject line and opening paragraph of an ALMAR or MARADMIN. Format per SECNAV M-5216.5 message conventions.
+
+CONTEXT: I need a subject line and opening paragraph that get the message read by busy Marines. The subject must convey the action, audience, and effective date in the line itself.
+
+INPUT:
+Message Type: {ALMAR / MARADMIN}
+Topic: {WHAT THIS IS ABOUT}
+Audience: {WHO MUST READ IT}
+Action Required: {WHAT THE READER MUST DO}
+Effective Date: {DD MMM YY}
+Key Reference: {MCO / NAVMC / SECNAVINST, if any}
+
+OUTPUT FORMAT:
+- Subject line in ALL CAPS, message-style brevity, action-oriented
+- Opening paragraph: 1 sentence purpose, 1 sentence audience, 1 sentence action
+- Suggested paragraph layout for the remainder (Background / Action / POC)
+
+VERIFICATION CHECKLIST:
+1. Does the subject line tell a busy Marine whether they need to read the body?
+2. Is the effective date in either the subject or the first paragraph?
+3. Is the action verb specific (not "be aware of")?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Message-traffic brevity
+- Do not invent reference paragraph numbers</pre>
+                </div>
+            </section>
+
+            <!-- ===========================================================
+                 SECTION 5: REGULATIONS & REFERENCES
+                 =========================================================== -->
+            <section id="section-5-regulations">
+                <h2 class="section-heading">Section 5: Regulations &amp; References</h2>
+                <p>MCO/NAVMC interpretation, cross-reference checks, T&amp;R lookup, and authority verification. Hallucinated paragraph numbers are the dominant failure mode in this section. Always verify cited paragraphs against the actual source.</p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">Ask Sage</span>
+                            <span class="copy-block__title">#19. MCO/NAVMC Paragraph Interpretation</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-19-mcointerp" aria-label="Copy MCO interpretation prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> Ask Sage (upload the actual MCO PDF). <strong>Time:</strong> 2 min. <strong>Risk:</strong> high. <strong>Verify after:</strong> open the cited paragraph and confirm the language.
+                    </div>
+<pre class="copy-block__body" id="copy-19-mcointerp">ROLE: You are a Marine officer or SNCO who interprets MCO and NAVMC paragraphs for line units and routinely catches misreadings of conditional language.
+
+CONTEXT: I need an interpretation of a specific paragraph from an order. I am uploading the order. Do NOT interpret from training-data memory; read the uploaded paragraph and quote it before interpreting.
+
+INPUT:
+Document: {MCO/NAVMC NUMBER and REVISION DATE, e.g., "MCO 1900.16, current revision"}
+Paragraph Number: {PARA NUMBER}
+My Question: {WHAT I AM TRYING TO DETERMINE}
+Situation Context: {WHAT THE MARINE OR UNIT IS TRYING TO DO}
+
+OUTPUT FORMAT:
+- Section 1: VERBATIM quote of the cited paragraph from the uploaded document
+- Section 2: Plain-English interpretation
+- Section 3: How the interpretation applies to my situation
+- Section 4: Conditions or exceptions that would change the interpretation
+- Section 5: Related paragraphs in the same order that affect this reading
+
+VERIFICATION CHECKLIST:
+1. Did you quote the paragraph verbatim from the upload, or did you paraphrase from memory?
+2. Are conditions and exceptions preserved?
+3. Does the interpretation distinguish "shall" from "should" from "may"?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Do not invent paragraph numbers, related paragraphs, or revision dates
+- If a paragraph is not in the upload, say so explicitly</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">Ask Sage</span>
+                            <span class="copy-block__title">#20. Cross-Reference (Does X Cite Y Correctly?)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-20-crossref" aria-label="Copy cross-reference prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> Ask Sage (upload BOTH documents). <strong>Time:</strong> 3 min. <strong>Risk:</strong> high. <strong>Verify after:</strong> open both source documents and confirm the citation chain.
+                    </div>
+<pre class="copy-block__body" id="copy-20-crossref">ROLE: You are a Marine staff officer verifying that a citation chain in one document accurately references another.
+
+CONTEXT: I need to verify that {SOURCE DOCUMENT} correctly cites {REFERENCED DOCUMENT}. I am uploading both. Quote the relevant text from each before assessing.
+
+INPUT:
+Source Document: {DOC NAME, REVISION DATE}
+Source Paragraph (claiming to cite Y): {PARA NUMBER}
+Referenced Document: {DOC NAME, REVISION DATE}
+Claimed Reference Location: {PARA NUMBER OR SECTION}
+What I Want to Confirm: {THAT THE CITATION SAYS WHAT THE SOURCE CLAIMS IT SAYS}
+
+OUTPUT FORMAT:
+- Section 1: Verbatim quote from the source's citing paragraph
+- Section 2: Verbatim quote from the referenced paragraph
+- Section 3: Assessment: MATCH / PARTIAL MATCH / DOES NOT MATCH / REFERENCED PARAGRAPH DOES NOT EXIST
+- Section 4: If partial or no match, what the source claims vs what the reference actually says
+- Section 5: Recommended fix (revise the citing language, change the reference, escalate)
+
+VERIFICATION CHECKLIST:
+1. Did you quote both sources verbatim from the uploads?
+2. Is the assessment one of the four named options (no soft "mostly matches")?
+3. Are revision dates of both documents named?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Do not invent paragraph numbers
+- Do not assess from memory if a paragraph is not in the upload</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">Ask Sage</span>
+                            <span class="copy-block__title">#21. T&amp;R Event Lookup Explanation</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-21-trlookup" aria-label="Copy T&amp;R lookup prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> Ask Sage (upload the T&amp;R manual for the MOS). <strong>Time:</strong> 2 min. <strong>Risk:</strong> medium. <strong>Verify after:</strong> event code and currency rules against the actual T&amp;R.
+                    </div>
+<pre class="copy-block__body" id="copy-21-trlookup">ROLE: You are a unit training officer who reads T&amp;R manuals daily and explains event prerequisites, currency, and evaluation conditions to junior Marines.
+
+CONTEXT: I need to understand a T&amp;R event from the uploaded manual: prerequisites, conditions, performance standards, currency period, and supporting events.
+
+INPUT:
+T&amp;R Manual: {MOS/COMMUNITY, e.g., "0311 T&amp;R Manual"}
+Event Code: {e.g., "INF-MAN-3001"}
+What I Need to Know: {ALL FIELDS / JUST CURRENCY / JUST PREREQS / JUST CONDITIONS}
+
+OUTPUT FORMAT:
+- Verbatim quote of the event entry from the uploaded T&amp;R
+- Plain-English explanation of each field
+- Prerequisites: list explicit
+- Conditions: list explicit
+- Standards: list explicit
+- Currency: explicit period and what triggers reset
+- Supporting events: list with codes
+- Sustainment vs Initial: clarify
+
+VERIFICATION CHECKLIST:
+1. Did you quote the event entry verbatim from the upload?
+2. Are all five fields (Prereqs, Conditions, Standards, Currency, Supporting Events) named?
+3. Is the answer about THIS revision of the T&amp;R (named)?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Do not invent event codes
+- Do not guess currency rules if not in the upload</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">Ask Sage</span>
+                            <span class="copy-block__title">#22. Authority Verification (Who Approves X?)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-22-authority" aria-label="Copy authority verification prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> Ask Sage (upload the controlling order). <strong>Time:</strong> 2 min. <strong>Risk:</strong> high. <strong>Verify after:</strong> open the cited paragraph and confirm signature authority and delegation.
+                    </div>
+<pre class="copy-block__body" id="copy-22-authority">ROLE: You are a Marine adjutant or admin chief responsible for routing actions to the correct approving authority and catching mis-routing before it embarrasses the command.
+
+CONTEXT: I need to know who has approval authority for a specific action and whether that authority has been delegated. Authority confusion is one of the most common reasons actions bounce back.
+
+INPUT:
+Action: {SPECIFIC, e.g., "Approve 30-day TAD outside CONUS"}
+Controlling Order: {MCO/NAVMC NUMBER, REVISION}
+My Best Guess of the Authority: {RANK or BILLET}
+Suspected Delegation Order (if any): {DOC AND DATE}
+
+OUTPUT FORMAT:
+- Section 1: Verbatim paragraph(s) from the controlling order naming the authority
+- Section 2: Verbatim paragraph(s) on delegation, if any
+- Section 3: Plain-English: who approves this action at my unit
+- Section 4: Edge cases that change the authority (e.g., during exercises, deployed, CO absence)
+- Section 5: Routing recommendation
+
+VERIFICATION CHECKLIST:
+1. Did you quote the authority paragraph verbatim from the upload?
+2. Is delegation addressed explicitly?
+3. Are edge cases named?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Do not invent paragraph numbers
+- If the authority is not in the upload, say so, do not guess</pre>
+                </div>
+            </section>
+
+            <!-- ===========================================================
+                 SECTION 6: OPERATIONAL DOCUMENTS
+                 =========================================================== -->
+            <section id="section-6-operational">
+                <h2 class="section-heading">Section 6: Operational Documents</h2>
+                <p>FRAGO, WARNORD, Risk Management Worksheet (DD 2977), range requests, and After-Action Reports. OPSEC scrub mandatory before any AI tool sees these inputs. Generalize unit designators and avoid specifics that would identify the operation.</p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#23. FRAGO Outline (Five-Paragraph)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-23-frago" aria-label="Copy FRAGO prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 90 sec. <strong>Risk:</strong> medium. <strong>Verify after:</strong> OPSEC scrub before pasting; never include real grids or unit identifiers below regiment.
+                    </div>
+<pre class="copy-block__body" id="copy-23-frago">ROLE: You are a S-3 watch officer drafting a FRAGO outline in the standard five-paragraph format (SMEAC).
+
+CONTEXT: A change to the base order has occurred. I need a clean FRAGO outline that captures what changed, what stays the same, and the new tasks.
+
+INPUT (OPSEC-scrubbed, no real grids/unit designators):
+Reference Base Order: {OPLAN/OPORD/FRAGO NUMBER}
+What Changed: {ONE OR TWO SENTENCES}
+What Remains in Effect: {LIST}
+New Mission Statement: {WHO, WHAT, WHEN, WHERE, WHY}
+New Tasks by Subordinate Unit: {LIST}
+Coordinating Instructions: {LIST}
+
+OUTPUT FORMAT:
+- Standard FRAGO header (FRAGO number, reference, time of issue)
+- Five paragraphs: SITUATION / MISSION / EXECUTION / ADMIN-LOGISTICS / COMMAND-SIGNAL
+- Each paragraph names only what is different from the base order or new
+- Closes with the standard "ACKNOWLEDGE" line
+
+VERIFICATION CHECKLIST:
+1. Are only changes and new tasks in the FRAGO body (not the whole base order)?
+2. Is the new mission statement a single sentence with the five Ws?
+3. Are subordinate tasks specific and assigned to a unit?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Direct, action-oriented voice
+- OPSEC: I will replace placeholders before pasting elsewhere
+- Do not invent grid coordinates or unit identifiers</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#24. WARNORD Checklist</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-24-warnord" aria-label="Copy WARNORD prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 60 sec. <strong>Risk:</strong> medium. <strong>Verify after:</strong> OPSEC.
+                    </div>
+<pre class="copy-block__body" id="copy-24-warnord">ROLE: You are a S-3 planner issuing a WARNORD that gives subordinate units enough information to begin parallel planning.
+
+CONTEXT: A mission is in development. I need to push a WARNORD that captures probable mission, timeline, and initial guidance without committing to specifics not yet decided.
+
+INPUT (OPSEC-scrubbed):
+Probable Mission Type: {RAID / RECON / SUPPORT / etc.}
+Probable Timeline: {WINDOW, NOT EXACT}
+Subordinate Units Affected: {LIST BY TYPE}
+Initial Guidance: {COMMANDER'S INTENT, BROAD}
+What is Decided: {LIST}
+What is Still TBD: {LIST}
+Time of Next Update: {DTG OR EVENT}
+
+OUTPUT FORMAT:
+- Standard WARNORD header
+- Sections: Situation Summary / Probable Mission / Initial Guidance / Decided/TBD / Coordinating Instructions / Next Update
+- Bullets where lists exist
+- Closes with explicit ACKNOWLEDGE
+
+VERIFICATION CHECKLIST:
+1. Is the probable mission stated as probable, not directive?
+2. Is the TBD list explicit so subordinates do not over-commit?
+3. Is the next-update DTG or event named?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Direct voice
+- OPSEC: generalize, replace placeholders before release
+- Do not commit to specifics not in the INPUT</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#25. Risk Management Worksheet (DD 2977)</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-25-rmw" aria-label="Copy RMW prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 2 min. <strong>Risk:</strong> medium. <strong>Verify after:</strong> approval authority based on residual risk level per MCO 3500.27.
+                    </div>
+<pre class="copy-block__body" id="copy-25-rmw">ROLE: You are a Marine officer or SNCO completing a DD Form 2977 Deliberate Risk Assessment Worksheet using the five-step Risk Management process per MCO 3500.27 series.
+
+CONTEXT: I am drafting a risk worksheet for an evolution. I need a first draft I can refine and route for approval at the level matching the residual risk.
+
+INPUT:
+Evolution: {WHAT, e.g., "Live-fire range, M240B, day and night"}
+Location: {RANGE, AREA, or GENERAL}
+Date Range: {DD MMM YY to DD MMM YY}
+Personnel: {ROUGH COUNT, NO NAMES}
+Equipment: {LIST}
+Known Hazards (start the list, I will add more): {LIST}
+Existing Controls: {LIST}
+
+OUTPUT FORMAT:
+- DD 2977 structure
+- Section 1: Hazards (one row per hazard)
+- For each hazard: Initial Severity / Initial Probability / Initial Risk Level / Controls / Residual Severity / Residual Probability / Residual Risk Level
+- Section 2: Overall residual risk and the approval authority required
+- Section 3: Implementation and supervision plan
+
+VERIFICATION CHECKLIST:
+1. Is every hazard specific and observable (not "weather")?
+2. Are controls actionable and assigned?
+3. Does the residual risk level match the controls listed?
+4. Is the approval authority correctly named for the residual risk level?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Direct, plan-oriented language
+- Do not invent hazards I did not name; expand the list with plausible additions and flag them as suggestions
+- Verify approval-authority paragraph in MCO 3500.27 before final routing</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#26. Range Request Narrative</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-26-range" aria-label="Copy range request prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 60 sec. <strong>Risk:</strong> low.
+                    </div>
+<pre class="copy-block__body" id="copy-26-range">ROLE: You are a unit training officer drafting the narrative section of a range request to convince the range control authority and the S-3 that the requested range, dates, and ammunition are tied to a specific T&amp;R requirement.
+
+CONTEXT: I am submitting a range request. The narrative needs to tie the request to T&amp;R events, currency, and unit training plan so it survives prioritization.
+
+INPUT:
+Range: {NAME OR TYPE}
+Dates: {WINDOW}
+Personnel Count: {NUMBER}
+Ammunition Requested: {LIST WITH DODICs}
+T&amp;R Events to be Completed: {EVENT CODES}
+Current Unit Training Status (why this is the priority): {1 TO 2 SENTENCES}
+Tie to Higher Training Objective: {OPLAN / PRE-DEPLOYMENT / SUSTAINMENT}
+
+OUTPUT FORMAT:
+- Three paragraphs
+- Paragraph 1: requested range, dates, personnel, ammunition (the ask)
+- Paragraph 2: T&amp;R events to be completed, with currency rationale
+- Paragraph 3: tie to higher training objective and risk if not approved
+
+VERIFICATION CHECKLIST:
+1. Are T&amp;R event codes correct (verify in the T&amp;R manual)?
+2. Are DODICs correct?
+3. Is the tie to higher training objective specific?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Direct, plan-oriented
+- Do not invent DODICs or T&amp;R event codes</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">Either</span>
+                            <span class="copy-block__title">#27. After-Action Report Structure</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-27-aar" aria-label="Copy AAR prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> Ask Sage if uploading raw notes/logs; genai.mil for outline only. <strong>Time:</strong> 3 min. <strong>Risk:</strong> medium. <strong>Verify after:</strong> OPSEC; consensus from key participants on findings.
+                    </div>
+<pre class="copy-block__body" id="copy-27-aar">ROLE: You are a Marine Corps lessons-learned analyst structuring an AAR that produces actionable findings, not narrative.
+
+CONTEXT: An event has concluded. I need an AAR structure with sustains, improves, and concrete recommendations. AARs that just narrate the event are useless. AARs that produce a fix list with owners are the goal.
+
+INPUT (OPSEC-scrubbed):
+Event Type: {EXERCISE / DEPLOYMENT / TRAINING / OPERATION}
+Period: {DD MMM YY to DD MMM YY}
+Unit Type: {GENERIC, e.g., "Reinforced infantry battalion"}
+Mission Summary: {ONE PARAGRAPH, GENERALIZED}
+Top 5 Sustains (what worked, observable): {LIST}
+Top 5 Improves (what did not work, observable): {LIST}
+Notes/Logs Available (for Ask Sage upload): {YES/NO}
+
+OUTPUT FORMAT:
+- Standard AAR structure: Executive Summary / Mission / Sustains / Improves / Recommendations / Action Items with Owners
+- Executive Summary: 3 to 5 sentences, leads with the most important finding
+- Sustains and Improves: bullets, each tied to an observable outcome
+- Recommendations: one per Improve, specific and actionable
+- Action Items: each with an owner, a due date placeholder, and a measure of completion
+
+VERIFICATION CHECKLIST:
+1. Does each Sustain and Improve cite an observable outcome?
+2. Does each Recommendation tie to a specific Improve?
+3. Does each Action Item have an owner?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Direct, analytical voice
+- OPSEC: generalize unit and operation identifiers
+- Do not invent findings; expand only if I asked you to suggest additional candidates</pre>
+                </div>
+            </section>
+
+            <!-- ===========================================================
+                 SECTION 7: ADMIN FORMS
+                 =========================================================== -->
+            <section id="section-7-admin">
+                <h2 class="section-heading">Section 7: Admin Forms</h2>
+                <p>DD 1610 justifications, leave request justifications, NJP processing checklists, and awards board package narratives. Routine but high-volume. Saving fifteen minutes per form across a battalion is meaningful time back.</p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#28. DD 1610 Travel Orders Justification</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-28-dd1610" aria-label="Copy DD 1610 prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 45 sec. <strong>Risk:</strong> low.
+                    </div>
+<pre class="copy-block__body" id="copy-28-dd1610">ROLE: You are a unit admin clerk drafting the justification block of a DD Form 1610 that survives DTS and budget-shop scrutiny.
+
+CONTEXT: A Marine is being sent on TAD. I need a justification that ties the trip to mission, names the receiving unit and event, and previews cost reasonableness.
+
+INPUT:
+Marine: {RANK LAST NAME}
+Destination: {CITY, STATE / BASE}
+Dates: {DD MMM YY to DD MMM YY}
+Purpose: {SCHOOL / CONFERENCE / EXERCISE / SUPPORT}
+Mission Tie: {WHICH OPLAN, T&amp;R EVENT, OR ORDER REQUIRES THIS TRAVEL}
+Cost Notes: {ANY KNOWN COST CONSIDERATIONS}
+
+OUTPUT FORMAT:
+- Three short paragraphs
+- Paragraph 1: who, where, when, why (1 to 2 sentences)
+- Paragraph 2: mission tie with the specific reference
+- Paragraph 3: cost reasonableness and approval routing
+
+VERIFICATION CHECKLIST:
+1. Is the mission tie specific (not "training")?
+2. Is the receiving organization named?
+3. Are dates reasonable for the purpose?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Brief and direct</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#29. Leave Request Justification</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-29-leave" aria-label="Copy leave request prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 30 sec. <strong>Risk:</strong> low.
+                    </div>
+<pre class="copy-block__body" id="copy-29-leave">ROLE: You are a Marine SNCO routing a leave request to the CO and writing the justification block in language that respects both the Marine's right to leave and the unit's training schedule.
+
+CONTEXT: A Marine has requested leave. I need a short justification that supports approval, identifies any training-calendar conflicts, and proposes a coverage plan.
+
+INPUT:
+Marine: {RANK LAST NAME}
+Dates: {DD MMM YY to DD MMM YY}
+Leave Type: {ORDINARY / EMERGENCY / SPECIAL}
+Conflict Check (events in the window): {LIST OR "NONE"}
+Coverage Plan: {WHO COVERS WHAT}
+Marine's Reason (if voluntarily shared): {OPTIONAL}
+
+OUTPUT FORMAT:
+- Two short paragraphs
+- Paragraph 1: request specifics, conflict check, coverage
+- Paragraph 2: recommendation and any conditions
+
+VERIFICATION CHECKLIST:
+1. Are conflicts named or "NONE" stated explicitly?
+2. Is coverage assigned to a specific Marine?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Respect Marine's privacy on reason; only include if they volunteered it</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">Either</span>
+                            <span class="copy-block__title">#30. NJP Processing Checklist</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-30-njp" aria-label="Copy NJP checklist prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> Ask Sage if uploading the JAGMAN; genai.mil for a generic checklist. <strong>Time:</strong> 2 min. <strong>Risk:</strong> high. <strong>Verify after:</strong> route through legal; this is a procedural aid, not legal advice.
+                    </div>
+<pre class="copy-block__body" id="copy-30-njp">ROLE: You are a unit legal admin generating a procedural checklist for NJP processing per JAGMAN. This is a procedural aid for the SNCO handling the routing, not legal advice.
+
+CONTEXT: An NJP package is starting through routing. I need a checklist covering Marine's rights advisement, evidence package, witness statements, JAG consultation, command screening, and post-NJP entries.
+
+INPUT:
+Marine's Rank: {RANK}
+Forum Likely: {SUMMARY / COMPANY-GRADE / FIELD-GRADE / SPCM REFERRED}
+Offenses (UCMJ articles cited): {LIST, but I will verify articles separately}
+Stage in Process: {INITIAL ROUTING / RIGHTS ADVISEMENT / HEARING SCHEDULED / POST-HEARING}
+
+OUTPUT FORMAT:
+- Numbered checklist by stage
+- Each item names the responsible role (SNCO, S-1, JAG, CO)
+- Each item names the document or action required
+- Marks the stop-the-clock items (Marine elects court-martial in lieu, etc.)
+
+VERIFICATION CHECKLIST:
+1. Are rights-advisement steps complete and in order?
+2. Are JAG consult points explicit?
+3. Are post-NJP entries (Page 11, SRB) named?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Procedural checklist tone
+- Do not interpret UCMJ articles or recommend punishment; route to JAG
+- Do not invent JAGMAN paragraph numbers</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#31. Awards Board Package Narrative</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-31-awardboard" aria-label="Copy awards board prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 90 sec. <strong>Risk:</strong> medium.
+                    </div>
+<pre class="copy-block__body" id="copy-31-awardboard">ROLE: You are a unit S-1 representative drafting the narrative section of an awards board package that survives a panel reading dozens of packages in one sitting.
+
+CONTEXT: I need the narrative cover page that contextualizes the citation for the board: scope of responsibility, peer comparison, recurring impact. The citation is separate; this narrative tells the board why the award level is justified.
+
+INPUT:
+Marine: {RANK LAST NAME}
+Award Recommended: {NAM / NAVCOM / MSM}
+Period: {DD MMM YY to DD MMM YY}
+Scope of Responsibility (people, dollars, equipment, mission): {LIST WITH NUMBERS}
+Peer Comparison: {TOP X% OF Y MARINES OBSERVED IN THIS BILLET}
+Recurring Impact (continued after the period or scaled beyond the unit): {1 TO 2 SENTENCES}
+Citation Highlights: {3 TO 5 TOP LINES FROM THE CITATION}
+
+OUTPUT FORMAT:
+- One-page narrative
+- Paragraph 1: scope of responsibility with numbers
+- Paragraph 2: peer comparison and how this Marine distinguished themselves
+- Paragraph 3: recurring or institutional impact
+- Paragraph 4: alignment to the award tier criteria
+
+VERIFICATION CHECKLIST:
+1. Are scope numbers defensible if challenged?
+2. Is the peer comparison specific (top X% of Y)?
+3. Does the narrative justify THIS award tier, not a higher or lower one?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Direct, dense voice
+- Do not inflate scope or impact beyond what I provided</pre>
+                </div>
+            </section>
+
+            <!-- ===========================================================
+                 SECTION 8: OPSEC & CYBERSECURITY
+                 =========================================================== -->
+            <section id="section-8-opsec">
+                <h2 class="section-heading">Section 8: OPSEC &amp; Cybersecurity</h2>
+                <p>Pre-paste scrub and CUI classification check. Use #32 before pasting anything you are not certain is releasable. Use #33 when a paragraph might be CUI and you need a sanity check on marking before further routing.</p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#32. Pre-Paste OPSEC Scrub</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-32-opsec" aria-label="Copy OPSEC scrub prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 30 sec. <strong>Risk:</strong> low. <strong>Verify after:</strong> your own OPSEC officer is the final authority. This is a sanity check, not a release approval.
+                    </div>
+<pre class="copy-block__body" id="copy-32-opsec">ROLE: You are an OPSEC reviewer scanning a paragraph for indicators that would compromise operational security or contain PII before it is pasted into a wider distribution.
+
+CONTEXT: I am about to share, post, or paste a paragraph. Scan it for OPSEC indicators and PII. Identify each finding with the specific element, why it matters, and a proposed redaction or generalization.
+
+INPUT: {PASTE_INPUT_HERE}
+
+OUTPUT FORMAT:
+- Section 1: PII findings (names, EDIPIs, DoD ID numbers, SSNs, dates of birth, home addresses, personal phone, personal email)
+- Section 2: OPSEC findings (unit designators below regiment, exact deployment dates, future operational dates, exact grid coordinates, exact equipment serials, specific personnel counts, specific capability gaps)
+- Section 3: Soft signals (anything that could combine with public information to compromise an operation)
+- Section 4: Proposed redactions for each finding
+- Section 5: Overall recommendation: SAFE TO SHARE / SHARE AFTER REDACTION / DO NOT SHARE WITHOUT OPSEC OFFICER REVIEW
+
+VERIFICATION CHECKLIST:
+1. Did you flag every name, EDIPI, and date of birth?
+2. Did you flag unit designators below regiment?
+3. Are proposed redactions specific (not "remove the name")?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Conservative scoring: when in doubt, flag it
+- Your output is advisory; the OPSEC officer is the authority</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#33. CUI Classification Check</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-33-cui" aria-label="Copy CUI check prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 60 sec. <strong>Risk:</strong> high. <strong>Verify after:</strong> your unit's information security manager is the authority; this prompt is a starting point, not a marking decision.
+                    </div>
+<pre class="copy-block__body" id="copy-33-cui">ROLE: You are a junior information security reviewer trained on DoDI 5200.48 (CUI) categories, providing a first-pass classification check on a paragraph.
+
+CONTEXT: I have a paragraph that might be CUI. Before I share it, I want a first-pass assessment of whether it likely meets a CUI category and which marking would apply. Your output is advisory only; the ISM signs marking decisions.
+
+INPUT: {PASTE_INPUT_HERE}
+
+OUTPUT FORMAT:
+- Section 1: Likely CUI category (or "Likely uncontrolled / publicly releasable")
+- Section 2: Specific elements that drove the determination
+- Section 3: Proposed banner marking (e.g., "CUI" plus category, "CUI//SP-PRVCY", "CUI//SP-PROPIN")
+- Section 4: Required handling caveats (distribution, storage, transmission)
+- Section 5: Recommendation: SHARE WITH MARKING / DO NOT SHARE PENDING ISM REVIEW / LIKELY UNCONTROLLED
+
+VERIFICATION CHECKLIST:
+1. Is the proposed CUI category one of the recognized DoDI 5200.48 categories?
+2. Are the driving elements specific?
+3. Is the recommendation conservative (when in doubt, route to ISM)?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Conservative scoring
+- Do not invent CUI categories or markings
+- This is advisory; ISM is the authority</pre>
+                </div>
+            </section>
+
+            <!-- ===========================================================
+                 SECTION 9: CAREER DEVELOPMENT
+                 =========================================================== -->
+            <section id="section-9-career">
+                <h2 class="section-heading">Section 9: Career Development</h2>
+                <p>Self-evaluation for promotion boards and PME study guide generation. These two prompts are for the Marine's own use. Self-evaluation is harder to fake; the second-order benefit is forcing the Marine to articulate accomplishments concretely.</p>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">genai.mil</span>
+                            <span class="copy-block__title">#34. Self-Evaluation for Promotion Board</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-34-selfeval" aria-label="Copy self-evaluation prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> genai.mil chat. <strong>Time:</strong> 2 min. <strong>Risk:</strong> low.
+                    </div>
+<pre class="copy-block__body" id="copy-34-selfeval">ROLE: You are a Marine career counselor helping a Marine prepare a self-evaluation for an upcoming promotion or selection board.
+
+CONTEXT: A Marine wants to organize their record for board review. The goal is to articulate sustained accomplishments and the through-line of their career, then identify gaps to close before the board convenes.
+
+INPUT:
+Rank/Name: {RANK LAST NAME}
+Board: {PROMOTION / SELECTION / SDA / COMMISSIONING}
+Time in Service: {YEARS}
+Time in Grade: {MONTHS}
+Billets Held (with periods): {LIST}
+Top 5 Career Accomplishments (specific, measurable): {LIST}
+Awards: {LIST}
+Education and PME: {LIST WITH DATES}
+Known Gaps in Record: {LIST}
+
+OUTPUT FORMAT:
+- Section 1: Career through-line (2 to 3 sentences naming the pattern of growth)
+- Section 2: Top accomplishments organized by billet
+- Section 3: Distinguishing strengths versus peer Marines in this grade
+- Section 4: Gaps to close before the board
+- Section 5: Recommended specific actions in the next 30/60/90 days
+
+VERIFICATION CHECKLIST:
+1. Is the through-line specific enough to distinguish this Marine?
+2. Are accomplishments measurable, not adjectival?
+3. Are gap-closure actions specific and dated?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Honest tone, neither inflated nor self-deprecating
+- Do not invent accomplishments</pre>
+                </div>
+
+                <div class="copy-block">
+                    <div class="copy-block__header">
+                        <div class="copy-block__label">
+                            <span class="tool-pill">Either</span>
+                            <span class="copy-block__title">#35. PME Study Guide Generator</span>
+                        </div>
+                        <button class="copy-btn" type="button" data-copy-target="copy-35-pme" aria-label="Copy PME study guide prompt">
+                            <span class="copy-btn__label">Copy to clipboard</span>
+                        </button>
+                    </div>
+                    <div class="copy-block__meta">
+                        <strong>Tool:</strong> Ask Sage if uploading the PME source material; genai.mil for general study guide. <strong>Time:</strong> 2 min. <strong>Risk:</strong> low.
+                    </div>
+<pre class="copy-block__body" id="copy-35-pme">ROLE: You are a Marine NCO building a focused PME study guide for a board, distance-education course, or unit reading program.
+
+CONTEXT: I need a study guide for a specific PME topic that produces actual learning, not surface recall. Output should drive a Marine to engage with the source, not bypass it.
+
+INPUT:
+PME Topic or Source: {BOOK / DOCTRINE / HISTORICAL CAMPAIGN / SUBJECT AREA}
+Audience Level: {JUNIOR ENLISTED / NCO / SNCO / OFFICER}
+Time Available: {SESSIONS, e.g., "Six 30-minute sessions"}
+Specific Outcome Desired: {WHAT THE MARINE SHOULD BE ABLE TO DO AFTER}
+
+OUTPUT FORMAT:
+- Section 1: Source-anchored objectives (each tied to chapter/section)
+- Section 2: Per-session breakdown (reading, key questions, reflection)
+- Section 3: Key questions per session (open-ended, not lookup)
+- Section 4: Application prompts (how to apply what was learned in the next week)
+- Section 5: Self-assessment checklist at the end
+
+VERIFICATION CHECKLIST:
+1. Are objectives tied to specific sections of the source?
+2. Are key questions open-ended (not yes/no, not lookup)?
+3. Does the application section connect the reading to current work?
+
+CONSTRAINTS:
+- No em-dashes
+- No AI-tells
+- Engaged-learner tone
+- Do not invent chapter or page numbers if the source is not uploaded</pre>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-heading">Print and Share</h2>
+                <p>
+                    Use your browser Print function for a PDF copy you can route on the unit share drive. Copy buttons are hidden on print. For sharing inside the EDD course, the canonical URL is this page.
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>
+                        Open-source AI-assisted development training for DoW personnel.
+                        Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../courses/">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="../toolkit/">Toolkit</a></li>
+                        <li><a href="../tools/">Tools</a></li>
+                        <li><a href="./">Resources</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Related Resources</h3>
+                    <ul>
+                        <li><a href="prompt-library.html">General Prompt Library</a></li>
+                        <li><a href="tool-selection-guide.html">Tool Selection Guide</a></li>
+                        <li><a href="capability-gap-map.html">Capability Gap Map</a></li>
+                        <li><a href="templates.html">Templates</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function() {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+
+            document.querySelectorAll('.copy-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var targetId = btn.getAttribute('data-copy-target');
+                    var target = document.getElementById(targetId);
+                    if (!target) return;
+                    var text = target.textContent;
+                    var label = btn.querySelector('.copy-btn__label');
+                    var originalLabel = label ? label.textContent : '';
+
+                    var done = function () {
+                        btn.classList.add('is-copied');
+                        if (label) label.textContent = 'Copied';
+                        setTimeout(function () {
+                            btn.classList.remove('is-copied');
+                            if (label) label.textContent = originalLabel;
+                        }, 1800);
+                    };
+                    var fail = function () {
+                        if (label) label.textContent = 'Copy failed, select and Ctrl/Cmd+C';
+                        setTimeout(function () {
+                            if (label) label.textContent = originalLabel;
+                        }, 2500);
+                    };
+
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(text).then(done).catch(function () {
+                            try {
+                                var range = document.createRange();
+                                range.selectNodeContents(target);
+                                var sel = window.getSelection();
+                                sel.removeAllRanges();
+                                sel.addRange(range);
+                                document.execCommand('copy');
+                                sel.removeAllRanges();
+                                done();
+                            } catch (err) { fail(); }
+                        });
+                    } else {
+                        try {
+                            var range = document.createRange();
+                            range.selectNodeContents(target);
+                            var sel = window.getSelection();
+                            sel.removeAllRanges();
+                            sel.addRange(range);
+                            document.execCommand('copy');
+                            sel.removeAllRanges();
+                            done();
+                        } catch (err) { fail(); }
+                    }
+                });
+            });
+        })();
+    </script>
+
+    <script src="../js/enhancements.js"></script>
+
+</body>
+</html>

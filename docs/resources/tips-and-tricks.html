@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Productivity tricks for genai.mil and Ask Sage that Marines don't discover until month six. Model-switching, context-window management, file ingestion patterns, IDE integration, prompt libraries. Built for Course 4.5.">
+    <title>AI Tips and Tricks for Marines | Expert-Driven Development</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+      /* One-page print friendly */
+      @media print {
+        body { background: #fff; }
+        .site-header, .mobile-nav, .page-header, .site-footer, .skip-link, .toc { display: none; }
+        .container { max-width: none; padding: 0 0.25in; }
+        main { padding: 0; }
+        h2 { font-size: 1.1rem; page-break-after: avoid; }
+        h3 { font-size: 1rem; page-break-after: avoid; }
+        table { font-size: 0.78rem; }
+        .callout { page-break-inside: avoid; }
+        section { page-break-inside: avoid; }
+      }
+    </style>
+</head>
+<body class="site-wrapper">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="../" class="site-brand">
+                <span class="site-brand__mark" aria-hidden="true"></span>
+                Expert-Driven Development
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul class="nav-list">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../courses/">Courses</a></li>
+                    <li><a href="../sop/">SOP</a></li>
+                    <li><a href="../toolkit/">Toolkit</a></li>
+                    <li><a href="../tools/">Tools</a></li>
+                    <li><a href="./" class="active">Resources</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="nav-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-list">
+            <li><a href="../">Home</a></li>
+            <li><a href="../courses/">Courses</a></li>
+            <li><a href="../sop/">SOP</a></li>
+            <li><a href="../toolkit/">Toolkit</a></li>
+            <li><a href="../tools/">Tools</a></li>
+            <li><a href="./" class="active">Resources</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </div>
+
+    <section class="page-header">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="./">Resources</a></li>
+                    <li aria-current="page">AI Tips and Tricks</li>
+                </ol>
+            </nav>
+            <h1 class="page-header__title">AI Tips and Tricks for Marines</h1>
+            <p class="page-header__desc">
+                If the Tool Selection Guide is which tool, this page is how to wring more out of whichever tool you picked. Productivity tricks that compound over time, organized by skill level.
+            </p>
+            <div class="mt-lg">
+                <span class="badge badge--gold">Course 4.5</span>
+                <span class="badge">Reference</span>
+            </div>
+        </div>
+    </section>
+
+    <main id="main-content" class="site-main">
+        <div class="container">
+
+            <nav class="toc" aria-label="On this page">
+                <p class="toc__title">On this page</p>
+                <ul class="toc__list">
+                    <li><a href="#model-switching">1. Model Switching (Ask Sage)</a></li>
+                    <li><a href="#context-window">2. Context Window Management</a></li>
+                    <li><a href="#file-ingestion">3. File Ingestion (Ask Sage)</a></li>
+                    <li><a href="#ide-integration">4. IDE Integration (Continue.dev)</a></li>
+                    <li><a href="#prompt-libraries">5. Prompt Libraries</a></li>
+                    <li><a href="#four-line-prompt">6. The 4-Line Prompt Template</a></li>
+                    <li><a href="#voice-text-polish">7. Voice to Text to Polish</a></li>
+                    <li><a href="#verification-habit">8. The Verification Habit</a></li>
+                    <li><a href="#anti-patterns">9. Anti-Patterns</a></li>
+                    <li><a href="#when-to-stop">10. When to Stop Using AI</a></li>
+                </ul>
+            </nav>
+
+            <section id="model-switching">
+                <h2>1. Model Switching (mid-conversation, Ask Sage only)</h2>
+                <p>
+                    Ask Sage offers 150+ models. The trick most Marines miss: you can switch models within a single conversation. The conversation keeps its context, but the next response is generated by whichever model you just picked. Used well, this is the closest thing the platform has to a productivity multiplier.
+                </p>
+
+                <h3>The model ladder</h3>
+                <ul>
+                    <li><strong>Opus 4.7</strong> for architecture, data model proposal, and any task where the answer has to hold together across many moving parts. Expensive per token. Reserve it for hard reasoning.</li>
+                    <li><strong>Sonnet 4.6</strong> as the workhorse implementation model. Most of your day-to-day prompts should land here.</li>
+                    <li><strong>Haiku 4.5</strong> for fast iteration on small tweaks: rename a variable, fix one sentence, restructure a list. Cheap and quick.</li>
+                    <li><strong>GPT-5 reasoning</strong> for a second opinion or verification pass on a high-stakes Opus 4.7 output. Different family, different failure modes, useful as a cross-check.</li>
+                </ul>
+
+                <h3>When to switch</h3>
+                <p>
+                    Two signals: the conversation just got more complex (escalate up the ladder), or the conversation got smaller and tighter (de-escalate to save tokens and time). Both are valid. Both are skills.
+                </p>
+
+                <div class="callout callout--info">
+                    <h3 class="callout__title">The "verification turn" trick</h3>
+                    <p>
+                        After Opus 4.7 produces a long output, switch to Sonnet 4.6 and ask "review the above for errors, omissions, and unsupported claims." You are using one model to QA another. The second model is less invested in defending the first model's reasoning, so it surfaces real issues. This is one of the highest-leverage habits a Marine can build.
+                    </p>
+                </div>
+            </section>
+
+            <section id="context-window">
+                <h2>2. Context Window Management</h2>
+                <p>
+                    Every model has a context window: the maximum amount of text it can hold in working memory at once. Once you hit the limit, the model silently drops earlier content. It will not warn you. Symptoms:
+                </p>
+                <ul>
+                    <li>The AI "forgets" a file you uploaded 20 turns ago.</li>
+                    <li>The AI suggests a fix you already explicitly rejected earlier in the conversation.</li>
+                    <li>The AI contradicts itself between turn 5 and turn 25.</li>
+                    <li>Quality of output degrades for no obvious reason.</li>
+                </ul>
+
+                <h3>The "summarize and restart" pattern</h3>
+                <p>
+                    Before the context fills, ask the model: "summarize what we've established so far in 200 words. List each decision we've made." Save that summary. Open a fresh chat. Paste the summary as the first message. You now have a clean working window with the load-bearing decisions still in scope.
+                </p>
+
+                <h3>The "context contract" trick</h3>
+                <p>
+                    At the start of a session, paste a single block stating ALL the constraints up front. Example: no external dependencies, scarlet and gold palette, target audience is junior NCOs, output format is a single HTML file. Then refer back to "the context contract" instead of re-stating constraints every turn. The AI keeps the contract in its working memory and reapplies it each response without you spending tokens on the restatement.
+                </p>
+
+                <h3>The "kill long quotes" pattern</h3>
+                <p>
+                    Do not paste 50-line code snippets when the AI only needs to know one function exists. Summarize: "I have a function <code>processCSV(text)</code> that returns <code>{rows, headers, errors}</code>." The AI now has the same useful information at 5% of the token cost. Long quotes are the most common reason a context window fills before it needed to.
+                </p>
+
+                <div class="callout callout--warning">
+                    <h3 class="callout__title">Watch for the silent drop</h3>
+                    <p>
+                        The model will not announce "I've forgotten your earlier file." It will just produce output as if it never saw the file. If you notice the AI losing track, do not push through. Summarize and restart. Three minutes of cleanup saves an hour of debugging bad output.
+                    </p>
+                </div>
+            </section>
+
+            <section id="file-ingestion">
+                <h2>3. File Ingestion (Ask Sage only)</h2>
+                <p>
+                    Ask Sage ingests DOCX, PDF, JSON, CSV, and code. Most Marines who first encounter this feature use it once to upload a single document. The high-leverage patterns are not obvious until someone shows you. Here they are:
+                </p>
+
+                <h3>The SOP query pattern</h3>
+                <p>
+                    Upload your unit's SOP as a PDF. Instead of reading the whole document, ask "what does this SOP say about X?" The model returns the relevant passages and a short answer. This converts a 60-page document into a queryable knowledge base in under a minute.
+                </p>
+
+                <h3>The CSV pattern surface</h3>
+                <p>
+                    Upload a 100-row CSV and ask the AI for patterns. Reasoning models will surface trends that a spreadsheet sort will not: clusters, outliers, suspicious gaps in the data. Useful for personnel rosters, training records, range usage logs.
+                </p>
+
+                <h3>The contradiction check</h3>
+                <p>
+                    Upload multiple files at once and ask "which of these files contradicts the others on X?" Excellent for cross-checking a unit SOP against a higher-HQ order, or a draft message against the source policy it cites.
+                </p>
+
+                <h3>Best practice: name files descriptively</h3>
+                <p>
+                    Before upload, rename files to describe their content. <code>personnel_2026Q1.csv</code> is useful. <code>data.csv</code> is not. The AI uses filenames as context. A descriptive filename means fewer turns explaining what the file is.
+                </p>
+
+                <h3>File chunking for large PDFs</h3>
+                <p>
+                    If a PDF is 200+ pages, split it before upload. Most models will not carry that much content coherently in working memory. Better still: ask a targeted question first and let Ask Sage retrieve the relevant chunk from the larger file. Pulling a single passage out of a 500-page reference is faster than asking the model to summarize the whole thing.
+                </p>
+
+                <div class="callout callout--info">
+                    <h3 class="callout__title">Use this for the FRO, not just the SSgt</h3>
+                    <p>
+                        File ingestion turns a Marine into a research analyst for the FRO or S-3 in about 30 seconds. Upload the operations order plus the supporting annexes, ask for inconsistencies, and produce a one-page brief. The same pattern works for inspection checklists, IG findings, and policy memos.
+                    </p>
+                </div>
+            </section>
+
+            <section id="ide-integration">
+                <h2>4. IDE Integration (Continue.dev for Ask Sage)</h2>
+                <p>
+                    Ask Sage exposes an API, and the open-source Continue.dev IDE plugin can route to that API. This lets you use Ask Sage models for in-editor code completion in VS Code (and any other Continue.dev-supported editor your tenant allows). Most static-stack work happens in an editor anyway. Round-tripping every change to a web UI is friction. Cutting that friction is one of the largest single-day productivity gains a Marine can make.
+                </p>
+
+                <h3>One-time setup</h3>
+                <ol>
+                    <li>Install the Continue.dev extension in VS Code.</li>
+                    <li>Paste your Ask Sage API key into Continue's settings.</li>
+                    <li>Pick which models to expose. Common configuration: Sonnet 4.6 for autocomplete, Opus 4.7 for "explain this code" and refactor tasks, Haiku 4.5 for inline suggestions.</li>
+                </ol>
+
+                <h3>What this changes</h3>
+                <ul>
+                    <li>Inline code completion uses your enterprise-authorized model. No public model, no public endpoint.</li>
+                    <li>Right-click "explain this function" runs against Opus 4.7 with the actual file open as context.</li>
+                    <li>Refactor across multiple files becomes a single chat turn instead of 10 copy-paste cycles to a browser.</li>
+                </ul>
+
+                <div class="callout callout--warning">
+                    <h3 class="callout__title">Tenant policy check first</h3>
+                    <p>
+                        Only do this on a duty workstation if your tenant policy allows VS Code with outbound API calls to Ask Sage's endpoint. Verify with your unit's S-6 and the AI POC before relying on it. If it is not allowed today, capture that as a Capability Gap Map row. "IDE integration with authorized AI endpoint blocked" is a defensible policy gap.
+                    </p>
+                </div>
+            </section>
+
+            <section id="prompt-libraries">
+                <h2>5. Prompt Libraries (personal + team)</h2>
+                <p>
+                    When you find a prompt that produces good output, save it. Treat prompts the way you would treat shell scripts: version them, comment them, and put them somewhere you can find them next month.
+                </p>
+
+                <h3>Personal library</h3>
+                <p>
+                    Keep a single <code>.md</code> file with one prompt per section. When you refine a prompt, add a date and a note about what changed and why. Example header:
+                </p>
+                <pre><code>## counseling-statement-draft
+Date: 2026-04-12 (v3)
+Context: NAVMC 11380 page-2 body for initial counseling.
+Change from v2: added explicit "no future commitments" constraint after
+NCO accidentally promised a school slot in a draft.</code></pre>
+
+                <h3>Team library</h3>
+                <p>
+                    Share working prompts via your unit's SharePoint or Teams. Build institutional knowledge. The Marine who PCSes next month leaves their prompt library behind for the section. This is exactly what "training relief" looks like in practice.
+                </p>
+
+                <h3>The "prompt-as-tool" pattern</h3>
+                <p>
+                    A long, refined prompt IS a tool. Treat it like one. Instead of "let me re-explain what I want," you say "I have a tool called <code>counseling-statement-draft.md</code>, here it is, run it on this Marine's billet description." Once a prompt is mature, it is reusable across dozens of similar tasks. The Marine Prompt Library page on this site is the EDD canonical example: each prompt is a tool, complete with use case and known failure modes.
+                </p>
+            </section>
+
+            <section id="four-line-prompt">
+                <h2>6. The 4-Line Prompt Template (always works)</h2>
+                <p>
+                    AI defaults to verbose, hedged output. The 4-line template removes ambiguity by making the AI's job mechanical. Use it whenever you do not already have a refined prompt for the task.
+                </p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Line</th>
+                                <th scope="col">Content</th>
+                                <th scope="col">Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Goal</strong></td>
+                                <td>One sentence. What the AI is producing and for whom.</td>
+                                <td>"Draft a counseling statement body for a Cpl on initial counseling."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Constraints</strong></td>
+                                <td>2-4 bullets. The hard rules.</td>
+                                <td>NAVMC 11380 format. No future commitments. Block paragraph style. Avoid superlatives.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Format</strong></td>
+                                <td>Explicit. Bullet, table, paragraph. Length.</td>
+                                <td>"Three short paragraphs, 80-120 words total."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Edge cases</strong></td>
+                                <td>1-3 explicit "if X then Y" rules.</td>
+                                <td>"If billet is unclear, list two assumptions and stop. If MOS code is missing, ask before drafting."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    Marines who use this template hit fewer "AI gave me the wrong shape" problems. The reason it works: every line removes one source of drift. The model is no longer guessing what good looks like.
+                </p>
+            </section>
+
+            <section id="voice-text-polish">
+                <h2>7. Voice to Text to Polish Workflow</h2>
+                <p>
+                    For long-form writing (FITREP comments, MOR memos, brief notes, command climate inputs): voice-record on your phone first. Transcribe with built-in iOS dictation, Android voice-to-text, or genai.mil's transcription if your tenant exposes it. Paste the transcript into genai.mil with "polish this into [target format]."
+                </p>
+                <p>
+                    Why this works: Marines write better when they talk first. The voice draft captures the actual story; the AI polish converts it to the required format. Time saved: 3x to 5x writing time on a typical FITREP block.
+                </p>
+
+                <div class="callout callout--info">
+                    <h3 class="callout__title">Three-pass version</h3>
+                    <p>
+                        Pass 1: voice-record while walking, no editing. Pass 2: transcribe and paste into AI with "polish into FITREP narrative bullet format, 150 words." Pass 3: read out loud and hand-edit the two or three lines that do not sound like you. Total time: ~12 minutes for a block that used to take an hour.
+                    </p>
+                </div>
+            </section>
+
+            <section id="verification-habit">
+                <h2>8. The Verification Habit</h2>
+                <p>
+                    Every AI output that you sign or distribute must be verified. The cost of skipping verification is your professional reputation. The habits below take less than five minutes per output and catch the failure modes that get Marines in trouble.
+                </p>
+
+                <ul>
+                    <li><strong>Read the output OUT LOUD.</strong> Spoken reading hits errors that silent reading misses. Your ear catches what your eye skipped.</li>
+                    <li><strong>Spot-check one specific factual claim.</strong> Pick a citation, a number, a date, or a name. Verify it. If it is wrong, assume the rest of the output needs verification too.</li>
+                    <li><strong>For citations: do the actual lookup.</strong> AI hallucinates paragraph numbers about 10% of the time even when it gets the MCO right. Pull up the source. Confirm the paragraph says what the AI says it says.</li>
+                    <li><strong>Two-tool cross-check (Course 4.5 Module 4).</strong> Run high-stakes outputs through both genai.mil AND Ask Sage. Disagreements are flags. If both tools agree, your confidence is higher. If they disagree, dig into the disagreement before signing.</li>
+                </ul>
+
+                <div class="callout callout--warning">
+                    <h3 class="callout__title">The signature rule</h3>
+                    <p>
+                        Your name on a document means you verified it. AI does not get to put your name on anything. If you did not check it, do not sign it.
+                    </p>
+                </div>
+            </section>
+
+            <section id="anti-patterns">
+                <h2>9. Anti-Patterns (things Marines do that hurt them)</h2>
+                <p>
+                    Every item below is something experienced AI users have seen Marines do, often more than once. None of them are fatal. All of them cost time and trust.
+                </p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Anti-pattern</th>
+                                <th scope="col">Why it hurts</th>
+                                <th scope="col">Do this instead</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pasting CUI without checking</td>
+                                <td>Tenant authorization is not a substitute for OPSEC review. Mistakes are unrecoverable.</td>
+                                <td>Run the OPSEC scrub prompt FIRST. Every time. No exceptions.</td>
+                            </tr>
+                            <tr>
+                                <td>Asking the AI to verify its own work</td>
+                                <td>Same model, same blind spots. It will agree with its own errors.</td>
+                                <td>Use a second model (model switching) or a human reviewer.</td>
+                            </tr>
+                            <tr>
+                                <td>Treating AI output as authoritative because it sounds confident</td>
+                                <td>Fluent prose is not the same as accurate prose. Hallucinations are confident by default.</td>
+                                <td>Spot-check one claim. If wrong, verify the rest.</td>
+                            </tr>
+                            <tr>
+                                <td>Asking the same question 5 times hoping for a different answer</td>
+                                <td>If the AI is wrong twice, it is wrong because of the prompt, not the model.</td>
+                                <td>Change the prompt. Add constraints. Switch models.</td>
+                            </tr>
+                            <tr>
+                                <td>Using Opus 4.7 for tasks Haiku 4.5 would handle</td>
+                                <td>You are burning tokens and waiting longer on a task the cheap model would nail.</td>
+                                <td>Reserve Opus 4.7 for genuinely hard reasoning. Default to Sonnet 4.6 or Haiku 4.5.</td>
+                            </tr>
+                            <tr>
+                                <td>Skipping the context contract</td>
+                                <td>Re-explaining the constraints every turn fills the context window with restated rules.</td>
+                                <td>State all constraints once. Refer back to "the context contract" by name.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="when-to-stop">
+                <h2>10. When to Stop Using AI</h2>
+                <p>
+                    Not every task is an AI task. Recognizing the ones that are not is itself a skill, and the Marines who develop it stay out of the predictable failure modes that get the rest of the cohort into trouble.
+                </p>
+
+                <h3>Tasks that are not AI tasks</h3>
+                <ul>
+                    <li><strong>In-person counseling.</strong> The conversation is the work product. An AI-drafted bullet list does not replace the conversation; at best it replaces the page-2 admin step after the conversation.</li>
+                    <li><strong>Time-critical decisions.</strong> If the answer has to be right in the next 60 seconds and lives or careers depend on it, the AI loop is too slow and too uncertain.</li>
+                    <li><strong>Anything classified above your tenant's authorization.</strong> genai.mil and Ask Sage are CUI and IL5-authorized respectively. Above that, do not paste, do not summarize, do not even paraphrase. Use the right system.</li>
+                </ul>
+
+                <h3>The 20-minute rule</h3>
+                <p>
+                    If you have spent more than 20 minutes prompt-engineering a task that takes 30 minutes to do by hand, stop and do it by hand. Then write down what made the task hard for the AI. Add it to your Frontier Map. The note is more valuable than the output, because next month you will hit the same kind of task and you will remember what to try differently.
+                </p>
+
+                <div class="callout callout--info">
+                    <h3 class="callout__title">Stopping is also a skill</h3>
+                    <p>
+                        The most senior Marines on AI workflows are the ones who stop early. They recognize a prompt-thrash before it eats an afternoon. They hand off to a human or pick up a pen. The Frontier Map is the place those decisions get captured so the rest of the unit benefits.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Compounding Returns</h2>
+                <p>
+                    None of the tricks on this page are individually decisive. The point is the compound. A Marine who uses model switching, the context contract, a personal prompt library, the 4-line template, voice-to-polish, and the verification habit moves through their day at roughly twice the throughput of a Marine using neither tool well. That gap shows up in FITREP blocks, in counseling cadence, in S-3 brief quality, and in the volume of small wins that accumulate into reputation.
+                </p>
+                <p>
+                    Build one habit at a time. Add the next one when the previous one is automatic. By month six, you are the Marine other Marines come to for the prompt that worked.
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Expert-Driven Development</h3>
+                    <p>
+                        Open-source AI-assisted development training for DoW personnel.
+                        Built by SSgt Jesse C. Morgan at MCD-Monterey.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Course 4.5 Resources</h3>
+                    <ul>
+                        <li><a href="tool-selection-guide.html">Tool Selection Guide</a></li>
+                        <li><a href="prompt-library.html">Marine Prompt Library</a></li>
+                        <li><a href="templates.html">Templates</a></li>
+                        <li><a href="debugging-scenarios.html">Debugging Scenarios</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-section__title">Navigation</h3>
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../courses/">Courses</a></li>
+                        <li><a href="../sop/">SOP</a></li>
+                        <li><a href="./">Resources</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>UNCLASSIFIED</span>
+                <span>SSgt Jesse C. Morgan, MCD-Monterey</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var toggle = document.querySelector('.nav-toggle');
+            var mobileNav = document.getElementById('mobile-nav');
+            if (toggle && mobileNav) {
+                toggle.addEventListener('click', function() {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    mobileNav.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+
+    <script src="../js/enhancements.js"></script>
+
+</body>
+</html>
