@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Slide deck for Course 4.5. A 4-hour live session pivoting the Course 4 build set off Power Platform onto static HTML and adding Ask Sage as a peer enterprise AI tool alongside genai.mil. Two artifacts produced: an Advanced Frontier Map and new entries to the Capability Gap Map.">
+    <title>Week 4.5, Advanced Workshop (Locked Tenant Reality) | EDD Training Deck</title>
+    <link rel="stylesheet" href="css/deck.css">
+</head>
+<body class="w4-deck">
+
+<a class="deck-back" href="../courses/advanced-reality.html" title="Return to the Advanced Workshop (Locked Tenant Reality) course page">
+  <span class="deck-back__arrow" aria-hidden="true">&larr;</span>
+  <span>Back to Advanced Workshop (Locked Tenant Reality)</span>
+</a>
+
+<!-- =========================================================
+     STAGE, slides render here, one at a time, scaled to fit.
+     ========================================================= -->
+<div class="stage">
+
+    <!-- ============================================================
+         SLIDE 1, COVER
+         ============================================================ -->
+    <section class="slide slide--cover" data-id="1" data-module="Cover" data-title="Cover, Advanced Workshop (Locked Tenant Reality)">
+        <div class="scarlet-bar"></div>
+        <div class="slide__body">
+            <div class="eyebrow">Week 4.5 &middot; Course 4.5 &middot; Reality Track</div>
+            <h1>Advanced Workshop<br>(Locked Tenant Reality)</h1>
+            <p class="tagline">Same six modules. Same frontier-mapping, complex-build, group-debugging, QA, teach-back, and playbook arc as Course 4. Different execution layer (static HTML) and a second enterprise AI tool on the desk (Ask Sage alongside genai.mil).</p>
+            <div class="meta">
+                <div><strong>Length</strong>4 hours (with one 10-min break)</div>
+                <div><strong>Format</strong>Live workshop, bring builds in progress</div>
+                <div><strong>Prereq</strong>Course 3.5 or one deployed static-stack tool</div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Expert-Driven Development &middot; Week 4.5 &middot; <a href="../courses/advanced-reality.html" target="_blank" rel="noopener">Course page</a> &middot; <a href="../handouts/advanced-reality-handout.html" target="_blank" rel="noopener">Student handout</a></div>
+            <div class="right">Cover</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 2, RECAP OF COURSE 4
+         ============================================================ -->
+    <section class="slide slide--content" data-id="2" data-module="Framing" data-title="What Course 4 taught, what 4.5 keeps, what 4.5 pivots">
+        <div class="slide__body">
+            <h2>What Course 4 taught. What 4.5 keeps. What 4.5 pivots.</h2>
+            <p class="subhead">Same arc. Different stack. One additional tool on the desk.</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>Course 4 taught</h3>
+                    <ul>
+                        <li>Frontier Mapping for your domain</li>
+                        <li>Complex multi-component Build (Power BI dashboard)</li>
+                        <li>Group Debugging clinic, five problems in 35 minutes</li>
+                        <li>Verification protocols and QA drill</li>
+                        <li>Teach-Back, the 201 multiplier</li>
+                        <li>Workflow Playbook, one recurring task end to end</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>4.5 keeps the arc and pivots the stack</h3>
+                    <ul>
+                        <li><strong>Keeps:</strong> six modules, same skills, same assessment rubric</li>
+                        <li><strong>Pivots:</strong> the Power BI/Power Apps/Power Automate build to single-file static HTML</li>
+                        <li><strong>Adds:</strong> Ask Sage as a peer enterprise AI tool alongside genai.mil</li>
+                        <li><strong>Adds:</strong> the meta-frontier (tool selection) as a first-class skill</li>
+                        <li><strong>Adds:</strong> the two-tool cross-check protocol for high-stakes work</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Recap, Course 4 to 4.5</div>
+            <div class="right">2</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 3, THE TWO-TOOL WORLD
+         ============================================================ -->
+    <section class="slide slide--content" data-id="3" data-module="Framing" data-title="The Two-Tool World, genai.mil and Ask Sage">
+        <div class="slide__body">
+            <h2>The Two-Tool World.</h2>
+            <p class="subhead">Two CUI-authorized enterprise AI tenants. Pick deliberately. New for 4.5.</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>genai.mil &middot; fast chat</h3>
+                    <ul>
+                        <li><strong>Use when:</strong> single-prompt drafts, quick code snippets, fast bounces, frontier classification</li>
+                        <li><strong>Strengths:</strong> low setup cost, fast turn time, always your default for one-shot work</li>
+                        <li><strong>Weakness:</strong> context window blows out across long multi-file work; constraints drift after many turns</li>
+                        <li><strong>Today:</strong> Build phases 2 and 3 prompts, debug bounces, teach-back prep</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Ask Sage &middot; multi-file reasoning</h3>
+                    <ul>
+                        <li><strong>Use when:</strong> multi-file refactor, dataset analysis with multiple CSVs, architecture trade-offs, verification cross-checks</li>
+                        <li><strong>Strengths:</strong> file ingestion, reasoning models (Claude 3 or a GPT o-series), holds schema across the conversation</li>
+                        <li><strong>Weakness:</strong> overkill and slow for one-shot drafts; higher setup cost per turn</li>
+                        <li><strong>Today:</strong> Build phase 1 architecture, phase 4 verification, the two-tool cross-check</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-top:18px;font-size:30px;color:var(--ink-soft);"><strong>Today's discipline:</strong> mode-switching (centaur vs cyborg) AND tool-switching (genai.mil vs Ask Sage). Two independent axes.</p>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> The Two-Tool World</div>
+            <div class="right">3</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 4, THE THREE LAYERS
+         ============================================================ -->
+    <section class="slide slide--content" data-id="4" data-module="Framing" data-title="The Three Layers, Spec / Prototype / Production">
+        <div class="slide__body">
+            <h2>Three layers. Two we always have. One we sometimes don't.</h2>
+            <p class="subhead">Carries from 3.5. Spec is now BOTH genai.mil and Ask Sage.</p>
+            <div class="cols-2" style="grid-template-columns:1fr 1fr 1fr;">
+                <div class="col">
+                    <h3>1. Spec</h3>
+                    <p>genai.mil for fast chat. Ask Sage for multi-file reasoning. Both CUI-authorized. Think, design, prompt, decompose, cross-check.</p>
+                    <p style="font-size:24px;color:var(--ink-soft);"><strong>Always available where granted.</strong></p>
+                </div>
+                <div class="col">
+                    <h3>2. Prototype</h3>
+                    <p>Single-file static HTML. Deployed to a free public host MCEN can reach. Inline CSS, inline JS, no CDN.</p>
+                    <p style="font-size:24px;color:var(--ink-soft);"><strong>Always available.</strong></p>
+                </div>
+                <div class="col">
+                    <h3>3. Production</h3>
+                    <p>Power Apps, Dataverse, Power Automate, real connectors, identity, write-back to systems of record.</p>
+                    <p style="font-size:24px;color:var(--ink-soft);"><strong>Often blocked.</strong> The Capability Gap Map layer.</p>
+                </div>
+            </div>
+            <div class="pullquote" style="margin-top:18px;font-size:30px;">
+                Work every layer we can reach. Document the wall where the work stops. The wall map is the case for changing what we have access to.
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> The Three Layers</div>
+            <div class="right">4</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 5, MISSION FOR THE DAY
+         ============================================================ -->
+    <section class="slide slide--content" data-id="5" data-module="Framing" data-title="Today's mission, three deliverables">
+        <div class="slide__body">
+            <h2>Today's mission. Three deliverables.</h2>
+            <p class="subhead">By 4 hours from now, every Marine in this room produces all three.</p>
+            <ul>
+                <li><strong>Deployed Readiness Dashboard:</strong> a single-file static HTML tool with three joined data sources, hand-rolled SVG bars, Not-Ready table, and a plain-text Commander's Snapshot. Public URL.</li>
+                <li><strong>Advanced Frontier Map:</strong> at least three rows specific to what bit you today, split by tool (genai.mil column, Ask Sage column).</li>
+                <li><strong>Capability Gap Map entries:</strong> at least two new rows mapping your Workflow Playbook to a production-layer wish with the specific blocking permission named.</li>
+            </ul>
+            <p style="margin-top:18px;font-size:30px;color:var(--ink-soft);">The tool is replaceable. The judgment about which tool to use, and how to verify what it tells you, is what we are actually teaching.</p>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Today's Mission</div>
+            <div class="right">5</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 6, AGENDA
+         ============================================================ -->
+    <section class="slide slide--content" data-id="6" data-module="Agenda" data-title="Agenda, six modules in four hours">
+        <div class="slide__body">
+            <h2>Agenda &middot; 4 hours.</h2>
+            <p class="subhead">Six modules. One 10-minute break. The complex build is heaviest by design.</p>
+            <table class="agenda-table">
+                <thead>
+                    <tr><th>Time</th><th>Module</th><th>Duration</th><th>Mode &amp; tool focus</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="workshop"><td class="time">0:00 to 0:30</td><td class="module">M1, Frontier Mapping for your domain</td><td class="dur">30 min</td><td>Workshop &middot; both tools</td></tr>
+                    <tr class="workshop"><td class="time">0:30 to 1:30</td><td class="module">M2, Complex Build, Readiness Dashboard</td><td class="dur">60 min</td><td>Live build &middot; both tools</td></tr>
+                    <tr><td class="time">1:30 to 1:40</td><td class="module">Break</td><td class="dur">10 min</td><td></td></tr>
+                    <tr class="workshop"><td class="time">1:40 to 2:20</td><td class="module">M3, Group Debugging</td><td class="dur">40 min</td><td>Clinic &middot; 5 scenarios</td></tr>
+                    <tr><td class="time">2:20 to 2:50</td><td class="module">M4, Verification &amp; QA, two-tool cross-check</td><td class="dur">30 min</td><td>Reference + drill</td></tr>
+                    <tr class="workshop"><td class="time">2:50 to 3:20</td><td class="module">M5, Teach-Back, the 201 multiplier</td><td class="dur">30 min</td><td>Workshop</td></tr>
+                    <tr class="workshop"><td class="time">3:20 to 3:50</td><td class="module">M6, Workflow Playbook + Capability Gap Map</td><td class="dur">30 min</td><td>Workshop</td></tr>
+                    <tr><td class="time">3:50 to 4:00</td><td class="module">Wrap, rubric, next steps</td><td class="dur">10 min</td><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Agenda</div>
+            <div class="right">6</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 7, REFRESHER
+         ============================================================ -->
+    <section class="slide slide--content" data-id="7" data-module="Framing" data-title="Refresher, 201 skills + frontier classification">
+        <div class="slide__body">
+            <h2>Refresher. 201 skills plus frontier classification.</h2>
+            <p class="subhead">Quick calibration before Module 1. Everyone in this room already has these.</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>The six 201 skills</h3>
+                    <ul>
+                        <li>Context Assembly</li>
+                        <li>Quality Judgment</li>
+                        <li>Task Decomposition</li>
+                        <li>Iterative Refinement</li>
+                        <li>Workflow Integration</li>
+                        <li>Frontier Recognition</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Three categories of failure</h3>
+                    <ul>
+                        <li><strong>Context:</strong> AI did not have enough information. Fixable with a better prompt.</li>
+                        <li><strong>Frontier:</strong> the model cannot do this task reliably right now. Document on the map.</li>
+                        <li><strong>Meta-frontier:</strong> wrong tool reached for. Fixable by switching tools. <em>New for 4.5.</em></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Refresher</div>
+            <div class="right">7</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         MODULE 1, FRONTIER MAPPING FOR YOUR DOMAIN
+         ============================================================ -->
+
+    <!-- SLIDE 8, Module 1 section divider -->
+    <section class="slide slide--section" data-id="8" data-module="Module 1" data-title="Module 1, Frontier Mapping for your domain">
+        <div class="slide__body">
+            <div class="module-tag">Module 1 of 6</div>
+            <h1>Frontier Mapping for Your Domain.</h1>
+            <div class="timing">30 minutes</div>
+            <p class="blurb">Make the boundary between AI helps and AI hurts visible for your specific work, in writing, shareable, split by tool.</p>
+            <a class="section__notes-link" href="../courses/advanced-reality.html#frontier-mapping" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 1 &middot; Frontier Mapping</div>
+            <div class="right">8</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 9, Why frontier mapping matters (the stat) -->
+    <section class="slide slide--content" data-id="9" data-module="Module 1" data-title="Why this map is the most valuable thing you'll make today">
+        <div class="slide__body">
+            <h2>Why this map is the most valuable thing you'll make today.</h2>
+            <div class="cols-2">
+                <div class="col">
+                    <div class="pullquote" style="font-size:38px;">
+                        Performance drops 19 percentage points when workers apply AI <em>outside</em> the frontier vs working without AI at all.
+                        <span class="attrib">BCG-Harvard, 758 consultants, 2023.</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <h3>What that means today</h3>
+                    <ul>
+                        <li>The boundary is real, and it is not where intuition puts it.</li>
+                        <li>People do not notice when they cross it. Quality collapses silently. The output still <em>looks</em> right.</li>
+                        <li>Each tool has its own boundary. genai.mil and Ask Sage have different frontiers in your domain.</li>
+                        <li>The map makes the boundary visible to your section.</li>
+                        <li>Most valuable artifact you will leave with today.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 1 &middot; Why It Matters</div>
+            <div class="right">9</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 10, Tool Handles table -->
+    <section class="slide slide--content" data-id="10" data-module="Module 1" data-title="Tool Handles, what each tool is good for in your domain">
+        <div class="slide__body">
+            <h2>Tool Handles &middot; what each tool is good for.</h2>
+            <p class="subhead">Two columns, one per tool. Yours will look like this for your own domain.</p>
+            <table class="map-table">
+                <thead>
+                    <tr>
+                        <th style="width:28%">Task</th>
+                        <th>genai.mil handles</th>
+                        <th>Ask Sage handles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="cat">Single-prompt drafts (counseling, awards, memos)</td>
+                        <td>Yes. Fast chat is the right tool. One prompt in, one polished draft out.</td>
+                        <td>Overkill. Works, but the file-ingestion overhead is not justified for one-shot drafts.</td>
+                    </tr>
+                    <tr>
+                        <td class="cat">Multi-file refactor of a static-stack tool</td>
+                        <td>Painful. Context window blows out across iterations. Common to see the model lose track across 20+ turns.</td>
+                        <td>Yes. Upload the files, ask Claude 3 (or another reasoning model the tenant exposes) for a targeted refactor with constraints stated up front.</td>
+                    </tr>
+                    <tr>
+                        <td class="cat">Quick code snippet (regex, date math)</td>
+                        <td>Yes. Bounce a single-line prompt, paste the result, verify.</td>
+                        <td>Works, but slow for what should be a 10-second answer.</td>
+                    </tr>
+                    <tr>
+                        <td class="cat">Dataset analysis with three CSVs (readiness, training, equipment)</td>
+                        <td>Limited. Can do it with paste-and-summarize on small samples. Loses fidelity at scale.</td>
+                        <td>Yes. Upload all three files. Use a reasoning model. Holds schema across the conversation.</td>
+                    </tr>
+                    <tr>
+                        <td class="cat">Architecture decision (data model, schema migration plan)</td>
+                        <td>Possible for small scope. Reasoning quality drops on larger trade-off questions.</td>
+                        <td>Yes. A reasoning model produces the best architecture analysis the locked-tenant world currently exposes.</td>
+                    </tr>
+                    <tr>
+                        <td class="cat">Verification cross-check (same prompt through both, look for disagreement)</td>
+                        <td>Half of the two-tool cross-check. Use for the fast side.</td>
+                        <td>Half of the two-tool cross-check. Use for the deliberate side. Disagreements are flags.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 1 &middot; Tool Handles</div>
+            <div class="right">10</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 11, SWITCH to editor / Frontier Map template -->
+    <section class="slide slide--workshop" data-id="11" data-module="Module 1" data-title="Open your Frontier Map template and start filling">
+        <div class="slide__body">
+            <span class="activity-tag">Workshop &middot; Switch to editor &middot; Now</span>
+            <h2>Open your Frontier Map template. Start filling.</h2>
+            <div class="timebox">15 minutes &middot; silent work, then a 10-minute live debrief</div>
+            <div class="prompt-box">
+                <span class="label">Prompt</span>
+                Open a blank doc. Three columns: <strong>Task &middot; genai.mil handles &middot; Ask Sage handles</strong>.
+                Pick <strong>five task types</strong> that cover what your section actually does this month.
+                Fill at least one specific, real example in every cell. Issues you have personally seen succeed or fail.
+                If you cannot tell yet, write "untested" and add it to your re-test list for next quarter.
+            </div>
+            <div class="what-good">
+                <strong>What good looks like in 15 minutes:</strong> 5 rows, every cell has at least one specific task (not a topic), and you can name at least one task where the two tools differ. If both columns say the same thing for every row, you have not stressed the boundary yet.
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 1 &middot; Build Your Map</div>
+            <div class="right">11</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 12, Module 1 debrief / live categorization -->
+    <section class="slide slide--content" data-id="12" data-module="Module 1" data-title="Module 1 debrief, surface one issue per student, categorize live">
+        <div class="slide__body">
+            <h2>Debrief &middot; one issue per student, categorized live.</h2>
+            <p class="subhead">10 minutes &middot; ~60 seconds each &middot; we are listening for patterns</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>What to share</h3>
+                    <ul>
+                        <li>One task where one tool clearly handles it and the other clearly does not.</li>
+                        <li>One task where you would now reach for a different tool than you did last month.</li>
+                        <li>One issue where the failure was tool-selection, not the model itself (the meta-frontier).</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>How I categorize it on the wall</h3>
+                    <ul>
+                        <li><strong>Context</strong> &rarr; fix the prompt</li>
+                        <li><strong>Frontier</strong> &rarr; on the unit map</li>
+                        <li><strong>Meta-frontier</strong> &rarr; on the unit map AND in the Workflow Playbook</li>
+                        <li><strong>Platform quirk</strong> &rarr; on the unit map</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pullquote" style="font-size:32px;">
+                When you can name where AI fails in your domain, you stop trusting it there. Knowing which tool to reach for first is the new advanced skill.
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 1 &middot; Debrief</div>
+            <div class="right">12</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         MODULE 2, COMPLEX BUILD, READINESS DASHBOARD
+         ============================================================ -->
+
+    <!-- SLIDE 13, Module 2 section divider -->
+    <section class="slide slide--section" data-id="13" data-module="Module 2" data-title="Module 2, Complex Build, Readiness Dashboard">
+        <div class="slide__body">
+            <div class="module-tag">Module 2 of 6</div>
+            <h1>Complex Build.<br>Readiness Dashboard.</h1>
+            <div class="timing">60 minutes</div>
+            <p class="blurb">Single-file static HTML. Three joined data sources. Hand-rolled SVG bars. Two mode switches and at least one tool switch by design.</p>
+            <a class="section__notes-link" href="../courses/advanced-reality.html#complex-build" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 2 &middot; Complex Build</div>
+            <div class="right">13</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 14, Build target overview -->
+    <section class="slide slide--content" data-id="14" data-module="Module 2" data-title="Build target, static HTML Readiness Dashboard">
+        <div class="slide__body">
+            <h2>Build target &middot; static HTML Readiness Dashboard.</h2>
+            <p class="subhead">Single file. Inline CSS. Inline JS. No external scripts. No CDN.</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>Inputs and outputs</h3>
+                    <ul>
+                        <li>Three data sources: personnel, training, equipment (JSON or CSV)</li>
+                        <li>Joined in JavaScript by EDIPI</li>
+                        <li>Overall readiness percentage card</li>
+                        <li>Hand-rolled SVG bar chart by company</li>
+                        <li>Not-Ready table</li>
+                        <li>Plain-text Commander's Snapshot with Copy button</li>
+                        <li>localStorage persistence so reload does not lose state</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>You will switch modes 2x AND tools 1x</h3>
+                    <ul>
+                        <li><strong>Phase 1:</strong> Centaur, Ask Sage with reasoning model (architecture)</li>
+                        <li><strong>Phase 2:</strong> Cyborg, your choice (ingestion + join)</li>
+                        <li><strong>Phase 3:</strong> Centaur, your choice (visualization)</li>
+                        <li><strong>Phase 4:</strong> Verification, Ask Sage cross-check + genai.mil brief generation</li>
+                    </ul>
+                    <p style="font-size:28px;color:var(--scarlet-dark);font-weight:600;">If you finish, the dashboard is a bonus. The grade is mode-switching AND tool-switching.</p>
+                </div>
+            </div>
+            <p style="margin-top:18px;font-size:28px;color:var(--ink-soft);"><strong>Reference build:</strong> <a href="../builds/readiness-dashboard.html" target="_blank" rel="noopener">builds/readiness-dashboard.html</a>. The destination. Check your work, do not copy-paste from it.</p>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 2 &middot; Build Target</div>
+            <div class="right">14</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 15, Phase 1, Data Architecture (Centaur, Ask Sage) -->
+    <section class="slide slide--content" data-id="15" data-module="Module 2" data-title="Phase 1, Data Architecture, Centaur, Ask Sage">
+        <div class="slide__body">
+            <h2>Phase 1 &middot; Data Architecture.</h2>
+            <p class="subhead">15 min &middot; Centaur &middot; Ask Sage with a reasoning model</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>Why this mode</h3>
+                    <p><strong>Centaur:</strong> data schema errors compound. A bad join model means rework everywhere downstream. Slow down. Verify.</p>
+                    <h3>Why this tool</h3>
+                    <p><strong>Ask Sage:</strong> reasoning quality on architecture trade-offs is materially higher with a reasoning model than with fast chat. The right tool wins the next hour for you.</p>
+                </div>
+                <div class="col">
+                    <h3>The work</h3>
+                    <ul>
+                        <li>Upload three sample CSVs to Ask Sage: personnel, training, equipment.</li>
+                        <li>Select Claude 3 (or whichever reasoning model the tenant exposes).</li>
+                        <li>Whiteboard the join model with the AI as your peer reviewer.</li>
+                        <li>Confirm three edge cases out loud before you write a line of HTML.</li>
+                    </ul>
+                    <p style="font-weight:700;color:var(--scarlet-dark);">Checkpoint: every student names three edge cases before leaving Phase 1.</p>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 2 &middot; Phase 1</div>
+            <div class="right">15</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 16, Phase 1 prompt -->
+    <section class="slide slide--content" data-id="16" data-module="Module 2" data-title="Phase 1 prompt, verbatim">
+        <div class="slide__body">
+            <h2>Phase 1 prompt &middot; verbatim to Ask Sage.</h2>
+            <p class="subhead">Reasoning model selected. Three CSVs uploaded. One prompt.</p>
+            <div class="prompt-box">
+                <span class="label">Whiteboard prompt &middot; Ask Sage &middot; Phase 1</span>
+                <p>
+                    You are helping me design a Unit Readiness Dashboard. I have three CSV datasets (personnel, training, equipment) I am about to upload. I need you to:
+                </p>
+                <ol>
+                    <li>Propose a join model that produces a readiness percentage per Marine and aggregated by company.</li>
+                    <li>Identify three edge cases that will break the naive join (orphaned EDIPIs, NULL training records, unassigned equipment).</li>
+                    <li>Recommend the in-memory data shape after parsing. Plain JS objects, no framework, single-file HTML.</li>
+                </ol>
+                <p>
+                    Constraint: the final tool must run 100% offline in a single HTML file with no external scripts or CDN.
+                </p>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 2 &middot; Phase 1 Prompt</div>
+            <div class="right">16</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 17, Phase 1 verification checkpoint -->
+    <section class="slide slide--content" data-id="17" data-module="Module 2" data-title="Phase 1 verification, three edge cases out loud">
+        <div class="slide__body">
+            <h2>Phase 1 verification &middot; three edge cases out loud.</h2>
+            <p class="subhead">Walk the room. No student leaves Phase 1 without naming three.</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>Edge cases most rooms hit</h3>
+                    <ul>
+                        <li>Orphaned EDIPIs (a Marine in personnel with no training record)</li>
+                        <li>NULL training records (the field exists but is empty)</li>
+                        <li>Duplicate equipment serial numbers</li>
+                        <li>Expired training certifications</li>
+                        <li>Marines listed in personnel but marked NJP or unfit</li>
+                        <li>Cross-attached Marines appearing under two units</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>If a student is stuck</h3>
+                    <p>One more prompt back to Ask Sage:</p>
+                    <div class="prompt-box" style="font-size:24px;">
+                        <span class="label">Edge-case extension prompt</span>
+                        <p>List five more edge cases I am not thinking of, ranked by how silently they would break the readiness percentage.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 2 &middot; Phase 1 Verification</div>
+            <div class="right">17</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 18, Phase 2, Data Ingestion + Joining (Cyborg) tool choice -->
+    <section class="slide slide--content" data-id="18" data-module="Module 2" data-title="Phase 2, Data Ingestion + Joining, Cyborg, tool choice">
+        <div class="slide__body">
+            <h2>Phase 2 &middot; Data Ingestion and Joining.</h2>
+            <p class="subhead">15 min &middot; Cyborg &middot; the explicit tool-choice beat</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>Why this mode</h3>
+                    <p><strong>Cyborg:</strong> ingestion is trial-and-error. Parse errors, schema drift, edge cases revealed only by running the code. Stay in continuous conversation.</p>
+                    <h3>Student choice on tool</h3>
+                    <ul>
+                        <li><strong>genai.mil chat:</strong> paste-and-parse. Fast iteration, lower setup cost.</li>
+                        <li><strong>Ask Sage:</strong> upload the CSVs, generate the join code with real schema knowledge. More deliberate, higher upfront cost, fewer rewrites.</li>
+                    </ul>
+                    <p>Both are valid. The point is that you can articulate why you chose yours.</p>
+                </div>
+                <div class="col">
+                    <h3>The teaching beat</h3>
+                    <p>Course 4 students switch between centaur and cyborg modes. Course 4.5 students switch <strong>BOTH</strong> modes AND tools. The two axes are independent. You can be in cyborg mode on genai.mil (fast chat, fast iteration) OR cyborg mode on Ask Sage (fewer turns, larger context per turn).</p>
+                    <p style="font-weight:700;color:var(--scarlet-dark);">Make the framing explicit. Watch students discover the second axis.</p>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 2 &middot; Phase 2</div>
+            <div class="right">18</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 19, Phase 2 deliberate failure -->
+    <section class="slide slide--content" data-id="19" data-module="Module 2" data-title="Phase 2 deliberate failure, the O(n^2) join">
+        <div class="slide__body">
+            <h2>Phase 2 deliberate failure &middot; let students hit it.</h2>
+            <p class="subhead">Do not warn. Do not correct. Let the AI fail. Debrief frontier-or-context.</p>
+            <div class="prompt-box">
+                <span class="label">Prompt 2 &middot; genai.mil chat</span>
+                <p>
+                    Write JavaScript that parses a JSON array of personnel records and a JSON array of training records. Join by EDIPI. Output an array of <code>{marine, training_status}</code> objects. Inline JS, no dependencies, single function.
+                </p>
+            </div>
+            <div class="cols-2" style="margin-top:18px;">
+                <div class="col">
+                    <h3>What the AI almost always returns</h3>
+                    <ul style="font-size:26px;">
+                        <li>An O(n^2) <code>array.find()</code> join that visibly stalls on 500+ records.</li>
+                        <li>A <code>JSON.parse</code> call with no try/catch that crashes on the first malformed paste.</li>
+                        <li>A join that silently drops orphans without flagging them.</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Debrief: frontier or context?</h3>
+                    <p style="font-size:26px;"><strong>Honest answer: context.</strong> The fix is to tell the AI it is getting 500+ records and ask for an indexed Map join, plus a try/catch with a visible error fallback.</p>
+                    <p style="font-size:26px;color:var(--scarlet-dark);font-weight:600;">Surface the lesson out loud. Most "AI failures" in this room today will be context failures, not frontier failures.</p>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 2 &middot; Phase 2 Failure</div>
+            <div class="right">19</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 20, Phase 3, Visualization (Centaur) -->
+    <section class="slide slide--content" data-id="20" data-module="Module 2" data-title="Phase 3, Visualization, the SVG-vs-Chart.js teaching beat">
+        <div class="slide__body">
+            <h2>Phase 3 &middot; Visualization.</h2>
+            <p class="subhead">20 min &middot; Centaur &middot; the SVG-vs-Chart.js teaching beat</p>
+            <div class="prompt-box">
+                <span class="label">Prompt 4 &middot; first pass</span>
+                <p>
+                    Build a horizontal bar chart of readiness by company. Company on the left axis, percentage as the bar length, value label on the right. Colors: scarlet for under 75, gold for 75 to 90, ink for above 90.
+                </p>
+            </div>
+            <div class="cols-2" style="margin-top:18px;">
+                <div class="col">
+                    <h3>What fast chat almost always returns</h3>
+                    <ul>
+                        <li>A <code>&lt;script src="..."&gt;</code> pulling Chart.js from a CDN.</li>
+                        <li>That violates the no-external-dependencies constraint stated up front.</li>
+                    </ul>
+                    <p style="font-weight:700;color:var(--scarlet-dark);">Let the student catch it. If they do not: "Where is that chart actually coming from? Open DevTools. What is the Network tab showing?"</p>
+                </div>
+                <div class="col">
+                    <h3>The reprompt</h3>
+                    <p>Phase 3 forces the student to restate the constraint with more force. This is the second deliberate failure target of the build. Next slide is the verbatim reprompt.</p>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 2 &middot; Phase 3</div>
+            <div class="right">20</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 21, Phase 3 prompt, the no-CDN reprompt -->
+    <section class="slide slide--content" data-id="21" data-module="Module 2" data-title="Phase 3 prompt, the no-external-scripts reprompt">
+        <div class="slide__body">
+            <h2>Phase 3 reprompt &middot; verbatim.</h2>
+            <p class="subhead">Stronger constraint. Targeted output format. Stylesheet palette referenced.</p>
+            <div class="prompt-box">
+                <span class="label">Prompt 5 &middot; constraint refresh</span>
+                <p>
+                    No external scripts, no CDN, no Chart.js. Render as inline SVG using vanilla JS. Bars labeled with company name on the left and percentage on the right, scaled to 0 to 100. Use the scarlet/gold/ink palette already in the stylesheet.
+                </p>
+            </div>
+            <p style="margin-top:18px;font-size:28px;color:var(--ink-soft);">When this prompt is run through Ask Sage with a reasoning model, the constraint is honored more reliably from the first response. When run through fast chat, the constraint gets violated and the student has to catch it. The contrast IS the lesson, and the next slide names it.</p>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 2 &middot; Phase 3 Reprompt</div>
+            <div class="right">21</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 22, Phase 3 contrast, reasoning models vs chat -->
+    <section class="slide slide--content" data-id="22" data-module="Module 2" data-title="Reasoning models honor constraints, chat models drift">
+        <div class="slide__body">
+            <h2>Reasoning models honor constraints. Chat models drift.</h2>
+            <p class="subhead">A key teaching beat for the day. Both tools have a place.</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>genai.mil &middot; fast chat</h3>
+                    <ul>
+                        <li>Cheaper per turn. Faster bounces.</li>
+                        <li>Pushes the verification burden onto you.</li>
+                        <li>Constraints drift after many turns or when not restated.</li>
+                        <li>Best for tasks where the verification cost is low and the iteration speed pays off.</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Ask Sage &middot; reasoning model</h3>
+                    <ul>
+                        <li>More expensive per turn. Slower bounces.</li>
+                        <li>Honors stated constraints more rigorously.</li>
+                        <li>Holds schema and file context across the conversation.</li>
+                        <li>Best for architecture, multi-file refactor, and verification cross-checks where the cost of wrong is high.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pullquote" style="font-size:32px;">
+                Neither is wrong. Use both. Pick deliberately. That picking IS the new advanced skill.
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 2 &middot; Tool Contrast</div>
+            <div class="right">22</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 23, Phase 4 verification + Commander's Snapshot -->
+    <section class="slide slide--content" data-id="23" data-module="Module 2" data-title="Phase 4, Verification with Ask Sage + Commander's Snapshot">
+        <div class="slide__body">
+            <h2>Phase 4 &middot; Verification and Commander's Snapshot.</h2>
+            <p class="subhead">10 min &middot; Ask Sage cross-check, then genai.mil brief generation</p>
+            <div class="prompt-box">
+                <span class="label">Prompt 6 &middot; Ask Sage verification cross-check</span>
+                <p>
+                    I am uploading two files: <code>readiness_output.csv</code> (what my dashboard generated) and <code>personnel_source.csv</code> (the original data). For each Marine in <code>readiness_output.csv</code> flagged as NOT READY, verify the reason by cross-referencing the source. Flag any rows where the source data does not support the NOT READY classification.
+                </p>
+            </div>
+            <div class="prompt-box" style="margin-top:18px;">
+                <span class="label">Prompt 7 &middot; genai.mil chat &middot; Commander's Snapshot</span>
+                <p>
+                    Add a "Generate Commander's Snapshot" button. It produces a plain-text brief in a read-only textarea. Format: header with unit and as-of date, overall readiness percentage with delta vs last week from localStorage, breakdown by company, top three NOT READY drivers, and a one-line REQUEST at the end if any company is below 75. Add a Copy button next to it.
+                </p>
+            </div>
+            <p style="margin-top:18px;font-weight:700;color:var(--scarlet-dark);font-size:26px;">Final standard: pick one Marine from the Not-Ready table. Open the source CSV in a text editor. Confirm the dashboard's reason matches the source.</p>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 2 &middot; Phase 4</div>
+            <div class="right">23</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 24, Module 2 debrief -->
+    <section class="slide slide--content" data-id="24" data-module="Module 2" data-title="Module 2 debrief, mode switches, tool switches, time saved">
+        <div class="slide__body">
+            <h2>Module 2 debrief.</h2>
+            <p class="subhead">5 minutes &middot; mode switches, tool switches, AI failures, time saved</p>
+            <ul>
+                <li>Where did you switch <strong>MODES</strong>? Why <em>there</em>?</li>
+                <li>Where did you switch <strong>TOOLS</strong>? Why <em>there</em>?</li>
+                <li>Where did the AI fail? Was it a frontier issue, a context issue, or a meta-frontier (tool-selection) issue?</li>
+                <li>If you had to build this again tomorrow, what would you do differently?</li>
+                <li>How long did this take? How long would it have taken without AI?</li>
+            </ul>
+            <div class="pullquote" style="font-size:32px;">
+                7+ prompts. At least 2 mode switches. At least 1 tool switch. At least 1 error-recovery cycle. <strong>That is normal for advanced builds.</strong> The students who succeeded verified at each phase boundary AND picked the right tool for each phase.
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 2 &middot; Debrief</div>
+            <div class="right">24</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         BREAK
+         ============================================================ -->
+    <section class="slide slide--break" data-id="25" data-module="Break" data-title="Break, return at 1:40">
+        <div class="slide__body">
+            <h1>BREAK</h1>
+            <div class="returns">10 minutes &middot; back at the time on screen</div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Break</div>
+            <div class="right">25</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         MODULE 3, GROUP DEBUGGING
+         ============================================================ -->
+
+    <!-- SLIDE 26, Module 3 section divider -->
+    <section class="slide slide--section" data-id="26" data-module="Module 3" data-title="Module 3, Group Debugging">
+        <div class="slide__body">
+            <div class="module-tag">Module 3 of 6</div>
+            <h1>Group Debugging.</h1>
+            <div class="timing">40 minutes</div>
+            <p class="blurb">Five problems. Seven minutes each. We fix the diagnostic pattern, not necessarily the tool.</p>
+            <a class="section__notes-link" href="../courses/advanced-reality.html#group-debugging" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 3 &middot; Debugging</div>
+            <div class="right">26</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 27, Clinic Protocol -->
+    <section class="slide slide--content" data-id="27" data-module="Module 3" data-title="Clinic Protocol, four steps per scenario">
+        <div class="slide__body">
+            <h2>Clinic Protocol &middot; same four steps per problem.</h2>
+            <p class="subhead">7 minutes total per scenario &middot; this slide stays up</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>Step 1 &middot; 2 min &middot; Student presents</h3>
+                    <p><strong>Format:</strong> "Expected behavior. Actual behavior. Steps I have already taken." No story-telling. No theories. Three lines.</p>
+                    <h3>Step 2 &middot; 3 min &middot; Group diagnosis</h3>
+                    <p>Clarifying questions and hypotheses. I prompt: data or logic? Input or output? Pattern we have seen before? <strong>Was the right tool used for this work?</strong></p>
+                </div>
+                <div class="col">
+                    <h3>Step 3 &middot; 2 min &middot; Instructor synthesis</h3>
+                    <p>I name the root-cause category: frontier limitation, insufficient context, incorrect assumption, integration failure, data quality, OR <strong>tool-selection failure (meta-frontier)</strong>. New for 4.5.</p>
+                    <h3>Step 4 &middot; in chat &middot; Document the pattern</h3>
+                    <p>Failure case goes on the collective Advanced Frontier Map. Pattern is the deliverable, not the fix.</p>
+                </div>
+            </div>
+            <p style="margin-top:18px;font-weight:700;color:var(--scarlet-dark);font-size:26px;">Time allocation: 7 min per problem &times; 5 problems = 35 min. 5 min final synthesis.</p>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 3 &middot; Clinic Protocol</div>
+            <div class="right">27</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 28, Scenario 1, Fetch race / double-submit -->
+    <section class="slide slide--content" data-id="28" data-module="Module 3" data-title="Scenario 1, Fetch race / double-submit">
+        <div class="slide__body">
+            <h2>Scenario 1 &middot; Fetch race / double-submit.</h2>
+            <p class="subhead">Counseling Tracker tool</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>Symptom</h3>
+                    <p>A counseling tracker tool double-saves the same entry whenever the user clicks Save twice quickly. Two identical rows in localStorage, both with the same timestamp.</p>
+                    <h3>Student fixes already tried</h3>
+                    <ul style="font-size:26px;">
+                        <li>Added a confirm dialog</li>
+                        <li>Added <code>setTimeout</code> debounce</li>
+                        <li>Neither worked</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Diagnostic pattern</h3>
+                    <p>Async handler race + missing in-flight guard. The save function fires twice before the first write completes. The fix is a disabled-while-pending button state plus an idempotency key.</p>
+                    <p style="font-weight:700;color:var(--scarlet-dark);">Category: context. AI was not told "this handler can be reentered." Fixable in the prompt.</p>
+                    <p style="font-size:24px;color:var(--ink-soft);"><a href="../resources/debugging-scenarios.html#scenario-1" target="_blank" rel="noopener">Full answer key &rarr;</a></p>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 3 &middot; Scenario 1</div>
+            <div class="right">28</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 29, Scenario 2, Stale localStorage after schema change -->
+    <section class="slide slide--content" data-id="29" data-module="Module 3" data-title="Scenario 2, Stale localStorage after schema change">
+        <div class="slide__body">
+            <h2>Scenario 2 &middot; Stale localStorage after schema change.</h2>
+            <p class="subhead">TEEP-like Tracker</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>Symptom</h3>
+                    <p>Tool was updated to add a "Confirmed By" field. New entries save correctly. Old entries throw a JS error when displayed because the property does not exist on legacy rows.</p>
+                    <h3>Student fixes already tried</h3>
+                    <ul style="font-size:26px;">
+                        <li>Rebuilt the render function three times</li>
+                        <li>Each rebuild handled the new entries cleanly</li>
+                        <li>Each rebuild still crashed on the old entries</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Diagnostic pattern</h3>
+                    <p>Missing schema migration. The fix is a one-time backfill on load (default the new field to a safe value when reading legacy rows) plus a schema version number in localStorage so the next migration is forced.</p>
+                    <p style="font-weight:700;color:var(--scarlet-dark);">Category: context. AI was not told the localStorage shape changed between versions. Fixable in the prompt.</p>
+                    <p style="font-size:24px;color:var(--ink-soft);"><a href="../resources/debugging-scenarios.html#scenario-2" target="_blank" rel="noopener">Full answer key &rarr;</a></p>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 3 &middot; Scenario 2</div>
+            <div class="right">29</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 30, Scenario 3, CSS specificity + timezone bug -->
+    <section class="slide slide--content" data-id="30" data-module="Module 3" data-title="Scenario 3, CSS specificity + timezone bug">
+        <div class="slide__body">
+            <h2>Scenario 3 &middot; CSS specificity + timezone bug.</h2>
+            <p class="subhead">Watch-Bill highlight rows. Two bugs stacked.</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>Symptom</h3>
+                    <p>Watch-bill tool should highlight rows for the current day in gold. The wrong row highlights, and only on Mondays.</p>
+                    <h3>What is actually wrong</h3>
+                    <ul style="font-size:26px;">
+                        <li>The gold class is overridden by a more specific selector</li>
+                        <li>Day-of-week comparison uses local time</li>
+                        <li>Rendered dates use UTC</li>
+                        <li>On Mondays the UTC date is still Sunday</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Diagnostic pattern</h3>
+                    <p>Two independent bugs on the same symptom. Fix one and the bug looks "different" but does not go away. The discipline is to bisect: kill the specificity collision first (use class-based styling consistently), THEN address the timezone.</p>
+                    <p style="font-weight:700;color:var(--scarlet-dark);">Category: context + frontier. The CSS specificity is context. The timezone-vs-UTC is a frontier issue date-math AI gets wrong without explicit constraints.</p>
+                    <p style="font-size:24px;color:var(--ink-soft);"><a href="../resources/debugging-scenarios.html#scenario-3" target="_blank" rel="noopener">Full answer key &rarr;</a></p>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 3 &middot; Scenario 3</div>
+            <div class="right">30</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 31, Scenario 4, Event delegation on dynamic content -->
+    <section class="slide slide--content" data-id="31" data-module="Module 3" data-title="Scenario 4, Event delegation on dynamic content">
+        <div class="slide__body">
+            <h2>Scenario 4 &middot; Event delegation on dynamic content.</h2>
+            <p class="subhead">List-based tool with Add and Delete</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>Symptom</h3>
+                    <p>Tool renders a list of items with Delete buttons. The first three Delete buttons work. After clicking Add and rendering four more items, only the original three buttons respond.</p>
+                </div>
+                <div class="col">
+                    <h3>Diagnostic pattern</h3>
+                    <p>Click handlers were attached at render time. New items never got them. Fix is event delegation on the parent container (single listener that reads <code>event.target</code>) or re-attach handlers on every render.</p>
+                    <p style="font-weight:700;color:var(--scarlet-dark);">Category: context. AI was not told the list is re-rendered after Add. Fixable in the prompt.</p>
+                    <p style="font-size:24px;color:var(--ink-soft);"><a href="../resources/debugging-scenarios.html#scenario-4" target="_blank" rel="noopener">Full answer key &rarr;</a></p>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 3 &middot; Scenario 4</div>
+            <div class="right">31</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 32, Scenario 5, Tool-selection failure (Meta-frontier) -->
+    <section class="slide slide--content" data-id="32" data-module="Module 3" data-title="Scenario 5, Tool-selection failure, the meta-frontier scenario">
+        <div class="slide__body">
+            <h2>Scenario 5 &middot; Tool-selection failure.</h2>
+            <p class="subhead">New for 4.5. The meta-frontier scenario.</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>Symptom</h3>
+                    <p>Student used genai.mil chat for a complex multi-file refactor of a static-stack tool. After 47 turns, the model has lost track of which files changed and is reintroducing bugs that were fixed earlier in the thread.</p>
+                </div>
+                <div class="col">
+                    <h3>Diagnostic pattern</h3>
+                    <p>The correct move was Ask Sage with file ingestion plus a reasoning model from the start. This is not a frontier issue with the AI. It is a meta-frontier issue with the human's tool selection.</p>
+                    <p style="font-weight:700;color:var(--scarlet-dark);">Category: meta-frontier. The fix is tool selection, not prompt refinement. Switch to Ask Sage, upload the files, restate the goal once.</p>
+                    <p style="font-size:24px;color:var(--ink-soft);"><a href="../resources/debugging-scenarios.html#scenario-5" target="_blank" rel="noopener">Full answer key &rarr;</a></p>
+                </div>
+            </div>
+            <div class="pullquote" style="font-size:30px;">
+                This category did not exist for Course 4 students. It does for Course 4.5 students, because they have two tools to pick between.
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 3 &middot; Scenario 5</div>
+            <div class="right">32</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 33, Module 3 synthesis -->
+    <section class="slide slide--content" data-id="33" data-module="Module 3" data-title="Module 3 synthesis, three patterns + two-step diagnostic instinct">
+        <div class="slide__body">
+            <h2>Module 3 synthesis &middot; three patterns and a diagnostic instinct.</h2>
+            <p class="subhead">5 minutes &middot; before we move to Module 4</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>The three patterns we just saw</h3>
+                    <ul>
+                        <li><strong>State mismatch:</strong> the AI did not know what the world looks like right now (legacy localStorage, in-flight handler, re-rendered DOM)</li>
+                        <li><strong>Wrong primitive:</strong> the AI reached for a primitive that does not match the constraint (inline style vs class, find vs Map, local time vs UTC)</li>
+                        <li><strong>Wrong tool:</strong> the AI was the wrong tool for the job in the first place (chat where a reasoning model was needed)</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>The two-step diagnostic instinct</h3>
+                    <ol>
+                        <li><strong>Is this fixable with a better prompt?</strong> If yes, it is context. Rephrase and continue.</li>
+                        <li><strong>Is this fixable with a different tool?</strong> If yes, it is meta-frontier. Switch tools and continue.</li>
+                    </ol>
+                    <p>Only if both are no, it is a real frontier limit and goes on the map.</p>
+                </div>
+            </div>
+            <div class="pullquote" style="font-size:30px;">
+                Most debugging is context, platform quirks, or wrong-tool. The human can fix all three. The fourth category (frontier) is what goes on the map.
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 3 &middot; Synthesis</div>
+            <div class="right">33</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         MODULE 4, VERIFICATION + QA
+         ============================================================ -->
+
+    <!-- SLIDE 34, Module 4 section divider -->
+    <section class="slide slide--section" data-id="34" data-module="Module 4" data-title="Module 4, Verification & QA">
+        <div class="slide__body">
+            <div class="module-tag">Module 4 of 6</div>
+            <h1>Verification &amp; QA.</h1>
+            <div class="timing">30 minutes</div>
+            <p class="blurb">A QA checklist, a timed planted-error drill, and the two-tool cross-check protocol that is new for 4.5.</p>
+            <a class="section__notes-link" href="../courses/advanced-reality.html#verification" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 4 &middot; Verification &amp; QA</div>
+            <div class="right">34</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 35, QA Checklist + Timed QA Drill -->
+    <section class="slide slide--workshop" data-id="35" data-module="Module 4" data-title="QA Checklist + Timed QA Drill, find the five errors">
+        <div class="slide__body">
+            <span class="activity-tag">Workshop &middot; Timed drill</span>
+            <h2>QA Checklist &middot; then find the five errors.</h2>
+            <div class="timebox">10 min silent &middot; 10 min debrief</div>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>The five QA protocols</h3>
+                    <ol>
+                        <li><strong>Source verification.</strong> Every citation, regulation number, NAVMC form, and URL independently verified.</li>
+                        <li><strong>Data accuracy.</strong> Numbers, dates, names, ranks, quantities checked against source.</li>
+                        <li><strong>Logic check.</strong> Reasoning holds end to end. Conclusions supported by premises.</li>
+                        <li><strong>Format compliance.</strong> Matches required formats, templates, and standards.</li>
+                        <li><strong>Domain review.</strong> Smell test from the SME. The one AI cannot do for you.</li>
+                    </ol>
+                </div>
+                <div class="col">
+                    <div class="prompt-box">
+                        <span class="label">Drill prompt</span>
+                        <p>I am sharing a one-page AI-generated SOP excerpt in chat now. Run it through all five protocols. Mark every issue you would not sign. Number them.</p>
+                        <p><strong>Five planted errors:</strong> two fabricated references, one contradictory timeline, one logic error, one format break. Find all five.</p>
+                    </div>
+                    <p style="font-size:24px;color:var(--scarlet-dark);font-weight:600;margin-top:10px;">If you only find three, you are skipping a protocol. Usually source verification, because it requires looking things up. Looking things up IS the protocol.</p>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 4 &middot; Timed QA Drill</div>
+            <div class="right">35</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 36, Two-Tool Cross-Check Protocol (NEW FOR 4.5) -->
+    <section class="slide slide--content" data-id="36" data-module="Module 4" data-title="Two-Tool Cross-Check Protocol, new for 4.5">
+        <div class="slide__body">
+            <h2>Two-Tool Cross-Check Protocol.</h2>
+            <p class="subhead">New for 4.5. For high-stakes outputs, run the same prompt through both tools.</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>When to run it</h3>
+                    <ul>
+                        <li>Anything that goes to a CO</li>
+                        <li>Anything that becomes a system of record</li>
+                        <li>Anything that ends up in a fitness report</li>
+                        <li>Any data product where wrong numbers have downstream consequences</li>
+                    </ul>
+                    <h3>How to run it</h3>
+                    <ol>
+                        <li>Same prompt to genai.mil.</li>
+                        <li>Same prompt to Ask Sage with a reasoning model.</li>
+                        <li>Compare the two answers side by side.</li>
+                    </ol>
+                </div>
+                <div class="col">
+                    <h3>What the result means</h3>
+                    <ul>
+                        <li><strong>Both agree on a substantive judgment</strong> &rarr; confidence increases (not to certainty, but materially).</li>
+                        <li><strong>Tools disagree</strong> &rarr; that is a flag. Dig in. The disagreement is data about where the model is uncertain.</li>
+                        <li><strong>Systematic disagreements</strong> &rarr; frontier-map row, probably a Capability Gap Map row.</li>
+                    </ul>
+                    <p style="font-weight:700;color:var(--scarlet-dark);">Cost: two prompts and a comparison turn. Reserve for outputs that will be acted on.</p>
+                </div>
+            </div>
+            <div class="pullquote" style="font-size:30px;">
+                The GDPval study found human review is where value is created (1.4x faster, 1.6x cheaper with review). The two-tool cross-check is one of the cheapest ways to raise the floor on review quality.
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 4 &middot; Two-Tool Cross-Check</div>
+            <div class="right">36</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         MODULE 5, TEACH-BACK
+         ============================================================ -->
+
+    <!-- SLIDE 37, Module 5 section divider -->
+    <section class="slide slide--section" data-id="37" data-module="Module 5" data-title="Module 5, Teach-Back, the 201 multiplier">
+        <div class="slide__body">
+            <div class="module-tag">Module 5 of 6</div>
+            <h1>Teach-Back.<br>The 201 Multiplier.</h1>
+            <div class="timing">30 minutes</div>
+            <p class="blurb">You leave this room as the person who teaches the next two Marines. Tool selection is part of what they will need to learn.</p>
+            <a class="section__notes-link" href="../courses/advanced-reality.html#teaching-others" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 5 &middot; Teach-Back</div>
+            <div class="right">37</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 38, Permission Gap + Apprentice Problem + Junior Protocol -->
+    <section class="slide slide--content" data-id="38" data-module="Module 5" data-title="Permission Gap + Apprentice Problem + Junior Marines protocol">
+        <div class="slide__body">
+            <h2>The permission gap, the apprentice problem, and the junior protocol.</h2>
+            <p class="subhead">Mollick: workers using AI but hiding it. Entry-level postings dropped 35% from 2023 to 2025.</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>The permission gap</h3>
+                    <p>Workers already using AI but hiding it. Worried about organizational reaction. Shadow culture, no shared practice. Your role as a 4.5 graduate is to formalize use, share techniques, and train others. <em>Including tool selection.</em></p>
+                    <h3>The apprentice problem</h3>
+                    <p>If a junior never manually writes a key document because AI generates it, how do they develop the judgment to know when the AI version is wrong? And how do they learn which tool to reach for when the task gets harder?</p>
+                </div>
+                <div class="col">
+                    <h3>Protocol for junior Marines</h3>
+                    <ul>
+                        <li><strong>Require review and explanation</strong> &middot; they defend WHY AI's output is right or wrong</li>
+                        <li><strong>Periodically work without AI</strong> &middot; key tasks done from scratch monthly</li>
+                        <li><strong>Use AI output as a teaching tool</strong> &middot; hand them a flawed draft, have them find issues</li>
+                        <li><strong>Rotate them through QA</strong> &middot; judgment from exposure to bad output</li>
+                        <li><strong>Teach tool selection deliberately</strong> &middot; when a junior asks for help, ask which tool they reached for first and why. Coach the selection, not just the prompt. <em>New for 4.5.</em></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 5 &middot; Permission Gap</div>
+            <div class="right">38</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 39, Teach-Back exercise + concept list with Tool Selection + Layer Separation -->
+    <section class="slide slide--workshop" data-id="39" data-module="Module 5" data-title="Teach-Back exercise, 3 minutes, pick a concept">
+        <div class="slide__body">
+            <span class="activity-tag">Workshop &middot; Teach-back</span>
+            <h2>Teach one concept &middot; 3 minutes.</h2>
+            <div class="timebox">2 min pick &middot; 5 min prep &middot; 10 min round-robin in breakouts &middot; 5 min full-room debrief</div>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>Pick one concept</h3>
+                    <ul style="font-size:26px;">
+                        <li>Centaur vs Cyborg modes</li>
+                        <li>Frontier mapping</li>
+                        <li>Context-building in prompts</li>
+                        <li>Iterative refinement</li>
+                        <li>Verification protocols</li>
+                        <li>The Jagged Frontier</li>
+                        <li><strong>Layer Separation</strong> (Spec / Prototype / Production) &middot; new</li>
+                        <li><strong>Tool Selection</strong> (genai.mil vs Ask Sage) &middot; new</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <div class="prompt-box">
+                        <span class="label">Template</span>
+                        <ul style="font-size:24px;">
+                            <li><strong>One-sentence definition</strong></li>
+                            <li><strong>Why it matters</strong></li>
+                            <li><strong>Real example from your job</strong></li>
+                            <li><strong>One common mistake</strong></li>
+                            <li><strong>Key takeaway</strong></li>
+                        </ul>
+                    </div>
+                    <p style="margin-top:10px;font-size:26px;color:var(--ink-soft);">Peers grade you on three things: could they explain it back, was the example concrete enough to be believable, do they know what to do differently tomorrow because of you.</p>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 5 &middot; Teach-Back</div>
+            <div class="right">39</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         MODULE 6, WORKFLOW PLAYBOOK + GAP MAP
+         ============================================================ -->
+
+    <!-- SLIDE 40, Module 6 section divider -->
+    <section class="slide slide--section" data-id="40" data-module="Module 6" data-title="Module 6, Workflow Playbook + Capability Gap Map">
+        <div class="slide__body">
+            <div class="module-tag">Module 6 of 6</div>
+            <h1>Workflow Playbook.<br>Capability Gap Map.</h1>
+            <div class="timing">30 minutes</div>
+            <p class="blurb">One page. One recurring task. The deliverable that proves you graduated. Plus two new Capability Gap Map rows that go to leadership.</p>
+            <a class="section__notes-link" href="../courses/advanced-reality.html#workflow-playbook" target="_blank" rel="noopener">Open instructor notes for this section &#x2197;</a>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 6 &middot; Playbook</div>
+            <div class="right">40</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 41, Workflow Playbook template + Worked Examples -->
+    <section class="slide slide--content" data-id="41" data-module="Module 6" data-title="Workflow Playbook template + two worked examples">
+        <div class="slide__body">
+            <h2>Workflow Playbook template &middot; with the new "Which tool" column.</h2>
+            <p class="subhead">Two worked examples. Same template. Different tool selection.</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>Worked example 1 &middot; genai.mil chat</h3>
+                    <table class="map-table" style="font-size:22px;">
+                        <tbody>
+                            <tr><td class="cat" style="width:38%">Task</td><td>Weekly training schedule for the section</td></tr>
+                            <tr><td class="cat">Frequency / Mode</td><td>Thursdays by 1600 &middot; Cyborg</td></tr>
+                            <tr><td class="cat"><strong>Which tool</strong></td><td>genai.mil chat</td></tr>
+                            <tr><td class="cat">Steps (H/AI)</td><td>1. H: pull events. 2. AI: draft schedule. 3. H: cross-reference range/vehicle/instructor. 4. AI: format conflicts as decision matrix. 5. H: decide, add notes. 6. AI: generate final.</td></tr>
+                            <tr><td class="cat">Verification</td><td>Locations confirmed &middot; 24-hour times &middot; no double-bookings &middot; uniform specified &middot; POC listed</td></tr>
+                            <tr><td class="cat">Time savings</td><td>3 hours &rarr; 45 minutes</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col">
+                    <h3>Worked example 2 &middot; Ask Sage + Claude 3 &middot; new</h3>
+                    <table class="map-table" style="font-size:22px;">
+                        <tbody>
+                            <tr><td class="cat" style="width:38%">Task</td><td>Weekly readiness rollup for the company commander's brief</td></tr>
+                            <tr><td class="cat">Frequency / Mode</td><td>Mondays by 1000 &middot; Centaur</td></tr>
+                            <tr><td class="cat"><strong>Which tool</strong></td><td>Ask Sage with Claude 3 (or the tenant's reasoning model)</td></tr>
+                            <tr><td class="cat">Steps (H/AI)</td><td>1. H: export three rosters from MOL. 2. AI: upload to Ask Sage, compute deltas vs last week, top three drivers. 3. H: spot-check three new NOT READY Marines against source. 4. AI: generate plain-text rollup with one-line recommended action. 5. H: log to dashboard for next week's delta.</td></tr>
+                            <tr><td class="cat">Verification</td><td>Overall % matches manual count &middot; delta sign and magnitude vs last week &middot; top three drivers trace back to source &middot; <strong>two-tool cross-check on cross-attached Marines</strong></td></tr>
+                            <tr><td class="cat">Time savings</td><td>4 hours &rarr; 1 hour</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 6 &middot; Worked Examples</div>
+            <div class="right">41</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 42, Capability Gap Map integration + worktime -->
+    <section class="slide slide--workshop" data-id="42" data-module="Module 6" data-title="Build your playbook + add 2+ Capability Gap Map rows">
+        <div class="slide__body">
+            <span class="activity-tag">Workshop &middot; Build now</span>
+            <h2>Write your playbook. Add two Capability Gap Map rows.</h2>
+            <div class="timebox">20 minutes &middot; silent work &middot; submit in chat by the timer</div>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>Your playbook</h3>
+                    <p>Pick a real, recurring task. Fill the nine fields: task, frequency, mode, <strong>which tool</strong>, 4 to 8 H/AI steps, verification checklist (3 to 5 items), known frontier issues, time savings, junior development note.</p>
+                    <p style="font-weight:700;color:var(--scarlet-dark);">Completion bar: 4+ steps with H/AI labels, verification checklist with 3+ items, at least one real frontier issue, time savings backed by your own data, an actionable junior development note.</p>
+                </div>
+                <div class="col">
+                    <h3>Capability Gap Map rows (2+)</h3>
+                    <p>Map your playbook to production-layer wishes. Examples from the readiness rollup:</p>
+                    <ul style="font-size:24px;">
+                        <li>MOL write-back so the snapshot posts back to the system of record</li>
+                        <li>Automated brief delivery once the rollup is approved</li>
+                        <li>Direct connector to the training currency database so the manual export is eliminated</li>
+                    </ul>
+                    <p style="font-size:24px;color:var(--ink-soft);">Open the <a href="../resources/capability-gap-map.html" target="_blank" rel="noopener">Capability Gap Map template</a> and fill rows now, while the workflow design is fresh.</p>
+                </div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Module 6 &middot; Worktime</div>
+            <div class="right">42</div>
+        </footer>
+    </section>
+
+    <!-- ============================================================
+         WRAP
+         ============================================================ -->
+
+    <!-- SLIDE 43, Artifact map -->
+    <section class="slide slide--content" data-id="43" data-module="Wrap" data-title="What you produced today, four artifacts">
+        <div class="slide__body">
+            <h2>What you produced today.</h2>
+            <p class="subhead">Four artifacts. All of them outlive the session.</p>
+            <div class="cols-2">
+                <div class="col">
+                    <h3>On the floor when you leave</h3>
+                    <ul>
+                        <li><strong>Readiness Dashboard:</strong> single-file static HTML, three data sources joined, SVG bars, Not-Ready table, Commander's Snapshot. Public URL.</li>
+                        <li><strong>Advanced Frontier Map rows:</strong> at least three rows specific to what bit you today, split by tool.</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Goes back to your section and up the chain</h3>
+                    <ul>
+                        <li><strong>Workflow Playbook:</strong> one page, one workflow your section can run without you in the room. With the "Which tool" column filled.</li>
+                        <li><strong>Capability Gap Map entries:</strong> at least two new rows mapping production-layer wishes to specific blocking permissions. Goes to the AI POC, then HQMC.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pullquote" style="font-size:30px;">
+                Three deliverables to the unit. One artifact to leadership. Compound across sessions.
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Wrap &middot; Artifacts</div>
+            <div class="right">43</div>
+        </footer>
+    </section>
+
+    <!-- SLIDE 44, Closing line -->
+    <section class="slide slide--cover" data-id="44" data-module="Closing" data-title="Closing line">
+        <div class="scarlet-bar"></div>
+        <div class="slide__body">
+            <div class="eyebrow">Closing</div>
+            <h1>Power Apps skills die<br>when you turn in your CAC.<br>HTML skills don't.</h1>
+            <p class="tagline">Knowing when to switch tools makes both skills last. Ship the dashboard. File the gap rows. Now go teach somebody.</p>
+            <div class="meta">
+                <div><strong>Artifacts due</strong>Dashboard URL, Playbook, two Gap Map rows</div>
+                <div><strong>Assessment</strong>5 of 6 categories Meets-or-better</div>
+                <div><strong>Next</strong>Forward Week 5 invite up the chain</div>
+            </div>
+        </div>
+        <footer class="slide__footer">
+            <div class="left"><span class="brand-mark"></span> Closing</div>
+            <div class="right">44</div>
+        </footer>
+    </section>
+
+</div><!-- /.stage -->
+
+
+<!-- =========================================================
+     SPEAKER NOTES PANE, toggle with N
+     One <div class="note-content"> per slide, in slide order.
+     ========================================================= -->
+<aside class="notes" aria-label="Speaker notes" id="notes">
+    <h4>Speaker notes &middot; press <em>N</em> to hide</h4>
+
+    <!-- 1 Cover -->
+    <div class="note-content">
+        <p><strong>Open the meeting on this slide and wait 30 seconds while people join.</strong> When you start, low-energy and direct. "Welcome to Week 4.5. This is the reality-track version of the Advanced Workshop. Same arc, different stack, one extra tool on the desk."</p>
+        <p>Confirm the prereq out loud: every Marine in this room has finished Course 3.5 OR has at least one deployed static-stack tool. If anyone has not, name it kindly and tell them they should be in Course 3.5 instead.</p>
+        <p>Tell the room how to follow along, where the bathroom is, and that they can press <strong>N</strong> on a presenter laptop to pull up speaker notes if co-presenting.</p>
+        <p><em>Time on slide: 90 seconds.</em></p>
+    </div>
+
+    <!-- 2 Recap Course 4 -->
+    <div class="note-content">
+        <p>Walk the left column quickly. Confirm everyone has done at least the Course 4 arc OR Course 3.5 plus a real build.</p>
+        <p>Land the pivot: <em>"Same six modules. Same skills. The difference is the build stack and the second tool on the desk."</em> Say that line slow enough that it lands.</p>
+        <p><em>Time on slide: 2 minutes.</em></p>
+    </div>
+
+    <!-- 3 Two-Tool World -->
+    <div class="note-content">
+        <p>This is THE key differentiator from Course 4. Spend time here.</p>
+        <p>Walk genai.mil first as the default. Read the four bullets. Then walk Ask Sage. Emphasize that Ask Sage is not better than genai.mil; it is different. The skill is knowing which to reach for.</p>
+        <p>Ask the room: <em>"Last week, where did you reach for the wrong tool and pay for it? Who can give me a 30-second example?"</em> Take one or two answers. The discussion sets up Module 1.</p>
+        <p>If your tenant only has genai.mil, name it now: <em>"We will run every Ask Sage phase today in genai.mil with paste-and-summarize, and we will feel the gap. The gap itself goes on the Capability Gap Map."</em></p>
+        <p><em>Time on slide: 4 minutes.</em></p>
+    </div>
+
+    <!-- 4 Three Layers -->
+    <div class="note-content">
+        <p>Read the three columns left to right. Land the thesis: <em>"We work every layer we can reach. We document the wall where the work stops. The wall map is the case for changing what we have access to."</em></p>
+        <p>Emphasize that Spec is now BOTH tools. That is the 4.5 update vs the 3.5 version of this slide.</p>
+        <p>If anyone asks why not just teach Power Platform: many of us cannot get Power Platform access in our current tenant. The Production layer is the wishlist. Today we work the layers we can reach.</p>
+        <p><em>Time on slide: 2 minutes.</em></p>
+    </div>
+
+    <!-- 5 Mission -->
+    <div class="note-content">
+        <p>Make the three deliverables concrete. By the end of the session, every Marine has a deployed URL, three frontier map rows split by tool, and two Capability Gap Map rows.</p>
+        <p>Read the closing line out loud: <em>"The tool is replaceable. The judgment about which tool to use, and how to verify what it tells you, is what we are actually teaching."</em> That sentence is the spine of the whole day.</p>
+        <p><em>Time on slide: 2 minutes.</em></p>
+    </div>
+
+    <!-- 6 Agenda -->
+    <div class="note-content">
+        <p>Walk the agenda once. Don't dwell. The point is rhythm: Module 1 in 30, Module 2 in 60 (heavy), break, Module 3 (clinic), Module 4 (QA + cross-check), Module 5 (teach-back), Module 6 (playbook + gap rows), wrap.</p>
+        <p>Call out the one break explicitly. 10 minutes. Hard time.</p>
+        <p>Module 2 is the heaviest by design. Tell the room so they pace themselves.</p>
+        <p><em>Time on slide: 3 minutes. Aim to enter Module 1 at about 0:12.</em></p>
+    </div>
+
+    <!-- 7 Refresher -->
+    <div class="note-content">
+        <p>One-minute review of the six 201 skills. No reteaching. Just calibration.</p>
+        <p>Spend more time on the three categories of failure. The third category (meta-frontier) is new for 4.5. Read it twice. <em>"Wrong tool reached for. Fixable by switching tools."</em></p>
+        <p><em>Time on slide: 2 minutes.</em></p>
+    </div>
+
+    <!-- 8 Module 1 divider -->
+    <div class="note-content">
+        <p>Pause 5 seconds before talking. Section dividers are a visual reset for the room.</p>
+        <p>Set the timing: "30 minutes total. 10 minutes of context, 15 minutes of silent work, 10 minutes of debrief."</p>
+        <p><em>Module 1 starts at 0:12. End at 0:30.</em></p>
+    </div>
+
+    <!-- 9 Why frontier matters -->
+    <div class="note-content">
+        <p>Lead with the stat. Read 19 percentage points out loud, then the source. <em>"That is the most important number in this whole day."</em></p>
+        <p>Land the right column. Quality collapses silently. The output still looks right. THAT is why the map matters: it is the only way to know where you are standing.</p>
+        <p>Each tool has its own boundary. Reinforce.</p>
+        <p><em>Time on slide: 3 minutes.</em></p>
+    </div>
+
+    <!-- 10 Tool Handles table -->
+    <div class="note-content">
+        <p>Walk one row out loud as a model. The "Multi-file refactor" row works well because it dramatizes the gap.</p>
+        <p>Don't read every row. Tell the room: <em>"Yours is going to look like this for your domain. Look how the two columns differ."</em></p>
+        <p>If a student says both columns look the same for their domain, push back: <em>"Have you actually tested a multi-file refactor in both? Have you tried dataset analysis in both? The columns differ once you stress them."</em></p>
+        <p><em>Time on slide: 4 minutes.</em></p>
+    </div>
+
+    <!-- 11 Workshop, Build your map -->
+    <div class="note-content">
+        <p><strong>Hard timebox: 15 minutes silent work.</strong> Set a visible timer. Mute yourself.</p>
+        <p>Read the prompt once. Repeat it once. Say nothing else for 30 seconds. Let the silence settle the room into work.</p>
+        <p>At the 7-minute mark, drop a chat message: <em>"Halfway. If both columns say the same thing for every row, you have not stressed the boundary yet."</em></p>
+        <p>At 13 min: "2 minutes left." At 15: hard stop. Move on even if people are not finished. The debrief is part of the learning.</p>
+        <p><em>Time on slide: 15 min (0:15 to 0:30).</em></p>
+    </div>
+
+    <!-- 12 Module 1 debrief -->
+    <div class="note-content">
+        <p>10 minutes. ~60 seconds per person if the room is around 6 to 8 people. Use a name list so you don't only call on the loudest hands.</p>
+        <p>As people share, categorize live on the wall: Context / Frontier / Meta-frontier / Platform quirk. The categorization itself is teaching.</p>
+        <p>If 2+ people independently report the same failure, name it: <em>"That is a pattern. On the unit map."</em></p>
+        <p>Hard stop at 10 minutes. "If we did not get to you, drop your map in chat."</p>
+        <p><em>Time on slide: 10 minutes (0:30 to 0:40). 10 minutes behind agenda; absorb into Module 2 build time.</em></p>
+    </div>
+
+    <!-- 13 Module 2 divider -->
+    <div class="note-content">
+        <p>Pause again. Section dividers are a reset.</p>
+        <p>Set expectations: <em>"60 minutes total. 15 minutes of pre-build framing, 35 minutes live build across four phases, 10 minutes debrief. The grade is mode-switching AND tool-switching, not the dashboard."</em> Say the grade-line twice.</p>
+        <p><em>Time on slide: 30 seconds.</em></p>
+    </div>
+
+    <!-- 14 Build target -->
+    <div class="note-content">
+        <p>Walk inputs and outputs once. Don't demo the dashboard. That defeats the build.</p>
+        <p>Land the line: <em>"If you finish, the dashboard is a bonus. The grade is mode-switching AND tool-switching."</em> This frees the people who feel slow.</p>
+        <p>Point them to the reference build. Use to check, do not copy-paste.</p>
+        <p><em>Time on slide: 3 minutes.</em></p>
+    </div>
+
+    <!-- 15 Phase 1 -->
+    <div class="note-content">
+        <p>Walk both "Why this mode" and "Why this tool". Both are deliberate calls. Both teach.</p>
+        <p>Before students prompt, ask: <em>"Why are we using Ask Sage with a reasoning model for this phase, not genai.mil?"</em> Correct answer: the architecture decision sets up the next hour. A reasoning model holds schema across the conversation and catches edge cases fast chat misses. The cost of getting this wrong is rework on every downstream phase.</p>
+        <p>If Ask Sage is unavailable, pivot: paste-and-summarize on small samples in genai.mil. Surface the gap. Add a Capability Gap Map row.</p>
+        <p><em>Time on slide: 3 minutes.</em></p>
+    </div>
+
+    <!-- 16 Phase 1 prompt -->
+    <div class="note-content">
+        <p>Project the prompt. Read it once. Have the students paste it into Ask Sage (or genai.mil if Sage is unavailable).</p>
+        <p>While they prompt, walk the room. Watch for two failures: (1) someone who skipped uploading the CSVs and asked generically, (2) someone who forgot the no-external-dependencies constraint.</p>
+        <p><em>Time on slide: 6 minutes including their prompt time.</em></p>
+    </div>
+
+    <!-- 17 Phase 1 verification -->
+    <div class="note-content">
+        <p>This is the checkpoint. Walk the room. Every student names three edge cases out loud. If they can't, run the extension prompt.</p>
+        <p>Common answers: orphaned EDIPIs, NULL training records, duplicate equipment serial numbers, expired certs, NJP/unfit, cross-attached Marines.</p>
+        <p><em>Time on slide: 6 minutes.</em></p>
+    </div>
+
+    <!-- 18 Phase 2 tool choice -->
+    <div class="note-content">
+        <p>Name what just happened to the room. Course 4 students switch between centaur and cyborg. Course 4.5 students switch BOTH modes AND tools. Two independent axes.</p>
+        <p>Make students declare which tool they are using and why before they start typing. 30 seconds per declaration. Push back on "I just used what was open." That is not a defensible choice.</p>
+        <p><em>Time on slide: 3 minutes.</em></p>
+    </div>
+
+    <!-- 19 Phase 2 deliberate failure -->
+    <div class="note-content">
+        <p><strong>Do not warn students. Do not correct. Let the AI fail.</strong> When hands go up, debrief frontier or context.</p>
+        <p>The honest answer is context. Tell the AI it is getting 500+ records and ask for an indexed Map join, plus a try/catch.</p>
+        <p>This is the canonical context-vs-frontier teaching beat of the day. Land it hard.</p>
+        <p><em>Time on slide: 5 minutes including their fail-recovery time.</em></p>
+    </div>
+
+    <!-- 20 Phase 3 vis (Centaur) -->
+    <div class="note-content">
+        <p>Run Prompt 4 live. Let fast chat return the Chart.js CDN answer.</p>
+        <p>If a student catches the CDN violation, praise out loud. If they don't: <em>"Open DevTools. What does the Network tab show? Where is that chart actually coming from?"</em></p>
+        <p>That diagnostic question is itself teaching. The Network tab is a verification tool the student probably doesn't use enough.</p>
+        <p><em>Time on slide: 4 minutes.</em></p>
+    </div>
+
+    <!-- 21 Phase 3 reprompt -->
+    <div class="note-content">
+        <p>Project the reprompt. Note that "no external scripts" is now stronger and the output format is constrained more tightly.</p>
+        <p>Have students who are on genai.mil paste the reprompt. Have students who are on Ask Sage do the same. Compare what comes back. Some rooms see the reasoning model hold the constraint on the first try, while fast chat needs the reprompt to honor it. The contrast IS the lesson.</p>
+        <p><em>Time on slide: 5 minutes.</em></p>
+    </div>
+
+    <!-- 22 Phase 3 contrast -->
+    <div class="note-content">
+        <p>This is the teaching beat. Read both columns out loud.</p>
+        <p>Land the pull-quote: <em>"Neither is wrong. Use both. Pick deliberately. That picking IS the new advanced skill."</em></p>
+        <p>If a student asks "so which is better?", reject the framing: "Better for what? Pick a task. I will tell you which is better for that task. There is no globally-better."</p>
+        <p><em>Time on slide: 3 minutes.</em></p>
+    </div>
+
+    <!-- 23 Phase 4 verification -->
+    <div class="note-content">
+        <p>Run Prompt 6 on Ask Sage with the two CSVs uploaded. Project the answer. Walk through how the model flagged discrepancies (or, if it didn't, ask the room to read the answer critically).</p>
+        <p>Then run Prompt 7 on genai.mil for the Commander's Snapshot. Project both side by side.</p>
+        <p>Land the final standard: <em>"Before you declare the build done, pick one Marine from the Not-Ready table. Open the source CSV in a text editor. Confirm the dashboard's reason matches the source."</em></p>
+        <p><em>Time on slide: 8 minutes.</em></p>
+    </div>
+
+    <!-- 24 Module 2 debrief -->
+    <div class="note-content">
+        <p>5 minutes. Two-question rotation: where did you switch MODES, and where did you switch TOOLS?</p>
+        <p>Surface the patterns out loud: <em>"Three of you switched tools at Phase 2. Two of you stayed in genai.mil the whole time. Both are defensible. The question is whether you chose, or whether you drifted."</em></p>
+        <p>Read the pull-quote to close: <strong>7+ prompts, 2 mode switches, 1 tool switch, 1 error-recovery cycle, that is normal.</strong></p>
+        <p><em>Time on slide: 6 minutes.</em></p>
+    </div>
+
+    <!-- 25 BREAK -->
+    <div class="note-content">
+        <p>Mute mic. Camera off. Set a 10-minute timer visible on screen.</p>
+        <p>Use the break to skim the M1 debrief notes and pull 2 to 3 frontier-map findings you can refer back to during M3.</p>
+        <p><em>Time on slide: 10 minutes.</em></p>
+    </div>
+
+    <!-- 26 Module 3 divider -->
+    <div class="note-content">
+        <p>Welcome back briskly. Don't restart from cold. <em>"You brought broken tools. We fix the diagnostic pattern, not the tool."</em></p>
+        <p>Set expectations: 5 problems, 7 minutes each. We will not fully fix everything. The pattern is the deliverable.</p>
+        <p><em>Time on slide: 90 seconds.</em></p>
+    </div>
+
+    <!-- 27 Clinic Protocol -->
+    <div class="note-content">
+        <p>This slide stays on screen for the first problem so people see the structure as you run it.</p>
+        <p>Walk the four steps. Be explicit on the time cuts: <em>"Step 1 is two minutes. If your story takes longer, I cut you. It is for the room's benefit, not against you."</em></p>
+        <p>Ask for the first volunteer. If nobody volunteers in 10 seconds, call on someone whose M2 build had an interesting failure.</p>
+        <p>Reinforce the new diagnostic question: <strong>was the right tool used for this work?</strong> That question alone catches Scenario 5.</p>
+        <p><em>Time on slide: 3 minutes intro; stays visible during clinic.</em></p>
+    </div>
+
+    <!-- 28 Scenario 1 -->
+    <div class="note-content">
+        <p>If nobody in the room brought a fetch-race problem, run this canned scenario. Walk the symptom, take group hypotheses, then reveal the diagnostic pattern.</p>
+        <p>Land the category: <strong>context.</strong> The AI was not told the handler can be re-entered. Fixable in the prompt.</p>
+        <p><em>Time on slide: 7 minutes.</em></p>
+    </div>
+
+    <!-- 29 Scenario 2 -->
+    <div class="note-content">
+        <p>Stale localStorage after schema change. Common pattern, especially in 3.5-graduated rooms where students are now polishing tools they shipped last week.</p>
+        <p>Land the category: <strong>context.</strong> The AI was not told the localStorage shape changed between versions.</p>
+        <p>Surface the lesson: any time you change a localStorage schema, you write a migration. That is now on the verification checklist for any tool that persists.</p>
+        <p><em>Time on slide: 7 minutes.</em></p>
+    </div>
+
+    <!-- 30 Scenario 3 -->
+    <div class="note-content">
+        <p>Two bugs stacked. This is the trickiest scenario in the deck because the symptom looks like one bug. The discipline is bisection.</p>
+        <p>If the group jumps to "it is the timezone," ask: <em>"Why does it only highlight on Mondays? Is the date the only variable?"</em> That gets them to the CSS specificity collision.</p>
+        <p>Land both categories: context (CSS) AND frontier (date math).</p>
+        <p><em>Time on slide: 7 minutes.</em></p>
+    </div>
+
+    <!-- 31 Scenario 4 -->
+    <div class="note-content">
+        <p>Event delegation. The most common bug in any list-with-Add-and-Delete static-stack tool.</p>
+        <p>Land the category: <strong>context.</strong> The AI was not told the list is re-rendered after Add.</p>
+        <p>Tell the room this is the bug that justifies event delegation as a default pattern in their playbook. Once they see it, they won't write list code without it again.</p>
+        <p><em>Time on slide: 7 minutes.</em></p>
+    </div>
+
+    <!-- 32 Scenario 5 (NEW) -->
+    <div class="note-content">
+        <p>This is the meta-frontier scenario. It does not exist for Course 4 students.</p>
+        <p>Walk the symptom carefully. 47 turns on a multi-file refactor in fast chat. Bugs reintroduced from earlier in the thread. This is what the failure mode looks like.</p>
+        <p>The fix is not better prompting. The fix is switching tools. Ask Sage with files uploaded, reasoning model, restate the goal once.</p>
+        <p>Land the category: <strong>meta-frontier.</strong> Read the pull-quote at the bottom. This category is what 4.5 adds.</p>
+        <p><em>Time on slide: 7 minutes.</em></p>
+    </div>
+
+    <!-- 33 Module 3 synthesis -->
+    <div class="note-content">
+        <p>5 minutes. Walk the three patterns briskly. State mismatch, wrong primitive, wrong tool. The first two existed for Course 4. The third is what 4.5 adds.</p>
+        <p>Walk the two-step diagnostic instinct. The question "is this fixable with a different tool?" did not exist for Course 4 students. It is now part of the discipline.</p>
+        <p>Read the pull-quote to close.</p>
+        <p><em>Time on slide: 5 minutes.</em></p>
+    </div>
+
+    <!-- 34 Module 4 divider -->
+    <div class="note-content">
+        <p>Brisk transition. <em>"Now we build the QA habit you hand to a junior Marine, plus a cross-check that is new for 4.5."</em></p>
+        <p>Set the structure: 5 minutes on the checklist + drill setup, 10 minutes silent drill, 5 minutes debrief, 10 minutes on the two-tool cross-check.</p>
+        <p><em>Time on slide: 30 seconds.</em></p>
+    </div>
+
+    <!-- 35 QA Checklist + Drill -->
+    <div class="note-content">
+        <p>Drop the AI-generated SOP excerpt into chat as you start the timer. (The excerpt is in the course page; copy it ahead of class.)</p>
+        <p>Walk the five protocols once. Spend extra time on Protocol 1 (source verification) because that is the one most students will skip.</p>
+        <p>10 minutes silent. Mute yourself. Do not answer chat questions during the drill.</p>
+        <p>At 10 minutes: hard stop. Reveal the five planted errors one by one. Ask: <em>"Which protocol caught it?"</em></p>
+        <p>If most of the room only found 3, name it kindly: <em>"Three is the average. Source verification requires actually looking the references up. Looking things up IS the protocol."</em></p>
+        <p><em>Time on slide: 10 min drill + 5 min debrief.</em></p>
+    </div>
+
+    <!-- 36 Two-Tool Cross-Check (NEW) -->
+    <div class="note-content">
+        <p>This is the new protocol for 4.5. Read both columns out loud.</p>
+        <p>Stress that this is not free. Two prompts and a comparison turn. Reserve for outputs that will be acted on. Anything to a CO, anything that becomes a system of record, anything in a fitness report.</p>
+        <p>Cite the GDPval finding once. <em>"Human review is where value is created. The two-tool cross-check is one of the cheapest ways to raise the floor on review quality."</em></p>
+        <p>If a student says this is too expensive to do every time, agree: <em>"You don't. You do it on the outputs that matter. The point is having the protocol available when the stakes go up."</em></p>
+        <p><em>Time on slide: 8 minutes.</em></p>
+    </div>
+
+    <!-- 37 Module 5 divider -->
+    <div class="note-content">
+        <p>Change the energy. <em>"You don't leave this room as a graduate. You leave as the person who teaches the next two Marines. Tool selection is part of what they will need to learn."</em></p>
+        <p>Set timing: 8 minutes framing, 22 minutes teach-back.</p>
+        <p><em>Time on slide: 30 seconds.</em></p>
+    </div>
+
+    <!-- 38 Permission Gap + Apprentice -->
+    <div class="note-content">
+        <p>Lead with the stats: workers hiding their AI use (Mollick), entry-level postings down 35% (2023 to 2025). Don't belabor either. The room knows.</p>
+        <p>Walk the protocol for juniors. Spend extra time on the new bullet at the bottom: <em>"When a junior asks for help, ask which tool they reached for first and why. Coach the selection, not just the prompt."</em></p>
+        <p><em>Time on slide: 5 minutes.</em></p>
+    </div>
+
+    <!-- 39 Teach-Back -->
+    <div class="note-content">
+        <p>Hard timebox. This one will sprawl if you let it. 2 min pick, 5 min prep silent, 10 min in breakouts (3 min per teach + 1 min feedback, rotate), 5 min full-room debrief.</p>
+        <p>Before sending to breakouts: <strong>model the template yourself</strong> with a Tool Selection example. The course page has a fully written one. Read it verbatim. People do better when they have seen the shape.</p>
+        <p>Use breakout rooms of 3 to 4. 10-minute timer. Pop into 1 to 2 rooms during.</p>
+        <p>When everyone returns: ask for one volunteer to teach to the full room. Give live feedback against the rubric. That is the teaching-of-teaching moment.</p>
+        <p><em>Time on slide: 22 minutes (2:55 to 3:17, drifted a few minutes; absorb in Module 6 timing).</em></p>
+    </div>
+
+    <!-- 40 Module 6 divider -->
+    <div class="note-content">
+        <p>Brisk: <em>"One page. One workflow. Plus two Capability Gap Map rows. The deliverable that proves you graduated and the artifact that goes to leadership."</em></p>
+        <p>Set timing: 5 min walk the worked examples, 20 min silent build, 5 min reflection and close.</p>
+        <p><em>Time on slide: 30 seconds.</em></p>
+    </div>
+
+    <!-- 41 Worked Examples -->
+    <div class="note-content">
+        <p>Walk Example 1 first (genai.mil chat, training schedule). That is the recognizable shape from Course 4.</p>
+        <p>Then walk Example 2 (Ask Sage with Claude 3, readiness rollup). Name the differences: the tool, the mode, the verification line that calls out the two-tool cross-check.</p>
+        <p>Tell people: <em>"Yours does not need to be this polished. Specific is more important than pretty. The 'Which tool' column is the field most students forget. Make sure yours is filled."</em></p>
+        <p><em>Time on slide: 5 minutes.</em></p>
+    </div>
+
+    <!-- 42 Worktime -->
+    <div class="note-content">
+        <p>20 minutes silent. Set the timer. Read the completion bar once.</p>
+        <p>Tell people to <strong>submit their playbook in chat at the timer</strong> AND drop their two Capability Gap Map rows into the Gap Map template at the same time.</p>
+        <p>At 10 minutes: chat broadcast: <em>"Halfway. 'Which tool' is the field people skip. Make sure yours is filled with a justified selection."</em></p>
+        <p>At 18 minutes: "2 minutes left. Submit what you have."</p>
+        <p>Hard stop at 20. Move to wrap.</p>
+        <p><em>Time on slide: 20 minutes.</em></p>
+    </div>
+
+    <!-- 43 Artifact map -->
+    <div class="note-content">
+        <p>Read the four artifacts once. Pause after each.</p>
+        <p>Land the point: <em>"Three deliverables to the unit. One artifact to leadership. They compound across sessions. The compiled Capability Gap Map across the room is the policy case for production access."</em></p>
+        <p>Frame the artifact as evidence, not complaint. Specific, named, defensible. Beneficiary counts. Time savings. The blocked permission named explicitly.</p>
+        <p><em>Time on slide: 3 minutes.</em></p>
+    </div>
+
+    <!-- 44 Closing -->
+    <div class="note-content">
+        <p>Read the closing line. Pause. Open for questions. Do not rush the room out.</p>
+        <p>Assessment threshold: 5 of 6 categories Meets-or-better. Be honest about the threshold and equally honest that nobody fails out: re-attempt after building one or two more tools, the seat is held.</p>
+        <p>Next action: Forward the Week 5 invite up the chain. The Supervisor Orientation is for their leadership, not them.</p>
+        <p><strong>After class, instructor only:</strong> save the chat transcript, compile the playbooks people submitted, fold any new frontier findings into the unit map, and forward the compiled Capability Gap Map through the AI POC to HQMC within 24 hours.</p>
+        <p><em>Time on slide: 2 minutes. Total runtime about 3:55. Buffer absorbed across the day. End on time.</em></p>
+    </div>
+
+</aside>
+
+<script src="js/deck.js"></script>
+</body>
+</html>
