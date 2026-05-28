@@ -364,7 +364,7 @@ Then propose a single Frontier Map row I can add, with these columns:
 
 genai.mil is your FAST chat layer. Single-prompt work. One prompt in, one polished draft out. Cheap per turn. Pushes the verification burden onto you.
 
-Ask Sage is your MULTI-FILE and REASONING layer. Architecture decisions, dataset analysis, multi-file refactors. Uses a reasoning model (Claude 3 or whichever the tenant exposes). Slower per turn, fewer turns needed, holds schema across the conversation.
+Ask Sage is your MULTI-FILE and REASONING layer. Architecture decisions, dataset analysis, multi-file refactors. Uses a reasoning model (Claude Opus 4.7 or whichever the tenant exposes). Slower per turn, fewer turns needed, holds schema across the conversation.
 
 The selection is part of the discipline. The wrong tool on the wrong task is one of the most common failure modes advanced builders hit, and it is the one most easily mistaken for an AI capability ceiling.
 
@@ -390,7 +390,7 @@ Fill three rows from your own job before we move on. Examples from the deck:
             <article id="handout-m2-p1-prompt">
                 <h2>Module 2 Block 3: Phase 1 Ask Sage architecture prompt</h2>
                 <p>
-                    Phase 1 cue. Drop at 0:35 right after the Build framing slide. Students upload three sample CSVs to Ask Sage and paste this prompt. Reasoning model required, Claude 3 if the tenant exposes it.
+                    Phase 1 cue. Drop at 0:35 right after the Build framing slide. Students upload three sample CSVs to Ask Sage and paste this prompt. Reasoning model required, Claude Opus 4.7 if the tenant exposes it.
                 </p>
 
                 <div class="copy-block">
@@ -981,7 +981,7 @@ The workflow is conflict-driven. You will not know what the conflicts are until 
                  BLOCK 16, Module 6 Worked Example 2, Weekly Readiness Rollup
                  =========================================================== -->
             <article id="handout-m6-example2">
-                <h2>Module 6 Block 16: Worked example 2, Weekly Readiness Rollup (Ask Sage + Claude 3)</h2>
+                <h2>Module 6 Block 16: Worked example 2, Weekly Readiness Rollup (Ask Sage + Claude Opus 4.7)</h2>
                 <p>
                     Drop at 3:30 right after worked example 1. Same template, different tool selection. This is the multi-file dataset workflow that the Module 2 build prepared students for.
                 </p>
@@ -997,18 +997,18 @@ The workflow is conflict-driven. You will not know what the conflicts are until 
                         </button>
                     </div>
                     <div class="copy-block__cue">
-                        <strong>Cue line for the room:</strong> "Worked example 2 in chat. Centaur, Ask Sage with Claude 3. Same task you would build with a static-HTML dashboard, now run as a weekly recurring workflow. The Step 3 spot-check is the discipline."
+                        <strong>Cue line for the room:</strong> "Worked example 2 in chat. Centaur, Ask Sage with Claude Opus 4.7. Same task you would build with a static-HTML dashboard, now run as a weekly recurring workflow. The Step 3 spot-check is the discipline."
                     </div>
-<pre class="copy-block__body" id="copy-w45-m6-ex2">WORKED EXAMPLE 2, Weekly Readiness Rollup. Centaur mode, Ask Sage with Claude 3 (or another reasoning model the tenant exposes).
+<pre class="copy-block__body" id="copy-w45-m6-ex2">WORKED EXAMPLE 2, Weekly Readiness Rollup. Centaur mode, Ask Sage with Claude Opus 4.7 (or another reasoning model the tenant exposes).
 
 | Field                  | Content                                                                                          |
 |------------------------|--------------------------------------------------------------------------------------------------|
 | Task                   | Weekly readiness rollup for the company commander's brief                                        |
 | Frequency              | Weekly. Every Monday by 1000.                                                                    |
 | Mode                   | Centaur (distinct human phases and AI phases with verification at each boundary)                 |
-| Which Tool             | Ask Sage with Claude 3 (or another reasoning model the tenant exposes)                           |
+| Which Tool             | Ask Sage with Claude Opus 4.7 (or another reasoning model the tenant exposes)                           |
 | Step 1                 | Human: Export current rosters from MOL: personnel, training currency, equipment status (Human Only) |
-| Step 2                 | AI: Upload all three CSVs to Ask Sage. Ask Claude 3 to compute deltas vs last week's saved snapshot. Output the top three drivers of any change in readiness percentage (AI generates, Human reviews) |
+| Step 2                 | AI: Upload all three CSVs to Ask Sage. Ask Claude Opus 4.7 to compute deltas vs last week's saved snapshot. Output the top three drivers of any change in readiness percentage (AI generates, Human reviews) |
 | Step 3                 | Human: Spot-check three Marines flagged as new NOT READY this week against the source CSVs to verify the AI's attribution (Human Only) |
 | Step 4                 | AI: Generate a plain-text rollup with overall percentage, delta, top three drivers, and a one-line recommended commander action (AI generates, Human approves) |
 | Step 5                 | Human: Review, paste into the brief slide, log to the readiness dashboard tool for next week's delta (Human Only) |
@@ -1111,7 +1111,7 @@ A single Marine asking for a connector is a request. Forty Marines documenting t
 | Range Coordination              | Static HTML range request tracker                | Conflict detection vs RTAM schedule                     | RTAM no documented integration surface          | Every battalion training shop    | 2-4 hrs per range event   |
 | Personnel Currency Dashboard    | Static HTML CSV-import dashboard                 | Live read of MCTIMS, push notifications                 | MCTIMS read access restricted                   | Every section leader USMC        | 30-60 min per section/wk  |
 | Unit Readiness Rollup (weekly)  | Ask Sage on three exported CSVs, plain-text brief| MOL write-back so the snapshot posts to system of record| MOL no write API; automated brief delivery blocked| Every company commander S-3 shop | 3 hrs/wk per shop         |
-| Multi-file reasoning AI access  | Ask Sage with Claude 3 where tenant grants it    | Universal Ask Sage with reasoning model in all tenants  | Ask Sage access blocked in some tenants         | Every Course 4.5 graduate        | 1-2 hrs per multi-file task|
+| Multi-file reasoning AI access  | Ask Sage with Claude Opus 4.7 where tenant grants it    | Universal Ask Sage with reasoning model in all tenants  | Ask Sage access blocked in some tenants         | Every Course 4.5 graduate        | 1-2 hrs per multi-file task|
 | [Your row]                      |                                                  |                                                         |                                                 |                                  |                           |
 
 What makes a STRONG row vs a WEAK one:

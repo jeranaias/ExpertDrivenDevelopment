@@ -310,7 +310,7 @@
                                     <tr>
                                         <td>Multi-file refactor of a static-stack tool</td>
                                         <td>Painful. Context window blows out across iterations. Common to see the model lose track of what changed across 20 turns.</td>
-                                        <td>Yes. Upload the file, ask Claude 3 (or another reasoning model exposed by the tenant) for a targeted refactor with constraints stated up front.</td>
+                                        <td>Yes. Upload the file, ask Claude Opus 4.7 (or another reasoning model exposed by the tenant) for a targeted refactor with constraints stated up front.</td>
                                     </tr>
                                     <tr>
                                         <td>Quick code snippet (regex, date math)</td>
@@ -330,7 +330,7 @@
                                     <tr>
                                         <td>Architecture decision (data model, schema migration plan)</td>
                                         <td>Possible for small scope. Reasoning quality drops on larger trade-off questions.</td>
-                                        <td>Yes. Claude 3 or a GPT o-series reasoning model produces the best architecture analysis the locked-tenant world currently exposes.</td>
+                                        <td>Yes. Claude Opus 4.7 or a GPT-5 reasoning variant produces the best architecture analysis the locked-tenant world currently exposes.</td>
                                     </tr>
                                     <tr>
                                         <td>Verification cross-check (run same prompt through both, look for disagreement)</td>
@@ -457,7 +457,7 @@
                         </p>
 
                         <p>
-                            Upload three sample CSVs to Ask Sage: personnel, training, and equipment. Select Claude 3 (or whatever
+                            Upload three sample CSVs to Ask Sage: personnel, training, and equipment. Select Claude Opus 4.7 (or whatever
                             reasoning model the tenant exposes) for the join-model proposal. Ask for an explicit join model, edge
                             cases, and an in-memory data shape.
                         </p>
@@ -588,7 +588,7 @@
                         <div class="callout callout--info">
                             <h3 class="callout__title">Key Teaching Beat: Model Capability Difference</h3>
                             <p>
-                                When this prompt is run through Ask Sage with a reasoning model (Claude 3 or a GPT o-series), the
+                                When this prompt is run through Ask Sage with a reasoning model (Claude Opus 4.7 or a GPT-5 reasoning), the
                                 no-external-dependencies constraint is honored more reliably from the first response. When run
                                 through genai.mil fast chat, the constraint gets violated and the student has to catch it. The
                                 contrast IS the lesson. Reasoning models follow stated constraints more rigorously. Fast chat is
@@ -1094,7 +1094,7 @@
                                     </tr>
                                     <tr>
                                         <td><strong>Which Tool</strong></td>
-                                        <td>Ask Sage with Claude 3 (or another reasoning model the tenant exposes)</td>
+                                        <td>Ask Sage with Claude Opus 4.7 (or another reasoning model the tenant exposes)</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Step 1</strong></td>
@@ -1102,7 +1102,7 @@
                                     </tr>
                                     <tr>
                                         <td><strong>Step 2</strong></td>
-                                        <td><strong>AI:</strong> Upload all three CSVs to Ask Sage. Ask Claude 3 to compute deltas vs last week's saved snapshot. Output the top three drivers of any change in readiness percentage (AI generates, Human reviews).</td>
+                                        <td><strong>AI:</strong> Upload all three CSVs to Ask Sage. Ask Claude Opus 4.7 to compute deltas vs last week's saved snapshot. Output the top three drivers of any change in readiness percentage (AI generates, Human reviews).</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Step 3</strong></td>

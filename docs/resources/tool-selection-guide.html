@@ -102,7 +102,7 @@
                 </p>
                 <ul>
                     <li><strong>genai.mil</strong> is the Marines' enterprise default chat platform (Jan 2026 MARADMIN, replaces NIPRGPT). Always-on conversational AI. CUI-authorized. Fast for single-shot prompts. Browser-based, no setup, no file uploads.</li>
-                    <li><strong>Ask Sage</strong> is IL5/IL6/Top Secret/FedRAMP High authorized. Azure Government hosted. 150+ LLMs including GPT-4o, GPT o-series reasoning models, Claude 3, Gemini Pro, Llama 3, and Mistral. Ingests DOCX, PDF, JSON, CSV, and code. API plus Continue.dev IDE integration. CUI and PHI authorized (DHA deployment Dec 2025).</li>
+                    <li><strong>Ask Sage</strong> is IL5/IL6/Top Secret/FedRAMP High authorized. Azure Government hosted. 150+ LLMs including GPT-5 plus GPT-5 reasoning variants, Claude Opus 4.7, Claude Sonnet 4.6, Claude Haiku 4.5, Gemini 2.5, Llama 4 (Scout and Maverick), and Mistral. Ingests DOCX, PDF, JSON, CSV, and code. API plus Continue.dev IDE integration. CUI and PHI authorized (DHA deployment Dec 2025).</li>
                     <li>The Army runs Ask Sage on cArmy Cloud under a $49M IDIQ contract. DHA uses it for clinical and operational workflows. Adoption across DoW is past the experimental stage.</li>
                 </ul>
                 <p>
@@ -143,7 +143,7 @@
                             </tr>
                             <tr>
                                 <td>About to iterate 10+ times to refine a complex output.</td>
-                                <td><strong>Ask Sage with a reasoning model</strong> (Claude 3 or GPT o-series)</td>
+                                <td><strong>Ask Sage with a reasoning model</strong> (Claude Opus 4.7 or GPT-5 reasoning)</td>
                                 <td>Chat models drift after roughly 6 to 8 iterations. Reasoning models hold the thread longer.</td>
                             </tr>
                             <tr>
@@ -207,7 +207,7 @@
                             <tr>
                                 <td><strong>Models available</strong></td>
                                 <td>Chat-tier OpenAI plus a couple of others; varies by tenant.</td>
-                                <td>150+ models: GPT-4o, GPT o-series, Claude 3, Gemini Pro, Llama 3, Mistral, Cohere.</td>
+                                <td>150+ models: GPT-5, GPT-5 reasoning, Claude Opus 4.7, Claude Sonnet 4.6, Claude Haiku 4.5, Gemini 2.5, Llama 4, Mistral, Cohere.</td>
                             </tr>
                             <tr>
                                 <td><strong>File ingestion (DOCX/PDF/JSON/CSV/code)</strong></td>
@@ -220,7 +220,7 @@
                                 <td>Yes.</td>
                             </tr>
                             <tr>
-                                <td><strong>Reasoning models (GPT o-series, Claude 3)</strong></td>
+                                <td><strong>Reasoning models (GPT-5 reasoning, Claude Opus 4.7)</strong></td>
                                 <td>Limited.</td>
                                 <td>Yes.</td>
                             </tr>
@@ -267,7 +267,7 @@
 
                 <h3>Pattern 1: Weekly readiness rollup</h3>
                 <p>
-                    <strong>Use Ask Sage with Claude 3.</strong> Upload last-week and this-week CSV exports. Ask for delta analysis: who fell off currency, who came on, what trends matter for the CO's brief. <em>Why:</em> dataset comparison is reasoning plus multi-file. genai.mil cannot ingest the CSVs and pasting them is lossy.
+                    <strong>Use Ask Sage with Claude Opus 4.7.</strong> Upload last-week and this-week CSV exports. Ask for delta analysis: who fell off currency, who came on, what trends matter for the CO's brief. <em>Why:</em> dataset comparison is reasoning plus multi-file. genai.mil cannot ingest the CSVs and pasting them is lossy.
                 </p>
 
                 <h3>Pattern 2: Counseling statement first draft</h3>

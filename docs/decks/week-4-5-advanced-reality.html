@@ -98,7 +98,7 @@
                     <h3>Ask Sage &middot; multi-file reasoning</h3>
                     <ul>
                         <li><strong>Use when:</strong> multi-file refactor, dataset analysis with multiple CSVs, architecture trade-offs, verification cross-checks</li>
-                        <li><strong>Strengths:</strong> file ingestion, reasoning models (Claude 3 or a GPT o-series), holds schema across the conversation</li>
+                        <li><strong>Strengths:</strong> file ingestion, reasoning models (Claude Opus 4.7 or a GPT-5 reasoning), holds schema across the conversation</li>
                         <li><strong>Weakness:</strong> overkill and slow for one-shot drafts; higher setup cost per turn</li>
                         <li><strong>Today:</strong> Build phase 1 architecture, phase 4 verification, the two-tool cross-check</li>
                     </ul>
@@ -300,7 +300,7 @@
                     <tr>
                         <td class="cat">Multi-file refactor of a static-stack tool</td>
                         <td>Painful. Context window blows out across iterations. Common to see the model lose track across 20+ turns.</td>
-                        <td>Yes. Upload the files, ask Claude 3 (or another reasoning model the tenant exposes) for a targeted refactor with constraints stated up front.</td>
+                        <td>Yes. Upload the files, ask Claude Opus 4.7 (or another reasoning model the tenant exposes) for a targeted refactor with constraints stated up front.</td>
                     </tr>
                     <tr>
                         <td class="cat">Quick code snippet (regex, date math)</td>
@@ -460,7 +460,7 @@
                     <h3>The work</h3>
                     <ul>
                         <li>Upload three sample CSVs to Ask Sage: personnel, training, equipment.</li>
-                        <li>Select Claude 3 (or whichever reasoning model the tenant exposes).</li>
+                        <li>Select Claude Opus 4.7 (or whichever reasoning model the tenant exposes).</li>
                         <li>Whiteboard the join model with the AI as your peer reviewer.</li>
                         <li>Confirm three edge cases out loud before you write a line of HTML.</li>
                     </ul>
@@ -1185,12 +1185,12 @@
                     </table>
                 </div>
                 <div class="col">
-                    <h3>Worked example 2 &middot; Ask Sage + Claude 3 &middot; new</h3>
+                    <h3>Worked example 2 &middot; Ask Sage + Claude Opus 4.7 &middot; new</h3>
                     <table class="map-table" style="font-size:22px;">
                         <tbody>
                             <tr><td class="cat" style="width:38%">Task</td><td>Weekly readiness rollup for the company commander's brief</td></tr>
                             <tr><td class="cat">Frequency / Mode</td><td>Mondays by 1000 &middot; Centaur</td></tr>
-                            <tr><td class="cat"><strong>Which tool</strong></td><td>Ask Sage with Claude 3 (or the tenant's reasoning model)</td></tr>
+                            <tr><td class="cat"><strong>Which tool</strong></td><td>Ask Sage with Claude Opus 4.7 (or the tenant's reasoning model)</td></tr>
                             <tr><td class="cat">Steps (H/AI)</td><td>1. H: export three rosters from MOL. 2. AI: upload to Ask Sage, compute deltas vs last week, top three drivers. 3. H: spot-check three new NOT READY Marines against source. 4. AI: generate plain-text rollup with one-line recommended action. 5. H: log to dashboard for next week's delta.</td></tr>
                             <tr><td class="cat">Verification</td><td>Overall % matches manual count &middot; delta sign and magnitude vs last week &middot; top three drivers trace back to source &middot; <strong>two-tool cross-check on cross-attached Marines</strong></td></tr>
                             <tr><td class="cat">Time savings</td><td>4 hours &rarr; 1 hour</td></tr>
@@ -1615,7 +1615,7 @@
     <!-- 41 Worked Examples -->
     <div class="note-content">
         <p>Walk Example 1 first (genai.mil chat, training schedule). That is the recognizable shape from Course 4.</p>
-        <p>Then walk Example 2 (Ask Sage with Claude 3, readiness rollup). Name the differences: the tool, the mode, the verification line that calls out the two-tool cross-check.</p>
+        <p>Then walk Example 2 (Ask Sage with Claude Opus 4.7, readiness rollup). Name the differences: the tool, the mode, the verification line that calls out the two-tool cross-check.</p>
         <p>Tell people: <em>"Yours does not need to be this polished. Specific is more important than pretty. The 'Which tool' column is the field most students forget. Make sure yours is filled."</em></p>
         <p><em>Time on slide: 5 minutes.</em></p>
     </div>
