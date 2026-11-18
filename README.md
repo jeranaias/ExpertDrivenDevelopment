@@ -23,7 +23,7 @@ Domain experts understand their problems better than anyone, but they cannot bui
 
 ## The Solution
 
-EDD uses AI as scaffolding to let domain experts build, document, and maintain their own tools on approved platforms. The tools outlast the AI -- they are standard applications running on standard infrastructure, not black-box AI products. One instructor built a system serving 440 users in 30 hours at zero cost.
+EDD uses AI as scaffolding to let domain experts build, document, and maintain their own tools on approved platforms. The tools outlast the AI -- they are standard applications running on standard infrastructure, not black-box AI products. One instructor wrote the original code of DonDocs, a naval correspondence generator now used across Marine Corps commands, at zero cost.
 
 ## Four-Layer Framework
 
@@ -58,10 +58,9 @@ This is a GitHub Pages site served from the `/docs` directory. All training mate
 
 ## Proof of Concept
 
-- **MCD Tutoring Application** -- 440 users, 30 hours to build, $0 cost, ATO approved
 - **DonDocs (Marine Coders)** -- 300 unique users/day on MCEN, MIU recognized
 - **Tanaghum** -- ILR-calibrated Arabic listening lessons, built in 2 days, in use by MLIs
-- **Harakat** -- Arabic diacritization system, 0.68% DER
+- **Harakat** -- Arabic diacritization system, 2.29% DER with a 6.7 MB model
 - **Mutawazin** -- Arabic typing proficiency trainer
 
 ## Course Pathways
